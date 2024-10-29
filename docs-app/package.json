@@ -21,7 +21,7 @@
     "lint:prettier:fix": "pnpm -w exec lint prettier:fix",
     "lint:prettier": "pnpm -w exec lint prettier",
     "lint:types": "glint",
-    "start": "ember serve",
+    "start": "vite --force",
     "test": "ember test",
     "test:ember": "ember test"
   },
@@ -56,10 +56,14 @@
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^4.0.4",
     "@ember/test-waiters": "^3.1.0",
-    "@embroider/broccoli-side-watch": "0.0.2-unstable.ba9fd29",
-    "@embroider/compat": "3.6.5",
-    "@embroider/core": "3.4.19",
+    "@embroider/compat": "unstable",
+    "@embroider/config-meta-loader": "unstable",
+    "@embroider/core": "unstable",
+    "@embroider/test-setup": "unstable",
+    "@embroider/vite": "unstable",
+    "ember-vite-hmr": "^1.8.2",
     "@embroider/webpack": "4.0.8",
+    "@rollup/plugin-babel": "^6.0.4",
     "@fontsource/lexend": "^5.1.1",
     "@glimmer/compiler": "^0.92.4",
     "@glimmer/component": "^1.1.2",
@@ -92,6 +96,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-load-initializers": "^3.0.1",
+    "ember-native": "workspace:*",
     "ember-page-title": "^8.2.3",
     "ember-primitives": "^0.25.0",
     "ember-qunit": "^8.0.2",
@@ -121,16 +126,25 @@
     "qunit-assertions-extra": "^1.0.3",
     "qunit-dom": "^3.2.1",
     "read-package-up": "^11.0.0",
+    "svg-inline-loader": "^0.8.2",
     "tailwindcss": "^3.4.14",
     "typedoc": "^0.26.9",
     "typescript": "^5.3.3",
     "webpack": "^5.95.0",
-    "ember-native": "workspace:*"
+    "vite": "^5.4.10"
   },
   "engines": {
     "node": ">= 20"
   },
   "ember": {
     "edition": "octane"
+  },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
   }
 }

@@ -1,5 +1,8 @@
 *
 !.github
+!vite.config.mjs
+!babel.config.js
+!index.html
 !app
 !config
 !public
