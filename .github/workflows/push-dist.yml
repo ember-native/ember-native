@@ -16,11 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
-      - uses: kategengler/put-built-npm-package-contents-on-branch@v2.1.0
+      - run: pnpm run build
+      - uses: peaceiris/actions-gh-pages@v4
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs-app/dist
           branch: ember-native-docs
           token: ${{ secrets.GITHUB_TOKEN }}
-          working-directory: docs-app
       - uses: kategengler/put-built-npm-package-contents-on-branch@v2.1.0
         with:
           branch: dist
