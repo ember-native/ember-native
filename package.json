@@ -30,12 +30,6 @@
     "yarn": "use pnpm"
   },
   "packageManager": "pnpm@9.12.2",
-  "pnpm": {
-    "overrides": {
-      "kolay": "/Users/patrickpircher/IdeaProjects/ember-native/kolay/kolay-1.2.2.tgz",
-      "@universal-ember/kolay-ui": "/Users/patrickpircher/IdeaProjects/ember-native/kolay/ui/universal-ember-kolay-ui-0.0.12.tgz"
-    }
-  },
   "volta": {
     "node": "20.17.0",
     "pnpm": "9.12.2"
