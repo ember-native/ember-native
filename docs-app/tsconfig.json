@@ -24,5 +24,11 @@
       "*": ["types/*"]
     }
   },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"]
+  "include": [
+    "app/**/*",
+    "app/**/*.gts",
+    "tests/**/*",
+    "tests/**/*.gts",
+    "types/**/*"
+  ]
 }

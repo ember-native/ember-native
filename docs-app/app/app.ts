@@ -3,6 +3,7 @@ import './css/styles.css';
 import 'inter-ui/inter-variable-latin.css';
 import '@fontsource/lexend';
 
+import compatModules from '@embroider/virtual/compat-modules';
 import Application from '@ember/application';
 
 import config from 'docs-app/config/environment';
@@ -27,7 +28,7 @@ Object.assign(window, {
 export default class App extends Application {
   modulePrefix = config.modulePrefix;
   podModulePrefix = config.podModulePrefix;
-  Resolver = Resolver;
+  Resolver = Resolver.withModules(compatModules);
 }
 
 loadInitializers(App, config.modulePrefix);

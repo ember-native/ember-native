@@ -4,10 +4,15 @@
 !babel.config.js
 !index.html
 !app
+!app/**/*
 !config
+!config/**/*
 !public
+!public/**/*
 !tests
+!tests/**/*
 !types
+!types/**/*
 !.editorconfig
 !.ember-cli
 !.eslintignore

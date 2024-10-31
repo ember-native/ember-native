@@ -7,7 +7,7 @@ import Route from 'ember-route-template';
 
 const Application =
   <template>
-    {{pageTitle "ember-primitives"}}
+    {{pageTitle "ember-native"}}
     {{(syncBodyClass)}}
 
     {{outlet}}

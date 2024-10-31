@@ -12,6 +12,12 @@ import {
 } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
 import { kolay } from 'kolay/vite';
+import postcssConfig from './config/postcss.config.js';
+
+// rollup-plugin-astroturf mjs has wrong import specifiers...
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const astroturf = require('rollup-plugin-astroturf');
 
 
 const extensions = [
@@ -48,6 +54,9 @@ export default defineConfig(({ mode }) => {
       extensions,
     },
     plugins: [
+      astroturf({
+        include: /\.(gts|gjs)/i,
+      }),
       kolay({
         src: 'public/docs',
         packages: ['ember-native'],
@@ -65,6 +74,9 @@ export default defineConfig(({ mode }) => {
         extensions,
       }),
     ],
+    css: {
+      postcss: postcssConfig,
+    },
     optimizeDeps: o,
     server: {
       port: 4200,

@@ -1,6 +1,6 @@
-const path = require('path');
-
-const { fontFamily } = require('tailwindcss/defaultTheme');
+import path from "path";
+import theme from "tailwindcss/defaultTheme";
+import generated from "@tailwindcss/typography";
 
 const appRoot = path.join(__dirname, '../');
 
@@ -14,10 +14,10 @@ module.exports = {
         '8xl': '88rem',
       },
       fontFamily: {
-        sans: ['InterVariable', ...fontFamily.sans],
+        sans: ['InterVariable', ...theme.fontFamily.sans],
         display: ['Lexend', { fontFeatureSettings: '"ss01"' }],
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [generated],
 };

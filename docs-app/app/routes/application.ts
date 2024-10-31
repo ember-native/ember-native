@@ -16,6 +16,7 @@ export default class Application extends Route {
   @service('ember-primitives/setup') declare primitives: SetupService;
 
   beforeModel() {
+    document.querySelector('.lds-ripple')?.remove();
     this.primitives.setup();
   }
 

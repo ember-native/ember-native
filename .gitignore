@@ -3,6 +3,7 @@
 !.github/**/*
 !docs-app
 !docs-app/**/*
+!ember-native
 !ember-native/**/*
 !.editorconfig
 !.gitignore
