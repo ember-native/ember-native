@@ -10,8 +10,8 @@
   "author": "",
   "scripts": {
     "_start:docs": "pnpm --filter docs-app start",
-    "build": "pnpm --filter docs-app ember-native build",
-    "lint": "pnpm --filter docs-app ember-native lint",
+    "build": "pnpm --filter docs-app --filter ember-native build",
+    "lint": "pnpm --filter docs-app --filter ember-native lint",
     "lint:fix": "turbo run _:lint:fix --output-logs errors-only",
     "start": "pnpm build; concurrently 'npm:_start:*' --prefix ' ' --restart-after 5000 --restart-tries -1",
     "test": "turbo run test --output-logs errors-only"
