@@ -128,7 +128,7 @@
     "qunit-assertions-extra": "^1.0.3",
     "qunit-dom": "^3.2.1",
     "read-package-up": "^11.0.0",
-    "rollup-plugin-astroturf": "github:patricklx/rollup-plugin-astroturf",
+    "rollup-plugin-astroturf": "^0.1.0",
     "svg-inline-loader": "^0.8.2",
     "tailwindcss": "^3.4.14",
     "typedoc": "^0.26.9",

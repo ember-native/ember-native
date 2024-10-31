@@ -328,8 +328,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.0
       rollup-plugin-astroturf:
-        specifier: github:patricklx/rollup-plugin-astroturf
-        version: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/e957c5372e4da79b9244c5a8ed3d10fd394e71f1(@babel/core@7.26.0)(astroturf@1.2.0(webpack@5.95.0))(rollup@4.24.2)
+        specifier: ^0.1.0
+        version: 0.1.0(@babel/core@7.26.0)(astroturf@1.2.0(webpack@5.95.0))(rollup@4.24.2)
       svg-inline-loader:
         specifier: ^0.8.2
         version: 0.8.2
@@ -7505,9 +7505,8 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  rollup-plugin-astroturf@https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/e957c5372e4da79b9244c5a8ed3d10fd394e71f1:
-    resolution: {tarball: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/e957c5372e4da79b9244c5a8ed3d10fd394e71f1}
-    version: 0.1.0
+  rollup-plugin-astroturf@0.1.0:
+    resolution: {integrity: sha512-O8WUWiz/PlGV+eFAsFHK0twGnxBaVvWck4ftfRxq7LIKi/t/4KZbvQmfqm7L7BEffigvhsO5X2Qvu65PPq0Xuw==}
     peerDependencies:
       '@babel/core': '>=7'
       astroturf: '>=1.0.0-beta.0'
@@ -18571,7 +18570,7 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rollup-plugin-astroturf@https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/e957c5372e4da79b9244c5a8ed3d10fd394e71f1(@babel/core@7.26.0)(astroturf@1.2.0(webpack@5.95.0))(rollup@4.24.2):
+  rollup-plugin-astroturf@0.1.0(@babel/core@7.26.0)(astroturf@1.2.0(webpack@5.95.0))(rollup@4.24.2):
     dependencies:
       '@babel/core': 7.26.0
       '@rollup/pluginutils': 4.2.1
