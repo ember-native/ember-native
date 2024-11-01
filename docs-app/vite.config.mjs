@@ -50,6 +50,7 @@ o.esbuildOptions.plugins.splice(0, 0, aliasPlugin);
 
 export default defineConfig(({ mode }) => {
   return {
+    base: '/ember-native',
     resolve: {
       extensions,
     },
