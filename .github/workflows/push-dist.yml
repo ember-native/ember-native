@@ -17,9 +17,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
       - working-directory: docs-app
-        run: pnpm i github:patricklx/rollup-plugin-astroturf#dist
+        run: pnpm i git+https://github.com/patricklx/rollup-plugin-astroturf.git#dist
       - working-directory: docs-app
-        run: pnpm i github:patrick/kolay#dist-kolay
+        run: pnpm i git+https://github.com/patrick/kolay#dist-kolay
       - working-directory: docs-app
         run: pnpm i github:patrick/kolay#dist-kolay-ui
       - run: pnpm run build
