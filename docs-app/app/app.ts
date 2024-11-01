@@ -31,4 +31,4 @@ export default class App extends Application {
   Resolver = Resolver.withModules(compatModules);
 }
 
-loadInitializers(App, config.modulePrefix);
+loadInitializers(App, config.modulePrefix, compatModules);
