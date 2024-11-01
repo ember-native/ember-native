@@ -1,0 +1,42 @@
+{
+  "name": "ember-native",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -b || echo 'its okay'",
+    "lint": "echo 'no lint'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "loader.js": "*",
+    "@nativescript/core": "*",
+    "@glimmer/runtime": "*",
+    "@glimmer/component": "*",
+    "ember-source": "*",
+    "ember-modifier": "*",
+    "@glimmer/tracking": "*"
+  },
+  "dependencies": {
+    "loader.js": "^4.7.0",
+    "@nativescript/core": "^8.8.4",
+    "ember-source": "^5.12.0",
+    "ember-modifier": "^4.2.0",
+    "@glimmer/runtime": "^0.92.4",
+    "@glimmer/tracking": "^1.1.2",
+    "@glimmer/component": "*"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./*": {
+      "default": "./dist/*",
+      "types": "./dist/*"
+    }
+  }
+}
