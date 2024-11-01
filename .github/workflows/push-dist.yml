@@ -16,6 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
+      - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
       - working-directory: docs-app
         run: pnpm i git+https://github.com/patricklx/rollup-plugin-astroturf.git#dist
       - working-directory: docs-app
