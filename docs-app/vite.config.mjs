@@ -60,6 +60,7 @@ export default defineConfig(({ mode }) => {
       }),
       kolay({
         src: 'public/docs',
+        baseUrl: '/ember-native',
         packages: ['ember-native'],
       }),
       hbs(),
