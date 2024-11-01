@@ -16,8 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
+      - run: cd docs-app
       - run: pnpm i github:patricklx/rollup-plugin-astroturf#dist
       - run: pnpm i github:universal-ember/kolay#modern-v2-addon--v3-addon
+      - run: cd ..
       - run: pnpm run build
       - uses: peaceiris/actions-gh-pages@v4
         with:
