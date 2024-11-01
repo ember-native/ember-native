@@ -1,9 +1,7 @@
-ember-primitives
+ember-native
 ==============================================================================
 
-Primitives for building UI faster.
-
-Docs: https://ember-primitives.pages.dev/
+use the Ember framework with Nativescript 
 
 
 Contributing
