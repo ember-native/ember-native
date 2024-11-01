@@ -19,7 +19,9 @@ jobs:
       - working-directory: docs-app
         run: pnpm i github:patricklx/rollup-plugin-astroturf#dist
       - working-directory: docs-app
-        run: pnpm i github:universal-ember/kolay#modern-v2-addon--v3-addon
+        run: pnpm i github:patrick/kolay#dist-kolay
+      - working-directory: docs-app
+        run: pnpm i github:patrick/kolay#dist-kolay-ui
       - run: pnpm run build
       - uses: peaceiris/actions-gh-pages@v4
         with:
