@@ -29,6 +29,13 @@
     "npm": "use pnpm",
     "yarn": "use pnpm"
   },
+  "pnpm": {
+    "overrides": {
+      "kolay": "git+https://github.com/patricklx/kolay#dist-kolay",
+      "@universal-ember/kolay-ui": "git+https://github.com/patricklx/kolay#dist-kolay-ui",
+      "rollup-plugin-astroturf.git": "git+https://github.com/patricklx/rollup-plugin-astroturf.git#dist"
+    }
+  },
   "packageManager": "pnpm@9.12.2",
   "volta": {
     "node": "20.17.0",

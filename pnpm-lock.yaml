@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+overrides:
+  kolay: git+https://github.com/patricklx/kolay#dist-kolay
+  '@universal-ember/kolay-ui': git+https://github.com/patricklx/kolay#dist-kolay-ui
+  rollup-plugin-astroturf.git: git+https://github.com/patricklx/rollup-plugin-astroturf.git#dist
+
 importers:
 
   .:
@@ -72,8 +77,8 @@ importers:
         specifier: ^2.2.1
         version: 2.2.2(highlight.js@11.10.0)
       kolay:
-        specifier: ^1.2.4
-        version: 1.2.4(gknsgagfdop7zfxk27vt33ufzy)
+        specifier: git+https://github.com/patricklx/kolay#dist-kolay
+        version: https://codeload.github.com/patricklx/kolay/tar.gz/08c0705d385a1e7893315e87cf26cc0fce91c2a5(mhw6n4fq4xz7posym7wdidmava)
       lorem-ipsum:
         specifier: ^2.0.8
         version: 2.0.8
@@ -187,8 +192,8 @@ importers:
         specifier: ^8.9.0
         version: 8.12.1(eslint@8.57.1)(typescript@5.6.3)
       '@universal-ember/kolay-ui':
-        specifier: ^0.0.13
-        version: 0.0.13(a7cn6unlgufw7skm6ydbaqmtt4)
+        specifier: git+https://github.com/patricklx/kolay#dist-kolay-ui
+        version: https://codeload.github.com/patricklx/kolay/tar.gz/51f8bedeec76e44a780e9b43e1fd74023e473c55(a7cn6unlgufw7skm6ydbaqmtt4)
       astroturf:
         specifier: ^1.2.0
         version: 1.2.0(webpack@5.95.0)
@@ -2362,8 +2367,9 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@universal-ember/kolay-ui@0.0.13':
-    resolution: {integrity: sha512-AieocMj1U898F5thI4dQC3pCRtpO0PhvOMJPPp6yTck3AsGGJ3kRGg1utA66OTqF0CG+ZvjEg3eHrsulptu3oA==}
+  '@universal-ember/kolay-ui@https://codeload.github.com/patricklx/kolay/tar.gz/51f8bedeec76e44a780e9b43e1fd74023e473c55':
+    resolution: {tarball: https://codeload.github.com/patricklx/kolay/tar.gz/51f8bedeec76e44a780e9b43e1fd74023e473c55}
+    version: 0.0.12
     peerDependencies:
       '@ember/test-waiters': ^3.1.0
       '@glimmer/component': '>= 1.1.2'
@@ -5895,20 +5901,21 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  kolay@1.2.4:
-    resolution: {integrity: sha512-hp2odT7R9gGze3+UWxl2+qv4mV88jUwMRe8ZCHCKY2mU0QP9kpcPADSpAWotJaV6fGV8eFoM75kBGfS+VP2xjg==}
+  kolay@https://codeload.github.com/patricklx/kolay/tar.gz/08c0705d385a1e7893315e87cf26cc0fce91c2a5:
+    resolution: {tarball: https://codeload.github.com/patricklx/kolay/tar.gz/08c0705d385a1e7893315e87cf26cc0fce91c2a5}
+    version: 1.2.2
     engines: {node: '>= 18'}
     peerDependencies:
       '@ember/test-waiters': ^3.1.0
       '@glimmer/component': '>= 1.1.2'
       '@glimmer/tracking': '>= 1.1.2'
       '@glint/template': '>= 1.3.0'
-      '@universal-ember/kolay-ui': '>= 0.0.13'
+      '@universal-ember/kolay-ui': git+https://github.com/patricklx/kolay#dist-kolay-ui
       ember-modifier: '>= 4.1.0'
       ember-primitives: '>= 0.11.3'
       ember-repl: ^4.1.1
       ember-resources: '>= 7.0.0'
-      ember-source: '>= 5.7.0'
+      ember-source: '>= 5.12.0'
       reactiveweb: '>= 1.2.1'
       tracked-built-ins: '>= 3.3.0'
 
@@ -7645,6 +7652,10 @@ packages:
   send@0.19.0:
     resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
     engines: {node: '>= 0.8.0'}
+
+  send@1.1.0:
+    resolution: {integrity: sha512-v67WcEouB5GxbTWL/4NeToqcZiAWEq90N888fczVArY8A79J0L4FD7vj5hm3eUMua5EpoQ59wa/oovY6TLvRUA==}
+    engines: {node: '>= 18'}
 
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
@@ -11794,7 +11805,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@universal-ember/kolay-ui@0.0.13(a7cn6unlgufw7skm6ydbaqmtt4)':
+  '@universal-ember/kolay-ui@https://codeload.github.com/patricklx/kolay/tar.gz/51f8bedeec76e44a780e9b43e1fd74023e473c55(a7cn6unlgufw7skm6ydbaqmtt4)':
     dependencies:
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.9
@@ -16744,14 +16755,14 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  kolay@1.2.4(gknsgagfdop7zfxk27vt33ufzy):
+  kolay@https://codeload.github.com/patricklx/kolay/tar.gz/08c0705d385a1e7893315e87cf26cc0fce91c2a5(mhw6n4fq4xz7posym7wdidmava):
     dependencies:
       '@ember/test-waiters': 3.1.0
       '@glimmer/component': 1.1.2(@babel/core@7.26.0)
       '@glimmer/tracking': 1.1.2
       '@glint/template': 1.5.0
       '@tsconfig/ember': 3.0.8
-      '@universal-ember/kolay-ui': 0.0.13(a7cn6unlgufw7skm6ydbaqmtt4)
+      '@universal-ember/kolay-ui': https://codeload.github.com/patricklx/kolay/tar.gz/51f8bedeec76e44a780e9b43e1fd74023e473c55(a7cn6unlgufw7skm6ydbaqmtt4)
       '@zamiell/typedoc-plugin-not-exported': 0.3.0(typedoc@0.26.10(typescript@5.6.3))
       common-tags: 1.8.2
       ember-modifier: 4.2.0(@babel/core@7.26.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5)(webpack@5.95.0))
@@ -16763,10 +16774,12 @@ snapshots:
       json5: 2.2.3
       package-up: 5.0.0
       reactiveweb: 1.3.0(@babel/core@7.26.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glimmer/tracking@1.1.2)(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5)(webpack@5.95.0))
+      send: 1.1.0
       tracked-built-ins: 3.3.0
       typedoc: 0.26.10(typescript@5.6.3)
       unplugin: 1.15.0(webpack-sources@3.2.3)
     transitivePeerDependencies:
+      - supports-color
       - typescript
       - webpack-sources
 
@@ -18758,6 +18771,23 @@ snapshots:
       fresh: 0.5.2
       http-errors: 2.0.0
       mime: 1.6.0
+      ms: 2.1.3
+      on-finished: 2.4.1
+      range-parser: 1.2.1
+      statuses: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+
+  send@1.1.0:
+    dependencies:
+      debug: 4.3.7(supports-color@9.4.0)
+      destroy: 1.2.0
+      encodeurl: 2.0.0
+      escape-html: 1.0.3
+      etag: 1.8.1
+      fresh: 0.5.2
+      http-errors: 2.0.0
+      mime-types: 2.1.35
       ms: 2.1.3
       on-finished: 2.4.1
       range-parser: 1.2.1
