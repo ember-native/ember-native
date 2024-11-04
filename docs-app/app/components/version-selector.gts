@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import PowerSelect from 'ember-power-select/components/power-select';
 
 export class VersionSelector extends Component {
 
@@ -7,5 +8,13 @@ export class VersionSelector extends Component {
     return result.map(r => r.name);
   }
 
-  <template></template>
+  load = () => {
+    this.promise = this.fetchVersions();
+  }
+
+  <template>
+    {{this.load}}
+    <PowerSelect >
+    </PowerSelect>
+  </template>
 }
