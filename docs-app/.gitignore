@@ -9,6 +9,8 @@
 !config/**/*
 !public
 !public/**/*
+!versions
+!versions/**/*
 !tests
 !tests/**/*
 !types

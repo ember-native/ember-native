@@ -17,12 +17,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
       - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
-      - run: pnpm run build
+      - if: github.ref == 'refs/heads/main'
+        run: |-
+          DOCS_VERSION=main pnpm run build
+          mkdir -p ./docs-app/versions/main
+          cp -r * ./docs-app/dist ./docs-app/versions/main
+      - if: github.ref_type == 'tag'
+        run: |-
+          DOCS_VERSION=$GITHUB_REF_NAME pnpm run build
+          mkdir -p ./docs-app/versions/$GITHUB_REF_NAME
+          cp -r * ./docs-app/dist ./docs-app/versions/$GITHUB_REF_NAME
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs-app/dist
+          publish_dir: ./docs-app/versions
           publish_branch: ember-native-docs
+          keep_files: true
       - uses: kategengler/put-built-npm-package-contents-on-branch@v2.1.0
         with:
           branch: dist
