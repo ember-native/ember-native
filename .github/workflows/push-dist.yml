@@ -30,7 +30,7 @@ jobs:
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs-app/versions
+          publish_dir: ./docs-app/gh-pages
           publish_branch: ember-native-docs
           keep_files: true
       - uses: kategengler/put-built-npm-package-contents-on-branch@v2.1.0
