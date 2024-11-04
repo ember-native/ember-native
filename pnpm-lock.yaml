@@ -50,6 +50,9 @@ importers:
       ember-basic-dropdown:
         specifier: ^8.3.0
         version: 8.3.0(@ember/string@3.1.1)(@ember/test-helpers@4.0.4(@babel/core@7.26.0)(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5)))(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.5.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.26.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5))))(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5))
+      ember-concurrency:
+        specifier: ^4.0.2
+        version: 4.0.2(@babel/core@7.26.0)(@glimmer/tracking@1.1.2)(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5))
       ember-focus-trap:
         specifier: ^1.1.0
         version: 1.1.0(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5))
@@ -4197,7 +4200,7 @@ packages:
     resolution: {integrity: sha512-qV3vxJKw5+7TVDdtdLPy8PhVsh58MlK8jwzqh5xeOwJPNP7o0+BlhvwoIlLYTPzGaHdfjEIFCgVSyMRGd74E1g==}
     engines: {node: '>= 18.*'}
     peerDependencies:
-      ember-source: '>= 5'
+      ember-source: ^5.10.1
 
   ember-mobile-menu@5.1.0:
     resolution: {integrity: sha512-iE+dydJ8EVaiOIZyxPe0QZsUClaUCaX8a20GvW0iTOCu1FeKrRI5HA9u9p+ELZPSw54gP/w3V53KK3pjMuDl+Q==}
@@ -7248,7 +7251,7 @@ packages:
   reactiveweb@1.3.0:
     resolution: {integrity: sha512-+HIF4nW2iiHrZYvMyaFJopL/ljEW8e8s9HS+I6kAtSeJqtJtox577qviywU8ffHRmHPZP4owTlSWg3F4nAj4Vg==}
     peerDependencies:
-      '@ember/test-waiters': '>= 3.1.0'
+      '@ember/test-waiters': ^3.1.0
       ember-source: '>= 3.28.0'
 
   read-cache@1.0.0:

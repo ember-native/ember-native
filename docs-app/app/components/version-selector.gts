@@ -6,7 +6,7 @@ import config from 'docs-app/config/environment';
 
 export class VersionSelector extends Component {
   @tracked promise;
-  @tracked selected = pkg.version;
+  @tracked selected = config.rootURL.split('/').slice(-1)[0] || 'main';
 
   async fetchVersions() {
     const result = await (await fetch('https://api.github.com/repos/ember-native/ember-native/contents/versions?ref=ember-native-docs')).json();
@@ -27,10 +27,10 @@ export class VersionSelector extends Component {
 
   <template>
     {{this.load}}
-    <PowerSelect 
+    <PowerSelect
       @options={{this.promise}}
       @selected={{this.selected}}
-      @labelText="loading versions"
+      @loadingMessage="loading versions"
       @onChange={{this.changeVersion}} as |name|>
         {{name}}
     </PowerSelect>

@@ -55,7 +55,7 @@ o.esbuildOptions.plugins.splice(0, 0, aliasPlugin);
 
 export default defineConfig(({ mode }) => {
   return {
-    base: '/ember-native/' + process.env.DOCS_URL || '',
+    base: process.env.DOCS_URL ? '/ember-native/' + (process.env.DOCS_URL || '') : '',
     resolve: {
       extensions,
     },
@@ -65,7 +65,7 @@ export default defineConfig(({ mode }) => {
       }),
       kolay({
         src: 'public/docs',
-        baseUrl: '/ember-native/' + (process.env.DOCS_URL || '') + '/',
+        baseUrl: process.env.DOCS_URL ? '/ember-native/' + (process.env.DOCS_URL || '') + '/' : '',
         packages: ['ember-native'],
       }),
       hbs(),

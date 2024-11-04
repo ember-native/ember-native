@@ -4,7 +4,7 @@ module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'docs-app',
     environment,
-    rootURL: '/ember-native/' + process.env.DOCS_URL || '',
+    rootURL: '/',
     locationType: 'history',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
@@ -42,6 +42,7 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.rootURL = '/ember-native/' + (process.env.DOCS_URL || 'versions/main/')
   }
 
   return ENV;

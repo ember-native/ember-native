@@ -13,6 +13,7 @@ import { sync } from 'ember-primitives/color-scheme';
 import Resolver from 'ember-resolver';
 
 import { install } from './icons';
+import 'ember-power-select/styles';
 
 sync();
 install();

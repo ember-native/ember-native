@@ -1,7 +1,6 @@
 import config from 'docs-app/config/environment';
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
-import { concat } from '@ember/helper';
 import { service } from '@ember/service';
 
 import { sentenceCase } from 'change-case';
@@ -25,6 +24,11 @@ function fixWords(text: string) {
     default:
       return text;
   }
+}
+
+const joinUrl = (...strs: string[]) => {
+  let prefix = strs[0]?.startsWith('/') ? '/' : '';
+  return strs.map(s => s.replace(/^\//, '').replace(/\/$/, '')).join('/');
 }
 
 /**
@@ -146,7 +150,7 @@ export class Nav extends Component<{
       <PageNav aria-label="Main Navigation">
         <:page as |x|>
           <SubSectionLink
-            @href={{concat config.rootURL x.page.path}}
+            @href={{joinUrl config.rootURL x.page.path}}
             @name={{nameFor x.page}}
             {{on "click" this.closeNav}}
           />
@@ -155,7 +159,7 @@ export class Nav extends Component<{
         <:collection as |x|>
           {{#if x.index}}
             <SectionLink
-              @href={{concat config.rootURL x.index.page.path}}
+              @href={{joinUrl config.rootURL x.index.page.path}}
               @name={{titleize x.collection.name}}
               {{on "click" this.closeNav}}
             />

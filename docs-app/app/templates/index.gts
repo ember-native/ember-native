@@ -49,7 +49,7 @@ export default Route(
           <br>
           </p>
         </div>
-        <InternalLink class={{styles.getStartedLink}} href="{{config.rootURL}}/1-get-started/index.md">
+        <InternalLink class={{styles.getStartedLink}} href="{{config.rootURL}}1-get-started/index.md">
           Get Started
         </InternalLink>
 
@@ -99,7 +99,7 @@ export default Route(
 );
 
 const GetStarted = <template>
-  <InternalLink href="{{config.rootURL}}/1-get-started/index.md" style="transform: scale(2.5);">
+  <InternalLink href="{{config.rootURL}}1-get-started/index.md" style="transform: scale(2.5);">
     Get Started ➤
   </InternalLink>
 </template>;
