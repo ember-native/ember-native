@@ -4,6 +4,7 @@ import { cell } from 'ember-resources';
 
 import { Flask, GitHub, Logo, Logomark } from './icons';
 import { ThemeToggle } from './theme-toggle';
+import { VersionSelector } from './version-selector';
 
 import type { TOC } from '@ember/component/template-only';
 
@@ -53,8 +54,8 @@ export const Header: TOC<{ Blocks: { default: [] } }> = <template>
 export const TopRight = <template>
   <div class="relative flex justify-end gap-6 basis-0 sm:gap-8 md:flex-grow">
     <ThemeToggle />
-    <TestsLink />
     <GitHubLink />
+    <VersionSelector />
   </div>
 </template>;
 
