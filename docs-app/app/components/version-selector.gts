@@ -31,7 +31,7 @@ export class VersionSelector extends Component {
       @options={{this.promise}}
       @selected={{this.selected}}
       @labelText="loading versions"
-      @onChange={{fn (mut this.selected)}} as |name|>
+      @onChange={{this.changeVersion}} as |name|>
         {{name}}
     </PowerSelect>
   </template>
