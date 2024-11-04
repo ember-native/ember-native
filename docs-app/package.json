@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build:dev": "vite build --environment=development",
-    "build": "vite build",
+    "build": "vite build --environment=production",
     "lint": "pnpm -w exec lint",
     "lint:fix": "pnpm -w exec lint fix",
     "lint:js": "pnpm -w exec lint js",
