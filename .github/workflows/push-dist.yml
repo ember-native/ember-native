@@ -19,12 +19,6 @@ jobs:
       - working-directory: docs-app
         run: pnpm uninstall ember-headless-form
       - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
-      - working-directory: docs-app
-        run: pnpm i git+https://github.com/patricklx/rollup-plugin-astroturf.git#dist
-      - working-directory: docs-app
-        run: pnpm i git+https://github.com/patricklx/kolay#dist-kolay
-      - working-directory: docs-app
-        run: pnpm i github:patricklx/kolay#dist-kolay-ui
       - run: pnpm run build && ls ./docs-app && ls ./docs-app/dist
       - uses: peaceiris/actions-gh-pages@v4
         with:
