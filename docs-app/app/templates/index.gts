@@ -1,5 +1,6 @@
 import { TopRight } from 'docs-app/components/header';
 import { Logo } from 'docs-app/components/icons';
+import config from 'docs-app/config/environment';
 import { BlueSky, Discord, GitHub, Mastodon, Threads, XTwitter } from 'docs-app/components/icons';
 import { ExternalLink } from 'ember-primitives/components/external-link';
 import { Hero } from 'ember-primitives/layout/hero';
@@ -48,7 +49,7 @@ export default Route(
           <br>
           </p>
         </div>
-        <InternalLink class={{styles.getStartedLink}} href="/1-get-started/index.md">
+        <InternalLink class={{styles.getStartedLink}} href="{{config.rootURL}}/1-get-started/index.md">
           Get Started
         </InternalLink>
 
@@ -98,7 +99,7 @@ export default Route(
 );
 
 const GetStarted = <template>
-  <InternalLink href="/1-get-started/index.md" style="transform: scale(2.5);">
+  <InternalLink href="{{config.rootURL}}/1-get-started/index.md" style="transform: scale(2.5);">
     Get Started ➤
   </InternalLink>
 </template>;

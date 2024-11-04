@@ -76,7 +76,7 @@ export const TestsLink = <template>
 export const GitHubLink = <template>
   <ExternalLink
     class="group"
-    href="https://github.com/universal-ember/ember-primitives"
+    href="https://github.com/ember-native/ember-native"
     aria-label="GitHub"
   >
     <GitHub
