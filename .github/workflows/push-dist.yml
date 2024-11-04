@@ -21,12 +21,12 @@ jobs:
         run: |-
           DOCS_VERSION=main pnpm run build
           mkdir -p ./docs-app/versions/main
-          cp -r * ./docs-app/dist ./docs-app/versions/main
+          cp -r ./docs-app/dist/* ./docs-app/versions/main
       - if: github.ref_type == 'tag'
         run: |-
           DOCS_VERSION=$GITHUB_REF_NAME pnpm run build
           mkdir -p ./docs-app/versions/$GITHUB_REF_NAME
-          cp -r * ./docs-app/dist ./docs-app/versions/$GITHUB_REF_NAME
+          cp -r ./docs-app/dist/* ./docs-app/versions/$GITHUB_REF_NAME
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
