@@ -16,10 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
-      - working-directory: docs-app
-        run: pnpm uninstall ember-headless-form
       - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
-      - run: pnpm run build && ls ./docs-app && ls ./docs-app/dist
+      - run: pnpm run build
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

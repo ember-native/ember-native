@@ -50,9 +50,6 @@ importers:
       ember-focus-trap:
         specifier: ^1.1.0
         version: 1.1.0(ember-source@5.12.0)
-      ember-headless-form:
-        specifier: ^1.1.0
-        version: 1.1.0(@babel/core@7.26.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.5.0)(@glint/template@1.5.0)(ember-source@5.12.0)
       ember-mobile-menu:
         specifier: ^5.1.0
         version: 5.1.0(@babel/core@7.26.0)(@ember/test-helpers@4.0.4)(@glint/template@1.5.0)(ember-source@5.12.0)
@@ -8647,29 +8644,6 @@ packages:
       ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.0)
     transitivePeerDependencies:
       - '@babel/core'
-      - supports-color
-    dev: false
-
-  /ember-headless-form@1.1.0(@babel/core@7.26.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.5.0)(@glint/template@1.5.0)(ember-source@5.12.0):
-    resolution: {integrity: sha512-FYiBk4Lk7yFsnyr6Ilm7Jc6ADj8jzPpmWVyqRMKl7/Pep+3NPuoyZKyRWD/C6Fen0DwzsdXRitk+HNPD+JFXqA==}
-    peerDependencies:
-      '@glimmer/component': ^1.1.2
-      '@glimmer/tracking': ^1.1.2
-      ember-source: '>=4.4.0'
-    dependencies:
-      '@babel/runtime': 7.26.0
-      '@embroider/addon-shim': 1.9.0
-      '@embroider/util': 1.13.2(@glint/environment-ember-loose@1.5.0)(@glint/template@1.5.0)(ember-source@5.12.0)
-      '@glimmer/component': 1.1.2(@babel/core@7.26.0)
-      '@glimmer/tracking': 1.1.2
-      ember-async-data: 1.0.3(ember-source@5.12.0)
-      ember-modifier: 4.2.0(@babel/core@7.26.0)(ember-source@5.12.0)
-      ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.0)
-      tracked-built-ins: 3.3.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@glint/environment-ember-loose'
-      - '@glint/template'
       - supports-color
     dev: false
 
