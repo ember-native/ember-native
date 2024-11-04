@@ -4,7 +4,7 @@ module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'docs-app',
     environment,
-    rootURL: '/ember-native' + process.env.DOCS_URL || '',
+    rootURL: '/ember-native/' + process.env.DOCS_URL || '',
     locationType: 'history',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
