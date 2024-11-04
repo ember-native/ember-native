@@ -1,3 +1,4 @@
+import './setup-inspector-support';
 import 'decorator-transforms/globals';
 import './css/styles.css';
 import 'inter-ui/inter-variable-latin.css';

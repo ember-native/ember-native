@@ -1,5 +1,7 @@
+import config from 'docs-app/config/environment';
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
+import { concat } from '@ember/helper';
 import { service } from '@ember/service';
 
 import { sentenceCase } from 'change-case';
@@ -144,7 +146,7 @@ export class Nav extends Component<{
       <PageNav aria-label="Main Navigation">
         <:page as |x|>
           <SubSectionLink
-            @href={{x.page.path}}
+            @href={{concat config.rootURL x.page.path}}
             @name={{nameFor x.page}}
             {{on "click" this.closeNav}}
           />
@@ -153,7 +155,7 @@ export class Nav extends Component<{
         <:collection as |x|>
           {{#if x.index}}
             <SectionLink
-              @href={{x.index.page.path}}
+              @href={{concat config.rootURL x.index.page.path}}
               @name={{titleize x.collection.name}}
               {{on "click" this.closeNav}}
             />

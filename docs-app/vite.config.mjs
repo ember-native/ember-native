@@ -41,6 +41,11 @@ const aliasPlugin = {
       path: args.path,
       external: true
     }));
+
+    build.onResolve({ filter: /ember-template-compiler$/ }, () => ({
+      path: "ember-source/dist/ember-template-compiler",
+      external: true,
+    }));
   },
 };
 
@@ -50,7 +55,7 @@ o.esbuildOptions.plugins.splice(0, 0, aliasPlugin);
 
 export default defineConfig(({ mode }) => {
   return {
-    base: '/ember-native',
+    base: '/ember-native/docs-app/dist',
     resolve: {
       extensions,
     },
@@ -60,7 +65,7 @@ export default defineConfig(({ mode }) => {
       }),
       kolay({
         src: 'public/docs',
-        baseUrl: '/ember-native/',
+        baseUrl: '/ember-native/docs-app/dist/',
         packages: ['ember-native'],
       }),
       hbs(),

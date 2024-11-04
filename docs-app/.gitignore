@@ -3,6 +3,7 @@
 !vite.config.mjs
 !babel.config.js
 !index.html
+!404.html
 !app
 !app/**/*
 !config
