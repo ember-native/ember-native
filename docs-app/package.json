@@ -148,6 +148,7 @@
   },
   "exports": {
     "./tests/*": "./tests/*",
+    "./package.json": "./package.json",
     "./*": "./app/*"
   }
 }
