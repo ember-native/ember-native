@@ -19,14 +19,14 @@ jobs:
       - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
       - if: github.ref == 'refs/heads/main'
         run: |-
-          DOCS_VERSION=main pnpm run build
-          mkdir -p ./docs-app/versions/main
-          cp -r ./docs-app/dist/* ./docs-app/versions/main
+          DOCS_URL=versions/main pnpm run build
+          mkdir -p ./docs-app/gh-pages/versions/main
+          cp -r ./docs-app/dist/* ./docs-app/gh-pages/versions/main
       - if: github.ref_type == 'tag'
         run: |-
-          DOCS_VERSION=$GITHUB_REF_NAME pnpm run build
-          mkdir -p ./docs-app/versions/$GITHUB_REF_NAME
-          cp -r ./docs-app/dist/* ./docs-app/versions/$GITHUB_REF_NAME
+          DOCS_URL=versions/$GITHUB_REF_NAME pnpm run build
+          mkdir -p ./docs-app/gh-pages/versions/$GITHUB_REF_NAME
+          cp -r ./docs-app/dist/* ./docs-app/gh-pages/versions/$GITHUB_REF_NAME
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

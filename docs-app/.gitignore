@@ -9,8 +9,8 @@
 !config/**/*
 !public
 !public/**/*
-!versions
-!versions/**/*
+!gh-pages
+!gh-pages/**/*
 !tests
 !tests/**/*
 !types
