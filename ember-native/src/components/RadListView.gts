@@ -2,7 +2,7 @@ import Component from "@glimmer/component";
 import { modifier } from 'ember-modifier';
 import { tracked } from "@glimmer/tracking";
 import ElementNode from "../dom/nodes/ElementNode";
-import {RadListView} from "nativescript-ui-listview";
+import { RadListView } from "nativescript-ui-listview";
 
 class TrackedMap extends Map<any, any> {
     @tracked counter = 0;
@@ -24,7 +24,20 @@ class TrackedMap extends Map<any, any> {
 }
 
 
-export default class ListViewComponent extends Component {
+interface RadListViewInterface<T> {
+  Element: RadListView;
+  Args: {
+    items: T[];
+  };
+  Blocks: {
+    header: [];
+    footer: [];
+    item: [T];
+  }
+}
+
+
+export default class RadListView<T> extends Component<RadListViewInterface<T>> {
     elementRefs = new TrackedMap();
     @tracked private listView: RadListView;
     private headerElement: ElementNode;
@@ -39,15 +52,10 @@ export default class ListViewComponent extends Component {
         });
     }
 
-    cleanup(listView) {
-
-    }
-
     setupListView = modifier(function setupListView(listView: RadListView) {
         this.listView = listView;
         const listViewComponent = this;
         function _getDefaultItemContent() {
-            listViewComponent.cleanup(listView);
             const sl = document.createElement('stackLayout') as ElementNode;
             Object.defineProperty(sl.nativeView, 'parent', {
                 get() {
@@ -86,7 +94,7 @@ export default class ListViewComponent extends Component {
     };
 
     <template>
-        <rad-list-view {{this.setupListView}} items={{@items}} />
+        <rad-list-view {{this.setupListView}} items={{@items}} ...attributes />
         {{#if this.listView}}
             {{#if (has-block 'header')}}
                 {{this.setupHeader}}

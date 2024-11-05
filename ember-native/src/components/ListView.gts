@@ -1,10 +1,21 @@
 import Component from "@glimmer/component";
 import { modifier } from 'ember-modifier';
-import type { ListView } from '@nativescript/core';
+import type { ListView as NativeListView } from '@nativescript/core';
 import { tracked } from "@glimmer/tracking";
 
 
-export default class ListViewComponent extends Component {
+interface ListViewInterface<T> {
+  Element: NativeListView;
+  Args: {
+    items: T[];
+  };
+  Blocks: {
+    item: [T];
+  }
+}
+
+
+export default class ListViewInterface<T> extends Component<ListViewInterface<T>> {
     @tracked elementRefs = [];
 
     get items() {
@@ -51,7 +62,7 @@ export default class ListViewComponent extends Component {
 
 
     <template>
-        <list-view {{this.setupListView}} items={{@items}} />
+        <list-view {{this.setupListView}} items={{@items}} ...attributes/>
         {{#each this.items as |item|}}
             {{#in-element item.element}}
                 {{yield item.item to='item'}}
