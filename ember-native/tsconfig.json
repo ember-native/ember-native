@@ -1,7 +1,11 @@
 {
+  "extends": "@tsconfig/ember/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
     "declaration": true,
     "noEmitOnError": false
+  },
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"]
   }
 }

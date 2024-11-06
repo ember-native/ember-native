@@ -61,7 +61,7 @@ export default class InspectorSupport extends Component {
     this.tooltip.setAttribute('visibility', 'collapse');
   }.bind(this));
   <template>
-    <absoluteLayout {{re  f this 'page'}}>
+    <absoluteLayout {{ref this 'page'}}>
       <htmlView {{this.setupHighlight}} />
       <htmlView {{this.setupTooltip}} zIndex=99 />
       {{(this.setupInspector)}}

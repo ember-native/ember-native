@@ -29,6 +29,19 @@
     "@glimmer/tracking": "^1.1.2",
     "@glimmer/component": "*"
   },
+  "devDependencies": {
+    "@glint/core": "^1.5.0",
+    "@glint/environment-ember-loose": "^1.5.0",
+    "@glint/environment-ember-template-imports": "^1.5.0",
+    "@glint/template": "^1.5.0"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
+  },
   "exports": {
     ".": {
       "default": "./dist/index.js",
