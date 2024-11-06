@@ -2,7 +2,7 @@ import Component from "@glimmer/component";
 import { modifier } from 'ember-modifier';
 import { tracked } from "@glimmer/tracking";
 import ElementNode from "../dom/nodes/ElementNode";
-import { RadListView } from "nativescript-ui-listview";
+import { RadListView as NativeRadListView } from "nativescript-ui-listview";
 
 class TrackedMap extends Map<any, any> {
   @tracked counter = 0;
@@ -25,7 +25,7 @@ class TrackedMap extends Map<any, any> {
 
 
 interface RadListViewInterface<T> {
-  Element: RadListView;
+  Element: NativeRadListView;
   Args: {
     items: T[];
   };
@@ -39,7 +39,7 @@ interface RadListViewInterface<T> {
 
 export default class RadListView<T> extends Component<RadListViewInterface<T>> {
   elementRefs = new TrackedMap();
-  @tracked private listView: RadListView;
+  @tracked private listView: NativeRadListView<T>;
   private headerElement: ElementNode;
   private footerElement: ElementNode;
 

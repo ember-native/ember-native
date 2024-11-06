@@ -10,8 +10,8 @@ export function setup() {
   globalThis.define = loader.define;
 
   globalThis.document = new DocumentNode() as unknown as Document;
-  globalThis.Element = ElementNode;
-  globalThis.Node = ElementNode;
+  globalThis.Element = ElementNode as any;
+  globalThis.Node = ElementNode as any;
 
   SimpleDynamicAttribute.prototype.set = function (dom, value, _env) {
     const {name, namespace} = this.attribute;
@@ -24,7 +24,7 @@ export function setup() {
     if (null === normalizedValue) {
       element.removeAttribute(name)
     } else {
-      element.setAttribute(name, normalizedValue);
+      element.setAttribute(name, normalizedValue as string);
     }
   }
 

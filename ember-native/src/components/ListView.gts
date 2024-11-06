@@ -14,7 +14,7 @@ interface ListViewInterface<T> {
   }
 }
 
-export default class ListViewInterface<T> extends Component<ListViewInterface<T>> {
+export default class ListView<T> extends Component<ListViewInterface<T>> {
   @tracked elementRefs = [];
 
   get items() {

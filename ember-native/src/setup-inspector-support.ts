@@ -115,21 +115,26 @@ export function setupInspectorSupport() {
     port2 = new Port(this, 'port1');
   }
 
-  globalThis.MessageChannel = MessageChannel;
+  (globalThis as any).MessageChannel = MessageChannel;
 
   globalThis.scrollX = 0;
   globalThis.scrollY = 0;
-  Object.defineProperty(globalThis, 'innerWidth', {
+  Object.defineProperty(globalThis as any, 'innerWidth', {
     get() {
-      return document.body?.nativeView?.getActualSize().width || 0;
+      return (document.body as any)?.nativeView?.getActualSize().width || 0;
     }
   })
 
 
-  CSSDomainDebugger.prototype.getInlineStylesForNode = (params) => {
+  (CSSDomainDebugger.prototype as any).getInlineStylesForNode = (params: any) => {
     const n = document.nodeMap.get(params.nodeId) as ElementNode;
     return {
-      attributesStyle: {},
+      attributesStyle: {
+        CSSStyle: {
+          cssProperties: [],
+          shorthandEntries: []
+        }
+      },
       inlineStyle: {
         shorthandEntries: [],
         cssProperties: Object.entries(n.style).map(([k, v]) => ({
@@ -157,13 +162,13 @@ export function setupInspectorSupport() {
 
 
   let EmberDomain = class EmberDomain {
-    port: MessagePort;
+    port!: MessagePort;
     private msgId: number;
     constructor() {
       this.msgId = 0;
       globalThis.addEventListener('message', (msg) => {
         if (msg.data === 'debugger-client') {
-          this.port = msg.ports[0];
+          this.port = msg.ports[0]!;
           this.port.addEventListener('message', (msg) => {
             __inspectorSendEvent(JSON.stringify({
               id: this.msgId++,
@@ -174,7 +179,7 @@ export function setupInspectorSupport() {
         }
       })
     }
-    fromExtension(msg) {
+    fromExtension(msg: any) {
       try {
         if (msg.type) {
           this.port?.postMessage(msg);
@@ -199,3 +204,4 @@ export function setupInspectorSupport() {
     __metadata("design:paramtypes", [])
   ], EmberDomain);
 }
+
