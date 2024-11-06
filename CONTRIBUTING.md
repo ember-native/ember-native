@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-primitives`
+* `cd ember-native`
 * `pnpm install`
 
 ## Linting
@@ -13,7 +13,7 @@
 
 ## Building the addon
 
-* `cd ember-primitives`
+* `cd ember-native`
 * `pnpm build`
 
 ## Running tests
