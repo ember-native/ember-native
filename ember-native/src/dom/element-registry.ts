@@ -1,6 +1,6 @@
 import ElementNode from './nodes/ElementNode';
 
-const elementMap = {};
+const elementMap: Record<string, any> = {};
 const dashRegExp = /-/g;
 
 const defaultViewMeta = {
@@ -11,15 +11,11 @@ const defaultViewMeta = {
     component: null
 };
 
-export function normalizeElementName(elementName) {
-    // console.log(`Normalize Element name ${elementName}`);
+export function normalizeElementName(elementName: string) {
     return `${elementName.replace(dashRegExp, '').toLowerCase()}`;
 }
-// export function registerNativeElement(elementName: string, resolver: () => typeof View, meta: ComponentMeta = null) {
-//     registerElement(elementName, () => new NativeNode(elementName, resolver(), meta));
-// }
 
-export function registerElement(elementName, resolver, meta = null) {
+export function registerElement(elementName: string, resolver: Function, meta: object|null = null) {
     const normalizedName = normalizeElementName(elementName);
 
     meta = Object.assign({}, defaultViewMeta, meta);
@@ -42,7 +38,7 @@ export function getElementMap() {
     return elementMap;
 }
 
-export function getViewClass(elementName) {
+export function getViewClass(elementName: string) {
     const normalizedName = normalizeElementName(elementName);
     const entry = elementMap[normalizedName];
 
@@ -57,7 +53,7 @@ export function getViewClass(elementName) {
     }
 }
 
-export function getViewMeta(elementName) {
+export function getViewMeta(elementName: string) {
     const normalizedName = normalizeElementName(elementName);
 
     let meta = defaultViewMeta;
@@ -70,7 +66,7 @@ export function getViewMeta(elementName) {
     return meta;
 }
 
-export function isKnownView(elementName) {
+export function isKnownView(elementName: string) {
     return elementMap[normalizeElementName(elementName)];
 }
 

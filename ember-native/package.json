@@ -35,6 +35,8 @@
     "loader.js": "*",
     "@nativescript/core": "*",
     "@glimmer/runtime": "*",
+    "@glimmer/reference": "*",
+    "@glimmer/validator": "*",
     "@glimmer/component": "*",
     "ember-source": "*",
     "ember-modifier": "*",
@@ -68,6 +70,8 @@
     "rollup-plugin-styles": "^4.0.0"
   },
   "devDependencies": {
+    "@glimmer/reference": "^0.92.3",
+    "@glimmer/validator": "^0.92.3",
     "nativescript-ui-listview": "^15.2.3",
     "loader.js": "^4.7.0",
     "@nativescript/core": "^8.8.4",
@@ -121,7 +125,7 @@
     "sass": "^1.62.1",
     "sass-embedded": "^1.63.6",
     "sass-loader": "^13.3.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.6.3",
     "typescript-plugin-css-modules": "^5.0.1",
     "yui": "^3.18.1",
     "fix-bad-declaration-output": "^1.1.4"

@@ -217,10 +217,12 @@ export interface IClassList {
   add(...classNames: string[]): void;
 
   remove(...classNames: string[]): void;
+
+  contains(className: string): boolean;
 }
 
 export default class ElementNode extends ViewNode {
-  _classList: IClassList;
+  declare _classList: IClassList;
 
   constructor(tagName: string) {
     super();
@@ -238,15 +240,15 @@ export default class ElementNode extends ViewNode {
 
   get classList() {
     if (!this._classList) {
-      const getClasses = () => (this.getAttribute('class') || '').split(/\s+/).filter((k: string) => k != '');
+      const getClasses: () => string[] = () => (this.getAttribute('class') || '').split(/\s+/).filter((k: string) => k != '');
 
       this._classList = {
         add: (...classNames: string[]) => {
           this.setAttribute('class', [...new Set(getClasses().concat(classNames))].join(' '));
         },
 
-        contains(klass) {
-          return getClasses().find(x => x === klass);
+        contains(klass: string) {
+          return Boolean(getClasses().find(x => x === klass));
         },
 
         remove: (...classNames: string[]) => {

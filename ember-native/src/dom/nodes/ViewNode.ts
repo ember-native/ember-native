@@ -1,39 +1,47 @@
 import { isAndroid, isIOS } from '@nativescript/core';
-import {EventData} from '@nativescript/core';
+import { type EventData } from '@nativescript/core';
 import {isBoolean} from '@nativescript/core/utils/types';
 
 import {getViewMeta, normalizeElementName} from '../element-registry';
 import { TextBase } from '@nativescript/core/ui/text-base';
+import DocumentNode from './DocumentNode.ts';
 
 const XML_ATTRIBUTES = Object.freeze(['tap', 'style', 'rows', 'columns', 'fontAttributes']);
 
-function* elementIterator(el: any) {
+function* elementIterator(el: any): Generator<any, void, unknown> {
   yield el;
   for (let child of el.childNodes) {
     yield* elementIterator(child);
   }
 }
 
+export type EventListener = (args: any) => void;
+
+interface IStyleProxy {
+  setProperty(propertyName: string, value: string, priority?: string): void;
+
+  removeProperty(property: string): void;
+
+  animation: string;
+  cssText: string;
+  width?: string;
+  height?: string;
+  left?: string;
+  right?: string;
+  top?: string;
+}
+
 export default class ViewNode {
-  nodeValue: any;
-  namespaceURI: any;
   attributes: any;
-  insertAdjacentHTML: any;
-  getAttributeNS: any;
-  removeAttributeNS: any;
-  setAttributeNS: any;
-  nodeName: string;
-  previousSibling: any;
-  cloneNode: any;
   args: any;
   template: any;
 
   nodeType: any;
   _tagName: any;
-  parentNode: ViewNode;
+  declare parentNode: ViewNode | null;
   childNodes: ViewNode[];
-  prevSibling: ViewNode;
-  nextSibling: ViewNode;
+  prevSibling: ViewNode | null;
+  nextSibling: ViewNode | null;
   _ownerDocument: any;
   _nativeView: any;
   _meta: any;
@@ -69,7 +77,7 @@ export default class ViewNode {
     return this.getElementByTagName(selector);
   }
 
-  contains(otherElement) {
+  contains(otherElement: ViewNode) {
     return false;
   }
 
@@ -108,11 +116,11 @@ export default class ViewNode {
     return this._tagName;
   }
 
-  get firstChild() {
+  get firstChild(): ViewNode | null | undefined {
     return this.childNodes.length ? this.childNodes[0] : null;
   }
 
-  get lastChild() {
+  get lastChild(): ViewNode | null | undefined {
     return this.childNodes.length ? this.childNodes[this.childNodes.length - 1] : null;
   }
 
@@ -132,34 +140,34 @@ export default class ViewNode {
     return (this._meta = getViewMeta(this.tagName));
   }
 
-  get isConnected() {
+  get isConnected(): boolean {
     return Boolean(this.ownerDocument);
   }
 
   /* istanbul ignore next */
-  get ownerDocument() {
+  get ownerDocument(): DocumentNode | null {
     let el = this;
     while (el != null && el.nodeType !== 9) {
       el = el.parentNode || el._ownerDocument;
     }
 
     if (el?.nodeType === 9) {
-      return el;
+      return el as unknown as DocumentNode;
     }
 
     return null;
   }
 
-  getAttribute(key) {
+  getAttribute(key: string) {
     if (this.nativeView) {
       return this.nativeView[key];
     } else {
-      return this[key];
+      return this[key as keyof this];
     }
   }
 
   /* istanbul ignore next */
-  setAttribute(key, value) {
+  setAttribute(key: string, value: any) {
     const nv = this.nativeView;
 
     this.attributes.push({
@@ -168,16 +176,16 @@ export default class ViewNode {
     })
 
     if (!nv) {
-      this[key] = value;
+      this[key as keyof this] = value;
       return;
     }
 
     // normalize key
     if (isAndroid && key.startsWith('android:')) {
-      key = key.substr(8);
+      key = key.slice(8);
     }
     if (isIOS && key.startsWith('ios:')) {
-      key = key.substr(4);
+      key = key.slice(4);
     }
 
     // try to fix case
@@ -202,12 +210,12 @@ export default class ViewNode {
       }
     } catch (e) {
       // ignore but log
-      console.warn(`set attribute threw an error, attr:${key} on ${this._tagName}: ${e.message}`);
+      console.warn(`set attribute threw an error, attr:${key} on ${this._tagName}: ${(e as any).message}`);
     }
   }
 
   /* istanbul ignore next */
-  setStyle(property, value) {
+  setStyle(property: string, value: string) {
     if (!(value = value.trim()).length) {
       return;
     }
@@ -219,7 +227,7 @@ export default class ViewNode {
     this.nativeView.style[property] = value;
   }
 
-  get style() {
+  get style(): IStyleProxy {
     return this.nativeView?.style;
   }
 
@@ -236,12 +244,12 @@ export default class ViewNode {
   }
 
   /* istanbul ignore next */
-  addEventListener(event, handler) {
+  addEventListener(event: string, handler: EventListener) {
     this.nativeView?.on(event, handler);
   }
 
   /* istanbul ignore next */
-  removeEventListener(event, handler) {
+  removeEventListener(event: string, handler: EventListener) {
     this.nativeView?.off(event, handler);
   }
 
@@ -259,7 +267,7 @@ export default class ViewNode {
   onRemovedChild(childNode: ViewNode) {
   }
 
-  insertBefore(childNode, referenceNode) {
+  insertBefore(childNode: ViewNode, referenceNode: ViewNode) {
     if (!childNode) {
       throw new Error(`Can't insert child.`);
     }
@@ -289,8 +297,8 @@ export default class ViewNode {
     let index = this.childNodes.indexOf(referenceNode);
 
     childNode.nextSibling = referenceNode;
-    childNode.prevSibling = this.childNodes[index - 1];
-    this.childNodes[index - 1].nextSibling = childNode;
+    childNode.prevSibling = this.childNodes[index - 1]!;
+    this.childNodes[index - 1]!.nextSibling = childNode;
     referenceNode.prevSibling = childNode;
     this.childNodes.splice(index, 0, childNode);
     childNode.parentNode = this;
@@ -298,7 +306,7 @@ export default class ViewNode {
     this.onInsertedChild(childNode, index);
   }
 
-  appendChild(childNode) {
+  appendChild(childNode: ViewNode) {
     if (!childNode) {
       throw new Error(`Can't append null child.`);
     }
@@ -326,7 +334,7 @@ export default class ViewNode {
     this.onInsertedChild(childNode, this.childNodes.length - 1);
   }
 
-  removeChild(childNode) {
+  removeChild(childNode: ViewNode) {
     if (!childNode) {
       throw new Error(`Can't remove child.`);
     }

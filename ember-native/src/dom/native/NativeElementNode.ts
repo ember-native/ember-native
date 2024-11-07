@@ -1,20 +1,10 @@
 import {KeyframeAnimation} from '@nativescript/core/ui/animation/keyframe-animation';
 import {LayoutBase} from '@nativescript/core/ui/layouts/layout-base';
-import {ContentView, EventData, isAndroid, isIOS, Page, View} from '@nativescript/core';
+import {ContentView, type EventData, isAndroid, isIOS, Page, View} from '@nativescript/core';
 import {CssAnimationParser} from '@nativescript/core/ui/styling/css-animation-parser';
 
 import ElementNode from '../nodes/ElementNode';
-import ViewNode from '../nodes/ViewNode';
-
-// import { logger as log } from '../basicdom';
-interface IStyleProxy {
-  setProperty(propertyName: string, value: string, priority?: string): void;
-
-  removeProperty(property: string): void;
-
-  animation: string;
-  cssText: string;
-}
+import ViewNode, { type EventListener } from '../nodes/ViewNode';
 
 function camelize(kebab: string): string {
   return kebab.replace(/[\-]+(\w)/g, (m, l) => l.toUpperCase());
@@ -26,18 +16,15 @@ export interface ComponentMeta {
   removeChild?: (parent: ViewNode, child: ViewNode) => void;
 }
 
-export type EventListener = (args: any) => void;
-
 const defaultViewMeta = {
   skipAddToDom: false
 };
 
-export default class NativeElementNode extends ElementNode {
-  style: IStyleProxy;
-  _nativeView: View;
+export default class NativeElementNode<T extends View = View> extends ElementNode {
+  declare _nativeView: T;
   _meta: ComponentMeta;
 
-  constructor(tagName: string, viewClass: typeof View, meta: ComponentMeta = null) {
+  constructor(tagName: string, viewClass: typeof View, meta: ComponentMeta | null = null) {
     super(tagName);
 
     this.nodeType = 1;
@@ -60,14 +47,14 @@ export default class NativeElementNode extends ElementNode {
       return this.getAttribute('style');
     };
 
-    let getParentPage = (): NativeElementNode => {
+    let getParentPage = (): NativeElementNode | null => {
       if (this.nativeView && this.nativeView.page) {
         return (this.nativeView.page as any).__GlimmerNativeElement__;
       }
       return null;
     };
 
-    let animations: Map<string, KeyframeAnimation> = new Map();
+    let animations: Map<string, KeyframeAnimation | null> = new Map();
     let oldAnimations: KeyframeAnimation[] = [];
 
     const addAnimation = (animation: string) => {
@@ -84,7 +71,7 @@ export default class NativeElementNode extends ElementNode {
 
       //quickly cancel any old ones
       while (oldAnimations.length) {
-        let oldAnimation = oldAnimations.shift();
+        let oldAnimation = oldAnimations.shift()!;
         if (oldAnimation.isPlaying) {
           oldAnimation.cancel();
         }
@@ -98,10 +85,10 @@ export default class NativeElementNode extends ElementNode {
         animations.set(animation, null);
         return;
       }
-      let animationInfo = animationInfos[0];
+      let animationInfo = animationInfos[0]!;
 
       //Fetch an animationInfo instance that includes the keyframes from the css (this won't include the animation properties parsed above)
-      let animationWithKeyframes = (page.nativeView as Page).getKeyframeAnimationWithName(animationInfo.name);
+      let animationWithKeyframes = (page.nativeView as Page).getKeyframeAnimationWithName(animationInfo.name!);
       if (!animationWithKeyframes) {
         animations.set(animation, null);
         return;
@@ -174,8 +161,10 @@ export default class NativeElementNode extends ElementNode {
   }
 
   /* istanbul ignore next */
-  setStyle(property: string, value: string | number) {
+  setStyle(property: string, value: string | number | null) {
     // log.debug(`setStyle ${this} ${property} ${value}`);
+
+    if (!value) return;
 
     if (!(value = value.toString().trim()).length) {
       return;
@@ -222,7 +211,7 @@ export default class NativeElementNode extends ElementNode {
     while (keypath.length > 0) {
       if (!getTarget) return null;
 
-      let key = keypath.shift();
+      let key = keypath.shift()!;
 
       // try to fix case
       let lowerkey = key.toLowerCase();
@@ -274,7 +263,7 @@ export default class NativeElementNode extends ElementNode {
 
     while (keypath.length > 0) {
       if (!setTarget) return;
-      let key = keypath.shift();
+      let key = keypath.shift()!;
 
       // try to fix case
       let lowerkey = key.toLowerCase();
@@ -383,7 +372,7 @@ function removeChild(parentNode: ViewNode, childNode: ViewNode) {
   }
 
   if (parentNode.meta && typeof parentNode.meta.removeChild === 'function') {
-    return parentNode.meta.removeChild(parentNode, childNode);
+    return parentNode.meta.removeChild(parentNode as ViewNode, childNode as ViewNode);
   }
 
   if (!childNode.nativeView || !childNode.nativeView) {
@@ -397,7 +386,7 @@ function removeChild(parentNode: ViewNode, childNode: ViewNode) {
     parentView.removeChild(childView);
   } else if (parentView instanceof ContentView) {
     if (parentView.content === childView) {
-      parentView.content = null;
+      (parentView as any).content = null;
     }
     if (childNode.nodeType === 8) {
       parentView._removeView(childView);

@@ -4,27 +4,20 @@ import { View } from '@nativescript/core';
 
 import { registerElement } from './element-registry';
 import FrameElement from './native/FrameElement';
-import NativeElementNode, { ComponentMeta } from './native/NativeElementNode';
+import NativeElementNode, { type ComponentMeta } from './native/NativeElementNode';
 import PageElement from './native/PageElement';
 import ElementNode from './nodes/ElementNode';
 import ViewNode from './nodes/ViewNode';
 
-export function registerNativeElement(elementName: string, resolver: () => typeof View, meta: ComponentMeta = null) {
+export function registerNativeElement(elementName: string, resolver: () => typeof View, meta: ComponentMeta | null = null) {
     registerElement(elementName, () => new NativeElementNode(elementName, resolver(), meta));
 }
 
 export function registerElements() {
     registerElement('head', () => null, {
-        insertChild(parentNode, childNode, atIndex) {}
+        insertChild() {}
     });
-    registerElement('style',  () => new ElementNode('style', this));
-    registerElement('div', () => require('@nativescript/core/ui/frame').Frame, {
-        insertChild(parentNode, childNode, atIndex) {
-          console.log('div elem', parentNode, childNode, atIndex);
-            //dont bother
-            parentNode.appendChild(childNode);
-        }
-    });
+    registerElement('style',  () => new ElementNode('style'));
 
     // Completed
     registerNativeElement(
@@ -84,5 +77,5 @@ export function registerElements() {
     // Not Complete
     registerElement('Frame', () => new FrameElement());
     registerElement('Page', () => new PageElement());
-    registerElement('Fragment', () => new ElementNode('fragment', this));
+    registerElement('Fragment', () => new ElementNode('fragment'));
 }

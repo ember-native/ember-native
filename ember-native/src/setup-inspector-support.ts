@@ -1,6 +1,5 @@
 import { DOMDomainDebugger } from '@nativescript/core/debugger/webinspector-dom';
 import * as inspectorCommands from '@nativescript/core/debugger/InspectorBackendCommands';
-import config from './env';
 import { RSVP } from '@ember/-internals/runtime';
 import Ember from 'ember';
 import * as tracking from '@glimmer/tracking';
@@ -8,10 +7,10 @@ import * as runtime from '@glimmer/runtime';
 import * as validator from '@glimmer/validator';
 import * as reference from '@glimmer/reference';
 import * as runloop from '@ember/runloop';
-import ElementNode from './lib/dom/nodes/ElementNode';
+import ElementNode from './dom/nodes/ElementNode';
 import { CSSDomainDebugger } from '@nativescript/core/debugger/webinspector-css';
 
-export function setupInspectorSupport() {
+export function setupInspectorSupport(config: any) {
   window.define('@glimmer/tracking', () => tracking);
   window.define('@glimmer/runtime', () => runtime);
   window.define('@glimmer/validator', () => validator);
@@ -26,13 +25,13 @@ export function setupInspectorSupport() {
 
   console.debug = console.log;
 
-  const globalMessaging = {};
+  const globalMessaging: Record<string, Function[]> = {};
 
   class Event {
     target: any;
     type: any;
 
-    constructor(type, target) {
+    constructor(type: string, target: Element) {
       this.type = type;
       this.target = target;
     }
@@ -45,7 +44,7 @@ export function setupInspectorSupport() {
     }
   }
 
-  globalThis.postMessage = (msg, origin, ports) => {
+  globalThis.postMessage = (msg, origin, ports?: Transferable[]) => {
     globalMessaging['message']?.forEach((listener) => listener({
       data: msg,
       origin,
@@ -53,45 +52,45 @@ export function setupInspectorSupport() {
     }));
   }
 
-  globalThis.triggerEvent = (type, element, data) => {
+  globalThis.triggerEvent = (type: string, element: Element, data: any) => {
     const e = new Event(type, element);
     globalMessaging[type]?.forEach((cb) => {
       cb(e);
     })
   }
 
-  globalThis.addEventListener = (type, cb) => {
+  globalThis.addEventListener = (type: any, cb: any) => {
     globalMessaging[type] = globalMessaging[type] || [];
-    globalMessaging[type].push(cb);
+    globalMessaging[type]!.push(cb);
   }
 
-  globalThis.removeEventListener = (type, cb) => {
+  globalThis.removeEventListener = (type: any, cb: any) => {
     if (type === 'message') {
-      const i = globalMessaging[type].indexOf(cb);
+      const i = globalMessaging[type]?.indexOf(cb) || -1;
       if (i >= 0) {
-        globalMessaging[type].splice(i, 1);
+        globalMessaging[type]!.splice(i, 1);
       }
     }
   }
 
   if (document.documentElement && document.documentElement.dataset) {
     // let EmberDebug know that content script has executed
-    document.documentElement.dataset.emberExtension = 1;
+    document.documentElement.dataset['emberExtension'] = "1";
   }
 
   class Port {
     private msgId: number;
     listeners: any[];
-    private otherPort: string;
+    private otherPort: keyof MessageChannel;
     private channel: MessageChannel;
-    constructor(channel: MessageChannel, otherPort: string) {
+    constructor(channel: MessageChannel, otherPort: keyof MessageChannel) {
       this.channel = channel;
       this.otherPort = otherPort;
       this.msgId = 20000;
       this.listeners = [];
     }
 
-    trigger(msg) {
+    trigger(msg: any) {
       this.listeners.forEach((listener) => listener({ data: msg }));
     }
 
@@ -102,10 +101,10 @@ export function setupInspectorSupport() {
     start() {
 
     }
-    addEventListener(type, cb) {
+    addEventListener(type: string, cb: Function) {
       this.listeners.push(cb);
     }
-    postMessage(msg) {
+    postMessage(msg: any) {
       this.channelPort.trigger(msg);
     }
   }

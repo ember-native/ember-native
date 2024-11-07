@@ -5,7 +5,7 @@ import PropertyNode from './PropertyNode';
 import TextNode from './TextNode';
 import ViewNode from './ViewNode';
 
-function* elementIterator(el: any) {
+function* elementIterator(el: any): Generator<any, void, unknown> {
   yield el;
   for (let child of el.childNodes) {
     yield* elementIterator(child);
@@ -14,31 +14,43 @@ function* elementIterator(el: any) {
 
 class HeadNode extends ElementNode {
   private document: any;
-  constructor(tagName, document) {
+  constructor(tagName: string, document: DocumentNode) {
     super(tagName);
     this.document = document;
   }
   appendChild(childNode: ViewNode) {
     if (childNode.tagName === 'style') {
       console.log('append style', this.document.page);
-      this.document.page.nativeView.addCss(childNode.childNodes[0].text);
+      this.document.page.nativeView.addCss((childNode.childNodes[0]! as any).text);
       return;
     }
     super.appendChild(childNode);
   }
 }
 
+let document: DocumentNode | null = null;
+
 export default class DocumentNode extends ViewNode {
   head: any;
-  nodeMap: Map<any, any>;
-  page: ElementNode;
-  body: ElementNode;
+  config: any;
+  declare nodeMap: Map<any, any>;
+  page: ElementNode | undefined;
+  body: ElementNode | undefined;
   documentElement = {
     dataset: {}
   }
 
+  static getInstance() {
+    if (!document) {
+      document = new DocumentNode();
+    }
+    return document;
+  }
+
   constructor() {
+    if (document) return document;
     super();
+    document = this;
     this.tagName = 'docNode';
     this.nodeType = 9;
     this.head = new HeadNode('head', this);
@@ -46,37 +58,36 @@ export default class DocumentNode extends ViewNode {
     this.nodeMap = new Map();
   }
 
-  createComment(text) {
+  createComment(text: string) {
     return new CommentNode(text);
   }
 
-  createPropertyNode(tagName: string, propertyName: string): PropertyNode {
+  static createPropertyNode(tagName: string, propertyName: string): PropertyNode {
     return new PropertyNode(tagName, propertyName);
   }
 
-  createElement(tagName) {
+  static createElement(tagName: string) {
     if (tagName.indexOf('.') >= 0) {
       let bits = tagName.split('.', 2);
-      return this.createPropertyNode(bits[0], bits[1]);
+      return this.createPropertyNode(bits[0]!, bits[1]!);
     }
-    console.log(createElement(tagName));
     const e = createElement(tagName);
     e._ownerDocument = this;
     if (e.nativeView) {
-      this.nodeMap.set(e.nativeView._domId, e);
+      this.getInstance().nodeMap.set(e.nativeView._domId, e);
     }
     if (tagName === 'page') {
-      this.page = e;
+      this.getInstance().page = e;
 
       Object.defineProperty(this, 'body', {
         configurable: true,
         get() {
           let page =  this.page;
           return {
-            insertAdjacentHTML(location, html) {
+            insertAdjacentHTML(_location: any, _html: any) {
               return null;
             },
-            addEventListener: globalThis.addEventListener.bind(this.page),
+            addEventListener: globalThis.addEventListener.bind(page),
             get lastChild() {
               return null
             }
@@ -87,16 +98,16 @@ export default class DocumentNode extends ViewNode {
     return e;
   }
 
-  createElementNS(namespace, tagName) {
-    return this.createElement(tagName);
+  createElementNS(namespace: any, tagName: string) {
+    return DocumentNode.createElement(tagName);
   }
 
-  createTextNode(text) {
+  createTextNode(text: string) {
     console.log('createTextNode', text);
     return new TextNode(text);
   }
 
-  addEventListener(event, callback) {
+  addEventListener(event: string, callback: Function) {
     if (event === 'DOMContentLoaded') {
       setTimeout(callback, 0);
       return;
@@ -104,14 +115,14 @@ export default class DocumentNode extends ViewNode {
     console.error('unsupported event on document', event);
   }
 
-  removeEventListener(event, handler) {
+  removeEventListener(event: string, handler: Function) {
     if (event === 'DOMContentLoaded') {
       return;
     }
     console.error('unsupported event on document', event);
   }
 
-  searchDom(node, startNode, endNode) {
+  searchDom(node:ViewNode, startNode: ViewNode, endNode: ViewNode) {
     const start = startNode || this.page;
     if (start === node) {
       return true;
@@ -124,7 +135,7 @@ export default class DocumentNode extends ViewNode {
         return true;
       }
     }
-    let sibling = node;
+    let sibling: ViewNode | null = node;
     while (sibling) {
       if (this.searchDom(node, sibling, endNode)) {
         return true;
@@ -139,23 +150,23 @@ export default class DocumentNode extends ViewNode {
     return {
       startNode: null as ViewNode | null,
       endNode: null as ViewNode | null,
-      setStartBefore(startNode) {
+      setStartBefore(startNode: ViewNode | null) {
         while (startNode && !startNode.nativeView) {
           startNode = startNode.nextSibling;
         }
         this.startNode = startNode;
       },
-      setEndAfter(endNode) {
+      setEndAfter(endNode: ViewNode | null) {
         while (endNode && !endNode.nativeView) {
           endNode = endNode.prevSibling;
         }
         this.endNode = endNode;
       },
-      isPointInRange(dom, number) {
-        return self.searchDom(dom, this.startNode, this.endNode);
+      isPointInRange(dom: ViewNode, number: number): boolean {
+        return self.searchDom(dom, this.startNode!, this.endNode!);
       },
       getBoundingClientRect() {
-        if (!this.startNode.nativeView) return null;
+        if (!this.startNode?.nativeView) return null;
         let point = this.startNode.nativeView.getLocationInWindow();
         let size = this.startNode.nativeView.getActualSize();
         let x = point.x;
@@ -184,11 +195,12 @@ export default class DocumentNode extends ViewNode {
     }
   }
 
-  querySelectorAll(selector) {
+  querySelectorAll(selector: string) {
     if (selector.startsWith('meta')) {
+      const config = this.config;
       return {
-        getAttribute() {
-          return JSON.stringify(this.config);
+        getAttribute(): string {
+          return JSON.stringify(config);
         }
       }
     }

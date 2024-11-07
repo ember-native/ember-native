@@ -4,6 +4,7 @@
     "environment": ["ember-loose", "ember-template-imports"]
   },
   "compilerOptions": {
+    "emitDecoratorMetadata": true,
     "allowJs": true,
     "declaration": true,
     "declarationDir": "declarations",
@@ -50,6 +51,8 @@
     "types/ember.d.ts",
     "index.d.ts",
     "src/**/*",
+    "src/**/*.gts",
+    "test.ts",
     "unpublished-development-types/**/*"
   ],
   "glint": {

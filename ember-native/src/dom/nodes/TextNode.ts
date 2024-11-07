@@ -1,10 +1,10 @@
-import { Label } from '@nativescript/core';
+import { Label, TextBase } from '@nativescript/core';
 import ViewNode from './ViewNode';
 
 export default class TextNode extends ViewNode {
     text: any;
-    private _parentNode: any;
-    constructor(text) {
+    private _parentNode: ViewNode | null = null;
+    constructor(text: string) {
         super();
 
         this.nodeType = 3;
@@ -15,7 +15,8 @@ export default class TextNode extends ViewNode {
         };
     }
 
-    set parentNode(node) {
+    // @ts-ignore
+  set parentNode(node: ViewNode | null) {
       this._parentNode = node;
       this.setText(this.text);
     }
@@ -24,7 +25,7 @@ export default class TextNode extends ViewNode {
       return this._parentNode;
     }
 
-    setText(text) {
+    setText(text: string) {
         this.text = text;
         if (this.parentNode?.nativeView instanceof TextBase) {
           this.parentNode.updateText();

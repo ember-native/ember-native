@@ -27,7 +27,7 @@ export default class PropertyNode extends ElementNode {
         return `${this.constructor.name}(${this.tagName}, ${this.propertyName})`;
     }
 
-    setOnNode(parent: ViewNode) {
+    setOnNode(parent: ViewNode | null) {
         if (parent && parent.tagName === this.propertyTagName) {
             const el = this.firstElement();
             parent.setAttribute(this.propertyName, el);
