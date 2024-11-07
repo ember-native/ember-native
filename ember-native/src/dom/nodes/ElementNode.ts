@@ -3,7 +3,7 @@
 // import { CssAnimationParser } from '@nativescript/core/ui/styling/css-animation-parser';
 import PropertyNode from './PropertyNode';
 import TextNode from './TextNode';
-import ViewNode from './ViewNode';
+import ViewNode from './ViewNode.ts';
 
 // import { getViewClass } from '../element-registry';
 // import ViewNode from './ViewNode';

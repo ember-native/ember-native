@@ -1,6 +1,6 @@
 import { Frame } from '@nativescript/core/ui/frame';
 
-import { createElement } from '../element-registry';
+import { createElement } from '../element-registry.ts';
 import ViewNode from '../nodes/ViewNode';
 import NativeElementNode from './NativeElementNode';
 import { Page } from '@nativescript/core/ui/page';

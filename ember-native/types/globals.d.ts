@@ -17,14 +17,6 @@ declare global {
 }
 
 
-declare module 'lib.dom.ts' {
-  var Element: typeof import('../src/dom/nodes/ElementNode.ts').default;
-  import { RadListView as NativeRadListView } from "nativescript-ui-listview";
-  interface HTMLElementTagNameMap {
-    "rad-list-view": NativeRadListView
-  }
-}
-
 declare module 'ember-modifier' {
   import ViewNode from '../declarations/dom/nodes/ViewNode';
   import type { ElementFor, EmptyObject, NamedArgs, PositionalArgs } from 'ember-modifier/-private/signature.ts';
@@ -72,11 +64,11 @@ declare module 'loader.js' {
 }
 
 declare module globalThis {
-  import NativeElementNode from '../declarations/dom/native/NativeElementNode';
+  import NativeElementNode from '../src/dom/native/NativeElementNode';
   import { RadListView as NativeRadListView } from "nativescript-ui-listview";
   import { ListView } from "@nativescript/core";
   interface HTMLElementTagNameMap {
-    "rad-list-view": NativeElementNode<NativeRadListView>
-    "list-view": NativeElementNode<ListView>
+    "rad-list-view": NativeElementNode<NativeRadListView>;
+    "list-view": NativeElementNode<ListView>;
   }
 }

@@ -1,8 +1,5 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
-  },
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "allowJs": true,

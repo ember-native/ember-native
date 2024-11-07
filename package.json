@@ -32,6 +32,7 @@
   "pnpm": {
     "overrides": {
       "@embroider/addon-shim": "1.9.0",
+      "ember-source": "^5.12.0",
       "kolay": "git+https://github.com/patricklx/kolay#dist-kolay",
       "@universal-ember/kolay-ui": "git+https://github.com/patricklx/kolay#dist-kolay-ui",
       "rollup-plugin-astroturf.git": "git+https://github.com/patricklx/rollup-plugin-astroturf.git#dist"

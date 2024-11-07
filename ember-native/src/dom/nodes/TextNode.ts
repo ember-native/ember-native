@@ -1,5 +1,5 @@
-import { Label, TextBase } from '@nativescript/core';
-import ViewNode from './ViewNode';
+import { TextBase } from '@nativescript/core';
+import ViewNode from './ViewNode.ts';
 
 export default class TextNode extends ViewNode {
     text: any;

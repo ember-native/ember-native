@@ -1,6 +1,6 @@
 import { Page } from '@nativescript/core/ui/page';
 
-import NativeElementNode from './NativeElementNode';
+import NativeElementNode from './NativeElementNode.ts';
 
 export default class PageElement extends NativeElementNode {
     constructor() {

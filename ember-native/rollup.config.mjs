@@ -1,4 +1,4 @@
-import path from 'path';
+´+import path from 'path';
 import fs from 'fs';
 import postcss from 'rollup-plugin-postcss';
 import { babel } from '@rollup/plugin-babel';

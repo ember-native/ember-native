@@ -1,7 +1,7 @@
-import NativeElementNode from '../declarations/dom/native/NativeElementNode';
+import NativeElementNode from '../src/dom/native/NativeElementNode';
 import '@glint/environment-ember-loose/-private/dsl/globals';
 import { Globals as EMLGlobals } from '@glint/environment-ember-template-imports/-private/dsl/globals';
-import ViewNode from '../declarations/dom/nodes/ViewNode';
+import ViewNode from '../src/dom/nodes/ViewNode';
 import type { ComponentLike } from "@glint/template";
 
 
