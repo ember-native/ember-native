@@ -1,4 +1,5 @@
 import { Header } from 'docs-app/components/header';
+
 import { Menu } from 'docs-app/components/icons';
 import { Nav } from 'docs-app/components/nav';
 // @ts-expect-error - no types are provided for ember-mobile-menu
@@ -89,7 +90,7 @@ const Layout: TOC<{ Blocks: { default: [] }}> = <template>
   </MenuWrapper>
 </template>;
 
-const ReportingAnIssue = <template>
+export const ReportingAnIssue = <template>
   <ExternalLink href="https://github.com/universal-ember/ember-primitives/issues/new">
     reporting an issue
   </ExternalLink>

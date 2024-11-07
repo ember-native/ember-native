@@ -104,7 +104,7 @@ const GetStarted = <template>
   </InternalLink>
 </template>;
 
-const Content = <template>
+export const Content = <template>
     <br><br>
 
     <div class="mx-auto" style="width: 66%">

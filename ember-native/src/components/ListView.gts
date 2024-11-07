@@ -60,7 +60,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
       ref.index = index;
       listViewComponent.elementRefs = [...listViewComponent.elementRefs];
     };
-  }.bind(this))
+  }.bind(this));
 
 
 

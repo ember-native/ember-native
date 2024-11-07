@@ -66,25 +66,17 @@ interface Document {
   nodeMap: any;
 }
 
-
-
 declare module 'loader.js' {
   declare const require: Function;
   declare const define: Function;
 }
 
-declare module '@glint/environment-ember-loose/registry' {
-  import type { EmbroiderUtilRegistry } from '@embroider/util';
-  export default interface Registry extends EmbroiderUtilRegistry {
-    // ...
-  }
-}
-
-
 declare module globalThis {
   import NativeElementNode from '../declarations/dom/native/NativeElementNode';
   import { RadListView as NativeRadListView } from "nativescript-ui-listview";
+  import { ListView } from "@nativescript/core";
   interface HTMLElementTagNameMap {
     "rad-list-view": NativeElementNode<NativeRadListView>
+    "list-view": NativeElementNode<ListView>
   }
 }
