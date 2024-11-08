@@ -37,19 +37,21 @@ declare module 'ember-modifier' {
   }>;
 }
 
+type AnyFunction = (...args: any) => any;
+
 declare namespace globalThis {
-  var define: Function;
-  var requirejs: Function;
-  var requireModule: Function;
+  var define: AnyFunction;
+  var requirejs: AnyFunction;
+  var requireModule: AnyFunction;
   var Element: typeof import('../src/dom/nodes/ElementNode.ts').default;
   var Node: typeof import('../src/dom/nodes/ElementNode.ts').default;
-  var __metadata: Function;
-  var __decorate: Function;
-  var __inspectorSendEvent: Function;
+  var __metadata: AnyFunction;
+  var __decorate: AnyFunction;
+  var __inspectorSendEvent: AnyFunction;
   var emberDebugInjected: boolean;
   var MessageChannel: MessageChannel;
-  var postMessage: Function;
-  var triggerEvent: Function;
+  var postMessage: AnyFunction;
+  var triggerEvent: AnyFunction;
   var EmberInspector: any;
 }
 
@@ -58,8 +60,8 @@ interface Document {
 }
 
 declare module 'loader.js' {
-  declare const require: Function;
-  declare const define: Function;
+  declare const require: AnyFunction;
+  declare const define: AnyFunction;
 }
 
 declare namespace globalThis {
