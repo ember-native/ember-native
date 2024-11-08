@@ -4,6 +4,7 @@ import { createElement } from '../element-registry.ts';
 import ViewNode from '../nodes/ViewNode';
 import NativeElementNode from './NativeElementNode';
 import { Page } from '@nativescript/core/ui/page';
+import type { View } from '@nativescript/core';
 
 export default class FrameElement extends NativeElementNode {
   currentPage: any;
@@ -14,9 +15,10 @@ export default class FrameElement extends NativeElementNode {
 
   setAttribute(key: string, value: any) {
     if (key.toLowerCase() == 'defaultpage') {
-      let dummy = createElement('fragment');
+      const dummy = createElement('fragment');
       (this.nativeView as Frame).navigate({
-        create: () => (dummy.firstElement() as NativeElementNode).nativeView
+        create: () =>
+          (dummy.firstElement() as NativeElementNode).nativeView as View,
       });
     }
     super.setAttribute(key, value);
@@ -35,16 +37,17 @@ export default class FrameElement extends NativeElementNode {
   appendChild(childNode: ViewNode) {
     //only handle page nodes
     console.log('appendChild', childNode);
-    if (childNode.nativeView instanceof Page) {
+    if (
+      childNode instanceof NativeElementNode &&
+      childNode.nativeView instanceof Page
+    ) {
       console.log('navigate', childNode);
       this.currentPage = childNode.nativeView;
       this.nativeView.navigate({
         create: () => childNode.nativeView,
         clearHistory: true,
         backstackVisible: false,
-        transition: {
-
-        }
+        transition: {},
       });
     }
     super.appendChild(childNode);
@@ -52,15 +55,17 @@ export default class FrameElement extends NativeElementNode {
   }
 
   onInsertedChild(childNode: ViewNode) {
-    if (childNode.nativeView instanceof Page && this.currentPage !== childNode.nativeView) {
+    if (
+      childNode instanceof NativeElementNode &&
+      childNode.nativeView instanceof Page &&
+      this.currentPage !== childNode.nativeView
+    ) {
       console.log('navigate', childNode);
       this.nativeView.navigate({
         create: () => childNode.nativeView,
         clearHistory: true,
         backstackVisible: false,
-        transition: {
-
-        }
+        transition: {},
       });
     }
   }

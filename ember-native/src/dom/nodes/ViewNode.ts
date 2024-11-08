@@ -1,35 +1,14 @@
-import { isAndroid, isIOS } from '@nativescript/core';
-import { type EventData } from '@nativescript/core';
-import {isBoolean} from '@nativescript/core/utils/types';
-
-import {getViewMeta, normalizeElementName} from '../element-registry';
-import { TextBase } from '@nativescript/core/ui/text-base';
+import { getViewMeta, normalizeElementName } from '../element-registry';
 import DocumentNode from './DocumentNode.ts';
-
-const XML_ATTRIBUTES = Object.freeze(['tap', 'style', 'rows', 'columns', 'fontAttributes']);
 
 function* elementIterator(el: any): Generator<any, void, unknown> {
   yield el;
-  for (let child of el.childNodes) {
+  for (const child of el.childNodes) {
     yield* elementIterator(child);
   }
 }
 
 export type EventListener = (args: any) => void;
-
-interface IStyleProxy {
-  setProperty(propertyName: string, value: string, priority?: string): void;
-
-  removeProperty(property: string): void;
-
-  animation: string;
-  cssText: string;
-  width?: string;
-  height?: string;
-  left?: string;
-  right?: string;
-  top?: string;
-}
 
 export default class ViewNode {
   attributes: any;
@@ -43,23 +22,22 @@ export default class ViewNode {
   prevSibling: ViewNode | null;
   nextSibling: ViewNode | null;
   _ownerDocument: any;
-  _nativeView: any;
   _meta: any;
 
   getElementById(id: string) {
-    for (let el of elementIterator(this)) {
+    for (const el of elementIterator(this)) {
       if (el.nodeType === 1 && el.id === id) return el;
     }
   }
 
   getElementByClass(klass: string) {
-    for (let el of elementIterator(this)) {
+    for (const el of elementIterator(this)) {
       if (el.nodeType === 1 && el.classList.contains(klass)) return el;
     }
   }
 
   getElementByTagName(tagName: string) {
-    for (let el of elementIterator(this)) {
+    for (const el of elementIterator(this)) {
       if (el.nodeType === 1 && el.tagName === tagName) return el;
     }
   }
@@ -77,7 +55,7 @@ export default class ViewNode {
     return this.getElementByTagName(selector);
   }
 
-  contains(otherElement: ViewNode) {
+  contains(_otherElement: ViewNode) {
     return false;
   }
 
@@ -90,7 +68,6 @@ export default class ViewNode {
     this.nextSibling = null;
 
     this._ownerDocument = null;
-    this._nativeView = null;
     this._meta = null;
     this.attributes = [];
   }
@@ -121,15 +98,9 @@ export default class ViewNode {
   }
 
   get lastChild(): ViewNode | null | undefined {
-    return this.childNodes.length ? this.childNodes[this.childNodes.length - 1] : null;
-  }
-
-  get nativeView() {
-    return this._nativeView;
-  }
-
-  set nativeView(view) {
-    this._nativeView = view;
+    return this.childNodes.length
+      ? this.childNodes[this.childNodes.length - 1]
+      : null;
   }
 
   get meta() {
@@ -159,113 +130,22 @@ export default class ViewNode {
   }
 
   getAttribute(key: string) {
-    if (this.nativeView) {
-      return this.nativeView[key];
-    } else {
-      return this[key as keyof this];
-    }
+    return this[key as keyof this];
   }
 
   /* istanbul ignore next */
   setAttribute(key: string, value: any) {
-    const nv = this.nativeView;
-
     this.attributes.push({
       nodeName: key,
       nodeValue: value,
-    })
+    });
 
-    if (!nv) {
-      this[key as keyof this] = value;
-      return;
-    }
-
-    // normalize key
-    if (isAndroid && key.startsWith('android:')) {
-      key = key.slice(8);
-    }
-    if (isIOS && key.startsWith('ios:')) {
-      key = key.slice(4);
-    }
-
-    // try to fix case
-    let lowerkey = key.toLowerCase();
-    for (let realKey in nv) {
-      if (lowerkey == realKey.toLowerCase()) {
-        key = realKey;
-        break;
-      }
-    }
-    try {
-      if (XML_ATTRIBUTES.indexOf(key) !== -1) {
-        nv[key] = value;
-      } else {
-        // detect expandable attrs for boolean values
-        // See https://vuejs.org/v2/guide/components-props.html#Passing-a-Boolean
-        if (isBoolean(nv[key]) && value === '') {
-          value = true;
-        } else {
-          nv[key] = value;
-        }
-      }
-    } catch (e) {
-      // ignore but log
-      console.warn(`set attribute threw an error, attr:${key} on ${this._tagName}: ${(e as any).message}`);
-    }
+    this[key as keyof this] = value;
   }
 
-  /* istanbul ignore next */
-  setStyle(property: string, value: string) {
-    if (!(value = value.trim()).length) {
-      return;
-    }
+  onInsertedChild(_childNode: ViewNode, _index: number) {}
 
-    if (property.endsWith('Align')) {
-      // NativeScript uses Alignment instead of Align, this ensures that text-align works
-      property += 'ment';
-    }
-    this.nativeView.style[property] = value;
-  }
-
-  get style(): IStyleProxy {
-    return this.nativeView?.style;
-  }
-
-  set style(v) {
-    Object.assign(this.nativeView?.style, v);
-  }
-
-  updateText() {
-    let hasTextAttr = this.nativeView instanceof TextBase;
-    if (hasTextAttr) {
-      const t = this.childNodes.map(c => (c as any).text).filter(Boolean).join('');
-      this.setAttribute('text', t.trim());
-    }
-  }
-
-  /* istanbul ignore next */
-  addEventListener(event: string, handler: EventListener) {
-    this.nativeView?.on(event, handler);
-  }
-
-  /* istanbul ignore next */
-  removeEventListener(event: string, handler: EventListener) {
-    this.nativeView?.off(event, handler);
-  }
-
-  dispatchEvent(event: EventData) {
-    if (this.nativeView) {
-      //nativescript uses the EventName while dom uses Type
-      event.eventName = (event as any).type;
-      this.nativeView.notify(event);
-    }
-  }
-
-  onInsertedChild(childNode: ViewNode, index: number) {
-  }
-
-  onRemovedChild(childNode: ViewNode) {
-  }
+  onRemovedChild(_childNode: ViewNode) {}
 
   insertBefore(childNode: ViewNode, referenceNode: ViewNode) {
     if (!childNode) {
@@ -279,11 +159,15 @@ export default class ViewNode {
     }
 
     if (referenceNode.parentNode !== this) {
-      throw new Error(`Can't insert child, because the reference node has a different parent.`);
+      throw new Error(
+        `Can't insert child, because the reference node has a different parent.`,
+      );
     }
 
     if (childNode.parentNode && childNode.parentNode !== this) {
-      throw new Error(`Can't insert child, because it already has a different parent.`);
+      throw new Error(
+        `Can't insert child, because it already has a different parent.`,
+      );
     }
 
     if (childNode.parentNode === this) {
@@ -294,7 +178,7 @@ export default class ViewNode {
       // throw new Error(`Can't insert child, because it is already a child.`)
     }
 
-    let index = this.childNodes.indexOf(referenceNode);
+    const index = this.childNodes.indexOf(referenceNode);
 
     childNode.nextSibling = referenceNode;
     childNode.prevSibling = this.childNodes[index - 1]!;
@@ -312,7 +196,9 @@ export default class ViewNode {
     }
 
     if (childNode.parentNode && childNode.parentNode !== this) {
-      throw new Error(`Can't append child, because it already has a different parent.`);
+      throw new Error(
+        `Can't append child, because it already has a different parent.`,
+      );
     }
 
     if (childNode.parentNode === this) {
@@ -381,7 +267,7 @@ export default class ViewNode {
   }
 
   firstElement() {
-    for (var child of this.childNodes) {
+    for (const child of this.childNodes) {
       if (child.nodeType == 1) {
         return child;
       }
@@ -389,17 +275,13 @@ export default class ViewNode {
     return null;
   }
 
-  getBoundingClientRect() {
-    if (!this.nativeView) return null;
-    if (!this.nativeView.getLocationInWindow) return null;
-    const point = this.nativeView.getLocationInWindow();
-    let actualSize = this.nativeView.getActualSize();
-    return {
-      left: point.x,
-      top: point.y,
-      bottom: point.y + actualSize.height,
-      width: actualSize.width,
-      height: actualSize.height,
-    }
+  getBoundingClientRect(): {
+    left: number;
+    top: number;
+    bottom: number;
+    width: number;
+    height: number;
+  } | null {
+    return null;
   }
 }

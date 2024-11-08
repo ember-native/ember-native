@@ -1,21 +1,23 @@
-import Component from "@glimmer/component";
+import Component from '@glimmer/component';
 import { modifier } from 'ember-modifier';
-import { tracked } from "@glimmer/tracking";
-import ElementNode from "../dom/nodes/ElementNode";
-import { RadListView as NativeRadListView, ListViewViewType } from "nativescript-ui-listview";
+import { tracked } from '@glimmer/tracking';
+import {
+  RadListView as NativeRadListView,
+  ListViewViewType,
+} from 'nativescript-ui-listview';
 import NativeElementNode from '../dom/native/NativeElementNode.ts';
 import DocumentNode from '../dom/nodes/DocumentNode.ts';
-
+import type { StackLayout } from '@nativescript/core';
 
 class TrackedMap extends Map<any, any> {
   @tracked counter = 0;
-  set(key:any, value:any):this {
+  set(key: any, value: any): this {
     this.counter += 1;
     super.set(key, value);
     return this;
   }
 
-  get(key:any):any {
+  get(key: any): any {
     if (this.counter === 0) return null;
     return super.get(key);
   }
@@ -26,7 +28,6 @@ class TrackedMap extends Map<any, any> {
   }
 }
 
-
 interface RadListViewInterface<T> {
   Element: NativeElementNode<NativeRadListView>;
   Args: {
@@ -36,66 +37,73 @@ interface RadListViewInterface<T> {
     header: [];
     footer: [];
     item: [T];
-  }
+  };
 }
 
-
-export default class RadListView<T = any> extends Component<RadListViewInterface<T>> {
+export default class RadListView<T = any> extends Component<
+  RadListViewInterface<T>
+> {
   elementRefs: TrackedMap = new TrackedMap();
   @tracked private listView: NativeElementNode<NativeRadListView> | undefined;
-  declare private headerElement: ElementNode;
-  declare private footerElement: ElementNode;
+  private declare headerElement: NativeElementNode<StackLayout>;
+  private declare footerElement: NativeElementNode<StackLayout>;
 
   get items() {
     return [...this.elementRefs.entries()].map(([element, item]) => {
       return {
         item,
-        element
-      }
+        element,
+      };
     });
   }
 
-  setupListView = modifier(function setupListView(this: RadListView, listView: NativeElementNode<NativeRadListView>) {
-    this.listView = listView;
-    const listViewComponent = this;
-    function _getDefaultItemContent() {
-      const sl = DocumentNode.createElement('stackLayout');
-      Object.defineProperty(sl.nativeView, 'parent', {
-        get() {
-          return this._parent;
-        },
-        set(v:any) {
-          this._parent = v;
-          Object.defineProperty(v, 'bindingContext', {
-            get() {
-              listViewComponent.elementRefs.get(sl);
-            },
-            set(v:any) {
-              listViewComponent.elementRefs.set(sl, v);
-            }
-          });
-        }
-      });
-      return sl.nativeView;
-    }
-    listView.nativeView.itemViewLoader = (type) => {
-      switch (type) {
-        case ListViewViewType.ItemView:
-          return _getDefaultItemContent()
-        case ListViewViewType.HeaderView:
-          return this.headerElement;
-        case ListViewViewType.FooterView:
-          return this.footerElement;
+  setupListView = modifier(
+    function setupListView(
+      this: RadListView,
+      listView: NativeElementNode<NativeRadListView>,
+    ) {
+      this.listView = listView;
+      const listViewComponent = this;
+      function _getDefaultItemContent() {
+        const sl = DocumentNode.createElement('stack-layout');
+        Object.defineProperty(sl.nativeView, 'parent', {
+          get() {
+            return this._parent;
+          },
+          set(v: any) {
+            this._parent = v;
+            Object.defineProperty(v, 'bindingContext', {
+              get() {
+                return listViewComponent.elementRefs.get(sl);
+              },
+              set(v: any) {
+                listViewComponent.elementRefs.set(sl, v);
+              },
+            });
+          },
+        });
+        return sl.nativeView;
       }
-    }
-  }.bind(this))
+      listView.nativeView.itemViewLoader = (type) => {
+        switch (type) {
+          case ListViewViewType.ItemView:
+            return _getDefaultItemContent();
+          case ListViewViewType.HeaderView:
+            return this.headerElement.nativeView;
+          case ListViewViewType.FooterView:
+            return this.footerElement.nativeView;
+        }
+        return DocumentNode.createElement('stack-layout').nativeView;
+      };
+    }.bind(this),
+  );
 
   setupHeader = () => {
-    this.headerElement = DocumentNode.createElement('stackLayout');
+    this.headerElement = DocumentNode.createElement('stack-layout');
   };
 
   setupFooter = () => {
-    this.footerElement = DocumentNode.createElement('stackLayout');
+    this.footerElement = DocumentNode.createElement('stack-layout');
   };
 
   <template>

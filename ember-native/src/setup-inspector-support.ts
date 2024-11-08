@@ -7,8 +7,6 @@ import * as runtime from '@glimmer/runtime';
 import * as validator from '@glimmer/validator';
 import * as reference from '@glimmer/reference';
 import * as runloop from '@ember/runloop';
-import ElementNode from './dom/nodes/ElementNode';
-import { CSSDomainDebugger } from '@nativescript/core/debugger/webinspector-css';
 
 export function setupInspectorSupport(config: any) {
   window.define('@glimmer/tracking', () => tracking);
@@ -25,7 +23,7 @@ export function setupInspectorSupport(config: any) {
 
   console.debug = console.log;
 
-  const globalMessaging: Record<string, Function[]> = {};
+  const globalMessaging: Record<string, ((args: any) => void)[]> = {};
 
   class Event {
     target: any;
@@ -36,33 +34,31 @@ export function setupInspectorSupport(config: any) {
       this.target = target;
     }
 
-    preventDefault() {
-
-    }
-    stopPropagation() {
-
-    }
+    preventDefault() {}
+    stopPropagation() {}
   }
 
   globalThis.postMessage = (msg, origin, ports?: Transferable[]) => {
-    globalMessaging['message']?.forEach((listener) => listener({
-      data: msg,
-      origin,
-      ports
-    }));
-  }
+    globalMessaging['message']?.forEach((listener) =>
+      listener({
+        data: msg,
+        origin,
+        ports,
+      }),
+    );
+  };
 
-  globalThis.triggerEvent = (type: string, element: Element, data: any) => {
+  globalThis.triggerEvent = (type: string, element: Element, _data: any) => {
     const e = new Event(type, element);
     globalMessaging[type]?.forEach((cb) => {
       cb(e);
-    })
-  }
+    });
+  };
 
   globalThis.addEventListener = (type: any, cb: any) => {
     globalMessaging[type] = globalMessaging[type] || [];
     globalMessaging[type]!.push(cb);
-  }
+  };
 
   globalThis.removeEventListener = (type: any, cb: any) => {
     if (type === 'message') {
@@ -71,11 +67,11 @@ export function setupInspectorSupport(config: any) {
         globalMessaging[type]!.splice(i, 1);
       }
     }
-  }
+  };
 
   if (document.documentElement && document.documentElement.dataset) {
     // let EmberDebug know that content script has executed
-    document.documentElement.dataset['emberExtension'] = "1";
+    document.documentElement.dataset['emberExtension'] = '1';
   }
 
   class Port {
@@ -98,10 +94,8 @@ export function setupInspectorSupport(config: any) {
       return this.channel[this.otherPort];
     }
 
-    start() {
-
-    }
-    addEventListener(type: string, cb: Function) {
+    start() {}
+    addEventListener(_type: string, cb: (args: any) => void) {
       this.listeners.push(cb);
     }
     postMessage(msg: any) {
@@ -121,31 +115,10 @@ export function setupInspectorSupport(config: any) {
   Object.defineProperty(globalThis as any, 'innerWidth', {
     get() {
       return (document.body as any)?.nativeView?.getActualSize().width || 0;
-    }
-  })
+    },
+  });
 
-
-  (CSSDomainDebugger.prototype as any).getInlineStylesForNode = (params: any) => {
-    const n = document.nodeMap.get(params.nodeId) as ElementNode;
-    return {
-      attributesStyle: {
-        CSSStyle: {
-          cssProperties: [],
-          shorthandEntries: []
-        }
-      },
-      inlineStyle: {
-        shorthandEntries: [],
-        cssProperties: Object.entries(n.style).map(([k, v]) => ({
-          name: k,
-          value: String(v)
-        }))
-      }
-    }
-  }
-
-
-  DOMDomainDebugger.prototype.resolveNode = ((params) => {
+  DOMDomainDebugger.prototype.resolveNode = (params) => {
     const n = document.nodeMap.get(params.nodeId);
     console.log(n);
 
@@ -154,13 +127,12 @@ export function setupInspectorSupport(config: any) {
         type: 'object',
         className: n.constructor.name,
         value: n,
-        objectId: 'dont know'
-      }
+        objectId: 'dont know',
+      },
     };
-  });
+  };
 
-
-  let EmberDomain = class EmberDomain {
+  let _EmberDomain = class EmberDomain {
     port!: MessagePort;
     private msgId: number;
     constructor() {
@@ -169,14 +141,16 @@ export function setupInspectorSupport(config: any) {
         if (msg.data === 'debugger-client') {
           this.port = msg.ports[0]!;
           this.port.addEventListener('message', (msg) => {
-            __inspectorSendEvent(JSON.stringify({
-              id: this.msgId++,
-              method: 'Ember.toExtension',
-              params: msg,
-            }));
-          })
+            __inspectorSendEvent(
+              JSON.stringify({
+                id: this.msgId++,
+                method: 'Ember.toExtension',
+                params: msg,
+              }),
+            );
+          });
         }
-      })
+      });
     }
     fromExtension(msg: any) {
       try {
@@ -191,16 +165,18 @@ export function setupInspectorSupport(config: any) {
         globalThis.emberDebugInjected = true;
         try {
           eval(msg.value);
-        } catch(e) {
-          console.error(e)
+        } catch (e) {
+          console.error(e);
         }
       }
     }
-  }
+  };
 
-  EmberDomain = __decorate([
-    inspectorCommands.DomainDispatcher('Ember'),
-    __metadata("design:paramtypes", [])
-  ], EmberDomain);
+  _EmberDomain = __decorate(
+    [
+      inspectorCommands.DomainDispatcher('Ember'),
+      __metadata('design:paramtypes', []),
+    ],
+    _EmberDomain,
+  );
 }
-

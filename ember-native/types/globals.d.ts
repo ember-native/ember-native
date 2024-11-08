@@ -1,33 +1,34 @@
 declare module '*.scss';
 
-declare global {
-  // Prevents ESLint from "fixing" this via its auto-fix to turn it into a type
-  // alias (e.g. after running any Ember CLI generator)
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  import { MutableArray } from '@ember/array';
-  interface Array<T> extends MutableArray<T> {}
-  // interface Function extends Ember.FunctionPrototypeExtensions {}
-
-  var define: Function;
-  namespace NodeJS {
-    interface Global {
-
-    }
-  }
-}
-
-
 declare module 'ember-modifier' {
   import ViewNode from '../declarations/dom/nodes/ViewNode';
-  import type { ElementFor, EmptyObject, NamedArgs, PositionalArgs } from 'ember-modifier/-private/signature.ts';
-  export function modifier<E extends ViewNode, P extends unknown[], N = EmptyObject>(fn: (element: E, positional: P, named: N) => void | Teardown): FunctionBasedModifier<{
+  import type {
+    ElementFor,
+    EmptyObject,
+    NamedArgs,
+    PositionalArgs,
+  } from 'ember-modifier/-private/signature.ts';
+  import type { Teardown } from 'ember-modifier/-private/function-based/modifier';
+  export function modifier<
+    E extends ViewNode,
+    P extends unknown[],
+    N = EmptyObject,
+  >(
+    fn: (element: E, positional: P, named: N) => void | Teardown,
+  ): FunctionBasedModifier<{
     Args: {
       Positional: P;
       Named: N;
     };
     Element: E;
   }>;
-  export function modifier<S>(fn: (element: ElementFor<S>, positional: PositionalArgs<S>, named: NamedArgs<S>) => void | Teardown): FunctionBasedModifier<{
+  export function modifier<S>(
+    fn: (
+      element: ElementFor<S>,
+      positional: PositionalArgs<S>,
+      named: NamedArgs<S>,
+    ) => void | Teardown,
+  ): FunctionBasedModifier<{
     Element: ElementFor<S>;
     Args: {
       Named: NamedArgs<S>;
@@ -36,8 +37,7 @@ declare module 'ember-modifier' {
   }>;
 }
 
-
-declare module globalThis {
+declare namespace globalThis {
   var define: Function;
   var requirejs: Function;
   var requireModule: Function;
@@ -53,7 +53,6 @@ declare module globalThis {
   var EmberInspector: any;
 }
 
-
 interface Document {
   nodeMap: any;
 }
@@ -63,12 +62,12 @@ declare module 'loader.js' {
   declare const define: Function;
 }
 
-declare module globalThis {
+declare namespace globalThis {
   import NativeElementNode from '../src/dom/native/NativeElementNode';
-  import { RadListView as NativeRadListView } from "nativescript-ui-listview";
-  import { ListView } from "@nativescript/core";
+  import { RadListView as NativeRadListView } from 'nativescript-ui-listview';
+  import { ListView } from '@nativescript/core';
   interface HTMLElementTagNameMap {
-    "rad-list-view": NativeElementNode<NativeRadListView>;
-    "list-view": NativeElementNode<ListView>;
+    'rad-list-view': NativeElementNode<NativeRadListView>;
+    'list-view': NativeElementNode<ListView>;
   }
 }

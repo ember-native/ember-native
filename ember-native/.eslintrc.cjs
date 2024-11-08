@@ -1,5 +1,6 @@
 'use strict';
 
+const { emberNativeGlobals } = require('./eslint/ember-native');
 module.exports = {
   root: true,
   parser: 'ember-eslint-parser',
@@ -10,16 +11,17 @@ module.exports = {
       root: __dirname,
     },
   },
-  plugins: ['ember'],
   extends: ['plugin:ember/recommended', 'plugin:prettier/recommended'],
   globals: {
     'ensure-safe-component': true,
+    ...emberNativeGlobals,
   },
   env: {
     browser: true,
   },
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-this-alias': 'off',
   },
   overrides: [
     {
@@ -31,9 +33,24 @@ module.exports = {
         'plugin:ember/recommended',
       ],
       rules: {
+        'no-var': 'off',
         'ember/no-at-ember-render-modifiers': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-this-alias': 'off',
         'ember/no-empty-glimmer-component-classes': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            args: 'all',
+            argsIgnorePattern: '^_',
+            caughtErrors: 'all',
+            caughtErrorsIgnorePattern: '^_',
+            destructuredArrayIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+            ignoreRestSiblings: true,
+          },
+        ],
       },
     },
     {
@@ -49,6 +66,7 @@ module.exports = {
       rules: {
         'ember/no-at-ember-render-modifiers': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-this-alias': 'off',
         'ember/no-empty-glimmer-component-classes': 'off',
       },
     },

@@ -4,10 +4,13 @@ import ElementNode from './ElementNode';
 import PropertyNode from './PropertyNode';
 import TextNode from './TextNode';
 import ViewNode from './ViewNode';
+import type { NativeElementsTagNameMap } from '../native-elements-tag-name-map.ts';
+import type PageElement from '../native/PageElement.ts';
+import NativeElementNode from '../native/NativeElementNode.ts';
 
 function* elementIterator(el: any): Generator<any, void, unknown> {
   yield el;
-  for (let child of el.childNodes) {
+  for (const child of el.childNodes) {
     yield* elementIterator(child);
   }
 }
@@ -21,7 +24,9 @@ class HeadNode extends ElementNode {
   appendChild(childNode: ViewNode) {
     if (childNode.tagName === 'style') {
       console.log('append style', this.document.page);
-      this.document.page.nativeView.addCss((childNode.childNodes[0]! as any).text);
+      this.document.page.nativeView.addCss(
+        (childNode.childNodes[0]! as any).text,
+      );
       return;
     }
     super.appendChild(childNode);
@@ -34,11 +39,11 @@ export default class DocumentNode extends ViewNode {
   head: any;
   config: any;
   declare nodeMap: Map<any, any>;
-  page: ElementNode | undefined;
+  page: PageElement | undefined;
   body: ElementNode | undefined;
   documentElement = {
-    dataset: {}
-  }
+    dataset: {},
+  };
 
   static getInstance() {
     if (!document) {
@@ -62,43 +67,48 @@ export default class DocumentNode extends ViewNode {
     return new CommentNode(text);
   }
 
-  static createPropertyNode(tagName: string, propertyName: string): PropertyNode {
+  static createPropertyNode(
+    tagName: string,
+    propertyName: string,
+  ): PropertyNode {
     return new PropertyNode(tagName, propertyName);
   }
 
-  static createElement(tagName: string) {
+  static createElement<T extends keyof NativeElementsTagNameMap>(
+    tagName: T,
+  ): NativeElementsTagNameMap[T] {
     if (tagName.indexOf('.') >= 0) {
-      let bits = tagName.split('.', 2);
-      return this.createPropertyNode(bits[0]!, bits[1]!);
+      const bits = tagName.split('.', 2);
+      return this.createPropertyNode(bits[0]!, bits[1]!) as any;
     }
     const e = createElement(tagName);
     e._ownerDocument = this;
-    if (e.nativeView) {
+    if (e instanceof NativeElementNode && e.nativeView) {
       this.getInstance().nodeMap.set(e.nativeView._domId, e);
     }
     if (tagName === 'page') {
-      this.getInstance().page = e;
+      this.getInstance().page = e as PageElement;
 
       Object.defineProperty(this, 'body', {
         configurable: true,
         get() {
-          let page =  this.page;
+          const page = this.page;
           return {
-            insertAdjacentHTML(_location: any, _html: any) {
+            insertAdjacentHTML() {
               return null;
             },
             addEventListener: globalThis.addEventListener.bind(page),
             get lastChild() {
-              return null
-            }
-          }
-        }
-      })
+              return null;
+            },
+          };
+        },
+      });
     }
     return e;
   }
 
-  createElementNS(namespace: any, tagName: string) {
+  createElementNS(_namespace: any, tagName: keyof NativeElementsTagNameMap) {
     return DocumentNode.createElement(tagName);
   }
 
@@ -107,7 +117,7 @@ export default class DocumentNode extends ViewNode {
     return new TextNode(text);
   }
 
-  addEventListener(event: string, callback: Function) {
+  addEventListener(event: string, callback: EventListener) {
     if (event === 'DOMContentLoaded') {
       setTimeout(callback, 0);
       return;
@@ -115,14 +125,14 @@ export default class DocumentNode extends ViewNode {
     console.error('unsupported event on document', event);
   }
 
-  removeEventListener(event: string, handler: Function) {
+  removeEventListener(event: string, handler: EventListener) {
     if (event === 'DOMContentLoaded') {
       return;
     }
-    console.error('unsupported event on document', event);
+    console.error('unsupported event on document', event, handler);
   }
 
-  searchDom(node:ViewNode, startNode: ViewNode, endNode: ViewNode) {
+  searchDom(node: ViewNode, startNode: ViewNode, endNode: ViewNode) {
     const start = startNode || this.page;
     if (start === node) {
       return true;
@@ -146,36 +156,37 @@ export default class DocumentNode extends ViewNode {
   }
 
   createRange() {
-    let self = this;
+    const self = this;
     return {
       startNode: null as ViewNode | null,
       endNode: null as ViewNode | null,
       setStartBefore(startNode: ViewNode | null) {
-        while (startNode && !startNode.nativeView) {
+        while (startNode && !(startNode as NativeElementNode).nativeView) {
           startNode = startNode.nextSibling;
         }
         this.startNode = startNode;
       },
       setEndAfter(endNode: ViewNode | null) {
-        while (endNode && !endNode.nativeView) {
+        while (endNode && !(endNode as NativeElementNode).nativeView) {
           endNode = endNode.prevSibling;
         }
         this.endNode = endNode;
       },
-      isPointInRange(dom: ViewNode, number: number): boolean {
+      isPointInRange(dom: ViewNode): boolean {
         return self.searchDom(dom, this.startNode!, this.endNode!);
       },
       getBoundingClientRect() {
+        if (!(this.startNode instanceof NativeElementNode)) return null;
         if (!this.startNode?.nativeView) return null;
-        let point = this.startNode.nativeView.getLocationInWindow();
-        let size = this.startNode.nativeView.getActualSize();
+        const point = this.startNode.nativeView.getLocationInWindow();
+        const size = this.startNode.nativeView.getActualSize();
         let x = point.x;
         let y = point.y;
         let width = size.width;
         let height = size.height;
         for (const element of elementIterator(this.startNode)) {
-          let point = element.nativeView.getLocationInWindow();
-          let size = element.nativeView.getActualSize();
+          const point = element.nativeView.getLocationInWindow();
+          const size = element.nativeView.getActualSize();
           x = Math.min(x, point.x);
           y = Math.min(y, point.y);
           width = point.x + size.width - x;
@@ -190,9 +201,9 @@ export default class DocumentNode extends ViewNode {
           bottom: y + height,
           width,
           height,
-        }
-      }
-    }
+        };
+      },
+    };
   }
 
   querySelectorAll(selector: string) {
@@ -201,8 +212,8 @@ export default class DocumentNode extends ViewNode {
       return {
         getAttribute(): string {
           return JSON.stringify(config);
-        }
-      }
+        },
+      };
     }
   }
 }

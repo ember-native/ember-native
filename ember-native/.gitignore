@@ -18,3 +18,5 @@
 !rollup.config.mjs
 !tsconfig.json
 !.npmrc
+!eslint
+!eslint/ember-native.js

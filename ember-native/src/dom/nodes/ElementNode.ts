@@ -2,7 +2,6 @@
 // import { Page } from '@nativescript/core/ui/page';
 // import { CssAnimationParser } from '@nativescript/core/ui/styling/css-animation-parser';
 import PropertyNode from './PropertyNode';
-import TextNode from './TextNode';
 import ViewNode from './ViewNode.ts';
 
 // import { getViewClass } from '../element-registry';
@@ -231,7 +230,7 @@ export default class ElementNode extends ViewNode {
   }
 
   get id() {
-    return this.getAttribute('id');
+    return this.getAttribute('id') as string;
   }
 
   set id(value: string) {
@@ -240,15 +239,21 @@ export default class ElementNode extends ViewNode {
 
   get classList() {
     if (!this._classList) {
-      const getClasses: () => string[] = () => (this.getAttribute('class') || '').split(/\s+/).filter((k: string) => k != '');
+      const getClasses: () => string[] = () =>
+        ((this.getAttribute('class') as string) || '')
+          .split(/\s+/)
+          .filter((k: string) => k != '');
 
       this._classList = {
         add: (...classNames: string[]) => {
-          this.setAttribute('class', [...new Set(getClasses().concat(classNames))].join(' '));
+          this.setAttribute(
+            'class',
+            [...new Set(getClasses().concat(classNames))].join(' '),
+          );
         },
 
         contains(klass: string) {
-          return Boolean(getClasses().find(x => x === klass));
+          return Boolean(getClasses().find((x) => x === klass));
         },
 
         remove: (...classNames: string[]) => {
@@ -256,13 +261,13 @@ export default class ElementNode extends ViewNode {
             'class',
             getClasses()
               .filter((i: string) => classNames.indexOf(i) == -1)
-              .join(' ')
+              .join(' '),
           );
         },
 
         get length() {
           return getClasses().length;
-        }
+        },
       };
     }
     return this._classList;
@@ -270,10 +275,6 @@ export default class ElementNode extends ViewNode {
 
   appendChild(childNode: ViewNode) {
     super.appendChild(childNode);
-
-    if (childNode.nodeType === 3) {
-      this.updateText();
-    }
 
     if (childNode.nodeType === 7) {
       (childNode as PropertyNode).setOnNode(this);
@@ -283,10 +284,6 @@ export default class ElementNode extends ViewNode {
   insertBefore(childNode: ViewNode, referenceNode: ViewNode) {
     super.insertBefore(childNode, referenceNode);
 
-    if (childNode.nodeType === 3) {
-      this.updateText();
-    }
-
     if (childNode.nodeType === 7) {
       (childNode as PropertyNode).setOnNode(this);
     }
@@ -294,10 +291,6 @@ export default class ElementNode extends ViewNode {
 
   removeChild(childNode: ViewNode) {
     super.removeChild(childNode);
-
-    if (childNode.nodeType === 3) {
-      this.updateText();
-    }
 
     if (childNode.nodeType === 7) {
       (childNode as PropertyNode).clearOnNode(this);
