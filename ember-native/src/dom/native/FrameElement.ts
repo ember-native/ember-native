@@ -1,10 +1,11 @@
 import { Frame } from '@nativescript/core/ui/frame';
+import type { View } from '@nativescript/core';
 
 import { createElement } from '../element-registry.ts';
-import ViewNode from '../nodes/ViewNode';
-import NativeElementNode from './NativeElementNode';
+import ViewNode from '../nodes/ViewNode.ts';
+import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
-import type { View } from '@nativescript/core';
+
 
 export default class FrameElement extends NativeElementNode {
   currentPage: any;

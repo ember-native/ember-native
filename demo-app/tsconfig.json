@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmitHelpers": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "lib": ["ESNext", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["app/*"],
+      "@/*": ["app/*"],
+      "@ember/*": ["./node_modules/ember-source/dist/packages/@ember/*"]
+    }
+  },
+  "include": ["app/**/*"],
+  "files": ["./references.d.ts"],
+  "exclude": ["node_modules", "platforms"]
+}

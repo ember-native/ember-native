@@ -1,7 +1,7 @@
 // import { KeyframeAnimation } from '@nativescript/core/ui/animation/keyframe-animation';
 // import { Page } from '@nativescript/core/ui/page';
 // import { CssAnimationParser } from '@nativescript/core/ui/styling/css-animation-parser';
-import PropertyNode from './PropertyNode';
+import PropertyNode from './PropertyNode.ts';
 import ViewNode from './ViewNode.ts';
 
 // import { getViewClass } from '../element-registry';

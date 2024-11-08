@@ -1,6 +1,6 @@
-import { normalizeElementName } from '../element-registry';
-import ElementNode from './ElementNode';
-import ViewNode from './ViewNode';
+import { normalizeElementName } from '../element-registry.ts';
+import ElementNode from './ElementNode.ts';
+import ViewNode from './ViewNode.ts';
 
 export default class PropertyNode extends ElementNode {
   propertyName: string;

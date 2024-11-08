@@ -1,6 +1,8 @@
 *
 !src
 !src/**/*
+!utils
+!utils/**/*
 !types
 !types/**/*
 !.eslintignore

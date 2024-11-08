@@ -1,3 +1,3 @@
-export { setup } from './setup';
-export { setupInspectorSupport } from './setup-inspector-support';
-export * from './components';
+export { setup } from './setup.ts';
+export { setupInspectorSupport } from './setup-inspector-support.ts';
+export * from './components/index.ts';

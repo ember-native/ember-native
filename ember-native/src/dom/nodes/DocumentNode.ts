@@ -1,9 +1,9 @@
-import { createElement } from '../element-registry';
-import CommentNode from './CommentNode';
-import ElementNode from './ElementNode';
-import PropertyNode from './PropertyNode';
-import TextNode from './TextNode';
-import ViewNode from './ViewNode';
+import { createElement } from '../element-registry.ts';
+import CommentNode from './CommentNode.ts';
+import ElementNode from './ElementNode.ts';
+import PropertyNode from './PropertyNode.ts';
+import TextNode from './TextNode.ts';
+import ViewNode from './ViewNode.ts';
 import type { NativeElementsTagNameMap } from '../native-elements-tag-name-map.ts';
 import type PageElement from '../native/PageElement.ts';
 import NativeElementNode from '../native/NativeElementNode.ts';

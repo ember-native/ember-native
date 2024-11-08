@@ -2,13 +2,12 @@
 import { FormattedString, Span } from '@nativescript/core';
 import { View } from '@nativescript/core';
 
-import { registerElement } from './element-registry';
-import FrameElement from './native/FrameElement';
+import { registerElement } from './element-registry.ts';
+import FrameElement from './native/FrameElement.ts';
 import NativeElementNode, {
   type ComponentMeta,
-} from './native/NativeElementNode';
-import PageElement from './native/PageElement';
-import ElementNode from './nodes/ElementNode';
+} from './native/NativeElementNode.ts';
+import PageElement from './native/PageElement.ts';
 
 export function registerNativeElement(
   elementName: string,
@@ -22,10 +21,7 @@ export function registerNativeElement(
 }
 
 export function registerElements() {
-  registerElement('head', () => null, {
-    insertChild() {},
-  });
-  registerElement('style', () => new ElementNode('style'));
+  registerElement('style', () => new NativeElementNode('style', null));
 
   // Completed
   registerNativeElement(

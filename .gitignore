@@ -1,6 +1,8 @@
 *
 !.github
 !.github/**/*
+!demo-app
+!demo-app/**/*
 !docs-app
 !docs-app/**/*
 !ember-native

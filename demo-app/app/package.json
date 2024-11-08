@@ -1,0 +1,6 @@
+{
+    "main": "app.gjs",
+    "android": {
+        "v8Flags": "--expose_gc"
+    }
+}
