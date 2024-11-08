@@ -1,10 +1,11 @@
 import packageJSON from '../package.json';
+import NativeElementNode from 'ember-native/dom/native/NativeElementNode';
 
 function config(environment: 'production' | 'development') {
   const ENV = {
     modulePrefix: packageJSON.name,
     environment,
-    rootElement: globalThis.document.createElement('stackLayout'),
+    rootElement: null as NativeElementNode | null,
     autoboot: false,
     rootURL: '/',
     locationType: 'history', // here is the change

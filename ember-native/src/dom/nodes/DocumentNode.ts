@@ -74,6 +74,10 @@ export default class DocumentNode extends ViewNode {
     return new PropertyNode(tagName, propertyName);
   }
 
+  createElement(name: string) {
+    return DocumentNode.createElement(name as any);
+  }
+
   static createElement<T extends keyof NativeElementsTagNameMap>(
     tagName: T,
   ): NativeElementsTagNameMap[T] {

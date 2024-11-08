@@ -4,8 +4,8 @@ import {on} from "@ember/modifier";
 import {service} from "@ember/service";
 import {tracked} from "@glimmer/tracking";
 import Component from "@glimmer/component";
-import ListView from '../lib/components/ListView.gts';
-import RadListView from '../lib/components/RadListView.gts';
+import ListView from 'ember-native/components/ListView';
+import RadListView from 'ember-native/components/RadListView';
 
 
 
@@ -13,6 +13,7 @@ class Page extends Component {
     @service history;
     @tracked list = ['a', 'b', 'c'];
     start = () => {
+        console.log('start');
         const lists = [
             ['a', 'b', 'c'],
             ['a', 'b', 'c', 'd', 'e'],

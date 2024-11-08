@@ -43,8 +43,8 @@ declare namespace globalThis {
   var define: AnyFunction;
   var requirejs: AnyFunction;
   var requireModule: AnyFunction;
-  var Element: typeof import('../src/dom/nodes/ElementNode.ts').default;
-  var Node: typeof import('../src/dom/nodes/ElementNode.ts').default;
+  var Element: typeof import('../declarations/dom/nodes/ElementNode.ts').default;
+  var Node: typeof import('../declarations/dom/nodes/ElementNode.ts').default;
   var __metadata: AnyFunction;
   var __decorate: AnyFunction;
   var __inspectorSendEvent: AnyFunction;

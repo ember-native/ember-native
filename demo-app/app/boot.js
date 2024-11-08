@@ -11,6 +11,7 @@ function boot() {
     });
     try {
       NativeApplication.run({ create: () => {
+        console.log('craate view', app.rootElement)
           return app.rootElement.nativeView;
         } });
     } catch (e) {

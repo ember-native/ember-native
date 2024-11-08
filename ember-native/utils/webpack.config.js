@@ -1,9 +1,10 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = (webpack) => {
   webpack.chainWebpack((config) => {
     const glimmerDirs = fs.readdirSync(
-      './node_modules/ember-source/dist/packages/@glimmer',
+      path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/@glimmer')
     );
     for (const glimmerDir of glimmerDirs) {
       console.log(glimmerDir);
@@ -65,6 +66,4 @@ module.exports = (webpack) => {
       ]),
     );
   });
-
-  return webpack.resolveConfig();
 };

@@ -2,6 +2,7 @@ import ENV from './env';
 import type ApplicationClass from '@ember/application';
 import type RouteClass from './router';
 import registry from './registry';
+import DocumentNode from 'ember-native/dom/nodes/DocumentNode';
 
 
 export function init(

@@ -1,8 +1,4 @@
 import RouteableComponentTemmplate from 'ember-routable-component/templates/ember-routable-component/ember-route-template';
-import { DEBUG } from '@glimmer/env';
-import ApplicationRoute from './routes/application.gts';
-import TestRoute from "./routes/test.gts";
-import IndexRoute from '~/routes';
 /* imported routes */
 
 

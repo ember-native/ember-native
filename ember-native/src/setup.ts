@@ -1,16 +1,13 @@
 import * as loader from 'loader.js';
-import DocumentNode from './dom/nodes/DocumentNode.ts';
 import { registerElements } from './dom/setup-registry.ts';
 import { SimpleDynamicAttribute } from '@glimmer/runtime';
 import ElementNode from './dom/nodes/ElementNode.ts';
 
-export function setup(config: any) {
+export function setup() {
   globalThis.requireModule = loader.require;
   globalThis.requirejs = loader.require;
   globalThis.define = loader.define;
 
-  globalThis.document = new DocumentNode() as unknown as Document;
-  (globalThis.document as unknown as DocumentNode).config = config;
   globalThis.Element = ElementNode as any;
   globalThis.Node = ElementNode as any;
 

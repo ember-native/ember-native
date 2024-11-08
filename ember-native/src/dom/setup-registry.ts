@@ -1,6 +1,34 @@
 // Largely taken from the Vue implimentation
-import { FormattedString, Span } from '@nativescript/core';
-import { View } from '@nativescript/core';
+import {
+  View,
+  AbsoluteLayout,
+  ActionBar, ActionItem, NavigationButton,
+  ActivityIndicator,
+  Placeholder,
+  Button,
+  DatePicker,
+  FlexboxLayout,
+  DockLayout,
+  FormattedString,
+  Span,
+  GridLayout,
+  HtmlView,
+  Label,
+  ListPicker,
+  StackLayout,
+  ScrollView,
+  Switch,
+  TabView,
+  TabViewItem,
+  TextField,
+  TextView,
+  WebView,
+  WrapLayout,
+  ContentView,
+  ListView,
+  Image,
+  Frame
+} from '@nativescript/core';
 
 import { registerElement } from './element-registry.ts';
 import FrameElement from './native/FrameElement.ts';
@@ -8,6 +36,7 @@ import NativeElementNode, {
   type ComponentMeta,
 } from './native/NativeElementNode.ts';
 import PageElement from './native/PageElement.ts';
+import {RadListView} from "nativescript-ui-listview";
 
 export function registerNativeElement(
   elementName: string,
@@ -21,53 +50,60 @@ export function registerNativeElement(
 }
 
 export function registerElements() {
+  registerElement('head', () => null as any, {
+    insertChild() {
+    }
+  });
   registerElement('style', () => new NativeElementNode('style', null));
-
+  registerElement('div', () => Frame as any, {
+    insertChild(parentNode: any, childNode: any, atIndex: any) {
+      console.log('div elem', parentNode, childNode, atIndex);
+      //dont bother
+      parentNode.appendChild(childNode);
+    }
+  });
   // Completed
   registerNativeElement(
     'AbsoluteLayout',
     () =>
-      require('@nativescript/core/ui/layouts/absolute-layout').AbsoluteLayout,
+      AbsoluteLayout,
   );
   registerNativeElement(
     'ActionBar',
-    () => require('@nativescript/core/ui/action-bar').ActionBar,
+    () => ActionBar,
   );
   registerNativeElement(
     'ActionItem',
-    () => require('@nativescript/core/ui/action-bar').ActionItem,
+    () => ActionItem as any,
   );
   registerNativeElement(
     'ActivityIndicator',
-    () => require('@nativescript/core/ui/activity-indicator').ActivityIndicator,
+    () => ActivityIndicator,
   );
-  registerNativeElement(
-    'Border',
-    () => require('@nativescript/core/ui/border').Border,
-  );
+
   registerNativeElement(
     'Comment',
-    () => require('@nativescript/core/ui/placeholder').Placeholder,
+    () => Placeholder,
   );
   registerNativeElement(
     'Button',
-    () => require('@nativescript/core/ui/button').Button,
+    () => Button,
   );
   registerNativeElement(
     'DatePicker',
-    () => require('@nativescript/core/ui/date-picker').DatePicker,
+    () => DatePicker,
   );
   registerNativeElement(
     'DockLayout',
-    () => require('@nativescript/core/ui/layouts/dock-layout').DockLayout,
+    () => DockLayout,
   );
   registerNativeElement(
     'FlexboxLayout',
-    () => require('@nativescript/core/ui/layouts/flexbox-layout').FlexboxLayout,
+    () => FlexboxLayout,
   );
   registerNativeElement(
     'FormattedString',
-    () => require('@nativescript/core/text/formatted-string').FormattedString,
+    () => FormattedString as any,
     {
       insertChild(
         parentNode: NativeElementNode<FormattedString>,
@@ -82,101 +118,80 @@ export function registerElements() {
   );
   registerNativeElement(
     'GridLayout',
-    () => require('@nativescript/core/ui/layouts/grid-layout').GridLayout,
+    () => GridLayout,
   );
   registerNativeElement(
     'HtmlView',
-    () => require('@nativescript/core/ui/html-view').HtmlView,
+    () => HtmlView,
   );
   registerNativeElement(
     'Image',
-    () => require('@nativescript/core/ui/image').Image,
+    () => Image,
   );
   registerNativeElement(
     'Label',
-    () => require('@nativescript/core/ui/label').Label,
+    () => Label,
   );
   registerNativeElement(
     'ListPicker',
-    () => require('@nativescript/core/ui/list-picker').ListPicker,
+    () => ListPicker,
   );
   registerNativeElement(
     'NavigationButton',
-    () => require('@nativescript/core/ui/action-bar').NavigationButton,
+    () => NavigationButton as any,
   );
   // registerNativeElement('Page', () => require('@nativescript/core/ui/page').Page);
   registerNativeElement(
     'Span',
-    () => require('@nativescript/core/text/span').Span,
+    () => Span as any,
   );
   registerNativeElement(
     'StackLayout',
-    () => require('@nativescript/core/ui/layouts/stack-layout').StackLayout,
+    () => StackLayout,
   );
   registerNativeElement(
     'ScrollView',
-    () => require('@nativescript/core/ui/scroll-view').ScrollView,
+    () => ScrollView,
   );
   registerNativeElement(
     'Switch',
-    () => require('@nativescript/core/ui/switch').Switch,
-  );
-  registerNativeElement(
-    'TabContentItem',
-    () =>
-      require('@nativescript/core/ui/tab-navigation-base/tab-content-item')
-        .TabContentItem,
-  );
-  registerNativeElement(
-    'Tabs',
-    () => require('@nativescript/core/ui/tabs').Tabs,
-  );
-  registerNativeElement(
-    'TabStrip',
-    () =>
-      require('@nativescript/core/ui/tab-navigation-base/tab-strip').TabStrip,
-  );
-  registerNativeElement(
-    'TabStripItem',
-    () =>
-      require('@nativescript/core/ui/tab-navigation-base/tab-strip-item')
-        .TabStripItem,
+    () => Switch,
   );
   registerNativeElement(
     'TabView',
-    () => require('@nativescript/core/ui/tab-view').TabView,
+    () => TabView,
   );
   registerNativeElement(
     'TabViewItem',
-    () => require('@nativescript/core/ui/tab-view').TabViewItem,
+    () => TabViewItem as any,
   );
   registerNativeElement(
     'TextField',
-    () => require('@nativescript/core/ui/text-field').TextField,
+    () => TextField,
   );
   registerNativeElement(
     'TextView',
-    () => require('@nativescript/core/ui/text-view').TextView,
+    () => TextView,
   );
   registerNativeElement(
     'WebView',
-    () => require('@nativescript/core/ui/web-view').WebView,
+    () => WebView,
   );
   registerNativeElement(
     'WrapLayout',
-    () => require('@nativescript/core/ui/layouts/wrap-layout').WrapLayout,
+    () => WrapLayout,
   );
   registerNativeElement(
     'ContentView',
-    () => require('@nativescript/core/ui/content-view').ContentView,
+    () => ContentView,
   );
   registerNativeElement(
     'ListView',
-    () => require('@nativescript/core/ui/list-view').ListView,
+    () => ListView,
   );
   registerNativeElement(
     'RadListView',
-    () => require('nativescript-ui-listview').RadListView,
+    () => RadListView,
   );
 
   // Not Complete
