@@ -14,7 +14,6 @@ import { TextBase } from '@nativescript/core/ui/text-base';
 import ElementNode from '../nodes/ElementNode.ts';
 import ViewNode, { type EventListener } from '../nodes/ViewNode.ts';
 
-
 function camelize(kebab: string): string {
   return kebab.replace(/-+(\w)/g, (_m, l) => l.toUpperCase());
 }

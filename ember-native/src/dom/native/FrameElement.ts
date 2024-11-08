@@ -6,7 +6,6 @@ import ViewNode from '../nodes/ViewNode.ts';
 import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
 
-
 export default class FrameElement extends NativeElementNode {
   currentPage: any;
 

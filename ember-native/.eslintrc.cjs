@@ -1,6 +1,6 @@
 'use strict';
 
-const { emberNativeGlobals } = require('./eslint/ember-native');
+const { emberNativeGlobals } = require('./utils/eslint/ember-native');
 module.exports = {
   root: true,
   parser: 'ember-eslint-parser',
@@ -64,6 +64,7 @@ module.exports = {
         'plugin:ember/recommended-gts',
       ],
       rules: {
+        'no-obsolete-elements': 'off',
         'ember/no-at-ember-render-modifiers': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-this-alias': 'off',
