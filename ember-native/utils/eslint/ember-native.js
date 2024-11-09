@@ -1,4 +1,4 @@
-export const emberNativeGlobals = {
+module.exports.emberNativeGlobals = {
   'absolute-layout': true,
   'stack-layout': true,
   'content-view': true,
