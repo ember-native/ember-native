@@ -28,6 +28,7 @@ jobs:
         with:
           node-version: 18.18.1
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: cd docs-app && pnpm uninstall ember-native 
       - run: pnpm build
       - id: set-pending
         run: echo "pending=$(./cache-status.sh)" >> $GITHUB_OUTPUT
