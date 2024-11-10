@@ -93,7 +93,7 @@ export default class DocumentNode extends ViewNode {
     if (tagName === 'page') {
       this.getInstance().page = e as PageElement;
 
-      Object.defineProperty(this, 'body', {
+      Object.defineProperty(this.getInstance(), 'body', {
         configurable: true,
         get() {
           const page = this.page;

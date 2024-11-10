@@ -10,6 +10,7 @@ export function setup() {
 
   globalThis.Element = ElementNode as any;
   globalThis.Node = ElementNode as any;
+  globalThis.HTMLElement = ElementNode as any;
 
   SimpleDynamicAttribute.prototype.set = function (dom, value, _env) {
     const { name, namespace } = this.attribute;

@@ -25,7 +25,7 @@ export default class InspectorSupport extends Component<InspectorSupportInterfac
     let i = setInterval(() => {
       const viewInspection =
         globalThis.EmberInspector?.viewDebug?.viewInspection;
-      if (viewInspection) {
+      if (viewInspection && this.tooltip) {
         this.tooltip.querySelector = () => {
           return {
             style: {},
