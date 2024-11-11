@@ -56,6 +56,7 @@ export default {
         'helpers/**/*.{js,ts}',
         'modifiers/**/*.{js,ts}',
         'services/**/*.{js,ts}',
+        'initializers/**/*.{js,ts}',
       ],
       {
         mapFilename: (fn) => {

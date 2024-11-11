@@ -148,6 +148,7 @@
       "./components/ember-native/ListView.js": "./dist/_app_/components/ember-native/ListView.js",
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
       "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
+      "./initializers/ember-native/history.js": "./dist/_app_/initializers/ember-native/history.js",
       "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js"
     }
   },
@@ -157,7 +158,10 @@
       "default": "./dist/index.js"
     },
     "./*": {
-      "types": ["./declarations/*.d.ts", "./types/*.d.ts"],
+      "types": [
+        "./declarations/*.d.ts",
+        "./types/*.d.ts"
+      ],
       "default": "./dist/*.js"
     },
     "./addon-main.js": "./addon-main.cjs"

@@ -1,4 +1,4 @@
-import packageJSON from '../package.json';
+import packageJSON from '../../package.json';
 import NativeElementNode from 'ember-native/dom/native/NativeElementNode';
 
 function config(environment: 'production' | 'development') {
