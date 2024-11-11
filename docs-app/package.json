@@ -100,7 +100,6 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-load-initializers": "^3.0.1",
-    "ember-native": "workspace:*",
     "ember-page-title": "^8.2.3",
     "ember-primitives": "^0.25.0",
     "ember-qunit": "^8.0.2",
