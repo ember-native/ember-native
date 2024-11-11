@@ -105,7 +105,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
     "css-loader": "^6.8.1",
-    "ember-modifier": "^4.1.0",
+    "ember-modifier": "^4.2.0",
     "ember-template-lint": "^5.11.2",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",

@@ -14,22 +14,24 @@ interface ListViewInterface<T> {
     items: T[];
   };
   Blocks: {
-    item: [T];
+    item: [T | null];
   };
 }
 
-export default class ListView<T> extends Component<ListViewInterface<T>> {
-  @tracked elementRefs: {
-    index: number;
-    item: T | null;
-    element: NativeElementNode<any>;
-  }[] = [];
+type Ref<T> = {
+  index: number;
+  item: T | null;
+  element: NativeElementNode<any>;
+};
 
-  get items() {
+export default class ListView<T> extends Component<ListViewInterface<T>> {
+  @tracked elementRefs: Ref<T>[] = [];
+
+  get items(): Ref<T>[] {
     return this.elementRefs.map(({ element, index }) => {
       return {
         index,
-        item: this.args.items[index] || '',
+        item: this.args.items[index] || null,
         element,
       };
     });
@@ -47,7 +49,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
     }
     this.elementRefs = this.elementRefs.filter(
       (e) => !!e.element.nativeView.nativeViewProtected?.getWindowToken(),
-    );
+    ) as Ref<T>[];
   }
 
   setupListView = modifier(

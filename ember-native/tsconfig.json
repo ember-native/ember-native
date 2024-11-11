@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
   "compilerOptions": {
+    "strictBindCallApply": true,
     "emitDecoratorMetadata": true,
     "allowJs": true,
     "declaration": true,
@@ -49,7 +50,6 @@
     "index.d.ts",
     "src/**/*",
     "src/**/*.gts",
-    "test.ts",
     "unpublished-development-types/**/*"
   ],
   "glint": {

@@ -9,7 +9,7 @@ import {
   View,
 } from '@nativescript/core';
 import { CssAnimationParser } from '@nativescript/core/ui/styling/css-animation-parser';
-import { ViewBase } from '@nativescript/core/ui/core/view-base';
+import { type ViewBase } from '@nativescript/core/ui/core/view-base';
 import { TextBase } from '@nativescript/core/ui/text-base';
 import ElementNode from '../nodes/ElementNode.ts';
 import ViewNode, { type EventListener } from '../nodes/ViewNode.ts';
