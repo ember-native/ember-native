@@ -1,6 +1,6 @@
 {
   "name": "ember-native-demo",
-  "main": "app/boot.js",
+  "main": "app/native/boot.js",
   "version": "1.0.0",
   "private": true,
   "scripts": {

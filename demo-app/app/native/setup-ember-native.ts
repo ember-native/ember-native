@@ -13,3 +13,5 @@ setupInspectorSupport(ENV);
 // @ts-ignore
 ENV.rootElement = DocumentNode.createElement('stack-layout');
 
+console.log('root el', ENV.rootElement);
+
