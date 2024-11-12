@@ -57,7 +57,6 @@ export function registerElements() {
   registerElement('style', () => new NativeElementNode('style', null));
   registerElement('div', () => Frame as any, {
     insertChild(parentNode: any, childNode: any, atIndex: any) {
-      console.log('div elem', parentNode, childNode, atIndex);
       //dont bother
       parentNode.appendChild(childNode);
     }

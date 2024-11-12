@@ -120,7 +120,6 @@ export function setupInspectorSupport(config: any) {
 
   DOMDomainDebugger.prototype.resolveNode = (params) => {
     const n = document.nodeMap.get(params.nodeId);
-    console.log(n);
 
     return {
       object: {
@@ -138,7 +137,6 @@ export function setupInspectorSupport(config: any) {
     constructor() {
       this.msgId = 0;
       globalThis.addEventListener('message', (msg) => {
-        console.log('event', msg);
         if (msg.data === 'debugger-client') {
           this.port = msg.ports[0]!;
           this.port.addEventListener('message', (msg) => {

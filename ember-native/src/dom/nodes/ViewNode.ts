@@ -43,7 +43,6 @@ export default class ViewNode {
   }
 
   querySelector(selector: string) {
-    console.log('querySelector', selector);
     if (selector.startsWith('.')) {
       return this.getElementByClass(selector.slice(1));
     }

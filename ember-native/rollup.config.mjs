@@ -57,6 +57,7 @@ export default {
         'modifiers/**/*.{js,ts}',
         'services/**/*.{js,ts}',
         'initializers/**/*.{js,ts}',
+        'instance-initializers/**/*.{js,ts}',
       ],
       {
         mapFilename: (fn) => {
@@ -107,8 +108,6 @@ export default {
 
     postcss({
       modules: true,
-      // Or with custom options for `postcss-modules`
-      modules: {},
     }),
 
     // Copy Readme and License into published package

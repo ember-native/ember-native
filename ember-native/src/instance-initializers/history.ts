@@ -6,7 +6,7 @@ const Initializer = {
   after: [],
 
   initialize(application: ApplicationInstance) {
-    const history = application.lookup('service:hisory') as HistoryService;
+    const history = application.lookup('service:history') as HistoryService;
     history.setup();
   },
 };

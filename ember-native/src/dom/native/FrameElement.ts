@@ -1,10 +1,18 @@
 import { Frame } from '@nativescript/core/ui/frame';
-import type { View } from '@nativescript/core';
+import type { NavigationTransition, View } from '@nativescript/core';
 
 import { createElement } from '../element-registry.ts';
 import ViewNode from '../nodes/ViewNode.ts';
 import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
+
+let nextTransition: {
+  transition: NavigationTransition | undefined,
+  animated: boolean | undefined;
+} | null = null;
+export function setNextTransition(transition: NavigationTransition, animated = true) {
+  nextTransition = { transition, animated };
+}
 
 export default class FrameElement extends NativeElementNode {
   currentPage: any;
@@ -36,19 +44,19 @@ export default class FrameElement extends NativeElementNode {
   // and set the instance as the default page by navigating to it.
   appendChild(childNode: ViewNode) {
     //only handle page nodes
-    console.log('appendChild', childNode);
     if (
       childNode instanceof NativeElementNode &&
       childNode.nativeView instanceof Page
     ) {
-      console.log('navigate', childNode);
       this.currentPage = childNode.nativeView;
       this.nativeView.navigate({
         create: () => childNode.nativeView,
         clearHistory: true,
         backstackVisible: false,
-        transition: {},
+        transition: nextTransition?.transition || {},
+        animated: nextTransition?.animated
       });
+      nextTransition = null;
     }
     super.appendChild(childNode);
     return;
@@ -60,13 +68,14 @@ export default class FrameElement extends NativeElementNode {
       childNode.nativeView instanceof Page &&
       this.currentPage !== childNode.nativeView
     ) {
-      console.log('navigate', childNode);
       this.nativeView.navigate({
         create: () => childNode.nativeView,
         clearHistory: true,
         backstackVisible: false,
-        transition: {},
+        transition: nextTransition?.transition || {},
+        animated: nextTransition?.animated
       });
+      nextTransition = null;
     }
   }
 

@@ -79,7 +79,7 @@
     "ember-source": "^5.12.0",
     "@glimmer/runtime": "^0.92.4",
     "@ember/optional-features": "^2.0.0",
-    "@embroider/addon-dev": "^6.0.1",
+    "@embroider/addon-dev": "^7.0.0",
     "@embroider/compat": "^3.6.5",
     "@embroider/core": "^3.4.19",
     "@embroider/macros": "^1.16.9",
@@ -148,7 +148,7 @@
       "./components/ember-native/ListView.js": "./dist/_app_/components/ember-native/ListView.js",
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
       "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
-      "./initializers/ember-native/history.js": "./dist/_app_/initializers/ember-native/history.js",
+      "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
       "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js"
     }
   },

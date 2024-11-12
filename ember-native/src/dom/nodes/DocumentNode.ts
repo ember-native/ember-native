@@ -23,7 +23,6 @@ class HeadNode extends ElementNode {
   }
   appendChild(childNode: ViewNode) {
     if (childNode.tagName === 'style') {
-      console.log('append style', this.document.page);
       this.document.page.nativeView.addCss(
         (childNode.childNodes[0]! as any).text,
       );
@@ -117,7 +116,6 @@ export default class DocumentNode extends ViewNode {
   }
 
   createTextNode(text: string) {
-    console.log('createTextNode', text);
     return new TextNode(text);
   }
 
