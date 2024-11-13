@@ -36,7 +36,6 @@ import NativeElementNode, {
   type ComponentMeta,
 } from './native/NativeElementNode.ts';
 import PageElement from './native/PageElement.ts';
-import {RadListView} from "nativescript-ui-listview";
 
 export function registerNativeElement(
   elementName: string,
@@ -187,10 +186,6 @@ export function registerElements() {
   registerNativeElement(
     'ListView',
     () => ListView,
-  );
-  registerNativeElement(
-    'RadListView',
-    () => RadListView,
   );
 
   // Not Complete

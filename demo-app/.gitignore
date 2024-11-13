@@ -3,6 +3,8 @@
 !App_Resources/**/*
 !app
 !app/**/*
+!types
+!types/**/*
 !.editorconfig
 !.gitignore
 !babel.config.cjs

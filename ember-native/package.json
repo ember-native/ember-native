@@ -71,9 +71,9 @@
     "rollup-plugin-styles": "^4.0.0"
   },
   "devDependencies": {
+    "nativescript-ui-listview": "^15.2.3",
     "@glimmer/reference": "^0.92.3",
     "@glimmer/validator": "^0.92.3",
-    "nativescript-ui-listview": "^15.2.3",
     "loader.js": "^4.7.0",
     "@nativescript/core": "^8.8.4",
     "ember-source": "^5.12.0",
