@@ -22,7 +22,7 @@ class Page extends Component {
     }
     <template>
         <page>
-            <action-bar title="List View">
+            <action-bar title="Rad List View">
                 <navigation-button
                     {{on 'tap' this.history.back}}
                     visibility="{{if this.history.stack.length 'visible' 'collapse'}}"
@@ -48,7 +48,7 @@ class Page extends Component {
 }
 
 // this will generate a Route class and use the provided template
-export default class ListViewRoute extends RoutableComponentRoute(Page) {
+export default class RadListViewRoute extends RoutableComponentRoute(Page) {
     activate() {
         console.log('activate');
     }

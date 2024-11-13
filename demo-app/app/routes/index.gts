@@ -12,19 +12,6 @@ import SideNav from "~/ui/components/side-nav.gts";
 
 class Page extends Component {
     @service('ember-native/history') history;
-    @tracked list = ['a', 'b', 'c'];
-    start = () => {
-        console.log('start');
-        const lists = [
-            ['a', 'b', 'c'],
-            ['a', 'b', 'c', 'd', 'e'],
-            ['1', '2', '3'],
-            ['1', '2', '3', 4, 5],
-        ];
-        setInterval(() => {
-            this.list = lists[Math.floor(Math.random() * lists.length)];
-        }, 200);
-    }
     <template>
         <page>
             <action-bar title="Ember Nativescript Examples">
@@ -33,8 +20,11 @@ class Page extends Component {
                 <LinkTo @route='list-view' @transitionName='fade'>
                     List View
                 </LinkTo>
-                <LinkTo @route='rad-list-view' @transitionName='fade'>
+                <LinkTo @route='rad-list-view' @transitionName='slideLeft'>
                     Rad List View
+                </LinkTo>
+                <LinkTo @route='tabs' @transitionName='explode'>
+                    Tabs
                 </LinkTo>
             </stack-layout>
         </page>
