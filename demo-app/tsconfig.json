@@ -18,7 +18,11 @@
       "@ember/*": ["./node_modules/ember-source/dist/packages/@ember/*"]
     }
   },
-  "include": ["app/**/*", "types/**/*"],
+  "include": [
+    "app/**/*",
+    "app/**/*.gts",
+    "types/**/*"
+  ],
   "files": ["./references.d.ts"],
   "exclude": ["node_modules", "platforms"]
 }

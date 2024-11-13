@@ -7,11 +7,10 @@ function boot() {
     NativeApplication.on(NativeApplication.launchEvent, () => {
       setTimeout(() => {
         resolve()
-      }, 5000)
+      }, 5000) // increase to debug with devtools
     });
     try {
       NativeApplication.run({ create: () => {
-        console.log('craate view', app.rootElement)
           return app.rootElement.nativeView;
         } });
     } catch (e) {

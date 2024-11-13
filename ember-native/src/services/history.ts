@@ -14,8 +14,8 @@ export default class HistoryService extends Service {
     this.router.on('routeDidChange', (transition) => {
       if (transition.from && !transition.data['isBack']) {
         this.stack.push(transition.from);
+        this.stack = [...this.stack];
       }
-      this.stack = [...this.stack];
     });
   }
 

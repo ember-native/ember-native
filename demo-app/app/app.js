@@ -1,5 +1,6 @@
 import EmberApplication from '@ember/application';
 import Resolver from 'ember-resolver';
+import loadInitializers from 'ember-load-initializers';
 import ENV from './config/env';
 import EmberNamespace from 'ember';
 import { name as pkgName } from '../package.json';
@@ -41,3 +42,6 @@ export default class App extends EmberApplication {
   podModulePrefix = `${ENV.modulePrefix}/pods`;
   Resolver = Resolver.withModules(modules);
 }
+
+
+loadInitializers(App, ENV.modulePrefix, modules);

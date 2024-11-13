@@ -32,6 +32,8 @@ module.exports = (env) => {
       '@glimmer/env',
       require.resolve('ember-native/utils/glimmer-env'),
     );
+
+    config.resolve.alias.set('~', '/app');
   });
 
   webpack.chainWebpack((config) => {

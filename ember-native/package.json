@@ -71,6 +71,7 @@
     "rollup-plugin-styles": "^4.0.0"
   },
   "devDependencies": {
+    "router_js": "^8.0.6",
     "nativescript-ui-listview": "^15.2.3",
     "@glimmer/reference": "^0.92.3",
     "@glimmer/validator": "^0.92.3",
@@ -149,7 +150,8 @@
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
       "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
       "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
-      "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js"
+      "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js",
+      "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js"
     }
   },
   "exports": {
@@ -158,10 +160,7 @@
       "default": "./dist/index.js"
     },
     "./*": {
-      "types": [
-        "./declarations/*.d.ts",
-        "./types/*.d.ts"
-      ],
+      "types": "./declarations/*.d.ts",
       "default": "./dist/*.js"
     },
     "./addon-main.js": "./addon-main.cjs"

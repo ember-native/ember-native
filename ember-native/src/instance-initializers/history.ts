@@ -6,7 +6,9 @@ const Initializer = {
   after: [],
 
   initialize(application: ApplicationInstance) {
-    const history = application.lookup('service:history') as HistoryService;
+    const history = application.lookup(
+      'service:ember-native/history',
+    ) as HistoryService;
     history.setup();
   },
 };

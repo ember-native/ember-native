@@ -7,10 +7,13 @@ import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
 
 let nextTransition: {
-  transition: NavigationTransition | undefined,
+  transition: NavigationTransition | undefined;
   animated: boolean | undefined;
 } | null = null;
-export function setNextTransition(transition: NavigationTransition, animated = true) {
+export function setNextTransition(
+  transition?: NavigationTransition,
+  animated = true,
+) {
   nextTransition = { transition, animated };
 }
 
@@ -54,7 +57,7 @@ export default class FrameElement extends NativeElementNode {
         clearHistory: true,
         backstackVisible: false,
         transition: nextTransition?.transition || {},
-        animated: nextTransition?.animated
+        animated: nextTransition?.animated,
       });
       nextTransition = null;
     }
@@ -73,7 +76,7 @@ export default class FrameElement extends NativeElementNode {
         clearHistory: true,
         backstackVisible: false,
         transition: nextTransition?.transition || {},
-        animated: nextTransition?.animated
+        animated: nextTransition?.animated,
       });
       nextTransition = null;
     }

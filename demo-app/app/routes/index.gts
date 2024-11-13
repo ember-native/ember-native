@@ -6,11 +6,12 @@ import {tracked} from "@glimmer/tracking";
 import Component from "@glimmer/component";
 import ListView from 'ember-native/components/ListView';
 import RadListView from 'ember-native/components/RadListView';
+import SideNav from "~/ui/components/side-nav.gts";
 
 
 
 class Page extends Component {
-    @service history;
+    @service('ember-native/history') history;
     @tracked list = ['a', 'b', 'c'];
     start = () => {
         console.log('start');
@@ -26,29 +27,16 @@ class Page extends Component {
     }
     <template>
         <page>
-            <actionBar title="MyApp">
-                <navigationButton
-                    {{on 'tap' this.history.back}}
-                    visibility="{{unless this.history.stack.length 'collapse'}}"
-                    android.position="left"
-                    text="Go back"
-                    android.systemIcon="ic_menu_back"
-                />
-            </actionBar>
-            <stackLayout>
-                <label text='Hello world 2!'></label>
-                <LinkTo @route='test' @text="test" />
-                {{(this.start)}}
-                <RadListView @items={{this.list}}>
-                    <:header><label>header</label></:header>
-                    <:item as |item|>
-                        <label>
-                            {{item}}
-                        </label>
-                    </:item>
-                    <:footer><label>footer</label></:footer>
-                </RadListView>
-            </stackLayout>
+            <action-bar title="Ember Nativescript Examples">
+            </action-bar>
+            <stack-layout>
+                <LinkTo @route='list-view' @transitionName='fade'>
+                    List View
+                </LinkTo>
+                <LinkTo @route='rad-list-view' @transitionName='fade'>
+                    Rad List View
+                </LinkTo>
+            </stack-layout>
         </page>
     </template>
 }
