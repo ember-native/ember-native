@@ -7,7 +7,7 @@ function boot() {
     NativeApplication.on(NativeApplication.launchEvent, () => {
       setTimeout(() => {
         resolve()
-      }, 5000) // increase to debug with devtools
+      }, 0)
     });
     try {
       NativeApplication.run({ create: () => {
