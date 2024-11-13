@@ -19,8 +19,7 @@
     }
   },
   "include": [
-    "app/**/*",
-    "app/**/*.gts",
+    "app/**/*"
     "types/**/*"
   ],
   "files": ["./references.d.ts"],
