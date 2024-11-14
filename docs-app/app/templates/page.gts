@@ -157,7 +157,7 @@ const EditLink = <template>
     <div class="flex justify-end pt-6 mt-12 border-t border-slate-200 dark:border-slate-800">
       <Link
         class="edit-page flex"
-        href="https://github.com/universal-ember/ember-primitives/edit/main/docs-app/public/docs{{docs.selected.path}}.md"
+        href="https://github.com/ember-native/ember-native/edit/main/docs-app/public/docs{{docs.selected.path}}.md"
       >
         Edit this page
       </Link>
