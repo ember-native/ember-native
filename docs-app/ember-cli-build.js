@@ -21,7 +21,13 @@ module.exports = async function (defaults) {
     },
   });
 
-  return require('@embroider/compat').prebuild(app);
+  return require('@embroider/compat').prebuild(app, {
+    staticAppPaths: [
+      'components/ember-native',
+      'instance-initializers/ember-native',
+      'services/ember-native',
+    ]
+  });
   //
   // const { kolay } = await import('kolay/webpack');
   //
