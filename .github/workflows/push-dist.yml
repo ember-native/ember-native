@@ -2,6 +2,8 @@ name: Push dist
 
 on:
   push:
+    tags:
+      - '*'
     branches:
       - main
       - master
