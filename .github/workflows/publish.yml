@@ -53,3 +53,11 @@ jobs:
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: fetch tags
+        id: fetch-tags
+        run: echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+      - name: invoke docs publish
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Push dist
+          ref: tags/${{ steps.fetch-tags.outputs.latest_tag }}
