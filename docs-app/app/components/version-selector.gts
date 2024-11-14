@@ -29,6 +29,7 @@ export class VersionSelector extends Component {
   <template>
     {{this.load}}
     <PowerSelect
+      style="width: 200px"
       @options={{this.promise}}
       @selected={{this.selected}}
       @loadingMessage="loading versions"
