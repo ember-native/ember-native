@@ -1,12 +1,12 @@
 # ember-native
 
-With `ember-native` you can use the ember framework with Nativescript
+With `ember-native` you can use the power of ember with Nativescript
 
-## Install
+some highlights are support for
+* list view
+* rad list view
+* glint
 
-```bash
-pnpm add ember-native
-```
+create new app by using the template from
 
-see demo here
 https://github.com/ember-native/ember-native-demo
