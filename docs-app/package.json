@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build:dev": "vite build --mode=development",
-    "build": "vite build --mode=production",
+    "build": "DOCS_URL=main vite build --mode=production",
     "lint": "concurrently 'pnpm:lint:*(!fix)' --names 'lint:'",
     "lint:fix": "concurrently 'pnpm:lint:*:fix' --names 'fix:'",
     "lint:js": "eslint",
