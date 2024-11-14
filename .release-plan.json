@@ -1,17 +1,17 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "major",
-      "oldVersion": "0.1.0",
-      "newVersion": "1.0.0",
+      "impact": "minor",
+      "oldVersion": "1.0.0",
+      "newVersion": "1.1.0",
       "constraints": [
         {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2024-11-14)\n\nember-native 1.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-native`\n  * [#5](https://github.com/ember-native/ember-native/pull/5) create-release-1 ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2024-11-14)\n\nember-native 1.1.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `ember-native`\n  * [#8](https://github.com/ember-native/ember-native/pull/8) fill HTMLElementTagNameMap ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
