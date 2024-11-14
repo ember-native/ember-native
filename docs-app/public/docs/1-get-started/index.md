@@ -6,6 +6,7 @@ some highlights are support for
 
 - list view
 - rad list view
+- ember transitions with native animations
 - glint
 
 create new app by using the template from
