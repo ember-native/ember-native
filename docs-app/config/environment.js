@@ -42,7 +42,7 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
-    ENV.rootURL = '/ember-native/' + ((process.env.DOCS_URL + '/') || 'versions/main/')
+    ENV.rootURL = '/ember-native/' + (process.env.DOCS_URL + '/' || 'versions/main/');
   }
 
   return ENV;

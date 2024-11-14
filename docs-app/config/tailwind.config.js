@@ -1,6 +1,6 @@
-import path from "path";
-import theme from "tailwindcss/defaultTheme";
-import generated from "@tailwindcss/typography";
+import path from 'path';
+import theme from 'tailwindcss/defaultTheme';
+import generated from '@tailwindcss/typography';
 
 const appRoot = path.join(__dirname, '../');
 

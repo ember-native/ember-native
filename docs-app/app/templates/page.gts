@@ -1,5 +1,4 @@
 import { Header } from 'docs-app/components/header';
-
 import { Menu } from 'docs-app/components/icons';
 import { Nav } from 'docs-app/components/nav';
 // @ts-expect-error - no types are provided for ember-mobile-menu
@@ -21,32 +20,29 @@ function resetScroll(..._args: unknown[]) {
 }
 
 const DocsPage = <template>
-    <Layout>
-      <section
-        data-main-scroll-container
-        class="flex-auto max-w-2xl min-w-0 py-4 lg:max-w-none"
-      >
-        <Article>
-          <Page>
-            {{! TODO: we need a pending state here
+  <Layout>
+    <section data-main-scroll-container class="flex-auto max-w-2xl min-w-0 py-4 lg:max-w-none">
+      <Article>
+        <Page>
+          {{! TODO: we need a pending state here
                   right now this is ignored, because the :pending
                   block doesn't exist.
             }}
-        {{! -- <:pending>
+          {{! -- <:pending>
               <div class="h-full w-full"></div>
             </:pending>
-        --}}
+        }}
 
-            <:error as |error|>
-              <section>
-                <Error @error={{error}} />
-              </section>
-            </:error>
+          <:error as |error|>
+            <section>
+              <Error @error={{error}} />
+            </section>
+          </:error>
 
-            <:success as |prose|>
-              <prose />
-              {{(removeLoader)}}
-              {{! this is probably really bad, and anti-patterny
+          <:success as |prose|>
+            <prose />
+            {{(removeLoader)}}
+            {{! this is probably really bad, and anti-patterny
                   but ember doesn't have a good way to have libraries
                   tie in to the URL without a bunch of setup -- which is maybe fine?
                   needs some experimenting -- there is a bit of a disconnect with
@@ -55,18 +51,18 @@ const DocsPage = <template>
                   compiled.
                   (that's why we have async state, because we're compiling, not loading)
               }}
-              {{resetScroll prose}}
-            </:success>
-          </Page>
-        </Article>
-        <EditLink />
-      </section>
-    </Layout>
+            {{resetScroll prose}}
+          </:success>
+        </Page>
+      </Article>
+      <EditLink />
+    </section>
+  </Layout>
 </template>;
 
 export default Route(DocsPage);
 
-const Layout: TOC<{ Blocks: { default: [] }}> = <template>
+const Layout: TOC<{ Blocks: { default: [] } }> = <template>
   <MenuWrapper as |mmw|>
     <mmw.MobileMenu @mode="push" @maxWidth={{300}} as |mm|>
       <Nav @onClick={{mm.actions.close}} />
@@ -128,7 +124,7 @@ const proseClasses = `
   dark:prose-code:text-slate-50
 `;
 
-export const Article: TOC<{ Element: HTMLElement; Blocks: { default: [] }}> = <template>
+export const Article: TOC<{ Element: HTMLElement; Blocks: { default: [] } }> = <template>
   <article class={{proseClasses}} ...attributes>
     {{yield}}
   </article>
@@ -144,13 +140,13 @@ const linkClasses = `
   dark:hover:[--tw-prose-underline-size:6px]
 `;
 
-export const InternalLink: TOC<{ Element: HTMLAnchorElement, Blocks: { default: [] }}> = <template>
+export const InternalLink: TOC<{ Element: HTMLAnchorElement; Blocks: { default: [] } }> = <template>
   <a class={{linkClasses}} href="#" ...attributes>
     {{yield}}
   </a>
 </template>;
 
-export const Link: TOC<{ Element: HTMLAnchorElement, Blocks: { default: [] }}> = <template>
+export const Link: TOC<{ Element: HTMLAnchorElement; Blocks: { default: [] } }> = <template>
   <ExternalLink class={{linkClasses}} ...attributes>
     {{yield}}
   </ExternalLink>
@@ -169,7 +165,7 @@ const EditLink = <template>
   {{/let}}
 </template>;
 
-const Error: TOC<{ Args: { error: string }}> = <template>
+const Error: TOC<{ Args: { error: string } }> = <template>
   <div
     data-page-error
     class="dark:text-white text:slate-900"
@@ -185,4 +181,3 @@ const Error: TOC<{ Args: { error: string }}> = <template>
     would be most helpful! 🎉
   </div>
 </template>;
-

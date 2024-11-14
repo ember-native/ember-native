@@ -26,7 +26,7 @@ module.exports = async function (defaults) {
       'components/ember-native',
       'instance-initializers/ember-native',
       'services/ember-native',
-    ]
+    ],
   });
   //
   // const { kolay } = await import('kolay/webpack');

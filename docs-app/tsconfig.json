@@ -1,9 +1,10 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
   "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
+    "environment": ["ember-template-imports"]
   },
   "compilerOptions": {
+    "allowArbitraryExtensions": true,
     // Have to use this because the glimmer types just *don't*
     // work with pnpm and being pre v1. if we were to make them post-v1, we could maybe make progress,
     // but there are too many scenarios where the wrong glimmer-vm dep is used for type checking,
@@ -24,11 +25,5 @@
       "*": ["types/*"]
     }
   },
-  "include": [
-    "app/**/*",
-    "app/**/*.gts",
-    "tests/**/*",
-    "tests/**/*.gts",
-    "types/**/*"
-  ]
+  "include": ["app/**/*", "app/**/*.gts", "tests/**/*", "tests/**/*.gts", "types/**/*"]
 }

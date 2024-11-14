@@ -4,9 +4,5 @@ import autoprefixer from 'autoprefixer';
 import tailwindConfig from './tailwind.config';
 
 export default {
-  plugins: [
-    postcssImport(),
-    tailwind(tailwindConfig),
-    autoprefixer()
-  ]
+  plugins: [postcssImport(), tailwind(tailwindConfig), autoprefixer()],
 };

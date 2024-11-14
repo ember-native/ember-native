@@ -1,10 +1,13 @@
-import config from './config/environment';
-import { RSVP } from '@ember/-internals/runtime';
 import Ember from 'ember';
-import * as tracking from '@glimmer/tracking';
+// @ts-expect-error dont care
 import * as runtime from '@glimmer/runtime';
+import * as tracking from '@glimmer/tracking';
+// @ts-expect-error dont care
 import * as validator from '@glimmer/validator';
-console.log(runtime);
+import { RSVP } from '@ember/-internals/runtime';
+
+import config from './config/environment';
+
 window.define('@glimmer/tracking', () => tracking);
 window.define('@glimmer/runtime', () => runtime);
 window.define('@glimmer/validator', () => validator);

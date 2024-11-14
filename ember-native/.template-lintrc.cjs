@@ -5,5 +5,6 @@ module.exports = {
   rules: {
     'no-inline-styles': 'warn',
     'no-positive-tabindex': 'warn',
+    'no-obsolete-elements': 'off',
   },
 };

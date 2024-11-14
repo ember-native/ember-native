@@ -9,29 +9,25 @@ import type { TOC } from '@ember/component/template-only';
 export const APIDocs: TOC<{
   Args: { declaration: string; name: string };
 }> = <template>
-      <KolayAPIDocs
-          @package="ember-native"
-          @module="declarations/{{@declaration}}"
-          @name={{@name}}
-      />
-    </template>;
+  <KolayAPIDocs @package="ember-native" @module="declarations/{{@declaration}}" @name={{@name}} />
+</template>;
 
 export const ComponentSignature: TOC<{
   Args: { declaration: string; name: string };
 }> = <template>
-      <KolayComponentSignature
-          @package="ember-native"
-          @module="declarations/{{@declaration}}"
-          @name={{@name}}
-      />
-    </template>;
+  <KolayComponentSignature
+    @package="ember-native"
+    @module="declarations/{{@declaration}}"
+    @name={{@name}}
+  />
+</template>;
 
 export const ModifierSignature: TOC<{
   Args: { declaration: string; name: string };
 }> = <template>
-      <KolayModifierSignature
-          @package="ember-native"
-          @module="declarations/{{@declaration}}"
-          @name={{@name}}
-      />
-    </template>;
+  <KolayModifierSignature
+    @package="ember-native"
+    @module="declarations/{{@declaration}}"
+    @name={{@name}}
+  />
+</template>;

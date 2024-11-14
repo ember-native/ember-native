@@ -2,12 +2,13 @@
 
 the dom consists of nativescript components
 like
-* StackLayout
-* GridLayout
-* Label
-* Button
-* Text
-* ...
+
+- StackLayout
+- GridLayout
+- Label
+- Button
+- Text
+- ...
 
 The supported write forms are either all lower case or dash form.
 
@@ -16,12 +17,12 @@ e.g.
 
 all text based components that support the text attribute can have text child nodes
 
-like  `Button` , `Label` or `Text`
+like `Button` , `Label` or `Text`
 
 e.g.
 
 ```gts
-export default <template>
+<template>
   <label>hi</label>
   <button> button text </button>
 </template>

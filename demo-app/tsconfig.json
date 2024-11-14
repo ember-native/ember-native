@@ -19,7 +19,7 @@
     }
   },
   "include": [
-    "app/**/*"
+    "app/**/*",
     "types/**/*"
   ],
   "files": ["./references.d.ts"],

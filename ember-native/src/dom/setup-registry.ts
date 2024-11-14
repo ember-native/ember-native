@@ -2,7 +2,9 @@
 import {
   View,
   AbsoluteLayout,
-  ActionBar, ActionItem, NavigationButton,
+  ActionBar,
+  ActionItem,
+  NavigationButton,
   ActivityIndicator,
   Placeholder,
   Button,
@@ -27,7 +29,7 @@ import {
   ContentView,
   ListView,
   Image,
-  Frame
+  Frame,
 } from '@nativescript/core';
 
 import { registerElement } from './element-registry.ts';
@@ -50,143 +52,56 @@ export function registerNativeElement(
 
 export function registerElements() {
   registerElement('head', () => null as any, {
-    insertChild() {
-    }
+    insertChild() {},
   });
   registerElement('style', () => new NativeElementNode('style', null));
   registerElement('div', () => Frame as any, {
-    insertChild(parentNode: any, childNode: any, atIndex: any) {
+    insertChild(parentNode: any, childNode: any, _atIndex: any) {
       //dont bother
       parentNode.appendChild(childNode);
-    }
+    },
   });
   // Completed
-  registerNativeElement(
-    'AbsoluteLayout',
-    () =>
-      AbsoluteLayout,
-  );
-  registerNativeElement(
-    'ActionBar',
-    () => ActionBar,
-  );
-  registerNativeElement(
-    'ActionItem',
-    () => ActionItem as any,
-  );
-  registerNativeElement(
-    'ActivityIndicator',
-    () => ActivityIndicator,
-  );
+  registerNativeElement('AbsoluteLayout', () => AbsoluteLayout);
+  registerNativeElement('ActionBar', () => ActionBar);
+  registerNativeElement('ActionItem', () => ActionItem as any);
+  registerNativeElement('ActivityIndicator', () => ActivityIndicator);
 
-  registerNativeElement(
-    'Comment',
-    () => Placeholder,
-  );
-  registerNativeElement(
-    'Button',
-    () => Button,
-  );
-  registerNativeElement(
-    'DatePicker',
-    () => DatePicker,
-  );
-  registerNativeElement(
-    'DockLayout',
-    () => DockLayout,
-  );
-  registerNativeElement(
-    'FlexboxLayout',
-    () => FlexboxLayout,
-  );
-  registerNativeElement(
-    'FormattedString',
-    () => FormattedString as any,
-    {
-      insertChild(
-        parentNode: NativeElementNode<FormattedString>,
-        childNode: NativeElementNode<Span>,
-        atIndex,
-      ) {
-        const parent = parentNode.nativeView;
-        const child = childNode.nativeView;
-        parent.spans.splice(atIndex, 0, child);
-      },
+  registerNativeElement('Comment', () => Placeholder);
+  registerNativeElement('Button', () => Button);
+  registerNativeElement('DatePicker', () => DatePicker);
+  registerNativeElement('DockLayout', () => DockLayout);
+  registerNativeElement('FlexboxLayout', () => FlexboxLayout);
+  registerNativeElement('FormattedString', () => FormattedString as any, {
+    insertChild(
+      parentNode: NativeElementNode<FormattedString>,
+      childNode: NativeElementNode<Span>,
+      atIndex,
+    ) {
+      const parent = parentNode.nativeView;
+      const child = childNode.nativeView;
+      parent.spans.splice(atIndex, 0, child);
     },
-  );
-  registerNativeElement(
-    'GridLayout',
-    () => GridLayout,
-  );
-  registerNativeElement(
-    'HtmlView',
-    () => HtmlView,
-  );
-  registerNativeElement(
-    'Image',
-    () => Image,
-  );
-  registerNativeElement(
-    'Label',
-    () => Label,
-  );
-  registerNativeElement(
-    'ListPicker',
-    () => ListPicker,
-  );
-  registerNativeElement(
-    'NavigationButton',
-    () => NavigationButton as any,
-  );
+  });
+  registerNativeElement('GridLayout', () => GridLayout);
+  registerNativeElement('HtmlView', () => HtmlView);
+  registerNativeElement('Image', () => Image);
+  registerNativeElement('Label', () => Label);
+  registerNativeElement('ListPicker', () => ListPicker);
+  registerNativeElement('NavigationButton', () => NavigationButton as any);
   // registerNativeElement('Page', () => require('@nativescript/core/ui/page').Page);
-  registerNativeElement(
-    'Span',
-    () => Span as any,
-  );
-  registerNativeElement(
-    'StackLayout',
-    () => StackLayout,
-  );
-  registerNativeElement(
-    'ScrollView',
-    () => ScrollView,
-  );
-  registerNativeElement(
-    'Switch',
-    () => Switch,
-  );
-  registerNativeElement(
-    'TabView',
-    () => TabView,
-  );
-  registerNativeElement(
-    'TabViewItem',
-    () => TabViewItem as any,
-  );
-  registerNativeElement(
-    'TextField',
-    () => TextField,
-  );
-  registerNativeElement(
-    'TextView',
-    () => TextView,
-  );
-  registerNativeElement(
-    'WebView',
-    () => WebView,
-  );
-  registerNativeElement(
-    'WrapLayout',
-    () => WrapLayout,
-  );
-  registerNativeElement(
-    'ContentView',
-    () => ContentView,
-  );
-  registerNativeElement(
-    'ListView',
-    () => ListView,
-  );
+  registerNativeElement('Span', () => Span as any);
+  registerNativeElement('StackLayout', () => StackLayout);
+  registerNativeElement('ScrollView', () => ScrollView);
+  registerNativeElement('Switch', () => Switch);
+  registerNativeElement('TabView', () => TabView);
+  registerNativeElement('TabViewItem', () => TabViewItem as any);
+  registerNativeElement('TextField', () => TextField);
+  registerNativeElement('TextView', () => TextView);
+  registerNativeElement('WebView', () => WebView);
+  registerNativeElement('WrapLayout', () => WrapLayout);
+  registerNativeElement('ContentView', () => ContentView);
+  registerNativeElement('ListView', () => ListView);
 
   // Not Complete
   registerElement('Frame', () => new FrameElement());

@@ -4,16 +4,15 @@ import './layout.css';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import { colorScheme } from 'ember-primitives/color-scheme';
 import Route from 'ember-route-template';
-import BasicDropdownWormhole from "ember-basic-dropdown/components/basic-dropdown-wormhole";
+import BasicDropdownWormhole from 'ember-basic-dropdown/components/basic-dropdown-wormhole';
 
-const Application =
-  <template>
-    {{pageTitle "ember-native"}}
-    {{(syncBodyClass)}}
+const Application = <template>
+  {{pageTitle "ember-native"}}
+  {{(syncBodyClass)}}
 
-    {{outlet}}
-    <BasicDropdownWormhole />
-  </template>
+  {{outlet}}
+  <BasicDropdownWormhole />
+</template>;
 
 export default Route(Application);
 

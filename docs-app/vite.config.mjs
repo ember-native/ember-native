@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
-import { hmr } from 'ember-vite-hmr';
+import { defineConfig } from "vite";
+import { hmr } from "ember-vite-hmr";
 import {
   resolver,
   hbs,
@@ -9,37 +9,27 @@ import {
   compatPrebuild,
   assets,
   contentFor,
-} from '@embroider/vite';
-import { babel } from '@rollup/plugin-babel';
-import { kolay } from 'kolay/vite';
-import postcssConfig from './config/postcss.config.js';
+} from "@embroider/vite";
+import { babel } from "@rollup/plugin-babel";
+import { kolay } from "kolay/vite";
+import postcssConfig from "./config/postcss.config.js";
 
 // rollup-plugin-astroturf mjs has wrong import specifiers...
-import { createRequire } from 'module';
+import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const astroturf = require('rollup-plugin-astroturf');
+const astroturf = require("rollup-plugin-astroturf");
 
-
-const extensions = [
-  '.mjs',
-  '.gjs',
-  '.js',
-  '.mts',
-  '.gts',
-  '.ts',
-  '.hbs',
-  '.json',
-];
+const extensions = [".mjs", ".gjs", ".js", ".mts", ".gts", ".ts", ".hbs", ".json"];
 
 const aliasPlugin = {
-  name: 'env',
+  name: "env",
   setup(build) {
     // Intercept import paths called "env" so esbuild doesn't attempt
     // to map them to a file system location. Tag them with the "env-ns"
     // namespace to reserve them for this plugin.
     build.onResolve({ filter: /^kolay.*:virtual$/ }, (args) => ({
       path: args.path,
-      external: true
+      external: true,
     }));
 
     build.onResolve({ filter: /ember-template-compiler$/ }, () => ({
@@ -50,12 +40,12 @@ const aliasPlugin = {
 };
 
 const o = optimizeDeps();
-o.esbuildOptions.target = 'esnext';
+o.esbuildOptions.target = "esnext";
 o.esbuildOptions.plugins.splice(0, 0, aliasPlugin);
 
 export default defineConfig(({ mode }) => {
   return {
-    base: process.env.DOCS_URL ? '/ember-native/' + process.env.DOCS_URL + '/' : '',
+    base: process.env.DOCS_URL ? "/ember-native/" + process.env.DOCS_URL + "/" : "",
     resolve: {
       extensions,
     },
@@ -64,9 +54,9 @@ export default defineConfig(({ mode }) => {
         include: /\.(gts|gjs)/i,
       }),
       kolay({
-        src: 'public/docs',
-        baseUrl: process.env.DOCS_URL ? '/ember-native/' + process.env.DOCS_URL + '/' : '',
-        packages: ['ember-native'],
+        src: "public/docs",
+        baseUrl: process.env.DOCS_URL ? "/ember-native/" + process.env.DOCS_URL + "/" : "",
+        packages: ["ember-native"],
       }),
       hbs(),
       templateTag(),
@@ -77,7 +67,7 @@ export default defineConfig(({ mode }) => {
       contentFor(),
       hmr(),
       babel({
-        babelHelpers: 'runtime',
+        babelHelpers: "runtime",
         extensions,
       }),
     ],
@@ -89,14 +79,12 @@ export default defineConfig(({ mode }) => {
       port: 4200,
     },
     build: {
-      target: 'esnext',
-      outDir: 'dist',
+      target: "esnext",
+      outDir: "dist",
       rollupOptions: {
         input: {
-          main: 'index.html',
-          ...(shouldBuildTests(mode)
-            ? { tests: 'tests/index.html' }
-            : undefined),
+          main: "index.html",
+          ...(shouldBuildTests(mode) ? { tests: "tests/index.html" } : undefined),
         },
       },
     },
@@ -104,5 +92,5 @@ export default defineConfig(({ mode }) => {
 });
 
 function shouldBuildTests(mode) {
-  return mode !== 'production' || process.env.FORCE_BUILD_TESTS;
+  return mode !== "production" || process.env.FORCE_BUILD_TESTS;
 }

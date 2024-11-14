@@ -1,28 +1,32 @@
-*.md
-app/templates/*.gts
-# unconventional js
-/blueprints/*/files/
-/vendor/
-.eslintcache
-
-# compiled output
-/dist/
-/tmp/
-
-# dependencies
-/bower_components/
-/node_modules/
-
-# misc
-/coverage/
-!.*
-.eslintcache
-.lint-todo/
-
-# ember-try
-/.node_modules.ember-try/
-/bower.json.ember-try
-/npm-shrinkwrap.json.ember-try
-/package.json.ember-try
-/package-lock.json.ember-try
-/yarn.lock.ember-try
+*
+!.github
+!vite.config.mjs
+!babel.config.js
+!index.html
+!app
+!app/**/*
+!config
+!config/**/*
+!public
+!public/**/*
+!gh-pages
+!gh-pages/**/*
+!tests
+!tests/**/*
+!types
+!types/**/*
+!.editorconfig
+!.ember-cli
+!.eslintignore
+!.eslintrc.js
+!.gitignore
+!.prettierignore
+!.prettierrc.js
+!.template-lintrc.js
+!.watchmanconfig
+!ember-cli-build.js
+!package.json
+!pnpm-lock.yaml
+!README.md
+!testem.js
+!tsconfig.json

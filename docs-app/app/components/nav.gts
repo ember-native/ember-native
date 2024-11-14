@@ -28,8 +28,14 @@ function fixWords(text: string) {
 
 const joinUrl = (...strs: string[]) => {
   let prefix = strs[0]?.startsWith('/') ? '/' : '';
-  return prefix+ strs.map(s => s.replace(/^\//, '').replace(/\/$/, '')).filter(x => !!x).join('/');
-}
+  return (
+    prefix +
+    strs
+      .map((s) => s.replace(/^\//, '').replace(/\/$/, ''))
+      .filter((x) => !!x)
+      .join('/')
+  );
+};
 
 /**
  * Converts 1-2-hyphenated-thing

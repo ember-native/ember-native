@@ -31,10 +31,7 @@ declare module 'ember-modifier' {
     };
     Element: E;
   }>;
-  type ElementFor<
-    S,
-    T extends ViewBase = ViewBase,
-  > = 'Element' extends keyof S
+  type ElementFor<S, T extends ViewBase = ViewBase> = 'Element' extends keyof S
     ? S['Element'] extends ViewNode<T>
       ? S['Element']
       : ViewNode<T>

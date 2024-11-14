@@ -1,12 +1,11 @@
+import { stylesheet } from 'astroturf';
 import { TopRight } from 'docs-app/components/header';
 import { Logo } from 'docs-app/components/icons';
 import config from 'docs-app/config/environment';
-import { BlueSky, Discord, GitHub, Mastodon, Threads, XTwitter } from 'docs-app/components/icons';
-import { ExternalLink } from 'ember-primitives/components/external-link';
 import { Hero } from 'ember-primitives/layout/hero';
 import Route from 'ember-route-template';
-import { stylesheet } from 'astroturf';
-import { Article, InternalLink, Link } from './page.gts';
+
+import { Article, InternalLink } from './page';
 
 import type { TOC } from '@ember/component/template-only';
 
@@ -46,55 +45,43 @@ export default Route(
           </h1>
           <p class="italic text-white w-full mx-auto">
             use the Ember framework with Nativescript
-          <br>
+            <br />
           </p>
         </div>
-        <InternalLink class={{styles.getStartedLink}} href="{{config.rootURL}}1-get-started/index.md">
+        <InternalLink
+          class={{styles.getStartedLink}}
+          href="{{config.rootURL}}1-get-started/index.md"
+        >
           Get Started
         </InternalLink>
 
       </div>
     </Hero>
 
-  <style>
-    .gradient-background {
-      background-image: linear-gradient(-45deg in oklch, #1252e3, #485de5, #7812e5, #3512c5);
-      background-size: 400% 400%;
-      animation: gradient-animation 16s ease infinite;
-    }
-
-    body.dark .gradient-background {
-      background-image: linear-gradient(-45deg in oklch, #110043, #182d75, #280065, #350076);
-    }
-
-    @keyframes gradient-animation {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-  </style>
+    <style>
+      .gradient-background { background-image: linear-gradient(-45deg in oklch, #1252e3, #485de5,
+      #7812e5, #3512c5); background-size: 400% 400%; animation: gradient-animation 16s ease
+      infinite; } body.dark .gradient-background { background-image: linear-gradient(-45deg in
+      oklch, #110043, #182d75, #280065, #350076); } @keyframes gradient-animation { 0% {
+      background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% {
+      background-position: 0% 50%; } }
+    </style>
 
     <Content />
 
-    <br><br>
-    <br><br>
+    <br /><br />
+    <br /><br />
 
     <div class="flex justify-center items-center">
       <GetStarted />
     </div>
 
-    <br><br>
+    <br /><br />
 
-    <br><br>
-    <br><br>
+    <br /><br />
+    <br /><br />
 
-    <hr>
+    <hr />
   </template>
 );
 
@@ -105,39 +92,38 @@ const GetStarted = <template>
 </template>;
 
 export const Content = <template>
-    <br><br>
+  <br /><br />
 
-    <div class="mx-auto" style="width: 66%">
-      <Article class="flex flex-wrap gap-12 justify-between" >
-        <div>
-          <H2>Goals</H2>
+  <div class="mx-auto" style="width: 66%">
+    <Article class="flex flex-wrap gap-12 justify-between">
+      <div>
+        <H2>Goals</H2>
 
-          <ul>
-            <li>use the Ember framework with Nativescript</li>
-            <li>high-quality components and utilities</li>
-            <li>pure data derivation</li>
-            <li>no extra rendering</li>
-            <li>no unneeded DOM</li>
-            <li>be contextually aware</li>
-            <li>be flexible</li>
-            <li>use the latest technology</li>
-          </ul>
-        </div>
+        <ul>
+          <li>use the Ember framework with Nativescript</li>
+          <li>high-quality components and utilities</li>
+          <li>pure data derivation</li>
+          <li>no extra rendering</li>
+          <li>no unneeded DOM</li>
+          <li>be contextually aware</li>
+          <li>be flexible</li>
+          <li>use the latest technology</li>
+        </ul>
+      </div>
 
-        <div>
-          <H2>Features</H2>
+      <div>
+        <H2>Features</H2>
 
-          <ul>
-            <li>ember routing</li>
-            <li>List View</li>
-            <li>Rad List View</li>
-          </ul>
-        </div>
-      </Article>
-    </div>
+        <ul>
+          <li>ember routing</li>
+          <li>List View</li>
+          <li>Rad List View</li>
+        </ul>
+      </div>
+    </Article>
+  </div>
 </template>;
 
-
-const H2: TOC<{ Blocks: { default: []}}> = <template>
+const H2: TOC<{ Blocks: { default: [] } }> = <template>
   <h2 class="text-3xl">{{yield}}</h2>
-</template>
+</template>;
