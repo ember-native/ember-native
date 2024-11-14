@@ -6,6 +6,9 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = async function (defaults) {
   const app = new EmberApp(defaults, {
+    addons: {
+      exclude: ['ember-native'],
+    },
     'ember-cli-babel': {
       enableTypeScriptTransform: true,
       disableDecoratorTransforms: true,
