@@ -1,4 +1,4 @@
-# ember-native 
+# ember-native
 
 With `ember-native` you can use the ember framework with Nativescript
 
