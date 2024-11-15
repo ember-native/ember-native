@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "minor",
-      "oldVersion": "1.0.0",
-      "newVersion": "1.1.0",
+      "oldVersion": "1.1.0",
+      "newVersion": "1.2.0",
       "constraints": [
         {
           "impact": "minor",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2024-11-14)\n\nember-native 1.1.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `ember-native`\n  * [#8](https://github.com/ember-native/ember-native/pull/8) fill HTMLElementTagNameMap ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2024-11-15)\n\nember-native 1.2.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `ember-native`\n  * [#15](https://github.com/ember-native/ember-native/pull/15) support back transition ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
