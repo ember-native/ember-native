@@ -27,25 +27,14 @@ export default class HistoryService extends Service {
     if (h && h.from) {
       const from = h.from;
       this.stack = [...this.stack];
-      let transition;
-      if (from.params?.['model']) {
-        transition = this.router.transitionTo(
-          from.name,
-          from.params?.['model'],
-          {
-            queryParams: from.queryParams,
-          },
-          h.data['transition'],
-        );
-      } else {
-        transition = this.router.transitionTo(
-          from.name,
-          {
-            queryParams: from.queryParams,
-          },
-          h.data['transition'],
-        );
-      }
+      const transition = this.nativeRouter.transitionTo(
+        from.name,
+        from.params?.['model'],
+        {
+          queryParams: from.queryParams,
+        },
+        h.data['transition'] as any,
+      );
       transition.data['isBack'] = true;
       return true;
     }
