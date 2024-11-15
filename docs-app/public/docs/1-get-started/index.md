@@ -14,8 +14,6 @@ create new app by using the template from
 
 https://github.com/ember-native/ember-native-demo
 
-
-
 <Callout>
   note that currently only v2 addons are supported and they need some custom setup to make services,initializers,routes, templates work.
   you need to include following code into the app.js. examples are included in the demo app.

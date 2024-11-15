@@ -1,11 +1,14 @@
 import Service, { service } from '@ember/service';
-import Router from '@ember/routing/router';
 import { Application } from '@nativescript/core';
 import { tracked } from '@glimmer/tracking';
+import type NativeRouter from './native-router.ts';
+import type Router from '@ember/routing/router';
+import type { Transition } from 'router_js';
 
 export default class HistoryService extends Service {
   @service router!: Router;
-  @tracked stack: any[] = [];
+  @service('ember-native/native-router') nativeRouter!: NativeRouter;
+  @tracked stack: Transition[] = [];
 
   setup() {
     Application.android?.on('activityBackPressed', (args) => {
@@ -13,7 +16,7 @@ export default class HistoryService extends Service {
     });
     this.router.on('routeDidChange', (transition) => {
       if (transition.from && !transition.data['isBack']) {
-        this.stack.push(transition.from);
+        this.stack.push(transition);
         this.stack = [...this.stack];
       }
     });
@@ -21,17 +24,27 @@ export default class HistoryService extends Service {
 
   back = () => {
     const h = this.stack.pop();
-    if (h) {
+    if (h && h.from) {
+      const from = h.from;
       this.stack = [...this.stack];
       let transition;
-      if (h.params.model) {
-        transition = this.router.transitionTo(h.name, h.params.model, {
-          queryParams: h.queryParams,
-        });
+      if (from.params?.['model']) {
+        transition = this.router.transitionTo(
+          from.name,
+          from.params?.['model'],
+          {
+            queryParams: from.queryParams,
+          },
+          h.data['transition'],
+        );
       } else {
-        transition = this.router.transitionTo(h.name, {
-          queryParams: h.queryParams,
-        });
+        transition = this.router.transitionTo(
+          from.name,
+          {
+            queryParams: from.queryParams,
+          },
+          h.data['transition'],
+        );
       }
       transition.data['isBack'] = true;
       return true;
