@@ -12,6 +12,7 @@ export default class NativeRouter extends Service {
     model: any,
     queryParams?: Record<string, any>,
     transition?: { transition: NavigationTransition; animated: boolean },
+    backTransition?: { transition: NavigationTransition; animated: boolean },
   ) {
     setNextTransition(transition?.transition, transition?.animated);
     let t: Transition;
@@ -20,7 +21,7 @@ export default class NativeRouter extends Service {
     } else {
       t = this.router.transitionTo(name, { queryParams });
     }
-    t.data['transition'] = transition;
+    t.data['transition'] = backTransition || transition;
     return t;
   }
 }
