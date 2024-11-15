@@ -2,12 +2,13 @@
 
 With `ember-native` you can use the power of ember with Nativescript
 
-some highlights are support for
+some highlights are:
 
 - list view
 - rad list view
 - ember transitions with native animations
 - glint
+- ember inspector
 
 create new app by using the template from
 
