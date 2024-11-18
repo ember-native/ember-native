@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-11-18)
+
+ember-native 1.3.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#18](https://github.com/ember-native/ember-native/pull/18) add hot reload ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2024-11-15)
 
 ember-native 1.2.1 (patch)
