@@ -1,19 +1,21 @@
 const {
   babelCompatSupport,
 } = require('@embroider/compat/babel');
+const hmrPlugin = require('ember-native/utils/babel-plugin');
 
 process.env.NODE_ENV = 'development';
 
 
 module.exports = {
   plugins: [
+      hmrPlugin.default,
     [
       'babel-plugin-ember-template-compilation',
       {
         compilerPath: 'ember-source/dist/ember-template-compiler.js',
         targetFormat: 'wire',
         enableLegacyModules: [],
-        transforms: [],
+        transforms: [hmrPlugin.hotAstProcessor.transform],
       },
     ],
     [

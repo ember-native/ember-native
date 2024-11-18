@@ -3,6 +3,8 @@
 !src/**/*
 !utils
 !utils/**/*
+!lib
+!lib/**/*
 !types
 !types/**/*
 !.eslintignore
@@ -22,3 +24,4 @@
 !.npmrc
 !eslint
 !eslint/ember-native.js
+!tsconfig.utils.json

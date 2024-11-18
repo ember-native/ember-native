@@ -7,6 +7,9 @@ const path = require("path");
 module.exports = (env) => {
 	webpack.init(env);
 
+  console.log('env', env);
+  process.env.EMBER_HMR_ENABLED = 'true';
+
 	// Learn how to customize:
 	// https://docs.nativescript.org/webpack
 
@@ -46,6 +49,9 @@ module.exports = (env) => {
       .end()
       .use('gjs-loader')
       .loader(require.resolve('ember-native/utils/content-tag-loader'))
+      .end()
+      .use('hmr-loader')
+      .loader(require.resolve('ember-native/utils/hmr-loader'))
       .end();
 
     config.module
@@ -55,7 +61,11 @@ module.exports = (env) => {
       .loader(require.resolve('ember-native/utils/fix-glimmer-content-owner'))
       .end()
       .use('babel-loader')
-      .loader('babel-loader');
+      .loader('babel-loader')
+      .end()
+      .use('hmr-loader')
+      .loader(require.resolve('ember-native/utils/hmr-loader'))
+      .end();
   });
 
   webpack.chainWebpack((config) => {

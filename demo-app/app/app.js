@@ -11,29 +11,58 @@ window.Ember = EmberNamespace;
 
 
 const modules = {};
-let context = require.context(
+const context1 = require.context(
   '.',
   true,
   /^\.\/.*\.(js|ts|gjs|gts|hbs)$/,
   'sync'
 );
-context.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context(key)));
+context1.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context1(key)));
 
-context = require.context(
+const context2 = require.context(
   '../node_modules/ember-routable-component/dist/_app_',
   true,
   /^\.\/.*\.(js|ts|gjs|gts|hbs)$/,
   'sync'
 );
-context.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context(key)));
+context2.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context2(key)));
 
-context = require.context(
+const context3 = require.context(
   '../node_modules/ember-native/dist/_app_',
   true,
   /^\.\/.*\.(js|ts|gjs|gts|hbs)$/,
   'sync'
 );
-context.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context(key)));
+context3.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context3(key)));
+
+function findModuleId(module) {
+  const entry = Object.entries(require.cache).find(([k, v]) => v === module);
+  return entry?.[0];
+}
+
+
+if (module.hot) {
+  const modulesBefore = Object.assign({}, modules);
+  module.hot.accept(context1.id, function() {
+    const context = require.context(
+      '.',
+      true,
+      /^\.\/.*\.(js|ts|gjs|gts|hbs)$/,
+      'sync'
+    );
+    context.keys().forEach((key) => (modules[pkgName + key.slice(1).replace(/\.(ts|js|gts|gjs|hbs)$/, '')] = context(key)));
+    for (const name of Object.keys(modulesBefore)) {
+      const module = modules[name];
+      if (name.includes('initializers') && modulesBefore[name]?.default !== module.default) {
+        const moduleId = findModuleId(module);
+        if (require.cache[moduleId]) {
+          require.cache[moduleId].hot.invalidate();
+          module.hot.apply();
+        }
+      }
+    }
+  });
+}
 
 export default class App extends EmberApplication {
   rootElement = ENV.rootElement;
