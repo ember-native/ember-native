@@ -1,17 +1,17 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "patch",
-      "oldVersion": "1.2.0",
-      "newVersion": "1.2.1",
+      "impact": "minor",
+      "oldVersion": "1.2.1",
+      "newVersion": "1.3.0",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2024-11-15)\n\nember-native 1.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#17](https://github.com/ember-native/ember-native/pull/17) fix back transition ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2024-11-18)\n\nember-native 1.3.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#18](https://github.com/ember-native/ember-native/pull/18) add hot reload ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
