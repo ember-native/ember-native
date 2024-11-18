@@ -19,6 +19,7 @@ export default class SideNav extends Component<SideNavInterface> {
     }
 
     <template>
+
         <rad-side-drawer gesturesEnabled={{true}} {{ref this 'drawer'}}>
             <rad-side-drawer.drawerContent>
                 <stack-layout class="sideStackLayout">

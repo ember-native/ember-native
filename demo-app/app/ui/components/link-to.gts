@@ -37,7 +37,10 @@ export default class LinkTo extends Component<LinkToInterface> {
             this.nativeRouter.transitionTo(this.args.route, undefined, options);
         }
     }
+
     <template>
         <button ...attributes text={{@text}} class="btn link-to" {{on 'tap' this.onClick}}>{{yield}}</button>
     </template>
 }
+
+
