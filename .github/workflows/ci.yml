@@ -24,7 +24,6 @@ jobs:
     outputs:
       pending: ${{ steps.set-pending.outputs.pending }}
     steps:
-      - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
       - uses: wyvox/action@v1
         with:
           node-version: 18.18.1
