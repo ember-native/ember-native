@@ -129,7 +129,7 @@
     "prettier-plugin-ember-template-tag": "^2.0.1",
     "qunit": "^2.22.0",
     "qunit-assertions-extra": "^1.0.3",
-    "qunit-dom": "^3.2.1",
+    "qunit-dom": "^3.3.0",
     "read-package-up": "^11.0.0",
     "rollup-plugin-astroturf": "^0.1.0",
     "svg-inline-loader": "^0.8.2",
