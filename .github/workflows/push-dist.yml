@@ -19,7 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
-      - run: git config --global url."https://github.com/".insteadOf "git@github.com:" && git config --global url."https://".insteadOf git://
       - if: github.ref == 'refs/heads/main'
         run: |-
           DOCS_URL=versions/main pnpm run build
