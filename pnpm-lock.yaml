@@ -26,8 +26,8 @@ importers:
         specifier: ^3.2.5
         version: 3.3.3
       prettier-plugin-ember-template-tag:
-        specifier: ^2.0.2
-        version: 2.0.2(prettier@3.3.3)
+        specifier: ^2.0.4
+        version: 2.0.4(prettier@3.3.3)
       release-plan:
         specifier: ^0.10.0
         version: 0.10.0(encoding@0.1.13)
@@ -330,8 +330,8 @@ importers:
         specifier: ^3.2.5
         version: 3.3.3
       prettier-plugin-ember-template-tag:
-        specifier: ^2.0.1
-        version: 2.0.2(prettier@3.3.3)
+        specifier: ^2.0.4
+        version: 2.0.4(prettier@3.3.3)
       qunit:
         specifier: ^2.22.0
         version: 2.22.0
@@ -598,8 +598,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.3
       prettier-plugin-ember-template-tag:
-        specifier: ^2.0.2
-        version: 2.0.2(prettier@3.3.3)
+        specifier: ^2.0.4
+        version: 2.0.4(prettier@3.3.3)
       qunit:
         specifier: ^2.19.4
         version: 2.22.0
@@ -8588,8 +8588,8 @@ packages:
     resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
     engines: {node: '>=6.0.0'}
 
-  prettier-plugin-ember-template-tag@2.0.2:
-    resolution: {integrity: sha512-eSEnrxdD3NtMyIGwG2FxcTPOdpcbCK7VnBNhAufdaoeOIs+mNwmTsZdkWxr/LMhBdgtR1IUQB0l0YQhUQGz6kQ==}
+  prettier-plugin-ember-template-tag@2.0.4:
+    resolution: {integrity: sha512-Ude3MJyPBMr/Er5aSS9Y0dsnHWX3prpJB+Jj/BKKUT/EvG2ftnIMBsZXmRu68RJA62JJB8MdKBloYmCu2pTRNg==}
     engines: {node: 18.* || >= 20}
     peerDependencies:
       prettier: '>= 3.0.0'
@@ -13035,7 +13035,7 @@ snapshots:
       eslint-plugin-n: 17.12.0(eslint@8.57.1)
       eslint-plugin-prettier: 5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.3.3)
       eslint-plugin-simple-import-sort: 12.1.1(eslint@8.57.1)
-      prettier-plugin-ember-template-tag: 2.0.2(prettier@3.3.3)
+      prettier-plugin-ember-template-tag: 2.0.4(prettier@3.3.3)
     optionalDependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -21657,10 +21657,10 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-ember-template-tag@2.0.2(prettier@3.3.3):
+  prettier-plugin-ember-template-tag@2.0.4(prettier@3.3.3):
     dependencies:
       '@babel/core': 7.26.0
-      content-tag: 1.2.2
+      content-tag: 2.0.3
       prettier: 3.3.3
     transitivePeerDependencies:
       - supports-color
