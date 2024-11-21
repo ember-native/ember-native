@@ -30,7 +30,7 @@
     "@shikijs/rehype": "^1.2.0",
     "assert": "^2.0.0",
     "change-case": "^5.4.4",
-    "decorator-transforms": "^2.2.2",
+    "decorator-transforms": "^2.3.0",
     "ember-basic-dropdown": "^8.3.0",
     "ember-concurrency": "^4.0.2",
     "ember-focus-trap": "^1.1.0",
