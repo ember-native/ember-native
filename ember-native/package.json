@@ -116,7 +116,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-ember": "^12.3.1",
-    "ember-eslint-parser": "^0.5.3",
+    "ember-eslint-parser": "^0.5.6",
     "eslint-plugin-ember-template-lint": "^0.15.0",
     "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-node": "^11.1.0",
