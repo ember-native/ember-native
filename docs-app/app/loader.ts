@@ -55,6 +55,10 @@ if (typeof define !== 'function' || typeof requireModule !== 'function') {
       return seen[name];
     };
 
+    requireModule.has = function (name) {
+      return !!registry[name];
+    }
+
     define.registry = registry;
     define.seen = seen;
   })();
