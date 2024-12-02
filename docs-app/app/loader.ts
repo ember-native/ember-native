@@ -60,8 +60,4 @@ if (typeof define !== 'function' || typeof requireModule !== 'function') {
   })();
 }
 
-export {
-  define,
-  require,
-  requireModule
-}
+export { define, require, requireModule };
