@@ -7,6 +7,11 @@ import * as validator from '@glimmer/validator';
 import { RSVP } from '@ember/-internals/runtime';
 
 import config from './config/environment';
+import * as loader from './loader';
+
+window.define = loader.define;
+window.require = loader.require;
+window.requireModule = loader.requireModule;
 
 window.define('@glimmer/tracking', () => tracking);
 window.define('@glimmer/runtime', () => runtime);
