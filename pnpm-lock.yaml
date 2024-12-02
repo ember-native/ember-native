@@ -222,8 +222,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.2(@babel/core@7.26.0)(@ember/test-helpers@4.0.4(@babel/core@7.26.0)(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5)))(@glint/template@1.5.0)(qunit@2.22.0)
       ember-auto-import:
-        specifier: ^2.9.0
-        version: 2.9.0(@glint/template@1.5.0)
+        specifier: ^2.10.0
+        version: 2.10.0(@glint/template@1.5.0)
       ember-cached-decorator-polyfill:
         specifier: ^1.0.2
         version: 1.0.2(@babel/core@7.26.0)(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5))
@@ -4823,8 +4823,8 @@ packages:
     peerDependencies:
       ember-source: ^5.12.0
 
-  ember-auto-import@2.9.0:
-    resolution: {integrity: sha512-iXPq2rJcJaqD+m5Lk1rYAVl7Db2MvT1MMjKJfJbNT3ps4xI2H+3njwwfT6pOKZIUVB/rfeyNPANqbnw3F68Qxg==}
+  ember-auto-import@2.10.0:
+    resolution: {integrity: sha512-bcBFDYVTFHyqyq8BNvsj6UO3pE6Uqou/cNmee0WaqBgZ+1nQqFz0UE26usrtnFAT+YaFZSkqF2H36QW84k0/cg==}
     engines: {node: 12.* || 14.* || >= 16}
 
   ember-basic-dropdown@8.4.0:
@@ -16486,7 +16486,7 @@ snapshots:
       axe-core: 4.10.2
       body-parser: 1.20.3
       broccoli-persistent-filter: 3.1.3
-      ember-auto-import: 2.9.0(@glint/template@1.5.0)
+      ember-auto-import: 2.10.0(@glint/template@1.5.0)
       ember-cli-babel: 7.26.11
       ember-cli-typescript: 4.2.1
       ember-cli-version-checker: 5.1.2
@@ -16516,7 +16516,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-auto-import@2.9.0(@glint/template@1.5.0):
+  ember-auto-import@2.10.0(@glint/template@1.5.0):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.26.0)
@@ -17198,7 +17198,7 @@ snapshots:
 
   ember-on-resize-modifier@2.0.2(@babel/core@7.26.0)(@glint/template@1.5.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5)):
     dependencies:
-      ember-auto-import: 2.9.0(@glint/template@1.5.0)
+      ember-auto-import: 2.10.0(@glint/template@1.5.0)
       ember-cli-babel: 7.26.11
       ember-cli-htmlbars: 5.7.2
       ember-modifier: 4.2.0(@babel/core@7.26.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.5.0)(rsvp@4.8.5))
@@ -17395,7 +17395,7 @@ snapshots:
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 4.2.0
       chalk: 4.1.2
-      ember-auto-import: 2.9.0(@glint/template@1.5.0)
+      ember-auto-import: 2.10.0(@glint/template@1.5.0)
       ember-cli-babel: 8.2.0(@babel/core@7.26.0)
       ember-cli-get-component-path-option: 1.0.0
       ember-cli-is-package-missing: 1.0.0
