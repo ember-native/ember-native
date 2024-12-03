@@ -49,7 +49,7 @@
     "@babel/plugin-syntax-decorators": "^7.22.5",
     "@ember/render-modifiers": "^2.1.0",
     "@ember/string": "^3.1.1",
-    "@embroider/addon-shim": "^1.8.9",
+    "@embroider/addon-shim": "^1.9.1-unstable.35f48d4",
     "@eslint/js": "^8.41.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
