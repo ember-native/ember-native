@@ -78,7 +78,7 @@
     "@glimmer/reference": "^0.93.1",
     "@glimmer/interfaces": "^0.92.3",
     "@glimmer/validator": "^0.92.3",
-    "@glimmer/runtime": "^0.92.3",
+    "@glimmer/runtime": "^0.93.1",
     "loader.js": "^4.7.0",
     "@nativescript/core": "^8.8.6",
     "ember-source": "^6.0.1",
