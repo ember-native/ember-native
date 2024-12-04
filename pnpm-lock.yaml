@@ -475,8 +475,8 @@ importers:
         specifier: ^0.93.1
         version: 0.93.1
       '@glimmer/runtime':
-        specifier: ^0.92.3
-        version: 0.92.4
+        specifier: ^0.93.1
+        version: 0.93.1
       '@glimmer/validator':
         specifier: ^0.92.3
         version: 0.92.3
@@ -1764,11 +1764,17 @@ packages:
   '@glimmer/destroyable@0.92.3':
     resolution: {integrity: sha512-vQ+mzT9Vkf+JueY7L5XbZqK0WyEVTKv0HOLrw/zDw9F5Szn3F/8Ea/qbAClo3QK3oZeg+ulFTa/61rdjSFYHGA==}
 
+  '@glimmer/destroyable@0.93.1':
+    resolution: {integrity: sha512-dx0OoRlltHtYBfKbyMmcZTcnGyBEGGpTg8SsAASrvfiiLgq5OEmuN/hpz06RUjo1SI9mb+wQkugD5ZujD7KaTg==}
+
   '@glimmer/di@0.1.11':
     resolution: {integrity: sha512-moRwafNDwHTnTHzyyZC9D+mUSvYrs1Ak0tRPjjmCghdoHHIvMshVbEnwKb/1WmW5CUlKc2eL9rlAV32n3GiItg==}
 
   '@glimmer/encoder@0.92.3':
     resolution: {integrity: sha512-DJ8DB33LxODjzCWRrxozHUaRqVyZj4p8jDLG42aCNmWo3smxrsjshcaVUwDmib24DW+dzR7kMc39ObMqT5zK0w==}
+
+  '@glimmer/encoder@0.92.5':
+    resolution: {integrity: sha512-C6PxHql94o5TRpNutu5H/WjnmEnNjq8Exsfuf8mGn32VBr5/+bxvnNeNPz0s6kZe2HZOjLLLn0LLgNtmlif74A==}
 
   '@glimmer/env@0.1.7':
     resolution: {integrity: sha512-JKF/a9I9jw6fGoz8kA7LEQslrwJ5jms5CXhu/aqkBWk+PmZ6pTl8mlb/eJ/5ujBGTiQzBhy5AIWF712iA+4/mw==}
@@ -1797,17 +1803,29 @@ packages:
   '@glimmer/manager@0.92.4':
     resolution: {integrity: sha512-YMoarZT/+Ft2YSd+Wuu5McVsdP9y6jeAdVQGYFpno3NlL3TXYbl7ELtK7OGxFLjzQE01BdiUZZRvcY+a/s9+CQ==}
 
+  '@glimmer/manager@0.93.1':
+    resolution: {integrity: sha512-D4JkomARvSwl0ik9P9AjVAp2A3BvvVHMQcEi6j9vGjDwW2jumYUQazP+KE36qVa/Xn2+ngHalPjL3wFR+zraKA==}
+
   '@glimmer/node@0.92.4':
     resolution: {integrity: sha512-a5GME7HQJZFJPQDdSetQI6jjKXXQi0Vdr3WuUrYwhienVTV5LG0uClbFE2yYWC7TX97YDHpRrNk1CC258rujkQ==}
 
   '@glimmer/opcode-compiler@0.92.4':
     resolution: {integrity: sha512-WnZSBwxNqW/PPD/zfxEg6BVR5tHwTm8fp76piix8BNCQ6CuzVn6HUJ5SlvBsOwyoRCmzt/pkKmBJn+I675KG4w==}
 
+  '@glimmer/opcode-compiler@0.93.1':
+    resolution: {integrity: sha512-JZtGTIZD/KiyOjxu9XrtAY+uNJlJpxAOCwXYIPxzBLuCD68YeZYs0BNMtNHHmP+kuTTFMt3ZNddiY2YmuEZw2A==}
+
   '@glimmer/owner@0.92.3':
     resolution: {integrity: sha512-ZxmXIUCy6DOobhGDhA6kMpaXZS7HAucEgIl/qcjV9crlzGOO8H4j+n2x6nA/8zpuqvO0gYaBzqdNdu+7EgOEmw==}
 
+  '@glimmer/owner@0.92.5':
+    resolution: {integrity: sha512-RWtXD3kWjFhFbt2awmeUxMMNWgtCEtc/ZMo6BiQN09vQVBSh5xzpl7D1VVf9rH+KNpb/QYdILJKACVDs7k6iGw==}
+
   '@glimmer/program@0.92.4':
     resolution: {integrity: sha512-fkquujQ11lsGCWl/+XpZW2E7bjHj/g6/Ht292A7pSoANBD8Bz/gPYiPM+XuMwes9MApEsTEMjV4EXlyk2/Cirg==}
+
+  '@glimmer/program@0.93.1':
+    resolution: {integrity: sha512-kpi4E54nCe3ziL1qGuyqfCybif4X2u6l+7onmvZqx0eQ/qP1OJJ6T3pn/+dHquZgZnIiDT6zeVslVAgRm5tT6g==}
 
   '@glimmer/reference@0.84.3':
     resolution: {integrity: sha512-lV+p/aWPVC8vUjmlvYVU7WQJsLh319SdXuAWoX/SE3pq340BJlAJiEcAc6q52y9JNhT57gMwtjMX96W5Xcx/qw==}
@@ -1820,6 +1838,9 @@ packages:
 
   '@glimmer/runtime@0.92.4':
     resolution: {integrity: sha512-ISqM/8hVh+fY/gnLAAPKfts4CvnJBOyCYAXgGccIlzzQrSVLaz0NoRiWTLGj5B/3xyPbqLwYPDvlTsOjYtvPoA==}
+
+  '@glimmer/runtime@0.93.1':
+    resolution: {integrity: sha512-hntGoykJKl3GqI2qbPT6An6gOSBnkPa01MLAmWRkXZfYIS5Rg52rYUkOnwk/ut4DAlvRrRFRIaEmhNi7ti+Ffg==}
 
   '@glimmer/syntax@0.84.3':
     resolution: {integrity: sha512-ioVbTic6ZisLxqTgRBL2PCjYZTFIwobifCustrozRU2xGDiYvVIL0vt25h2c1ioDsX59UgVlDkIK4YTAQQSd2A==}
@@ -1867,11 +1888,17 @@ packages:
   '@glimmer/vm@0.92.3':
     resolution: {integrity: sha512-DNMQz7nn2zRwKO1irVZ4alg1lH+VInwR3vkWVgobUs0yh7OoHVGXKMd5uxzIksqJEUw1XOX9Qgu/GYZB1PiH3w==}
 
+  '@glimmer/vm@0.93.1':
+    resolution: {integrity: sha512-LTlEJZsxwz3lkNGh8wk5KjCVc2jwBIGLy1h8zuiz5rHwhHpdIE17iokp7tKoZR5vnhBSvS4UxcgctBhOl7PgaQ==}
+
   '@glimmer/wire-format@0.88.1':
     resolution: {integrity: sha512-DPM2UiYRNzcWdOUrSa8/IFbWKovH+c2JPnbvtk04DpfQapU7+hteBj34coEN/pW3FJiP3WMvx/EuPfWROkeDsg==}
 
   '@glimmer/wire-format@0.92.3':
     resolution: {integrity: sha512-gFz81Q9+V7Xs0X8mSq6y8qacHm0dPaGJo2/Bfcsdow1hLOKNgTCLr4XeDBhRML8f6I6Gk9ugH4QDxyIOXOpC4w==}
+
+  '@glimmer/wire-format@0.93.1':
+    resolution: {integrity: sha512-EHtdlZAZsOMBP6b9YC03OyduswqiT6Ei/mR/N1oR/4LZZ8lOyVgp6Q4H0TQW6jprWEiTMdHaO8/SEGTCrrhtUw==}
 
   '@glint/core@1.5.0':
     resolution: {integrity: sha512-oo6ZDwX2S0Qqjai/CJH72LHg1U6rvzH1IyiFlWofaFiu/nSg04CDWZuJNPC3r47jz1+SaSI+mVMUaKJznzxzzQ==}
@@ -12671,12 +12698,24 @@ snapshots:
       '@glimmer/interfaces': 0.92.3
       '@glimmer/util': 0.92.3
 
+  '@glimmer/destroyable@0.93.1':
+    dependencies:
+      '@glimmer/env': 0.1.7
+      '@glimmer/global-context': 0.92.4
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/util': 0.93.1
+
   '@glimmer/di@0.1.11': {}
 
   '@glimmer/encoder@0.92.3':
     dependencies:
       '@glimmer/interfaces': 0.92.3
       '@glimmer/vm': 0.92.3
+
+  '@glimmer/encoder@0.92.5':
+    dependencies:
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/vm': 0.93.1
 
   '@glimmer/env@0.1.7': {}
 
@@ -12716,6 +12755,17 @@ snapshots:
       '@glimmer/validator': 0.92.3
       '@glimmer/vm': 0.92.3
 
+  '@glimmer/manager@0.93.1':
+    dependencies:
+      '@glimmer/destroyable': 0.93.1
+      '@glimmer/env': 0.1.7
+      '@glimmer/global-context': 0.92.4
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/reference': 0.93.1
+      '@glimmer/util': 0.93.1
+      '@glimmer/validator': 0.93.1
+      '@glimmer/vm': 0.93.1
+
   '@glimmer/node@0.92.4':
     dependencies:
       '@glimmer/interfaces': 0.92.3
@@ -12736,9 +12786,25 @@ snapshots:
       '@glimmer/vm': 0.92.3
       '@glimmer/wire-format': 0.92.3
 
+  '@glimmer/opcode-compiler@0.93.1':
+    dependencies:
+      '@glimmer/encoder': 0.92.5
+      '@glimmer/env': 0.1.7
+      '@glimmer/global-context': 0.92.4
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/manager': 0.93.1
+      '@glimmer/reference': 0.93.1
+      '@glimmer/util': 0.93.1
+      '@glimmer/vm': 0.93.1
+      '@glimmer/wire-format': 0.93.1
+
   '@glimmer/owner@0.92.3':
     dependencies:
       '@glimmer/util': 0.92.3
+
+  '@glimmer/owner@0.92.5':
+    dependencies:
+      '@glimmer/util': 0.93.1
 
   '@glimmer/program@0.92.4':
     dependencies:
@@ -12750,6 +12816,17 @@ snapshots:
       '@glimmer/util': 0.92.3
       '@glimmer/vm': 0.92.3
       '@glimmer/wire-format': 0.92.3
+
+  '@glimmer/program@0.93.1':
+    dependencies:
+      '@glimmer/encoder': 0.92.5
+      '@glimmer/env': 0.1.7
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/manager': 0.93.1
+      '@glimmer/opcode-compiler': 0.93.1
+      '@glimmer/util': 0.93.1
+      '@glimmer/vm': 0.93.1
+      '@glimmer/wire-format': 0.93.1
 
   '@glimmer/reference@0.84.3':
     dependencies:
@@ -12789,6 +12866,21 @@ snapshots:
       '@glimmer/validator': 0.92.3
       '@glimmer/vm': 0.92.3
       '@glimmer/wire-format': 0.92.3
+
+  '@glimmer/runtime@0.93.1':
+    dependencies:
+      '@glimmer/destroyable': 0.93.1
+      '@glimmer/env': 0.1.7
+      '@glimmer/global-context': 0.92.4
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/manager': 0.93.1
+      '@glimmer/owner': 0.92.5
+      '@glimmer/program': 0.93.1
+      '@glimmer/reference': 0.93.1
+      '@glimmer/util': 0.93.1
+      '@glimmer/validator': 0.93.1
+      '@glimmer/vm': 0.93.1
+      '@glimmer/wire-format': 0.93.1
 
   '@glimmer/syntax@0.84.3':
     dependencies:
@@ -12873,6 +12965,11 @@ snapshots:
       '@glimmer/interfaces': 0.92.3
       '@glimmer/util': 0.92.3
 
+  '@glimmer/vm@0.93.1':
+    dependencies:
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/util': 0.93.1
+
   '@glimmer/wire-format@0.88.1':
     dependencies:
       '@glimmer/interfaces': 0.88.1
@@ -12882,6 +12979,11 @@ snapshots:
     dependencies:
       '@glimmer/interfaces': 0.92.3
       '@glimmer/util': 0.92.3
+
+  '@glimmer/wire-format@0.93.1':
+    dependencies:
+      '@glimmer/interfaces': 0.93.0
+      '@glimmer/util': 0.93.1
 
   '@glint/core@1.5.0(typescript@5.6.3)':
     dependencies:
