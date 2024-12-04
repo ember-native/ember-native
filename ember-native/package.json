@@ -109,7 +109,7 @@
     "broccoli": "^3.4.2",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
-    "css-loader": "^6.8.1",
+    "css-loader": "^7.1.2",
     "ember-modifier": "^4.2.0",
     "ember-template-lint": "^5.11.2",
     "eslint": "^8.57.0",
