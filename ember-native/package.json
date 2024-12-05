@@ -48,7 +48,7 @@
     "@babel/core": "^7.24.0",
     "@babel/plugin-syntax-decorators": "^7.22.5",
     "@ember/render-modifiers": "^2.1.0",
-    "@ember/string": "^3.1.1",
+    "@ember/string": "^4.0.0",
     "@embroider/addon-shim": "^1.9.1-unstable.35f48d4",
     "@eslint/js": "^8.41.0",
     "@glimmer/component": "^1.1.2",
