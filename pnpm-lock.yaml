@@ -339,8 +339,8 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3(qunit@2.22.0)
       qunit-dom:
-        specifier: ^3.3.0
-        version: 3.3.0
+        specifier: ^3.4.0
+        version: 3.4.0
       read-package-up:
         specifier: ^11.0.0
         version: 11.0.0
@@ -604,8 +604,8 @@ importers:
         specifier: ^2.19.4
         version: 2.22.0
       qunit-dom:
-        specifier: ^3.3.0
-        version: 3.3.0
+        specifier: ^3.4.0
+        version: 3.4.0
       release-it:
         specifier: ^15.10.3
         version: 15.11.0(encoding@0.1.13)
@@ -8784,8 +8784,8 @@ packages:
     peerDependencies:
       qunit: ^2.0.0
 
-  qunit-dom@3.3.0:
-    resolution: {integrity: sha512-sGPhNbZ/3gPbH3rp7PxnzqXuh6cyN/AG/vO/X9k0IYlsoBLi83MU6PdtSw/KiWLV8X/32jxD6fbeP9vjNAY4Dw==}
+  qunit-dom@3.4.0:
+    resolution: {integrity: sha512-N5PYbJ20RD3JZN4whINdl7dDfxScUy7eNuO8IwUtBWC7d6SH+BqtBqVZdRn9evxLQVzuask6OGvMy4gdpiCceg==}
 
   qunit-theme-ember@1.0.0:
     resolution: {integrity: sha512-vdMVVo6ecdCkWttMTKeyq1ZTLGHcA6zdze2zhguNuc3ritlJMhOXY5RDseqazOwqZVfCg3rtlmL3fMUyIzUyFQ==}
@@ -13985,7 +13985,7 @@ snapshots:
 
   '@types/qunit-dom@0.7.0':
     dependencies:
-      qunit-dom: 3.3.0
+      qunit-dom: 3.4.0
 
   '@types/qunit@2.19.12': {}
 
@@ -21943,7 +21943,7 @@ snapshots:
     dependencies:
       qunit: 2.22.0
 
-  qunit-dom@3.3.0:
+  qunit-dom@3.4.0:
     dependencies:
       dom-element-descriptors: 0.5.1
 
