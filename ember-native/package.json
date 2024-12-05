@@ -51,7 +51,7 @@
     "@ember/string": "^4.0.0",
     "@embroider/addon-shim": "^1.9.1-unstable.35f48d4",
     "@eslint/js": "^8.41.0",
-    "@glimmer/component": "^1.1.2",
+    "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
