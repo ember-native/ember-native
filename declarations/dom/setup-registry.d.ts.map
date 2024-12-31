@@ -1,0 +1,1 @@
+{"version":3,"file":"setup-registry.d.ts","sourceRoot":"","sources":["../../src/dom/setup-registry.ts"],"names":[],"mappings":"AACA,OAAO,EACL,IAAI,EA8BL,MAAM,oBAAoB,CAAC;AAI5B,OAA0B,EACxB,KAAK,aAAa,EACnB,MAAM,+BAA+B,CAAC;AAGvC,wBAAgB,qBAAqB,CACnC,WAAW,EAAE,MAAM,EACnB,QAAQ,EAAE,MAAM,OAAO,IAAI,EAC3B,IAAI,GAAE,aAAa,GAAG,IAAW,QAMlC;AAED,wBAAgB,gBAAgB,SAyD/B"}
