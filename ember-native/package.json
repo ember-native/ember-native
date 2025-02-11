@@ -77,7 +77,7 @@
     "nativescript-ui-listview": "^15.2.3",
     "@glimmer/reference": "^0.93.1",
     "@glimmer/interfaces": "^0.92.3",
-    "@glimmer/validator": "^0.92.3",
+    "@glimmer/validator": "^0.94.6",
     "@glimmer/runtime": "^0.93.1",
     "loader.js": "^4.7.0",
     "@nativescript/core": "^8.8.6",
