@@ -1,7 +1,7 @@
 import NativeElementNode from '../dom/native/NativeElementNode';
 import '@glint/environment-ember-template-imports/globals';
 import '@glint/template/-private/dsl/emit';
-import type { ComponentLike } from '@glint/template';
+import type { ComponentLike, ModifierLike } from '@glint/template';
 import type { ViewBase } from '@nativescript/core';
 import 'ember-modifier';
 import type {
@@ -13,6 +13,7 @@ import type {
   FunctionBasedModifier,
   Teardown,
 } from 'ember-modifier/-private/function-based/modifier';
+import type { NativeElementsTagNameMap } from '../dom/native-elements-tag-name-map.ts';
 
 declare module 'ember-modifier' {
   type ViewNode<T extends ViewBase> =
@@ -69,6 +70,19 @@ declare module '@glint/environment-ember-template-imports/globals' {
 }
 
 declare module '@glint/template/-private/dsl/emit' {
+  export function emitElement<Name extends string>(
+    name: Name,
+  ): {
+    element: Name extends keyof NativeElementsTagNameMap
+      ? NativeElementsTagNameMap[Name]
+      : NativeElementNode<null>;
+  };
+
+  export function applySplattributes<
+    SourceElement extends NativeElementNode<any>,
+    TargetElement extends SourceElement,
+  >(source: SourceElement, target: TargetElement): void;
+
   export function applyAttributes<T extends ViewBase>(
     element: NativeElementNode<T>,
     attrs: Record<string, any>,
@@ -78,4 +92,23 @@ declare module '@glint/template/-private/dsl/emit' {
     SourceElement extends NativeElementNode<T>,
     TargetElement extends SourceElement,
   >(source: SourceElement, target: TargetElement): void;
+}
+
+declare module '@ember/modifier' {
+  interface OnModifierArgs {
+    capture?: boolean;
+    once?: boolean;
+    passive?: boolean;
+  }
+  type OnModifierType = abstract new <Name extends string>() => InstanceType<
+    ModifierLike<{
+      Element: NativeElementNode<ViewBase>;
+      Args: {
+        Named: OnModifierArgs;
+        Positional: [name: Name, callback: (event: any) => void];
+      };
+    }>
+  >;
+  // eslint-disable-next-line
+  export interface OnModifier extends OnModifierType {}
 }

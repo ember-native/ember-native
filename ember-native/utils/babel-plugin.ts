@@ -260,9 +260,7 @@ export default function hotReplaceAst(babel: typeof Babel) {
         };
 
         const ifHotStatements = [];
-        console.log('bindings', bindings);
         for (const imp of bindings) {
-          console.log('imp', imp);
           const importDeclaration = findImport(
             imp,
           ) as BabelTypesNamespace.ImportDeclaration;

@@ -222,6 +222,18 @@ export interface IClassList {
 
 export default class ElementNode extends ViewNode {
   declare _classList: IClassList;
+  declare _id: string;
+  static ELEMENT_NODE: number;
+  static ATTRIBUTE_NODE: number;
+  static TEXT_NODE: number;
+  static DOCUMENT_NODE: number;
+
+  static {
+    this.ELEMENT_NODE = 1; //Node.ELEMENT_NODE
+    this.ATTRIBUTE_NODE = 2; //Node.ATTRIBUTE_NODE
+    this.TEXT_NODE = 3; //Node.TEXT_NODE
+    this.DOCUMENT_NODE = 9; //Node.DOCUMENT_NODE
+  }
 
   constructor(tagName: string) {
     super();
@@ -230,11 +242,18 @@ export default class ElementNode extends ViewNode {
   }
 
   get id() {
-    return this.getAttribute('id') as string;
+    if (this.getAttribute === ElementNode.prototype.getAttribute) {
+      return this['_id'];
+    }
+    return this.getAttribute('id') as typeof this._id;
   }
 
-  set id(value: string) {
-    this.setAttribute('id', value);
+  set id(v: string) {
+    if (this.getAttribute === ElementNode.prototype.getAttribute) {
+      this['_id'] = v;
+      return;
+    }
+    this.setAttribute('id', v);
   }
 
   get classList() {

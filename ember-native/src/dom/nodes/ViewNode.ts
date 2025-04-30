@@ -24,6 +24,14 @@ export default class ViewNode {
   _ownerDocument: any;
   _meta: any;
 
+  get textContent() {
+    const contents = [];
+    for (const el of elementIterator(this)) {
+      contents.push(el.text || el.html);
+    }
+    return contents.filter((c) => !!c).join(' ');
+  }
+
   getElementById(id: string) {
     for (const el of elementIterator(this)) {
       if (el.nodeType === 1 && el.id === id) return el;
@@ -221,7 +229,7 @@ export default class ViewNode {
 
   removeChild(childNode: ViewNode) {
     if (!childNode) {
-      throw new Error(`Can't remove child.`);
+      throw new Error(`Can't remove <null> child.`);
     }
 
     if (!childNode.parentNode) {

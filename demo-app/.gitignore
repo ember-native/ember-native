@@ -6,6 +6,10 @@
 !types
 !types/**/*
 !.editorconfig
+!.github
+!.github/**/*
+!tests
+!tests/**/*
 !.gitignore
 !babel.config.cjs
 !content-tag-loader.js
@@ -18,3 +22,11 @@
 !references.d.ts
 !tsconfig.json
 !webpack.config.js
+!karma.conf.js
+!tsconfig.spec.json
+!config.js
+!pnpm-lock.yaml
+!.npmrc
+!unit-test-patch-files
+!unit-test-patch-files/*
+!eslint.config.mjs

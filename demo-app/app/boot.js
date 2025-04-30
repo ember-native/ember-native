@@ -1,4 +1,4 @@
-import app from './main';
+import app from './native/main';
 import { Application as NativeApplication } from '@nativescript/core/application/application';
 
 
@@ -24,7 +24,6 @@ const document = globalThis.document;
 
 
 boot().then(() => {
-  console.log('visit');
   app.visit('/', {
     document: document,
     isInteractive: true

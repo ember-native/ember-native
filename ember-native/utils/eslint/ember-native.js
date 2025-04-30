@@ -6,4 +6,6 @@ module.exports.emberNativeGlobals = {
   'rad-list-view': true,
   'list-view': true,
   frame: true,
+  require: true,
+  module: true,
 };

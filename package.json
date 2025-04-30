@@ -11,7 +11,7 @@
   "scripts": {
     "_start:docs": "pnpm --filter docs-app start",
     "build": "pnpm --filter docs-app --filter ember-native build",
-    "lint": "pnpm --filter docs-app --filter ember-native lint",
+    "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter docs-app --filter ember-native lint:fix",
     "start": "pnpm build; concurrently 'npm:_start:*' --prefix ' ' --restart-after 5000 --restart-tries -1",
     "test": "turbo run test --output-logs errors-only"
@@ -37,6 +37,9 @@
       "kolay": "https://codeload.github.com/patricklx/kolay/tar.gz/dist-kolay",
       "@universal-ember/kolay-ui": "https://codeload.github.com/patricklx/kolay/tar.gz/dist-kolay-ui",
       "rollup-plugin-astroturf.git": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/dist"
+    },
+    "patchedDependencies": {
+      "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
     }
   },
   "packageManager": "pnpm@9.12.2",
@@ -45,4 +48,3 @@
     "pnpm": "9.12.2"
   }
 }
-
