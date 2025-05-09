@@ -107,7 +107,7 @@
     "broccoli": "^3.4.2",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
-    "content-tag": "^2.0.3",
+    "content-tag": "^4.0.0",
     "css-loader": "^7.1.2",
     "ember-eslint-parser": "^0.5.9",
     "ember-modifier": "^4.2.0",
