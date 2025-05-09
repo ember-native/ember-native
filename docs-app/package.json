@@ -64,7 +64,7 @@
     "@embroider/core": "alpha",
     "@embroider/test-setup": "alpha",
     "@embroider/vite": "alpha",
-    "@embroider/webpack": "4.0.8",
+    "@embroider/webpack": "4.1.0",
     "@fontsource/lexend": "^5.1.1",
     "@glimmer/compiler": "^0.94.10",
     "@glimmer/component": "^2.0.0",
