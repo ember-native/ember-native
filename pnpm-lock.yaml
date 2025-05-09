@@ -70,8 +70,8 @@ importers:
         specifier: ^0.94.9
         version: 0.94.9
       '@glimmer/program':
-        specifier: ^0.92.4
-        version: 0.92.4
+        specifier: ^0.94.9
+        version: 0.94.9
       '@glimmer/reference':
         specifier: ^0.92.3
         version: 0.92.3
@@ -2113,6 +2113,9 @@ packages:
 
   '@glimmer/program@0.93.1':
     resolution: {integrity: sha512-kpi4E54nCe3ziL1qGuyqfCybif4X2u6l+7onmvZqx0eQ/qP1OJJ6T3pn/+dHquZgZnIiDT6zeVslVAgRm5tT6g==}
+
+  '@glimmer/program@0.94.9':
+    resolution: {integrity: sha512-KA3TXYL2iDdR92pPnB/sw1tgIC7B40l2P60iD1sqkYbyxAbrUPHSToA1ycmK4DwmxDOT3Hz9dvpceoCMbh0xjA==}
 
   '@glimmer/reference@0.84.3':
     resolution: {integrity: sha512-lV+p/aWPVC8vUjmlvYVU7WQJsLh319SdXuAWoX/SE3pq340BJlAJiEcAc6q52y9JNhT57gMwtjMX96W5Xcx/qw==}
@@ -16759,6 +16762,15 @@ snapshots:
       '@glimmer/vm': 0.93.1
       '@glimmer/wire-format': 0.93.1
 
+  '@glimmer/program@0.94.9':
+    dependencies:
+      '@glimmer/interfaces': 0.94.6
+      '@glimmer/manager': 0.94.9
+      '@glimmer/opcode-compiler': 0.94.9
+      '@glimmer/util': 0.94.8
+      '@glimmer/vm': 0.94.8
+      '@glimmer/wire-format': 0.94.8
+
   '@glimmer/reference@0.84.3':
     dependencies:
       '@glimmer/env': 0.1.7
@@ -28438,7 +28450,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.27.1
       index-to-position: 1.1.0
-      type-fest: 4.41.0
+      type-fest: 4.40.1
 
   parse-ms@2.1.0: {}
 
