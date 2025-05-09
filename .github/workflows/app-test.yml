@@ -38,7 +38,7 @@ jobs:
       - name: install
         run: |
           npm i -g pnpm
-          pnpm install --no-frozen-lockfile
+          pnpm install
 
       - name: build
         run: |
