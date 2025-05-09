@@ -615,8 +615,8 @@ importers:
         specifier: ^3.4.14
         version: 3.4.17(ts-node@10.9.2(@types/node@22.15.17)(typescript@5.8.3))
       typedoc:
-        specifier: ^0.26.9
-        version: 0.26.11(typescript@5.8.3)
+        specifier: ^0.28.4
+        version: 0.28.4(typescript@5.8.3)
       typescript:
         specifier: ^5.3.3
         version: 5.8.3
@@ -2025,6 +2025,9 @@ packages:
 
   '@gar/promisify@1.1.3':
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
+
+  '@gerrit0/mini-shiki@3.4.0':
+    resolution: {integrity: sha512-48lKoQegmfJ0iyR/jRz5OrYOSM3WewG9YWCPqUvYFEC54shQO8RsAaspaK/2PRHVVnjekRqfAFvq8pwCpIo5ig==}
 
   '@glimmer/blueprint@1.1.2':
     resolution: {integrity: sha512-OjHVO+Yq6duMktn1p2uzxmDeIp6wBl0M93BQFOP3yo8CNVo+0emXuNDySKr0XheD+KhgJpaaW2V3O9vuH5XhHQ==}
@@ -13555,6 +13558,13 @@ packages:
     peerDependencies:
       typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x
 
+  typedoc@0.28.4:
+    resolution: {integrity: sha512-xKvKpIywE1rnqqLgjkoq0F3wOqYaKO9nV6YkkSat6IxOWacUCc/7Es0hR3OPmkIqkPoEn7U3x+sYdG72rstZQA==}
+    engines: {node: '>= 18', pnpm: '>= 10'}
+    hasBin: true
+    peerDependencies:
+      typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x
+
   typescript-eslint@8.32.0:
     resolution: {integrity: sha512-UMq2kxdXCzinFFPsXc9o2ozIpYCCOiEC46MG3yEh5Vipq6BO27otTtEBZA1fQ66DulEUgE97ucQ/3YY66CPg0A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -16584,6 +16594,14 @@ snapshots:
   '@foxt/js-srp@0.0.3-patch2': {}
 
   '@gar/promisify@1.1.3': {}
+
+  '@gerrit0/mini-shiki@3.4.0':
+    dependencies:
+      '@shikijs/engine-oniguruma': 3.4.0
+      '@shikijs/langs': 3.4.0
+      '@shikijs/themes': 3.4.0
+      '@shikijs/types': 3.4.0
+      '@shikijs/vscode-textmate': 10.0.2
 
   '@glimmer/blueprint@1.1.2':
     dependencies:
@@ -31585,6 +31603,15 @@ snapshots:
       markdown-it: 14.1.0
       minimatch: 9.0.5
       shiki: 1.29.2
+      typescript: 5.8.3
+      yaml: 2.7.1
+
+  typedoc@0.28.4(typescript@5.8.3):
+    dependencies:
+      '@gerrit0/mini-shiki': 3.4.0
+      lunr: 2.3.9
+      markdown-it: 14.1.0
+      minimatch: 9.0.5
       typescript: 5.8.3
       yaml: 2.7.1
 
