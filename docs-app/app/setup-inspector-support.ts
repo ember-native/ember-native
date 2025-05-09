@@ -8,8 +8,6 @@ import { RSVP } from '@ember/-internals/runtime';
 
 import config from './config/environment';
 
-
-
 window.define('@glimmer/tracking', () => tracking);
 window.define('@glimmer/runtime', () => runtime);
 window.define('@glimmer/validator', () => validator);
