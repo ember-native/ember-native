@@ -78,7 +78,7 @@
     "babel-plugin-ember-template-compilation": "^2.3.0",
     "browserify-fs": "^1.0.0",
     "buffer": "^6.0.3",
-    "content-tag": "^2.0.1",
+    "content-tag": "^4.0.0",
     "css-loader": "^7.1.2",
     "decorator-transforms": "^2.1.0",
     "ember-template-lint": "^7.6.0",
