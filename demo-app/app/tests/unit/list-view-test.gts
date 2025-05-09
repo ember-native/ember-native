@@ -61,7 +61,7 @@ QUnit.module('ListView | test', function(hooks) {
         assert.dom(this.element as Element).containsText('hello');
         assert.dom(this.element as Element).containsText('world');
 
-        test.list = [PromiseWithResolvers('hi')];
+        test.list = [PromiseWithResolvers('hi2')];
 
         await rerender();
         await Promise.all(test.list.map(x => x.promise));
