@@ -91,8 +91,8 @@ importers:
         specifier: ^0.92.3
         version: 0.92.3
       '@glimmer/validator':
-        specifier: ^0.92.3
-        version: 0.92.3
+        specifier: ^0.94.8
+        version: 0.94.8
       '@glimmer/vm':
         specifier: ^0.92.3
         version: 0.92.3
@@ -168,10 +168,10 @@ importers:
         version: 4.0.5(@babel/core@7.27.1)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7))
       '@embroider/compat':
         specifier: unstable
-        version: 4.0.3-unstable.9eaf3f9(@embroider/core@4.0.3-unstable.9eaf3f9(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)
+        version: 4.0.4-unstable.ce3535d(@embroider/core@4.0.4-unstable.ce3535d(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)
       '@embroider/core':
         specifier: unstable
-        version: 4.0.3-unstable.9eaf3f9(@glint/template@1.5.2)
+        version: 4.0.4-unstable.ce3535d(@glint/template@1.5.2)
       '@glint/core':
         specifier: ^1.5.2
         version: 1.5.2(typescript@5.8.3)
@@ -189,7 +189,7 @@ importers:
         version: 8.8.0
       '@nativescript/webpack':
         specifier: ^5.0.22
-        version: 5.0.24(handlebars@4.7.8)(lodash@4.17.21)(sass-embedded@1.87.0)(type-fest@4.40.1)(typescript@5.8.3)(underscore@1.13.7)
+        version: 5.0.24(handlebars@4.7.8)(lodash@4.17.21)(sass-embedded@1.87.0)(type-fest@4.41.0)(typescript@5.8.3)(underscore@1.13.7)
       '@types/qunit':
         specifier: 2.19.12
         version: 2.19.12
@@ -745,8 +745,8 @@ importers:
         specifier: ^0.93.1
         version: 0.93.1
       '@glimmer/validator':
-        specifier: ^0.92.3
-        version: 0.92.3
+        specifier: ^0.94.8
+        version: 0.94.8
       '@glint/core':
         specifier: ^1.5.0
         version: 1.5.2(typescript@5.8.3)
@@ -1642,11 +1642,11 @@ packages:
     peerDependencies:
       '@embroider/core': ^4.0.0-alpha.9
 
-  '@embroider/compat@4.0.3-unstable.9eaf3f9':
-    resolution: {integrity: sha512-APCp6b1x/8usi/8tKLZSZ8zfpFQFbcIJ/c9lnGIjVuatLCHY6fryfhZ+TA/8EHyNn/BbVOQqfduNCYx1I5bisA==}
+  '@embroider/compat@4.0.4-unstable.ce3535d':
+    resolution: {integrity: sha512-dSdRVx5bhU3NTw20rFlRUhUtQGHY97Rx85JAi8niL7zha1qnxw9eqovhsu1Zm8do8JSEQXSkIlq1rpc6Z+wKXQ==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@embroider/core': ^4.0.3-unstable.9eaf3f9
+      '@embroider/core': ^4.0.4-unstable.ce3535d
 
   '@embroider/config-meta-loader@1.0.0-alpha.3':
     resolution: {integrity: sha512-sr0vervRVdxbs39vi2K70XbRnFxXji1FSomw9pMRTzyXj+CL3dEQjxO4dGyhl0J48764aJ6QF1ACaRJR4GCEcQ==}
@@ -1660,8 +1660,8 @@ packages:
     resolution: {integrity: sha512-4dGc1K0J1qIuWm2MizBuj7TMhyUzokQQLuTX60Z0cHhdMy9PyjwxOBLZBBAZz4swgXj5YYHF+006Yf5v0uTv6w==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/core@4.0.3-unstable.9eaf3f9':
-    resolution: {integrity: sha512-RJ6yen1odg1nidEPCHHNIukmfrEz0a9XJJsdJYR0ji5x5qXOF9JybEUdlWvJ2qA7uI13QgS+3bb+OGv7CpVLAQ==}
+  '@embroider/core@4.0.4-unstable.ce3535d':
+    resolution: {integrity: sha512-/7SSBzFya/O/V5LPYmhICiBpuMzbOrNNF8t3Lmzoxm5uokrCdA2eUTTMfrJnxAAjGxwqgyGQNXobpyoisXYz7A==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/hbs-loader@3.0.3':
@@ -1725,8 +1725,8 @@ packages:
       '@glint/template':
         optional: true
 
-  '@embroider/macros@1.17.3-unstable.9eaf3f9':
-    resolution: {integrity: sha512-3VMSwTuvrRh4DP/mlbGNn0+G+pkrE/k0VH/qDNT8tNiVIBwqX3H0hnC+tzjQTyrN2KaLPfrOFaJg1z6UDwb9MA==}
+  '@embroider/macros@1.17.4-unstable.ce3535d':
+    resolution: {integrity: sha512-w0qJYO6zsmOdWQHyYF7sUxqjturiQCw19H7uNfWYiLFp/jpKi/7i/88c8PwDmzuelqmR/ypofmLm8p3J0mrBFg==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -1737,8 +1737,8 @@ packages:
   '@embroider/reverse-exports@0.1.1-alpha.2':
     resolution: {integrity: sha512-dyECoyni4N2Nu+vnE0OtdkmOj8PZiTLopRfAWBmbmvA6t1kfyPFVv7c0BZ92J4VUz+adcOBfiXjuN4JeL66nIQ==}
 
-  '@embroider/reverse-exports@0.1.3-unstable.9eaf3f9':
-    resolution: {integrity: sha512-mLvYCVDtS/rK0DVwYSCG4+5/Wh1iB5ayohvADEBqJ7HK1+3JV4BfD4qXC8A8Sfe17fVl6VleEZivY2XJl2Fnnw==}
+  '@embroider/reverse-exports@0.1.3-unstable.ce3535d':
+    resolution: {integrity: sha512-WAfDXzIwaRwvgmzRWsiHjF1jXf6QNLEmIzVdsC/6P0ZHTvqAwXeuY9YA+jH68XsDScW8/lbp8gYmZLyzNFUowQ==}
 
   '@embroider/shared-internals@2.5.2':
     resolution: {integrity: sha512-jNDJ9YlV6Qp9Na9v17qirUewVuq6T0t32nn+bbnFlCRTvmllKluZdYPSC5RuRnEZKTloVYRSF0+f1rgkTIEvxQ==}
@@ -1760,8 +1760,8 @@ packages:
     resolution: {integrity: sha512-qXTHPlL3WACyMYrJJKnmY03I7U+E/NtT5145b5+VyGwWaN7Bekq0sY8CW9Dt6P/XqreTv8ustVCSANpujtkDLw==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/shared-internals@3.0.1-unstable.9eaf3f9':
-    resolution: {integrity: sha512-IXB7Qo0HQUnSLxuMmhNjZdLMQWYhKoAijxZAuNsmnGCkNi8iB5KQc4w7lQOlWuvR6i8MmTDwGv7kbdCwsPbNCw==}
+  '@embroider/shared-internals@3.0.1-unstable.ce3535d':
+    resolution: {integrity: sha512-mdimvbtaaak1CWn0wpCVi98k6KF00jthP0Zj+XxADOCW3SELmN8a9kAX9KMhvaVi9kHLfOTfsX7cPrtTPPc1VQ==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/test-setup@0.44.0-alpha.2':
@@ -2043,6 +2043,9 @@ packages:
   '@glimmer/global-context@0.92.4':
     resolution: {integrity: sha512-WCbiZXk1lSt3qLniOHpNC7d7yPTBnycgGBVTFW70niJOBmZr2A4NSUQP1kB1t0ljS2t765DHLMGSRny1zFK4Pw==}
 
+  '@glimmer/global-context@0.93.4':
+    resolution: {integrity: sha512-Yw9xkDReAcC5oS/hY3PjGrFKRygYFA4pdO7tvuxReoVOyUtjoBOAwHJUileiElERDdMWIMfoLema8Td1mqkjhA==}
+
   '@glimmer/inline-precompile@1.0.1':
     resolution: {integrity: sha512-mKDkrbxdOhJy9onjFWEN/zgmnsl+U7y3aapKyHUENcdNi2GqSF3o4UZM6No7dVXZ53JrNiTPw/BGI/K5DKp0Nw==}
     peerDependencies:
@@ -2145,6 +2148,9 @@ packages:
 
   '@glimmer/validator@0.93.1':
     resolution: {integrity: sha512-PmqlpVODtLq+bKDyJxtgVyKuC0u9IHf6vEYwWe4N1vEEWPkktslqQrqOwRBsKYQvxF8ZSC9SzWFWV4bCdiMS1Q==}
+
+  '@glimmer/validator@0.94.8':
+    resolution: {integrity: sha512-vTP6hAcrxE5/0dG2w+tHSteXxgWmkBwMzu5ZTxMg+EkqthWl8B5r5skLiviQ6SdKAOBJGhzf6tF4ltHo5y83hQ==}
 
   '@glimmer/vm-babel-plugins@0.92.3':
     resolution: {integrity: sha512-VpkKsHc3oiq9ruiwT7sN4RuOIc5n10PCeWX7tYSNZ85S1bETcAFn0XbyNjI+G3uFshQGEK0T8Fn3+/8VTNIQIg==}
@@ -13327,6 +13333,10 @@ packages:
     resolution: {integrity: sha512-9YvLNnORDpI+vghLU/Nf+zSv0kL47KbVJ1o3sKgoTefl6i+zebxbiDQWoe/oWWqPhIgQdRZRT1KA9sCPL810SA==}
     engines: {node: '>=16'}
 
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
+    engines: {node: '>=16'}
+
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
@@ -15692,7 +15702,7 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@embroider/compat@4.0.3-unstable.9eaf3f9(@embroider/core@4.0.3-unstable.9eaf3f9(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)':
+  '@embroider/compat@4.0.4-unstable.ce3535d(@embroider/core@4.0.4-unstable.ce3535d(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)':
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/core': 7.27.1
@@ -15703,8 +15713,8 @@ snapshots:
       '@babel/preset-env': 7.27.1(@babel/core@7.27.1)
       '@babel/runtime': 7.27.1
       '@babel/traverse': 7.27.1
-      '@embroider/core': 4.0.3-unstable.9eaf3f9(@glint/template@1.5.2)
-      '@embroider/macros': 1.17.3-unstable.9eaf3f9(@glint/template@1.5.2)
+      '@embroider/core': 4.0.4-unstable.ce3535d(@glint/template@1.5.2)
+      '@embroider/macros': 1.17.4-unstable.ce3535d(@glint/template@1.5.2)
       '@types/babel__code-frame': 7.0.6
       assert-never: 1.4.0
       babel-import-util: 3.0.1
@@ -15820,14 +15830,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/core@4.0.3-unstable.9eaf3f9(@glint/template@1.5.2)':
+  '@embroider/core@4.0.4-unstable.ce3535d(@glint/template@1.5.2)':
     dependencies:
       '@babel/core': 7.27.1
       '@babel/parser': 7.27.1
       '@babel/traverse': 7.27.1
-      '@embroider/macros': 1.17.3-unstable.9eaf3f9(@glint/template@1.5.2)
-      '@embroider/reverse-exports': 0.1.3-unstable.9eaf3f9
-      '@embroider/shared-internals': 3.0.1-unstable.9eaf3f9
+      '@embroider/macros': 1.17.4-unstable.ce3535d(@glint/template@1.5.2)
+      '@embroider/reverse-exports': 0.1.3-unstable.ce3535d
+      '@embroider/shared-internals': 3.0.1-unstable.ce3535d
       assert-never: 1.4.0
       babel-plugin-ember-template-compilation: 2.4.1
       broccoli-node-api: 1.7.0
@@ -15956,9 +15966,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/macros@1.17.3-unstable.9eaf3f9(@glint/template@1.5.2)':
+  '@embroider/macros@1.17.4-unstable.ce3535d(@glint/template@1.5.2)':
     dependencies:
-      '@embroider/shared-internals': 3.0.1-unstable.9eaf3f9
+      '@embroider/shared-internals': 3.0.1-unstable.ce3535d
       assert-never: 1.4.0
       babel-import-util: 3.0.1
       ember-cli-babel: 7.26.11
@@ -15975,7 +15985,7 @@ snapshots:
     dependencies:
       resolve.exports: 2.0.3
 
-  '@embroider/reverse-exports@0.1.3-unstable.9eaf3f9':
+  '@embroider/reverse-exports@0.1.3-unstable.ce3535d':
     dependencies:
       mem: 8.1.1
       resolve.exports: 2.0.3
@@ -16081,7 +16091,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/shared-internals@3.0.1-unstable.9eaf3f9':
+  '@embroider/shared-internals@3.0.1-unstable.ce3535d':
     dependencies:
       babel-import-util: 3.0.1
       debug: 4.4.0(supports-color@9.4.0)
@@ -16431,6 +16441,8 @@ snapshots:
 
   '@glimmer/global-context@0.92.4': {}
 
+  '@glimmer/global-context@0.93.4': {}
+
   '@glimmer/inline-precompile@1.0.1(@glimmer/compiler@0.92.4)':
     dependencies:
       '@glimmer/compiler': 0.92.4
@@ -16451,7 +16463,7 @@ snapshots:
   '@glimmer/interfaces@0.94.6':
     dependencies:
       '@simple-dom/interface': 1.4.0
-      type-fest: 4.40.1
+      type-fest: 4.41.0
 
   '@glimmer/manager@0.92.4':
     dependencies:
@@ -16672,6 +16684,11 @@ snapshots:
       '@glimmer/global-context': 0.92.4
       '@glimmer/interfaces': 0.93.0
       '@glimmer/util': 0.93.1
+
+  '@glimmer/validator@0.94.8':
+    dependencies:
+      '@glimmer/global-context': 0.93.4
+      '@glimmer/interfaces': 0.94.6
 
   '@glimmer/vm-babel-plugins@0.92.3(@babel/core@7.27.1)':
     dependencies:
@@ -17194,10 +17211,10 @@ snapshots:
       '@nativescript/hook': 2.0.0
       glob-regex: 0.3.2
 
-  '@nativescript/webpack@5.0.24(handlebars@4.7.8)(lodash@4.17.21)(sass-embedded@1.87.0)(type-fest@4.40.1)(typescript@5.8.3)(underscore@1.13.7)':
+  '@nativescript/webpack@5.0.24(handlebars@4.7.8)(lodash@4.17.21)(sass-embedded@1.87.0)(type-fest@4.41.0)(typescript@5.8.3)(underscore@1.13.7)':
     dependencies:
       '@babel/core': 7.27.1
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.16(react-refresh@0.14.2)(type-fest@4.40.1)(webpack@5.99.7)
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.16(react-refresh@0.14.2)(type-fest@4.41.0)(webpack@5.99.7)
       acorn: 8.14.1
       acorn-stage3: 4.0.0(acorn@8.14.1)
       ansi-colors: 4.1.3
@@ -17828,7 +17845,7 @@ snapshots:
 
   '@pkgr/core@0.2.4': {}
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.14.2)(type-fest@4.40.1)(webpack@5.99.7)':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.14.2)(type-fest@4.41.0)(webpack@5.99.7)':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.42.0
@@ -17840,7 +17857,7 @@ snapshots:
       source-map: 0.7.4
       webpack: 5.99.7(webpack-cli@4.10.0)
     optionalDependencies:
-      type-fest: 4.40.1
+      type-fest: 4.41.0
 
   '@pnpm/cli-meta@5.0.1':
     dependencies:
@@ -28022,7 +28039,7 @@ snapshots:
       got: 12.6.1
       registry-auth-token: 5.1.0
       registry-url: 6.0.1
-      semver: 7.7.1
+      semver: 7.5.1
 
   package-up@5.0.0:
     dependencies:
@@ -28089,7 +28106,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.27.1
       index-to-position: 1.1.0
-      type-fest: 4.40.1
+      type-fest: 4.41.0
 
   parse-ms@2.1.0: {}
 
@@ -31118,6 +31135,8 @@ snapshots:
   type-fest@2.19.0: {}
 
   type-fest@4.40.1: {}
+
+  type-fest@4.41.0: {}
 
   type-is@1.6.18:
     dependencies:
