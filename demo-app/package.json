@@ -35,7 +35,7 @@
     "@glimmer/syntax": "^0.94.9",
     "@glimmer/test-helpers": "^0.31.2",
     "@glimmer/tracking": "^1.1.2",
-    "@glimmer/util": "^0.92.3",
+    "@glimmer/util": "^0.94.8",
     "@glimmer/validator": "^0.94.8",
     "@glimmer/vm": "^0.92.3",
     "@glimmer/wire-format": "^0.92.3",
