@@ -108,7 +108,7 @@
     "ember-source": "^6.0.1",
     "ember-template-imports": "^4.2.0",
     "ember-template-lint": "^6.0.0",
-    "ember-vite-hmr": "^1.8.2",
+    "ember-vite-hmr": "^2.0.1",
     "ember-welcome-page": "^7.0.2",
     "ember-native": "workspace:*",
     "eslint": "^8.57.0",
