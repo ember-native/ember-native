@@ -4,8 +4,9 @@
     "emitDeclarationOnly": false,
     "outDir": "../dist/utils",
     "target": "ES6",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "es2020",
+    "lib": ["es2023", "dom"],
+    "moduleResolution": "bundler",
     "noEmitOnError": false
   },
   "include": [

@@ -62,15 +62,26 @@ export default class DocumentNode extends ViewNode {
     this.nodeMap = new Map();
   }
 
+  createEvent(eventInterface: string) {
+    const event = {
+      eventInterface,
+      initEvent(type: string, bubbles: boolean, cancelable: boolean) {
+        Object.assign(event, {
+          type,
+          bubbles,
+          cancelable,
+        });
+      },
+    };
+    return event;
+  }
+
   createComment(text: string) {
     return new CommentNode(text);
   }
 
-  static createPropertyNode(
-    tagName: string,
-    propertyName: string,
-  ): PropertyNode {
-    return new PropertyNode(tagName, propertyName);
+  static createPropertyNode(tagName: string): PropertyNode {
+    return new PropertyNode(tagName);
   }
 
   createElement(name: string) {
@@ -80,9 +91,8 @@ export default class DocumentNode extends ViewNode {
   static createElement<T extends keyof NativeElementsTagNameMap>(
     tagName: T,
   ): NativeElementsTagNameMap[T] {
-    if (tagName.indexOf('.') >= 0) {
-      const bits = tagName.split('.', 2);
-      return this.createPropertyNode(bits[0]!, bits[1]!) as any;
+    if (tagName === 'property') {
+      return this.createPropertyNode(tagName) as any;
     }
     const e = createElement(tagName);
     e._ownerDocument = this.getInstance();

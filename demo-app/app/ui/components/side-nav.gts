@@ -1,15 +1,14 @@
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier'
 import { ref } from '~/ui/modifiers/ref';
-import type NativeElementNode from 'ember-native/dom/native/NativeElementNode';
 import type { RadSideDrawer }  from 'nativescript-ui-sidedrawer';
+import NativeElementNode from 'ember-native/dom/native/NativeElementNode';
 
 export interface SideNavInterface {
-    Args: {
-
+    Blocks: {
+        default: [];
     }
-}
-
+};
 
 export default class SideNav extends Component<SideNavInterface> {
     declare drawer: NativeElementNode<RadSideDrawer>;
@@ -19,9 +18,8 @@ export default class SideNav extends Component<SideNavInterface> {
     }
 
     <template>
-
         <rad-side-drawer gesturesEnabled={{true}} {{ref this 'drawer'}}>
-            <rad-side-drawer.drawerContent>
+            <property key=drawerContent>
                 <stack-layout class="sideStackLayout">
                     <stack-layout class="sideTitleStackLayout">
                         <label>Navigation Menu</label>
@@ -36,15 +34,14 @@ export default class SideNav extends Component<SideNavInterface> {
                         <label class="sideLabel">Sent Mail</label>
                         <label class="sideLabel">Drafts</label>
                     </stack-layout>
-                    <label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" {{on
-                        'tap' this.onCloseDrawerTap}} ></label>
+                    <label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" {{on 'tap' this.onCloseDrawerTap}} ></label>
                 </stack-layout>
-            </rad-side-drawer.drawerContent>
-            <rad-side-drawer.mainContent>
+            </property>
+            <property key="mainContent">
                 <stack-layout>
                     {{yield}}
                 </stack-layout>
-            </rad-side-drawer.mainContent>
+            </property>
         </rad-side-drawer>
     </template>
 }

@@ -3,8 +3,10 @@ import { LayoutBase } from '@nativescript/core/ui/layouts/layout-base';
 import {
   ContentView,
   type EventData,
+  Frame,
   isAndroid,
   isIOS,
+  ListView,
   Page,
   View,
 } from '@nativescript/core';
@@ -228,7 +230,7 @@ export default class NativeElementNode<
     }
   }
 
-  get nativeView() {
+  get nativeView(): T {
     return this._nativeView;
   }
 
@@ -299,6 +301,10 @@ export default class NativeElementNode<
       return;
     }
 
+    if (parentNode.nativeView instanceof ListView) {
+      return;
+    }
+
     if (parentNode.meta && typeof parentNode.meta.insertChild === 'function') {
       //our dom includes "textNode" and "commentNode" which does not appear in the nativeview's children.
       //we recalculate the index required for the insert operation buy only including native element nodes in the count
@@ -345,10 +351,6 @@ export default class NativeElementNode<
       parentView.content = childView;
       return;
     }
-
-    throw new Error(
-      "Parent can't contain children: " + parentNode + ', ' + childNode,
-    );
   }
 
   onRemovedChild(childNode: ViewNode) {
@@ -379,6 +381,10 @@ export default class NativeElementNode<
 
     const parentView = parentNode.nativeView;
     const childView = childNode.nativeView;
+
+    if (parentView instanceof Frame) {
+      return;
+    }
 
     if (parentView instanceof LayoutBase) {
       parentView.removeChild(childView);
@@ -494,6 +500,16 @@ export default class NativeElementNode<
     const nw = this.nativeView as View;
     const point = nw.getLocationInWindow();
     const actualSize = nw.getActualSize();
+    if (!point) {
+      return {
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        width: 0,
+        height: 0,
+      };
+    }
     return {
       left: point.x,
       top: point.y,

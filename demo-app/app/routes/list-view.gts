@@ -14,7 +14,7 @@ class Page extends Component {
             ['a', 'b', 'c'],
             ['a', 'b', 'c', 'd', 'e'],
             ['1', '2', '3'],
-            ['1', '2', '3', 4, 5],
+            ['1', '2', '3', '4', '5']
         ];
         setInterval(() => {
             this.list = lists[Math.floor(Math.random() * lists.length)];

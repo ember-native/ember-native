@@ -1,13 +1,34 @@
-const webpack = require("@nativescript/webpack");
-const fs = require("fs");
-const emberWebpack = require('ember-native/utils/webpack.config')
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
+var Module = require('module');
+var { fileURLToPath } = require('node:url');
+
+Module.registerHooks({
+  resolve: (specifier, context, nextResolve) => {
+    //do your thing here
+    if(context.parentURL && fileURLToPath(context.parentURL).includes(':')) return nextResolve(specifier, context);
+    if (context.parentURL) {
+      const parentURL = fs.realpathSync(fileURLToPath(context.parentURL));
+      const resolved = require.resolve(specifier, { paths: [path.dirname(parentURL)] });
+      if (fs.existsSync(resolved)) {
+        specifier = fs.realpathSync(resolved);
+      }
+      return nextResolve(specifier, context);
+    }
+    const resolved = require.resolve(specifier);
+    if (fs.existsSync(resolved)) {
+      specifier = fs.realpathSync(resolved);
+    }
+    return nextResolve(specifier, context);
+  }
+});
+const webpack = require('@nativescript/webpack');
+
 
 
 module.exports = (env) => {
 	webpack.init(env);
 
-  console.log('env', env);
   process.env.EMBER_HMR_ENABLED = 'true';
 
 	// Learn how to customize:
@@ -24,19 +45,23 @@ module.exports = (env) => {
         `ember-source/dist/packages/@glimmer/${glimmerDir}`,
       );
     }
-    // change the "@" alias to "app/libs"
+
+    config.resolve.extensions.add('.gjs');
+    config.resolve.extensions.add('.gts');
+
+    config.resolve.alias.set('ember-cli-test-loader/test-support/index', 'ember-cli-test-loader/addon-test-support/index');
+    config.resolve.alias.set('@ember/test-helpers', require.resolve('@ember/test-helpers'));
+    config.resolve.alias.set('@ember/test-waiters', require.resolve('@ember/test-waiters'));
     config.resolve.alias.set('@ember', 'ember-source/dist/packages/@ember');
+    config.resolve.alias.set('ember-testing', 'ember-source/dist/packages/ember-testing');
     config.resolve.alias.set('ember', 'ember-source/dist/packages/ember');
-    config.resolve.alias.set(
-      '@glimmer/component',
-      '@glimmer/component/addon/index.ts',
-    );
     config.resolve.alias.set(
       '@glimmer/env',
       require.resolve('ember-native/utils/glimmer-env'),
     );
 
     config.resolve.alias.set('~', '/app');
+    config.resolve.alias.delete('@');
   });
 
   webpack.chainWebpack((config) => {
@@ -57,22 +82,30 @@ module.exports = (env) => {
     config.module
       .rule('js/ts')
       .test(/\.([jt]s)$/)
-      .use('fix-glimmer-content-owner')
-      .loader(require.resolve('ember-native/utils/fix-glimmer-content-owner'))
-      .end()
       .use('babel-loader')
       .loader('babel-loader')
       .end()
       .use('hmr-loader')
       .loader(require.resolve('ember-native/utils/hmr-loader'))
       .end();
+
+    const testRootXml = path.dirname(path.resolve('./app/tests/test-root-view.xml'));
+    config.module.rule('xml').include.add(testRootXml);
+
+    const unitTestsXml = path.dirname(path.resolve('./node_modules/@nativescript/unit-test-runner/app'));
+    config.module.rule('xml').include.add(fs.realpathSync(unitTestsXml));
   });
 
   webpack.chainWebpack((config) => {
     config.plugin('DefinePlugin').tap((args) => {
       Object.assign(args[0], {
         window: 'globalThis',
+        __TEST_RUNNER_STAY_OPEN__: !process.env.CI,
+        process: {
+          browser: true
+        }
       });
+      console.log('define plugin', args);
       return args;
     });
   });
@@ -87,5 +120,30 @@ module.exports = (env) => {
     );
   });
 
-	return webpack.resolveConfig();
+  webpack.chainWebpack((config) => {
+    const fallback = {};
+    Object.assign(fallback, {
+      "stream": require.resolve("stream-browserify"),
+      "http": require.resolve("stream-http"),
+      "https": require.resolve("https-browserify"),
+      "url": require.resolve("url"),
+      "querystring": require.resolve("querystring-es3"),
+      buffer: require.resolve('buffer'),
+      "path": false,
+      "tty": false,
+      "timers": false,
+      "os": false,
+      "util": require.resolve("util"),
+      "crypto": false,
+      "fs": false,
+      "tls": false,
+      "net": false,
+      "zlib": false,
+    })
+    config.resolve.set('fallback', fallback);
+    config.target('node');
+  });
+
+	const conf = webpack.resolveConfig();
+  return conf;
 };

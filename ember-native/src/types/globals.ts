@@ -34,53 +34,95 @@ declare module 'loader.js' {
   const define: AnyFunction;
 }
 
-type ViewBase = import('@nativescript/core').ViewBase;
-type NativeElementNode<T extends ViewBase> =
-  import('../dom/native/NativeElementNode').default<T>;
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface HTMLElementTagNameMap {
-  'rad-list-view': NativeElementNode<
+  'rad-list-view': import('../dom/native/NativeElementNode').default<
     import('nativescript-ui-listview').RadListView
   >;
-  'list-view': NativeElementNode<import('@nativescript/core').ListView>;
-  'html-view': NativeElementNode<import('@nativescript/core').HtmlView>;
-  'scroll-view': NativeElementNode<import('@nativescript/core').ScrollView>;
-  'text-field': NativeElementNode<import('@nativescript/core').TextField>;
-  'text-view': NativeElementNode<import('@nativescript/core').TextView>;
-  'web-view': NativeElementNode<import('@nativescript/core').WebView>;
-  'content-view': NativeElementNode<import('@nativescript/core').ContentView>;
-  'tab-view': NativeElementNode<import('@nativescript/core').TabView>;
-  'tab-view-item': NativeElementNode<import('@nativescript/core').TabViewItem>;
-  switch: NativeElementNode<import('@nativescript/core').Switch>;
-  'formatted-string': NativeElementNode<
+  'list-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').ListView
+  >;
+  'html-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').HtmlView
+  >;
+  'scroll-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').ScrollView
+  >;
+  'text-field': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').TextField
+  >;
+  'text-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').TextView
+  >;
+  'web-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').WebView
+  >;
+  'content-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').ContentView
+  >;
+  'tab-view': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').TabView
+  >;
+  'tab-view-item': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').TabViewItem
+  >;
+  switch: import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').Switch
+  >;
+  'formatted-string': import('../dom/native/NativeElementNode').default<
     import('@nativescript/core').FormattedString
   >;
   frame: import('../dom/native/FrameElement.ts').default;
   page: import('../dom/native/PageElement.ts').default;
   // @ts-expect-error just override
-  span: NativeElementNode<import('@nativescript/core').Span>;
-  'action-bar': NativeElementNode<import('@nativescript/core').ActionBar>;
-  'action-item': NativeElementNode<import('@nativescript/core').ActionItem>;
-  comment: NativeElementNode<import('@nativescript/core').Placeholder>;
+  span: import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').Span
+  >;
+  'action-bar': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').ActionBar
+  >;
+  'action-item': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').ActionItem
+  >;
+  comment: import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').Placeholder
+  >;
   // @ts-expect-error just override
-  button: NativeElementNode<import('@nativescript/core').Button>;
-  'navigation-button': NativeElementNode<
+  button: import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').Button
+  >;
+  'navigation-button': import('../dom/native/NativeElementNode').default<
     import('@nativescript/core').NavigationButton
   >;
-  image: NativeElementNode<import('@nativescript/core').Image>;
+  image: import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').Image
+  >;
   // @ts-expect-error just override
-  label: NativeElementNode<import('@nativescript/core').Label>;
-  'list-picker': NativeElementNode<import('@nativescript/core').ListPicker>;
-  'date-picker': NativeElementNode<import('@nativescript/core').DatePicker>;
-  'dock-layout': NativeElementNode<import('@nativescript/core').DockLayout>;
-  'wrap-layout': NativeElementNode<import('@nativescript/core').WrapLayout>;
-  'stack-layout': NativeElementNode<import('@nativescript/core').StackLayout>;
-  'grid-layout': NativeElementNode<import('@nativescript/core').GridLayout>;
-  'flexbox-layout': NativeElementNode<
+  label: import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').Label
+  >;
+  'list-picker': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').ListPicker
+  >;
+  'date-picker': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').DatePicker
+  >;
+  'dock-layout': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').DockLayout
+  >;
+  'wrap-layout': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').WrapLayout
+  >;
+  'stack-layout': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').StackLayout
+  >;
+  'grid-layout': import('../dom/native/NativeElementNode').default<
+    import('@nativescript/core').GridLayout
+  >;
+  'flexbox-layout': import('../dom/native/NativeElementNode').default<
     import('@nativescript/core').FlexboxLayout
   >;
-  'absolute-layout': NativeElementNode<
+  'absolute-layout': import('../dom/native/NativeElementNode').default<
     import('@nativescript/core').AbsoluteLayout
   >;
 }

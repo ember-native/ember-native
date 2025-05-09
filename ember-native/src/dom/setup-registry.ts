@@ -89,7 +89,6 @@ export function registerElements() {
   registerNativeElement('Label', () => Label);
   registerNativeElement('ListPicker', () => ListPicker);
   registerNativeElement('NavigationButton', () => NavigationButton as any);
-  // registerNativeElement('Page', () => require('@nativescript/core/ui/page').Page);
   registerNativeElement('Span', () => Span as any);
   registerNativeElement('StackLayout', () => StackLayout);
   registerNativeElement('ScrollView', () => ScrollView);

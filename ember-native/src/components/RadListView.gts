@@ -48,6 +48,19 @@ export default class RadListView<T = any> extends Component<
   private declare headerElement: NativeElementNode<StackLayout>;
   private declare footerElement: NativeElementNode<StackLayout>;
 
+  cleanup(listView: NativeElementNode<NativeRadListView>) {
+    for (const [element] of [...this.elementRefs.entries()]) {
+      const n = element.nativeView.nativeViewProtected;
+      if (!n || !n.getWindowToken()) {
+        this.elementRefs.delete(element);
+        const idx = listView.childNodes.findIndex((c) => c === element);
+        if (idx >= 0) {
+          listView.childNodes.splice(idx, 1);
+        }
+      }
+    }
+  }
+
   get items() {
     return [...this.elementRefs.entries()].map(([element, item]) => {
       return {
@@ -63,9 +76,13 @@ export default class RadListView<T = any> extends Component<
       listView: NativeElementNode<NativeRadListView>,
     ) {
       this.listView = listView;
+      listView.nativeView.on('itemRecyclingInternal', () => {
+        this.cleanup(listView);
+      });
       const listViewComponent = this;
       function _getDefaultItemContent() {
         const sl = DocumentNode.createElement('stack-layout');
+        listView.appendChild(sl);
         Object.defineProperty(sl.nativeView, 'parent', {
           get() {
             return this._parent;

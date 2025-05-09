@@ -1,17 +1,14 @@
-import { normalizeElementName } from '../element-registry.ts';
 import ElementNode from './ElementNode.ts';
 import ViewNode from './ViewNode.ts';
 
 export default class PropertyNode extends ElementNode {
-  propertyName: string;
-  propertyTagName: string;
-
-  constructor(tagName: string, propertyName: string) {
-    super(`${tagName}.${propertyName}`);
-    this.propertyName = propertyName;
-    this.propertyTagName = normalizeElementName(tagName);
-
+  constructor(tagName: string) {
+    super(tagName);
     this.nodeType = 7; //processing instruction
+  }
+
+  get propertyName() {
+    return this.getAttribute('key') as string;
   }
 
   onInsertedChild() {
@@ -28,14 +25,14 @@ export default class PropertyNode extends ElementNode {
   }
 
   setOnNode(parent: ViewNode | null) {
-    if (parent && parent.tagName === this.propertyTagName) {
+    if (parent && this.propertyName) {
       const el = this.firstElement();
       parent.setAttribute(this.propertyName, el);
     }
   }
 
   clearOnNode(parent: ViewNode) {
-    if (parent && parent.tagName === this.propertyTagName) {
+    if (parent && this.propertyName) {
       parent.setAttribute(this.propertyName, null);
     }
   }

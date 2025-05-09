@@ -2,8 +2,19 @@ const {
   babelCompatSupport,
 } = require('@embroider/compat/babel');
 const hmrPlugin = require('ember-native/utils/babel-plugin');
+const macros = require("@embroider/macros/src/macros-config");
 
 process.env.NODE_ENV = 'development';
+
+global.__embroider_macros_global__ = {
+    value: null,
+    set(key, val) {
+        this.value = val;
+    },
+    get() {
+        return this.value;
+    }
+};
 
 
 module.exports = {
@@ -50,3 +61,10 @@ module.exports = {
     compact: false,
   },
 };
+
+
+const config = macros.default.for({}, process.cwd());
+config.setConfig(__filename, 'ember-qunit', {
+    disableContainerStyles: true,
+    theme: 'no-theme'
+});

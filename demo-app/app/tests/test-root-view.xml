@@ -1,0 +1,8 @@
+<GridLayout columns="150, *">
+    <ContentView col="0" id="root-frame-content-view">
+        <Frame defaultPage="test-run-page" id="root-frame">
+        </Frame>
+    </ContentView>
+    <StackLayout col="1" id="ember-testing-content-view">
+    </StackLayout>
+</GridLayout>

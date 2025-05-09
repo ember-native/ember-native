@@ -28,20 +28,22 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
   @tracked elementRefs: Ref<T>[] = [];
 
   get items(): Ref<T>[] {
-    return this.elementRefs.map(({ element, index }) => {
-      return {
-        index,
-        item: this.args.items[index] || null,
-        element,
-      };
-    });
+    return this.elementRefs
+      .filter((x) => x.index < this.args.items.length)
+      .map(({ element, index }) => {
+        return {
+          index,
+          item: this.args.items[index] || null,
+          element,
+        };
+      });
   }
 
   cleanup(listView: NativeElementNode<NativeListView>) {
     for (const elementRef of this.elementRefs) {
       const n = elementRef.element.nativeView.nativeViewProtected;
       if (!n || !n.getWindowToken()) {
-        elementRef.element.parentNode!.removeChild(elementRef.element);
+        elementRef.element.parentNode?.removeChild(elementRef.element);
         ((listView.nativeView as any)._realizedItems as any).delete(
           elementRef.element.nativeView,
         );
@@ -61,6 +63,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
       function _getDefaultItemContent(index: number) {
         listViewComponent.cleanup(listView);
         const sl = DocumentNode.createElement('stack-layout');
+        listView.appendChild(sl);
         listViewComponent.elementRefs.push({
           element: sl,
           item: null,

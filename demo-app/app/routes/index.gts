@@ -1,12 +1,7 @@
 import RoutableComponentRoute from 'ember-routable-component';
-import LinkTo from '../ui/components/link-to.gts';
-import {on} from "@ember/modifier";
-import {service} from "@ember/service";
-import {tracked} from "@glimmer/tracking";
+import LinkTo from '../ui/components/link-to';
+import { service } from "@ember/service";
 import Component from "@glimmer/component";
-import ListView from 'ember-native/components/ListView';
-import RadListView from 'ember-native/components/RadListView';
-import SideNav from "~/ui/components/side-nav.gts";
 
 
 
@@ -23,7 +18,7 @@ class Page extends Component {
                 <LinkTo @route='rad-list-view' @transitionName='slideLeft'>
                     Rad List View
                 </LinkTo>
-                <LinkTo @route='tabs' @transitionName='explode'>
+                <LinkTo @route='tabs' @transitionName='explode' @transitionDuration={{1000}}>
                     Tabs
                 </LinkTo>
             </stack-layout>

@@ -10,7 +10,6 @@ module.exports = (webpack) => {
       ),
     );
     for (const glimmerDir of glimmerDirs) {
-      console.log(glimmerDir);
       config.resolve.alias.set(
         `@glimmer/${glimmerDir}`,
         `ember-source/dist/packages/@glimmer/${glimmerDir}`,

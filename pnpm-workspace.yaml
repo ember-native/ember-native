@@ -1,3 +1,4 @@
 packages:
   - 'ember-native'
+  - 'demo-app'
   - 'docs-app'
