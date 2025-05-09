@@ -46,7 +46,7 @@
     "kolay": "https://codeload.github.com/patricklx/kolay/tar.gz/dist-kolay",
     "lorem-ipsum": "^2.0.8",
     "path-browserify": "^1.0.1",
-    "reactiveweb": "^1.2.2",
+    "reactiveweb": "^1.4.2",
     "shiki": "^1.2.0",
     "should-handle-link": "^1.2.2",
     "tracked-built-ins": "^3.2.0"
