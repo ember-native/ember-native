@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-05-09)
+
+* ember-native 2.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-native`
+  * [#66](https://github.com/ember-native/ember-native/pull/66) enable unit tests ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2024-11-18)
 
 ember-native 1.3.0 (minor)
