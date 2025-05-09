@@ -645,8 +645,8 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       '@eslint/js':
-        specifier: ^8.41.0
-        version: 8.57.1
+        specifier: ^9.26.0
+        version: 9.26.0
       '@glimmer/component':
         specifier: ^2.0.0
         version: 2.0.0
