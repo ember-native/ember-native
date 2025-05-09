@@ -54,6 +54,9 @@ jobs:
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v3
 
+      - name: build
+        run: cd demo-app && npx -y nativescript build android
+
       - name: AVD cache
         uses: actions/cache@v4
         id: avd-cache
