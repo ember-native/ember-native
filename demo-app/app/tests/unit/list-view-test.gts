@@ -68,6 +68,6 @@ QUnit.module('ListView | test', function(hooks) {
 
         assert.dom(this.element as Element).doesNotContainText('hello');
         assert.dom(this.element as Element).doesNotContainText('world');
-        assert.dom(this.element as Element).containsText('hi');
+        assert.dom(this.element as Element).containsText('hi2');
     });
 });
