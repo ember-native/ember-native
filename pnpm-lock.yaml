@@ -88,8 +88,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       '@glimmer/util':
-        specifier: ^0.92.3
-        version: 0.92.3
+        specifier: ^0.94.8
+        version: 0.94.8
       '@glimmer/validator':
         specifier: ^0.94.8
         version: 0.94.8
