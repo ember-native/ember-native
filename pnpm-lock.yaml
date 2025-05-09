@@ -73,8 +73,8 @@ importers:
         specifier: ^0.94.9
         version: 0.94.9
       '@glimmer/reference':
-        specifier: ^0.92.3
-        version: 0.92.3
+        specifier: ^0.94.8
+        version: 0.94.8
       '@glimmer/runtime':
         specifier: ^0.92.4
         version: 0.92.4
@@ -736,8 +736,8 @@ importers:
         specifier: ^0.92.3
         version: 0.92.3
       '@glimmer/reference':
-        specifier: ^0.93.1
-        version: 0.93.1
+        specifier: ^0.94.8
+        version: 0.94.8
       '@glimmer/runtime':
         specifier: ^0.93.1
         version: 0.93.1
