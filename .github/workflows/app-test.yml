@@ -3,7 +3,7 @@ name: app test
 on:
   push:
     branches:
-      - add-e2e-tests
+      - main
   pull_request:
   workflow_dispatch:
 
