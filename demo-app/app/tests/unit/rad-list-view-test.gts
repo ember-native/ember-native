@@ -3,6 +3,7 @@ import { render, rerender } from '@ember/test-helpers';
 import { RenderingTestContext } from "@ember/test-helpers/setup-rendering-context";
 import { tracked } from '@glimmer/tracking';
 import { RadListView } from 'ember-native';
+import { modifier } from 'ember-modifier';
 
 function PromiseWithResolvers(label) {
     let resolve, reject;
@@ -17,6 +18,10 @@ function PromiseWithResolvers(label) {
         reject
     }
 }
+
+const onInsert = modifier(function setRef(element: any, [fn, ...args]: any) {
+    fn(...args)
+});
 
 
 /**
@@ -38,12 +43,17 @@ QUnit.module('RadListView | test', function(hooks) {
             return '';
         }
 
+        let counter = 0;
+        function count() {
+            counter += 1;
+        }
+
         await render(<template>
             <grid-layout rows="*">
                 <RadListView row="1" @items={{test.list}}>
                     <:header><label>header</label></:header>
                     <:item as |item|>
-                        <label>
+                        <label  {{onInsert count}}>
                             {{item.label}}
                             {{call item.resolve 1}}
                         </label>
@@ -54,20 +64,16 @@ QUnit.module('RadListView | test', function(hooks) {
         </template>);
         await Promise.all(test.list.map(x => x.promise));
         assert.equal(this.element.textContent.trim(), 'hello');
-        console.log('rad list text', this.element.textContent);
-
-        console.log('rad list 1');
+        assert.equal(counter, 1, '1 after first time render');
 
         await new Promise(resolve => setTimeout(resolve, 50));
 
-        test.list = [PromiseWithResolvers('hello'), PromiseWithResolvers('world')];
+        test.list = [...test.list, PromiseWithResolvers('world')];
 
         await rerender();
         await Promise.all(test.list.map(x => x.promise));
         await new Promise(resolve => setTimeout(resolve, 50));
-
-        console.log('rad list 2');
-        console.log('rad list text', this.element.textContent);
+        assert.equal(counter, 2, '2 after first time render');
 
         assert.dom(this.element as Element).containsText('hello');
         assert.dom(this.element as Element).containsText('world');
