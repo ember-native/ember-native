@@ -97,8 +97,8 @@ importers:
         specifier: ^0.92.3
         version: 0.92.3
       '@glimmer/wire-format':
-        specifier: ^0.92.3
-        version: 0.92.3
+        specifier: ^0.94.8
+        version: 0.94.8
       '@nativescript/core':
         specifier: ~8.9.2
         version: 8.9.2
