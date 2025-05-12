@@ -49,7 +49,7 @@
     "reactiveweb": "^1.4.2",
     "shiki": "^1.2.0",
     "should-handle-link": "^1.2.2",
-    "tracked-built-ins": "^3.2.0"
+    "tracked-built-ins": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",
