@@ -87,7 +87,7 @@
     "ember-resolver": "^13.0.2",
     "ember-routable-component": "^1.2.0",
     "eslint-plugin-ember": "^12.3.1",
-    "globals": "^16.0.0",
+    "globals": "^16.1.0",
     "https-browserify": "^1.0.0",
     "karma": "^4.0.0",
     "karma-coverage": "2.2.1",
