@@ -182,8 +182,8 @@ importers:
         specifier: 3.0.5
         version: 3.0.5
       '@nativescript/android':
-        specifier: 8.8.4
-        version: 8.8.4
+        specifier: 8.9.1
+        version: 8.9.1
       '@nativescript/types':
         specifier: ~8.8.0
         version: 8.8.0
@@ -2560,8 +2560,8 @@ packages:
   '@napi-rs/wasm-runtime@0.2.9':
     resolution: {integrity: sha512-OKRBiajrrxB9ATokgEQoG87Z25c67pCpYcCwmXYX8PBftC9pBfN18gnm/fh1wurSLEKIAt+QRFLFCQISrb66Jg==}
 
-  '@nativescript/android@8.8.4':
-    resolution: {integrity: sha512-Y1oXkMk7wHSKAV4T2qJx6PUd617ohVCO8T5cS3Si+8m04LmPCFJ+7PgC04Oi7aCEYSOv97DtP1LGP2LD1fZw4g==}
+  '@nativescript/android@8.9.1':
+    resolution: {integrity: sha512-9xy7Vp77icneQCv0fRVwYfJhuhqFYY3/nPoB7OeG/I78WITPUm+2fNyBj0A6Uu4qJ5/rhwiNAWCaVX0IGBs0oQ==}
 
   '@nativescript/core@8.9.2':
     resolution: {integrity: sha512-lqj3HiCe0sZZgae7wWt2D/Qbn7T/9xdDO4qeeSEqKnb33smUPM0NrRGZVSSTRFY5HDIfSUX2npmiEsUUgl3rhg==}
@@ -17546,7 +17546,7 @@ snapshots:
       '@tybys/wasm-util': 0.9.0
     optional: true
 
-  '@nativescript/android@8.8.4': {}
+  '@nativescript/android@8.9.1': {}
 
   '@nativescript/core@8.9.2':
     dependencies:

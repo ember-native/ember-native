@@ -68,7 +68,7 @@
     "@glint/core": "^1.5.2",
     "@glint/environment-ember-template-imports": "^1.5.2",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
-    "@nativescript/android": "8.8.4",
+    "@nativescript/android": "8.9.1",
     "@nativescript/core": "^8.9.2",
     "@nativescript/types": "~8.8.0",
     "@nativescript/webpack": "^5.0.22",
