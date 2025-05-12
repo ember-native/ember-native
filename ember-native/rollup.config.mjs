@@ -61,9 +61,9 @@ export default {
       ],
       {
         mapFilename: (fn) => {
-          const parts = fn.split(path.sep);
+          const parts = fn.split('/');
           parts.splice(1, 0, 'ember-native');
-          return parts.join(path.sep);
+          return parts.join('/');
         },
       },
     ),

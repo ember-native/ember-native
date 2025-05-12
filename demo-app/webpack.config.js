@@ -1,23 +1,30 @@
 const fs = require('fs');
 const path = require('path');
 var Module = require('module');
-var { fileURLToPath } = require('node:url');
+var { fileURLToPath, pathToFileURL } = require('node:url');
 
 Module.registerHooks({
   resolve: (specifier, context, nextResolve) => {
     //do your thing here
-    if(context.parentURL && fileURLToPath(context.parentURL).includes(':')) return nextResolve(specifier, context);
+    if(context.parentURL && fileURLToPath(context.parentURL).includes('node:')) return nextResolve(specifier, context);
+
     if (context.parentURL) {
       const parentURL = fs.realpathSync(fileURLToPath(context.parentURL));
       const resolved = require.resolve(specifier, { paths: [path.dirname(parentURL)] });
       if (fs.existsSync(resolved)) {
         specifier = fs.realpathSync(resolved);
+        if (context.conditions.includes?.('import')) {
+          specifier = pathToFileURL(specifier).toString();
+        }
       }
       return nextResolve(specifier, context);
     }
     const resolved = require.resolve(specifier);
     if (fs.existsSync(resolved)) {
       specifier = fs.realpathSync(resolved);
+      if (context.conditions.includes?.('import')) {
+        specifier = pathToFileURL(specifier).toString();
+      }
     }
     return nextResolve(specifier, context);
   }
