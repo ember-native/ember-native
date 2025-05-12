@@ -56,7 +56,7 @@
     "@babel/eslint-parser": "^7.25.8",
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "^4.0.0",
-    "@ember/test-helpers": "^4.0.4",
+    "@ember/test-helpers": "^5.2.2",
     "@ember/test-waiters": "^4.0.0",
     "@embroider/addon-shim": "alpha",
     "@embroider/compat": "alpha",
