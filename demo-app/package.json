@@ -38,7 +38,7 @@
     "@glimmer/util": "^0.94.8",
     "@glimmer/validator": "^0.94.8",
     "@glimmer/vm": "^0.92.3",
-    "@glimmer/wire-format": "^0.92.3",
+    "@glimmer/wire-format": "^0.94.8",
     "@nativescript/core": "~8.9.2",
     "@nativescript/theme": "^3.1.0",
     "@nativescript/unit-test-runner": "~3.0.0",
