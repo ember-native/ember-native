@@ -168,10 +168,10 @@ importers:
         version: 5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2)
       '@embroider/compat':
         specifier: unstable
-        version: 4.0.4-unstable.ce3535d(@embroider/core@4.0.4-unstable.ce3535d(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)
+        version: 4.0.4-unstable.136f94a(@embroider/core@4.0.4-unstable.136f94a(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)
       '@embroider/core':
         specifier: unstable
-        version: 4.0.4-unstable.ce3535d(@glint/template@1.5.2)
+        version: 4.0.4-unstable.136f94a(@glint/template@1.5.2)
       '@glint/core':
         specifier: ^1.5.2
         version: 1.5.2(typescript@5.8.3)
@@ -485,9 +485,6 @@ importers:
       ember-auto-import:
         specifier: ^2.10.0
         version: 2.10.0(@glint/template@1.5.2)(webpack@5.99.7)
-      ember-cached-decorator-polyfill:
-        specifier: ^1.0.2
-        version: 1.0.2(@babel/core@7.27.1)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7))
       ember-cli:
         specifier: ~6.4.0
         version: 6.4.0(handlebars@4.7.8)(underscore@1.13.7)
@@ -1660,11 +1657,11 @@ packages:
     peerDependencies:
       '@embroider/core': ^4.0.0-alpha.9
 
-  '@embroider/compat@4.0.4-unstable.ce3535d':
-    resolution: {integrity: sha512-dSdRVx5bhU3NTw20rFlRUhUtQGHY97Rx85JAi8niL7zha1qnxw9eqovhsu1Zm8do8JSEQXSkIlq1rpc6Z+wKXQ==}
+  '@embroider/compat@4.0.4-unstable.136f94a':
+    resolution: {integrity: sha512-NVVQGCsSgR8sWNKhodytBlYjMbkQkcCRKQaVG5Ti5Y3ItuMG+Igeg3id3aszTmgtbgVW2Kxb1Zfa59ZThPnhiQ==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@embroider/core': ^4.0.4-unstable.ce3535d
+      '@embroider/core': ^4.0.4-unstable.136f94a
 
   '@embroider/config-meta-loader@1.0.0-alpha.3':
     resolution: {integrity: sha512-sr0vervRVdxbs39vi2K70XbRnFxXji1FSomw9pMRTzyXj+CL3dEQjxO4dGyhl0J48764aJ6QF1ACaRJR4GCEcQ==}
@@ -1678,8 +1675,8 @@ packages:
     resolution: {integrity: sha512-4dGc1K0J1qIuWm2MizBuj7TMhyUzokQQLuTX60Z0cHhdMy9PyjwxOBLZBBAZz4swgXj5YYHF+006Yf5v0uTv6w==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/core@4.0.4-unstable.ce3535d':
-    resolution: {integrity: sha512-/7SSBzFya/O/V5LPYmhICiBpuMzbOrNNF8t3Lmzoxm5uokrCdA2eUTTMfrJnxAAjGxwqgyGQNXobpyoisXYz7A==}
+  '@embroider/core@4.0.4-unstable.136f94a':
+    resolution: {integrity: sha512-fEfHSkulQIi/TGAFl7WKGiCOimW6+o+pUpvTUI+ScrG1BDyDd4Z1FXX7Fu5ZqAmrWa4XxDxt4kdIgTDqyTUTJQ==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/hbs-loader@3.0.3':
@@ -1743,8 +1740,8 @@ packages:
       '@glint/template':
         optional: true
 
-  '@embroider/macros@1.17.4-unstable.ce3535d':
-    resolution: {integrity: sha512-w0qJYO6zsmOdWQHyYF7sUxqjturiQCw19H7uNfWYiLFp/jpKi/7i/88c8PwDmzuelqmR/ypofmLm8p3J0mrBFg==}
+  '@embroider/macros@1.17.4-unstable.136f94a':
+    resolution: {integrity: sha512-GDdNkFji8EcgbaERweWFiek9XHHND3A5mnsFroIuVQrzf/qB/XwrYofHMYUVWcgPaut5w3RO+Skbdj3ySeQEmw==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -1755,8 +1752,8 @@ packages:
   '@embroider/reverse-exports@0.1.1-alpha.2':
     resolution: {integrity: sha512-dyECoyni4N2Nu+vnE0OtdkmOj8PZiTLopRfAWBmbmvA6t1kfyPFVv7c0BZ92J4VUz+adcOBfiXjuN4JeL66nIQ==}
 
-  '@embroider/reverse-exports@0.1.3-unstable.ce3535d':
-    resolution: {integrity: sha512-WAfDXzIwaRwvgmzRWsiHjF1jXf6QNLEmIzVdsC/6P0ZHTvqAwXeuY9YA+jH68XsDScW8/lbp8gYmZLyzNFUowQ==}
+  '@embroider/reverse-exports@0.1.3-unstable.136f94a':
+    resolution: {integrity: sha512-iBZkba4QWPLodLQTZmIClxImNJ6xly+SdNISv9pf2k46itxAKgSas8w14vfTsfBt8iCDL1LtLT40UGnlnI8xHA==}
 
   '@embroider/shared-internals@2.5.2':
     resolution: {integrity: sha512-jNDJ9YlV6Qp9Na9v17qirUewVuq6T0t32nn+bbnFlCRTvmllKluZdYPSC5RuRnEZKTloVYRSF0+f1rgkTIEvxQ==}
@@ -1774,8 +1771,8 @@ packages:
     resolution: {integrity: sha512-qXTHPlL3WACyMYrJJKnmY03I7U+E/NtT5145b5+VyGwWaN7Bekq0sY8CW9Dt6P/XqreTv8ustVCSANpujtkDLw==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/shared-internals@3.0.1-unstable.ce3535d':
-    resolution: {integrity: sha512-mdimvbtaaak1CWn0wpCVi98k6KF00jthP0Zj+XxADOCW3SELmN8a9kAX9KMhvaVi9kHLfOTfsX7cPrtTPPc1VQ==}
+  '@embroider/shared-internals@3.0.1-unstable.136f94a':
+    resolution: {integrity: sha512-fv+4U6Zuqvy9102bZ1J0O4nSyNtwYH1pMmMpwazM+2DJAAmIXfozxHJaa6HpeOUdIgHwGDxTYeu6t3CyWgWhCg==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/test-setup@0.44.0-alpha.2':
@@ -15990,7 +15987,7 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@embroider/compat@4.0.4-unstable.ce3535d(@embroider/core@4.0.4-unstable.ce3535d(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)':
+  '@embroider/compat@4.0.4-unstable.136f94a(@embroider/core@4.0.4-unstable.136f94a(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)':
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/core': 7.27.1
@@ -16001,8 +15998,8 @@ snapshots:
       '@babel/preset-env': 7.27.1(@babel/core@7.27.1)
       '@babel/runtime': 7.27.1
       '@babel/traverse': 7.27.1
-      '@embroider/core': 4.0.4-unstable.ce3535d(@glint/template@1.5.2)
-      '@embroider/macros': 1.17.4-unstable.ce3535d(@glint/template@1.5.2)
+      '@embroider/core': 4.0.4-unstable.136f94a(@glint/template@1.5.2)
+      '@embroider/macros': 1.17.4-unstable.136f94a(@glint/template@1.5.2)
       '@types/babel__code-frame': 7.0.6
       assert-never: 1.4.0
       babel-import-util: 3.0.1
@@ -16118,14 +16115,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/core@4.0.4-unstable.ce3535d(@glint/template@1.5.2)':
+  '@embroider/core@4.0.4-unstable.136f94a(@glint/template@1.5.2)':
     dependencies:
       '@babel/core': 7.27.1
       '@babel/parser': 7.27.1
       '@babel/traverse': 7.27.1
-      '@embroider/macros': 1.17.4-unstable.ce3535d(@glint/template@1.5.2)
-      '@embroider/reverse-exports': 0.1.3-unstable.ce3535d
-      '@embroider/shared-internals': 3.0.1-unstable.ce3535d
+      '@embroider/macros': 1.17.4-unstable.136f94a(@glint/template@1.5.2)
+      '@embroider/reverse-exports': 0.1.3-unstable.136f94a
+      '@embroider/shared-internals': 3.0.1-unstable.136f94a
       assert-never: 1.4.0
       babel-plugin-ember-template-compilation: 2.4.1
       broccoli-node-api: 1.7.0
@@ -16254,9 +16251,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/macros@1.17.4-unstable.ce3535d(@glint/template@1.5.2)':
+  '@embroider/macros@1.17.4-unstable.136f94a(@glint/template@1.5.2)':
     dependencies:
-      '@embroider/shared-internals': 3.0.1-unstable.ce3535d
+      '@embroider/shared-internals': 3.0.1-unstable.136f94a
       assert-never: 1.4.0
       babel-import-util: 3.0.1
       ember-cli-babel: 7.26.11
@@ -16273,7 +16270,7 @@ snapshots:
     dependencies:
       resolve.exports: 2.0.3
 
-  '@embroider/reverse-exports@0.1.3-unstable.ce3535d':
+  '@embroider/reverse-exports@0.1.3-unstable.136f94a':
     dependencies:
       mem: 8.1.1
       resolve.exports: 2.0.3
@@ -16362,7 +16359,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/shared-internals@3.0.1-unstable.ce3535d':
+  '@embroider/shared-internals@3.0.1-unstable.136f94a':
     dependencies:
       babel-import-util: 3.0.1
       debug: 4.4.0(supports-color@9.4.0)
@@ -22626,7 +22623,7 @@ snapshots:
 
   ember-cached-decorator-polyfill@1.0.2(@babel/core@7.27.1)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.7)):
     dependencies:
-      '@embroider/macros': 1.17.2(@glint/template@1.5.2)
+      '@embroider/macros': 1.17.3(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
       babel-import-util: 1.4.1
       ember-cache-primitive-polyfill: 1.0.1(@babel/core@7.27.1)
