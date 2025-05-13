@@ -111,7 +111,7 @@
     "css-loader": "^7.1.2",
     "ember-eslint-parser": "^0.5.9",
     "ember-modifier": "^4.2.0",
-    "ember-source": "^6.0.1",
+    "ember-source": "^6.4.0",
     "ember-template-lint": "^5.11.2",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
