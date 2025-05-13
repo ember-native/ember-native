@@ -251,8 +251,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       karma-nativescript-launcher:
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 1.0.0
+        version: 1.0.0
       karma-qunit:
         specifier: 4.2.1
         version: 4.2.1(karma@4.4.1)(qunit@2.24.1)
@@ -9391,8 +9391,8 @@ packages:
     resolution: {integrity: sha512-yj7hbequkQP2qOSb20GuNSIyE//PgJWHwC2IydLE6XRtsnaflv+/OSGNssPjobYUlhVVagy99TQpqUt3vAUG7A==}
     engines: {node: '>=10.0.0'}
 
-  karma-nativescript-launcher@0.4.0:
-    resolution: {integrity: sha512-rsd/o0SL72PQn5GwGtrT31PAhaJJGiWKB4pF1xCsnb8FHMM6u6Wc5lXrYTcYxgm/CLuZBqT6YStLKHvCVggPUA==}
+  karma-nativescript-launcher@1.0.0:
+    resolution: {integrity: sha512-7Cc1tI41YGCsjTzaKOX0f6grzzhaIDnnmqyQ2irViIMR9aSSGj6q/CG5YXM5Ao4oB0EcqHIhmN1ntsQypcmd0A==}
 
   karma-qunit@4.2.1:
     resolution: {integrity: sha512-bd4TXH8L7i3hYelRo/5OTlyRiMrSyUpgI94pzkASaD/qjlc1j8liuZeroRS4aA5B7AmnCYQILEsKcSfuaQgcPA==}
@@ -12587,14 +12587,14 @@ packages:
     resolution: {integrity: sha512-AzqKpGKjrj7EM6rKVQEPpB288oCfnrEIuyoT9cyF4nmGa7V8Zk6f7RRqYisX8X9m+Q7bd632aZW4ky7EhbQztA==}
     engines: {node: '>= 0.4'}
 
-  shelljs@0.5.3:
-    resolution: {integrity: sha512-C2FisSSW8S6TIYHHiMHN0NqzdjWfTekdMpA2FJTbRWnQMLO1RRIXEB9eVZYOlofYmjZA7fY3ChoFu09MeI3wlQ==}
-    engines: {node: '>=0.8.0'}
-    hasBin: true
-
   shelljs@0.8.5:
     resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
     engines: {node: '>=4'}
+    hasBin: true
+
+  shelljs@0.9.2:
+    resolution: {integrity: sha512-S3I64fEiKgTZzKCC46zT/Ib9meqofLrQVbpSswtjFfAVDW+AZ54WTnAM/3/yENoxz/V1Cy6u3kiiEbQ4DNphvw==}
+    engines: {node: '>=18'}
     hasBin: true
 
   shellwords@0.1.1:
@@ -26554,9 +26554,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  karma-nativescript-launcher@0.4.0:
+  karma-nativescript-launcher@1.0.0:
     dependencies:
-      shelljs: 0.5.3
+      shelljs: 0.9.2
 
   karma-qunit@4.2.1(karma@4.4.1)(qunit@2.24.1):
     dependencies:
@@ -30384,11 +30384,16 @@ snapshots:
 
   shell-quote@1.8.2: {}
 
-  shelljs@0.5.3: {}
-
   shelljs@0.8.5:
     dependencies:
       glob: 7.2.3
+      interpret: 1.4.0
+      rechoir: 0.6.2
+
+  shelljs@0.9.2:
+    dependencies:
+      execa: 1.0.0
+      fast-glob: 3.3.3
       interpret: 1.4.0
       rechoir: 0.6.2
 
