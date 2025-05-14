@@ -359,8 +359,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2(@babel/core@7.27.1)(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)
       shiki:
-        specifier: ^1.2.0
-        version: 1.29.2
+        specifier: ^3.4.1
+        version: 3.4.1
       should-handle-link:
         specifier: ^1.2.2
         version: 1.3.0
