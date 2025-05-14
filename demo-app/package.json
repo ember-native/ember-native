@@ -91,7 +91,7 @@
     "https-browserify": "^1.0.0",
     "karma": "^4.0.0",
     "karma-coverage": "2.2.1",
-    "karma-nativescript-launcher": "0.4.0",
+    "karma-nativescript-launcher": "1.0.0",
     "karma-qunit": "4.2.1",
     "nativescript": "^8.9.2",
     "nyc": "17.1.0",
@@ -103,7 +103,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.31.1",
+    "typescript-eslint": "^8.32.1",
     "eslint": "^9.26.0",
     "url": "^0.11.4",
     "util": "^0.12.5"

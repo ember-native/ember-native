@@ -32,6 +32,7 @@ interface RadListViewInterface<T> {
   Element: NativeElementNode<NativeRadListView>;
   Args: {
     items: T[];
+    key?: string;
   };
   Blocks: {
     header: [];
@@ -59,6 +60,13 @@ export default class RadListView<T = any> extends Component<
         }
       }
     }
+  }
+
+  get itemKey() {
+    if (this.args.key) {
+      return 'item.' + this.args.key;
+    }
+    return 'item';
   }
 
   get items() {
@@ -132,7 +140,7 @@ export default class RadListView<T = any> extends Component<
           {{yield to='header'}}
         {{/in-element}}
       {{/if}}
-      {{#each this.items as |item|}}
+      {{#each this.items key=this.itemKey as |item|}}
         {{#in-element item.element}}
           {{yield item.item to='item'}}
         {{/in-element}}

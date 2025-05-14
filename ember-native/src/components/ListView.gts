@@ -12,6 +12,7 @@ interface ListViewInterface<T> {
   Element: NativeElementNode<NativeListView>;
   Args: {
     items: T[];
+    key?: string;
   };
   Blocks: {
     item: [T | null];
@@ -37,6 +38,13 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
           element,
         };
       });
+  }
+
+  get itemKey() {
+    if (this.args.key) {
+      return 'item.' + this.args.key;
+    }
+    return 'item';
   }
 
   cleanup(listView: NativeElementNode<NativeListView>) {
@@ -81,6 +89,9 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
         const ref = listViewComponent.elementRefs.find(
           (e) => e.element.nativeView === stackLayout,
         )!;
+        if (ref.index === index) {
+          return;
+        }
         ref.index = index;
         listViewComponent.elementRefs = [...listViewComponent.elementRefs];
       };
@@ -89,7 +100,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
 
   <template>
     <list-view {{this.setupListView}} items={{@items}} ...attributes />
-    {{#each this.items as |item|}}
+    {{#each this.items key=this.itemKey as |item|}}
       {{#in-element item.element}}
         {{yield item.item to='item'}}
       {{/in-element}}
