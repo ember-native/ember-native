@@ -102,7 +102,7 @@
     "ember-load-initializers": "^3.0.1",
     "ember-page-title": "^9.0.1",
     "ember-primitives": "^0.25.0",
-    "ember-qunit": "^8.0.2",
+    "ember-qunit": "^9.0.3",
     "ember-resolver": "^13.0.2",
     "ember-resources": "^7.0.4",
     "ember-source": "^6.4.0",
