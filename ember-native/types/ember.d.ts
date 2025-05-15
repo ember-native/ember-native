@@ -1,1 +1,1 @@
-import 'ember-source/types/stable';
+import 'ember-source/types';
