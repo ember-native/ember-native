@@ -129,7 +129,7 @@
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.19.4",
     "qunit-dom": "^3.4.0",
-    "release-it": "^15.10.3",
+    "release-it": "^19.0.2",
     "rollup": "^4.29.1",
     "rollup-plugin-copy": "^3.4.0",
     "router_js": "^8.0.6",
