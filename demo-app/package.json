@@ -74,7 +74,7 @@
     "@nativescript/webpack": "^5.0.22",
     "@types/qunit": "2.19.12",
     "babel-import-util": "^3.0.0",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "babel-plugin-ember-template-compilation": "^2.3.0",
     "browserify-fs": "^1.0.0",
     "buffer": "^6.0.3",
