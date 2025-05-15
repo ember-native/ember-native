@@ -94,8 +94,8 @@ importers:
         specifier: ^0.94.8
         version: 0.94.8
       '@glimmer/vm':
-        specifier: ^0.92.3
-        version: 0.92.3
+        specifier: ^0.94.8
+        version: 0.94.8
       '@glimmer/wire-format':
         specifier: ^0.94.8
         version: 0.94.8
