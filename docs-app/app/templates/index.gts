@@ -1,13 +1,10 @@
 import { stylesheet } from 'astroturf';
-import { TopRight } from 'docs-app/components/header';
+import { GitHubLink } from 'docs-app/components/header';
 import { Logo } from 'docs-app/components/icons';
-import config from 'docs-app/config/environment';
-import { Hero } from 'ember-primitives/layout/hero';
 import Route from 'ember-route-template';
-
-import { Article, InternalLink } from './page';
-
-import type { TOC } from '@ember/component/template-only';
+import config from 'docs-app/config/environment';
+import { VersionSelector } from 'docs-app/components/version-selector';
+import { Article, H2, IndexPage, InternalLink, TopRight } from '@universal-ember/docs-support';
 
 const styles = stylesheet`
   .getStartedLink {
@@ -33,68 +30,50 @@ const styles = stylesheet`
 
 export default Route(
   <template>
-    <Hero class="shadow-xl shadow-slate-900/5 gradient-background">
-      <header class="absolute md:sticky right-0 bottom-0 md:top-0 z-50 p-4 flex items-center">
-        <TopRight />
-      </header>
-
-      <div class="h-full flex flex-col gap-8 justify-center items-center">
+    <IndexPage>
+      <:logo>
         <div style="margin: 0 auto; transform: translateY(-20%);" class="grid gap-4">
           <h1 style="filter: drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.4));">
             <Logo style="margin: auto; width: fit-content;" />
           </h1>
-          <p class="italic text-white w-full mx-auto">
-            use the Ember framework with Nativescript
-            <br />
-          </p>
         </div>
+      </:logo>
+      <:header>
+        <TopRight>
+          <GitHubLink />
+          <VersionSelector />
+        </TopRight>
+      </:header>
+      <:tagline>
+        <p class="text-center">
+          use the Ember framework with Nativescript
+          <br />
+        </p>
+      </:tagline>
+      <:callToAction>
         <InternalLink
           class={{styles.getStartedLink}}
           href="{{config.rootURL}}1-get-started/index.md"
         >
           Get Started
         </InternalLink>
+      </:callToAction>
+      <:content>
+        <Content />
 
-      </div>
-    </Hero>
+        <br /><br />
+        <br /><br />
 
-    <style>
-      .gradient-background {
-        background-image: linear-gradient(-45deg in oklch, #1252e3, #485de5, #7812e5, #3512c5);
-        background-size: 400% 400%;
-        animation: gradient-animation 16s ease infinite;
-      }
-      body.dark .gradient-background {
-        background-image: linear-gradient(-45deg in oklch, #110043, #182d75, #280065, #350076);
-      }
-      @keyframes gradient-animation {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-    </style>
+        <div class="flex justify-center items-center">
+          <GetStarted />
+        </div>
 
-    <Content />
+        <br /><br />
+        <br /><br />
 
-    <br /><br />
-    <br /><br />
-
-    <div class="flex justify-center items-center">
-      <GetStarted />
-    </div>
-
-    <br /><br />
-
-    <br /><br />
-    <br /><br />
-
-    <hr />
+      </:content>
+      <:footer></:footer>
+    </IndexPage>
   </template>
 );
 
@@ -104,7 +83,7 @@ const GetStarted = <template>
   </InternalLink>
 </template>;
 
-export const Content = <template>
+const Content = <template>
   <br /><br />
 
   <div class="mx-auto" style="width: 66%">
@@ -135,8 +114,4 @@ export const Content = <template>
       </div>
     </Article>
   </div>
-</template>;
-
-const H2: TOC<{ Blocks: { default: [] } }> = <template>
-  <h2 class="text-3xl">{{yield}}</h2>
 </template>;

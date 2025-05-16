@@ -1,42 +1,4 @@
 import type { TOC } from '@ember/component/template-only';
-/**
- * Copied from font-awesome directly,
- * but with the addition of fill="currentColor"
- *
- * Font Awesome Free 6.6.0 by @fontawesome
- * - https://fontawesome.com License
- * - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.
- */
-
-export const XTwitter: TOC<{ Element: SVGElement }> = <template>
-  <svg aria-hidden="true" ...attributes>
-    <use xlink:href="#social-xtwitter" />
-  </svg>
-</template>;
-
-export const Discord: TOC<{ Element: SVGElement }> = <template>
-  <svg aria-hidden="true" ...attributes>
-    <use xlink:href="#social-discord" />
-  </svg>
-</template>;
-
-export const Threads: TOC<{ Element: SVGElement }> = <template>
-  <svg aria-hidden="true" ...attributes>
-    <use xlink:href="#social-threads" />
-  </svg>
-</template>;
-
-export const BlueSky: TOC<{ Element: SVGElement }> = <template>
-  <svg aria-hidden="true" ...attributes>
-    <use xlink:href="#social-bluesky" />
-  </svg>
-</template>;
-
-export const Mastodon: TOC<{ Element: SVGElement }> = <template>
-  <svg aria-hidden="true" ...attributes>
-    <use xlink:href="#social-mastodon" />
-  </svg>
-</template>;
 
 export const Sun: TOC<{ Element: SVGElement }> = <template>
   <svg aria-hidden="true" viewBox="0 0 16 16" ...attributes>
