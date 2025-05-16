@@ -18,7 +18,7 @@ const glimmerDirs = fs.readdirSync(
 const alias = {}
 
 for (const glimmerDir of glimmerDirs) {
-  alias[`@glimmer/${glimmerDir}`] = path.resolve(process.cwd(), `./node_modules/ember-source/dist/packages/@glimmer/${glimmerDir}`);
+  alias[`@glimmer/${glimmerDir}`] = `ember-source/dist/packages/@glimmer/${glimmerDir}`;
 }
 
 export default defineConfig((/* { mode } */) => {
