@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-05-16)
+
+
+
+#### :house: Internal
+* [#126](https://github.com/ember-native/ember-native/pull/126) no alias ([@patricklx](https://github.com/patricklx))
+* [#125](https://github.com/ember-native/ember-native/pull/125) migrate to @universal ember/docs support ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2025-05-12)
 
 * ember-native 2.1.0 (minor)
