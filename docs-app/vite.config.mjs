@@ -1,13 +1,4 @@
-import {
-  assets,
-  compatPrebuild,
-  contentFor,
-  hbs,
-  optimizeDeps,
-  resolver,
-  scripts,
-  templateTag,
-} from "@embroider/vite";
+import { classicEmberSupport, ember, extensions } from "@embroider/vite";
 
 import { babel } from "@rollup/plugin-babel";
 import { hmr } from "ember-vite-hmr";
@@ -15,44 +6,38 @@ import { kolay } from "kolay/vite";
 // rollup-plugin-astroturf mjs has wrong import specifiers...
 import { createRequire } from "module";
 import { defineConfig } from "vite";
-
-import postcssConfig from "./config/postcss.config.js";
-
+import fs from "fs";
+import path from "path";
 const require = createRequire(import.meta.url);
 const astroturf = require("rollup-plugin-astroturf");
 
-const extensions = [".mjs", ".gjs", ".js", ".mts", ".gts", ".ts", ".hbs", ".json"];
+const glimmerDirs = fs.readdirSync(
+  path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/@glimmer')
+);
 
-const aliasPlugin = {
-  name: "env",
-  setup(build) {
-    // Intercept import paths called "env" so esbuild doesn't attempt
-    // to map them to a file system location. Tag them with the "env-ns"
-    // namespace to reserve them for this plugin.
-    build.onResolve({ filter: /^kolay.*:virtual$/ }, (args) => ({
-      path: args.path,
-      external: true,
-    }));
+const alias = {}
 
-    build.onResolve({ filter: /ember-template-compiler$/ }, () => ({
-      path: "ember-source/dist/ember-template-compiler",
-      external: true,
-    }));
-  },
-};
+for (const glimmerDir of glimmerDirs) {
+  alias[`@glimmer/${glimmerDir}`] = path.resolve(process.cwd(), `./node_modules/ember-source/dist/packages/@glimmer/${glimmerDir}`);
+}
 
-const o = optimizeDeps();
-
-o.esbuildOptions.target = "esnext";
-o.esbuildOptions.plugins.splice(0, 0, aliasPlugin);
-
-export default defineConfig(({ mode }) => {
+export default defineConfig((/* { mode } */) => {
   return {
     base: process.env.DOCS_URL ? "/ember-native/" + process.env.DOCS_URL + "/" : "",
+    build: {
+      target: ["esnext"],
+    },
+    css: {
+      postcss: "./config/postcss.config.mjs",
+    },
     resolve: {
       extensions,
+      alias: alias
     },
     plugins: [
+      classicEmberSupport(),
+      ember(),
+      hmr(),
       astroturf({
         include: /\.(gts|gjs)/i,
       }),
@@ -60,39 +45,18 @@ export default defineConfig(({ mode }) => {
         src: "public/docs",
         packages: ["ember-native"],
       }),
-      hbs(),
-      templateTag(),
-      scripts(),
-      resolver(),
-      compatPrebuild(),
-      assets(),
-      contentFor(),
-      hmr(),
       babel({
         babelHelpers: "runtime",
         extensions,
       }),
     ],
-    css: {
-      postcss: postcssConfig,
-    },
-    optimizeDeps: o,
-    server: {
-      port: 4200,
-    },
-    build: {
-      target: "esnext",
-      outDir: "dist",
-      rollupOptions: {
-        input: {
-          main: "index.html",
-          ...(shouldBuildTests(mode) ? { tests: "tests/index.html" } : undefined),
-        },
+    optimizeDeps: {
+      // a wasm-providing dependency
+      exclude: ["content-tag"],
+      // for top-level-await, etc
+      esbuildOptions: {
+        target: "esnext",
       },
     },
   };
 });
-
-function shouldBuildTests(mode) {
-  return mode !== "production" || process.env.FORCE_BUILD_TESTS;
-}

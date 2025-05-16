@@ -1,23 +1,20 @@
 import Route from '@ember/routing/route';
-import { service } from '@ember/service';
 
 import rehypeShikiFromHighlighter from '@shikijs/rehype/core';
-import { Callout } from 'docs-app/components/callout';
+import { setupTabster } from 'ember-primitives/tabster';
+import { setupKolay } from 'kolay/setup';
 import { getHighlighterCore } from 'shiki/core';
 import getWasm from 'shiki/wasm';
+import 'ember-power-select/ember-power-select.scss';
+
+import { Callout } from '@universal-ember/docs-support';
 
 import { APIDocs, ComponentSignature, ModifierSignature } from './api-docs';
 
-import type { SetupService } from 'ember-primitives';
-import type { DocsService } from 'kolay';
-
 export default class Application extends Route {
-  @service('kolay/docs') declare docs: DocsService;
-  @service('ember-primitives/setup') declare primitives: SetupService;
 
   beforeModel() {
     document.querySelector('.lds-ripple')?.remove();
-    this.primitives.setup();
   }
 
   async model() {
@@ -39,51 +36,53 @@ export default class Application extends Route {
       loadWasm: getWasm,
     });
 
-    await this.docs.setup({
-      apiDocs: import('kolay/api-docs:virtual'),
-      manifest: import('kolay/manifest:virtual'),
-      topLevelScope: {
-        Callout,
-        APIDocs,
-        ComponentSignature,
-        ModifierSignature,
-      },
-      resolve: {
-        // ember-primitives
-        'ember-primitives': import('ember-primitives'),
-        'ember-primitives/floating-ui': import('ember-primitives/floating-ui'),
-        'ember-primitives/color-scheme': import('ember-primitives/color-scheme'),
-        'ember-primitives/components/form': import('ember-primitives/components/form'),
+    const [manifest] = await Promise.all([
+      setupTabster(this),
+      setupKolay(this, {
+        topLevelScope: {
+          Callout,
+          APIDocs,
+          ComponentSignature,
+          ModifierSignature,
+        },
+        resolve: {
+          // ember-primitives
+          'ember-primitives': import('ember-primitives'),
+          'ember-primitives/floating-ui': import('ember-primitives/floating-ui'),
+          'ember-primitives/on-resize': import('ember-primitives/on-resize'),
+          'ember-primitives/color-scheme': import('ember-primitives/color-scheme'),
+          'ember-primitives/components/form': import('ember-primitives/components/form'),
 
-        // community libraries
-        'ember-resources': import('ember-resources'),
-        'reactiveweb/remote-data': import('reactiveweb/remote-data'),
-        // @ts-expect-error - no types provided
-        'ember-focus-trap/modifiers/focus-trap': import('ember-focus-trap/modifiers/focus-trap'),
-        // @ts-expect-error - no types provided
-        'ember-focus-trap': import('ember-focus-trap'),
+          // community libraries
+          'ember-resources': import('ember-resources'),
+          'reactiveweb/remote-data': import('reactiveweb/remote-data'),
+          // @ts-expect-error - no types provided
+          'ember-focus-trap/modifiers/focus-trap': import('ember-focus-trap/modifiers/focus-trap'),
+          // @ts-expect-error - no types provided
+          'ember-focus-trap': import('ember-focus-trap'),
 
-        // utility
-        'lorem-ipsum': import('lorem-ipsum'),
-        'form-data-utils': import('form-data-utils'),
-        kolay: import('kolay'),
-      },
-      rehypePlugins: [
-        [
-          rehypeShikiFromHighlighter,
-          highlighter,
-          {
-            // Theme chosen by CSS variables in app/css/site/shiki.css
-            defaultColor: false,
-            themes: {
-              light: 'github-light',
-              dark: 'github-dark',
+          // utility
+          'lorem-ipsum': import('lorem-ipsum'),
+          'form-data-utils': import('form-data-utils'),
+          kolay: import('kolay'),
+        },
+        rehypePlugins: [
+          [
+            rehypeShikiFromHighlighter,
+            highlighter,
+            {
+              // Theme chosen by CSS variables in app/css/site/shiki.css
+              defaultColor: false,
+              themes: {
+                light: 'github-light',
+                dark: 'github-dark',
+              },
             },
-          },
+          ],
         ],
-      ],
-    });
+      }),
+    ]);
 
-    return { manifest: this.docs.manifest };
+    return { manifest };
   }
 }

@@ -14,7 +14,7 @@ module.exports = {
           'ember-cli-htmlbars-inline-precompile',
           'htmlbars-inline-precompile',
         ],
-        transforms: [...templateCompatSupport(), hotAstProcessor.transform],
+        transforms: [...templateCompatSupport()],
       },
     ],
     [
