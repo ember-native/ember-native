@@ -4,14 +4,7 @@ import { Logo } from 'docs-app/components/icons';
 import Route from 'ember-route-template';
 import config from 'docs-app/config/environment';
 import { VersionSelector } from 'docs-app/components/version-selector';
-import {
-  Article,
-  H2,
-  IndexPage,
-  InternalLink,
-  TopRight,
-} from '@universal-ember/docs-support';
-
+import { Article, H2, IndexPage, InternalLink, TopRight } from '@universal-ember/docs-support';
 
 const styles = stylesheet`
   .getStartedLink {

@@ -12,10 +12,10 @@ const require = createRequire(import.meta.url);
 const astroturf = require("rollup-plugin-astroturf");
 
 const glimmerDirs = fs.readdirSync(
-  path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/@glimmer')
+  path.resolve(process.cwd(), "./node_modules/ember-source/dist/packages/@glimmer"),
 );
 
-const alias = {}
+const alias = {};
 
 for (const glimmerDir of glimmerDirs) {
   alias[`@glimmer/${glimmerDir}`] = `ember-source/dist/packages/@glimmer/${glimmerDir}`;
@@ -32,7 +32,7 @@ export default defineConfig((/* { mode } */) => {
     },
     resolve: {
       extensions,
-      alias: alias
+      alias: alias,
     },
     plugins: [
       classicEmberSupport(),

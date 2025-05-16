@@ -6,33 +6,33 @@ import Route from 'ember-route-template';
 import { OopsError, PageLayout } from '@universal-ember/docs-support';
 
 export default Route(
-<template>
-  <PageLayout>
-    <:logoLink>
-      <Logomark class="h-9 w-28 lg:hidden" />
-      <Logo class="hidden w-auto h-9 fill-slate-700 lg:block dark:fill-sky-100" />
-    </:logoLink>
-    <:topRight>
-      <GitHubLink />
-    </:topRight>
-    <:error as |error|>
-      <OopsError @error={{error}}>
-        If you have a GitHub account (and the time),
-        <ReportingAnIssue />
-        would be most helpful! 🎉
-      </OopsError>
-    </:error>
-    <:editLink as |Link|>
-      {{#let (service "kolay/docs") as |docs|}}
-        <Link
+  <template>
+    <PageLayout>
+      <:logoLink>
+        <Logomark class="h-9 w-28 lg:hidden" />
+        <Logo class="hidden w-auto h-9 fill-slate-700 lg:block dark:fill-sky-100" />
+      </:logoLink>
+      <:topRight>
+        <GitHubLink />
+      </:topRight>
+      <:error as |error|>
+        <OopsError @error={{error}}>
+          If you have a GitHub account (and the time),
+          <ReportingAnIssue />
+          would be most helpful! 🎉
+        </OopsError>
+      </:error>
+      <:editLink as |Link|>
+        {{#let (service "kolay/docs") as |docs|}}
+          <Link
             @href="https://github.com/ember-native/ember-native/edit/main/docs-app/public/docs{{docs.selected.path}}.md"
-        >
-        Edit this page
-        </Link>
-      {{/let}}
-    </:editLink>
-  </PageLayout>
-</template>
+          >
+            Edit this page
+          </Link>
+        {{/let}}
+      </:editLink>
+    </PageLayout>
+  </template>
 );
 
 const ReportingAnIssue = <template>

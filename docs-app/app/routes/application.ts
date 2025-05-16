@@ -12,7 +12,6 @@ import { Callout } from '@universal-ember/docs-support';
 import { APIDocs, ComponentSignature, ModifierSignature } from './api-docs';
 
 export default class Application extends Route {
-
   beforeModel() {
     document.querySelector('.lds-ripple')?.remove();
   }

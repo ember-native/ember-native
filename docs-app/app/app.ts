@@ -13,7 +13,6 @@ import { install } from './icons';
 sync();
 install();
 
-
 Object.assign(window, {
   process: { env: {} },
   Buffer: {},
