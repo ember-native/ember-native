@@ -30,6 +30,12 @@ import {
   ListView,
   Image,
   Frame,
+  RootLayout,
+  Progress,
+  SearchBar,
+  SegmentedBar,
+  Slider,
+  TimePicker,
 } from '@nativescript/core';
 
 import { registerElement } from './element-registry.ts';
@@ -62,16 +68,40 @@ export function registerElements() {
     },
   });
   // Completed
+  registerNativeElement('StackLayout', () => StackLayout);
+  registerNativeElement('GridLayout', () => GridLayout);
+  registerNativeElement('RootLayout', () => RootLayout);
+  registerNativeElement('FlexboxLayout', () => FlexboxLayout);
+  registerNativeElement('WrapLayout', () => WrapLayout);
+  registerNativeElement('DockLayout', () => DockLayout);
   registerNativeElement('AbsoluteLayout', () => AbsoluteLayout);
+
+  registerElement('Frame', () => new FrameElement());
+  registerElement('Page', () => new PageElement());
   registerNativeElement('ActionBar', () => ActionBar);
   registerNativeElement('ActionItem', () => ActionItem as any);
+  registerNativeElement('NavigationButton', () => NavigationButton as any);
   registerNativeElement('ActivityIndicator', () => ActivityIndicator);
-
-  registerNativeElement('Comment', () => Placeholder);
   registerNativeElement('Button', () => Button);
   registerNativeElement('DatePicker', () => DatePicker);
-  registerNativeElement('DockLayout', () => DockLayout);
-  registerNativeElement('FlexboxLayout', () => FlexboxLayout);
+  registerNativeElement('HtmlView', () => HtmlView);
+  registerNativeElement('Image', () => Image);
+  registerNativeElement('Label', () => Label);
+  registerNativeElement('ListPicker', () => ListPicker);
+  registerNativeElement('ListView', () => ListView);
+  registerNativeElement('Comment', () => Placeholder);
+  registerNativeElement('Placeholder', () => Placeholder);
+  registerNativeElement('Progress', () => Progress);
+  registerNativeElement('ScrollView', () => ScrollView);
+  registerNativeElement('SearchBar', () => SearchBar);
+  registerNativeElement('SegmentedBar', () => SegmentedBar);
+  registerNativeElement('Slider', () => Slider);
+  registerNativeElement('Switch', () => Switch);
+  registerNativeElement('TabView', () => TabView);
+  registerNativeElement('TabViewItem', () => TabViewItem as any);
+  registerNativeElement('TextField', () => TextField);
+  registerNativeElement('TextView', () => TextView);
+  registerNativeElement('TimePicker', () => TimePicker);
   registerNativeElement('FormattedString', () => FormattedString as any, {
     insertChild(
       parentNode: NativeElementNode<FormattedString>,
@@ -83,27 +113,10 @@ export function registerElements() {
       parent.spans.splice(atIndex, 0, child);
     },
   });
-  registerNativeElement('GridLayout', () => GridLayout);
-  registerNativeElement('HtmlView', () => HtmlView);
-  registerNativeElement('Image', () => Image);
-  registerNativeElement('Label', () => Label);
-  registerNativeElement('ListPicker', () => ListPicker);
-  registerNativeElement('NavigationButton', () => NavigationButton as any);
   registerNativeElement('Span', () => Span as any);
-  registerNativeElement('StackLayout', () => StackLayout);
-  registerNativeElement('ScrollView', () => ScrollView);
-  registerNativeElement('Switch', () => Switch);
-  registerNativeElement('TabView', () => TabView);
-  registerNativeElement('TabViewItem', () => TabViewItem as any);
-  registerNativeElement('TextField', () => TextField);
-  registerNativeElement('TextView', () => TextView);
   registerNativeElement('WebView', () => WebView);
-  registerNativeElement('WrapLayout', () => WrapLayout);
   registerNativeElement('ContentView', () => ContentView);
-  registerNativeElement('ListView', () => ListView);
 
   // Not Complete
-  registerElement('Frame', () => new FrameElement());
-  registerElement('Page', () => new PageElement());
   registerElement('Fragment', () => new NativeElementNode('fragment', null));
 }
