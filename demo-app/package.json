@@ -27,7 +27,7 @@
     "@glimmer/component": "^2.0.0",
     "@glimmer/encoder": "^0.92.3",
     "@glimmer/inline-precompile": "^1.0.1",
-    "@glimmer/interfaces": "^0.92.3",
+    "@glimmer/interfaces": "^0.94.6",
     "@glimmer/opcode-compiler": "^0.94.9",
     "@glimmer/program": "^0.94.9",
     "@glimmer/reference": "^0.94.8",
