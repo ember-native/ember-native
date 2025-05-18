@@ -49,7 +49,7 @@ module.exports = (env) => {
       console.log(glimmerDir);
       config.resolve.alias.set(
         `@glimmer/${glimmerDir}`,
-        `ember-source/dist/packages/@glimmer/${glimmerDir}`,
+        path.resolve(process.cwd(), `./node_modules/ember-source/dist/packages/@glimmer/${glimmerDir}`),
       );
     }
 
@@ -59,9 +59,9 @@ module.exports = (env) => {
     config.resolve.alias.set('ember-cli-test-loader/test-support/index', 'ember-cli-test-loader/addon-test-support/index');
     config.resolve.alias.set('@ember/test-helpers', require.resolve('@ember/test-helpers'));
     config.resolve.alias.set('@ember/test-waiters', require.resolve('@ember/test-waiters'));
-    config.resolve.alias.set('@ember', 'ember-source/dist/packages/@ember');
-    config.resolve.alias.set('ember-testing', 'ember-source/dist/packages/ember-testing');
-    config.resolve.alias.set('ember', 'ember-source/dist/packages/ember');
+    config.resolve.alias.set('@ember', path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/@ember'));
+    config.resolve.alias.set('ember-testing', path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/ember-testing'));
+    config.resolve.alias.set('ember', path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/ember'));
     config.resolve.alias.set(
       '@glimmer/env',
       require.resolve('ember-native/utils/glimmer-env'),
