@@ -34,7 +34,7 @@
       "@embroider/addon-shim": "1.9.0",
       "ember-source": "^5.12.0",
       "ember-eslint-parser": "0.5.3",
-      "rollup-plugin-astroturf.git": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/dist"
+      "rollup-plugin-astroturf.git": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5c1ac98"
     },
     "patchedDependencies": {
       "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
