@@ -70,7 +70,7 @@
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
     "@nativescript/android": "8.9.1",
     "@nativescript/core": "^8.9.2",
-    "@nativescript/types": "~8.8.0",
+    "@nativescript/types": "~8.9.1",
     "@nativescript/webpack": "^5.0.22",
     "@types/qunit": "2.19.12",
     "babel-import-util": "^3.0.0",
