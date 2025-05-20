@@ -73,10 +73,6 @@ export default {
     // package names.
     addon.dependencies(),
 
-    astroturf({
-      include: /\.(jsx?|tsx?|gts|gjs)/i,
-    }),
-
     // This babel config should *not* apply presets or compile away ES modules.
     // It exists only to provide development niceties for you, like automatic
     // template colocation.
@@ -86,6 +82,10 @@ export default {
     babel({
       extensions: ['.js', '.gjs', '.ts', '.gts'],
       babelHelpers: 'bundled',
+    }),
+
+    astroturf({
+      include: /\.(jsx?|tsx?|gts|gjs)/i,
     }),
 
     // Ensure that standalone .hbs files are properly integrated as Javascript.

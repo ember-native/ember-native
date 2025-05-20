@@ -31,9 +31,6 @@ export default defineConfig((/* { mode } */) => {
       classicEmberSupport(),
       ember(),
       hmr(),
-      astroturf({
-        include: /\.(gts|gjs)/i,
-      }),
       kolay({
         src: "public/docs",
         packages: ["ember-native"],
@@ -41,6 +38,9 @@ export default defineConfig((/* { mode } */) => {
       babel({
         babelHelpers: "runtime",
         extensions,
+      }),
+      astroturf({
+        include: /\.(gts|gjs)/i,
       }),
     ],
     optimizeDeps: {
