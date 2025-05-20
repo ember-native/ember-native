@@ -816,7 +816,7 @@ importers:
         version: 7.1.2(webpack@5.99.8)
       ember-eslint-parser:
         specifier: 0.5.3
-        version: 0.5.3(@babel/core@7.27.1)(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)
+        version: 0.5.9(@babel/core@7.27.1)(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)
       ember-modifier:
         specifier: ^4.2.0
         version: 4.2.2(@babel/core@7.27.1)
@@ -6717,6 +6717,16 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
+  ember-eslint-parser@0.5.9:
+    resolution: {integrity: sha512-IW4/3cEiFp49M2LiKyzi7VcT1egogOe8UxQ9eUKTooenC7Q4qNhzTD6rOZ8j51m8iJC+8hCzjbNCa3K4CN0Hhg==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@babel/core': ^7.23.6
+      '@typescript-eslint/parser': '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+
   ember-eslint@0.2.1:
     resolution: {integrity: sha512-sxmh8dNJmWZH4Xx+4AC0XYbp3hKTSU8M3s886Ly9S6oL1dzVQ0A/GJp4lJUf5ex7wDbgZtMIhMQcw89329NIyw==}
 
@@ -9628,6 +9638,9 @@ packages:
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
+
+  mathml-tag-names@2.1.3:
+    resolution: {integrity: sha512-APMBEanjybaPzUrfqU0IMU5I0AswKMH7k8OTLs0vvV4KZpExkTkY87nR/zpbuTPj+gARop7aGUbl11pnDfW6xg==}
 
   mdast-util-definitions@5.1.2:
     resolution: {integrity: sha512-8SVPMuHqlPME/z3gqVwWY4zVXn8lqKv/pAhC57FuJ40ImXyBpmO5ukh98zB2v7Blql2FiHjHv9LVztSIqjY+MA==}
@@ -12855,6 +12868,9 @@ packages:
 
   svg-inline-loader@0.8.2:
     resolution: {integrity: sha512-kbrcEh5n5JkypaSC152eGfGcnT4lkR0eSfvefaUJkLqgGjRQJyKDvvEE/CCv5aTSdfXuc+N98w16iAojhShI3g==}
+
+  svg-tags@1.0.0:
+    resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
 
   svgo@2.8.0:
     resolution: {integrity: sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==}
@@ -22608,6 +22624,21 @@ snapshots:
     transitivePeerDependencies:
       - eslint
 
+  ember-eslint-parser@0.5.9(@babel/core@7.27.1)(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1):
+    dependencies:
+      '@babel/core': 7.27.1
+      '@babel/eslint-parser': 7.27.1(@babel/core@7.27.1)(eslint@8.57.1)
+      '@glimmer/syntax': 0.92.3
+      content-tag: 2.0.3
+      eslint-scope: 7.2.2
+      html-tags: 3.3.1
+      mathml-tag-names: 2.1.3
+      svg-tags: 1.0.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.32.1(eslint@8.57.1)(typescript@5.8.3)
+    transitivePeerDependencies:
+      - eslint
+
   ember-eslint@0.2.1(@babel/core@7.27.1)(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3):
     dependencies:
       '@babel/eslint-parser': 7.27.1(@babel/core@7.27.1)(eslint@8.57.1)
@@ -26565,6 +26596,8 @@ snapshots:
 
   math-intrinsics@1.1.0: {}
 
+  mathml-tag-names@2.1.3: {}
+
   mdast-util-definitions@5.1.2:
     dependencies:
       '@types/mdast': 3.0.15
@@ -30424,6 +30457,8 @@ snapshots:
       loader-utils: 1.4.2
       object-assign: 4.1.1
       simple-html-tokenizer: 0.1.1
+
+  svg-tags@1.0.0: {}
 
   svgo@2.8.0:
     dependencies:
