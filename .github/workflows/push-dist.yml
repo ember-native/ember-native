@@ -8,6 +8,7 @@ on:
     branches:
       - main
       - master
+      - fix-docs
 
 jobs:
   push-dist:
@@ -19,14 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: NullVoxPopuli/action-setup-pnpm@v2.3.1
-      - if: github.ref == 'refs/heads/main'
+      - if: github.ref == 'refs/heads/fix-docs'
         run: |-
           DOCS_URL=versions/main pnpm run build
           mkdir -p ./docs-app/gh-pages/versions/main
           cp -r ./docs-app/dist/* ./docs-app/gh-pages/versions/main
       - if: github.ref_type == 'tag'
         run: |-
-          DOCS_URL=versions/$GITHUB_REF_NAME pnpm run build
+          DOCS_URL=versions/$GITHUB_REF pnpm run build
           mkdir -p ./docs-app/gh-pages/versions/$GITHUB_REF_NAME
           cp -r ./docs-app/dist/* ./docs-app/gh-pages/versions/$GITHUB_REF_NAME
       - uses: peaceiris/actions-gh-pages@v4
