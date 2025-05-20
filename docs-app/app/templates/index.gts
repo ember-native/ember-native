@@ -6,6 +6,8 @@ import config from 'docs-app/config/environment';
 import { VersionSelector } from 'docs-app/components/version-selector';
 import { Article, H2, IndexPage, InternalLink, TopRight } from '@universal-ember/docs-support';
 
+console.log('config', config);
+
 const styles = stylesheet`
   .getStartedLink {
     box-shadow: inherit;
