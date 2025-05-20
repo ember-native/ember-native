@@ -84,7 +84,7 @@
     "@embroider/webpack": "^4.1.0",
     "@glimmer/interfaces": "^0.94.6",
     "@glimmer/reference": "^0.94.8",
-    "@glimmer/runtime": "^0.93.1",
+    "@glimmer/runtime": "^0.94.10",
     "@glimmer/syntax": "^0.94.9",
     "@glimmer/validator": "^0.94.8",
     "@glint/core": "^1.5.0",
