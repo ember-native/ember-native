@@ -183,8 +183,8 @@ importers:
         specifier: 8.9.1
         version: 8.9.1
       '@nativescript/types':
-        specifier: ~8.8.0
-        version: 8.8.0
+        specifier: ~8.9.1
+        version: 8.9.1
       '@nativescript/webpack':
         specifier: ^5.0.22
         version: 5.0.24(handlebars@4.7.8)(lodash@4.17.21)(sass-embedded@1.89.0)(type-fest@4.41.0)(typescript@5.8.3)(underscore@1.13.7)
@@ -2524,14 +2524,14 @@ packages:
   '@nativescript/theme@3.1.0':
     resolution: {integrity: sha512-LTo0k/1HbwuFl9vTNfeOFtHuXf/BEVKROeaLZJbHX8U6DoUc+VprF46v6E9EFALOOPgxsgAJFtnEdOFDa26Ogw==}
 
-  '@nativescript/types-android@8.8.0':
-    resolution: {integrity: sha512-U8ZOT+dtfYbfMj2OY1l6h9RQB+0weBQu6sG/2hKYyqmFnyT69XLmWbjE26LkqCceAukVk2Vg15bpk6haZVLI/Q==}
+  '@nativescript/types-android@8.9.0':
+    resolution: {integrity: sha512-tNfCpfbSu/YMFjEbKk89Kw5VCRn8Y7Kyg4x7YRR5q3urrvhaUD6hBzoLWprrOfHwmoQXVU/eEMleKcrk0/liiw==}
 
-  '@nativescript/types-ios@8.8.0':
-    resolution: {integrity: sha512-kifctOi4OR/7zLV/G5DxrK2Ws45lbsZROje+fGn7osnMXYs641zsrBIgm2OQuADcuMvNTk9ynHxI76NtPLPLYA==}
+  '@nativescript/types-ios@8.9.1':
+    resolution: {integrity: sha512-OsQiVg+r8oWfqsbH5Lcs1ItODipc4bxIFcaXFkcYZTvlbCKG72IZ+HNdd88oKlh4z8HaqdDRJT5zXQWQ1GZ+YQ==}
 
-  '@nativescript/types@8.8.0':
-    resolution: {integrity: sha512-cXzKaHdS9HXPga7G+jCMjhDgvZGGEYUJ4Uq+DpevPMz8aRVL1s4UPe7q75xi2DsgRSQzb6UM8FZNbpFsrtiPLg==}
+  '@nativescript/types@8.9.1':
+    resolution: {integrity: sha512-mMgnpDQVDDARx+WyoNP2jZD4UcwZEmPuieFgipfA0LkwGaB0mcVKAXPruW0qxAkuXtgS0qY+qgpON06nDfJmMQ==}
 
   '@nativescript/unit-test-runner@3.0.4':
     resolution: {integrity: sha512-NsUq0M0y5PWS8MbRcfsnCRtnvAL+ueUvtIeaYNDg12+9LHzD3995tp5NfYfWBxQ/lUCDot+AeB2XDl5v8ROSLQ==}
@@ -17124,14 +17124,14 @@ snapshots:
 
   '@nativescript/theme@3.1.0': {}
 
-  '@nativescript/types-android@8.8.0': {}
+  '@nativescript/types-android@8.9.0': {}
 
-  '@nativescript/types-ios@8.8.0': {}
+  '@nativescript/types-ios@8.9.1': {}
 
-  '@nativescript/types@8.8.0':
+  '@nativescript/types@8.9.1':
     dependencies:
-      '@nativescript/types-android': 8.8.0
-      '@nativescript/types-ios': 8.8.0
+      '@nativescript/types-android': 8.9.0
+      '@nativescript/types-ios': 8.9.1
 
   '@nativescript/unit-test-runner@3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)':
     dependencies:
