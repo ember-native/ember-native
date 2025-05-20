@@ -15,8 +15,6 @@ const glimmerDirs = fs.readdirSync(
   path.resolve(process.cwd(), "./node_modules/ember-source/dist/packages/@glimmer"),
 );
 
-process.env.DOCS_URL = 'test-sub'
-
 export default defineConfig((/* { mode } */) => {
   return {
     base: process.env.DOCS_URL ? "/ember-native/" + process.env.DOCS_URL : "",
