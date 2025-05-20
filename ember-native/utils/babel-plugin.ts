@@ -270,11 +270,17 @@ export default function hotReplaceAst(babel: typeof Babel) {
           }
           const source = importDeclaration.source.value;
           // const timestamp = Date.now();
-          const ast = parse(`
+          const ast = parse(
+            `
           import.meta.webpackHot.accept('${source}', function () {
             ${hotAstProcessor.meta.importVar}.${imp} = ${imp};
           });
-          `);
+          `,
+            {
+              babelrc: false,
+              configFile: false,
+            },
+          );
           const accept = ast!.program.body;
           ifHotStatements.push(...accept);
         }

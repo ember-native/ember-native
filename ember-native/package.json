@@ -67,7 +67,7 @@
     "ember-template-lint-plugin-prettier": "^5.0.0",
     "ember-truth-helpers": "^4.0.3",
     "prettier-linter-helpers": "^1.0.0",
-    "rollup-plugin-astroturf": "^0.1.0",
+    "rollup-plugin-astroturf": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-root-import": "^1.0.0",
     "rollup-plugin-styles": "^4.0.0"
@@ -102,7 +102,7 @@
     "@typescript-eslint/eslint-plugin": "^8.13.0",
     "@typescript-eslint/parser": "^8.13.0",
     "babel-import-util": "^3.0.0",
-    "babel-plugin-ember-template-compilation": "^2.2.5",
+    "babel-plugin-ember-template-compilation": "^3.0.0",
     "bower": "^1.8.8",
     "broccoli": "^3.4.2",
     "broccoli-asset-rev": "^3.0.0",

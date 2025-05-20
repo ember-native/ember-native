@@ -32,10 +32,20 @@ const parserOptions = {
         js: {
             ecmaFeatures: { modules: true },
             ecmaVersion: 'latest',
+            requireConfigFile: false,
+            babelOptions: {
+              babelrc: false,
+              configFile: false,
+            }
         },
         ts: {
             projectService: true,
             tsconfigRootDir: import.meta.dirname,
+            requireConfigFile: false,
+            babelOptions: {
+              babelrc: false,
+              configFile: false,
+            }
         },
     },
 };
