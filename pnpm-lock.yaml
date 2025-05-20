@@ -228,7 +228,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0(ember-source@5.12.0(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.8))
       ember-template-lint:
-        specifier: ^7.6.0
+        specifier: ^7.7.0
         version: 7.7.0(@babel/core@7.27.1)
       eslint:
         specifier: ^9.26.0
@@ -538,8 +538,8 @@ importers:
         specifier: ^4.2.0
         version: 4.3.0
       ember-template-lint:
-        specifier: ^6.0.0
-        version: 6.1.0
+        specifier: ^7.7.0
+        version: 7.7.0(@babel/core@7.27.1)
       ember-vite-hmr:
         specifier: ^2.0.1
         version: 2.0.1(@embroider/compat@4.0.0-alpha.14(@embroider/core@4.0.0-alpha.10(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.8))(babel-import-util@3.0.1)(babel-plugin-ember-template-compilation@2.4.1)(webpack@5.99.8)
@@ -686,7 +686,7 @@ importers:
         version: 1.0.0
       ember-template-lint-plugin-prettier:
         specifier: ^5.0.0
-        version: 5.0.0(ember-template-lint@5.13.0)(prettier@3.5.3)
+        version: 5.0.0(ember-template-lint@7.7.0(@babel/core@7.27.1))(prettier@3.5.3)
       ember-truth-helpers:
         specifier: ^4.0.3
         version: 4.0.3(ember-source@5.12.0(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.8))
@@ -824,8 +824,8 @@ importers:
         specifier: ^5.12.0
         version: 5.12.0(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.8)
       ember-template-lint:
-        specifier: ^5.11.2
-        version: 5.13.0
+        specifier: ^7.7.0
+        version: 7.7.0(@babel/core@7.27.1)
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -840,7 +840,7 @@ importers:
         version: 12.5.0(@babel/core@7.27.1)(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)
       eslint-plugin-ember-template-lint:
         specifier: ^0.15.0
-        version: 0.15.0(ember-template-lint@5.13.0)(eslint@8.57.1)
+        version: 0.15.0(ember-template-lint@7.7.0(@babel/core@7.27.1))(eslint@8.57.1)
       eslint-plugin-n:
         specifier: ^17.18.0
         version: 17.18.0(eslint@8.57.1)
@@ -6197,10 +6197,6 @@ packages:
     resolution: {integrity: sha512-BS8PfmtDGnrgYdOonGZQdLZslWIeCGFP9tpan0hi1Co2Zr2NKADsvGYA8XxuG/4UWgJ6Cjtv+YJnB6MM69QGlQ==}
     engines: {node: '>= 0.4'}
 
-  date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
-
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
@@ -6916,16 +6912,6 @@ packages:
     peerDependencies:
       ember-template-lint: '>= 4.0.0'
       prettier: '>= 3.0.0'
-
-  ember-template-lint@5.13.0:
-    resolution: {integrity: sha512-AYxz9S9fVZfHPmTsymc7NwsD7FVmDUZyfC+KYpxDlK0wic7JSQx2FNQNqQSBFRLOuzn7VQ0/+1pX6DGqKDGswg==}
-    engines: {node: ^14.18.0 || ^16.0.0 || >= 18.0.0}
-    hasBin: true
-
-  ember-template-lint@6.1.0:
-    resolution: {integrity: sha512-UyzLPcyneG3mnbBfewyYIlV7fy6JKHQVAJy5a9+URdJKkZKN+3vQkQzIIlsz6dP/GpoXVB+datns5HlfMfliSA==}
-    engines: {node: ^18.18.0 || >= 20.9.0}
-    hasBin: true
 
   ember-template-lint@7.7.0:
     resolution: {integrity: sha512-KVQNeCdZHglpMm0YY4itu18xzw+IYeLLceWlL9tplCNcsQLSDYynyOvkzuQQH+y4JYN7aFnlxlxSGPyCOpBLZg==}
@@ -7891,10 +7877,6 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  fuse.js@6.6.2:
-    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
-    engines: {node: '>=10'}
-
   fuse.js@7.1.0:
     resolution: {integrity: sha512-trLf4SzuuUxfusZADLINj+dE8clK1frKdmqiJNb1Es75fmI5oY6X2mxLVUciLLjxqw/xr72Dhy+lER6dGd02FQ==}
     engines: {node: '>=10'}
@@ -8111,10 +8093,6 @@ packages:
 
   globby@13.1.4:
     resolution: {integrity: sha512-iui/IiiW+QrJ1X1hKH5qwlMQyv34wJAYwH1vrf8b9kBA4sNiif3gKsMHa+BrdnOpEudWjpotfa7LrTzB1ERS/g==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  globby@13.2.2:
-    resolution: {integrity: sha512-Y1zNGV+pzQdh7H39l9zgB4PJqjRNqydvdYCDG4HFXM4XuvSaQQlEc91IU1yALL8gUTDomgBAfz3XJdmUS+oo0w==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   globby@14.1.0:
@@ -20273,7 +20251,7 @@ snapshots:
     dependencies:
       ansi-align: 3.0.1
       camelcase: 7.0.1
-      chalk: 5.2.0
+      chalk: 5.4.1
       cli-boxes: 3.0.0
       string-width: 5.1.2
       type-fest: 2.19.0
@@ -21731,10 +21709,6 @@ snapshots:
       es-errors: 1.3.0
       is-data-view: 1.0.2
 
-  date-fns@2.30.0:
-    dependencies:
-      '@babel/runtime': 7.27.1
-
   date-fns@3.6.0: {}
 
   date-format@2.1.0: {}
@@ -23014,58 +22988,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@5.13.0)(prettier@3.5.3):
+  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@7.7.0(@babel/core@7.27.1))(prettier@3.5.3):
     dependencies:
       '@prettier/sync': 0.2.1(prettier@3.5.3)
-      ember-template-lint: 5.13.0
+      ember-template-lint: 7.7.0(@babel/core@7.27.1)
       prettier: 3.5.3
       prettier-linter-helpers: 1.0.0
-
-  ember-template-lint@5.13.0:
-    dependencies:
-      '@lint-todo/utils': 13.1.1
-      aria-query: 5.3.2
-      chalk: 5.4.1
-      ci-info: 3.9.0
-      date-fns: 2.30.0
-      ember-template-imports: 3.4.2
-      ember-template-recast: 6.1.5
-      eslint-formatter-kakoune: 1.0.0
-      find-up: 6.3.0
-      fuse.js: 6.6.2
-      get-stdin: 9.0.0
-      globby: 13.2.2
-      is-glob: 4.0.3
-      language-tags: 1.0.9
-      micromatch: 4.0.8
-      resolve: 1.22.10
-      v8-compile-cache: 2.4.0
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - supports-color
-
-  ember-template-lint@6.1.0:
-    dependencies:
-      '@lint-todo/utils': 13.1.1
-      aria-query: 5.3.2
-      chalk: 5.4.1
-      ci-info: 4.2.0
-      date-fns: 3.6.0
-      ember-template-imports: 3.4.2
-      ember-template-recast: 6.1.5
-      eslint-formatter-kakoune: 1.0.0
-      find-up: 7.0.0
-      fuse.js: 7.1.0
-      get-stdin: 9.0.0
-      globby: 14.1.0
-      is-glob: 4.0.3
-      language-tags: 1.0.9
-      micromatch: 4.0.8
-      resolve: 1.22.10
-      v8-compile-cache: 2.4.0
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - supports-color
 
   ember-template-lint@7.7.0(@babel/core@7.27.1):
     dependencies:
@@ -23509,13 +23437,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-ember-template-lint@0.15.0(ember-template-lint@5.13.0)(eslint@8.57.1):
+  eslint-plugin-ember-template-lint@0.15.0(ember-template-lint@7.7.0(@babel/core@7.27.1))(eslint@8.57.1):
     dependencies:
       '@glimmer/syntax': 0.84.3
       '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.8.3)
       ember-template-imports: 3.4.2
-      ember-template-lint: 5.13.0
+      ember-template-lint: 7.7.0(@babel/core@7.27.1)
       ember-template-recast: 6.1.5
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
@@ -24479,8 +24407,6 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  fuse.js@6.6.2: {}
-
   fuse.js@7.1.0: {}
 
   fwd-stream@1.0.4:
@@ -24758,14 +24684,6 @@ snapshots:
       slash: 3.0.0
 
   globby@13.1.4:
-    dependencies:
-      dir-glob: 3.0.1
-      fast-glob: 3.3.3
-      ignore: 5.3.2
-      merge2: 1.4.1
-      slash: 4.0.0
-
-  globby@13.2.2:
     dependencies:
       dir-glob: 3.0.1
       fast-glob: 3.3.3
@@ -25301,7 +25219,7 @@ snapshots:
   inquirer@9.2.6:
     dependencies:
       ansi-escapes: 4.3.2
-      chalk: 5.2.0
+      chalk: 5.4.1
       cli-cursor: 3.1.0
       cli-width: 4.1.0
       external-editor: 3.1.0
@@ -26375,7 +26293,7 @@ snapshots:
 
   log-symbols@5.1.0:
     dependencies:
-      chalk: 5.2.0
+      chalk: 5.4.1
       is-unicode-supported: 1.3.0
 
   log4js@4.5.1:
@@ -27764,7 +27682,7 @@ snapshots:
 
   ora@6.3.1:
     dependencies:
-      chalk: 5.2.0
+      chalk: 5.4.1
       cli-cursor: 4.0.0
       cli-spinners: 2.9.2
       is-interactive: 2.0.0
@@ -31314,7 +31232,7 @@ snapshots:
   update-notifier@6.0.2:
     dependencies:
       boxen: 7.1.1
-      chalk: 5.2.0
+      chalk: 5.4.1
       configstore: 6.0.0
       has-yarn: 3.0.0
       import-lazy: 4.0.0
