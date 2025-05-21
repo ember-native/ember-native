@@ -1,6 +1,6 @@
 'use strict';
 
-import { emberNativeGlobals } from './utils/eslint/ember-native';
+import { emberNativeGlobals } from './utils/eslint/ember-native.js';
 // eslint.config.js
 import { configs } from "@nullvoxpopuli/eslint-configs";
 
