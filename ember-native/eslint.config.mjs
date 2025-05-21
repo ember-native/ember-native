@@ -14,6 +14,7 @@ export default [
     globals: {
     'ensure-safe-component': true,
     ...emberNativeGlobals,
+    },
   },
   {
     files: ["**/*.ts", "**/*.gts"],
