@@ -12,6 +12,13 @@ export default [
   // see: https://eslint.org/docs/user-guide/configuring/configuration-files#how-do-overrides-work
   {
     languageOptions: {
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          babelrc: false,
+          configFile: false,
+        }
+      },
       globals: {
         ...emberNativeGlobals.emberNativeGlobals,
       }
