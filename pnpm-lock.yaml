@@ -301,8 +301,8 @@ importers:
         specifier: ^3.4.2
         version: 3.4.2
       '@universal-ember/docs-support':
-        specifier: ^0.6.6
-        version: 0.6.6(@babel/core@7.27.1)(@ember/test-helpers@5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2))(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@22.15.21)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)
+        specifier: '>=0.6.7'
+        version: 0.6.7(@babel/core@7.27.1)(@ember/test-helpers@5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2))(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@22.15.21)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)
       assert:
         specifier: ^2.0.0
         version: 2.1.0
@@ -3763,8 +3763,8 @@ packages:
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
-  '@universal-ember/docs-support@0.6.6':
-    resolution: {integrity: sha512-mK9jdgs9UnNdCx9nj8KZViEVVMsEBZdxz3XooKwgvYwkx4nyh1zsmmsNO2oV3eO3ni/gQg5SW/OrIC/LgS4CGQ==}
+  '@universal-ember/docs-support@0.6.7':
+    resolution: {integrity: sha512-pV2e4exl+aETYwnOap+hcIzMQbIIMtw/p99rkFeg/phCUAHOwgH1wghiRLPTDccPQu3fc6ct7db76KkO6Y84+Q==}
 
   '@unrs/resolver-binding-darwin-arm64@1.7.2':
     resolution: {integrity: sha512-vxtBno4xvowwNmO/ASL0Y45TpHqmNkAaDtz4Jqb+clmcVSSl8XCG/PNFFkGsXXXS6AMjP+ja/TtNCFFa1QwLRg==}
@@ -18648,7 +18648,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@universal-ember/docs-support@0.6.6(@babel/core@7.27.1)(@ember/test-helpers@5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2))(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@22.15.21)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)':
+  '@universal-ember/docs-support@0.6.7(@babel/core@7.27.1)(@ember/test-helpers@5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2))(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@22.15.21)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
       '@fontsource/lexend': 5.2.7
