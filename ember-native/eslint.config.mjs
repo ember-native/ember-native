@@ -11,9 +11,10 @@ export default [
   // your modifications here
   // see: https://eslint.org/docs/user-guide/configuring/configuration-files#how-do-overrides-work
   {
-    globals: {
-    'ensure-safe-component': true,
-    ...emberNativeGlobals,
+    languageOptions: {
+      globals: {
+        ...emberNativeGlobals.emberNativeGlobals,
+      }
     },
   },
   {
