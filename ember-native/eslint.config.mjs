@@ -1,6 +1,6 @@
 'use strict';
 
-const { emberNativeGlobals } = require('./utils/eslint/ember-native');
+import { emberNativeGlobals } from './utils/eslint/ember-native';
 // eslint.config.js
 import { configs } from "@nullvoxpopuli/eslint-configs";
 
