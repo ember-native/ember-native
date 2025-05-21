@@ -27,7 +27,7 @@
     "test:ember": "ember test"
   },
   "dependencies": {
-    "@shikijs/rehype": "^1.22.2",
+    "@shikijs/rehype": "^3.4.2",
     "@universal-ember/docs-support": "^0.6.6",
     "assert": "^2.0.0",
     "change-case": "^5.4.4",
