@@ -108,8 +108,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       chromedriver:
-        specifier: ^136.0.2
-        version: 136.0.2
+        specifier: ^136.0.3
+        version: 136.0.3
       ember-compatibility-helpers:
         specifier: ^1.2.7
         version: 1.2.7(@babel/core@7.27.1)
@@ -5147,8 +5147,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  chromedriver@136.0.2:
-    resolution: {integrity: sha512-yJ52GN01edLYWYK/OspYBv3plzF08Ucdq4ukYigJGOX8dWr/tP5PXSZPWFPVarmbmcO57pNLP9Im8hsYljMEjw==}
+  chromedriver@136.0.3:
+    resolution: {integrity: sha512-bE27WxCr8Fd12ZFvRWbkWgTvm9MF+le59U6MlxejO9bC9bPHp+IQfttsDMXThb05/M+/FOx8x2/0mQ50zG0kDg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -20522,7 +20522,7 @@ snapshots:
       - debug
       - supports-color
 
-  chromedriver@136.0.2:
+  chromedriver@136.0.3:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.9.0
