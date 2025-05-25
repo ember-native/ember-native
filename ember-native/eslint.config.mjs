@@ -115,6 +115,7 @@ export default ts.config(
         files: [
             '**/*.cjs',
             'babel.config.js',
+            'webpack.config.js'
         ],
         plugins: {
             n,
