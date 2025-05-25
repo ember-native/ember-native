@@ -22,5 +22,5 @@ jobs:
           node-version: 23
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: cd docs-app
-      - run: pnpm build
       - run: pnpm lint
+      - run: pnpm build
