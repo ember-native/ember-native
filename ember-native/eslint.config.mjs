@@ -60,7 +60,7 @@ export default ts.config(
      * https://eslint.org/docs/latest/use/configure/ignore
      */
     {
-        ignores: ['dist/', 'node_modules/'],
+        ignores: ['dist/', 'node_modules/', 'declarations'],
     },
     /**
      * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
