@@ -24,7 +24,7 @@ import n from 'eslint-plugin-n';
 
 import babelParser from '@babel/eslint-parser';
 
-import emberNativeGlobals from './src/utils/eslint/ember-native';
+import emberNativeGlobals from './utils/eslint/ember-native';
 
 const parserOptions = {
     esm: {
