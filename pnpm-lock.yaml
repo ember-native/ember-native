@@ -390,7 +390,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim':
         specifier: 1.9.0
-        version: 1.10.0
+        version: 1.9.0
       '@embroider/compat':
         specifier: ^4.1.0
         version: 4.1.0(@embroider/core@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.9)
@@ -642,7 +642,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim':
         specifier: 1.9.0
-        version: 1.10.0
+        version: 1.9.0
       '@eslint/js':
         specifier: ^9.26.0
         version: 9.27.0
@@ -705,8 +705,8 @@ importers:
         version: 4.0.0(rollup@4.41.1)
     devDependencies:
       '@babel/types':
-        specifier: ^7.26.0
-        version: 7.27.1
+        specifier: ^7.27.3
+        version: 7.27.3
       '@ember/optional-features':
         specifier: ^2.0.0
         version: 2.2.0
@@ -1649,10 +1649,6 @@ packages:
     peerDependenciesMeta:
       rollup:
         optional: true
-
-  '@embroider/addon-shim@1.10.0':
-    resolution: {integrity: sha512-gcJuHiXgnrzaU8NyU+2bMbtS6PNOr5v5B8OXBqaBvTCsMpXLvKo8OBOQFCoUN0rPX2J6VaFqrbi/371sMvzZug==}
-    engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/addon-shim@1.9.0':
     resolution: {integrity: sha512-fMzayl/licUL8VRAy4qXROKcYvHwUbV8aTh4m97L5/MRuVpxbcAy92DGGTqx5OBKCSQN3gMg+sUKeE6AviefpQ==}
@@ -15575,15 +15571,6 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/addon-shim@1.10.0':
-    dependencies:
-      '@embroider/shared-internals': 3.0.0
-      broccoli-funnel: 3.0.8
-      common-ancestor-path: 1.0.1
-      semver: 7.7.2
-    transitivePeerDependencies:
-      - supports-color
-
   '@embroider/addon-shim@1.9.0':
     dependencies:
       '@embroider/shared-internals': 2.9.0
@@ -17081,7 +17068,7 @@ snapshots:
       npm-pick-manifest: 10.0.0
       proc-log: 5.0.0
       promise-retry: 2.0.1
-      semver: 7.7.2
+      semver: 7.7.1
       which: 5.0.0
 
   '@npmcli/installed-package-contents@3.0.0':
@@ -27106,7 +27093,7 @@ snapshots:
       make-fetch-happen: 14.0.3
       nopt: 8.1.0
       proc-log: 5.0.0
-      semver: 7.7.2
+      semver: 7.7.1
       tar: 7.4.3
       tinyglobby: 0.2.13
       which: 5.0.0
@@ -27166,7 +27153,7 @@ snapshots:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.16.1
-      semver: 7.7.2
+      semver: 7.7.1
       validate-npm-package-license: 3.0.4
 
   normalize-package-data@6.0.2:
@@ -27215,7 +27202,7 @@ snapshots:
       npm-install-checks: 7.1.1
       npm-normalize-package-bin: 4.0.0
       npm-package-arg: 12.0.2
-      semver: 7.7.2
+      semver: 7.7.1
 
   npm-registry-fetch@18.0.2:
     dependencies:
@@ -27664,7 +27651,7 @@ snapshots:
       got: 12.6.1
       registry-auth-token: 5.1.0
       registry-url: 6.0.1
-      semver: 7.7.2
+      semver: 7.5.1
 
   package-up@5.0.0:
     dependencies:
@@ -29389,7 +29376,7 @@ snapshots:
 
   semver-diff@4.0.0:
     dependencies:
-      semver: 7.7.2
+      semver: 7.5.1
 
   semver@2.3.2: {}
 
@@ -31105,7 +31092,7 @@ snapshots:
       is-yarn-global: 0.4.1
       latest-version: 7.0.0
       pupa: 3.1.0
-      semver: 7.7.2
+      semver: 7.5.1
       semver-diff: 4.0.0
       xdg-basedir: 5.1.0
 

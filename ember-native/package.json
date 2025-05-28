@@ -73,7 +73,7 @@
     "rollup-plugin-styles": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/types": "^7.26.0",
+    "@babel/types": "^7.27.3",
     "@ember/optional-features": "^2.0.0",
     "@embroider/addon-dev": "^8.0.1",
     "@embroider/compat": "^4.1.0",
