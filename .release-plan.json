@@ -1,18 +1,8 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "patch",
-      "oldVersion": "2.1.0",
-      "newVersion": "2.1.1",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        }
-      ],
-      "pkgJSONPath": "./ember-native/package.json"
+      "oldVersion": "2.1.1"
     }
   },
-  "description": "## Release (2025-05-18)\n\n* ember-native 2.1.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#124](https://github.com/ember-native/ember-native/pull/124) add missing components ([@patricklx](https://github.com/patricklx))\n\n#### :house: Internal\n* [#126](https://github.com/ember-native/ember-native/pull/126) no alias ([@patricklx](https://github.com/patricklx))\n* [#125](https://github.com/ember-native/ember-native/pull/125) migrate to @universal ember/docs support ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2025-05-28)\n\n\n\n#### :rocket: Enhancement\n* [#136](https://github.com/ember-native/ember-native/pull/136) update astroturf ([@patricklx](https://github.com/patricklx))\n\n#### :house: Internal\n* [#152](https://github.com/ember-native/ember-native/pull/152) update kolay ([@patricklx](https://github.com/patricklx))\n* [#151](https://github.com/ember-native/ember-native/pull/151) update docs support ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
