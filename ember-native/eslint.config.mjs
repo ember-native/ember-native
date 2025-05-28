@@ -27,124 +27,126 @@ import babelParser from '@babel/eslint-parser';
 import emberNativeGlobals from './utils/eslint/ember-native.js';
 
 const parserOptions = {
-    esm: {
-        js: {
-            ecmaFeatures: { modules: true },
-            ecmaVersion: 'latest',
-            requireConfigFile: false,
-            babelOptions: {
-              babelrc: false,
-              configFile: false,
-            }
-        },
-        ts: {
-            projectService: true,
-            tsconfigRootDir: import.meta.dirname,
-            requireConfigFile: false,
-            babelOptions: {
-              babelrc: false,
-              configFile: false,
-            }
-        },
+  esm: {
+    js: {
+      ecmaFeatures: {modules: true},
+      ecmaVersion: 'latest',
+      requireConfigFile: false,
+      babelOptions: {
+        babelrc: false,
+        configFile: false,
+      }
     },
+    ts: {
+      projectService: true,
+      tsconfigRootDir: import.meta.dirname,
+      requireConfigFile: false,
+      babelOptions: {
+        babelrc: false,
+        configFile: false,
+      }
+    },
+  },
 };
 
 export default ts.config(
-    js.configs.recommended,
-    ember.configs.base,
-    ember.configs.gjs,
-    ember.configs.gts,
-    eslintConfigPrettier,
-    /**
-     * Ignores must be in their own object
-     * https://eslint.org/docs/latest/use/configure/ignore
-     */
-    {
-        ignores: ['dist/', 'node_modules/', 'declarations'],
+  js.configs.recommended,
+  ember.configs.base,
+  ember.configs.gjs,
+  ember.configs.gts,
+  eslintConfigPrettier,
+  /**
+   * Ignores must be in their own object
+   * https://eslint.org/docs/latest/use/configure/ignore
+   */
+  {
+    ignores: ['dist/', 'node_modules/', 'declarations'],
+  },
+  /**
+   * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
+   */
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error',
     },
-    /**
-     * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
-     */
-    {
-        linterOptions: {
-            reportUnusedDisableDirectives: 'error',
-        },
+  },
+  {
+    languageOptions: {
+      globals: {
+        ...emberNativeGlobals.emberNativeGlobals,
+      }
     },
-    {
-        languageOptions: {
-            globals: {
-                ...emberNativeGlobals.emberNativeGlobals,
-            }
-        },
+  },
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      parser: babelParser,
     },
-    {
-        files: ['**/*.js'],
-        languageOptions: {
-            parser: babelParser,
-        },
+  },
+  {
+    files: ['**/*.{js,gjs}'],
+    languageOptions: {
+      parserOptions: parserOptions.esm.js,
+      globals: {
+        ...globals.browser,
+        ...emberNativeGlobals.emberNativeGlobals
+      },
     },
-    {
-        files: ['**/*.{js,gjs}'],
-        languageOptions: {
-            parserOptions: parserOptions.esm.js,
-            globals: {
-                ...globals.browser,
-                ...emberNativeGlobals.emberNativeGlobals
-            },
-        },
+  },
+  {
+    files: ['**/*.{ts,gts}'],
+    languageOptions: {
+      parser: ember.parser,
+      parserOptions: parserOptions.esm.ts,
     },
-    {
-        files: ['**/*.{ts,gts}'],
-        languageOptions: {
-            parser: ember.parser,
-            parserOptions: parserOptions.esm.ts,
-        },
-        extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
-        rules: {
-            '@typescript-eslint/no-unsafe-assignment': 'off',
-            '@typescript-eslint/no-explicit-any': 'off',
-            '@typescript-eslint/no-unsafe-member-access': 'off',
-            '@typescript-eslint/no-unsafe-call': 'off',
-            '@typescript-eslint/no-unsafe-argument': 'off',
-        }
+    extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
+    rules: {
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+    }
+  },
+  /**
+   * CJS node files
+   */
+  {
+    files: [
+      '**/*.cjs',
+      'babel.config.js',
+      'rollup.config.mjs',
+      'webpack.config.js',
+      'utils/*.js'
+    ],
+    plugins: {
+      n,
     },
-    /**
-     * CJS node files
-     */
-    {
-        files: [
-            '**/*.cjs',
-            'babel.config.js',
-            'webpack.config.js'
-        ],
-        plugins: {
-            n,
-        },
 
-        languageOptions: {
-            sourceType: 'script',
-            ecmaVersion: 'latest',
-            globals: {
-                ...globals.node,
-            },
-        },
+    languageOptions: {
+      sourceType: 'script',
+      ecmaVersion: 'latest',
+      globals: {
+        ...globals.node,
+      },
     },
-    /**
-     * ESM node files
-     */
-    {
-        files: ['**/*.mjs'],
-        plugins: {
-            n,
-        },
+  },
+  /**
+   * ESM node files
+   */
+  {
+    files: ['**/*.mjs'],
+    plugins: {
+      n,
+    },
 
-        languageOptions: {
-            sourceType: 'module',
-            ecmaVersion: 'latest',
-            parserOptions: parserOptions.esm.js,
-            globals: {
-                ...globals.node,
-            },
-        },
+    languageOptions: {
+      sourceType: 'module',
+      ecmaVersion: 'latest',
+      parserOptions: parserOptions.esm.js,
+      globals: {
+        ...globals.node,
+      },
     },
+  },
 );
