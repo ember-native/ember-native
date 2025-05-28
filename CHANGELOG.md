@@ -1,5 +1,19 @@
 # Changelog
 
+## Release (2025-05-28)
+
+
+
+#### :rocket: Enhancement
+* [#136](https://github.com/ember-native/ember-native/pull/136) update astroturf ([@patricklx](https://github.com/patricklx))
+
+#### :house: Internal
+* [#152](https://github.com/ember-native/ember-native/pull/152) update kolay ([@patricklx](https://github.com/patricklx))
+* [#151](https://github.com/ember-native/ember-native/pull/151) update docs support ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2025-05-18)
 
 * ember-native 2.1.1 (patch)
