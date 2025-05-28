@@ -390,7 +390,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim':
         specifier: 1.9.0
-        version: 1.9.0
+        version: 1.10.0
       '@embroider/compat':
         specifier: ^4.1.0
         version: 4.1.0(@embroider/core@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.9)
@@ -642,7 +642,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim':
         specifier: 1.9.0
-        version: 1.9.0
+        version: 1.10.0
       '@eslint/js':
         specifier: ^9.26.0
         version: 9.27.0
@@ -1628,6 +1628,10 @@ packages:
     peerDependenciesMeta:
       rollup:
         optional: true
+
+  '@embroider/addon-shim@1.10.0':
+    resolution: {integrity: sha512-gcJuHiXgnrzaU8NyU+2bMbtS6PNOr5v5B8OXBqaBvTCsMpXLvKo8OBOQFCoUN0rPX2J6VaFqrbi/371sMvzZug==}
+    engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/addon-shim@1.9.0':
     resolution: {integrity: sha512-fMzayl/licUL8VRAy4qXROKcYvHwUbV8aTh4m97L5/MRuVpxbcAy92DGGTqx5OBKCSQN3gMg+sUKeE6AviefpQ==}
@@ -15518,6 +15522,15 @@ snapshots:
       - canvas
       - supports-color
       - utf-8-validate
+
+  '@embroider/addon-shim@1.10.0':
+    dependencies:
+      '@embroider/shared-internals': 3.0.0
+      broccoli-funnel: 3.0.8
+      common-ancestor-path: 1.0.1
+      semver: 7.7.2
+    transitivePeerDependencies:
+      - supports-color
 
   '@embroider/addon-shim@1.9.0':
     dependencies:
