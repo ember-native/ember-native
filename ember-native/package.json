@@ -5,7 +5,10 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/ember-native/ember-native",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ember-native/ember-native.git"
+  },
   "license": "MIT",
   "author": "Patrick Pircher",
   "files": [
