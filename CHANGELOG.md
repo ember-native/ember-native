@@ -2,6 +2,25 @@
 
 ## Release (2025-05-28)
 
+* ember-native 2.2.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#174](https://github.com/ember-native/ember-native/pull/174) bump version ([@patricklx](https://github.com/patricklx))
+* Other
+  * [#136](https://github.com/ember-native/ember-native/pull/136) update astroturf ([@patricklx](https://github.com/patricklx))
+
+#### :house: Internal
+* [#172](https://github.com/ember-native/ember-native/pull/172) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))
+* [#152](https://github.com/ember-native/ember-native/pull/152) update kolay ([@patricklx](https://github.com/patricklx))
+* [#151](https://github.com/ember-native/ember-native/pull/151) update docs support ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 2
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+
+## Release (2025-05-28)
+
 
 
 #### :rocket: Enhancement
