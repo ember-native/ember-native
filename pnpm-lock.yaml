@@ -144,8 +144,8 @@ importers:
         specifier: ^16.0.4
         version: 16.0.5(sass-embedded@1.89.0)(sass@1.89.0)(webpack@5.99.9)
       selenium-webdriver:
-        specifier: ^4.28.1
-        version: 4.32.0
+        specifier: ^4.33.0
+        version: 4.33.0
       ts-loader:
         specifier: ^9.5.2
         version: 9.5.2(typescript@5.8.3)(webpack@5.99.9)
@@ -12244,8 +12244,8 @@ packages:
     resolution: {integrity: sha512-Gn/JaSk/Mt9gYubxTtSn/QCV4em9mpAPiR1rqy/Ocu19u/G9J5WWdNoUT4SiV6mFC3y6cxyFcFwdzPM3FgxGAQ==}
     engines: {node: '>= 10.13.0'}
 
-  selenium-webdriver@4.32.0:
-    resolution: {integrity: sha512-dG48JJnB96Aea1iVaZOKGmd6yT6aemeI1heWI/i8DtfD3pDX7uIlwpDBoGauNhtXAaFaamP+U4hIab8zZkg3Ag==}
+  selenium-webdriver@4.33.0:
+    resolution: {integrity: sha512-5vRhk4iI0B9nYbEitfnCjPDXBfG6o9DNhj5DG2355eQo8idETknhj1tigqqlkHsGephSZwLZqEm/d+3e1stGUA==}
     engines: {node: '>= 18.20.5'}
 
   semver-diff@4.0.0:
@@ -22458,7 +22458,7 @@ snapshots:
     dependencies:
       chromedriver: 129.0.4
       ember-inspector: 4.13.1
-      selenium-webdriver: 4.32.0
+      selenium-webdriver: 4.33.0
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -29364,7 +29364,7 @@ snapshots:
       ajv-formats: 2.1.1(ajv@8.17.1)
       ajv-keywords: 5.1.0(ajv@8.17.1)
 
-  selenium-webdriver@4.32.0:
+  selenium-webdriver@4.33.0:
     dependencies:
       '@bazel/runfiles': 6.3.1
       jszip: 3.10.1
