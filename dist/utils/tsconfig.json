@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "emitDeclarationOnly": false,
+    "outDir": "../dist/utils",
+    "target": "ES6",
+    "module": "es2020",
+    "lib": ["es2023", "dom"],
+    "moduleResolution": "bundler",
+    "noEmitOnError": false
+  },
+  "include": [
+    "./babel-plugin.ts"
+  ]
+}
