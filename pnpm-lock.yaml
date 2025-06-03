@@ -390,7 +390,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim':
         specifier: 1.9.0
-        version: 1.10.0
+        version: 1.9.0
       '@embroider/compat':
         specifier: ^4.1.0
         version: 4.1.0(@embroider/core@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.9)
@@ -405,7 +405,7 @@ importers:
         version: 4.0.0(@embroider/compat@4.1.0(@embroider/core@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.9))(@embroider/core@4.1.0(@glint/template@1.5.2))(@embroider/webpack@4.1.0(@embroider/core@4.1.0(@glint/template@1.5.2))(webpack@5.99.9))
       '@embroider/vite':
         specifier: ^1.1.3
-        version: 1.1.5(@embroider/core@4.1.0(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.41.1)(vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))
+        version: 1.1.5(@embroider/core@4.1.0(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.41.1)(vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.1)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))
       '@embroider/webpack':
         specifier: 4.1.0
         version: 4.1.0(@embroider/core@4.1.0(@glint/template@1.5.2))(webpack@5.99.9)
@@ -621,7 +621,7 @@ importers:
         version: 5.8.3
       vite:
         specifier: ^6.3.5
-        version: 6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
+        version: 6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.1)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
 
   ember-native:
     dependencies:
@@ -642,7 +642,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim':
         specifier: 1.9.0
-        version: 1.10.0
+        version: 1.9.0
       '@eslint/js':
         specifier: ^9.28.0
         version: 9.28.0
@@ -885,14 +885,14 @@ importers:
         specifier: ^8.0.6
         version: 8.0.6(route-recognizer@0.3.4)(rsvp@4.8.5)
       sass:
-        specifier: ^1.81.0
-        version: 1.89.0
+        specifier: ^1.89.1
+        version: 1.89.1
       sass-embedded:
         specifier: ^1.88.0
         version: 1.89.0
       sass-loader:
         specifier: ^16.0.4
-        version: 16.0.5(sass-embedded@1.89.0)(sass@1.89.0)(webpack@5.99.9)
+        version: 16.0.5(sass-embedded@1.89.0)(sass@1.89.1)(webpack@5.99.9)
       typescript:
         specifier: ^5.6.3
         version: 5.8.3
@@ -1649,10 +1649,6 @@ packages:
     peerDependenciesMeta:
       rollup:
         optional: true
-
-  '@embroider/addon-shim@1.10.0':
-    resolution: {integrity: sha512-gcJuHiXgnrzaU8NyU+2bMbtS6PNOr5v5B8OXBqaBvTCsMpXLvKo8OBOQFCoUN0rPX2J6VaFqrbi/371sMvzZug==}
-    engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/addon-shim@1.9.0':
     resolution: {integrity: sha512-fMzayl/licUL8VRAy4qXROKcYvHwUbV8aTh4m97L5/MRuVpxbcAy92DGGTqx5OBKCSQN3gMg+sUKeE6AviefpQ==}
@@ -12272,6 +12268,11 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  sass@1.89.1:
+    resolution: {integrity: sha512-eMLLkl+qz7tx/0cJ9wI+w09GQ2zodTkcE/aVfywwdlRcI3EO19xGnbmJwg/JMIm+5MxVJ6outddLZ4Von4E++Q==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+
   sax@1.3.0:
     resolution: {integrity: sha512-0s+oAmw9zLl1V1cS9BtZN7JAd0cW5e0QH4W3LWEK6a4LaLEA2OTpGYWDY+6XasBLtz6wkm3u1xRw95mRuJ59WA==}
 
@@ -15621,15 +15622,6 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/addon-shim@1.10.0':
-    dependencies:
-      '@embroider/shared-internals': 3.0.0
-      broccoli-funnel: 3.0.8
-      common-ancestor-path: 1.0.1
-      semver: 7.7.2
-    transitivePeerDependencies:
-      - supports-color
-
   '@embroider/addon-shim@1.9.0':
     dependencies:
       '@embroider/shared-internals': 2.9.0
@@ -15873,7 +15865,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/vite@1.1.5(@embroider/core@4.1.0(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.41.1)(vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))':
+  '@embroider/vite@1.1.5(@embroider/core@4.1.0(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.41.1)(vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.1)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))':
     dependencies:
       '@babel/core': 7.27.3
       '@embroider/core': 4.1.0(@glint/template@1.5.2)
@@ -15891,7 +15883,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.39.2
-      vite: 6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
+      vite: 6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.1)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -29506,7 +29498,23 @@ snapshots:
       sass-embedded: 1.89.0
       webpack: 5.99.9(webpack-cli@4.10.0)
 
+  sass-loader@16.0.5(sass-embedded@1.89.0)(sass@1.89.1)(webpack@5.99.9):
+    dependencies:
+      neo-async: 2.6.2
+    optionalDependencies:
+      sass: 1.89.1
+      sass-embedded: 1.89.0
+      webpack: 5.99.9(webpack-cli@4.10.0)
+
   sass@1.89.0:
+    dependencies:
+      chokidar: 4.0.3
+      immutable: 5.1.2
+      source-map-js: 1.2.1
+    optionalDependencies:
+      '@parcel/watcher': 2.5.1
+
+  sass@1.89.1:
     dependencies:
       chokidar: 4.0.3
       immutable: 5.1.2
@@ -31055,7 +31063,7 @@ snapshots:
       postcss-modules-local-by-default: 4.2.0(postcss@8.5.4)
       postcss-modules-scope: 3.2.1(postcss@8.5.4)
       reserved-words: 0.1.2
-      sass: 1.89.0
+      sass: 1.89.1
       source-map-js: 1.2.1
       stylus: 0.62.0
       tsconfig-paths: 4.2.0
@@ -31405,7 +31413,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0):
+  vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.0)(sass@1.89.1)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.4
       fdir: 6.4.4(picomatch@4.0.2)
@@ -31418,7 +31426,7 @@ snapshots:
       fsevents: 2.3.3
       jiti: 1.21.7
       less: 4.3.0
-      sass: 1.89.0
+      sass: 1.89.1
       sass-embedded: 1.89.0
       stylus: 0.62.0
       terser: 5.39.2
