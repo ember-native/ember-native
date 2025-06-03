@@ -44,7 +44,7 @@
     "@nativescript/theme": "^3.1.0",
     "@nativescript/unit-test-runner": "~3.0.0",
     "@valor/nativescript-websockets": "^2.0.2",
-    "chromedriver": "^136.0.3",
+    "chromedriver": "^137.0.1",
     "ember-compatibility-helpers": "^1.2.7",
     "ember-load-initializers": "^3.0.1",
     "ember-modifier": "^4.2.0",
