@@ -53,7 +53,7 @@
     "ember-source": "^6.4.0",
     "nativescript-ui-listview": "^15.2.3",
     "nativescript-ui-sidedrawer": "^15.2.3",
-    "octokit": "^5.0.2",
+    "octokit": "^5.0.3",
     "postcss-loader": "^8.1.1",
     "sass-loader": "^16.0.4",
     "selenium-webdriver": "^4.33.0",
