@@ -59,7 +59,7 @@
     "@glimmer/tracking": "^1.1.2",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@types/node": "^22.9.1",
+    "@types/node": "^24.0.4",
     "astroturf": "^1.2.0",
     "ember-cli-babel": "^8.2.0",
     "ember-cli-htmlbars": "^6.2.0",
