@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2025-05-28)
 
 * ember-native 2.2.0 (minor)
