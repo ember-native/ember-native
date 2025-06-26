@@ -48,7 +48,7 @@
     "loader.js": "*"
   },
   "dependencies": {
-    "@babel/core": "^7.27.3",
+    "@babel/core": "^7.27.7",
     "@babel/plugin-syntax-decorators": "^7.22.5",
     "@ember/render-modifiers": "^3.0.0",
     "@ember/string": "^4.0.0",

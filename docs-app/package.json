@@ -52,7 +52,7 @@
     "tracked-built-ins": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.3",
+    "@babel/core": "^7.27.7",
     "@ember/app-tsconfig": "^1.0.3",
     "@babel/eslint-parser": "^7.25.8",
     "@ember/optional-features": "^2.1.0",
