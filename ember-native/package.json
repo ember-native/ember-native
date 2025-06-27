@@ -78,7 +78,7 @@
   "devDependencies": {
     "@babel/types": "^7.27.3",
     "@ember/optional-features": "^2.0.0",
-    "@embroider/addon-dev": "^8.0.1",
+    "@embroider/addon-dev": "^8.1.0",
     "@embroider/compat": "^4.1.0",
     "@embroider/core": "^4.1.0",
     "@embroider/macros": "^1.16.9",
