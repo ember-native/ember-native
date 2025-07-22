@@ -83,7 +83,7 @@
     "content-tag": "^4.0.0",
     "css-loader": "^7.1.2",
     "decorator-transforms": "^2.1.0",
-    "ember-template-lint": "^7.7.0",
+    "ember-template-lint": "^7.9.1",
     "ember-cli-version-checker": "^5.1.2",
     "ember-qunit": "^9.0.3",
     "ember-resolver": "^13.1.1",
