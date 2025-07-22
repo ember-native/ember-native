@@ -80,7 +80,7 @@
     "@ember/optional-features": "^2.0.0",
     "@embroider/addon-dev": "^8.1.0",
     "@embroider/compat": "^4.1.0",
-    "@embroider/core": "^4.1.0",
+    "@embroider/core": "^4.1.1",
     "@embroider/macros": "^1.16.9",
     "@embroider/shared-internals": "^3.0.0",
     "@embroider/util": "^1.13.2",
