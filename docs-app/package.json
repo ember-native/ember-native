@@ -119,7 +119,7 @@
     "eslint-plugin-qunit": "^8.1.2",
     "file-loader": "^6.2.0",
     "globby": "^14.0.0",
-    "inter-ui": "^4.1.0",
+    "inter-ui": "^4.1.1",
     "loader.js": "^4.7.0",
     "pnpm-sync-dependencies-meta-injected": "0.0.14",
     "postcss": "^8.5.4",

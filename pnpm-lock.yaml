@@ -569,8 +569,8 @@ importers:
         specifier: ^14.0.0
         version: 14.1.0
       inter-ui:
-        specifier: ^4.1.0
-        version: 4.1.0
+        specifier: ^4.1.1
+        version: 4.1.1
       loader.js:
         specifier: ^4.7.0
         version: 4.7.0
@@ -8730,8 +8730,8 @@ packages:
     resolution: {integrity: sha512-LJKFHCSeIRq9hanN14IlOtPSTe3lNES7TYDTE2xxdAy1LS5rYphajK1qtwvj3YmQXvvk0U2Vbmcni8P9EIQW9w==}
     engines: {node: '>=18'}
 
-  inter-ui@4.1.0:
-    resolution: {integrity: sha512-lUJ5YLtpj7jWsrhTbN5w32MLOqISGFGOTMRNn+IGhLrbt67z5yvmBRoqpLCWLVlJ+l7kqnH6su4meEqvLMfAAA==}
+  inter-ui@4.1.1:
+    resolution: {integrity: sha512-451h0J29HyOmA+JXgSi/6M12tL7ZCZ8arYKZUXiOXTJpJbAKqJvFh3k5SiV3x7tKe0C0KyrKUUiQIvvZ2PQDcA==}
     engines: {node: '>=16.0.0'}
 
   internal-slot@1.1.0:
@@ -18998,7 +18998,7 @@ snapshots:
       ember-modifier: 4.2.2(@babel/core@7.27.7)
       ember-primitives: 0.30.1(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(ember-modifier@4.2.2(@babel/core@7.27.7))(ember-resources@7.0.4(@glimmer/component@2.0.0)(@glint/template@1.5.2))(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
       ember-resources: 7.0.4(@glimmer/component@2.0.0)(@glint/template@1.5.2)
-      inter-ui: 4.1.0
+      inter-ui: 4.1.1
       kolay: 3.7.2(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/syntax@0.94.9)(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.8.3)(webpack@5.99.9)
       package-up: 5.0.0
       read-package-up: 11.0.0
@@ -25406,7 +25406,7 @@ snapshots:
       wrap-ansi: 6.2.0
       yoctocolors-cjs: 2.1.2
 
-  inter-ui@4.1.0: {}
+  inter-ui@4.1.1: {}
 
   internal-slot@1.1.0:
     dependencies:
