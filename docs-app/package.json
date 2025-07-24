@@ -58,7 +58,7 @@
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "^4.0.0",
     "@ember/test-helpers": "^5.2.2",
-    "@ember/test-waiters": "^4.0.0",
+    "@ember/test-waiters": "^4.1.1",
     "@embroider/addon-shim": "^1.10.0",
     "@embroider/compat": "^4.1.0",
     "@embroider/config-meta-loader": "^1.0.0",
