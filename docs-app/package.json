@@ -136,7 +136,7 @@
     "tailwindcss": "^3.4.14",
     "typedoc": "^0.28.5",
     "typescript": "^5.3.3",
-    "vite": "^6.3.5"
+    "vite": "^7.0.6"
   },
   "engines": {
     "node": ">= 20"
