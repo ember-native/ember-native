@@ -120,7 +120,7 @@ export default class WebpackHotReload extends Service {
   constructor(...args: any) {
     super(...args);
     if (!(window as any).emberHotReloadPlugin) return;
-    const app = (getOwner(this) as ApplicationInstance)!.application as any;
+    const app = (getOwner(this) as ApplicationInstance).application as any;
     (window as any).emberHotReloadPlugin.Resolver = app.Resolver;
     modulePrefix = app.modulePrefix;
     podModulePrefix = app.podModulePrefix;

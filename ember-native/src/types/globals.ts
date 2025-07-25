@@ -3,28 +3,27 @@ declare module '*.scss';
 type AnyFunction = (...args: any) => any;
 
 // @ts-expect-error already defined, do not care
-// eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/prefer-namespace-keyword,@typescript-eslint/no-namespace
+// eslint-disable-next-line @typescript-eslint/prefer-namespace-keyword,@typescript-eslint/no-namespace
 declare module globalThis {
-  var define: AnyFunction;
-  var requirejs: AnyFunction;
-  var requireModule: AnyFunction;
+  const define: AnyFunction;
+  const requirejs: AnyFunction;
+  const requireModule: AnyFunction;
   // @ts-expect-error ignore
-  var Element: import('../dom/nodes/ElementNode.ts').default;
+  const Element: import('../dom/nodes/ElementNode.ts').default;
   // @ts-expect-error ignore
-  var Node: import('../dom/nodes/ElementNode.ts').default;
-  var __metadata: AnyFunction;
-  var __decorate: AnyFunction;
-  var __inspectorSendEvent: AnyFunction;
-  var emberDebugInjected: boolean;
+  const Node: import('../dom/nodes/ElementNode.ts').default;
+  const __metadata: AnyFunction;
+  const __decorate: AnyFunction;
+  const __inspectorSendEvent: AnyFunction;
+  const emberDebugInjected: boolean;
   // @ts-expect-error ignore
-  var MessageChannel: MessageChannel;
+  const MessageChannel: MessageChannel;
   // @ts-expect-error ignore
-  var postMessage: AnyFunction;
-  var triggerEvent: AnyFunction;
-  var EmberInspector: any;
+  const postMessage: AnyFunction;
+  const triggerEvent: AnyFunction;
+  const EmberInspector: any;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Document {
   nodeMap: any;
 }
@@ -34,7 +33,6 @@ declare module 'loader.js' {
   const define: AnyFunction;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface HTMLElementTagNameMap {
   'rad-list-view': import('../dom/native/NativeElementNode').default<
     import('nativescript-ui-listview').RadListView
