@@ -35,7 +35,8 @@ async function checkA11y(assert: Assert, path: string, theme: string) {
       errorText = e.message;
     }
 
-    const message = `no a11y errors found for ${path} using the ${theme} theme` + `\n\n` + errorText;
+    const message =
+      `no a11y errors found for ${path} using the ${theme} theme` + `\n\n` + errorText;
 
     if (window.location.search.includes('debugA11yAudit')) {
       console.error(errorText);

@@ -24,4 +24,8 @@ export default class App extends Application {
   Resolver = Resolver.withModules(compatModules as unknown as Record<string, unknown>);
 }
 
-loadInitializers(App, config.modulePrefix, compatModules as unknown as Record<string, Record<string, unknown>> | undefined);
+loadInitializers(
+  App,
+  config.modulePrefix,
+  compatModules as unknown as Record<string, Record<string, unknown>> | undefined
+);

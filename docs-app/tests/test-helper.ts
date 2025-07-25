@@ -24,10 +24,8 @@ void (async function loadManifest() {
 
   // The accessibility page deliberately
   // has violations for demonstration
-  (window as unknown as { __pages__?: Page[] }).__pages__ = pages?.filter(
-    (page) => {
-      return typeof page.path === 'string' && !page.path.includes('accessibility');
-    }
-  );
+  (window as unknown as { __pages__?: Page[] }).__pages__ = pages?.filter((page) => {
+    return typeof page.path === 'string' && !page.path.includes('accessibility');
+  });
   start();
 })();
