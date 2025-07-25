@@ -129,7 +129,7 @@ export default class NativeElementNode<
 
       // save and launch the animation
       animations.set(animation, animationInstance);
-      animationInstance.play(this.nativeView as View);
+      animationInstance.play(this.nativeView as unknown as View);
     };
 
     const removeAnimation = (animation: string) => {
@@ -496,8 +496,8 @@ export default class NativeElementNode<
 
   getBoundingClientRect() {
     if (!this.nativeView) return null;
-    if (!(this.nativeView as View).getLocationInWindow) return null;
-    const nw = this.nativeView as View;
+    if (!(this.nativeView as unknown as View).getLocationInWindow) return null;
+    const nw = this.nativeView as unknown as View;
     const point = nw.getLocationInWindow();
     const actualSize = nw.getActualSize();
     if (!point) {

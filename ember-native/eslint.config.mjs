@@ -20,15 +20,16 @@ import ts from 'typescript-eslint';
 import ember from 'eslint-plugin-ember/recommended';
 
 import eslintConfigPrettier from 'eslint-config-prettier';
-import qunit from 'eslint-plugin-qunit';
 import n from 'eslint-plugin-n';
 
 import babelParser from '@babel/eslint-parser';
 
+import emberNativeGlobals from './utils/eslint/ember-native.js';
+
 const parserOptions = {
   esm: {
     js: {
-      ecmaFeatures: { modules: true },
+      ecmaFeatures: {modules: true},
       ecmaVersion: 'latest',
       requireConfigFile: false,
       babelOptions: {
@@ -59,7 +60,7 @@ export default ts.config(
    * https://eslint.org/docs/latest/use/configure/ignore
    */
   {
-    ignores: ['dist/', 'node_modules/', 'coverage/', '!**/.*'],
+    ignores: ['dist/', 'node_modules/', 'declarations'],
   },
   /**
    * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
@@ -67,6 +68,13 @@ export default ts.config(
   {
     linterOptions: {
       reportUnusedDisableDirectives: 'error',
+    },
+  },
+  {
+    languageOptions: {
+      globals: {
+        ...emberNativeGlobals.emberNativeGlobals,
+      }
     },
   },
   {
@@ -81,6 +89,7 @@ export default ts.config(
       parserOptions: parserOptions.esm.js,
       globals: {
         ...globals.browser,
+        ...emberNativeGlobals.emberNativeGlobals
       },
     },
   },
@@ -91,23 +100,19 @@ export default ts.config(
       parserOptions: parserOptions.esm.ts,
     },
     extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
-  },
-  // Disable specific TypeScript rules for problematic files
-  {
-    files: ['app/setup-inspector-support.ts', 'tests/application/pages-test.ts', 'tests/test-helper.ts'],
     rules: {
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
-    },
-  },
-  {
-    files: ['tests/**/*-test.{js,gjs,ts,gts}'],
-    plugins: {
-      qunit,
-    },
+      '@typescript-eslint/no-this-alias': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/no-floating-promises': 'off'
+    }
   },
   /**
    * CJS node files
@@ -115,14 +120,10 @@ export default ts.config(
   {
     files: [
       '**/*.cjs',
-      'config/**/*.js',
-      'testem.js',
-      'testem*.js',
-      '.prettierrc.js',
-      '.stylelintrc.js',
-      '.template-lintrc.js',
-      'ember-cli-build.js',
       'babel.config.js',
+      'rollup.config.mjs',
+      'webpack.config.js',
+      'utils/*.js'
     ],
     plugins: {
       n,

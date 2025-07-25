@@ -52,14 +52,14 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
       const n = elementRef.element.nativeView.nativeViewProtected;
       if (!n || !n.getWindowToken()) {
         elementRef.element.parentNode?.removeChild(elementRef.element);
-        ((listView.nativeView as any)._realizedItems as any).delete(
+        ((listView.nativeView as any)._realizedItems).delete(
           elementRef.element.nativeView,
         );
       }
     }
     this.elementRefs = this.elementRefs.filter(
       (e) => !!e.element.nativeView.nativeViewProtected?.getWindowToken(),
-    ) as Ref<T>[];
+    );
   }
 
   setupListView = modifier(

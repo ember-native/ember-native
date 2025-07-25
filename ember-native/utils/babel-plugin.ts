@@ -127,7 +127,7 @@ class HotAstProcessor {
         ) {
           return;
         }
-        const original = node.original.split('.')[0]!;
+        const original = node.original.split('.')[0];
         if (original === 'this') return;
         if (original.startsWith('@')) return;
         if (original === 'block') return;
@@ -171,7 +171,7 @@ class HotAstProcessor {
         element: ASTv1.ElementNode,
         p: WalkerPath<ASTv1.ElementNode>,
       ) => {
-        const original = element.tag.split('.')[0]!;
+        const original = element.tag.split('.')[0];
         if (findBlockParams(original, p)) return;
         if (importVar) {
           if (findImport(original)) {
@@ -235,7 +235,7 @@ export default function hotReplaceAst(babel: typeof Babel) {
           path.node.body.findIndex(
             (e: BabelTypesNamespace.Statement) =>
               e.type === 'VariableDeclaration' &&
-              (e.declarations[0]!.id as BabelTypesNamespace.Identifier).name ===
+              (e.declarations[0].id as BabelTypesNamespace.Identifier).name ===
                 hotAstProcessor.meta.importVar,
           ) + 1;
 
@@ -281,7 +281,7 @@ export default function hotReplaceAst(babel: typeof Babel) {
               configFile: false,
             },
           );
-          const accept = ast!.program.body;
+          const accept = ast.program.body;
           ifHotStatements.push(...accept);
         }
         const ifHot = t.ifStatement(

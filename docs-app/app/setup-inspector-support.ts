@@ -1,15 +1,24 @@
 import Ember from 'ember';
-// @ts-expect-error dont care
+// These imports have type issues but are needed for the inspector
+// @ts-expect-error no types
 import * as runtime from '@glimmer/runtime';
-// @ts-expect-error dont care
+// @ts-expect-error no types
 import * as reference from '@glimmer/reference';
 import * as tracking from '@glimmer/tracking';
-// @ts-expect-error dont care
+// @ts-expect-error no types
 import * as validator from '@glimmer/validator';
 import { RSVP } from '@ember/-internals/runtime';
 
 import config from './config/environment';
 
+// Define window.define to avoid TypeScript errors
+declare global {
+  interface Window {
+    define: (moduleName: string, factory: () => unknown) => void;
+  }
+}
+
+// Type assertions for window.define calls
 window.define('@glimmer/tracking', () => tracking);
 window.define('@glimmer/reference', () => reference);
 window.define('@glimmer/runtime', () => runtime);
