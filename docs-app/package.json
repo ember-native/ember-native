@@ -101,7 +101,7 @@
     "ember-cli-terser": "^4.0.2",
     "ember-load-initializers": "^3.0.1",
     "ember-page-title": "^9.0.1",
-    "ember-primitives": "^0.32.0",
+    "ember-primitives": "^0.36.0",
     "ember-qunit": "^9.0.3",
     "ember-resolver": "^13.1.1",
     "ember-resources": "^7.0.4",
