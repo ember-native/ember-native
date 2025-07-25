@@ -1,12 +1,11 @@
 import Ember from 'ember';
 // These imports have type issues but are needed for the inspector
-// @ts-ignore
+// @ts-expect-error no types
 import * as runtime from '@glimmer/runtime';
-// @ts-ignore
+// @ts-expect-error no types
 import * as reference from '@glimmer/reference';
-// @ts-ignore
 import * as tracking from '@glimmer/tracking';
-// @ts-ignore
+// @ts-expect-error no types
 import * as validator from '@glimmer/validator';
 import { RSVP } from '@ember/-internals/runtime';
 
