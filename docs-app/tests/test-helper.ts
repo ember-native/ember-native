@@ -5,6 +5,7 @@ import { start } from 'ember-qunit';
 
 import Application from 'docs-app/app';
 import config from 'docs-app/config/environment';
+import type { Page } from 'docs-app/types/page';
 
 setApplication(Application.create(config.APP));
 
@@ -15,15 +16,22 @@ QUnit.config.urlConfig.push({
   label: 'Log a11y violations',
 });
 
-(async function loadManifest() {
-  let response = await fetch('/kolay-manifest/manifest.json');
-  let json = await response.json();
-  let pages = json.groups[0].list;
+// Use void operator to explicitly mark the promise as ignored
+void (async function loadManifest() {
+  const response = await fetch('/kolay-manifest/manifest.json');
+  const json = (await response.json()) as { groups: { list: Page[] }[] };
+  const pages = json.groups[0].list;
 
   // The accessibility page deliberately
   // has violations for demonstration
-  (window as any).__pages__ = pages.filter(
-    (page: { path: string }) => !page.path.includes('accessibility')
+  (window as { __pages__: Page[] }).__pages__ = pages.filter(
+    (page) => {
+      // Ensure page is properly typed
+      if (typeof page === 'object' && page !== null && 'path' in page && typeof page.path === 'string') {
+        return !page.path.includes('accessibility');
+      }
+      return false;
+    }
   );
   start();
 })();

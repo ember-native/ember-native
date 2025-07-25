@@ -4,18 +4,22 @@ import { tracked } from '@glimmer/tracking';
 import config from 'docs-app/config/environment';
 import PowerSelect from 'ember-power-select/components/power-select';
 
+interface GithubContent {
+  name: string;
+}
+
 export class VersionSelector extends Component {
-  @tracked promise!: Promise<any>;
+  @tracked promise!: Promise<string[]>;
   @tracked selected = config.rootURL.split('/').slice(-2)[0] || 'main';
 
   async fetchVersions() {
-    const result = await (
+    const result = (await (
       await fetch(
         'https://api.github.com/repos/ember-native/ember-native/contents/versions?ref=ember-native-docs'
       )
-    ).json();
+    ).json()) as GithubContent[];
 
-    return result.map((r: any) => r.name);
+    return result.map((r) => r.name);
   }
 
   load = () => {

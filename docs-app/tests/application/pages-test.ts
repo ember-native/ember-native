@@ -6,7 +6,10 @@ import { colorScheme } from 'ember-primitives/color-scheme';
 
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 
-const pages: { path: string }[] = (window as any).__pages__;
+import { Page } from 'docs-app/types/page';
+
+// Type the window properly to avoid unsafe member access
+const pages: Page[] = (window as { __pages__: Page[] }).__pages__;
 
 /**
  * a11yAudit halts tests, this gets around that
@@ -25,16 +28,14 @@ async function checkA11y(assert: Assert, path: string, theme: string) {
       },
     });
     assert.ok(true, `no a11y errors found for ${path} using the ${theme} theme`);
-  } catch (e) {
+  } catch (e: unknown) {
     let errorText = '';
 
-    if (typeof e === 'object') {
-      if (e && 'message' in e && typeof e.message === 'string') {
-        errorText = e.message;
-      }
+    if (e instanceof Error) {
+      errorText = e.message;
     }
 
-    let message = `no a11y errors found for ${path} using the ${theme} theme` + `\n\n` + errorText;
+    const message = `no a11y errors found for ${path} using the ${theme} theme` + `\n\n` + errorText;
 
     if (window.location.search.includes('debugA11yAudit')) {
       console.error(errorText);
@@ -47,21 +48,24 @@ async function checkA11y(assert: Assert, path: string, theme: string) {
 module('Application | Pages', function (hooks) {
   setupApplicationTest(hooks);
 
-  for (let page of pages) {
-    test(`${page.path}`, async function (assert) {
-      let path = page.path.replace('.md', '');
+  for (const page of pages) {
+    // Ensure page is properly typed
+    if (typeof page === 'object' && page !== null && 'path' in page && typeof page.path === 'string') {
+      test(`${page.path}`, async function (assert) {
+        const path = page.path.replace('.md', '');
 
-      await visit(path);
-      await waitUntil(() => findAll('nav a').length !== 0);
-      await checkA11y(assert, path, 'default');
+        await visit(path);
+        await waitUntil(() => findAll('nav a').length !== 0);
+        await checkA11y(assert, path, 'default');
 
-      assert.dom('[data-page-error]').doesNotExist();
+        assert.dom('[data-page-error]').doesNotExist();
 
-      colorScheme.update('dark');
-      await checkA11y(assert, path, 'dark');
+        colorScheme.update('dark');
+        await checkA11y(assert, path, 'dark');
 
-      colorScheme.update('light');
-      await checkA11y(assert, path, 'light');
-    });
+        colorScheme.update('light');
+        await checkA11y(assert, path, 'light');
+      });
+    }
   }
 });

@@ -1,5 +1,4 @@
 const { babelCompatSupport, templateCompatSupport } = require('@embroider/compat/babel');
-const { hotAstProcessor } = require('ember-vite-hmr/lib/babel-plugin');
 
 module.exports = {
   plugins: [

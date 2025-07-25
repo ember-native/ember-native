@@ -6,8 +6,6 @@ import { kolay } from "kolay/vite";
 // rollup-plugin-astroturf mjs has wrong import specifiers...
 import { createRequire } from "module";
 import { defineConfig } from "vite";
-import fs from "fs";
-import path from "path";
 const require = createRequire(import.meta.url);
 const astroturf = require("rollup-plugin-astroturf");
 
