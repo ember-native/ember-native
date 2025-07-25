@@ -26,11 +26,7 @@ void (async function loadManifest() {
   // has violations for demonstration
   (window as { __pages__: Page[] }).__pages__ = pages.filter(
     (page) => {
-      // Ensure page is properly typed
-      if (typeof page === 'object' && page !== null && 'path' in page && typeof page.path === 'string') {
-        return !page.path.includes('accessibility');
-      }
-      return false;
+      return typeof page.path === 'string' && !page.path.includes('accessibility');
     }
   );
   start();

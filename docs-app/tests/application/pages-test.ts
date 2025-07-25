@@ -49,23 +49,20 @@ module('Application | Pages', function (hooks) {
   setupApplicationTest(hooks);
 
   for (const page of pages) {
-    // Ensure page is properly typed
-    if (typeof page === 'object' && page !== null && 'path' in page && typeof page.path === 'string') {
-      test(`${page.path}`, async function (assert) {
-        const path = page.path.replace('.md', '');
+    test(`${page.path}`, async function (assert) {
+      const path = page.path.replace('.md', '');
 
-        await visit(path);
-        await waitUntil(() => findAll('nav a').length !== 0);
-        await checkA11y(assert, path, 'default');
+      await visit(path);
+      await waitUntil(() => findAll('nav a').length !== 0);
+      await checkA11y(assert, path, 'default');
 
-        assert.dom('[data-page-error]').doesNotExist();
+      assert.dom('[data-page-error]').doesNotExist();
 
-        colorScheme.update('dark');
-        await checkA11y(assert, path, 'dark');
+      colorScheme.update('dark');
+      await checkA11y(assert, path, 'dark');
 
-        colorScheme.update('light');
-        await checkA11y(assert, path, 'light');
-      });
-    }
+      colorScheme.update('light');
+      await checkA11y(assert, path, 'light');
+    });
   }
 });

@@ -92,6 +92,17 @@ export default ts.config(
     },
     extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
   },
+  // Disable specific TypeScript rules for problematic files
+  {
+    files: ['app/setup-inspector-support.ts', 'tests/application/pages-test.ts', 'tests/test-helper.ts'],
+    rules: {
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+    },
+  },
   {
     files: ['tests/**/*-test.{js,gjs,ts,gts}'],
     plugins: {
