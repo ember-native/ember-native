@@ -21,7 +21,7 @@
     "debug:types": "glint --debug-intermediate-representation"
   },
   "dependencies": {
-    "@ember/test-waiters": "^4.0.0",
+    "@ember/test-waiters": "^4.1.1",
     "@embroider/macros": "^1.16.10",
     "@glimmer/blueprint": "^1.1.2",
     "@glimmer/compiler": "^0.94.10",
