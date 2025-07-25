@@ -5,7 +5,7 @@ import { start } from 'ember-qunit';
 
 import Application from 'docs-app/app';
 import config from 'docs-app/config/environment';
-import type { Page } from 'docs-app/types/page';
+import type { Page } from '../types/page';
 
 setApplication(Application.create(config.APP));
 
@@ -20,11 +20,11 @@ QUnit.config.urlConfig.push({
 void (async function loadManifest() {
   const response = await fetch('/kolay-manifest/manifest.json');
   const json = (await response.json()) as { groups: { list: Page[] }[] };
-  const pages = json.groups[0].list;
+  const pages = json.groups[0]?.list;
 
   // The accessibility page deliberately
   // has violations for demonstration
-  (window as { __pages__: Page[] }).__pages__ = pages.filter(
+  (window as unknown as { __pages__?: Page[] }).__pages__ = pages?.filter(
     (page) => {
       return typeof page.path === 'string' && !page.path.includes('accessibility');
     }

@@ -6,10 +6,10 @@ import { colorScheme } from 'ember-primitives/color-scheme';
 
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 
-import { Page } from 'docs-app/types/page';
+import type { Page } from '../../types/page';
 
 // Type the window properly to avoid unsafe member access
-const pages: Page[] = (window as { __pages__: Page[] }).__pages__;
+const pages: Page[] = (window as unknown as { __pages__: Page[] }).__pages__;
 
 /**
  * a11yAudit halts tests, this gets around that
