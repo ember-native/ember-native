@@ -257,7 +257,7 @@ importers:
         version: 4.2.1(karma@4.4.1)(qunit@2.24.1)
       nativescript:
         specifier: ^8.9.2
-        version: 8.9.2(@types/node@24.0.4)(encoding@0.1.13)
+        version: 8.9.2(@types/node@24.1.0)(encoding@0.1.13)
       nyc:
         specifier: 17.1.0
         version: 17.1.0
@@ -302,7 +302,7 @@ importers:
         version: 3.4.2
       '@universal-ember/docs-support':
         specifier: '>=0.6.7'
-        version: 0.6.7(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@ember/test-waiters@4.1.1(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)
+        version: 0.6.7(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@ember/test-waiters@4.1.1(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)
       assert:
         specifier: ^2.0.0
         version: 2.1.0
@@ -405,7 +405,7 @@ importers:
         version: 4.0.0(@embroider/compat@4.1.0(@embroider/core@4.1.1(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.99.9))(@embroider/core@4.1.1(@glint/template@1.5.2))(@embroider/webpack@4.1.0(@embroider/core@4.1.1(@glint/template@1.5.2))(webpack@5.99.9))
       '@embroider/vite':
         specifier: ^1.1.3
-        version: 1.1.5(@embroider/core@4.1.1(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.45.1)(vite@7.0.6(@types/node@24.0.4)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))
+        version: 1.1.5(@embroider/core@4.1.1(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.45.1)(vite@7.0.6(@types/node@24.1.0)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))
       '@embroider/webpack':
         specifier: 4.1.0
         version: 4.1.0(@embroider/core@4.1.1(@glint/template@1.5.2))(webpack@5.99.9)
@@ -444,7 +444,7 @@ importers:
         version: 6.0.4(@babel/core@7.27.7)(@types/babel__core@7.20.5)(rollup@4.45.1)
       '@tailwindcss/typography':
         specifier: ^0.5.15
-        version: 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)))
+        version: 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)))
       '@tsconfig/ember':
         specifier: ^3.0.5
         version: 3.0.10
@@ -612,7 +612,7 @@ importers:
         version: 0.8.2
       tailwindcss:
         specifier: ^3.4.14
-        version: 3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+        version: 3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
       typedoc:
         specifier: ^0.28.5
         version: 0.28.5(typescript@5.8.3)
@@ -621,7 +621,7 @@ importers:
         version: 5.8.3
       vite:
         specifier: ^7.0.6
-        version: 7.0.6(@types/node@24.0.4)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
+        version: 7.0.6(@types/node@24.1.0)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
 
   ember-native:
     dependencies:
@@ -659,8 +659,8 @@ importers:
         specifier: ^16.0.1
         version: 16.0.1(rollup@4.41.1)
       '@types/node':
-        specifier: ^24.0.4
-        version: 24.0.4
+        specifier: ^24.1.0
+        version: 24.1.0
       astroturf:
         specifier: ^1.2.0
         version: 1.2.0(webpack@5.99.9)
@@ -696,7 +696,7 @@ importers:
         version: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(@babel/core@7.27.7)(astroturf@1.2.0(webpack@5.99.9))(rollup@4.41.1)
       rollup-plugin-postcss:
         specifier: ^4.0.2
-        version: 4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+        version: 4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
       rollup-plugin-root-import:
         specifier: ^1.0.0
         version: 1.0.0
@@ -898,7 +898,7 @@ importers:
         version: 5.8.3
       typescript-plugin-css-modules:
         specifier: ^5.0.1
-        version: 5.1.0(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))(typescript@5.8.3)
+        version: 5.1.0(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))(typescript@5.8.3)
       yui:
         specifier: ^3.18.1
         version: 3.18.1
@@ -3845,8 +3845,8 @@ packages:
   '@types/node@16.9.1':
     resolution: {integrity: sha512-QpLcX9ZSsq3YYUUnD3nFDY8H7wctAhQj/TFKL8Ya8v5fMm3CFXxo8zStsLAl780ltoYoo1WvKUVGBQK+1ifr7g==}
 
-  '@types/node@24.0.4':
-    resolution: {integrity: sha512-ulyqAkrhnuNq9pB76DRBTkcS6YsmDALy6Ua63V8OhrOBgbcYt6IOdzpw5P1+dyRIyMerzLkeYWBeOXPpA9GMAA==}
+  '@types/node@24.1.0':
+    resolution: {integrity: sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -16182,7 +16182,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/vite@1.1.5(@embroider/core@4.1.1(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.45.1)(vite@7.0.6(@types/node@24.0.4)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))':
+  '@embroider/vite@1.1.5(@embroider/core@4.1.1(@glint/template@1.5.2))(@glint/template@1.5.2)(rollup@4.45.1)(vite@7.0.6(@types/node@24.1.0)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0))':
     dependencies:
       '@babel/core': 7.27.7
       '@embroider/core': 4.1.1(@glint/template@1.5.2)
@@ -16200,7 +16200,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.39.2
-      vite: 7.0.6(@types/node@24.0.4)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
+      vite: 7.0.6(@types/node@24.1.0)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -18252,7 +18252,7 @@ snapshots:
 
   '@rigor789/resolve-package-path@1.0.7': {}
 
-  '@rigor789/trapezedev-project@7.1.2(@types/node@24.0.4)(encoding@0.1.13)(typescript@5.7.3)':
+  '@rigor789/trapezedev-project@7.1.2(@types/node@24.1.0)(encoding@0.1.13)(typescript@5.7.3)':
     dependencies:
       '@ionic/utils-fs': 3.1.7
       '@ionic/utils-subprocess': 2.1.14
@@ -18276,7 +18276,7 @@ snapshots:
       replace: 1.2.2
       tempy: 1.0.1
       tmp: 0.2.3
-      ts-node: 10.9.2(@types/node@24.0.4)(typescript@5.7.3)
+      ts-node: 10.9.2(@types/node@24.1.0)(typescript@5.7.3)
       xcode: 3.0.1
       xml-js: 1.6.11
       xpath: 0.0.32
@@ -18617,13 +18617,13 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)))':
+  '@tailwindcss/typography@0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
 
   '@testim/chrome-version@1.1.4': {}
 
@@ -18702,7 +18702,7 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/chai-as-promised@7.1.8':
     dependencies:
@@ -18712,11 +18712,11 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/cors@2.8.18':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/cssnano@5.1.3(postcss@8.5.4)':
     dependencies:
@@ -18753,7 +18753,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.6':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -18767,25 +18767,25 @@ snapshots:
 
   '@types/fs-extra@5.1.0':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/fs-extra@8.1.5':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/fs-extra@9.0.13':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 6.0.0
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/glob@8.1.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/hast@2.3.10':
     dependencies:
@@ -18831,7 +18831,7 @@ snapshots:
 
   '@types/node@16.9.1': {}
 
-  '@types/node@24.0.4':
+  '@types/node@24.1.0':
     dependencies:
       undici-types: 7.8.0
 
@@ -18864,19 +18864,19 @@ snapshots:
   '@types/rimraf@2.0.5':
     dependencies:
       '@types/glob': 8.1.0
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/rsvp@4.0.9': {}
 
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       '@types/send': 0.17.4
 
   '@types/sizzle@2.3.9': {}
@@ -18885,7 +18885,7 @@ snapshots:
 
   '@types/ssri@7.1.5':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
 
   '@types/supports-color@8.1.3': {}
 
@@ -18897,7 +18897,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
     optional: true
 
   '@typescript-eslint/eslint-plugin@8.32.1(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)':
@@ -19100,11 +19100,11 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@universal-ember/docs-support@0.6.7(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@ember/test-waiters@4.1.1(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)':
+  '@universal-ember/docs-support@0.6.7(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@ember/test-waiters@4.1.1(@glint/template@1.5.2))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))(typescript@5.8.3)(webpack@5.99.9)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
       '@fontsource/lexend': 5.2.7
-      '@tailwindcss/typography': 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)))
+      '@tailwindcss/typography': 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)))
       change-case: 5.4.4
       decorator-transforms: 2.3.0(@babel/core@7.27.7)
       ember-mobile-menu: 5.3.0(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(webpack@5.99.9)
@@ -19116,7 +19116,7 @@ snapshots:
       package-up: 5.0.0
       read-package-up: 11.0.0
       should-handle-link: 1.3.0
-      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
     transitivePeerDependencies:
       - '@babel/core'
       - '@ember/test-helpers'
@@ -23415,7 +23415,7 @@ snapshots:
   engine.io@6.6.4:
     dependencies:
       '@types/cors': 2.8.18
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.7.2
@@ -25976,7 +25976,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -27563,13 +27563,13 @@ snapshots:
     dependencies:
       nativescript-ui-core: 15.2.3
 
-  nativescript@8.9.2(@types/node@24.0.4)(encoding@0.1.13):
+  nativescript@8.9.2(@types/node@24.1.0)(encoding@0.1.13):
     dependencies:
       '@foxt/js-srp': 0.0.3-patch2
       '@nativescript/doctor': 2.0.16-rc.0
       '@npmcli/arborist': 9.1.0
       '@rigor789/resolve-package-path': 1.0.7
-      '@rigor789/trapezedev-project': 7.1.2(@types/node@24.0.4)(encoding@0.1.13)(typescript@5.7.3)
+      '@rigor789/trapezedev-project': 7.1.2(@types/node@24.1.0)(encoding@0.1.13)(typescript@5.7.3)
       ansi-colors: 4.1.3
       archiver: 7.0.1
       axios: 1.7.9
@@ -28594,21 +28594,21 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.5.4
 
-  postcss-load-config@3.1.4(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)):
+  postcss-load-config@3.1.4(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)):
     dependencies:
       lilconfig: 2.1.0
       yaml: 1.10.2
     optionalDependencies:
       postcss: 8.5.4
-      ts-node: 10.9.2(@types/node@24.0.4)(typescript@5.8.3)
+      ts-node: 10.9.2(@types/node@24.1.0)(typescript@5.8.3)
 
-  postcss-load-config@4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)):
+  postcss-load-config@4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.8.0
     optionalDependencies:
       postcss: 8.5.4
-      ts-node: 10.9.2(@types/node@24.0.4)(typescript@5.8.3)
+      ts-node: 10.9.2(@types/node@24.1.0)(typescript@5.8.3)
 
   postcss-loader@7.3.4(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.9):
     dependencies:
@@ -29682,7 +29682,7 @@ snapshots:
       globby: 10.0.1
       is-plain-object: 3.0.1
 
-  rollup-plugin-postcss@4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)):
+  rollup-plugin-postcss@4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)):
     dependencies:
       chalk: 4.1.2
       concat-with-sourcemaps: 1.1.0
@@ -29691,7 +29691,7 @@ snapshots:
       p-queue: 6.6.2
       pify: 5.0.0
       postcss: 8.5.4
-      postcss-load-config: 3.1.4(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+      postcss-load-config: 3.1.4(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
       postcss-modules: 4.3.1(postcss@8.5.4)
       promise.series: 0.2.0
       resolve: 1.22.10
@@ -30916,7 +30916,7 @@ snapshots:
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu': 4.40.0
 
-  tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3)):
+  tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -30935,7 +30935,7 @@ snapshots:
       postcss: 8.5.4
       postcss-import: 15.1.0(postcss@8.5.4)
       postcss-js: 4.0.1(postcss@8.5.4)
-      postcss-load-config: 4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+      postcss-load-config: 4.0.2(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
       postcss-nested: 6.2.0(postcss@8.5.4)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -31327,14 +31327,14 @@ snapshots:
       '@ts-morph/common': 0.26.1
       code-block-writer: 13.0.3
 
-  ts-node@10.9.2(@types/node@24.0.4)(typescript@5.7.3):
+  ts-node@10.9.2(@types/node@24.1.0)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       acorn: 8.14.1
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -31345,14 +31345,14 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3):
+  ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       acorn: 8.14.1
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -31514,7 +31514,7 @@ snapshots:
 
   typescript-memoize@1.1.1: {}
 
-  typescript-plugin-css-modules@5.1.0(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))(typescript@5.8.3):
+  typescript-plugin-css-modules@5.1.0(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))(typescript@5.8.3):
     dependencies:
       '@types/postcss-modules-local-by-default': 4.0.2
       '@types/postcss-modules-scope': 3.0.4
@@ -31523,7 +31523,7 @@ snapshots:
       less: 4.3.0
       lodash.camelcase: 4.3.0
       postcss: 8.5.4
-      postcss-load-config: 3.1.4(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.0.4)(typescript@5.8.3))
+      postcss-load-config: 3.1.4(postcss@8.5.4)(ts-node@10.9.2(@types/node@24.1.0)(typescript@5.8.3))
       postcss-modules-extract-imports: 3.1.0(postcss@8.5.4)
       postcss-modules-local-by-default: 4.2.0(postcss@8.5.4)
       postcss-modules-scope: 3.2.1(postcss@8.5.4)
@@ -31882,7 +31882,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@7.0.6(@types/node@24.0.4)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0):
+  vite@7.0.6(@types/node@24.1.0)(jiti@1.21.7)(less@4.3.0)(sass-embedded@1.89.2)(sass@1.89.2)(stylus@0.62.0)(terser@5.39.2)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.8
       fdir: 6.4.6(picomatch@4.0.3)
@@ -31891,7 +31891,7 @@ snapshots:
       rollup: 4.45.1
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.1.0
       fsevents: 2.3.3
       jiti: 1.21.7
       less: 4.3.0
