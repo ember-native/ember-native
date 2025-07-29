@@ -84,7 +84,7 @@
     "@embroider/macros": "^1.16.9",
     "@embroider/shared-internals": "^3.0.0",
     "@embroider/util": "^1.13.2",
-    "@embroider/webpack": "^4.1.0",
+    "@embroider/webpack": "^4.1.1",
     "@glimmer/interfaces": "^0.94.6",
     "@glimmer/reference": "^0.94.8",
     "@glimmer/runtime": "^0.94.10",
