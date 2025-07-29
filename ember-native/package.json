@@ -103,7 +103,7 @@
     "@types/qunit": "^2.19.5",
     "@types/qunit-dom": "^0.7.0",
     "@typescript-eslint/eslint-plugin": "^8.13.0",
-    "@typescript-eslint/parser": "^8.33.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "babel-import-util": "^3.0.0",
     "babel-plugin-ember-template-compilation": "^3.0.0",
     "bower": "^1.8.8",
