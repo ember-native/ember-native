@@ -22,7 +22,7 @@ export default class InspectorSupport extends Component<InspectorSupportInterfac
   declare page: PageElement;
   declare ownerDocument: DocumentNode;
   setupInspector = () => {
-    let i = setInterval(() => {
+    const i = setInterval(() => {
       const viewInspection =
         globalThis.EmberInspector?.viewDebug?.viewInspection;
       if (viewInspection && this.tooltip) {
@@ -40,8 +40,8 @@ export default class InspectorSupport extends Component<InspectorSupportInterfac
           _showHighlight.call(this, node, rect);
           this.highlight.setAttribute('visibility', 'visible');
           const style = this.highlight.style as any;
-          style.width = (style.width as any).value;
-          style.height = (style.height as any).value;
+          style.width = style.width.value;
+          style.height = style.height.value;
           const pos = this.page.nativeView.getLocationInWindow() || {
             x: 0,
             y: 0,

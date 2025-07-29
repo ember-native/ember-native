@@ -30,7 +30,7 @@ export default class HistoryService extends Service {
 
   back = () => {
     const h = this.stack.pop();
-    if (h && h.from) {
+    if (h?.from) {
       const from = h.from;
       this.stack = [...this.stack];
       const transition = this.nativeRouter.transitionTo(

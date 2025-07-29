@@ -57,7 +57,7 @@ export function setupInspectorSupport(config: any) {
 
   globalThis.addEventListener = (type: any, cb: any) => {
     globalMessaging[type] = globalMessaging[type] || [];
-    globalMessaging[type]!.push(cb);
+    globalMessaging[type].push(cb);
   };
 
   globalThis.removeEventListener = (type: any, cb: any) => {

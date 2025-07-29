@@ -1,4 +1,3 @@
-import { modifier } from 'ember-modifier';
 import { ExternalLink } from 'ember-primitives';
 
 import { Flask, GitHub } from '@universal-ember/docs-support/icons';

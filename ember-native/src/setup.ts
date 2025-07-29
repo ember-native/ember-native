@@ -26,12 +26,12 @@ export function setup() {
   }
   handleBackburnerErrors();
 
-  SimpleDynamicAttribute.prototype.set = function (dom, value, _env) {
+  SimpleDynamicAttribute.prototype.set = function (dom, value) {
     const { name, namespace } = this.attribute;
     dom.__setAttribute(name, value as any, namespace);
   };
 
-  SimpleDynamicAttribute.prototype.update = function (value, _env) {
+  SimpleDynamicAttribute.prototype.update = function (value) {
     const normalizedValue = value;
     const { element: element, name: name } = this.attribute;
     if (null === normalizedValue) {
