@@ -729,8 +729,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@embroider/util':
-        specifier: ^1.13.2
-        version: 1.13.2(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.5.2)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2(@babel/core@7.27.7)))(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
+        specifier: ^1.13.3
+        version: 1.13.3(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.5.2)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2(@babel/core@7.27.7)))(@glint/template@1.5.2)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
       '@embroider/webpack':
         specifier: ^4.1.1
         version: 4.1.1(@embroider/core@4.1.1(@glint/template@1.5.2))(webpack@5.99.9)
