@@ -95,7 +95,7 @@
     "karma-coverage": "2.2.1",
     "karma-nativescript-launcher": "1.0.0",
     "karma-qunit": "4.2.1",
-    "nativescript": "^8.9.2",
+    "nativescript": "^8.9.3",
     "nyc": "17.1.0",
     "path-browserify": "^1.0.1",
     "querystring-es3": "^0.2.1",
