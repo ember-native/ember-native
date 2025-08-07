@@ -554,8 +554,8 @@ importers:
         specifier: ^12.3.1
         version: 12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-n:
-        specifier: ^17.18.0
-        version: 17.18.0(eslint@9.27.0(jiti@1.21.7))
+        specifier: ^17.21.3
+        version: 17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-prettier:
         specifier: ^5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2)
@@ -843,8 +843,8 @@ importers:
         specifier: ^0.21.0
         version: 0.21.0(@babel/core@7.27.7)(ember-template-lint@7.9.1)(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-n:
-        specifier: ^17.18.0
-        version: 17.18.0(eslint@9.27.0(jiti@1.21.7))
+        specifier: ^17.21.3
+        version: 17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-node:
         specifier: ^11.1.0
         version: 11.1.0(eslint@9.27.0(jiti@1.21.7))
@@ -7332,8 +7332,8 @@ packages:
     resolution: {integrity: sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg==}
     engines: {node: '>=10.13.0'}
 
-  enhanced-resolve@5.18.2:
-    resolution: {integrity: sha512-6Jw4sE1maoRJo3q8MsSIn2onJFbLTOjY9hlx4DZXmOKvLRd1Ok2kXmAGXaafL2+ijsJZ1ClYbl/pmqr9+k4iUQ==}
+  enhanced-resolve@5.18.3:
+    resolution: {integrity: sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==}
     engines: {node: '>=10.13.0'}
 
   ensure-posix-path@1.1.1:
@@ -7604,14 +7604,8 @@ packages:
     resolution: {integrity: sha512-3An5ISV5dq/kHfXdNyY5TUe2ONC3yXFSkLX2gu+W8xAhKhfvrRvkSAeKXCxZqZ0KJLX15ojBuLPyj+UikQMkOA==}
     engines: {node: '>=18.0'}
 
-  eslint-plugin-n@17.18.0:
-    resolution: {integrity: sha512-hvZ/HusueqTJ7VDLoCpjN0hx4N4+jHIWTXD4TMLHy9F23XkDagR9v+xQWRWR57yY55GPF8NnD4ox9iGTxirY8A==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      eslint: '>=8.23.0'
-
-  eslint-plugin-n@17.21.2:
-    resolution: {integrity: sha512-s3ai4Msfk5mbSvOgCkYo6k5+zP3W/OK+AvLmMmx++Ki4a5CPO7luIDwOnjUZm/t+oZYP0YADTxe+u4JqnT8+Dg==}
+  eslint-plugin-n@17.21.3:
+    resolution: {integrity: sha512-MtxYjDZhMQgsWRm/4xYLL0i2EhusWT7itDxlJ80l1NND2AL2Vi5Mvneqv/ikG9+zpran0VsVRXTEHrpLmUZRNw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.23.0'
@@ -17836,7 +17830,7 @@ snapshots:
       hosted-git-info: 8.1.0
       json-parse-even-better-errors: 4.0.0
       proc-log: 5.0.0
-      semver: 7.7.1
+      semver: 7.7.2
       validate-npm-package-license: 3.0.4
 
   '@npmcli/promise-spawn@8.0.2':
@@ -17872,7 +17866,7 @@ snapshots:
       eslint-plugin-decorator-position: 6.0.0(@babel/eslint-parser@7.27.1(@babel/core@7.27.7)(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-json: 4.0.1
-      eslint-plugin-n: 17.21.2(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
+      eslint-plugin-n: 17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-simple-import-sort: 12.1.1(eslint@9.27.0(jiti@1.21.7))
       globals: 16.3.0
       prettier-plugin-ember-template-tag: 2.1.0(prettier@3.6.2)
@@ -23196,7 +23190,7 @@ snapshots:
       '@eslint/js': 9.32.0
       eslint-config-prettier: 10.1.5(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-ember: 12.7.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.27.0(jiti@1.21.7))
-      eslint-plugin-n: 17.21.2(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
+      eslint-plugin-n: 17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-qunit: 8.2.5(eslint@9.27.0(jiti@1.21.7))
       globals: 16.3.0
       typescript-eslint: 8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
@@ -23811,7 +23805,7 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.2
 
-  enhanced-resolve@5.18.2:
+  enhanced-resolve@5.18.3:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.2.2
@@ -24247,22 +24241,10 @@ snapshots:
       lodash: 4.17.21
       vscode-json-languageservice: 4.2.1
 
-  eslint-plugin-n@17.18.0(eslint@9.27.0(jiti@1.21.7)):
+  eslint-plugin-n@17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3):
     dependencies:
       '@eslint-community/eslint-utils': 4.7.0(eslint@9.27.0(jiti@1.21.7))
-      enhanced-resolve: 5.18.1
-      eslint: 9.27.0(jiti@1.21.7)
-      eslint-plugin-es-x: 7.8.0(eslint@9.27.0(jiti@1.21.7))
-      get-tsconfig: 4.10.1
-      globals: 15.15.0
-      ignore: 5.3.2
-      minimatch: 9.0.5
-      semver: 7.7.2
-
-  eslint-plugin-n@17.21.2(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3):
-    dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.27.0(jiti@1.21.7))
-      enhanced-resolve: 5.18.2
+      enhanced-resolve: 5.18.3
       eslint: 9.27.0(jiti@1.21.7)
       eslint-plugin-es-x: 7.8.0(eslint@9.27.0(jiti@1.21.7))
       get-tsconfig: 4.10.1
