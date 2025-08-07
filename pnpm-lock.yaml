@@ -548,8 +548,8 @@ importers:
         specifier: ^9.27.0
         version: 9.27.0(jiti@1.21.7)
       eslint-config-prettier:
-        specifier: ^10.1.5
-        version: 10.1.5(eslint@9.27.0(jiti@1.21.7))
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-ember:
         specifier: ^12.3.1
         version: 12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.27.0(jiti@1.21.7))
@@ -558,7 +558,7 @@ importers:
         version: 17.18.0(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-qunit:
         specifier: ^8.1.2
         version: 8.1.2(eslint@9.27.0(jiti@1.21.7))
@@ -834,8 +834,8 @@ importers:
         specifier: ^15.0.0
         version: 15.0.0(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))
       eslint-config-prettier:
-        specifier: ^10.1.5
-        version: 10.1.5(eslint@9.27.0(jiti@1.21.7))
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-ember:
         specifier: ^12.3.1
         version: 12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.27.0(jiti@1.21.7))
@@ -850,7 +850,7 @@ importers:
         version: 11.1.0(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-qunit:
         specifier: ^8.1.1
         version: 8.1.2(eslint@9.27.0(jiti@1.21.7))
@@ -7490,8 +7490,8 @@ packages:
       eslint: ^7.32.0 || ^8.2.0
       eslint-plugin-import: ^2.25.2
 
-  eslint-config-prettier@10.1.5:
-    resolution: {integrity: sha512-zc1UmCpNltmVY34vuLRV61r1K27sWuX39E+uyUnY8xS2Bex88VV9cugG+UZbRSRGtGyFboj+D8JODyme1plMpw==}
+  eslint-config-prettier@10.1.8:
+    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -23194,7 +23194,7 @@ snapshots:
     dependencies:
       '@babel/eslint-parser': 7.28.0(@babel/core@7.27.7)(eslint@9.27.0(jiti@1.21.7))
       '@eslint/js': 9.32.0
-      eslint-config-prettier: 10.1.5(eslint@9.27.0(jiti@1.21.7))
+      eslint-config-prettier: 10.1.8(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-ember: 12.7.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-n: 17.21.2(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-qunit: 8.2.5(eslint@9.27.0(jiti@1.21.7))
@@ -24090,7 +24090,7 @@ snapshots:
       object.entries: 1.1.9
       semver: 6.3.1
 
-  eslint-config-prettier@10.1.5(eslint@9.27.0(jiti@1.21.7)):
+  eslint-config-prettier@10.1.8(eslint@9.27.0(jiti@1.21.7)):
     dependencies:
       eslint: 9.27.0(jiti@1.21.7)
 
@@ -24284,7 +24284,7 @@ snapshots:
       resolve: 1.22.10
       semver: 6.3.1
 
-  eslint-plugin-prettier@5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2):
+  eslint-plugin-prettier@5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2):
     dependencies:
       eslint: 9.27.0(jiti@1.21.7)
       prettier: 3.6.2
@@ -24292,7 +24292,7 @@ snapshots:
       synckit: 0.11.11
     optionalDependencies:
       '@types/eslint': 9.6.1
-      eslint-config-prettier: 10.1.5(eslint@9.27.0(jiti@1.21.7))
+      eslint-config-prettier: 10.1.8(eslint@9.27.0(jiti@1.21.7))
 
   eslint-plugin-qunit@8.1.2(eslint@9.27.0(jiti@1.21.7)):
     dependencies:
