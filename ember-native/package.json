@@ -134,7 +134,7 @@
     "qunit": "^2.19.4",
     "qunit-dom": "^3.4.0",
     "release-it": "^15.10.3",
-    "rollup": "^4.41.1",
+    "rollup": "^4.46.2",
     "rollup-plugin-copy": "^3.4.0",
     "router_js": "^8.0.6",
     "sass": "^1.89.2",
