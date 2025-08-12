@@ -138,7 +138,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "router_js": "^8.0.6",
     "sass": "^1.89.2",
-    "sass-embedded": "^1.89.2",
+    "sass-embedded": "^1.90.0",
     "sass-loader": "^16.0.4",
     "typescript": "^5.9.2",
     "typescript-plugin-css-modules": "^5.2.0",
