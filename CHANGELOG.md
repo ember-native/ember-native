@@ -1,5 +1,15 @@
 # Changelog
 
+## Release (2025-08-19)
+
+
+
+#### :house: Internal
+* [#178](https://github.com/ember-native/ember-native/pull/178) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))
+
+#### Committers: 1
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+
 
 
 
