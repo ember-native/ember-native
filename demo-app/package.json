@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@ember/test-waiters": "^4.1.1",
-    "@embroider/macros": "^1.16.10",
+    "@embroider/macros": "^1.18.1",
     "@glimmer/blueprint": "^1.1.2",
     "@glimmer/compiler": "^0.94.10",
     "@glimmer/component": "^2.0.0",
