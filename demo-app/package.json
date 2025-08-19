@@ -37,7 +37,7 @@
     "@glimmer/test-helpers": "^0.31.2",
     "@glimmer/tracking": "^1.1.2",
     "@glimmer/util": "^0.94.8",
-    "@glimmer/validator": "^0.94.8",
+    "@glimmer/validator": "^0.95.0",
     "@glimmer/vm": "^0.94.8",
     "@glimmer/wire-format": "^0.94.8",
     "@nativescript/core": "~8.9.7",
