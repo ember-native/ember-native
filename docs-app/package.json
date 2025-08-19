@@ -136,7 +136,7 @@
     "tailwindcss": "^3.4.14",
     "typedoc": "^0.28.10",
     "typescript": "^5.9.2",
-    "vite": "^7.0.6",
+    "vite": "^7.1.2",
     "globals": "^16.3.0"
   },
   "engines": {
