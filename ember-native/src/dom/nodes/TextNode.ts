@@ -35,4 +35,12 @@ export default class TextNode extends ViewNode {
       this.parentNode.updateText();
     }
   }
+
+  get nodeValue() {
+    return this.text;
+  }
+
+  set nodeValue(value: string) {
+    this.setText(value);
+  }
 }

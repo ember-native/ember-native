@@ -32,12 +32,12 @@ QUnit.module('Basics | rendering & modifier', function(hooks) {
 
     const state = new State();
     await render(<template><button>counter: {{state.counter}}</button></template>);
-    assert.equal(this.element.textContent.trim(), 'counter: 0');
+    assert.equal(this.element.textContent.trim(), 'counter:  0');
 
     state.counter += 1;
 
     await rerender();
-    assert.equal(this.element.textContent.trim(), 'counter: 1');
+    assert.equal(this.element.textContent.trim(), 'counter:  1');
   });
 
     QUnit.test('modifier works', async function(assert) {
