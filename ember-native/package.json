@@ -107,7 +107,7 @@
     "babel-import-util": "^3.0.0",
     "babel-plugin-ember-template-compilation": "^3.0.0",
     "bower": "^1.8.8",
-    "globals": "^16.3.0",
+    "globals": "^16.5.0",
     "broccoli": "^3.4.2",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^9.2.0",

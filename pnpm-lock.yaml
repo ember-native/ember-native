@@ -238,8 +238,8 @@ importers:
         specifier: ^12.3.1
         version: 12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7))
       globals:
-        specifier: ^16.3.0
-        version: 16.3.0
+        specifier: ^16.5.0
+        version: 16.5.0
       https-browserify:
         specifier: ^1.0.0
         version: 1.0.0
@@ -566,8 +566,8 @@ importers:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.99.9)
       globals:
-        specifier: ^16.3.0
-        version: 16.3.0
+        specifier: ^16.5.0
+        version: 16.5.0
       globby:
         specifier: ^14.0.0
         version: 14.1.0
@@ -858,8 +858,8 @@ importers:
         specifier: ^1.1.4
         version: 1.1.4(@babel/preset-env@7.28.3(@babel/core@7.27.7))
       globals:
-        specifier: ^16.3.0
-        version: 16.3.0
+        specifier: ^16.5.0
+        version: 16.5.0
       loader.js:
         specifier: ^4.7.0
         version: 4.7.0
@@ -8483,8 +8483,8 @@ packages:
     resolution: {integrity: sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==}
     engines: {node: '>=18'}
 
-  globals@16.3.0:
-    resolution: {integrity: sha512-bqWEnJ1Nt3neqx2q5SFfGS8r/ahumIakg3HcwtNlrVlwXIeNumWn/c7Pn/wKzGhf6SaW6H6uWXLqC30STCMchQ==}
+  globals@16.5.0:
+    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
     engines: {node: '>=18'}
 
   globals@9.18.0:
@@ -18035,7 +18035,7 @@ snapshots:
       eslint-plugin-json: 4.0.1
       eslint-plugin-n: 17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2)
       eslint-plugin-simple-import-sort: 12.1.1(eslint@9.27.0(jiti@1.21.7))
-      globals: 16.3.0
+      globals: 16.5.0
       prettier-plugin-ember-template-tag: 2.1.0(prettier@3.6.2)
     optionalDependencies:
       '@babel/eslint-parser': 7.27.1(@babel/core@7.27.7)(eslint@9.27.0(jiti@1.21.7))
@@ -23407,7 +23407,7 @@ snapshots:
       eslint-plugin-ember: 12.7.4(@babel/core@7.27.7)(@typescript-eslint/parser@8.44.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-n: 17.21.3(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2)
       eslint-plugin-qunit: 8.2.5(eslint@9.27.0(jiti@1.21.7))
-      globals: 16.3.0
+      globals: 16.5.0
       typescript-eslint: 8.44.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2)
     transitivePeerDependencies:
       - '@babel/core'
@@ -25531,7 +25531,7 @@ snapshots:
 
   globals@15.15.0: {}
 
-  globals@16.3.0: {}
+  globals@16.5.0: {}
 
   globals@9.18.0: {}
 
