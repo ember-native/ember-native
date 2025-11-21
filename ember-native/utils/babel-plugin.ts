@@ -1,7 +1,6 @@
 import { parse, type PluginObj } from '@babel/core';
-import type * as BabelTypesNamespace from '@babel/types';
-import type { Program, Statement } from '@babel/types';
 import type * as Babel from '@babel/core';
+import type { types } from '@babel/core';
 import * as glimmer from '@glimmer/syntax';
 import { ASTv1, type NodeVisitor, WalkerPath } from '@glimmer/syntax';
 import { ImportUtil } from 'babel-import-util';
@@ -25,7 +24,7 @@ class HotAstProcessor {
     locals: Set<string>;
     importVar: any;
     importBindings: Set<string>;
-    babelProgram?: Program;
+    babelProgram?: types.Program;
   };
   didCreateImportClass: boolean = false;
 
@@ -82,7 +81,7 @@ class HotAstProcessor {
   }: {
     importVar: string;
     importBindings: Set<string>;
-    babelProgram: Program;
+    babelProgram: types.Program;
   }) {
     const findImport = function findImport(specifier: string) {
       return babelProgram.body.find(
@@ -208,8 +207,8 @@ export default function hotReplaceAst(babel: typeof Babel) {
         if (state.filename?.includes('node_modules')) {
           return;
         }
-        const util = new ImportUtil(babel, path);
-        const tracked = util.import(path, '@glimmer/tracking', 'tracked');
+        const util = new ImportUtil(babel as any, path as any);
+        const tracked = util.import(path as any, '@glimmer/tracking', 'tracked');
         const klass = t.classExpression(
           path.scope.generateUidIdentifier('Imports'),
           null,
@@ -233,22 +232,22 @@ export default function hotReplaceAst(babel: typeof Babel) {
 
         const varDeclaration =
           path.node.body.findIndex(
-            (e: BabelTypesNamespace.Statement) =>
+            (e) =>
               e.type === 'VariableDeclaration' &&
-              (e.declarations[0].id as BabelTypesNamespace.Identifier).name ===
+              (e.declarations[0].id as any).name ===
                 hotAstProcessor.meta.importVar,
           ) + 1;
 
         const lastImportIndex =
           [...path.node.body].findLastIndex(
-            (e: BabelTypesNamespace.Statement) =>
+            (e) =>
               e.type === 'ImportDeclaration',
           ) + 1;
 
         path.node.body.splice(
           Math.max(varDeclaration, lastImportIndex),
           0,
-          assign as unknown as Statement,
+          assign as any,
         );
 
         const findImport = function findImport(specifier: string) {
@@ -263,7 +262,7 @@ export default function hotReplaceAst(babel: typeof Babel) {
         for (const imp of bindings) {
           const importDeclaration = findImport(
             imp,
-          ) as BabelTypesNamespace.ImportDeclaration;
+          ) as any;
           if (!importDeclaration) {
             console.log('could not find import for ', imp);
             continue;
@@ -291,7 +290,7 @@ export default function hotReplaceAst(babel: typeof Babel) {
           ),
           t.blockStatement([...ifHotStatements]),
         );
-        path.node.body.push(ifHot);
+        path.node.body.push(ifHot as any);
         path.scope.crawl();
       },
     },
