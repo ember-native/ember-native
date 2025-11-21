@@ -207,8 +207,8 @@ export default function hotReplaceAst(babel: typeof Babel) {
         if (state.filename?.includes('node_modules')) {
           return;
         }
-        const util = new ImportUtil(babel, path);
-        const tracked = util.import(path, '@glimmer/tracking', 'tracked');
+        const util = new ImportUtil(babel as any, path as any);
+        const tracked = util.import(path as any, '@glimmer/tracking', 'tracked');
         const klass = t.classExpression(
           path.scope.generateUidIdentifier('Imports'),
           null,
