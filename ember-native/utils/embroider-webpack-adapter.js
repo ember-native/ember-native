@@ -88,6 +88,9 @@ function createResolverPlugin() {
                 return { id: res };
               }
               try {
+                if (spec.startsWith('ember-source')) {
+                  return { id: require.resolve(spec) };
+                }
                 return { id: require.resolve(spec, { paths: [path.dirname(from)] }) };
               } catch (e) {
                 return null;

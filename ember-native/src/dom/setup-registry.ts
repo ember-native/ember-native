@@ -66,10 +66,6 @@ export function registerElements() {
       //dont bother
       parentNode.appendChild(childNode);
     },
-    appendChild(parentNode: any, childNode: any, _atIndex: any) {
-      //dont bother
-      parentNode.appendChild(childNode);
-    },
   });
   // Completed
   registerNativeElement('StackLayout', () => StackLayout);
