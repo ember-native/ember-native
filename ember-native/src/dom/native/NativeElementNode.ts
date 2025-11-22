@@ -359,6 +359,10 @@ export default class NativeElementNode<
       return;
     }
 
+    if (childNode.parentNode !== parentNode) {
+      return;
+    }
+
     if (
       !(parentNode instanceof NativeElementNode) ||
       !(childNode instanceof NativeElementNode) ||
