@@ -4,6 +4,7 @@ import rehypeShikiFromHighlighter from '@shikijs/rehype/core';
 import { setupTabster } from 'ember-primitives/tabster';
 import { setupKolay } from 'kolay/setup';
 import { createHighlighterCore } from 'shiki/core';
+import { createOnigurumaEngine } from 'shiki';
 import getWasm from 'shiki/wasm';
 import 'ember-power-select/ember-power-select.scss';
 
@@ -32,7 +33,7 @@ export default class Application extends Route {
         import('shiki/langs/jsonc.mjs'),
         import('shiki/langs/markdown.mjs'),
       ],
-      loadWasm: getWasm,
+      engine: createOnigurumaEngine(getWasm),
     });
 
     const [manifest] = await Promise.all([
