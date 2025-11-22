@@ -157,9 +157,6 @@ module.exports = function configureEmbroiderWebpackAdapter(webpack) {
     config.module
       .rule('js/ts')
       .test(/\.([jt]s)$/)
-      .exclude
-      .add(/node_modules/)
-      .end()
       .use('babel-loader')
       .loader('babel-loader')
       .end();

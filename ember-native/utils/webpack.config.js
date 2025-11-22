@@ -25,28 +25,6 @@ module.exports = (webpack) => {
     );
   });
 
-  // Only configure fallback loaders if adapter failed to load
-  if (!adapterLoaded) {
-    webpack.chainWebpack((config) => {
-      // add a new rule for *.something files
-      config.module
-        .rule('gts/gjs')
-        .test(/\.g[jt]s$/)
-        .use('babel-loader')
-        .loader('babel-loader')
-        .end()
-        .use('gjs-loader')
-        .loader(require.resolve('./content-tag-loader.js'))
-        .end();
-
-      config.module
-        .rule('js/ts')
-        .test(/\.([jt]s)$/)
-        .use('babel-loader')
-        .loader('babel-loader');
-    });
-  }
-
   webpack.chainWebpack((config) => {
     config.plugin('DefinePlugin').tap((args) => {
       Object.assign(args[0], {
