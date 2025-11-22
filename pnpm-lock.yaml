@@ -44,57 +44,6 @@ importers:
       '@embroider/macros':
         specifier: ^1.18.1
         version: 1.18.1(@glint/template@1.5.2)
-      '@glimmer/blueprint':
-        specifier: ^1.1.2
-        version: 1.1.2
-      '@glimmer/compiler':
-        specifier: ^0.94.10
-        version: 0.94.10
-      '@glimmer/component':
-        specifier: ^2.0.0
-        version: 2.0.0
-      '@glimmer/encoder':
-        specifier: ^0.93.8
-        version: 0.93.8
-      '@glimmer/inline-precompile':
-        specifier: ^1.0.1
-        version: 1.0.1(@glimmer/compiler@0.94.10)
-      '@glimmer/interfaces':
-        specifier: ^0.94.6
-        version: 0.94.6
-      '@glimmer/opcode-compiler':
-        specifier: ^0.94.9
-        version: 0.94.9
-      '@glimmer/program':
-        specifier: ^0.94.9
-        version: 0.94.9
-      '@glimmer/reference':
-        specifier: ^0.94.8
-        version: 0.94.8
-      '@glimmer/runtime':
-        specifier: ^0.94.10
-        version: 0.94.10
-      '@glimmer/syntax':
-        specifier: ^0.94.9
-        version: 0.94.9
-      '@glimmer/test-helpers':
-        specifier: ^0.31.2
-        version: 0.31.2(@glimmer/component@2.0.0)
-      '@glimmer/tracking':
-        specifier: ^1.1.2
-        version: 1.1.2
-      '@glimmer/util':
-        specifier: ^0.94.8
-        version: 0.94.8
-      '@glimmer/validator':
-        specifier: ^0.95.0
-        version: 0.95.0
-      '@glimmer/vm':
-        specifier: ^0.94.8
-        version: 0.94.8
-      '@glimmer/wire-format':
-        specifier: ^0.94.8
-        version: 0.94.8
       '@nativescript/core':
         specifier: ~8.9.7
         version: 8.9.7
@@ -652,9 +601,6 @@ importers:
       '@glimmer/component':
         specifier: ^2.0.0
         version: 2.0.0
-      '@glimmer/tracking':
-        specifier: ^1.1.2
-        version: 1.1.2
       '@rollup/plugin-alias':
         specifier: ^5.1.0
         version: 5.1.1(rollup@4.46.3)
@@ -2251,9 +2197,6 @@ packages:
   '@gerrit0/mini-shiki@3.9.2':
     resolution: {integrity: sha512-Tvsj+AOO4Z8xLRJK900WkyfxHsZQu+Zm1//oT1w443PO6RiYMoq/4NGOhaNuZoUMYsjKIAPVQ6eOFMddj6yphQ==}
 
-  '@glimmer/blueprint@1.1.2':
-    resolution: {integrity: sha512-OjHVO+Yq6duMktn1p2uzxmDeIp6wBl0M93BQFOP3yo8CNVo+0emXuNDySKr0XheD+KhgJpaaW2V3O9vuH5XhHQ==}
-
   '@glimmer/compiler@0.92.4':
     resolution: {integrity: sha512-xoR8F6fsgFqWbPbCfSgJuJ95vaLnXw0SgDCwyl/KMeeaSxpHwJbr8+BfiUl+7ko2A+HzrY5dPXXnGr4ZM+CUXw==}
     engines: {node: '>= 16.0.0'}
@@ -2292,11 +2235,6 @@ packages:
 
   '@glimmer/global-context@0.93.4':
     resolution: {integrity: sha512-Yw9xkDReAcC5oS/hY3PjGrFKRygYFA4pdO7tvuxReoVOyUtjoBOAwHJUileiElERDdMWIMfoLema8Td1mqkjhA==}
-
-  '@glimmer/inline-precompile@1.0.1':
-    resolution: {integrity: sha512-mKDkrbxdOhJy9onjFWEN/zgmnsl+U7y3aapKyHUENcdNi2GqSF3o4UZM6No7dVXZ53JrNiTPw/BGI/K5DKp0Nw==}
-    peerDependencies:
-      '@glimmer/compiler': '> 0.23.0 || > 0.24.0-alpha.1 || > 0.25.0-alpha.1'
 
   '@glimmer/interfaces@0.84.3':
     resolution: {integrity: sha512-dk32ykoNojt0mvEaIW6Vli5MGTbQo58uy3Epj7ahCgTHmWOKuw/0G83f2UmFprRwFx689YTXG38I/vbpltEjzg==}
@@ -2366,11 +2304,6 @@ packages:
 
   '@glimmer/syntax@0.94.9':
     resolution: {integrity: sha512-OBw8DqMzKO4LX4kJBhwfTUqtpbd7O9amQXNTfb1aS7pufio5Vu5Qi6mRTfdFj6RyJ//aSI/l0kxWt6beYW0Apg==}
-
-  '@glimmer/test-helpers@0.31.2':
-    resolution: {integrity: sha512-Ft36aWOkpW84YgIlf8hNySKJaQALPCySJwNY6g2CgU07sxahnxt4HCSZSi6wrJo+JMR0cXGU4Q8yU8GyNpLnBA==}
-    peerDependencies:
-      '@glimmer/component': '>= 0.9.1'
 
   '@glimmer/tracking@1.1.2':
     resolution: {integrity: sha512-cyV32zsHh+CnftuRX84ALZpd2rpbDrhLhJnTXn9W//QpqdRZ5rdMsxSY9fOsj0CKEc706tmEU299oNnDc0d7tA==}
@@ -4904,11 +4837,6 @@ packages:
   babel-plugin-ember-template-compilation@3.0.0:
     resolution: {integrity: sha512-tIZh1sgvswtJqtjiAQLZEtfje37HvsFsivV3jOrkruq0K1JzewP5VUJxx72qK3vwqFOG6XtiVXYBNyEJFmdXgQ==}
     engines: {node: '>= 18.*'}
-
-  babel-plugin-glimmer-inline-precompile@1.2.0:
-    resolution: {integrity: sha512-Omp3RyJyN2An2htKiwo45eQvoqVZaOR5tSbN6PjBHaYfLxEXeOM6m8/3udvAQD/2XcjdLipemVKt+Xez3XwoZg==}
-    peerDependencies:
-      '@glimmer/compiler': '> 0.23.0 || > 0.24.0-alpha.1 || > 0.25.0-alpha.1'
 
   babel-plugin-htmlbars-inline-precompile@5.3.1:
     resolution: {integrity: sha512-QWjjFgSKtSRIcsBhJmEwS2laIdrA6na8HAlc/pEAhjHgQsah/gMiBFRZvbQTy//hWxR4BMwV7/Mya7q5H8uHeA==}
@@ -17112,10 +17040,6 @@ snapshots:
       '@shikijs/types': 3.14.0
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@glimmer/blueprint@1.1.2':
-    dependencies:
-      ember-cli-string-utils: 1.1.0
-
   '@glimmer/compiler@0.92.4':
     dependencies:
       '@glimmer/interfaces': 0.92.3
@@ -17175,11 +17099,6 @@ snapshots:
   '@glimmer/global-context@0.92.3': {}
 
   '@glimmer/global-context@0.93.4': {}
-
-  '@glimmer/inline-precompile@1.0.1(@glimmer/compiler@0.94.10)':
-    dependencies:
-      '@glimmer/compiler': 0.94.10
-      babel-plugin-glimmer-inline-precompile: 1.2.0(@glimmer/compiler@0.94.10)
 
   '@glimmer/interfaces@0.84.3':
     dependencies:
@@ -17363,10 +17282,6 @@ snapshots:
       '@glimmer/wire-format': 0.94.8
       '@handlebars/parser': 2.0.0
       simple-html-tokenizer: 0.5.11
-
-  '@glimmer/test-helpers@0.31.2(@glimmer/component@2.0.0)':
-    dependencies:
-      '@glimmer/component': 2.0.0
 
   '@glimmer/tracking@1.1.2':
     dependencies:
@@ -20694,10 +20609,6 @@ snapshots:
       '@glimmer/syntax': 0.94.9
       babel-import-util: 3.0.1
       import-meta-resolve: 4.1.0
-
-  babel-plugin-glimmer-inline-precompile@1.2.0(@glimmer/compiler@0.94.10):
-    dependencies:
-      '@glimmer/compiler': 0.94.10
 
   babel-plugin-htmlbars-inline-precompile@5.3.1:
     dependencies:
