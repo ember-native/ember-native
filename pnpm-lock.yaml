@@ -370,6 +370,9 @@ importers:
       '@embroider/webpack':
         specifier: 4.1.1
         version: 4.1.1(@embroider/core@4.1.1(@glint/template@1.5.2))(webpack@5.99.9)
+      '@eslint/js':
+        specifier: ^9.39.1
+        version: 9.39.1
       '@fontsource/lexend':
         specifier: ^5.1.1
         version: 5.2.7
@@ -2157,8 +2160,8 @@ packages:
     resolution: {integrity: sha512-fnqSjGWd/CoIp4EXIxWVK/sHA6DOHN4+8Ix2cX5ycOY7LG0UY8nHCU5pIp2eaE1Mc7Qd8kHspYNzYXT2ojPLzg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.35.0':
-    resolution: {integrity: sha512-30iXE9whjlILfWobBkNerJo+TXYsgVM5ERQwMcMKCHckHflCmf7wXDAHlARoWnh0s1U72WqlbeyE7iAcCzuCPw==}
+  '@eslint/js@9.39.1':
+    resolution: {integrity: sha512-S26Stp4zCy88tH94QbBv3XCuzRQiZ9yXofEILmglYTh/Ug/a9/umqvgFtYBAo3Lp0nsI/5/qH1CCrbdK3AP1Tw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -16991,7 +16994,7 @@ snapshots:
 
   '@eslint/js@9.28.0': {}
 
-  '@eslint/js@9.35.0': {}
+  '@eslint/js@9.39.1': {}
 
   '@eslint/object-schema@2.1.6': {}
 
@@ -18128,7 +18131,7 @@ snapshots:
   '@nullvoxpopuli/eslint-configs@5.3.4(@babel/core@7.27.7)(@babel/eslint-parser@7.27.1(@babel/core@7.27.7)(eslint@9.27.0(jiti@1.21.7)))(@typescript-eslint/eslint-plugin@8.32.1(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint-plugin-ember@12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.38.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7)))(eslint-plugin-qunit@8.1.2(eslint@9.27.0(jiti@1.21.7)))(eslint@9.27.0(jiti@1.21.7))(prettier@3.6.2)(typescript@5.9.2)':
     dependencies:
       '@babel/core': 7.27.7
-      '@eslint/js': 9.35.0
+      '@eslint/js': 9.39.1
       '@typescript-eslint/parser': 8.44.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2)
       cosmiconfig: 9.0.0(typescript@5.9.2)
       ember-eslint: 0.4.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.44.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2)
@@ -23463,7 +23466,7 @@ snapshots:
   ember-eslint@0.4.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.44.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2):
     dependencies:
       '@babel/eslint-parser': 7.28.5(@babel/core@7.27.7)(eslint@9.27.0(jiti@1.21.7))
-      '@eslint/js': 9.35.0
+      '@eslint/js': 9.39.1
       eslint-config-prettier: 10.1.8(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-ember: 12.7.4(@babel/core@7.27.7)(@typescript-eslint/parser@8.44.0(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2))(eslint@9.27.0(jiti@1.21.7))
       eslint-plugin-n: 17.23.1(eslint@9.27.0(jiti@1.21.7))(typescript@5.9.2)
