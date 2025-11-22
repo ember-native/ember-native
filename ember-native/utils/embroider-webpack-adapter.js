@@ -72,6 +72,11 @@ function createResolverPlugin() {
           const requestStr = request.request;
           const issuer = request.context?.issuer || request.path;
 
+          if (!request.context?.issuer) {
+            callback();
+            return;
+          }
+
           // Create a context compatible with vite plugins
           // The resolver expects a context with a resolve method
           const context = {
