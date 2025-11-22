@@ -3,8 +3,11 @@ import * as inspectorCommands from '@nativescript/core/debugger/InspectorBackend
 import { RSVP } from '@ember/-internals/runtime';
 import Ember from 'ember';
 import * as tracking from '@glimmer/tracking';
+// @ts-expect-error ignore
 import * as runtime from '@glimmer/runtime';
+// @ts-expect-error ignore
 import * as validator from '@glimmer/validator';
+// @ts-expect-error ignore
 import * as reference from '@glimmer/reference';
 import * as runloop from '@ember/runloop';
 

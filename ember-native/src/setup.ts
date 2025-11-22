@@ -1,5 +1,6 @@
 import * as loader from 'loader.js';
 import { registerElements } from './dom/setup-registry.ts';
+// @ts-expect-error ignore
 import { SimpleDynamicAttribute } from '@glimmer/runtime';
 import ElementNode from './dom/nodes/ElementNode.ts';
 import { _backburner } from '@ember/runloop';
