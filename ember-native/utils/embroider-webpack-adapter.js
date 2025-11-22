@@ -100,13 +100,19 @@ function createResolverPlugin() {
             })
             .then((result) => {
               if (result && result.id) {
-                // Update the request to the resolved path
-                request.request = result.id;
+                // Embroider resolved it - continue with the resolved path
+                const obj = {
+                  ...request,
+                  request: result.id,
+                  path: result.id
+                };
+                resolver.doResolve(target, obj, null, resolveContext, callback);
+              } else {
+                // Embroider couldn't resolve it - let the next plugin try
+                callback();
               }
-              callback();
             })
             .catch((error) => {
-              console.error('Embroider resolver error:', error);
               callback();
             });
         });
