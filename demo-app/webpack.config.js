@@ -40,6 +40,7 @@ Module.registerHooks({
     return nextResolve(originalSpecifier, context);
   }
 });
+
 const webpack = require('@nativescript/webpack');
 const configureEmberNative = require('ember-native/utils/webpack.config.js');
 
