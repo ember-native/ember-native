@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2025-11-22)
+
+* ember-native 2.2.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#268](https://github.com/ember-native/ember-native/pull/268) fix text node updates ([@patricklx](https://github.com/patricklx))
+
+#### :house: Internal
+* [#178](https://github.com/ember-native/ember-native/pull/178) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))
+
+#### Committers: 2
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+
 
 
 
