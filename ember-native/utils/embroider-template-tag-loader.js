@@ -37,14 +37,11 @@ module.exports = function embroiderTemplateTagLoader(source) {
       if (result && result.code) {
         // Return just the code, like content-tag-loader does
         // This avoids the .inputSourceMap error with babel-loader
-        return result.code;
+        callback(null, result.code);
       } else {
         // If no transformation, pass through
-        return source;
+        callback();
       }
-    })
-    .then((code) => {
-      callback(null, code);
     })
     .catch((error) => {
       console.error('Template tag transformation error:', error);
