@@ -20,6 +20,7 @@ Module.registerHooks({
           }
         }
         return nextResolve(specifier, context);
+        // eslint-disable-next-line no-unused-vars
       } catch (e) {
         // console.log('failed to resolve', specifier,' from ', parentURL, e);
       }
@@ -33,6 +34,7 @@ Module.registerHooks({
         }
       }
       return nextResolve(specifier, context);
+      // eslint-disable-next-line no-unused-vars
     } catch (e) {
       //console.log('failed to resolve', specifier, e);
     }
