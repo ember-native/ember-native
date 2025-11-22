@@ -6,12 +6,9 @@
  * with automatic fallback to custom loaders if unavailable.
  */
 module.exports = (webpack) => {
-  // Always try to use embroider adapter
-  let adapterLoaded = false;
   try {
     const configureAdapter = require('./embroider-webpack-adapter.js');
     configureAdapter(webpack);
-    adapterLoaded = true;
     console.log('✓ Using @embroider/vite webpack adapter');
   } catch (e) {
     console.warn('⚠ Failed to load embroider adapter, using fallback loaders:', e.message);

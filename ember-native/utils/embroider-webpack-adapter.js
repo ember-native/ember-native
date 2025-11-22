@@ -25,6 +25,7 @@ function tryExtensions(basePath, extensions = ['js', 'ts', 'gts', '.gjs']) {
         if (stats.isFile()) {
           return fullPath;
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (e) {
         // Continue to next extension
       }
@@ -40,6 +41,7 @@ function tryExtensions(basePath, extensions = ['js', 'ts', 'gts', '.gjs']) {
         if (stats.isFile()) {
           return indexPath;
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (e) {
         // Continue to next extension
       }
@@ -69,7 +71,6 @@ function createResolverPlugin() {
       resolver
         .getHook('described-resolve')
         .tapAsync('EmbroiderResolverPlugin', (request, resolveContext, callback) => {
-          const requestStr = request.request;
           const issuer = request.context?.issuer || request.path;
 
           if (!request.context?.issuer) {
@@ -92,6 +93,7 @@ function createResolverPlugin() {
                   return { id: require.resolve(spec) };
                 }
                 return { id: require.resolve(spec, { paths: [path.dirname(from)] }) };
+                // eslint-disable-next-line no-unused-vars
               } catch (e) {
                 return null;
               }
@@ -120,6 +122,7 @@ function createResolverPlugin() {
                 callback();
               }
             })
+            // eslint-disable-next-line no-unused-vars
             .catch((error) => {
               callback();
             });
