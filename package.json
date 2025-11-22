@@ -38,7 +38,7 @@
       "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
     }
   },
-  "packageManager": "pnpm@9.12.2",
+  "packageManager": "pnpm@10.23.0",
   "volta": {
     "node": "20.17.0",
     "pnpm": "9.12.2"

@@ -10,7 +10,7 @@ overrides:
 
 patchedDependencies:
   '@nativescript/unit-test-runner':
-    hash: 6fjeie3vsxjpmqbl67fkeez57i
+    hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
     path: patches/@nativescript__unit-test-runner.patch
 
 importers:
@@ -103,7 +103,7 @@ importers:
         version: 3.1.0
       '@nativescript/unit-test-runner':
         specifier: ~3.0.0
-        version: 3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)
+        version: 3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.2
@@ -139,7 +139,7 @@ importers:
         version: 5.0.3
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(postcss@8.5.3)(typescript@5.9.2)(webpack@5.99.9)
+        version: 8.1.1(postcss@8.5.6)(typescript@5.9.2)(webpack@5.99.9)
       sass-loader:
         specifier: ^16.0.4
         version: 16.0.5(sass-embedded@1.90.0)(sass@1.89.0)(webpack@5.99.9)
@@ -17783,7 +17783,7 @@ snapshots:
       '@nativescript/types-android': 8.9.0
       '@nativescript/types-ios': 8.9.1
 
-  '@nativescript/unit-test-runner@3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)':
+  '@nativescript/unit-test-runner@3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
     dependencies:
       '@nativescript/hook': 2.0.0
       glob-regex: 0.3.2
@@ -29253,17 +29253,6 @@ snapshots:
       jiti: 1.21.7
       postcss: 8.5.3
       semver: 7.7.2
-      webpack: 5.99.9(webpack-cli@4.10.0)
-    transitivePeerDependencies:
-      - typescript
-
-  postcss-loader@8.1.1(postcss@8.5.3)(typescript@5.9.2)(webpack@5.99.9):
-    dependencies:
-      cosmiconfig: 9.0.0(typescript@5.9.2)
-      jiti: 1.21.7
-      postcss: 8.5.3
-      semver: 7.7.2
-    optionalDependencies:
       webpack: 5.99.9(webpack-cli@4.10.0)
     transitivePeerDependencies:
       - typescript

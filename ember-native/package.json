@@ -175,6 +175,7 @@
       "types": "./declarations/*.d.ts",
       "default": "./dist/*.js"
     },
+    "./utils/*": "./dist/utils/*",
     "./addon-main.js": "./addon-main.cjs"
   },
   "typesVersions": {

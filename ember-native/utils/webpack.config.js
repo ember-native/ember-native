@@ -1,54 +1,51 @@
-const fs = require('fs');
-const path = require('path');
 
+/**
+ * Configures webpack for ember-native using @embroider/vite adapter
+ *
+ * This configuration uses @embroider/vite plugins via the webpack adapter
+ * with automatic fallback to custom loaders if unavailable.
+ */
 module.exports = (webpack) => {
+  // Always try to use embroider adapter
+  let adapterLoaded = false;
+  try {
+    const configureAdapter = require('./embroider-webpack-adapter.js');
+    configureAdapter(webpack);
+    adapterLoaded = true;
+    console.log('✓ Using @embroider/vite webpack adapter');
+  } catch (e) {
+    console.warn('⚠ Failed to load embroider adapter, using fallback loaders:', e.message);
+  }
+
+  // Configure @glimmer/env alias (still needed)
   webpack.chainWebpack((config) => {
-    const glimmerDirs = fs.readdirSync(
-      path.resolve(
-        process.cwd(),
-        './node_modules/ember-source/dist/packages/@glimmer',
-      ),
-    );
-    for (const glimmerDir of glimmerDirs) {
-      config.resolve.alias.set(
-        `@glimmer/${glimmerDir}`,
-        `ember-source/dist/packages/@glimmer/${glimmerDir}`,
-      );
-    }
-    // change the "@" alias to "app/libs"
-    config.resolve.alias.set('@ember', 'ember-source/dist/packages/@ember');
-    config.resolve.alias.set('ember', 'ember-source/dist/packages/ember');
-    config.resolve.alias.set(
-      '@glimmer/component',
-      '@glimmer/component/addon/index.ts',
-    );
     config.resolve.alias.set(
       '@glimmer/env',
       require.resolve('./glimmer-env.js'),
     );
   });
 
-  webpack.chainWebpack((config) => {
-    // add a new rule for *.something files
-    config.module
-      .rule('gts/gjs')
-      .test(/\.g[jt]s$/)
-      .use('babel-loader')
-      .loader('babel-loader')
-      .end()
-      .use('gjs-loader')
-      .loader(require.resolve('./content-tag-loader.js'))
-      .end();
+  // Only configure fallback loaders if adapter failed to load
+  if (!adapterLoaded) {
+    webpack.chainWebpack((config) => {
+      // add a new rule for *.something files
+      config.module
+        .rule('gts/gjs')
+        .test(/\.g[jt]s$/)
+        .use('babel-loader')
+        .loader('babel-loader')
+        .end()
+        .use('gjs-loader')
+        .loader(require.resolve('./content-tag-loader.js'))
+        .end();
 
-    config.module
-      .rule('js/ts')
-      .test(/\.([jt]s)$/)
-      .use('fix-glimmer-content-owner')
-      .loader(require.resolve('./fix-glimmer-content-owner.js'))
-      .end()
-      .use('babel-loader')
-      .loader('babel-loader');
-  });
+      config.module
+        .rule('js/ts')
+        .test(/\.([jt]s)$/)
+        .use('babel-loader')
+        .loader('babel-loader');
+    });
+  }
 
   webpack.chainWebpack((config) => {
     config.plugin('DefinePlugin').tap((args) => {
