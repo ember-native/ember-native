@@ -198,7 +198,7 @@ export default function hotReplaceAst(babel: typeof Babel) {
     },
     visitor: {
       Program(path, state) {
-        if (!hotAstProcessor.meta.importVar) {
+        if (!hotAstProcessor.meta.importVar || !hotAstProcessor.meta.importBindings) {
           return;
         }
         if (process.env['EMBER_HMR_ENABLED'] !== 'true') {

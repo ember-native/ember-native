@@ -1,7 +1,7 @@
 const {
   babelCompatSupport,
 } = require('@embroider/compat/babel');
-const hmrPlugin = require('ember-native/utils/babel-plugin');
+const hmrPlugin = require('ember-native/utils/babel-plugin.js');
 const macros = require("@embroider/macros/src/macros-config");
 
 process.env.NODE_ENV = 'development';

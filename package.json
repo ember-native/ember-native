@@ -36,11 +36,22 @@
     },
     "patchedDependencies": {
       "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@nativescript/core",
+      "@nativescript/unit-test-runner",
+      "@parcel/watcher",
+      "chromedriver",
+      "core-js",
+      "core-js-pure",
+      "esbuild",
+      "nativescript",
+      "unrs-resolver"
+    ]
   },
-  "packageManager": "pnpm@9.12.2",
+  "packageManager": "pnpm@10.23.0",
   "volta": {
     "node": "20.17.0",
-    "pnpm": "9.12.2"
+    "pnpm": "10.23.0"
   }
 }
