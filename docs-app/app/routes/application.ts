@@ -3,7 +3,8 @@ import Route from '@ember/routing/route';
 import rehypeShikiFromHighlighter from '@shikijs/rehype/core';
 import { setupTabster } from 'ember-primitives/tabster';
 import { setupKolay } from 'kolay/setup';
-import { getHighlighterCore } from 'shiki/core';
+import { createHighlighterCore } from 'shiki/core';
+import { createOnigurumaEngine } from 'shiki';
 import getWasm from 'shiki/wasm';
 import 'ember-power-select/ember-power-select.scss';
 
@@ -17,7 +18,7 @@ export default class Application extends Route {
   }
 
   async model() {
-    const highlighter = await getHighlighterCore({
+    const highlighter = await createHighlighterCore({
       themes: [import('shiki/themes/github-dark.mjs'), import('shiki/themes/github-light.mjs')],
       langs: [
         import('shiki/langs/javascript.mjs'),
@@ -32,7 +33,7 @@ export default class Application extends Route {
         import('shiki/langs/jsonc.mjs'),
         import('shiki/langs/markdown.mjs'),
       ],
-      loadWasm: getWasm,
+      engine: createOnigurumaEngine(getWasm),
     });
 
     const [manifest] = await Promise.all([

@@ -47,7 +47,7 @@
     "lorem-ipsum": "^2.0.8",
     "path-browserify": "^1.0.1",
     "reactiveweb": "^1.5.0",
-    "shiki": "^1.22.2",
+    "shiki": "^3.14.0",
     "should-handle-link": "^1.2.2",
     "tracked-built-ins": "^4.0.0"
   },
