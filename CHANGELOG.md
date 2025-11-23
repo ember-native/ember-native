@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-11-23)
+
+* ember-native 3.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-native`
+  * [#269](https://github.com/ember-native/ember-native/pull/269) improve webpack config ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2025-11-22)
 
 * ember-native 2.2.1 (patch)
