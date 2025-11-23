@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "patch",
-      "oldVersion": "2.2.0",
-      "newVersion": "2.2.1",
+      "impact": "major",
+      "oldVersion": "2.2.1",
+      "newVersion": "3.0.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2025-11-22)\n\n* ember-native 2.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#268](https://github.com/ember-native/ember-native/pull/268) fix text node updates ([@patricklx](https://github.com/patricklx))\n\n#### :house: Internal\n* [#178](https://github.com/ember-native/ember-native/pull/178) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))\n\n#### Committers: 2\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n"
+  "description": "## Release (2025-11-23)\n\n* ember-native 3.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-native`\n  * [#269](https://github.com/ember-native/ember-native/pull/269) improve webpack config ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
