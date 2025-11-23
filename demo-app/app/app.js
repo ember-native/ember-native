@@ -1,5 +1,5 @@
 import EmberApplication from '@ember/application';
-import Resolver from 'ember-resolver';
+import Resolver from 'ember-resolver/index.js';
 import loadInitializers from 'ember-load-initializers';
 import ENV from './config/env';
 import EmberNamespace from 'ember';

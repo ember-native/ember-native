@@ -396,6 +396,9 @@ export default class NativeElementNode<
         parentView._removeView(childView);
       }
     } else if (parentView instanceof View) {
+      if (childNode.parentNode !== parentNode) {
+        return;
+      }
       parentView._removeView(childView);
     } else {
       // throw new Error("Unknown parent type: " + parent);

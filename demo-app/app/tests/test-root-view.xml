@@ -4,5 +4,6 @@
         </Frame>
     </ContentView>
     <StackLayout col="1" id="ember-testing-content-view">
+        hi
     </StackLayout>
 </GridLayout>

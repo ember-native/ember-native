@@ -6,6 +6,7 @@ var { fileURLToPath, pathToFileURL } = require('node:url');
 Module.registerHooks({
   resolve: (specifier, context, nextResolve) => {
     //do your thing here
+    const originalSpecifier = specifier;
     if(context.parentURL && fileURLToPath(context.parentURL).includes('node:')) return nextResolve(specifier, context);
 
     if (context.parentURL) {
@@ -19,8 +20,9 @@ Module.registerHooks({
           }
         }
         return nextResolve(specifier, context);
+        // eslint-disable-next-line no-unused-vars
       } catch (e) {
-        console.log('failed to resolve', specifier,' from ', parentURL, e);
+        //console.log('failed to resolve', specifier,' from ', parentURL, e);
       }
     }
     try {
@@ -31,16 +33,18 @@ Module.registerHooks({
           specifier = pathToFileURL(specifier).toString();
         }
       }
+      return nextResolve(specifier, context);
+      // eslint-disable-next-line no-unused-vars
     } catch (e) {
-      console.log('failed to resolve', specifier, e);
+      // console.log('failed to resolve', specifier, e);
     }
 
-    return nextResolve(specifier, context);
+    return nextResolve(originalSpecifier, context);
   }
 });
+
 const webpack = require('@nativescript/webpack');
-
-
+const configureEmberNative = require('ember-native/utils/webpack.config.js');
 
 module.exports = (env) => {
 	webpack.init(env);
@@ -50,66 +54,41 @@ module.exports = (env) => {
 	// Learn how to customize:
 	// https://docs.nativescript.org/webpack
 
-  webpack.chainWebpack((config) => {
-    const glimmerDirs = fs.readdirSync(
-      path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/@glimmer')
-    );
-    for (const glimmerDir of glimmerDirs) {
-      console.log(glimmerDir);
-      config.resolve.alias.set(
-        `@glimmer/${glimmerDir}`,
-        path.resolve(process.cwd(), `./node_modules/ember-source/dist/packages/@glimmer/${glimmerDir}`),
-      );
-    }
+  // Use ember-native webpack configuration (includes embroider adapter)
+  configureEmberNative(webpack);
 
+  webpack.chainWebpack((config) => {
+    // Add .gjs and .gts extensions
     config.resolve.extensions.add('.gjs');
     config.resolve.extensions.add('.gts');
-
-    config.resolve.alias.set('ember-cli-test-loader/test-support/index', 'ember-cli-test-loader/addon-test-support/index');
-    config.resolve.alias.set('@ember/test-helpers', require.resolve('@ember/test-helpers'));
-    config.resolve.alias.set('@ember/test-waiters', require.resolve('@ember/test-waiters'));
-    config.resolve.alias.set('@ember', path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/@ember'));
-    config.resolve.alias.set('ember-testing', path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/ember-testing'));
-    config.resolve.alias.set('ember', path.resolve(process.cwd(), './node_modules/ember-source/dist/packages/ember'));
-    config.resolve.alias.set(
-      '@glimmer/env',
-      require.resolve('ember-native/utils/glimmer-env'),
-    );
-
+    // Test-specific aliases
+    // App-specific aliases
     config.resolve.alias.set('~', '/app');
     config.resolve.alias.delete('@');
   });
 
+  // HMR loaders for routes, controllers, templates
   webpack.chainWebpack((config) => {
-    // add a new rule for *.something files
     config.module
       .rule('gts/gjs')
-      .test(/\.g[jt]s$/)
-      .use('babel-loader')
-      .loader('babel-loader')
-      .end()
-      .use('gjs-loader')
-      .loader(require.resolve('ember-native/utils/content-tag-loader'))
-      .end()
       .use('hmr-loader')
-      .loader(require.resolve('ember-native/utils/hmr-loader'))
+      .loader(require.resolve('ember-native/utils/hmr-loader.js'))
       .end();
 
     config.module
       .rule('js/ts')
-      .test(/\.([jt]s)$/)
-      .use('babel-loader')
-      .loader('babel-loader')
-      .end()
       .use('hmr-loader')
-      .loader(require.resolve('ember-native/utils/hmr-loader'))
+      .loader(require.resolve('ember-native/utils/hmr-loader.js'))
       .end();
 
+    // Include test XML files
     const testRootXml = path.dirname(path.resolve('./app/tests/test-root-view.xml'));
     config.module.rule('xml').include.add(testRootXml);
 
-    const unitTestsXml = path.dirname(path.resolve('./node_modules/@nativescript/unit-test-runner/app'));
-    config.module.rule('xml').include.add(fs.realpathSync(unitTestsXml));
+    // Include unit-test-runner XML files
+    const unitTestRunnerPath = path.dirname(require.resolve('@nativescript/unit-test-runner/package.json'));
+    config.module.rule('xml').include.add(unitTestRunnerPath);
+    config.module.rule('xml').include.add(fs.realpathSync(unitTestRunnerPath));
   });
 
   webpack.chainWebpack((config) => {
@@ -160,7 +139,22 @@ module.exports = (env) => {
     config.target('node');
   });
 
+  // Configure webpack resolveLoader for pnpm
+  webpack.chainWebpack((config) => {
+    const nativescriptWebpackPath = fs.realpathSync(path.dirname(require.resolve('@nativescript/webpack/package.json')));
+    console.log(path.resolve(nativescriptWebpackPath, '..', '..'));
+    console.log(fs.readdirSync(path.resolve(nativescriptWebpackPath, '..', '..')));
+    console.log(path.resolve(nativescriptWebpackPath, 'dist', 'loaders'))
+    console.log(fs.readdirSync(path.resolve(nativescriptWebpackPath, 'dist', 'loaders')));
+    config.resolveLoader.modules
+      .add(path.resolve(__dirname, 'node_modules'))
+      .add(path.resolve(nativescriptWebpackPath, '..', '..'))
+      .add(path.resolve(nativescriptWebpackPath, 'dist', 'loaders'))
+      .end();
+  });
+
 	const conf = webpack.resolveConfig();
   console.log('conf', conf)
+  console.log('module.rules', conf.module.rules.map(r => r.use))
   return conf;
 };
