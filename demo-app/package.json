@@ -60,7 +60,7 @@
     "@types/qunit": "2.19.13",
     "babel-import-util": "^3.0.0",
     "babel-loader": "^10.0.0",
-    "babel-plugin-ember-template-compilation": "^3.0.0",
+    "babel-plugin-ember-template-compilation": "^3.0.1",
     "browserify-fs": "^1.0.0",
     "buffer": "^6.0.3",
     "content-tag": "^4.0.0",
