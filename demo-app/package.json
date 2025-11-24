@@ -56,7 +56,7 @@
     "@nativescript/android": "8.9.1",
     "@nativescript/core": "^8.9.7",
     "@nativescript/types": "~8.9.1",
-    "@nativescript/webpack": "^5.0.22",
+    "@nativescript/webpack": "^5.0.25",
     "@types/qunit": "2.19.13",
     "babel-import-util": "^3.0.0",
     "babel-loader": "^10.0.0",
