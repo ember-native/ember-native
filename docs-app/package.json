@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@shikijs/rehype": "^3.4.2",
-    "@universal-ember/docs-support": ">=0.6.7",
+    "@universal-ember/docs-support": ">=0.6.9",
     "assert": "^2.0.0",
     "change-case": "^5.4.4",
     "decorator-transforms": "^2.3.0",
