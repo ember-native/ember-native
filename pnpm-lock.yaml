@@ -398,8 +398,8 @@ importers:
         specifier: ^0.5.15
         version: 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.5.0)(typescript@5.9.2)))
       '@tsconfig/ember':
-        specifier: ^3.0.5
-        version: 3.0.10
+        specifier: ^3.0.12
+        version: 3.0.12
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -717,8 +717,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.4(@babel/core@7.27.7)(@types/babel__core@7.20.5)(rollup@4.46.3)
       '@tsconfig/ember':
-        specifier: ^3.0.8
-        version: 3.0.10
+        specifier: ^3.0.12
+        version: 3.0.12
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -3678,8 +3678,8 @@ packages:
   '@ts-morph/common@0.26.1':
     resolution: {integrity: sha512-Sn28TGl/4cFpcM+jwsH1wLncYq3FtN/BIpem+HOygfBWPT5pAeS5dB4VFVzV8FbnOKHpDLZmvAl4AjPEev5idA==}
 
-  '@tsconfig/ember@3.0.10':
-    resolution: {integrity: sha512-qFIlJIMsn25frlp2WOtX/OxNxfsYeqM7OdSXB88vgvRqU9ElV3KpQc2EhmchoKpHoKB3oiLPIJNRuf5xcxjamw==}
+  '@tsconfig/ember@3.0.12':
+    resolution: {integrity: sha512-ypFTXqIzQAB5HpYPi4TwDElDcUheWrKsEaYXgjiCAvsH6zxcQ4zUeuJqmfT+FoUlHTPZ3Xyel81OxrcjI+rilw==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -19157,7 +19157,7 @@ snapshots:
       minimatch: 9.0.5
       path-browserify: 1.0.1
 
-  '@tsconfig/ember@3.0.10': {}
+  '@tsconfig/ember@3.0.12': {}
 
   '@tsconfig/node10@1.0.11': {}
 

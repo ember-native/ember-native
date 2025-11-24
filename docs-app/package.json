@@ -79,7 +79,7 @@
     "@nullvoxpopuli/eslint-configs": "^5.3.4",
     "@rollup/plugin-babel": "^6.0.4",
     "@tailwindcss/typography": "^0.5.15",
-    "@tsconfig/ember": "^3.0.5",
+    "@tsconfig/ember": "^3.0.12",
     "@types/babel__core": "^7.20.5",
     "@types/babel__standalone": "^7.1.7",
     "@types/eslint__js": "^8.42.3",
