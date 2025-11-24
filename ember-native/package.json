@@ -107,7 +107,7 @@
     "concurrently": "^9.2.0",
     "content-tag": "^4.0.0",
     "css-loader": "^7.1.2",
-    "ember-eslint-parser": "^0.5.9",
+    "ember-eslint-parser": "^0.5.13",
     "ember-modifier": "^4.2.0",
     "ember-source": "^6.6.0",
     "ember-template-lint": "^7.9.1",
