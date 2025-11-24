@@ -104,7 +104,7 @@
     "globals": "^16.5.0",
     "broccoli": "^3.4.2",
     "broccoli-asset-rev": "^3.0.0",
-    "concurrently": "^9.2.0",
+    "concurrently": "^9.2.1",
     "content-tag": "^4.0.0",
     "css-loader": "^7.1.2",
     "ember-eslint-parser": "^0.5.9",
