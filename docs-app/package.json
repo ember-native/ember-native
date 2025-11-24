@@ -91,7 +91,7 @@
     "astroturf": "^1.2.0",
     "autoprefixer": "^10.4.19",
     "broccoli-asset-rev": "^3.0.0",
-    "concurrently": "^9.2.0",
+    "concurrently": "^9.2.1",
     "ember-a11y-testing": "^7.0.1",
     "ember-auto-import": "^2.10.0",
     "ember-cli": "~6.6.0",
