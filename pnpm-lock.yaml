@@ -362,8 +362,8 @@ importers:
         specifier: ^9.39.1
         version: 9.39.1
       '@fontsource/lexend':
-        specifier: ^5.1.1
-        version: 5.2.7
+        specifier: ^5.2.11
+        version: 5.2.11
       '@glimmer/compiler':
         specifier: ^0.94.10
         version: 0.94.10
@@ -2185,8 +2185,8 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@fontsource/lexend@5.2.7':
-    resolution: {integrity: sha512-LvhJCaFlpR3/5msAzvIGJqVlvcVIN/Je9niM+pCFUazGeeb0ygOu0TlyAAJCi1TpN3te6tVqnDVMW+1fSFNQ9w==}
+  '@fontsource/lexend@5.2.11':
+    resolution: {integrity: sha512-bShbQr2g2sWl7GJNyIxdllZST1faVbebXN6H7AEEDCRms/g4orDLxWnmTVodOtiErdZVUJURq4jpafZ34nIkTw==}
 
   '@foxt/js-srp@0.0.3-patch2':
     resolution: {integrity: sha512-mCjMIf+/mwmuzSGr8CWWQDjDUqMBnw9TBnzfcBUTR2ySPoXcg6Pfb4/WPklY1TwY3Pe3f3r8q6hzWvvogInuug==}
@@ -16999,7 +16999,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@fontsource/lexend@5.2.7': {}
+  '@fontsource/lexend@5.2.11': {}
 
   '@foxt/js-srp@0.0.3-patch2': {}
 
@@ -19705,7 +19705,7 @@ snapshots:
   '@universal-ember/docs-support@0.6.9(@babel/core@7.27.7)(@ember/test-helpers@5.2.2(@babel/core@7.27.7)(@glint/template@1.7.3))(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glimmer/compiler@0.94.10)(@glimmer/component@2.0.0)(@glimmer/syntax@0.94.9)(@glimmer/tracking@1.1.2)(@glint/template@1.7.3)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(ts-node@10.9.2(@types/node@24.10.1)(typescript@5.9.2))(typescript@5.9.2)(webpack@5.103.0)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      '@fontsource/lexend': 5.2.7
+      '@fontsource/lexend': 5.2.11
       '@tailwindcss/typography': 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.10.1)(typescript@5.9.2)))
       change-case: 5.4.4
       decorator-transforms: 2.3.0(@babel/core@7.27.7)
