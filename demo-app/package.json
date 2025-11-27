@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@ember/test-waiters": "^4.1.1",
-    "@embroider/macros": "^1.18.1",
+    "@embroider/macros": "^1.19.5",
     "@nativescript/core": "~8.9.7",
     "@nativescript/theme": "^3.1.0",
     "@nativescript/unit-test-runner": "~3.0.0",
