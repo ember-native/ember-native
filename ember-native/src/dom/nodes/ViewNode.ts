@@ -183,6 +183,7 @@ export default class ViewNode {
       // fixes #127 - see for more details
       // fixes #240
       // throw new Error(`Can't insert child, because it is already a child.`)
+      this.removeChild(childNode);
     }
 
     const index = this.childNodes.indexOf(referenceNode);
@@ -214,6 +215,7 @@ export default class ViewNode {
       // fixes #127 - see for more details
       // fixes #240
       // throw new Error(`Can't append child, because it is already a child.`)
+      this.removeChild(childNode);
     }
 
     if (this.lastChild) {
