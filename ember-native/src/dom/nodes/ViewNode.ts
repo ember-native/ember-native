@@ -19,8 +19,6 @@ export default class ViewNode {
   _tagName: any;
   declare parentNode: ViewNode | null;
   childNodes: ViewNode[];
-  prevSibling: ViewNode | null;
-  nextSibling: ViewNode | null;
   _ownerDocument: any;
   _meta: any;
 
@@ -71,8 +69,6 @@ export default class ViewNode {
     this._tagName = null;
     this.parentNode = null;
     this.childNodes = [];
-    this.prevSibling = null;
-    this.nextSibling = null;
 
     this._ownerDocument = null;
     this._meta = null;
@@ -108,6 +104,28 @@ export default class ViewNode {
     return this.childNodes.length
       ? this.childNodes[this.childNodes.length - 1]
       : null;
+  }
+
+  get nextSibling(): ViewNode | null {
+    if (!this.parentNode) {
+      return null;
+    }
+    const index = this.parentNode.childNodes.indexOf(this);
+    if (index === -1 || index === this.parentNode.childNodes.length - 1) {
+      return null;
+    }
+    return this.parentNode.childNodes[index + 1];
+  }
+
+  get prevSibling(): ViewNode | null {
+    if (!this.parentNode) {
+      return null;
+    }
+    const index = this.parentNode.childNodes.indexOf(this);
+    if (index <= 0) {
+      return null;
+    }
+    return this.parentNode.childNodes[index - 1];
   }
 
   get meta() {
@@ -187,11 +205,6 @@ export default class ViewNode {
     }
 
     const index = this.childNodes.indexOf(referenceNode);
-
-    childNode.nextSibling = referenceNode;
-    childNode.prevSibling = this.childNodes[index - 1]!;
-    this.childNodes[index - 1]!.nextSibling = childNode;
-    referenceNode.prevSibling = childNode;
     this.childNodes.splice(index, 0, childNode);
     childNode.parentNode = this;
 
@@ -218,11 +231,6 @@ export default class ViewNode {
       this.removeChild(childNode);
     }
 
-    if (this.lastChild) {
-      childNode.prevSibling = this.lastChild;
-      this.lastChild.nextSibling = childNode;
-    }
-
     this.childNodes.push(childNode);
     childNode.parentNode = this;
 
@@ -243,14 +251,6 @@ export default class ViewNode {
     }
 
     childNode.parentNode = null;
-
-    if (childNode.prevSibling) {
-      childNode.prevSibling.nextSibling = childNode.nextSibling;
-    }
-
-    if (childNode.nextSibling) {
-      childNode.nextSibling.prevSibling = childNode.prevSibling;
-    }
 
     // reset the prevSibling and nextSibling. If not, a keep-alived component will
     // still have a filled nextSibling attribute so vue will not
