@@ -78,7 +78,7 @@
     "@embroider/compat": "^4.1.0",
     "@embroider/core": "^4.4.0",
     "@embroider/macros": "^1.19.5",
-    "@embroider/shared-internals": "^3.0.0",
+    "@embroider/shared-internals": "^3.0.1",
     "@embroider/vite": "^1.4.2",
     "@embroider/util": "^1.13.3",
     "@embroider/webpack": "^4.1.1",
