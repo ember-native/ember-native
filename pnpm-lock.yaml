@@ -390,7 +390,7 @@ importers:
         version: 1.7.3
       '@nullvoxpopuli/eslint-configs':
         specifier: ^5.3.4
-        version: 5.3.4(@babel/core@7.27.7)(@babel/eslint-parser@7.28.5(@babel/core@7.27.7)(eslint@9.27.0(jiti@2.6.1)))(@typescript-eslint/eslint-plugin@8.47.0(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint-plugin-ember@12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1)))(eslint-plugin-qunit@8.1.2(eslint@9.27.0(jiti@2.6.1)))(eslint@9.27.0(jiti@2.6.1))(prettier@3.6.2)(typescript@5.9.2)
+        version: 5.3.4(@babel/core@7.27.7)(@babel/eslint-parser@7.28.5(@babel/core@7.27.7)(eslint@9.27.0(jiti@2.6.1)))(@typescript-eslint/eslint-plugin@8.47.0(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint-plugin-ember@12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1)))(eslint-plugin-qunit@8.2.5(eslint@9.27.0(jiti@2.6.1)))(eslint@9.27.0(jiti@2.6.1))(prettier@3.6.2)(typescript@5.9.2)
       '@rollup/plugin-babel':
         specifier: ^6.1.0
         version: 6.1.0(@babel/core@7.27.7)(@types/babel__core@7.20.5)(rollup@4.46.3)
@@ -512,8 +512,8 @@ importers:
         specifier: ^5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.27.0(jiti@2.6.1)))(eslint@9.27.0(jiti@2.6.1))(prettier@3.6.2)
       eslint-plugin-qunit:
-        specifier: ^8.1.2
-        version: 8.1.2(eslint@9.27.0(jiti@2.6.1))
+        specifier: ^8.2.5
+        version: 8.2.5(eslint@9.27.0(jiti@2.6.1))
       file-loader:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.103.0)
@@ -798,8 +798,8 @@ importers:
         specifier: ^5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.27.0(jiti@2.6.1)))(eslint@9.27.0(jiti@2.6.1))(prettier@3.6.2)
       eslint-plugin-qunit:
-        specifier: ^8.1.1
-        version: 8.1.2(eslint@9.27.0(jiti@2.6.1))
+        specifier: ^8.2.5
+        version: 8.2.5(eslint@9.27.0(jiti@2.6.1))
       fix-bad-declaration-output:
         specifier: ^1.1.4
         version: 1.1.4(@babel/preset-env@7.28.5(@babel/core@7.27.7))
@@ -7551,10 +7551,6 @@ packages:
         optional: true
       eslint-config-prettier:
         optional: true
-
-  eslint-plugin-qunit@8.1.2:
-    resolution: {integrity: sha512-2gDQdHlQW8GVXD7YYkO8vbm9Ldc60JeGMuQN5QlD48OeZ8znBvvoHWZZMeXjvoDPReGaLEvyuWrDtrI8bDbcqw==}
-    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
 
   eslint-plugin-qunit@8.2.5:
     resolution: {integrity: sha512-qr7RJCYImKQjB+39q4q46i1l7p1V3joHzBE5CAYfxn5tfVFjrnjn/tw7q/kDyweU9kAIcLul0Dx/KWVUCb3BgA==}
@@ -17634,7 +17630,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@nullvoxpopuli/eslint-configs@5.3.4(@babel/core@7.27.7)(@babel/eslint-parser@7.28.5(@babel/core@7.27.7)(eslint@9.27.0(jiti@2.6.1)))(@typescript-eslint/eslint-plugin@8.47.0(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint-plugin-ember@12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1)))(eslint-plugin-qunit@8.1.2(eslint@9.27.0(jiti@2.6.1)))(eslint@9.27.0(jiti@2.6.1))(prettier@3.6.2)(typescript@5.9.2)':
+  '@nullvoxpopuli/eslint-configs@5.3.4(@babel/core@7.27.7)(@babel/eslint-parser@7.28.5(@babel/core@7.27.7)(eslint@9.27.0(jiti@2.6.1)))(@typescript-eslint/eslint-plugin@8.47.0(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint-plugin-ember@12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1)))(eslint-plugin-qunit@8.2.5(eslint@9.27.0(jiti@2.6.1)))(eslint@9.27.0(jiti@2.6.1))(prettier@3.6.2)(typescript@5.9.2)':
     dependencies:
       '@babel/core': 7.27.7
       '@eslint/js': 9.39.1
@@ -17654,7 +17650,7 @@ snapshots:
       '@babel/eslint-parser': 7.28.5(@babel/core@7.27.7)(eslint@9.27.0(jiti@2.6.1))
       '@typescript-eslint/eslint-plugin': 8.47.0(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2)
       eslint-plugin-ember: 12.5.0(@babel/core@7.27.7)(@typescript-eslint/parser@8.48.0(eslint@9.27.0(jiti@2.6.1))(typescript@5.9.2))(eslint@9.27.0(jiti@2.6.1))
-      eslint-plugin-qunit: 8.1.2(eslint@9.27.0(jiti@2.6.1))
+      eslint-plugin-qunit: 8.2.5(eslint@9.27.0(jiti@2.6.1))
       prettier: 3.6.2
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
@@ -23993,13 +23989,6 @@ snapshots:
     optionalDependencies:
       '@types/eslint': 9.6.1
       eslint-config-prettier: 10.1.8(eslint@9.27.0(jiti@2.6.1))
-
-  eslint-plugin-qunit@8.1.2(eslint@9.27.0(jiti@2.6.1)):
-    dependencies:
-      eslint-utils: 3.0.0(eslint@9.27.0(jiti@2.6.1))
-      requireindex: 1.2.0
-    transitivePeerDependencies:
-      - eslint
 
   eslint-plugin-qunit@8.2.5(eslint@9.27.0(jiti@2.6.1)):
     dependencies:
