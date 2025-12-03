@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "major",
-      "oldVersion": "2.2.1",
-      "newVersion": "3.0.0",
+      "impact": "patch",
+      "oldVersion": "3.0.0",
+      "newVersion": "3.0.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2025-11-23)\n\n* ember-native 3.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-native`\n  * [#269](https://github.com/ember-native/ember-native/pull/269) improve webpack config ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2025-12-03)\n\n* ember-native 3.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#298](https://github.com/ember-native/ember-native/pull/298) make next/prev sibling getter ([@patricklx](https://github.com/patricklx))\n  * [#297](https://github.com/ember-native/ember-native/pull/297) remove child before insert again ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
