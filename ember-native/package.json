@@ -119,7 +119,7 @@
     "eslint-plugin-n": "^17.21.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-qunit": "^8.1.1",
+    "eslint-plugin-qunit": "^8.2.5",
     "fix-bad-declaration-output": "^1.1.4",
     "loader.js": "^4.7.0",
     "nativescript-ui-listview": "^15.2.3",
