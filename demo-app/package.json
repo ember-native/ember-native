@@ -48,7 +48,7 @@
     "@babel/plugin-transform-typescript": "^7.28.0",
     "@babel/eslint-parser": "^7.28.5",
     "@ember/test-helpers": "^5.2.2",
-    "@embroider/compat": "^4.1.0",
+    "@embroider/compat": "^4.1.11",
     "@embroider/core": "^4.4.0",
     "@glint/core": "^1.5.2",
     "@glint/environment-ember-template-imports": "^1.5.2",
