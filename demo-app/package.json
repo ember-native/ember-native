@@ -37,7 +37,7 @@
     "nativescript-ui-listview": "^15.2.3",
     "nativescript-ui-sidedrawer": "^15.2.3",
     "octokit": "^5.0.5",
-    "selenium-webdriver": "^4.34.0"
+    "selenium-webdriver": "^4.38.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^10.1.8",

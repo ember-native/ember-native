@@ -87,8 +87,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5
       selenium-webdriver:
-        specifier: ^4.34.0
-        version: 4.34.0
+        specifier: ^4.38.0
+        version: 4.38.0
     devDependencies:
       '@babel/core':
         specifier: ^7.27.7
@@ -1708,8 +1708,8 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@bazel/runfiles@6.3.1':
-    resolution: {integrity: sha512-1uLNT5NZsUVIGS4syuHwTzZ8HycMPyr6POA3FCE4GbMtc4rhoJk8aZKtNIRthJYfL+iioppi+rTfH3olMPr9nA==}
+  '@bazel/runfiles@6.5.0':
+    resolution: {integrity: sha512-RzahvqTkfpY2jsDxo8YItPX+/iZ6hbiikw1YhE0bA9EKBR5Og8Pa6FHn9PO9M0zaXRVsr0GFQLKbB/0rzy9SzA==}
 
   '@bufbuild/protobuf@2.6.3':
     resolution: {integrity: sha512-w/gJKME9mYN7ZoUAmSMAWXk4hkVpxRKvEJCb3dV5g9wwWdxTJJ0ayOJAVcNxtdqaxDyFuC0uz4RSGVacJ030PQ==}
@@ -12766,8 +12766,8 @@ packages:
     resolution: {integrity: sha512-eflK8wEtyOE6+hsaRVPxvUKYCpRgzLqDTb8krvAsRIwOGlHoSgYLgBXoubGgLd2fT41/OUYdb48v4k4WWHQurA==}
     engines: {node: '>= 10.13.0'}
 
-  selenium-webdriver@4.34.0:
-    resolution: {integrity: sha512-zGfQFcsASAv3KrYzYh+iw4fFqB7iZAgHW7BU6rRz7isK1i1X4x3LvjmZad4bUUgHDwTnAhlqTzDh21byB+zHMg==}
+  selenium-webdriver@4.38.0:
+    resolution: {integrity: sha512-5/UXXFSQmn7FGQkbcpAqvfhzflUdMWtT7QqpEgkFD6Q6rDucxB5EUfzgjmr6JbUj30QodcW3mDXehzoeS/Vy5w==}
     engines: {node: '>= 20.0.0'}
 
   semver-diff@4.0.0:
@@ -16112,7 +16112,7 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@bazel/runfiles@6.3.1': {}
+  '@bazel/runfiles@6.5.0': {}
 
   '@bufbuild/protobuf@2.6.3': {}
 
@@ -23782,7 +23782,7 @@ snapshots:
     dependencies:
       chromedriver: 129.0.4
       ember-inspector: 4.13.1
-      selenium-webdriver: 4.34.0
+      selenium-webdriver: 4.38.0
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -30929,11 +30929,11 @@ snapshots:
       ajv-formats: 2.1.1(ajv@8.17.1)
       ajv-keywords: 5.1.0(ajv@8.17.1)
 
-  selenium-webdriver@4.34.0:
+  selenium-webdriver@4.38.0:
     dependencies:
-      '@bazel/runfiles': 6.3.1
+      '@bazel/runfiles': 6.5.0
       jszip: 3.10.1
-      tmp: 0.2.3
+      tmp: 0.2.5
       ws: 8.18.3
     transitivePeerDependencies:
       - bufferutil
