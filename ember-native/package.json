@@ -68,7 +68,8 @@
     "rollup-plugin-astroturf": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-root-import": "^1.0.0",
-    "rollup-plugin-styles": "^4.0.0"
+    "rollup-plugin-styles": "^4.0.0",
+    "@embroider/vite": "^1.4.2"
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
@@ -79,7 +80,6 @@
     "@embroider/core": "^4.4.0",
     "@embroider/macros": "^1.19.5",
     "@embroider/shared-internals": "^3.0.1",
-    "@embroider/vite": "^1.4.2",
     "@embroider/util": "^1.13.3",
     "@embroider/webpack": "^4.1.1",
     "@glimmer/syntax": "^0.94.9",

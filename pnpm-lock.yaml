@@ -10,7 +10,7 @@ overrides:
 
 patchedDependencies:
   '@nativescript/unit-test-runner':
-    hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
+    hash: 6fjeie3vsxjpmqbl67fkeez57i
     path: patches/@nativescript__unit-test-runner.patch
 
 importers:
@@ -52,7 +52,7 @@ importers:
         version: 3.1.0
       '@nativescript/unit-test-runner':
         specifier: ~3.0.0
-        version: 3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
+        version: 3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.2
@@ -601,6 +601,9 @@ importers:
       '@embroider/addon-shim':
         specifier: 1.9.0
         version: 1.9.0
+      '@embroider/vite':
+        specifier: ^1.4.2
+        version: 1.4.2(@embroider/core@4.4.0(@glint/template@1.7.3))(@glint/template@1.7.3)(rollup@4.46.3)(vite@7.1.2(@types/node@24.1.0)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.90.0)(sass@1.94.2)(stylus@0.62.0)(terser@5.44.1)(yaml@2.8.1))
       '@eslint/js':
         specifier: ^9.28.0
         version: 9.28.0
@@ -686,9 +689,6 @@ importers:
       '@embroider/util':
         specifier: ^1.13.3
         version: 1.13.3(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2(@babel/core@7.27.7)))(@glint/template@1.7.3)(ember-source@6.6.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
-      '@embroider/vite':
-        specifier: ^1.4.2
-        version: 1.4.2(@embroider/core@4.4.0(@glint/template@1.7.3))(@glint/template@1.7.3)(rollup@4.46.3)(vite@7.1.2(@types/node@24.1.0)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.90.0)(sass@1.94.2)(stylus@0.62.0)(terser@5.44.1)(yaml@2.8.1))
       '@embroider/webpack':
         specifier: ^4.1.1
         version: 4.1.1(@embroider/core@4.4.0(@glint/template@1.7.3))(webpack@5.103.0)
@@ -18019,7 +18019,7 @@ snapshots:
       '@nativescript/types-android': 8.9.0
       '@nativescript/types-ios': 8.9.1
 
-  '@nativescript/unit-test-runner@3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
+  '@nativescript/unit-test-runner@3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)':
     dependencies:
       '@nativescript/hook': 2.0.0
       glob-regex: 0.3.2
