@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "patch",
-      "oldVersion": "3.0.0",
-      "newVersion": "3.0.1",
+      "oldVersion": "3.0.1",
+      "newVersion": "3.0.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2025-12-03)\n\n* ember-native 3.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#298](https://github.com/ember-native/ember-native/pull/298) make next/prev sibling getter ([@patricklx](https://github.com/patricklx))\n  * [#297](https://github.com/ember-native/ember-native/pull/297) remove child before insert again ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2025-12-05)\n\n* ember-native 3.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#317](https://github.com/ember-native/ember-native/pull/317) move embroider vite to deps ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
