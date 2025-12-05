@@ -1,5 +1,17 @@
 # Changelog
 
+## Release (2025-12-03)
+
+* ember-native 3.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#298](https://github.com/ember-native/ember-native/pull/298) make next/prev sibling getter ([@patricklx](https://github.com/patricklx))
+  * [#297](https://github.com/ember-native/ember-native/pull/297) remove child before insert again ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2025-11-23)
 
 * ember-native 3.0.0 (major)
