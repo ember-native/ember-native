@@ -25,3 +25,5 @@
 !eslint
 !eslint/ember-native.js
 !tsconfig.utils.json
+!bin
+!bin/*

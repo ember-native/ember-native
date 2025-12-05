@@ -11,8 +11,12 @@
   },
   "license": "MIT",
   "author": "Patrick Pircher",
+  "bin": {
+    "ember-native": "./bin/create-app.js"
+  },
   "files": [
     "addon-main.cjs",
+    "bin",
     "declarations",
     "dist",
     "types"
