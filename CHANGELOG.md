@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-12-05)
+
+* ember-native 3.0.2 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#317](https://github.com/ember-native/ember-native/pull/317) move embroider vite to deps ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2025-12-03)
 
 * ember-native 3.0.1 (patch)
