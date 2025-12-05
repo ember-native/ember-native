@@ -4,6 +4,15 @@ ember-native
 use the Ember framework with Nativescript 
 
 
+## developing
+git clone https://github.com/ember-native/ember-native-demo
+and adjust it to your needs.
+
+or
+
+`npx ember-native create my-native-app`
+
+
 Contributing
 ------------------------------------------------------------------------------
 
