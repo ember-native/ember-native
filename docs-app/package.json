@@ -61,7 +61,7 @@
     "@ember/test-helpers": "^5.2.2",
     "@ember/test-waiters": "^4.1.1",
     "@embroider/addon-shim": "^1.10.2",
-    "@embroider/compat": "^4.1.0",
+    "@embroider/compat": "^4.1.11",
     "@embroider/config-meta-loader": "^1.0.0",
     "@embroider/core": "^4.4.0",
     "@embroider/test-setup": "^4.0.0",

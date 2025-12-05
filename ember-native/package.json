@@ -76,7 +76,7 @@
     "@babel/eslint-parser": "^7.28.5",
     "@ember/optional-features": "^2.0.0",
     "@embroider/addon-dev": "^8.1.0",
-    "@embroider/compat": "^4.1.0",
+    "@embroider/compat": "^4.1.11",
     "@embroider/core": "^4.4.0",
     "@embroider/macros": "^1.19.5",
     "@embroider/shared-internals": "^3.0.1",
