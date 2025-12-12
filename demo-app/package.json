@@ -11,7 +11,7 @@
     "dev:server:android": "VITE_DEBUG_LOGS=1 vite serve -- --env.android --env.hmr",
     "ios": "VITE_DEBUG_LOGS=1 ns debug ios",
     "android": "VITE_DEBUG_LOGS=1 ns debug android",
-    "build": " nativescript build android",
+    "build": " nativescript build android --env.verbose",
     "debug-test": "pnpm nativescript test android --debug-brk",
     "debug": " nativescript debug android --debug-brk",
     "prepare-android": "npx nativescript prepare android",
@@ -70,6 +70,9 @@
     "concurrently": "^9.2.0",
     "content-tag": "^4.0.0",
     "decorator-transforms": "^2.1.0",
+    "ember-auto-import": "^2.12.0",
+    "ember-cli": "~6.6.0",
+    "ember-cli-babel": "^8.2.0",
     "ember-cli-version-checker": "^5.1.2",
     "ember-qunit": "^9.0.3",
     "ember-resolver": "^13.1.1",
@@ -80,6 +83,7 @@
     "eslint-plugin-ember": "^12.3.1",
     "eslint-plugin-n": "^17.23.1",
     "eslint-plugin-qunit": "^8.2.5",
+    "fast-glob": "^3.3.3",
     "globals": "^16.5.0",
     "https-browserify": "^1.0.0",
     "karma": "^4.0.0",
@@ -137,5 +141,8 @@
       "core-js-pure",
       "nativescript"
     ]
+  },
+  "ember": {
+    "edition": "octane"
   }
 }
