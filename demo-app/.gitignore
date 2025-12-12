@@ -30,3 +30,4 @@
 !unit-test-patch-files
 !unit-test-patch-files/*
 !eslint.config.mjs
+!vite.config.ts
