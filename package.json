@@ -17,8 +17,13 @@
     "test": "turbo run test --output-logs errors-only"
   },
   "devDependencies": {
+    "@angular/compiler": "^21.0.8",
+    "@angular/compiler-cli": "^21.0.8",
+    "@babel/traverse": "^7.28.6",
+    "@babel/types": "^7.28.6",
     "@glint/core": "^1.5.0",
     "concurrently": "^9.2.1",
+    "ember-cli": "~6.6.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.2",
     "glob": "^13.0.0",
@@ -26,7 +31,9 @@
     "prettier-plugin-ember-template-tag": "^2.1.0",
     "release-plan": "^0.17.2",
     "semver": "^7.7.3",
-    "typescript": "^5.9.2"
+    "tinyglobby": "^0.2.15",
+    "typescript": "^5.9.2",
+    "vite": "^7.3.1"
   },
   "engines": {
     "node": ">= 20.*",

@@ -4,7 +4,7 @@ const path = require('node:path');
 const originalLoad = Module._load;
 Module._load = function (request, parent, isMain) {
   if (request === '@rollup/rollup-win32-x64-msv' || parent?.id?.includes('rollup')) {
-    console.log('load', request, parent.id);
+    // console.log('load', request, parent.id);
   }
 
   const parentFile = parent?.filename ? fs.realpathSync(parent?.filename) : undefined;

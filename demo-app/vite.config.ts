@@ -6,7 +6,6 @@ import Module from 'module';
 
 const req = Module.prototype.require;
 Module.prototype.require = function (...args) {
-  console.log('require', ...args);
   return req.call(this, ...args);
 }
 
