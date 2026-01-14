@@ -29,6 +29,9 @@ importers:
       '@babel/types':
         specifier: ^7.28.6
         version: 7.28.6
+      '@esbuild/win32-x64':
+        specifier: 0.25.12
+        version: 0.25.12
       '@glint/core':
         specifier: ^1.5.0
         version: 1.5.2(typescript@5.9.3)
@@ -18496,8 +18499,7 @@ snapshots:
   '@esbuild/win32-ia32@0.27.2':
     optional: true
 
-  '@esbuild/win32-x64@0.25.12':
-    optional: true
+  '@esbuild/win32-x64@0.25.12': {}
 
   '@esbuild/win32-x64@0.25.9':
     optional: true
