@@ -21,6 +21,9 @@ class Page extends Component {
                 <LinkTo @route='tabs' @transitionName='explode' @transitionDuration={{1000}}>
                     Tabs
                 </LinkTo>
+                <LinkTo @route='warp-drive' @transitionName='slideTop'>
+                    WarpDrive Demo
+                </LinkTo>
             </stack-layout>
         </page>
     </template>
