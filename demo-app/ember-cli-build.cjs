@@ -21,3 +21,14 @@ module.exports = async function (defaults) {
 
   return compatBuild(app, buildOnce);
 };
+
+// const realLog = console.log;
+// console.log = function (...args) {
+//   realLog.call(null, ...args);
+//   try {
+//     throw new Error('no logs!');
+//   } catch (e) {
+//     realLog(e);
+//     throw e;
+//   }
+// }

@@ -6,7 +6,7 @@
   "scripts": {
     "devtools": "ember-devtools",
     "dev:ios": "concurrently -k -n vite,ns 'npm run dev:server:ios' 'wait-on tcp:5173 && npm run ios'",
-    "dev:android": "concurrently -k -n vite,ns 'npm run dev:server:android' 'wait-on tcp:5173 && npm run android'",
+    "dev:android": "concurrently -k -n vite,ns 'pnpm run dev:server:android' 'wait-on tcp:5173 && pnpm run android'",
     "dev:server:ios": "VITE_DEBUG_LOGS=1 vite serve -- --env.ios --env.hmr",
     "dev:server:android": "VITE_DEBUG_LOGS=1 vite serve -- --env.android --env.hmr",
     "ios": "VITE_DEBUG_LOGS=1 ns debug ios",

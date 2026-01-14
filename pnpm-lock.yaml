@@ -32,6 +32,9 @@ importers:
       '@glint/core':
         specifier: ^1.5.0
         version: 1.5.2(typescript@5.9.3)
+      '@rollup/rollup-win32-x64-msvc':
+        specifier: ^4.55.1
+        version: 4.55.1
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
@@ -4360,6 +4363,11 @@ packages:
 
   '@rollup/rollup-win32-x64-msvc@4.53.3':
     resolution: {integrity: sha512-UhTd8u31dXadv0MopwGgNOBpUVROFKWVQgAg5N1ESyCz8AuBcMqm4AuTjrwgQKGDfoFuz02EuMRHQIw/frmYKQ==}
+    cpu: [x64]
+    os: [win32]
+
+  '@rollup/rollup-win32-x64-msvc@4.55.1':
+    resolution: {integrity: sha512-SPEpaL6DX4rmcXtnhdrQYgzQ5W2uW3SCJch88lB2zImhJRhIIK44fkUrgIV/Q8yUNfw5oyZ5vkeQsZLhCb06lw==}
     cpu: [x64]
     os: [win32]
 
@@ -20789,6 +20797,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.53.3':
     optional: true
+
+  '@rollup/rollup-win32-x64-msvc@4.55.1': {}
 
   '@rtsao/scc@1.1.0': {}
 
