@@ -1,7 +1,6 @@
 import app from './native/main';
 import { Application as NativeApplication } from '@nativescript/core/application/application';
 
-
 function boot() {
   return new Promise((resolve, reject) => {
     NativeApplication.on(NativeApplication.launchEvent, () => {

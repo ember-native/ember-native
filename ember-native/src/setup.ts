@@ -6,6 +6,8 @@ import ElementNode from './dom/nodes/ElementNode.ts';
 import { _backburner } from '@ember/runloop';
 import DocumentNode from './dom/nodes/DocumentNode.ts';
 
+globalThis.registerBundlerModules = () => null;
+
 export function setup() {
   globalThis.requireModule = loader.require;
   globalThis.requirejs = loader.require;
