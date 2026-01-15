@@ -7,6 +7,7 @@ import { _backburner } from '@ember/runloop';
 import DocumentNode from './dom/nodes/DocumentNode.ts';
 
 globalThis.registerBundlerModules = () => null;
+globalThis.structuredClone = (x) => JSON.parse(JSON.stringify(x));
 
 export function setup() {
   globalThis.requireModule = loader.require;

@@ -20,6 +20,9 @@ global.__embroider_macros_global__ = {
 // Configure WarpDrive using the official babel plugin
 const warpDriveMacros = babelPlugin({
   compatWith: '5.6',
+  env: {
+    DEBUG: process.env.DEBUG || false,
+  },
 });
 
 module.exports = {

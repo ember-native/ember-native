@@ -3,5 +3,5 @@ import { RadListView } from 'nativescript-ui-listview';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 
 
-registerNativeElement('RadListView', () => RadListView);
-registerNativeElement('RadSideDrawer', () => RadSideDrawer);
+registerNativeElement('RadListView', () => RadListView as any);
+registerNativeElement('RadSideDrawer', () => RadSideDrawer as any);
