@@ -7,6 +7,7 @@ import './app.scss';
 import { name as pkgName } from '../package.json';
 import ApplicationInstance from "@ember/application/instance";
 import Router from "./router";
+import './configure-signals';
 
 window.EmberENV = ENV.EmberENV;
 window._Ember = EmberNamespace;

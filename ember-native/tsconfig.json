@@ -42,7 +42,7 @@
       can do the proper transformations on those files.
     */
     "allowImportingTsExtensions": true,
-    
+
     /* Disable strict type checking */
     "strict": false,
     "noImplicitAny": false,

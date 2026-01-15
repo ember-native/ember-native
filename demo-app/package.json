@@ -17,8 +17,8 @@
     "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
-    "lint:types": "ember-tsc",
-    "debug:types": "ember-tsc --debug-intermediate-representation"
+    "lint:types": "glint",
+    "debug:types": "glint --debug-intermediate-representation"
   },
   "dependencies": {
     "@ember/test-waiters": "^4.1.1",
@@ -42,6 +42,7 @@
     "nativescript-ui-sidedrawer": "^15.2.3",
     "octokit": "^5.0.5",
     "selenium-webdriver": "^4.34.0",
+    "tracked-built-ins": "^4.0.0",
     "yam": "^1.0.0"
   },
   "devDependencies": {
@@ -53,8 +54,8 @@
     "@embroider/compat": "^4.1.11",
     "@embroider/core": "^4.4.0",
     "@glimmer/component": "^2.0.0",
-    "@ember-tsc/ember-tsc": "^1.0.9",
-    "@ember-tsc/template": "^1.7.3",
+    "@glint/core": "^1.5.2",
+    "@glint/environment-ember-template-imports": "^1.5.2",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
     "@nativescript/android": "8.9.1",
     "@nativescript/core": "^8.9.7",
