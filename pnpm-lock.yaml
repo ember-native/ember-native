@@ -11,7 +11,7 @@ overrides:
 
 patchedDependencies:
   '@nativescript/unit-test-runner':
-    hash: 6fjeie3vsxjpmqbl67fkeez57i
+    hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
     path: patches/@nativescript__unit-test-runner.patch
 
 importers:
@@ -111,7 +111,7 @@ importers:
         version: 3.1.0
       '@nativescript/unit-test-runner':
         specifier: ~3.0.0
-        version: 3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)
+        version: 3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.2
@@ -18189,7 +18189,7 @@ snapshots:
       '@nativescript/types-android': 8.9.0
       '@nativescript/types-ios': 8.9.1
 
-  '@nativescript/unit-test-runner@3.0.4(patch_hash=6fjeie3vsxjpmqbl67fkeez57i)':
+  '@nativescript/unit-test-runner@3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
     dependencies:
       '@nativescript/hook': 2.0.0
       glob-regex: 0.3.2
