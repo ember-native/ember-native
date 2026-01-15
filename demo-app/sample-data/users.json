@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "type": "user",
+      "id": "1",
+      "attributes": {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "age": 28,
+        "avatar": "https://i.pravatar.cc/150?img=1",
+        "bio": "Software engineer passionate about mobile development and open source."
+      }
+    },
+    {
+      "type": "user",
+      "id": "2",
+      "attributes": {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "age": 34,
+        "avatar": "https://i.pravatar.cc/150?img=2",
+        "bio": "Full-stack developer with expertise in JavaScript and TypeScript."
+      }
+    },
+    {
+      "type": "user",
+      "id": "3",
+      "attributes": {
+        "name": "Charlie Brown",
+        "email": "charlie.brown@example.com",
+        "age": 42,
+        "avatar": "https://i.pravatar.cc/150?img=3",
+        "bio": "Tech lead focused on building scalable applications."
+      }
+    },
+    {
+      "type": "user",
+      "id": "4",
+      "attributes": {
+        "name": "Diana Prince",
+        "email": "diana.prince@example.com",
+        "age": 31,
+        "avatar": "https://i.pravatar.cc/150?img=4",
+        "bio": "UX engineer bridging design and development."
+      }
+    },
+    {
+      "type": "user",
+      "id": "5",
+      "attributes": {
+        "name": "Ethan Hunt",
+        "email": "ethan.hunt@example.com",
+        "age": 29,
+        "avatar": "https://i.pravatar.cc/150?img=5",
+        "bio": "DevOps specialist automating everything."
+      }
+    },
+    {
+      "type": "user",
+      "id": "6",
+      "attributes": {
+        "name": "Fiona Green",
+        "email": "fiona.green@example.com",
+        "age": 26,
+        "avatar": "https://i.pravatar.cc/150?img=6",
+        "bio": "Frontend developer creating beautiful user experiences."
+      }
+    }
+  ]
+}
