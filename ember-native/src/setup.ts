@@ -109,16 +109,16 @@ if (typeof globalThis.TransformStream === 'undefined') {
 // Polyfill EventTarget for AbortSignal
 if (typeof globalThis.EventTarget === 'undefined') {
   class EventTarget {
-    private _listeners: Map<string, Set<Function>> = new Map();
+    private _listeners: Map<string, Set<(event: any) => void>> = new Map();
     
-    addEventListener(type: string, listener: Function) {
+    addEventListener(type: string, listener: (event: any) => void) {
       if (!this._listeners.has(type)) {
         this._listeners.set(type, new Set());
       }
       this._listeners.get(type)!.add(listener);
     }
     
-    removeEventListener(type: string, listener: Function) {
+    removeEventListener(type: string, listener: (event: any) => void) {
       const listeners = this._listeners.get(type);
       if (listeners) {
         listeners.delete(listener);
@@ -154,7 +154,7 @@ if (typeof globalThis.AbortController === 'undefined') {
       }
       // Dispatch abort event
       const event = { type: 'abort', target: this.signal };
-      this.signal.dispatchEvent(event);
+      this.signal['dispatchEvent'](event);
     }
   }
   

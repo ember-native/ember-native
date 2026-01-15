@@ -29,7 +29,7 @@ class TrackedMap extends Map<any, any> {
 }
 
 interface RadListViewInterface<T> {
-  Element: NativeElementNode<NativeRadListView>;
+  Element: NativeElementNode<any>;
   Args: {
     items: T[];
     key?: string;
@@ -45,11 +45,11 @@ export default class RadListView<T = any> extends Component<
   RadListViewInterface<T>
 > {
   elementRefs: TrackedMap = new TrackedMap();
-  @tracked private listView: NativeElementNode<NativeRadListView> | undefined;
+  @tracked private listView: NativeElementNode<any> | undefined;
   private declare headerElement: NativeElementNode<StackLayout>;
   private declare footerElement: NativeElementNode<StackLayout>;
 
-  cleanup(listView: NativeElementNode<NativeRadListView>) {
+  cleanup(listView: NativeElementNode<any>) {
     for (const [element] of [...this.elementRefs.entries()]) {
       const n = element.nativeView.nativeViewProtected;
       if (!n || !n.getWindowToken()) {
@@ -81,10 +81,10 @@ export default class RadListView<T = any> extends Component<
   setupListView = modifier(
     function setupListView(
       this: RadListView,
-      listView: NativeElementNode<NativeRadListView>,
+      listView: NativeElementNode<any>,
     ) {
       this.listView = listView;
-      listView.nativeView.on('itemRecyclingInternal', () => {
+      (listView.nativeView as any).on('itemRecyclingInternal', () => {
         this.cleanup(listView);
       });
       const listViewComponent = this;

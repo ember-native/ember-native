@@ -97,7 +97,7 @@ export default class DocumentNode extends ViewNode {
     const e = createElement(tagName);
     e._ownerDocument = this.getInstance();
     if (e instanceof NativeElementNode && e.nativeView) {
-      this.getInstance().nodeMap.set(e.nativeView._domId, e);
+      this.getInstance().nodeMap.set((e.nativeView as any)._domId, e);
     }
     if (tagName === 'page') {
       this.getInstance().page = e as PageElement;

@@ -3,9 +3,7 @@ import type NativeElementNode from './native/NativeElementNode.ts';
 export interface NativeElementsTagNameMap {
   property: NativeElementNode<null>;
   fragment: NativeElementNode<null>;
-  'rad-list-view': NativeElementNode<
-    import('nativescript-ui-listview').RadListView
-  >;
+  'rad-list-view': NativeElementNode<any>;
   'list-view': NativeElementNode<import('@nativescript/core').ListView>;
   'html-view': NativeElementNode<import('@nativescript/core').HtmlView>;
   'scroll-view': NativeElementNode<import('@nativescript/core').ScrollView>;
