@@ -24,16 +24,16 @@ class Page extends Component {
   loadUsers = async (forceReload = false) => {
     this.isLoading = true;
     this.error = null;
-    
+
     try {
       // Add artificial delay to demonstrate loading state
       if (forceReload) {
         await new Promise(resolve => setTimeout(resolve, 1500));
       }
-      
+
       // Use store.request() instead of fetch() + store.push()
       const { content } = await this.store.request<{ data: User[] }>({
-        url: 'https://raw.githubusercontent.com/ember-native/ember-native/use-warp-drive/demo-app/sample-data/users.json',
+        url: 'https://raw.githubusercontent.com/ember-native/ember-native/main/demo-app/sample-data/users.json',
         method: 'GET',
         cacheOptions: {
           reload: forceReload, // Force reload when button is pressed
@@ -41,11 +41,11 @@ class Page extends Component {
           types: ['user']
         }
       });
-      
+
       // The data is automatically pushed to the store's cache
       // We can access it directly from the response
       this.users = content.data || [];
-      
+
     } catch (err) {
       this.error = err instanceof Error ? err.message : 'Failed to load users';
       console.error('Error loading users:', err);
@@ -77,7 +77,7 @@ class Page extends Component {
           android.systemIcon="ic_menu_back"
         />
       </action-bar>
-      
+
       <grid-layout rows="auto, *" class="page-content">
         <!-- Header Section -->
         <stack-layout row="0" class="header-section">
@@ -98,9 +98,9 @@ class Page extends Component {
               <label class="error-icon" text="⚠️" />
               <label class="error-title" text="Oops! Something went wrong" />
               <label class="error-message" text="{{this.error}}" textWrap="true" />
-              <button 
-                class="btn btn-primary retry-button" 
-                text="🔄 Try Again" 
+              <button
+                class="btn btn-primary retry-button"
+                text="🔄 Try Again"
                 {{on 'tap' this.loadUsers}}
               />
             </stack-layout>
@@ -109,12 +109,12 @@ class Page extends Component {
               <scroll-view>
                 <stack-layout class="user-detail-container">
                   <label class="detail-header" text="👤 User Profile" />
-                  
+
                   <stack-layout class="detail-card">
                     <label class="user-name" text="{{this.selectedUser.name}}" />
                     <label class="user-email" text="📧 {{this.selectedUser.email}}" />
                     <label class="user-age" text="🎂 Age: {{this.selectedUser.age}}" />
-                    
+
                     {{#if this.selectedUser.bio}}
                       <stack-layout class="bio-section">
                         <label class="bio-label" text="About" />
@@ -122,10 +122,10 @@ class Page extends Component {
                       </stack-layout>
                     {{/if}}
                   </stack-layout>
-                  
-                  <button 
-                    class="btn btn-outline back-button" 
-                    text="← Back to List" 
+
+                  <button
+                    class="btn btn-outline back-button"
+                    text="← Back to List"
                     {{on 'tap' this.clearSelection}}
                   />
                 </stack-layout>
@@ -135,18 +135,18 @@ class Page extends Component {
                 <stack-layout class="list-header">
                   <label class="user-count" text="{{this.users.length}} Users Loaded" />
                   <label class="list-instruction" text="Tap any user to view details" />
-                  <button 
-                    class="btn btn-primary reload-button" 
-                    text="🔄 Reload Data" 
+                  <button
+                    class="btn btn-primary reload-button"
+                    text="🔄 Reload Data"
                     {{on 'tap' this.reloadUsers}}
                   />
                 </stack-layout>
-                
+
                 <scroll-view>
                   <stack-layout class="user-list">
                     {{#each this.users as |user|}}
-                      <grid-layout 
-                        columns="auto, *" 
+                      <grid-layout
+                        columns="auto, *"
                         class="user-card"
                         {{on 'tap' (fn this.selectUser user)}}
                       >
