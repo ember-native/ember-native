@@ -52,7 +52,7 @@
     "@embroider/vite": "^1.4.2",
     "@eslint/js": "^9.28.0",
     "@glimmer/component": "^2.0.0",
-    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@types/node": "^24.1.0",
     "astroturf": "^1.2.0",
