@@ -27,7 +27,7 @@ export function buildSignalConfig(): SignalHooks {
     },
     
     willSyncFlushWatchers: () => {
-      return !!_backburner.currentInstance && _backburner._autorun !== true;
+      return !!_backburner.currentInstance && (_backburner as any)._autorun !== true;
     }
   } satisfies SignalHooks;
 }

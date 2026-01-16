@@ -1,4 +1,5 @@
-import { Type } from '@warp-drive/core-types/symbols';
+import { Type } from '@warp-drive/core/types/symbols';
+import type { PolarisResourceSchema } from '@warp-drive/core/types/schema/fields';
 
 export interface User {
   [Type]: 'user';
@@ -10,33 +11,33 @@ export interface User {
   bio?: string;
 }
 
-export const UserSchema = {
+export const UserSchema: PolarisResourceSchema = {
   type: 'user',
   identity: { name: 'id', kind: '@id' },
   fields: [
     {
       name: 'name',
-      kind: 'attribute',
+      kind: 'field',
       type: null,
     },
     {
       name: 'email',
-      kind: 'attribute',
+      kind: 'field',
       type: null,
     },
     {
       name: 'age',
-      kind: 'attribute',
+      kind: 'field',
       type: null,
     },
     {
       name: 'avatar',
-      kind: 'attribute',
+      kind: 'field',
       type: null,
     },
     {
       name: 'bio',
-      kind: 'attribute',
+      kind: 'field',
       type: null,
     },
   ],
