@@ -47,11 +47,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
-        with:
-          # This creates an .npmrc that reads the NODE_AUTH_TOKEN environment variable
-          node-registry-url: 'https://registry.npmjs.org'
       - name: npm publish
-        run: pnpm release-plan publish
+        run: pnpm release-plan publish --provenance
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: fetch tags
