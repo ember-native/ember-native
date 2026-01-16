@@ -30,7 +30,6 @@
     "@warp-drive/core": "^5.8.1",
     "@warp-drive/json-api": "^5.8.1",
     "@warp-drive/schema-record": "^5.8.1",
-    "capture-exit": "^2.0.0",
     "chromedriver": "^137.0.1",
     "ember-compatibility-helpers": "^1.2.7",
     "ember-load-initializers": "^3.0.1",
@@ -42,8 +41,7 @@
     "nativescript-ui-sidedrawer": "^15.2.3",
     "octokit": "^5.0.5",
     "selenium-webdriver": "^4.34.0",
-    "tracked-built-ins": "^4.0.0",
-    "yam": "^1.0.0"
+    "tracked-built-ins": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",
@@ -53,6 +51,7 @@
     "@ember/test-helpers": "^5.2.2",
     "@embroider/compat": "^4.1.11",
     "@embroider/core": "^4.4.0",
+    "@embroider/vite": "^1.5.0",
     "@glimmer/component": "^2.0.0",
     "@glint/core": "^1.5.2",
     "@glint/environment-ember-template-imports": "^1.5.2",
@@ -95,15 +94,13 @@
     "querystring-es3": "^0.2.1",
     "qunit": "^2.24.3",
     "qunit-dom": "^3.4.0",
-    "rsvp": "^4.8.5",
     "socket.io": "^4.8.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.38.0",
     "url": "^0.11.4",
-    "util": "^0.12.5",
-    "webpack-merge": "^6.0.1"
+    "util": "^0.12.5"
   },
   "exports": {
     "./tests/*": "./tests/*",

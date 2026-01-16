@@ -17,22 +17,12 @@
     "test": "turbo run test --output-logs errors-only"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.7",
-    "@embroider/vite": "^1.5.0",
-    "@glimmer/env": "^0.1.7",
+    "@glint/core": "^1.5.0",
     "concurrently": "^9.2.1",
-    "ember-cli": "~6.6.0",
-    "fast-glob": "^3.3.3",
-    "fs-monkey": "^1.1.0",
-    "heimdalljs": "^0.2.6",
-    "heimdalljs-logger": "^0.1.10",
     "prettier": "^3.6.2",
     "prettier-plugin-ember-template-tag": "^2.1.0",
     "release-plan": "^0.17.2",
-    "rsvp": "^4.8.5",
-    "strip-ansi": "6.0.1",
-    "typescript": "^5.9.2",
-    "webpack": "^5.104.1"
+    "typescript": "^5.9.2"
   },
   "engines": {
     "node": ">= 20.*",
@@ -42,8 +32,7 @@
   "pnpm": {
     "overrides": {
       "@embroider/addon-shim": "1.9.0",
-      "ember-eslint-parser": "0.5.3",
-      "strip-ansi": "6.0.1"
+      "ember-eslint-parser": "0.5.3"
     },
     "patchedDependencies": {
       "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
@@ -64,16 +53,5 @@
   "volta": {
     "node": "20.17.0",
     "pnpm": "10.23.0"
-  },
-  "dependencies": {
-    "capture-exit": "^2.0.0",
-    "find-up": "^8.0.0",
-    "locate-path": "^8.0.0",
-    "p-limit": "^7.2.0",
-    "p-locate": "^6.0.0",
-    "path-exists": "^5.0.0",
-    "unicorn-magic": "^0.4.0",
-    "yam": "^1.0.0",
-    "yocto-queue": "^1.2.2"
   }
 }
