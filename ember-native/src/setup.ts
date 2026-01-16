@@ -9,6 +9,13 @@ import DocumentNode from './dom/nodes/DocumentNode.ts';
 globalThis.registerBundlerModules = () => null;
 globalThis.structuredClone = (x) => JSON.parse(JSON.stringify(x));
 
+// Polyfill console.warn if not available
+if (typeof console.warn === 'undefined') {
+  console.warn = function(...args: any[]) {
+    console.log('[WARN]', ...args);
+  };
+}
+
 // Polyfill queueMicrotask for async operations
 if (typeof globalThis.queueMicrotask === 'undefined') {
   globalThis.queueMicrotask = (callback: () => void) => {
