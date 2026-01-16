@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-01-16)
+
+* ember-native 3.1.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#321](https://github.com/ember-native/ember-native/pull/321) support warp drive ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2025-12-05)
 
 * ember-native 3.0.2 (patch)
