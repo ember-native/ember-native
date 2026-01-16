@@ -15,6 +15,8 @@ Ember Native is a framework that enables running Ember.js applications on Native
 - **Requests Guide**: https://warp-drive.io/guides/the-manual/requests
 - **Signals/Reactivity**: https://github.com/warp-drive-data/warp-drive/blob/main/guides/the-manual/misc/reactivity/signals.md
 
+read https://warp-drive.io/llms-full.txt to work with warp-drive!!!
+
 ### Key Concepts
 
 #### Modern WarpDrive (v5) - No Legacy Support
