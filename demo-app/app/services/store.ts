@@ -1,24 +1,14 @@
-// import Cache from '@ember-data/json-api';
-// import EDataStore, { CacheHandler } from '@ember-data/store';
-// import RequestManager from '@ember-data/request';
-// import Fetch from '@ember-data/request/fetch';
-// import Adapter from '@ember-data/adapter/json-api';
-//
-// export default class Store extends EDataStore {
-//   #adapter = new Adapter();
-//   requestManager: RequestManager;
-//
-//   adapterFor() {
-//     return this.#adapter;
-//   }
-//   constructor() {
-//     // eslint-disable-next-line prefer-rest-params
-//     super(...arguments);
-//     this.requestManager = new RequestManager();
-//     this.requestManager.use([Fetch]);
-//     this.requestManager.useCache(CacheHandler);
-//   }
-//   createCache(storeWrapper) {
-//     return new Cache(storeWrapper);
-//   }
-// }
+import { useRecommendedStore } from '@warp-drive/core';
+import { JSONAPICache } from '@warp-drive/json-api';
+import { UserSchema } from '../schemas/user';
+
+export default class StoreService extends useRecommendedStore({
+  cache: JSONAPICache,
+  schemas: [UserSchema],
+}) {}
+
+declare module '@ember/service' {
+  interface Registry {
+    store: StoreService;
+  }
+}

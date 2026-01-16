@@ -45,6 +45,7 @@ Module.registerHooks({
 
 const webpack = require('@nativescript/webpack');
 const configureEmberNative = require('ember-native/utils/webpack.config.js');
+const { execSync } = require("node:child_process");
 
 module.exports = (env) => {
 	webpack.init(env);
@@ -153,8 +154,25 @@ module.exports = (env) => {
       .end();
   });
 
-	const conf = webpack.resolveConfig();
+	let conf = webpack.resolveConfig();
   console.log('conf', conf)
-  console.log('module.rules', conf.module.rules.map(r => r.use))
-  return conf;
+  //console.log('module.rules', conf.module.rules.map(r => r.use))
+
+  // Wrap config in async function to run Embroider prebuild
+  return (() => {
+    try {
+      const { emberBuild } = require('@embroider/vite');
+      console.log('🔨 Running Embroider prebuild...');
+      execSync('pnpm ember build', {
+        env: {
+          ...process.env,
+          EMBROIDER_PREBUILD: 'true',
+        }
+      })
+      console.log('✓ Embroider prebuild completed');
+    } catch (e) {
+      console.warn('⚠ Embroider prebuild failed:', e?.message || e);
+    }
+    return conf;
+  })();
 };

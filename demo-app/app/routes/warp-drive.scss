@@ -1,0 +1,243 @@
+// WarpDrive Demo Page Styles
+
+.page-content {
+  background-color: #f5f7fa;
+}
+
+// Header Section
+.header-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20 16;
+  margin-bottom: 16;
+}
+
+.page-title {
+  font-size: 28;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 4;
+}
+
+.page-subtitle {
+  font-size: 14;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  margin-bottom: 8;
+}
+
+.page-description {
+  font-size: 12;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+// Loading State
+.loading-container {
+  padding: 40 20;
+  vertical-align: center;
+}
+
+.activity-indicator {
+  width: 50;
+  height: 50;
+  color: #667eea;
+  margin-bottom: 16;
+}
+
+.loading-text {
+  font-size: 16;
+  color: #4a5568;
+  text-align: center;
+}
+
+// Error State
+.error-container {
+  padding: 40 20;
+  vertical-align: center;
+}
+
+.error-icon {
+  font-size: 48;
+  text-align: center;
+  margin-bottom: 16;
+}
+
+.error-title {
+  font-size: 20;
+  font-weight: bold;
+  color: #e53e3e;
+  text-align: center;
+  margin-bottom: 8;
+}
+
+.error-message {
+  font-size: 14;
+  color: #718096;
+  text-align: center;
+  margin-bottom: 20;
+  padding: 0 20;
+}
+
+.retry-button {
+  margin: 0 40;
+  background-color: #667eea;
+  color: #ffffff;
+  border-radius: 8;
+  padding: 12 24;
+}
+
+// List Header
+.list-header {
+  padding: 16;
+  background-color: #ffffff;
+  margin-bottom: 8;
+}
+
+.user-count {
+  font-size: 20;
+  font-weight: bold;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 4;
+}
+
+.list-instruction {
+  font-size: 13;
+  color: #718096;
+  text-align: center;
+  margin-bottom: 12;
+}
+
+.reload-button {
+  margin: 0 40;
+  background-color: #667eea;
+  color: #ffffff;
+  border-radius: 8;
+  padding: 10 20;
+  font-size: 14;
+}
+
+// User List
+.user-list {
+  padding: 0 12 12 12;
+}
+
+.user-card {
+  background-color: #ffffff;
+  border-radius: 12;
+  padding: 16;
+  margin-bottom: 12;
+  border-width: 1;
+  border-color: #e2e8f0;
+}
+
+.user-avatar {
+  font-size: 40;
+  width: 50;
+  text-align: center;
+  vertical-align: top;
+  margin-right: 12;
+}
+
+.user-info {
+  vertical-align: top;
+}
+
+.user-card-name {
+  font-size: 18;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 4;
+}
+
+.user-card-email {
+  font-size: 14;
+  color: #667eea;
+  margin-bottom: 4;
+}
+
+.user-card-age {
+  font-size: 12;
+  color: #718096;
+  margin-bottom: 6;
+}
+
+.user-card-bio {
+  font-size: 12;
+  color: #4a5568;
+  font-style: italic;
+  margin-top: 4;
+}
+
+// User Detail View
+.user-detail-container {
+  padding: 16;
+}
+
+.detail-header {
+  font-size: 24;
+  font-weight: bold;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 20;
+}
+
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 16;
+  padding: 24;
+  margin-bottom: 20;
+  border-width: 1;
+  border-color: #e2e8f0;
+}
+
+.user-name {
+  font-size: 24;
+  font-weight: bold;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 12;
+}
+
+.user-email {
+  font-size: 16;
+  color: #667eea;
+  text-align: center;
+  margin-bottom: 8;
+}
+
+.user-age {
+  font-size: 16;
+  color: #718096;
+  text-align: center;
+  margin-bottom: 16;
+}
+
+.bio-section {
+  background-color: #f7fafc;
+  border-radius: 8;
+  padding: 16;
+  margin-top: 16;
+}
+
+.bio-label {
+  font-size: 14;
+  font-weight: bold;
+  color: #4a5568;
+  margin-bottom: 8;
+}
+
+.bio-text {
+  font-size: 14;
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+.back-button {
+  margin: 0 20;
+  border-color: #667eea;
+  color: #667eea;
+  border-radius: 8;
+  padding: 12 24;
+}
