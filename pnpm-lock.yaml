@@ -30,8 +30,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(prettier@3.6.2)
       release-plan:
-        specifier: ^0.17.2
-        version: 0.17.2
+        specifier: ^0.17.4
+        version: 0.17.4
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -8612,8 +8612,8 @@ packages:
   git-url-parse@13.1.0:
     resolution: {integrity: sha512-5FvPJP/70WkIprlUZ33bm4UAaFdjcLkJLpWft1BeZKqwR0uhhNGoKwlUaPtVb4LxCSQ++erHapRak9kWGj+FCA==}
 
-  github-changelog@2.1.2:
-    resolution: {integrity: sha512-psDEGxwD5fWDLOW+BOORg1JgZOnbCuMhNLevsD/nP7QVXEVExUGnXBP6MmrFm0hAao9LgBLSBKfcNzGuwecRDA==}
+  github-changelog@2.1.4:
+    resolution: {integrity: sha512-mZQF/YC9OR8XMGpYlLQqG66RiKwlaQZ7rXTZug28oOYkzOXd0acszuvYHVzPlYmns1aDDSwQkbzFxNOYpWhmig==}
     engines: {node: 18.* || 20.* || >= 22}
     hasBin: true
 
@@ -12379,8 +12379,8 @@ packages:
     engines: {node: '>=14.9'}
     hasBin: true
 
-  release-plan@0.17.2:
-    resolution: {integrity: sha512-LgE/3CU8sFZt28uJR886xvWdw/CL0g5g5YSFTAJUvUy5qdERZdcc1pu317nKpYFs/yEDjiUasLj3rxnXBJf1zA==}
+  release-plan@0.17.4:
+    resolution: {integrity: sha512-CK+RrsvP6JXysgFuqUoOvprAT95J5x8usHzAQh3M1RMQqFScnAyfY6lb1LBsjqW/HUsvLjkLfSp8dJseRHEpEw==}
     hasBin: true
 
   release-zalgo@1.0.0:
@@ -22917,7 +22917,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.9.2
@@ -26067,7 +26067,7 @@ snapshots:
     dependencies:
       git-up: 7.0.0
 
-  github-changelog@2.1.2:
+  github-changelog@2.1.4:
     dependencies:
       '@manypkg/get-packages': 2.2.2
       chalk: 4.1.2
@@ -29457,7 +29457,7 @@ snapshots:
 
   pac-proxy-agent@6.0.4:
     dependencies:
-      agent-base: 7.1.3
+      agent-base: 7.1.4
       debug: 4.4.3(supports-color@8.1.1)
       get-uri: 6.0.4
       http-proxy-agent: 7.0.2(supports-color@8.1.1)
@@ -30645,7 +30645,7 @@ snapshots:
       - encoding
       - supports-color
 
-  release-plan@0.17.2:
+  release-plan@0.17.4:
     dependencies:
       '@manypkg/get-packages': 2.2.2
       '@npmcli/package-json': 6.2.0
@@ -30655,7 +30655,7 @@ snapshots:
       cli-highlight: 2.1.11
       execa: 9.6.0
       fs-extra: 11.3.2
-      github-changelog: 2.1.2
+      github-changelog: 2.1.4
       js-yaml: 4.1.1
       latest-version: 9.0.0
       parse-github-repo-url: 1.4.1
