@@ -44,6 +44,9 @@ importers:
       '@embroider/macros':
         specifier: ^1.19.5
         version: 1.19.5(@glint/template@1.7.3)
+      '@glimmer/validator':
+        specifier: ^0.95.0
+        version: 0.95.0
       '@nativescript/core':
         specifier: ~8.9.7
         version: 8.9.7
@@ -129,9 +132,6 @@ importers:
       '@glimmer/component':
         specifier: ^2.0.0
         version: 2.0.0
-      '@glimmer/validator':
-        specifier: ^0.95.0
-        version: 0.95.0
       '@glint/core':
         specifier: ^1.5.2
         version: 1.5.2(typescript@5.9.2)
