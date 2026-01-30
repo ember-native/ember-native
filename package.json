@@ -1,0 +1,183 @@
+{
+  "name": "ember-native",
+  "version": "3.1.0",
+  "description": "Use the Ember framework with Nativescript",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ember-native/ember-native.git"
+  },
+  "license": "MIT",
+  "author": "Patrick Pircher",
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "build": "pnpm build:js && pnpm build:utils && pnpm build:types",
+    "build:js": "rollup --config",
+    "build:utils": "cd utils && tsc --project tsconfig.json",
+    "build:types": "glint --declaration && npx fix-bad-declaration-output './declarations/**/*.d.ts'",
+    "lint": "concurrently 'pnpm:lint:*(!fix)' --names 'lint:'",
+    "lint:fix": "concurrently 'pnpm:lint:*:fix' --names 'fix:'",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
+    "lint:js": "eslint .",
+    "lint:js:fix": "eslint . --fix",
+    "lint:types": "glint",
+    "start": "concurrently 'npm:start:*'",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "debug:types": "glint --debug-intermediate-representation",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
+  },
+  "peerDependencies": {
+    "@glimmer/component": "*",
+    "@nativescript/core": "*",
+    "ember-modifier": "*",
+    "ember-source": "*",
+    "loader.js": "*"
+  },
+  "dependencies": {
+    "@babel/plugin-syntax-decorators": "^7.22.5",
+    "@ember/render-modifiers": "^3.0.0",
+    "@ember/string": "^4.0.0",
+    "@ember/test-waiters": "^4.1.1",
+    "@embroider/addon-shim": "^1.10.2",
+    "@embroider/vite": "^1.4.2",
+    "@eslint/js": "^9.28.0",
+    "@glimmer/component": "^2.0.0",
+    "@rollup/plugin-alias": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@types/node": "^24.1.0",
+    "astroturf": "^1.2.0",
+    "ember-cli-babel": "^8.2.0",
+    "ember-cli-htmlbars": "^6.2.0",
+    "ember-cli-moment-shim": "^3.8.0",
+    "ember-concurrency": "^4.0.2",
+    "ember-get-config": "^2.1.1",
+    "ember-maybe-import-regenerator": "^1.0.0",
+    "ember-template-lint-plugin-prettier": "^5.0.0",
+    "ember-truth-helpers": "^4.0.3",
+    "prettier-linter-helpers": "^1.0.0",
+    "rollup-plugin-astroturf": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-root-import": "^1.0.0",
+    "rollup-plugin-styles": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.28.5",
+    "@babel/eslint-parser": "^7.28.5",
+    "@ember/optional-features": "^2.0.0",
+    "@embroider/addon-dev": "^8.1.0",
+    "@embroider/compat": "^4.1.11",
+    "@embroider/core": "^4.4.0",
+    "@embroider/macros": "^1.19.5",
+    "@embroider/shared-internals": "^3.0.1",
+    "@embroider/util": "^1.13.3",
+    "@embroider/webpack": "^4.1.1",
+    "@glimmer/syntax": "^0.94.9",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.5.0",
+    "@glint/environment-ember-loose": "^1.5.0",
+    "@glint/environment-ember-template-imports": "^1.5.0",
+    "@glint/template": "^1.7.3",
+    "@nativescript/core": "^8.9.7",
+    "@release-it-plugins/lerna-changelog": "^8.0.1",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@tsconfig/ember": "^3.0.12",
+    "@types/babel__core": "^7.20.5",
+    "@types/jquery": "^3.5.16",
+    "@types/qunit": "^2.19.13",
+    "@types/qunit-dom": "^0.7.0",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "typescript-eslint": "^8.38.0",
+    "babel-import-util": "^3.0.0",
+    "babel-plugin-ember-template-compilation": "^3.0.1",
+    "bower": "^1.8.8",
+    "globals": "^16.5.0",
+    "broccoli": "^4.0.0",
+    "broccoli-asset-rev": "^3.0.0",
+    "concurrently": "^9.2.1",
+    "content-tag": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "ember-eslint-parser": "^0.5.13",
+    "ember-modifier": "^4.2.0",
+    "ember-source": "^6.6.0",
+    "ember-template-lint": "^7.9.1",
+    "eslint": "^9.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-ember": "^12.3.1",
+    "eslint-plugin-ember-template-lint": "^0.21.0",
+    "eslint-plugin-n": "^17.21.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-qunit": "^8.2.5",
+    "fix-bad-declaration-output": "^1.1.4",
+    "loader.js": "^4.7.0",
+    "nativescript-ui-listview": "^15.2.3",
+    "prettier": "^3.6.2",
+    "prettier-plugin-ember-template-tag": "^2.1.0",
+    "qunit": "^2.24.3",
+    "qunit-dom": "^3.4.0",
+    "release-it": "^15.10.3",
+    "rollup": "^4.46.3",
+    "rollup-plugin-copy": "^3.5.0",
+    "router_js": "^8.0.6",
+    "sass": "^1.94.2",
+    "sass-embedded": "^1.90.0",
+    "sass-loader": "^16.0.4",
+    "typescript": "^5.9.2",
+    "typescript-plugin-css-modules": "^5.2.0",
+    "yui": "^3.18.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./components/ember-native/InspectorSupport.js": "./dist/_app_/components/ember-native/InspectorSupport.js",
+      "./components/ember-native/ListView.js": "./dist/_app_/components/ember-native/ListView.js",
+      "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
+      "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
+      "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
+      "./instance-initializers/ember-native/webpack-hot-reload.js": "./dist/_app_/instance-initializers/ember-native/webpack-hot-reload.js",
+      "./modifiers/ember-native/index.js": "./dist/_app_/modifiers/ember-native/index.js",
+      "./modifiers/ember-native/native-slot.js": "./dist/_app_/modifiers/ember-native/native-slot.js",
+      "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js",
+      "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js",
+      "./services/ember-native/webpack-hot-reload.js": "./dist/_app_/services/ember-native/webpack-hot-reload.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./utils/*": "./dist/utils/*",
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
+  }
+}
