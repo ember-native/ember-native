@@ -155,6 +155,8 @@
       "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
       "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
       "./instance-initializers/ember-native/webpack-hot-reload.js": "./dist/_app_/instance-initializers/ember-native/webpack-hot-reload.js",
+      "./modifiers/ember-native/index.js": "./dist/_app_/modifiers/ember-native/index.js",
+      "./modifiers/ember-native/native-slot.js": "./dist/_app_/modifiers/ember-native/native-slot.js",
       "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js",
       "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js",
       "./services/ember-native/webpack-hot-reload.js": "./dist/_app_/services/ember-native/webpack-hot-reload.js"
