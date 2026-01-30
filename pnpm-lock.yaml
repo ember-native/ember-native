@@ -356,8 +356,8 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
       '@ember/optional-features':
-        specifier: ^2.1.0
-        version: 2.2.0
+        specifier: ^2.3.0
+        version: 2.3.0
       '@ember/string':
         specifier: ^4.0.0
         version: 4.0.1
@@ -696,8 +696,8 @@ importers:
         specifier: ^7.28.5
         version: 7.28.5
       '@ember/optional-features':
-        specifier: ^2.0.0
-        version: 2.2.0
+        specifier: ^2.3.0
+        version: 2.3.0
       '@embroider/addon-dev':
         specifier: ^8.1.0
         version: 8.1.0(@glint/template@1.7.3)(rollup@4.46.3)
@@ -1955,8 +1955,8 @@ packages:
   '@ember/edition-utils@1.2.0':
     resolution: {integrity: sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==}
 
-  '@ember/optional-features@2.2.0':
-    resolution: {integrity: sha512-a1OQ+w9vDvMXd9BNA9r779yr8MAPguGaMGbIeTMPWACeWBdD6bACBB5iKE3gNyrJAYKMq2wab6BKmRFS3Qw3hw==}
+  '@ember/optional-features@2.3.0':
+    resolution: {integrity: sha512-+M8CkPledQEaDbfIlwlq6Phgpm5jdT3a6WVDJk7b/zadw5xAJkuQKVK7DgR0SFgHGiWlyn6a8AU5p2mCA706RA==}
     engines: {node: 10.* || 12.* || >= 14}
 
   '@ember/render-modifiers@2.1.0':
@@ -8631,10 +8631,6 @@ packages:
 
   glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
-
-  glob@10.4.5:
-    resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
-    hasBin: true
 
   glob@10.5.0:
     resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
@@ -16644,7 +16640,7 @@ snapshots:
 
   '@ember/edition-utils@1.2.0': {}
 
-  '@ember/optional-features@2.2.0':
+  '@ember/optional-features@2.3.0':
     dependencies:
       chalk: 4.1.2
       ember-cli-version-checker: 5.1.2
@@ -26108,15 +26104,6 @@ snapshots:
 
   glob-to-regexp@0.4.1: {}
 
-  glob@10.4.5:
-    dependencies:
-      foreground-child: 3.3.1
-      jackspeak: 3.4.3
-      minimatch: 9.0.5
-      minipass: 7.1.2
-      package-json-from-dist: 1.0.1
-      path-scurry: 1.11.1
-
   glob@10.5.0:
     dependencies:
       foreground-child: 3.3.1
@@ -32094,7 +32081,7 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       commander: 4.1.1
-      glob: 10.4.5
+      glob: 10.5.0
       lines-and-columns: 1.2.4
       mz: 2.7.0
       pirates: 4.0.7
