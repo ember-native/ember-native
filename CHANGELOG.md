@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-01-30)
+
+* ember-native 3.2.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#324](https://github.com/ember-native/ember-native/pull/324) add native-slot modifier ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-01-16)
 
 * ember-native 3.1.0 (minor)
