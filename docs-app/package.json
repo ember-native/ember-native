@@ -123,7 +123,7 @@
     "globby": "^14.0.0",
     "inter-ui": "^4.1.1",
     "loader.js": "^4.7.0",
-    "pnpm-sync-dependencies-meta-injected": "0.0.14",
+    "pnpm-sync-dependencies-meta-injected": "0.0.15",
     "postcss": "^8.5.6",
     "postcss-import": "^16.1.1",
     "postcss-loader": "^8.1.1",
