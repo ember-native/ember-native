@@ -638,8 +638,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@rollup/plugin-alias':
-        specifier: ^5.1.0
-        version: 5.1.1(rollup@4.46.3)
+        specifier: ^6.0.0
+        version: 6.0.0(rollup@4.46.3)
       '@rollup/plugin-node-resolve':
         specifier: ^16.0.1
         version: 16.0.1(rollup@4.46.3)
@@ -3706,11 +3706,11 @@ packages:
   '@rigor789/resolve-package-path@1.0.7':
     resolution: {integrity: sha512-/JqGCvHpj0PxS9cyZPP5LpiEy1pYszgWor/JTyreHQwLPQQdxO1mUYTtRribYcVosxH7FFs0GJBtJ652nlwKyw==}
 
-  '@rollup/plugin-alias@5.1.1':
-    resolution: {integrity: sha512-PR9zDb+rOzkRb2VD+EuKB7UC41vU5DIwZ5qqCpk0KJudcWAyi8rvYOhS7+L5aZCspw1stTViLgN5v6FF1p5cgQ==}
-    engines: {node: '>=14.0.0'}
+  '@rollup/plugin-alias@6.0.0':
+    resolution: {integrity: sha512-tPCzJOtS7uuVZd+xPhoy5W4vThe6KWXNmsFCNktaAh5RTqcLiSfT4huPQIXkgJ6YCOjJHvecOAzQxLFhPxKr+g==}
+    engines: {node: '>=20.19.0'}
     peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+      rollup: '>=4.0.0'
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -19279,7 +19279,7 @@ snapshots:
 
   '@rigor789/resolve-package-path@1.0.7': {}
 
-  '@rollup/plugin-alias@5.1.1(rollup@4.46.3)':
+  '@rollup/plugin-alias@6.0.0(rollup@4.46.3)':
     optionalDependencies:
       rollup: 4.46.3
 
