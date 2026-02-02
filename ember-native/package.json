@@ -133,7 +133,7 @@
     "router_js": "^8.0.6",
     "sass": "^1.94.2",
     "sass-embedded": "^1.90.0",
-    "sass-loader": "^16.0.4",
+    "sass-loader": "^16.0.6",
     "typescript": "^5.9.2",
     "typescript-plugin-css-modules": "^5.2.0",
     "yui": "^3.18.1"
