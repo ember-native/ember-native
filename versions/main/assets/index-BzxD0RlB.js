@@ -1,0 +1,1 @@
+export{A as APIDocs,C as CommentQuery,b as Compiled,c as ComponentSignature,H as HelperSignature,M as ModifierSignature,f as docsManager,g as getIndexPage,h as isCollection,j as isIndex,s as selected,e as typedocLoader}from"./main-BHTF0m7K.js";function a(e){e.route("page",{path:"/*page"},function(){})}export{a as addRoutes};
