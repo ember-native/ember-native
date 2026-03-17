@@ -1,0 +1,1 @@
+import{I as e,T as t,k as a,l as o,m as n,n as s,o as p}from"./main-DZZx5PXE.js";const l=Object.freeze(Object.defineProperty({__proto__:null,Input:e,Textarea:t,capabilities:a,default:o,getComponentTemplate:n,setComponentManager:s,setComponentTemplate:p},Symbol.toStringTag,{value:"Module"}));export{l as _};
