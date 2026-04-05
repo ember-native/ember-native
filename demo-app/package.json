@@ -95,7 +95,7 @@
     "querystring-es3": "^0.2.1",
     "qunit": "^2.24.3",
     "qunit-dom": "^3.4.0",
-    "socket.io": "^4.8.1",
+    "socket.io": "^4.8.3",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "typescript": "^5.9.2",
