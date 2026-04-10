@@ -526,8 +526,8 @@ importers:
         specifier: ^2.0.6
         version: 2.0.7(5eb898a6e65531f46105d13dd4ad20c5)
       ember-welcome-page:
-        specifier: ^7.0.2
-        version: 7.0.2
+        specifier: ^8.0.5
+        version: 8.0.5(@babel/core@7.29.0)
       eslint:
         specifier: ^9.27.0
         version: 9.39.4(jiti@2.6.1)
@@ -6769,9 +6769,8 @@ packages:
       '@embroider/compat': '*'
       babel-plugin-ember-template-compilation: ^2.2.2
 
-  ember-welcome-page@7.0.2:
-    resolution: {integrity: sha512-TyaKxFIRXhODW5BTbqD/by0Gu8Z9B9AA1ki3Bzzm6fOj2b30Qlprtt+XUG52kS0zVNmxYj/WWoT0TsKiU61VOw==}
-    engines: {node: 14.* || 16.* || >= 18}
+  ember-welcome-page@8.0.5:
+    resolution: {integrity: sha512-XegmXI94mt/EVUD3Ya15OuAxB3iCdK16lGS7vCimUIi4fGGooxUTOnlKexTsVLbcJh8u2bsw5JZ0iVht1X5sng==}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -22559,10 +22558,12 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-welcome-page@7.0.2:
+  ember-welcome-page@8.0.5(@babel/core@7.29.0):
     dependencies:
       '@embroider/addon-shim': 1.9.0
+      decorator-transforms: 2.3.1(@babel/core@7.29.0)
     transitivePeerDependencies:
+      - '@babel/core'
       - supports-color
 
   emoji-regex@10.6.0: {}
