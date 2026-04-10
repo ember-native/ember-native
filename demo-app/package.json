@@ -23,6 +23,7 @@
   "dependencies": {
     "@ember/test-waiters": "^4.1.1",
     "@embroider/macros": "^1.19.5",
+    "@glimmer/validator": "^0.95.0",
     "@nativescript/core": "~8.9.7",
     "@nativescript/theme": "^3.1.0",
     "@nativescript/unit-test-runner": "~3.0.0",
@@ -30,7 +31,6 @@
     "@warp-drive/core": "^5.8.1",
     "@warp-drive/json-api": "^5.8.1",
     "@warp-drive/schema-record": "^5.8.1",
-    "@glimmer/validator": "^0.95.0",
     "chromedriver": "^137.0.1",
     "ember-compatibility-helpers": "^1.2.7",
     "ember-load-initializers": "^3.0.1",
@@ -53,6 +53,7 @@
     "@embroider/compat": "^4.1.11",
     "@embroider/core": "^4.4.0",
     "@embroider/vite": "^1.5.0",
+    "@eslint/js": "^10.0.1",
     "@glimmer/component": "^2.1.1",
     "@glint/core": "^1.5.2",
     "@glint/environment-ember-template-imports": "^1.5.2",

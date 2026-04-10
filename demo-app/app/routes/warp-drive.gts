@@ -5,20 +5,21 @@ import { fn } from "@ember/helper";
 import { service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import type Store from '@warp-drive/core/store';
+import type StoreService from '../services/store';
 import type { User } from '../schemas/user';
+import type Owner from '@ember/owner';
 
 class Page extends Component {
   @service('ember-native/history') history!: HistoryService;
-  @service declare store: Store;
+  @service declare store: StoreService;
   @tracked users: User[] = [];
   @tracked selectedUser: User | null = null;
   @tracked isLoading = false;
   @tracked error: string | null = null;
 
-  constructor(owner: unknown, args: {}) {
+  constructor(owner: Owner, args: object) {
     super(owner, args);
-    this.loadUsers();
+    void this.loadUsers();
   }
 
   loadUsers = async (forceReload = false) => {
@@ -55,7 +56,7 @@ class Page extends Component {
   };
 
   reloadUsers = () => {
-    this.loadUsers(true);
+    void this.loadUsers(true);
   };
 
   selectUser = (user: User) => {

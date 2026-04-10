@@ -161,7 +161,7 @@ module.exports = (env) => {
   // Wrap config in async function to run Embroider prebuild
   return (() => {
     try {
-      const { emberBuild } = require('@embroider/vite');
+      require('@embroider/vite');
       console.log('🔨 Running Embroider prebuild...');
       execSync('pnpm ember build', {
         env: {

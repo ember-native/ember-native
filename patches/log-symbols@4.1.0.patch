@@ -1,0 +1,21 @@
+diff --git a/index.js b/index.js
+index 0000000000000000000000000000000000000000..1111111111111111111111111111111111111111 100644
+--- a/index.js
++++ b/index.js
+@@ -1,6 +1,15 @@
+ 'use strict';
+ const chalk = require('chalk');
+-const isUnicodeSupported = require('is-unicode-supported');
++
++let isUnicodeSupported;
++try {
++	isUnicodeSupported = require('is-unicode-supported');
++} catch (e) {
++	// Fallback if is-unicode-supported is not available
++	isUnicodeSupported = () => {
++		return process.platform !== 'win32' || process.env.CI || process.env.TERM === 'xterm-256color';
++	};
++}
+ 
+ const main = {
+ 	info: chalk.blue('ℹ'),
