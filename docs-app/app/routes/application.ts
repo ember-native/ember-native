@@ -56,7 +56,6 @@ export default class Application extends Route {
           // community libraries
           'ember-resources': import('ember-resources'),
           'reactiveweb/remote-data': import('reactiveweb/remote-data'),
-          // @ts-expect-error - no types provided
           'ember-focus-trap/modifiers/focus-trap': import('ember-focus-trap/modifiers/focus-trap'),
           // @ts-expect-error - no types provided
           'ember-focus-trap': import('ember-focus-trap'),
