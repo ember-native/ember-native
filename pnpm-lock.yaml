@@ -397,8 +397,8 @@ importers:
         specifier: 4.1.1
         version: 4.1.1(92a09542ac8eb5413355dd638829a92f)
       '@eslint/js':
-        specifier: ^9.39.1
-        version: 9.39.4
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@fontsource/lexend':
         specifier: ^5.2.11
         version: 5.2.11
@@ -500,7 +500,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(bdb548fd8e45eee4186af9a5fb09c5da)
+        version: file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -637,8 +637,8 @@ importers:
         specifier: ^1.4.2
         version: 1.7.2(459b251042aba6826848bf3aa6b0de02)
       '@eslint/js':
-        specifier: ^9.28.0
-        version: 9.39.4
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.39.4(jiti@2.6.1))
       '@rollup/plugin-alias':
         specifier: ^6.0.0
         version: 6.0.0(rollup@4.60.1)
@@ -16004,6 +16004,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@eslint/js@10.0.1(eslint@9.39.4(jiti@1.21.7))':
+    optionalDependencies:
+      eslint: 9.39.4(jiti@1.21.7)
+
   '@eslint/js@10.0.1(eslint@9.39.4(jiti@2.6.1))':
     optionalDependencies:
       eslint: 9.39.4(jiti@2.6.1)
@@ -22325,7 +22329,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(bdb548fd8e45eee4186af9a5fb09c5da):
+  ember-native@file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
       '@ember/render-modifiers': 3.0.0(e38124df485b593f5d3b009cf43c31c0)
@@ -22333,7 +22337,7 @@ snapshots:
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@embroider/vite': 1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)
-      '@eslint/js': 9.39.4
+      '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
       '@nativescript/core': 8.9.9
       '@rollup/plugin-alias': 6.0.0(rollup@4.60.1)
@@ -22363,6 +22367,7 @@ snapshots:
       - bufferutil
       - canvas
       - ember-template-lint
+      - eslint
       - postcss
       - prettier
       - rollup

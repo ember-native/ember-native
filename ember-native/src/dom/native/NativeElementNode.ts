@@ -38,7 +38,7 @@ export default class NativeElementNode<
   T extends ViewBase | null = ViewBase,
 > extends ElementNode {
   declare _nativeView: T;
-  _meta: ComponentMeta;
+  declare _meta: ComponentMeta;
 
   constructor(
     tagName: string,

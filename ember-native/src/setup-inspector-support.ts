@@ -131,7 +131,7 @@ export function setupInspectorSupport(config: any) {
     };
   };
 
-  let _EmberDomain = class EmberDomain {
+  const _EmberDomain = class EmberDomain {
     port!: MessagePort;
     private msgId: number;
     constructor() {
@@ -171,7 +171,7 @@ export function setupInspectorSupport(config: any) {
     }
   };
 
-  _EmberDomain = __decorate(
+  __decorate(
     [
       inspectorCommands.DomainDispatcher('Ember'),
       __metadata('design:paramtypes', []),
