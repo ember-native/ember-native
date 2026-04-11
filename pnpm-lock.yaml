@@ -301,7 +301,7 @@ importers:
         version: 2.3.1(@babel/core@7.29.0)
       ember-basic-dropdown:
         specifier: ^8.11.0
-        version: 8.11.0(753f7c195c95a148767df5526bbbeb32)
+        version: 8.11.0(a80ba1218cd104542e2b9e2300b56188)
       ember-concurrency:
         specifier: ^5.2.0
         version: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -313,7 +313,7 @@ importers:
         version: 4.3.0(@babel/core@7.29.0)
       ember-power-select:
         specifier: ^8.12.1
-        version: 8.12.1(d24b9ee8257bb427def1570145093de4)
+        version: 8.12.1(2226f68ec44e4c731f817794a0caa24d)
       ember-repl:
         specifier: 7.0.1
         version: 7.0.1(97a2ca31a8e4cf9a385bac208eb0c5f1)
@@ -413,10 +413,10 @@ importers:
         version: 1.5.2(typescript@5.9.3)
       '@glint/environment-ember-loose':
         specifier: ^1.5.0
-        version: 1.5.2(695ea36db1ec9699fdb83bba6ca96b8e)
+        version: 1.5.2(96fe3a083b32aa82f6498dda275a83e4)
       '@glint/environment-ember-template-imports':
         specifier: ^1.5.0
-        version: 1.5.2(70b961d10a6f489b3d6f6eb020eac777)
+        version: 1.5.2(cd97f510eeb61d3be34b732d876bf02a)
       '@glint/template':
         specifier: ^1.7.3
         version: 1.7.7
@@ -484,8 +484,8 @@ importers:
         specifier: ^8.2.0
         version: 8.3.1(@babel/core@7.29.0)
       ember-cli-htmlbars:
-        specifier: ^6.3.0
-        version: 6.3.0
+        specifier: ^7.0.1
+        version: 7.0.1(0e419c6a72fae3437e21935b6846107c)
       ember-cli-inject-live-reload:
         specifier: ^2.1.0
         version: 2.1.0
@@ -655,8 +655,8 @@ importers:
         specifier: ^8.2.0
         version: 8.3.1(@babel/core@7.29.0)
       ember-cli-htmlbars:
-        specifier: ^6.2.0
-        version: 6.3.0
+        specifier: ^7.0.1
+        version: 7.0.1(0e419c6a72fae3437e21935b6846107c)
       ember-cli-moment-shim:
         specifier: ^3.8.0
         version: 3.8.0(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -717,7 +717,7 @@ importers:
         version: 3.0.2
       '@embroider/util':
         specifier: ^1.13.3
-        version: 1.13.5(2dbbbbe42ecc7fd2986d8664d4d2640e)
+        version: 1.13.5(78e6f0cf21efb525d9b10e7432730735)
       '@embroider/webpack':
         specifier: ^4.1.1
         version: 4.1.1(92a09542ac8eb5413355dd638829a92f)
@@ -735,10 +735,10 @@ importers:
         version: 1.5.2(typescript@5.9.3)
       '@glint/environment-ember-loose':
         specifier: ^1.5.0
-        version: 1.5.2(695ea36db1ec9699fdb83bba6ca96b8e)
+        version: 1.5.2(96fe3a083b32aa82f6498dda275a83e4)
       '@glint/environment-ember-template-imports':
         specifier: ^1.5.0
-        version: 1.5.2(70b961d10a6f489b3d6f6eb020eac777)
+        version: 1.5.2(cd97f510eeb61d3be34b732d876bf02a)
       '@glint/template':
         specifier: ^1.7.3
         version: 1.7.7
@@ -3677,6 +3677,9 @@ packages:
   '@types/minimatch@3.0.5':
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
 
+  '@types/minimatch@5.1.2':
+    resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
+
   '@types/minimatch@6.0.0':
     resolution: {integrity: sha512-zmPitbQ8+6zNutpwgcQuLcsEpn/Cj54Kbn7L5pX0Os5kdWplB7xPgEh/g+SWOB/qmows2gpuCaPyduq8ZZRnxA==}
     deprecated: This is a stub types definition. minimatch provides its own type definitions, so you do not need this installed.
@@ -6434,6 +6437,13 @@ packages:
   ember-cli-htmlbars@6.3.0:
     resolution: {integrity: sha512-N9Y80oZfcfWLsqickMfRd9YByVcTGyhYRnYQ2XVPVrp6jyUyOeRWmEAPh7ERSXpp8Ws4hr/JB9QVQrn/yZa+Ag==}
     engines: {node: 12.* || 14.* || >= 16}
+
+  ember-cli-htmlbars@7.0.1:
+    resolution: {integrity: sha512-bNVAwTvBOmk7KjGCN0Vq81w8FAWQ1zXwCS1CUUHTeWdcFypRsv0qUEkTtwxho4H3BYaoqMCXPS45Js9WWtEXYw==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@babel/core': '>= 7'
+      ember-source: '>= 4.0.0'
 
   ember-cli-import-polyfill@0.2.0:
     resolution: {integrity: sha512-vq19edejqzNN3u4ZtETSPqppLrDHSh7LwC6nHaqV7gddJQMVgCtu/fZzPAGM6WfrFK/4vwPMLYyu0c+3MbATvQ==}
@@ -13428,6 +13438,10 @@ packages:
     resolution: {integrity: sha512-41TvKmDGVpm2iuH7o+DAOt06yyu/cSHpX3uzAwetzASvlNtVddgIjXIb2DfB/Wa20B1Jo86+1Dv1CraSU7hWdw==}
     engines: {node: 10.* || >= 12.*}
 
+  walk-sync@4.0.1:
+    resolution: {integrity: sha512-oXP3IlkfG9Mqdgqh3JGYTPAcryRQd1J1CJOxOgsri2I1MD6N+k4OqxEVP4ZQ0xyYJfYPhBVPRMUVK+N5f13+jQ==}
+    engines: {node: '>= 20.*'}
+
   walk-up-path@4.0.0:
     resolution: {integrity: sha512-3hu+tD8YzSLGuFYtPRb48vdhKMi0KQV5sn+uWr8+7dMEq/2G/dtLrdDinkLjqq5TIbIBjYJ4Ax/n3YiaW7QM8A==}
     engines: {node: 20 || >=22}
@@ -15758,14 +15772,14 @@ snapshots:
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
       '@embroider/webpack': 4.1.1(92a09542ac8eb5413355dd638829a92f)
 
-  '@embroider/util@1.13.5(2dbbbbe42ecc7fd2986d8664d4d2640e)':
+  '@embroider/util@1.13.5(78e6f0cf21efb525d9b10e7432730735)':
     dependencies:
       '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
       broccoli-funnel: 3.0.8
       ember-cli-babel: 7.26.11
       ember-source: 6.12.0(@glimmer/component@2.1.1)(rsvp@4.8.5)
     optionalDependencies:
-      '@glint/environment-ember-loose': 1.5.2(695ea36db1ec9699fdb83bba6ca96b8e)
+      '@glint/environment-ember-loose': 1.5.2(96fe3a083b32aa82f6498dda275a83e4)
       '@glint/template': 1.7.7
     transitivePeerDependencies:
       - '@babel/core'
@@ -16193,9 +16207,23 @@ snapshots:
       ember-cli-htmlbars: 6.3.0
       ember-modifier: 4.3.0(@babel/core@7.29.0)
 
+  '@glint/environment-ember-loose@1.5.2(96fe3a083b32aa82f6498dda275a83e4)':
+    dependencies:
+      '@glimmer/component': 2.1.1
+      '@glint/template': 1.7.7
+    optionalDependencies:
+      ember-cli-htmlbars: 7.0.1(0e419c6a72fae3437e21935b6846107c)
+      ember-modifier: 4.3.0(@babel/core@7.29.0)
+
   '@glint/environment-ember-template-imports@1.5.2(70b961d10a6f489b3d6f6eb020eac777)':
     dependencies:
       '@glint/environment-ember-loose': 1.5.2(695ea36db1ec9699fdb83bba6ca96b8e)
+      '@glint/template': 1.7.7
+      content-tag: 2.0.3
+
+  '@glint/environment-ember-template-imports@1.5.2(cd97f510eeb61d3be34b732d876bf02a)':
+    dependencies:
+      '@glint/environment-ember-loose': 1.5.2(96fe3a083b32aa82f6498dda275a83e4)
       '@glint/template': 1.7.7
       content-tag: 2.0.3
 
@@ -18032,7 +18060,7 @@ snapshots:
   '@tufjs/models@4.1.0':
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 10.2.4
+      minimatch: 10.2.5
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
@@ -18192,6 +18220,8 @@ snapshots:
   '@types/mime@1.3.5': {}
 
   '@types/minimatch@3.0.5': {}
+
+  '@types/minimatch@5.1.2': {}
 
   '@types/minimatch@6.0.0':
     dependencies:
@@ -21710,12 +21740,12 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-basic-dropdown@8.11.0(753f7c195c95a148767df5526bbbeb32):
+  ember-basic-dropdown@8.11.0(a80ba1218cd104542e2b9e2300b56188):
     dependencies:
       '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
-      '@embroider/util': 1.13.5(2dbbbbe42ecc7fd2986d8664d4d2640e)
+      '@embroider/util': 1.13.5(78e6f0cf21efb525d9b10e7432730735)
       '@glimmer/component': 2.1.1
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
       ember-element-helper: 0.8.8
@@ -21836,6 +21866,23 @@ snapshots:
       semver: 7.7.4
       silent-error: 1.1.1
       walk-sync: 2.2.0
+    transitivePeerDependencies:
+      - supports-color
+
+  ember-cli-htmlbars@7.0.1(0e419c6a72fae3437e21935b6846107c):
+    dependencies:
+      '@babel/core': 7.29.0
+      '@ember/edition-utils': 1.2.0
+      babel-plugin-ember-template-compilation: 2.4.1
+      broccoli-debug: 0.6.5
+      broccoli-persistent-filter: 3.1.3
+      broccoli-plugin: 4.0.7
+      ember-source: 6.12.0(@glimmer/component@2.1.1)(rsvp@4.8.5)
+      fs-tree-diff: 2.0.1
+      heimdalljs-logger: 0.1.10
+      js-string-escape: 1.0.1
+      silent-error: 1.1.1
+      walk-sync: 4.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -22294,7 +22341,7 @@ snapshots:
       '@types/node': 25.6.0
       astroturf: 1.2.0(webpack@5.106.1)
       ember-cli-babel: 8.3.1(@babel/core@7.29.0)
-      ember-cli-htmlbars: 6.3.0
+      ember-cli-htmlbars: 7.0.1(0e419c6a72fae3437e21935b6846107c)
       ember-cli-moment-shim: 3.8.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-concurrency: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-get-config: 2.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -22332,15 +22379,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-power-select@8.12.1(d24b9ee8257bb427def1570145093de4):
+  ember-power-select@8.12.1(2226f68ec44e4c731f817794a0caa24d):
     dependencies:
       '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
-      '@embroider/util': 1.13.5(2dbbbbe42ecc7fd2986d8664d4d2640e)
+      '@embroider/util': 1.13.5(78e6f0cf21efb525d9b10e7432730735)
       '@glimmer/component': 2.1.1
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
       ember-assign-helper: 0.5.1
-      ember-basic-dropdown: 8.11.0(753f7c195c95a148767df5526bbbeb32)
+      ember-basic-dropdown: 8.11.0(a80ba1218cd104542e2b9e2300b56188)
       ember-concurrency: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-element-helper: 0.8.8
       ember-modifier: 4.3.0(@babel/core@7.29.0)
@@ -24835,7 +24882,7 @@ snapshots:
 
   ignore-walk@8.0.0:
     dependencies:
-      minimatch: 10.2.4
+      minimatch: 10.2.5
 
   ignore@5.3.2: {}
 
@@ -31195,6 +31242,13 @@ snapshots:
       ensure-posix-path: 1.1.1
       matcher-collection: 2.0.1
       minimatch: 3.1.5
+
+  walk-sync@4.0.1:
+    dependencies:
+      '@types/minimatch': 5.1.2
+      ensure-posix-path: 1.1.1
+      matcher-collection: 2.0.1
+      minimatch: 10.2.5
 
   walk-up-path@4.0.0: {}
 
