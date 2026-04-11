@@ -62,6 +62,7 @@ module.exports = {
       },
     ],
     ["@babel/plugin-transform-typescript", { allowDeclareFields: true }],
+    "@babel/plugin-transform-unicode-property-regex",
     ...babelCompatSupport()
       .filter(x => !(x[0] || x).includes('macros-babel-plugin.js'))
       .filter(x => !(x[0] || x).includes('babel-plugin-cache-busting.js')),
