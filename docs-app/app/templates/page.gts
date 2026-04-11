@@ -23,9 +23,9 @@ export default Route(
         </OopsError>
       </:error>
       <:editLink as |Link|>
-        {{#let (service "kolay/docs") as |docs|}}
+        {{#let (service "kolay/selected") as |docs|}}
           <Link
-            @href="https://github.com/ember-native/ember-native/edit/main/docs-app/public/docs{{docs.selected.path}}.md"
+            @href="https://github.com/ember-native/ember-native/edit/main/docs-app/public/docs{{docs.path}}.md"
           >
             Edit this page
           </Link>
