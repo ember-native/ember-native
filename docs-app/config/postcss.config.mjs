@@ -1,11 +1,11 @@
 import autoprefixer from "autoprefixer";
 import postcssImport from "postcss-import";
-import tailwind from "tailwindcss";
+import tailwindcss from "@tailwindcss/postcss";
 
 const config = {
   plugins: [
     postcssImport(),
-    tailwind((await import("./tailwind.config.mjs")).default),
+    tailwindcss(),
     autoprefixer(),
   ],
 };
