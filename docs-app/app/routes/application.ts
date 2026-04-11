@@ -45,6 +45,7 @@ export default class Application extends Route {
           ComponentSignature,
           ModifierSignature,
         },
+        // @ts-expect-error does not exist
         resolve: {
           // ember-primitives
           'ember-primitives': import('ember-primitives'),
@@ -56,9 +57,7 @@ export default class Application extends Route {
           // community libraries
           'ember-resources': import('ember-resources'),
           'reactiveweb/remote-data': import('reactiveweb/remote-data'),
-          // @ts-expect-error - no types provided
           'ember-focus-trap/modifiers/focus-trap': import('ember-focus-trap/modifiers/focus-trap'),
-          // @ts-expect-error - no types provided
           'ember-focus-trap': import('ember-focus-trap'),
 
           // utility

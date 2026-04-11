@@ -29,7 +29,7 @@ module.exports = function embroiderTemplateTagLoader(source) {
   Promise.resolve()
     .then(() => {
       if (templateTagPlugin.transform) {
-        return templateTagPlugin.transform.call(context, source, id);
+        return templateTagPlugin.transform.handler.call(context, source, id);
       }
       return null;
     })
