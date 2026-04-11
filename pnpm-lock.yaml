@@ -428,7 +428,7 @@ importers:
         version: 6.1.0(e10c821eb081679c9c0a37d91ab94083)
       '@tailwindcss/typography':
         specifier: ^0.5.15
-        version: 0.5.19(tailwindcss@3.4.19(yaml@2.8.3))
+        version: 0.5.19(tailwindcss@4.2.2)
       '@tsconfig/ember':
         specifier: ^3.0.12
         version: 3.0.12
@@ -601,8 +601,8 @@ importers:
         specifier: ^0.8.2
         version: 0.8.2
       tailwindcss:
-        specifier: ^3.4.14
-        version: 3.4.19(yaml@2.8.3)
+        specifier: ^4.2.2
+        version: 4.2.2
       typedoc:
         specifier: ^0.28.14
         version: 0.28.18(typescript@5.9.3)
@@ -12638,6 +12638,9 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  tailwindcss@4.2.2:
+    resolution: {integrity: sha512-KWBIxs1Xb6NoLdMVqhbhgwZf2PGBpPEiwOqgI4pFIYbNTfBXiKYyWoTsXgBQ9WFg/OlhnvHaY+AEpW7wSmFo2Q==}
+
   tap-parser@18.3.1:
     resolution: {integrity: sha512-4mlzCiUQUpi8yHvqNHrwCW1OvIa6kMftozxXlJic0YsuqgcvldtyfytoG5g7Wivpu3eNo5abUXiaeqYNjyOHag==}
     engines: {node: 20 || >=22}
@@ -18000,6 +18003,11 @@ snapshots:
     dependencies:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.19(yaml@2.8.3)
+
+  '@tailwindcss/typography@0.5.19(tailwindcss@4.2.2)':
+    dependencies:
+      postcss-selector-parser: 6.0.10
+      tailwindcss: 4.2.2
 
   '@testim/chrome-version@1.1.4': {}
 
@@ -30202,6 +30210,8 @@ snapshots:
     transitivePeerDependencies:
       - tsx
       - yaml
+
+  tailwindcss@4.2.2: {}
 
   tap-parser@18.3.1:
     dependencies:
