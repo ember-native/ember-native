@@ -725,8 +725,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       '@glimmer/syntax':
-        specifier: ^0.94.9
-        version: 0.94.9
+        specifier: ^0.95.0
+        version: 0.95.0
       '@glimmer/tracking':
         specifier: ^1.1.2
         version: 1.1.2
@@ -19384,7 +19384,7 @@ snapshots:
 
   babel-plugin-ember-template-compilation@2.4.1:
     dependencies:
-      '@glimmer/syntax': 0.94.9
+      '@glimmer/syntax': 0.95.0
       babel-import-util: 3.0.1
 
   babel-plugin-ember-template-compilation@3.1.0:
