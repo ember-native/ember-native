@@ -24,7 +24,7 @@
     "@ember/test-waiters": "^4.1.1",
     "@embroider/macros": "^1.19.5",
     "@glimmer/validator": "^0.95.0",
-    "@nativescript/core": "~8.9.7",
+    "@nativescript/core": "^9.0.0",
     "@nativescript/theme": "^3.1.0",
     "@nativescript/unit-test-runner": "~3.0.0",
     "@valor/nativescript-websockets": "^2.0.2",
