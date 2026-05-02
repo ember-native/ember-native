@@ -50,8 +50,8 @@ importers:
         specifier: ^0.95.0
         version: 0.95.0
       '@nativescript/core':
-        specifier: ~8.9.7
-        version: 8.9.9
+        specifier: ^9.0.0
+        version: 9.0.18
       '@nativescript/theme':
         specifier: ^3.1.0
         version: 3.1.0
@@ -500,7 +500,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d)
+        version: file:ember-native(ef342506c85ad18f81029cd062ebd0f5)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -2657,6 +2657,9 @@ packages:
   '@nativescript/core@8.9.9':
     resolution: {integrity: sha512-xkwxkEuqQA9ajX3ThkimZ/sVl95gaB51f8cu/jUrEDVEy2vY5+J7EGXfpN2pl+jK2XQ9hB0/TmMTkY0ewxgODw==}
 
+  '@nativescript/core@9.0.18':
+    resolution: {integrity: sha512-RbVa9M70AA7yhpHpoO9qqba5na4hByTPhkYzhKmcXK/krI2DXirt4jdom/UB02ikN6Mc7k586KKzfxotxfnfHg==}
+
   '@nativescript/doctor@2.0.17':
     resolution: {integrity: sha512-+S3nL9/OwsrQ75MkolXtLYOuzzjc2W9EEqys7hg8FLFJbcQc47TYmpGLf/v7bdwx6Rh8G3HTcKy0QSkjInL1WQ==}
 
@@ -4181,10 +4184,12 @@ packages:
   '@xmldom/xmldom@0.8.12':
     resolution: {integrity: sha512-9k/gHF6n/pAi/9tqr3m3aqkuiNosYTurLLUtc7xQ9sxB/wm7WPygCv8GYa6mS0fLJEHhqMC1ATYhz++U/lRHqg==}
     engines: {node: '>=10.0.0'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xmldom/xmldom@0.9.9':
     resolution: {integrity: sha512-qycIHAucxy/LXAYIjmLmtQ8q9GPnMbnjG1KXhWm9o5sCr6pOYDATkMPiTNa6/v8eELyqOQ2FsEqeoFYmgv/gJg==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -6055,6 +6060,10 @@ packages:
 
   css-what@6.2.2:
     resolution: {integrity: sha512-u/O3vwbptzhMs3L1fQE82ZSLHQQfto5gyZzwteVIEyeaY5Fc7R4dapF/BvRoSYFeqfBk4m0V1Vafq5Pjv25wvA==}
+    engines: {node: '>= 6'}
+
+  css-what@7.0.0:
+    resolution: {integrity: sha512-wD5oz5xibMOPHzy13CyGmogB3phdvcDaB5t0W/Nr5Z2O/agcB8YwOz6e2Lsp10pNDzBoDO9nVa3RGs/2BttpHQ==}
     engines: {node: '>= 6'}
 
   css@3.0.0:
@@ -13105,19 +13114,22 @@ packages:
 
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
-    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@7.0.3:
     resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-compile-cache-lib@3.0.1:
@@ -16735,6 +16747,21 @@ snapshots:
       css-what: 6.2.2
       emoji-regex: 10.6.0
       source-map: 0.6.1
+      tslib: 2.8.1
+
+  '@nativescript/core@9.0.18':
+    dependencies:
+      '@csstools/css-calc': 2.1.4(f5bbab77a7781b6ee795024fdb514bb3)
+      '@csstools/css-color-parser': 3.1.0(f5bbab77a7781b6ee795024fdb514bb3)
+      '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
+      '@csstools/css-tokenizer': 3.0.4
+      '@nativescript/hook': 3.0.5
+      acorn: 8.16.0
+      css-tree: 3.2.1
+      css-what: 7.0.0
+      emoji-regex: 10.6.0
+      source-map: 0.7.6
+      source-map-js: 1.2.1
       tslib: 2.8.1
 
   '@nativescript/doctor@2.0.17':
@@ -21173,6 +21200,8 @@ snapshots:
 
   css-what@6.2.2: {}
 
+  css-what@7.0.0: {}
+
   css@3.0.0:
     dependencies:
       inherits: 2.0.4
@@ -22203,7 +22232,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d):
+  ember-native@file:ember-native(ef342506c85ad18f81029cd062ebd0f5):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
       '@ember/render-modifiers': 3.0.0(e38124df485b593f5d3b009cf43c31c0)
@@ -22213,7 +22242,7 @@ snapshots:
       '@embroider/vite': 1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)
       '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
-      '@nativescript/core': 8.9.9
+      '@nativescript/core': 9.0.18
       '@rollup/plugin-alias': 6.0.0(rollup@4.60.1)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.1)
       '@types/node': 25.6.0
