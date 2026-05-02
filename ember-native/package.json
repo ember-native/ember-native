@@ -80,7 +80,7 @@
     "@embroider/shared-internals": "^3.0.1",
     "@embroider/util": "^1.13.3",
     "@embroider/webpack": "^4.1.1",
-    "@glimmer/syntax": "^0.94.9",
+    "@glimmer/syntax": "^0.95.0",
     "@glimmer/tracking": "^1.1.2",
     "@glimmer/component": "^2.1.1",
     "@glint/core": "^1.5.0",
