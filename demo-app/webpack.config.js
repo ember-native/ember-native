@@ -1,47 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-var Module = require('module');
-var { fileURLToPath, pathToFileURL } = require('node:url');
 
-Module.registerHooks({
-  resolve: (specifier, context, nextResolve) => {
-    //do your thing here
-    const originalSpecifier = specifier;
-    if(context.parentURL && fileURLToPath(context.parentURL).includes('node:')) return nextResolve(specifier, context);
-
-    if (context.parentURL) {
-      const parentURL = fs.realpathSync(fileURLToPath(context.parentURL));
-      try {
-        const resolved = require.resolve(specifier, { paths: [path.dirname(parentURL)] });
-        if (fs.existsSync(resolved)) {
-          specifier = fs.realpathSync(resolved);
-          if (context.conditions.includes?.('import')) {
-            specifier = pathToFileURL(specifier).toString();
-          }
-        }
-        return nextResolve(specifier, context);
-        // eslint-disable-next-line no-unused-vars
-      } catch (e) {
-        //console.log('failed to resolve', specifier,' from ', parentURL, e);
-      }
-    }
-    try {
-      const resolved = require.resolve(specifier);
-      if (fs.existsSync(resolved)) {
-        specifier = fs.realpathSync(resolved);
-        if (context.conditions.includes?.('import')) {
-          specifier = pathToFileURL(specifier).toString();
-        }
-      }
-      return nextResolve(specifier, context);
-      // eslint-disable-next-line no-unused-vars
-    } catch (e) {
-      // console.log('failed to resolve', specifier, e);
-    }
-
-    return nextResolve(originalSpecifier, context);
-  }
-});
 
 const webpack = require('@nativescript/webpack');
 const configureEmberNative = require('ember-native/utils/webpack.config.js');
