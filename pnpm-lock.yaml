@@ -133,7 +133,7 @@ importers:
         version: 4.4.7(@glint/template@1.7.7)
       '@embroider/vite':
         specifier: ^1.5.0
-        version: 1.7.2(459b251042aba6826848bf3aa6b0de02)
+        version: 1.7.2(a0dccb589d7a4788e1b4dfecc8f073a4)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -389,13 +389,13 @@ importers:
         version: 4.4.7(@glint/template@1.7.7)
       '@embroider/test-setup':
         specifier: ^4.0.0
-        version: 4.0.0(f48bd570c37f6e1a622867a34ef7ef40)
+        version: 4.0.0(de7262948e47c0970b66f37f7431589d)
       '@embroider/vite':
         specifier: ^1.1.3
-        version: 1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)
+        version: 1.7.2(295304e8aad73e013cef671b01f01299)
       '@embroider/webpack':
-        specifier: 4.1.1
-        version: 4.1.1(92a09542ac8eb5413355dd638829a92f)
+        specifier: 4.1.2
+        version: 4.1.2(92a09542ac8eb5413355dd638829a92f)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@1.21.7))
@@ -500,7 +500,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d)
+        version: file:ember-native(42b0107cae760a7cedbb67ea59486d88)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -614,7 +614,7 @@ importers:
         version: 8.58.1(717face55a559967bf1b77f9b43bd1f1)
       vite:
         specifier: ^7.1.2
-        version: 7.3.2(f3f1bd43dd632b0257fb9e1ace38aeb3)
+        version: 7.3.2(9f8ce656c4107b3722a8b507f9607848)
 
   ember-native:
     dependencies:
@@ -635,7 +635,7 @@ importers:
         version: 1.9.0
       '@embroider/vite':
         specifier: ^1.4.2
-        version: 1.7.2(459b251042aba6826848bf3aa6b0de02)
+        version: 1.7.2(a0dccb589d7a4788e1b4dfecc8f073a4)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -719,8 +719,8 @@ importers:
         specifier: ^1.13.3
         version: 1.13.5(78e6f0cf21efb525d9b10e7432730735)
       '@embroider/webpack':
-        specifier: ^4.1.1
-        version: 4.1.1(92a09542ac8eb5413355dd638829a92f)
+        specifier: ^4.1.2
+        version: 4.1.2(92a09542ac8eb5413355dd638829a92f)
       '@glimmer/component':
         specifier: ^2.1.1
         version: 2.1.1
@@ -837,7 +837,7 @@ importers:
         version: 8.2.6(eslint@9.39.4(jiti@2.6.1))
       fix-bad-declaration-output:
         specifier: ^1.1.5
-        version: 1.1.5(d8e14f727f2879460e589df737de2942)
+        version: 1.1.5(d765941454330ab4be90f7296c04da46)
       globals:
         specifier: ^16.5.0
         version: 16.5.0
@@ -911,6 +911,10 @@ packages:
 
   '@babel/compat-data@7.29.0':
     resolution: {integrity: sha512-T1NCJqT/j9+cn8fvkt7jtwbLBfLC/1y1c7NtCeXFRgzGTsafi68MRv8yzkYSapBnFA6L3U2VSc02ciDzoAJhJg==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/compat-data@7.29.3':
+    resolution: {integrity: sha512-LIVqM46zQWZhj17qA8wb4nW/ixr2y1Nw+r1etiAWgRM6U1IqP+LNhL1yg440jYZR72jCWcWbLWzIosH+uP1fqg==}
     engines: {node: '>=6.9.0'}
 
   '@babel/core@7.29.0':
@@ -1034,6 +1038,12 @@ packages:
 
   '@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@7.27.1':
     resolution: {integrity: sha512-g4L7OYun04N1WyqMNjldFwlfPCLVkgB54A/YCXICZYBsvJJE3kByKv9c9+R/nAfmIfjl2rKYLNyMHboYbZaWaA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+
+  '@babel/plugin-bugfix-safari-rest-destructuring-rhs-array@7.29.3':
+    resolution: {integrity: sha512-SRS46DFR4HqzUzCVgi90/xMoL+zeBDBvWdKYXSEzh79kXswNFEglUpMKxR04//dPqwYXWUBJ3mpUd933ru9Kmg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0
@@ -1476,6 +1486,12 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
+  '@babel/preset-env@7.29.3':
+    resolution: {integrity: sha512-ySZypNLAIH1ClygLDQzVMoGQRViATnkHkYYV6TcNDz+8+jwZCdsguGvsb3EY5d9wyWyhmF1iSuFM0Yh5XPnqSA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+
   '@babel/preset-flow@7.27.1':
     resolution: {integrity: sha512-ez3a2it5Fn6P54W8QkbfIyyIbxlXvcxyWHHvno1Wg0Ej5eiJY5hBb8ExttoIOJJk7V2dZE6prP7iby5q2aQ0Lg==}
     engines: {node: '>=6.9.0'}
@@ -1748,11 +1764,11 @@ packages:
     resolution: {integrity: sha512-fMzayl/licUL8VRAy4qXROKcYvHwUbV8aTh4m97L5/MRuVpxbcAy92DGGTqx5OBKCSQN3gMg+sUKeE6AviefpQ==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/babel-loader-9@3.1.2':
-    resolution: {integrity: sha512-x2K0QpG+S3h6a0gY8tWtiUFEQAMUk6NdWqtT+4eyoZ1YCYcWXVPhRx3FXS5FsHXk/lmrMd2hc7XPgYk6kYoKuQ==}
+  '@embroider/babel-loader-9@3.1.3':
+    resolution: {integrity: sha512-hQFO+AcUIOw5mSCgw1hwDrcNMa3xYoDV7UrPyWO73cXd+6jD3kW2iXzBt8kKgCf1BrdyCZ5oq2LikcvpCekIUw==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@embroider/core': ^3.5.7
+      '@embroider/core': ^3.5.9
 
   '@embroider/compat@4.1.17':
     resolution: {integrity: sha512-MjjtChtKXMNit2xmjPpxtK+f0kNHW2ao5lDhbkSdKjCcYghMvWYdbe5hdX+3QknyaZxDy4LW2dEHCWm3fhVtlg==}
@@ -1768,11 +1784,11 @@ packages:
     resolution: {integrity: sha512-8byUO0RKTI/Y25dTxQt/S9L6Ph57L4obGGJfqquP5cQzlEos5w2CRSWV85RhAYowFAuTxgqMbVfAnJTWatgvpg==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/hbs-loader@3.0.4':
-    resolution: {integrity: sha512-k7ZWqOzZGQHyCciaPs87K5/nlaFOtXbLaRhjrBpSZJafXxbu21tYQWDjsQG5sfNhmX+izjQeZ/7fcimpG08edg==}
+  '@embroider/hbs-loader@3.0.5':
+    resolution: {integrity: sha512-/K9LpLSlTf8X0Htn+m61IRny6kHyIScBX4Lqrpd8GSA07snQDyVJygQngQFMReITlIUK0YOIK7CxDIml2NN3iw==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@embroider/core': ^3.5.7
+      '@embroider/core': ^3.5.9
       webpack: ^5
 
   '@embroider/macros@1.20.2':
@@ -1786,10 +1802,6 @@ packages:
 
   '@embroider/reverse-exports@0.2.0':
     resolution: {integrity: sha512-WFsw8nQpHZiWGEDYpa/A79KEFfTisqteXbY+jg9eZiww1r1G+LZvsmdszDp86TkotUSCqrMbK/ewn0jR1CJmqg==}
-    engines: {node: 12.* || 14.* || >= 16}
-
-  '@embroider/shared-internals@2.9.1':
-    resolution: {integrity: sha512-8PJBsa37GD++SAfHf8rcJzlwDwuAQCBo0fr+eGxg9l8XhBXsTnE/7706dM4OqWew9XNqRXn39wfIGHZoBpjNMw==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/shared-internals@2.9.2':
@@ -1834,11 +1846,11 @@ packages:
       '@embroider/core': ^4.4.7
       vite: '>= 5.2.0'
 
-  '@embroider/webpack@4.1.1':
-    resolution: {integrity: sha512-L/Og9W9BhHo0RhRsxJjfDMIBZQvuAP9kcUw7ysG+yfblCmRpQarWu+3IyKEBpPt0B2BKfnJY1fW6WtyPKCov3Q==}
+  '@embroider/webpack@4.1.2':
+    resolution: {integrity: sha512-jMLRp3pw1OBYAcM1m+jEMbewowKWGX2s4TGfuDNVX81roCZWVbIxIvS4eQwoxL2j8MkuAnEjNbYMJonbl4VeMA==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@embroider/core': ^3.5.7
+      '@embroider/core': ^3.5.9
       webpack: ^5.0.0
 
   '@emnapi/core@1.9.2':
@@ -4181,10 +4193,12 @@ packages:
   '@xmldom/xmldom@0.8.12':
     resolution: {integrity: sha512-9k/gHF6n/pAi/9tqr3m3aqkuiNosYTurLLUtc7xQ9sxB/wm7WPygCv8GYa6mS0fLJEHhqMC1ATYhz++U/lRHqg==}
     engines: {node: '>=10.0.0'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xmldom/xmldom@0.9.9':
     resolution: {integrity: sha512-qycIHAucxy/LXAYIjmLmtQ8q9GPnMbnjG1KXhWm9o5sCr6pOYDATkMPiTNa6/v8eELyqOQ2FsEqeoFYmgv/gJg==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -9146,6 +9160,10 @@ packages:
     resolution: {integrity: sha512-IWqP2SCPhyVFTBtRcgMHdzlf9ul25NwaFx4wCEH/KjAXuuHY4yNjvPXsBokp8jCB936PyWRaPKUNh8NvylLp2Q==}
     engines: {node: '>=6.11.5'}
 
+  loader-runner@4.3.2:
+    resolution: {integrity: sha512-DFEqQ3ihfS9blba08cLfYf1NRAIEm+dDjic073DRDc3/JspI/8wYmtDsHwd3+4hwvdxSK7PGaElfTmm0awWJ4w==}
+    engines: {node: '>=6.11.5'}
+
   loader-utils@1.4.2:
     resolution: {integrity: sha512-I5d00Pd/jwMD2QCduo657+YM/6L3KZu++pmX9VFncxaxvHcru9jx1lBaFft+r4Mt2jK0Yhp41XlRAihzPxHNCg==}
     engines: {node: '>=4.0.0'}
@@ -12578,6 +12596,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  terser@5.46.2:
+    resolution: {integrity: sha512-uxfo9fPcSgLDYob/w1FuL0c99MWiJDnv+5qXSQc5+Ki5NjVNsYi66INnMFBjf6uFz6OnX12piJQPF4IpjJTNTw==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   test-exclude@6.0.0:
     resolution: {integrity: sha512-cAGWPIyOHU6zlmg88jwm7VRyXnMN7iV68OGAbYDk/Mh/xC/pzVPlQtY6ngoIH/5/tciuhGfvESU8GrHrcxD56w==}
     engines: {node: '>=8'}
@@ -13105,19 +13128,22 @@ packages:
 
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
-    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@7.0.3:
     resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-compile-cache-lib@3.0.1:
@@ -13773,6 +13799,8 @@ snapshots:
 
   '@babel/compat-data@7.29.0': {}
 
+  '@babel/compat-data@7.29.3': {}
+
   '@babel/core@7.29.0':
     dependencies:
       '@babel/code-frame': 7.29.0
@@ -14064,6 +14092,22 @@ snapshots:
     dependencies:
       '@babel/core': 7.29.0
       '@babel/helper-plugin-utils': 7.28.6
+
+  '@babel/plugin-bugfix-safari-rest-destructuring-rhs-array@7.29.3(@babel/core@7.29.0)':
+    dependencies:
+      '@babel/core': 7.29.0
+      '@babel/helper-plugin-utils': 7.28.6
+      '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
+    transitivePeerDependencies:
+      - supports-color
+
+  '@babel/plugin-bugfix-safari-rest-destructuring-rhs-array@7.29.3(@babel/core@7.29.0)(supports-color@8.1.1)':
+    dependencies:
+      '@babel/core': 7.29.0
+      '@babel/helper-plugin-utils': 7.28.6
+      '@babel/helper-skip-transparent-expression-wrappers': 7.27.1(supports-color@8.1.1)
+    transitivePeerDependencies:
+      - supports-color
 
   '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.27.1(@babel/core@7.29.0)':
     dependencies:
@@ -14803,9 +14847,86 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/preset-env@7.29.2(@babel/core@7.29.0)(supports-color@8.1.1)':
+  '@babel/preset-env@7.29.3(@babel/core@7.29.0)':
     dependencies:
-      '@babel/compat-data': 7.29.0
+      '@babel/compat-data': 7.29.3
+      '@babel/core': 7.29.0
+      '@babel/helper-compilation-targets': 7.28.6
+      '@babel/helper-plugin-utils': 7.28.6
+      '@babel/helper-validator-option': 7.27.1
+      '@babel/plugin-bugfix-firefox-class-in-computed-class-key': 7.28.5(@babel/core@7.29.0)
+      '@babel/plugin-bugfix-safari-class-field-initializer-scope': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-bugfix-safari-rest-destructuring-rhs-array': 7.29.3(@babel/core@7.29.0)
+      '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-bugfix-v8-static-class-fields-redefine-readonly': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-proposal-private-property-in-object': 7.21.0-placeholder-for-preset-env.2(@babel/core@7.29.0)
+      '@babel/plugin-syntax-import-assertions': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-syntax-import-attributes': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-syntax-unicode-sets-regex': 7.18.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-arrow-functions': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-async-generator-functions': 7.29.0(@babel/core@7.29.0)
+      '@babel/plugin-transform-async-to-generator': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-block-scoped-functions': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-block-scoping': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-class-properties': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-class-static-block': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-classes': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-computed-properties': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-destructuring': 7.28.5(@babel/core@7.29.0)
+      '@babel/plugin-transform-dotall-regex': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-duplicate-keys': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-duplicate-named-capturing-groups-regex': 7.29.0(@babel/core@7.29.0)
+      '@babel/plugin-transform-dynamic-import': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-explicit-resource-management': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-exponentiation-operator': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-export-namespace-from': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-for-of': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-function-name': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-json-strings': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-literals': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-logical-assignment-operators': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-member-expression-literals': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-modules-amd': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-modules-commonjs': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-modules-systemjs': 7.29.0(@babel/core@7.29.0)
+      '@babel/plugin-transform-modules-umd': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-named-capturing-groups-regex': 7.29.0(@babel/core@7.29.0)
+      '@babel/plugin-transform-new-target': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-nullish-coalescing-operator': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-numeric-separator': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-object-rest-spread': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-object-super': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-optional-catch-binding': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-optional-chaining': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-parameters': 7.27.7(@babel/core@7.29.0)
+      '@babel/plugin-transform-private-methods': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-private-property-in-object': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-property-literals': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-regenerator': 7.29.0(@babel/core@7.29.0)
+      '@babel/plugin-transform-regexp-modifiers': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-reserved-words': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-shorthand-properties': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-spread': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-sticky-regex': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-template-literals': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-typeof-symbol': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-unicode-escapes': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-unicode-property-regex': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-transform-unicode-regex': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-unicode-sets-regex': 7.28.6(@babel/core@7.29.0)
+      '@babel/preset-modules': 0.1.6-no-external-plugins(@babel/core@7.29.0)
+      babel-plugin-polyfill-corejs2: 0.4.17(@babel/core@7.29.0)
+      babel-plugin-polyfill-corejs3: 0.14.2(@babel/core@7.29.0)
+      babel-plugin-polyfill-regenerator: 0.6.8(@babel/core@7.29.0)
+      core-js-compat: 3.49.0
+      semver: 6.3.1
+    transitivePeerDependencies:
+      - supports-color
+
+  '@babel/preset-env@7.29.3(@babel/core@7.29.0)(supports-color@8.1.1)':
+    dependencies:
+      '@babel/compat-data': 7.29.3
       '@babel/core': 7.29.0
       '@babel/helper-compilation-targets': 7.28.6
       '@babel/helper-plugin-utils': 7.28.6
@@ -14813,6 +14934,7 @@ snapshots:
       '@babel/plugin-bugfix-firefox-class-in-computed-class-key': 7.28.5(@babel/core@7.29.0)(supports-color@8.1.1)
       '@babel/plugin-bugfix-safari-class-field-initializer-scope': 7.27.1(@babel/core@7.29.0)
       '@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-bugfix-safari-rest-destructuring-rhs-array': 7.29.3(@babel/core@7.29.0)(supports-color@8.1.1)
       '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining': 7.27.1(@babel/core@7.29.0)(supports-color@8.1.1)
       '@babel/plugin-bugfix-v8-static-class-fields-redefine-readonly': 7.28.6(@babel/core@7.29.0)(supports-color@8.1.1)
       '@babel/plugin-proposal-private-property-in-object': 7.21.0-placeholder-for-preset-env.2(@babel/core@7.29.0)
@@ -15450,7 +15572,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/babel-loader-9@3.1.2(886b31060a5941b223dfde169f7100ed)':
+  '@embroider/babel-loader-9@3.1.3(886b31060a5941b223dfde169f7100ed)':
     dependencies:
       '@babel/core': 7.29.0(supports-color@8.1.1)
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
@@ -15550,7 +15672,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/hbs-loader@3.0.4(92a09542ac8eb5413355dd638829a92f)':
+  '@embroider/hbs-loader@3.0.5(92a09542ac8eb5413355dd638829a92f)':
     dependencies:
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
       webpack: 5.106.1(webpack-cli@6.0.1)
@@ -15592,10 +15714,10 @@ snapshots:
       mem: 8.1.1
       resolve.exports: 2.0.3
 
-  '@embroider/shared-internals@2.9.1(supports-color@8.1.1)':
+  '@embroider/shared-internals@2.9.2':
     dependencies:
       babel-import-util: 2.1.1
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@9.4.0)
       ember-rfc176-data: 0.3.18
       fs-extra: 9.1.0
       is-subdir: 1.2.0
@@ -15609,10 +15731,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/shared-internals@2.9.2':
+  '@embroider/shared-internals@2.9.2(supports-color@8.1.1)':
     dependencies:
       babel-import-util: 2.1.1
-      debug: 4.4.3(supports-color@9.4.0)
+      debug: 4.4.3(supports-color@8.1.1)
       ember-rfc176-data: 0.3.18
       fs-extra: 9.1.0
       is-subdir: 1.2.0
@@ -15644,14 +15766,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/test-setup@4.0.0(f48bd570c37f6e1a622867a34ef7ef40)':
+  '@embroider/test-setup@4.0.0(de7262948e47c0970b66f37f7431589d)':
     dependencies:
       lodash: 4.18.1
       resolve: 1.22.11
     optionalDependencies:
       '@embroider/compat': 4.1.17(aeb5d9f8bdcfb5e866a2a41764179e3d)
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
-      '@embroider/webpack': 4.1.1(92a09542ac8eb5413355dd638829a92f)
+      '@embroider/webpack': 4.1.2(92a09542ac8eb5413355dd638829a92f)
 
   '@embroider/util@1.13.5(78e6f0cf21efb525d9b10e7432730735)':
     dependencies:
@@ -15666,7 +15788,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@embroider/vite@1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)':
+  '@embroider/vite@1.7.2(295304e8aad73e013cef671b01f01299)':
     dependencies:
       '@babel/core': 7.29.0
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
@@ -15684,7 +15806,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.46.1
-      vite: 7.3.2(f3f1bd43dd632b0257fb9e1ace38aeb3)
+      vite: 7.3.2(9f8ce656c4107b3722a8b507f9607848)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -15692,7 +15814,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/vite@1.7.2(459b251042aba6826848bf3aa6b0de02)':
+  '@embroider/vite@1.7.2(a0dccb589d7a4788e1b4dfecc8f073a4)':
     dependencies:
       '@babel/core': 7.29.0
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
@@ -15710,7 +15832,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.46.1
-      vite: 7.3.2(188484b1e94155b44f25fd43e6b7e9e6)
+      vite: 7.3.2(653fb13979edcd3bbd05f4cd290d8a91)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -15718,14 +15840,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/webpack@4.1.1(92a09542ac8eb5413355dd638829a92f)':
+  '@embroider/webpack@4.1.2(92a09542ac8eb5413355dd638829a92f)':
     dependencies:
       '@babel/core': 7.29.0(supports-color@8.1.1)
-      '@babel/preset-env': 7.29.2(@babel/core@7.29.0)(supports-color@8.1.1)
-      '@embroider/babel-loader-9': 3.1.2(886b31060a5941b223dfde169f7100ed)
+      '@babel/preset-env': 7.29.3(@babel/core@7.29.0)(supports-color@8.1.1)
+      '@embroider/babel-loader-9': 3.1.3(886b31060a5941b223dfde169f7100ed)
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
-      '@embroider/hbs-loader': 3.0.4(92a09542ac8eb5413355dd638829a92f)
-      '@embroider/shared-internals': 2.9.1(supports-color@8.1.1)
+      '@embroider/hbs-loader': 3.0.5(92a09542ac8eb5413355dd638829a92f)
+      '@embroider/shared-internals': 2.9.2(supports-color@8.1.1)
       '@types/supports-color': 8.1.3
       assert-never: 1.4.0
       babel-loader: 8.4.1(@babel/core@7.29.0)(webpack@5.106.1)
@@ -15741,7 +15863,7 @@ snapshots:
       source-map-url: 0.4.1
       style-loader: 2.0.0(webpack@5.106.1)
       supports-color: 8.1.1
-      terser: 5.46.1
+      terser: 5.46.2
       thread-loader: 3.0.4(webpack@5.106.1)
       webpack: 5.106.1(webpack-cli@6.0.1)
     transitivePeerDependencies:
@@ -20275,7 +20397,7 @@ snapshots:
       lodash.defaultsdeep: 4.6.1
       matcher-collection: 2.0.1
       symlink-or-copy: 1.3.1
-      terser: 5.46.1
+      terser: 5.46.2
       walk-sync: 2.2.0
       workerpool: 6.5.1
     transitivePeerDependencies:
@@ -21668,7 +21790,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.29.0(@babel/core@7.29.0)
       '@babel/plugin-transform-typescript': 7.28.6(@babel/core@7.29.0)
       '@babel/polyfill': 7.12.1
-      '@babel/preset-env': 7.29.2(@babel/core@7.29.0)
+      '@babel/preset-env': 7.29.3(@babel/core@7.29.0)
       '@babel/runtime': 7.12.18
       amd-name-resolver: 1.3.1
       babel-plugin-debug-macros: 0.3.4(@babel/core@7.29.0)
@@ -22203,14 +22325,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d):
+  ember-native@file:ember-native(42b0107cae760a7cedbb67ea59486d88):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
       '@ember/render-modifiers': 3.0.0(e38124df485b593f5d3b009cf43c31c0)
       '@ember/string': 4.0.1
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
-      '@embroider/vite': 1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)
+      '@embroider/vite': 1.7.2(295304e8aad73e013cef671b01f01299)
       '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
       '@nativescript/core': 8.9.9
@@ -23727,12 +23849,12 @@ snapshots:
       micromatch: 4.0.8
       resolve-dir: 1.0.1
 
-  fix-bad-declaration-output@1.1.5(d8e14f727f2879460e589df737de2942):
+  fix-bad-declaration-output@1.1.5(d765941454330ab4be90f7296c04da46):
     dependencies:
       '@babel/parser': 7.29.2
       fs-extra: 11.3.4
       globby: 14.1.0
-      jscodeshift: 0.15.2(d8e14f727f2879460e589df737de2942)
+      jscodeshift: 0.15.2(d765941454330ab4be90f7296c04da46)
     transitivePeerDependencies:
       - '@babel/preset-env'
       - supports-color
@@ -25243,7 +25365,7 @@ snapshots:
 
   jsbn@0.1.1: {}
 
-  jscodeshift@0.15.2(d8e14f727f2879460e589df737de2942):
+  jscodeshift@0.15.2(d765941454330ab4be90f7296c04da46):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/parser': 7.29.2
@@ -25266,7 +25388,7 @@ snapshots:
       temp: 0.8.4
       write-file-atomic: 2.4.3
     optionalDependencies:
-      '@babel/preset-env': 7.29.2(@babel/core@7.29.0)
+      '@babel/preset-env': 7.29.3(@babel/core@7.29.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -25690,6 +25812,8 @@ snapshots:
       type-fest: 0.6.0
 
   loader-runner@4.3.1: {}
+
+  loader-runner@4.3.2: {}
 
   loader-utils@1.4.2:
     dependencies:
@@ -29868,6 +29992,13 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
+  terser@5.46.2:
+    dependencies:
+      '@jridgewell/source-map': 0.3.11
+      acorn: 8.16.0
+      commander: 2.20.3
+      source-map-support: 0.5.21
+
   test-exclude@6.0.0:
     dependencies:
       '@istanbuljs/schema': 0.1.3
@@ -29965,7 +30096,7 @@ snapshots:
   thread-loader@3.0.4(webpack@5.106.1):
     dependencies:
       json-parse-better-errors: 1.0.2
-      loader-runner: 4.3.1
+      loader-runner: 4.3.2
       loader-utils: 2.0.4
       neo-async: 2.6.2
       schema-utils: 3.3.0
@@ -30639,7 +30770,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@7.3.2(188484b1e94155b44f25fd43e6b7e9e6):
+  vite@7.3.2(653fb13979edcd3bbd05f4cd290d8a91):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -30655,10 +30786,10 @@ snapshots:
       sass: 1.99.0
       sass-embedded: 1.99.0
       stylus: 0.62.0
-      terser: 5.46.1
+      terser: 5.46.2
       yaml: 2.8.3
 
-  vite@7.3.2(f3f1bd43dd632b0257fb9e1ace38aeb3):
+  vite@7.3.2(9f8ce656c4107b3722a8b507f9607848):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -30674,7 +30805,7 @@ snapshots:
       sass: 1.99.0
       sass-embedded: 1.99.0
       stylus: 0.62.0
-      terser: 5.46.1
+      terser: 5.46.2
       yaml: 2.8.3
 
   vm2@3.10.5:
