@@ -691,6 +691,9 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(rollup@4.60.1)
     devDependencies:
+      '@babel/core':
+        specifier: ^7.29.0
+        version: 7.29.0
       '@babel/eslint-parser':
         specifier: ^7.28.5
         version: 7.28.6(35c79763e2f529503c5fce6757258eb9)
