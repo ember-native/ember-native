@@ -11,6 +11,9 @@ overrides:
   ember-eslint-parser: 0.5.3
 
 patchedDependencies:
+  '@nativescript/core@9.0.18':
+    hash: 16a56c81e27c2a1b562f434c82a594f7173446a4c68ad6a50069d22904b19f0f
+    path: patches/@nativescript__core@9.0.18.patch
   '@nativescript/unit-test-runner':
     hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
     path: patches/@nativescript__unit-test-runner.patch
@@ -51,7 +54,7 @@ importers:
         version: 0.95.0
       '@nativescript/core':
         specifier: ^9.0.0
-        version: 9.0.18
+        version: 9.0.18(patch_hash=16a56c81e27c2a1b562f434c82a594f7173446a4c68ad6a50069d22904b19f0f)
       '@nativescript/theme':
         specifier: ^3.1.0
         version: 3.1.0
@@ -500,7 +503,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(ef342506c85ad18f81029cd062ebd0f5)
+        version: file:ember-native(67ad17817089d1ce31a6e30f6541ba55)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -16752,7 +16755,7 @@ snapshots:
       source-map: 0.6.1
       tslib: 2.8.1
 
-  '@nativescript/core@9.0.18':
+  '@nativescript/core@9.0.18(patch_hash=16a56c81e27c2a1b562f434c82a594f7173446a4c68ad6a50069d22904b19f0f)':
     dependencies:
       '@csstools/css-calc': 2.1.4(f5bbab77a7781b6ee795024fdb514bb3)
       '@csstools/css-color-parser': 3.1.0(f5bbab77a7781b6ee795024fdb514bb3)
@@ -22235,7 +22238,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(ef342506c85ad18f81029cd062ebd0f5):
+  ember-native@file:ember-native(67ad17817089d1ce31a6e30f6541ba55):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
       '@ember/render-modifiers': 3.0.0(e38124df485b593f5d3b009cf43c31c0)
@@ -22245,7 +22248,7 @@ snapshots:
       '@embroider/vite': 1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)
       '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
-      '@nativescript/core': 9.0.18
+      '@nativescript/core': 9.0.18(patch_hash=16a56c81e27c2a1b562f434c82a594f7173446a4c68ad6a50069d22904b19f0f)
       '@rollup/plugin-alias': 6.0.0(rollup@4.60.1)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.1)
       '@types/node': 25.6.0
