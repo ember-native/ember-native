@@ -99,6 +99,22 @@ module.exports = (env) => {
     config.target('node');
   });
 
+  // Fix ESM module resolution for acorn and css-what
+  webpack.chainWebpack((config) => {
+    // Handle .mjs files
+    config.module
+      .rule('mjs')
+      .test(/\.mjs$/)
+      .include.add(/node_modules/)
+      .end()
+      .type('javascript/auto');
+
+    // Disable fullySpecified for ESM modules
+    config.module
+      .rule('js/ts')
+      .resolve.set('fullySpecified', false);
+  });
+
   // Configure webpack resolveLoader for pnpm
   webpack.chainWebpack((config) => {
     const nativescriptWebpackPath = fs.realpathSync(path.dirname(require.resolve('@nativescript/webpack/package.json')));
@@ -117,8 +133,12 @@ module.exports = (env) => {
   console.log('conf', conf)
   //console.log('module.rules', conf.module.rules.map(r => r.use))
 
-  // Wrap config in async function to run Embroider prebuild
+  // Skip Embroider prebuild in CI or if it fails
   return (() => {
+    if (process.env.CI) {
+      console.log('⚠ Skipping Embroider prebuild in CI environment');
+      return conf;
+    }
     try {
       require('@embroider/vite');
       console.log('🔨 Running Embroider prebuild...');
@@ -126,11 +146,12 @@ module.exports = (env) => {
         env: {
           ...process.env,
           EMBROIDER_PREBUILD: 'true',
-        }
+        },
+        timeout: 30000, // 30 second timeout
       })
       console.log('✓ Embroider prebuild completed');
     } catch (e) {
-      console.warn('⚠ Embroider prebuild failed:', e?.message || e);
+      console.warn('⚠ Embroider prebuild failed or timed out:', e?.message || e);
     }
     return conf;
   })();
