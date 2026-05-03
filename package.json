@@ -35,7 +35,8 @@
       "ember-eslint-parser": "0.5.3"
     },
     "patchedDependencies": {
-      "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
+      "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch",
+      "@nativescript/core@9.0.18": "patches/@nativescript__core@9.0.18.patch"
     },
     "onlyBuiltDependencies": [
       "@nativescript/core",

@@ -1,0 +1,11 @@
+diff --git a/ui/styling/css-selector.js b/ui/styling/css-selector.js
+index d122d2aac9b9ed2906521f7af29d983a71b6a138..29caada6a93d6d040230cd32645d4c9cc1400eb8 100644
+--- a/ui/styling/css-selector.js
++++ b/ui/styling/css-selector.js
+@@ -1,4 +1,5 @@
+-import { parse as convertToCSSWhatSelector } from 'css-what';
++import * as cssWhat from 'css-what';
++const { parse: convertToCSSWhatSelector } = cssWhat;
+ import '../../globals';
+ import { isCssVariable } from '../core/properties';
+ import { isNullOrUndefined } from '../../utils/types';
