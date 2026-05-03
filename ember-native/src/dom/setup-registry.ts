@@ -47,7 +47,7 @@ import PageElement from './native/PageElement.ts';
 
 export function registerNativeElement(
   elementName: string,
-  resolver: () => typeof View,
+  resolver: () => any,
   meta: ComponentMeta | null = null,
 ) {
   registerElement(
