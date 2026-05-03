@@ -113,6 +113,16 @@ module.exports = (env) => {
     config.module
       .rule('js/ts')
       .resolve.set('fullySpecified', false);
+
+    // Add aliases for ESM modules that need CommonJS resolution
+    // Use pnpm's node_modules structure
+    const pnpmRoot = path.resolve(__dirname, '..', 'node_modules', '.pnpm');
+    const acornPath = path.join(pnpmRoot, 'acorn@8.16.0', 'node_modules', 'acorn', 'dist', 'acorn.js');
+    const cssWhatPath = path.join(pnpmRoot, 'css-what@6.2.2', 'node_modules', 'css-what', 'lib', 'commonjs', 'index.js');
+    
+    config.resolve.alias
+      .set('acorn', acornPath)
+      .set('css-what', cssWhatPath);
   });
 
   // Configure webpack resolveLoader for pnpm
