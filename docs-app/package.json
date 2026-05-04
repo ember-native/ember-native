@@ -86,7 +86,7 @@
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.48.0",
     "astroturf": "^1.2.0",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.5.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^9.2.1",
     "content-tag": "^4.1.0",
