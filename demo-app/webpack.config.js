@@ -1,47 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-var Module = require('module');
-var { fileURLToPath, pathToFileURL } = require('node:url');
 
-Module.registerHooks({
-  resolve: (specifier, context, nextResolve) => {
-    //do your thing here
-    const originalSpecifier = specifier;
-    if(context.parentURL && fileURLToPath(context.parentURL).includes('node:')) return nextResolve(specifier, context);
-
-    if (context.parentURL) {
-      const parentURL = fs.realpathSync(fileURLToPath(context.parentURL));
-      try {
-        const resolved = require.resolve(specifier, { paths: [path.dirname(parentURL)] });
-        if (fs.existsSync(resolved)) {
-          specifier = fs.realpathSync(resolved);
-          if (context.conditions.includes?.('import')) {
-            specifier = pathToFileURL(specifier).toString();
-          }
-        }
-        return nextResolve(specifier, context);
-        // eslint-disable-next-line no-unused-vars
-      } catch (e) {
-        //console.log('failed to resolve', specifier,' from ', parentURL, e);
-      }
-    }
-    try {
-      const resolved = require.resolve(specifier);
-      if (fs.existsSync(resolved)) {
-        specifier = fs.realpathSync(resolved);
-        if (context.conditions.includes?.('import')) {
-          specifier = pathToFileURL(specifier).toString();
-        }
-      }
-      return nextResolve(specifier, context);
-      // eslint-disable-next-line no-unused-vars
-    } catch (e) {
-      // console.log('failed to resolve', specifier, e);
-    }
-
-    return nextResolve(originalSpecifier, context);
-  }
-});
 
 const webpack = require('@nativescript/webpack');
 const configureEmberNative = require('ember-native/utils/webpack.config.js');
@@ -122,7 +81,7 @@ module.exports = (env) => {
       "stream": require.resolve("stream-browserify"),
       "http": require.resolve("stream-http"),
       "https": require.resolve("https-browserify"),
-      "url": require.resolve("url"),
+      "url": false,
       "querystring": require.resolve("querystring-es3"),
       buffer: require.resolve('buffer'),
       "path": false,
@@ -138,6 +97,62 @@ module.exports = (env) => {
     })
     config.resolve.set('fallback', fallback);
     config.target('node');
+  });
+
+  // Fix ESM module resolution for acorn and css-what
+  webpack.chainWebpack((config) => {
+    // Handle .mjs files
+    config.module
+      .rule('mjs')
+      .test(/\.mjs$/)
+      .include.add(/node_modules/)
+      .end()
+      .type('javascript/auto');
+
+    // Force css-what CommonJS dist to be treated as CJS (not ESM),
+    // because the css-what root package.json has "type":"module" which
+    // prevents webpack from statically tracing require('./types.js').
+    config.module
+      .rule('css-what-cjs')
+      .test(/css-what.*dist[/\\]commonjs.*\.js$/)
+      .type('javascript/auto');
+
+    // Disable fullySpecified for ESM modules
+    config.module
+      .rule('js/ts')
+      .resolve.set('fullySpecified', false);
+
+    // Add aliases for ESM modules that need CommonJS resolution
+    // Use pnpm's node_modules structure
+    const pnpmRoot = path.resolve(__dirname, '..', 'node_modules', '.pnpm');
+    const acornPath = path.join(pnpmRoot, 'acorn@8.16.0', 'node_modules', 'acorn', 'dist', 'acorn.js');
+    const cssWhatPath = path.join(pnpmRoot, 'css-what@7.0.0', 'node_modules', 'css-what', 'dist', 'commonjs', 'index.js');
+
+    config.resolve.alias
+      .set('acorn', acornPath)
+      .set('css-what', cssWhatPath);
+
+    // source-map-js uses relative requires (./base64-vlq) that NativeScript's
+    // native runtime cannot resolve. Stub out the generator via
+    // NormalModuleReplacementPlugin since source map *generation* is not
+    // needed at runtime in a NativeScript app.
+    const stubPath = path.resolve(__dirname, 'app/stubs/source-map-generator-stub.js');
+    config.plugin('source-map-js-stub')
+      .use(require('webpack').NormalModuleReplacementPlugin, [
+        /source-map-js[/\\]lib[/\\]source-map-generator/,
+        stubPath,
+      ]);
+
+    // Replace ember-native-devtools' setup-inspector.js with a NativeScript-
+    // compatible stub. The original uses socket.io-client@2.x (which requires
+    // the Node.js 'url' built-in at load time) and calls fileURLToPath() at
+    // module-level, both of which crash the NativeScript JS runtime.
+    const devtoolsClientStubPath = path.resolve(__dirname, 'app/stubs/ember-native-devtools-client-stub.js');
+    config.plugin('ember-native-devtools-client-stub')
+      .use(require('webpack').NormalModuleReplacementPlugin, [
+        /ember-native-devtools[/\\]src[/\\]setup-inspector\.js/,
+        devtoolsClientStubPath,
+      ]);
   });
 
   // Configure webpack resolveLoader for pnpm
@@ -158,8 +173,12 @@ module.exports = (env) => {
   console.log('conf', conf)
   //console.log('module.rules', conf.module.rules.map(r => r.use))
 
-  // Wrap config in async function to run Embroider prebuild
+  // Skip Embroider prebuild in CI or if it fails
   return (() => {
+    if (process.env.CI) {
+      console.log('⚠ Skipping Embroider prebuild in CI environment');
+      return conf;
+    }
     try {
       require('@embroider/vite');
       console.log('🔨 Running Embroider prebuild...');
@@ -167,11 +186,12 @@ module.exports = (env) => {
         env: {
           ...process.env,
           EMBROIDER_PREBUILD: 'true',
-        }
+        },
+        timeout: 30000, // 30 second timeout
       })
       console.log('✓ Embroider prebuild completed');
     } catch (e) {
-      console.warn('⚠ Embroider prebuild failed:', e?.message || e);
+      console.warn('⚠ Embroider prebuild failed or timed out:', e?.message || e);
     }
     return conf;
   })();

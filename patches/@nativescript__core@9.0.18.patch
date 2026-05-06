@@ -1,0 +1,33 @@
+diff --git a/globals/index.js b/globals/index.js
+index 0000000000000000000000000000000000000000..1111111111111111111111111111111111111111 100644
+--- a/globals/index.js
++++ b/globals/index.js
+@@ -1,4 +1,5 @@
+-import tslib from 'tslib';
++import * as _tslibNs from 'tslib';
++const tslib = (_tslibNs && _tslibNs.default && typeof _tslibNs.default === 'object') ? _tslibNs.default : _tslibNs;
+ import { installPolyfillsFromModule } from './polyfills/utils';
+ import './polyfills/polyfill-xhr';
+ import * as timer from '../timer';
+diff --git a/ui/styling/css-selector.js b/ui/styling/css-selector.js
+index d122d2aac9b9ed2906521f7af29d983a71b6a138..29caada6a93d6d040230cd32645d4c9cc1400eb8 100644
+--- a/ui/styling/css-selector.js
++++ b/ui/styling/css-selector.js
+@@ -1,4 +1,5 @@
+-import { parse as convertToCSSWhatSelector } from 'css-what';
++import * as cssWhat from 'css-what';
++const { parse: convertToCSSWhatSelector } = cssWhat;
+ import '../../globals';
+ import { isCssVariable } from '../core/properties';
+ import { isNullOrUndefined } from '../../utils/types';
+diff --git a/ui/core/bindable/bindable-expressions.js b/ui/core/bindable/bindable-expressions.js
+index 0000000000000000000000000000000000000000..1111111111111111111111111111111111111111 100644
+--- a/ui/core/bindable/bindable-expressions.js
++++ b/ui/core/bindable/bindable-expressions.js
+@@ -1,4 +1,5 @@
+-import { parse } from 'acorn';
++import * as acorn from 'acorn';
++const { parse } = acorn;
+ import { isFunction, isNullOrUndefined, isObject } from '../../../utils/types';
+ const expressionsCache = {};
+ const FORCED_CHAIN_VALUE = Symbol('forcedChain');

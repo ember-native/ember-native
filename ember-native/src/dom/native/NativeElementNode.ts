@@ -70,8 +70,8 @@ export default class NativeElementNode<
     };
 
     const getParentPage = (): NativeElementNode | null => {
-      if (this.nativeView && this.nativeView.page) {
-        return (this.nativeView.page as any).__GlimmerNativeElement__;
+      if (this.nativeView && (this.nativeView as any).page) {
+        return ((this.nativeView as any).page as any).__GlimmerNativeElement__;
       }
       return null;
     };
@@ -155,7 +155,6 @@ export default class NativeElementNode<
         this.setStyle(camelize(propertyName), value);
       },
 
-      // @ts-expect-error does not exist
       removeProperty: (propertyName: string) => {
         this.setStyle(camelize(propertyName), null);
       },
@@ -212,11 +211,11 @@ export default class NativeElementNode<
   }
 
   get style() {
-    return this.nativeView?.style;
+    return (this.nativeView as any)?.style;
   }
 
   set style(v) {
-    Object.assign(this.nativeView?.style || {}, v);
+    Object.assign((this.nativeView as any)?.style || {}, v);
   }
 
   updateText() {
@@ -246,13 +245,13 @@ export default class NativeElementNode<
   /* istanbul ignore next */
   addEventListener(event: string, handler: EventListener) {
     // log.debug('add event listener', this, event, handler);
-    this.nativeView!.on(event, handler);
+    (this.nativeView as any)!.on(event, handler);
   }
 
   /* istanbul ignore next */
   removeEventListener(event: string, handler?: EventListener) {
     // log.debug(`remove event listener ${this} ${event}`);
-    this.nativeView!.off(event, handler);
+    (this.nativeView as any)!.off(event, handler);
   }
 
   getAttribute(fullkey: string) {
@@ -459,7 +458,7 @@ export default class NativeElementNode<
     if (this.nativeView) {
       //nativescript uses the EventName while dom uses Type
       event.eventName = (event as any).type;
-      this.nativeView.notify(event);
+      (this.nativeView as any).notify(event);
     }
   }
 

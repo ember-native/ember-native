@@ -1,0 +1,23 @@
+import LinkTo from "~/ui/components/link-to.gts";
+
+
+<template>
+  <page height="100%" width="100%">
+    <action-bar title="Ember Nativescript Examples">
+    </action-bar>
+    <stack-layout>
+      <LinkTo @route='list-view' @transitionName='fade'>
+        List View
+      </LinkTo>
+      <LinkTo @route='rad-list-view' @transitionName='slideLeft'>
+        Rad List View
+      </LinkTo>
+      <LinkTo @route='tabs' @transitionName='explode' @transitionDuration={{1000}}>
+        Tabs
+      </LinkTo>
+      <LinkTo @route='warp-drive' @transitionName='slideTop'>
+        WarpDrive Demo
+      </LinkTo>
+    </stack-layout>
+  </page>
+</template>

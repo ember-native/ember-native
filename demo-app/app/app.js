@@ -7,6 +7,7 @@ import './app.scss';
 import { name as pkgName } from '../package.json';
 import ApplicationInstance from "@ember/application/instance";
 import Router from "./router";
+import setupInspector from '@embroider/legacy-inspector-support/ember-source-4.12';
 import './configure-signals';
 
 window.EmberENV = ENV.EmberENV;
@@ -81,6 +82,7 @@ export default class App extends EmberApplication {
   modulePrefix = ENV.modulePrefix;
   podModulePrefix = `${ENV.modulePrefix}/pods`;
   Resolver = Resolver.withModules(modules);
+  inspector = setupInspector(this);
 
   buildInstance() {
     const instance = super.buildInstance();
