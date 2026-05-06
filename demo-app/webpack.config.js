@@ -81,7 +81,7 @@ module.exports = (env) => {
       "stream": require.resolve("stream-browserify"),
       "http": require.resolve("stream-http"),
       "https": require.resolve("https-browserify"),
-      "url": require.resolve("url"),
+      "url": false,
       "querystring": require.resolve("querystring-es3"),
       buffer: require.resolve('buffer'),
       "path": false,
@@ -109,6 +109,14 @@ module.exports = (env) => {
       .end()
       .type('javascript/auto');
 
+    // Force css-what CommonJS dist to be treated as CJS (not ESM),
+    // because the css-what root package.json has "type":"module" which
+    // prevents webpack from statically tracing require('./types.js').
+    config.module
+      .rule('css-what-cjs')
+      .test(/css-what.*dist[/\\]commonjs.*\.js$/)
+      .type('javascript/auto');
+
     // Disable fullySpecified for ESM modules
     config.module
       .rule('js/ts')
@@ -118,11 +126,33 @@ module.exports = (env) => {
     // Use pnpm's node_modules structure
     const pnpmRoot = path.resolve(__dirname, '..', 'node_modules', '.pnpm');
     const acornPath = path.join(pnpmRoot, 'acorn@8.16.0', 'node_modules', 'acorn', 'dist', 'acorn.js');
-    const cssWhatPath = path.join(pnpmRoot, 'css-what@6.2.2', 'node_modules', 'css-what', 'lib', 'commonjs', 'index.js');
-    
+    const cssWhatPath = path.join(pnpmRoot, 'css-what@7.0.0', 'node_modules', 'css-what', 'dist', 'commonjs', 'index.js');
+
     config.resolve.alias
       .set('acorn', acornPath)
       .set('css-what', cssWhatPath);
+
+    // source-map-js uses relative requires (./base64-vlq) that NativeScript's
+    // native runtime cannot resolve. Stub out the generator via
+    // NormalModuleReplacementPlugin since source map *generation* is not
+    // needed at runtime in a NativeScript app.
+    const stubPath = path.resolve(__dirname, 'app/stubs/source-map-generator-stub.js');
+    config.plugin('source-map-js-stub')
+      .use(require('webpack').NormalModuleReplacementPlugin, [
+        /source-map-js[/\\]lib[/\\]source-map-generator/,
+        stubPath,
+      ]);
+
+    // Replace ember-native-devtools' setup-inspector.js with a NativeScript-
+    // compatible stub. The original uses socket.io-client@2.x (which requires
+    // the Node.js 'url' built-in at load time) and calls fileURLToPath() at
+    // module-level, both of which crash the NativeScript JS runtime.
+    const devtoolsClientStubPath = path.resolve(__dirname, 'app/stubs/ember-native-devtools-client-stub.js');
+    config.plugin('ember-native-devtools-client-stub')
+      .use(require('webpack').NormalModuleReplacementPlugin, [
+        /ember-native-devtools[/\\]src[/\\]setup-inspector\.js/,
+        devtoolsClientStubPath,
+      ]);
   });
 
   // Configure webpack resolveLoader for pnpm

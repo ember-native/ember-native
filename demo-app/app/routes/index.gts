@@ -8,7 +8,7 @@ import Component from "@glimmer/component";
 class Page extends Component {
     @service('ember-native/history') history;
     <template>
-        <page>
+        <page height="100%" width="100%">
             <action-bar title="Ember Nativescript Examples">
             </action-bar>
             <stack-layout>

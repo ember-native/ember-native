@@ -12,7 +12,7 @@ overrides:
 
 patchedDependencies:
   '@nativescript/core@9.0.18':
-    hash: 94379ae82c4dd9e59471dc827b54c7ed8f9e447e13d0226512eec6353624e484
+    hash: cf84d99b0a8ac8ee4afa1c324472769e129b4e3c91dbd44ed4df0e7bf74f3ca2
     path: patches/@nativescript__core@9.0.18.patch
   '@nativescript/unit-test-runner':
     hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
@@ -46,6 +46,9 @@ importers:
       '@ember/test-waiters':
         specifier: ^4.1.1
         version: 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/legacy-inspector-support':
+        specifier: ^0.1.3
+        version: 0.1.3
       '@embroider/macros':
         specifier: ^1.19.5
         version: 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -54,7 +57,7 @@ importers:
         version: 0.95.0
       '@nativescript/core':
         specifier: ^9.0.0
-        version: 9.0.18(patch_hash=94379ae82c4dd9e59471dc827b54c7ed8f9e447e13d0226512eec6353624e484)
+        version: 9.0.18(patch_hash=cf84d99b0a8ac8ee4afa1c324472769e129b4e3c91dbd44ed4df0e7bf74f3ca2)
       '@nativescript/theme':
         specifier: ^3.1.0
         version: 3.1.0
@@ -79,6 +82,9 @@ importers:
       ember-compatibility-helpers:
         specifier: ^1.2.7
         version: 1.2.7(@babel/core@7.29.0)
+      ember-inspector:
+        specifier: ^4.17.0
+        version: 4.17.0
       ember-load-initializers:
         specifier: ^3.0.1
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
@@ -89,8 +95,8 @@ importers:
         specifier: link:../ember-native
         version: link:../ember-native
       ember-native-devtools:
-        specifier: ^3.0.1
-        version: 3.0.1(socket.io-client@2.1.1)
+        specifier: ^3.0.2
+        version: 3.0.2(socket.io-client@2.1.1)
       ember-source:
         specifier: ^6.12.0
         version: 6.12.0(@glimmer/component@2.1.1)(rsvp@4.8.5)
@@ -503,7 +509,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(ad5a0921ba90562ef43e71dbad837cf7)
+        version: file:ember-native(583e7298225531fd5bc3e54dc414915f)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -1780,6 +1786,9 @@ packages:
     peerDependencies:
       '@embroider/core': ^3.5.7
       webpack: ^5
+
+  '@embroider/legacy-inspector-support@0.1.3':
+    resolution: {integrity: sha512-0VzD1xExkT78a1CUiW8wZ5VZDL4bVyMSc3t8E/RiAW1X6TlyKIA/m6zoQgsQtQIiiTPPxH0/1Tdd0F7b5//etw==}
 
   '@embroider/macros@1.20.2':
     resolution: {integrity: sha512-WJWSkG9vIL0s93vKwtNFqqAOCOflNkWNpqsC7VAqXeeTKNpCc7wtdOhPkNGJpb52CEt7vlQ5R/zMyCfGAB7MEA==}
@@ -6650,8 +6659,8 @@ packages:
     resolution: {integrity: sha512-uNmv1cPG/4qsac8oIf5txJ2FZ8p88LEpG4P3dNcjsJS98Y8hd0GPMFwVqpnzI78Lz7VYRGQWY4jnE4qm5R3j4g==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  ember-inspector@4.15.1:
-    resolution: {integrity: sha512-x7469pBhXuuf1MANO2iHL2Hzgg2YdQH5Hw5BDhzpnysEKDZLQel6GKja+WnhHAawAcG8MolUWq5aVgBV9mAkGA==}
+  ember-inspector@4.17.0:
+    resolution: {integrity: sha512-wRV2xA/C9FeokwKXoD09HKcL9qlPNXg4A58+Vmo3epffk4t+QwiipOwESM2pxjjC5y4ta8qb/X+x5m8Ke/8EUA==}
     engines: {node: '>= 22', pnpm: ^9.0.0}
 
   ember-load-initializers@3.0.1:
@@ -6674,8 +6683,8 @@ packages:
   ember-modifier@4.3.0:
     resolution: {integrity: sha512-O0rirSLQbGg0VJ/NqoQ4uN1bh2iAekZC/Ykma+FkjCM2ofrO38u+d8n3+AK6uVWeMJmogGX2KL+Is5fofoInJg==}
 
-  ember-native-devtools@3.0.1:
-    resolution: {integrity: sha512-LHOlsoCju07B3QIbF8XwuZ1gMgz8T9etLfW7V4bWGyFExrgSbzYArmPB8TIGWs8hjc5kkpsctL+LMAqSPp7u/A==}
+  ember-native-devtools@3.0.2:
+    resolution: {integrity: sha512-5Zxphj+tOzyPf3bA48lCrZT1e5+cJSo4nWS68DgDJp4iAMDzbHRNTEjUQvCV72+zV+evMoHGZBN7GGHUTYCiEA==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
@@ -13120,7 +13129,7 @@ packages:
 
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
 
   uuid@7.0.3:
@@ -15573,6 +15582,12 @@ snapshots:
       '@embroider/core': 4.4.7(@glint/template@1.7.7)
       webpack: 5.106.1(webpack-cli@6.0.1)
 
+  '@embroider/legacy-inspector-support@0.1.3':
+    dependencies:
+      '@embroider/addon-shim': 1.9.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@embroider/macros@1.20.2(7727beade5f526b31da91186c63ace33)':
     dependencies:
       '@embroider/shared-internals': 3.0.2
@@ -16755,7 +16770,7 @@ snapshots:
       source-map: 0.6.1
       tslib: 2.8.1
 
-  '@nativescript/core@9.0.18(patch_hash=94379ae82c4dd9e59471dc827b54c7ed8f9e447e13d0226512eec6353624e484)':
+  '@nativescript/core@9.0.18(patch_hash=cf84d99b0a8ac8ee4afa1c324472769e129b4e3c91dbd44ed4df0e7bf74f3ca2)':
     dependencies:
       '@csstools/css-calc': 2.1.4(f5bbab77a7781b6ee795024fdb514bb3)
       '@csstools/css-color-parser': 3.1.0(f5bbab77a7781b6ee795024fdb514bb3)
@@ -22171,11 +22186,11 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  ember-inspector@4.15.1:
+  ember-inspector@4.17.0:
     dependencies:
       got: 11.8.6
       rimraf: 5.0.10
-      yauzl: 2.10.0
+      yauzl: 3.2.0
 
   ember-load-initializers@3.0.1(6d319b1a0d9582607008b9b09e953766):
     dependencies:
@@ -22227,9 +22242,9 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  ember-native-devtools@3.0.1(socket.io-client@2.1.1):
+  ember-native-devtools@3.0.2(socket.io-client@2.1.1):
     dependencies:
-      ember-inspector: 4.15.1
+      ember-inspector: 4.17.0
       express: 5.2.1
       socket.io: 4.8.3
       socket.io-client: 2.1.1
@@ -22238,7 +22253,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(ad5a0921ba90562ef43e71dbad837cf7):
+  ember-native@file:ember-native(583e7298225531fd5bc3e54dc414915f):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
       '@ember/render-modifiers': 3.0.0(e38124df485b593f5d3b009cf43c31c0)
@@ -22248,7 +22263,7 @@ snapshots:
       '@embroider/vite': 1.7.2(08cee99eb9433cb9e1d821cc5a8ac2a1)
       '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
-      '@nativescript/core': 9.0.18(patch_hash=94379ae82c4dd9e59471dc827b54c7ed8f9e447e13d0226512eec6353624e484)
+      '@nativescript/core': 9.0.18(patch_hash=cf84d99b0a8ac8ee4afa1c324472769e129b4e3c91dbd44ed4df0e7bf74f3ca2)
       '@rollup/plugin-alias': 6.0.0(rollup@4.60.1)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.1)
       '@types/node': 25.6.0
