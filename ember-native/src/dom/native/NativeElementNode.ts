@@ -236,7 +236,6 @@ export default class NativeElementNode<
 
   set nativeView(view) {
     this._nativeView = view;
-    this.addEventListener('tap', () => globalThis.triggerEvent('click', this));
   }
 
   get meta() {
