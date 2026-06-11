@@ -13,6 +13,7 @@ interface ListViewInterface<T> {
   Args: {
     items: T[];
     key?: string;
+    onItemTap: (item: T) => void;
   };
   Blocks: {
     item: [T | null];
@@ -95,6 +96,11 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
         ref.index = index;
         listViewComponent.elementRefs = [...listViewComponent.elementRefs];
       };
+      if (listViewComponent.args.onItemTap) {
+        listView.nativeView.on('itemTap', (args) => {          
+          listViewComponent.args.onItemTap(args);
+        });
+      }
     }.bind(this),
   );
 
