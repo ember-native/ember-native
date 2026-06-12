@@ -37,7 +37,7 @@ jobs:
 
       - name: install
         run: |
-          npm i -g pnpm
+          npm i -g pnpm@10
           pnpm install
 
       - name: build
