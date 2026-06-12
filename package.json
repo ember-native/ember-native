@@ -21,15 +21,35 @@
     "concurrently": "^9.2.1",
     "prettier": "^3.6.2",
     "prettier-plugin-ember-template-tag": "^2.1.0",
-    "release-plan": "^0.18.0",
+    "release-plan": "^0.17.4",
     "typescript": "^5.9.2"
   },
-  "packageManager": "pnpm@10.23.0",
   "engines": {
     "node": ">= 20.*",
     "npm": "use pnpm",
     "yarn": "use pnpm"
   },
+  "pnpm": {
+    "overrides": {
+      "@embroider/addon-shim": "1.9.0",
+      "ember-eslint-parser": "0.5.3"
+    },
+    "patchedDependencies": {
+      "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch"
+    },
+    "onlyBuiltDependencies": [
+      "@nativescript/core",
+      "@nativescript/unit-test-runner",
+      "@parcel/watcher",
+      "chromedriver",
+      "core-js",
+      "core-js-pure",
+      "esbuild",
+      "nativescript",
+      "unrs-resolver"
+    ]
+  },
+  "packageManager": "pnpm@10.23.0",
   "volta": {
     "node": "24.14.1",
     "pnpm": "10.23.0"
