@@ -24,12 +24,12 @@
     "release-plan": "^0.18.0",
     "typescript": "^5.9.2"
   },
+  "packageManager": "pnpm@10.23.0",
   "engines": {
     "node": ">= 20.*",
     "npm": "use pnpm",
     "yarn": "use pnpm"
   },
-  "packageManager": "pnpm@10.23.0",
   "volta": {
     "node": "24.14.1",
     "pnpm": "10.23.0"
