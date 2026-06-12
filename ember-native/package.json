@@ -70,6 +70,7 @@
     "rollup-plugin-styles": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
     "@babel/types": "^7.28.5",
     "@babel/eslint-parser": "^7.28.5",
     "@ember/optional-features": "^2.3.0",

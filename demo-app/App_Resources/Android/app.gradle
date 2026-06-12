@@ -1,6 +1,8 @@
 // You can add your native dependencies here
 dependencies {
 //  implementation 'androidx.multidex:multidex:2.0.1'
+  // Required by @nativescript/core enableEdgeToEdge (SystemBarStyle added in 1.8.0)
+  implementation 'androidx.activity:activity:1.8.0'
 }
 
 android {
