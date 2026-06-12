@@ -3,6 +3,8 @@ const path = require('path');
 var Module = require('module');
 var { fileURLToPath, pathToFileURL } = require('node:url');
 
+console.log('loading webpack.config.js');
+
 Module.registerHooks({
   resolve: (specifier, context, nextResolve) => {
     //do your thing here
@@ -48,6 +50,7 @@ const configureEmberNative = require('ember-native/utils/webpack.config.js');
 const { execSync } = require("node:child_process");
 
 module.exports = (env) => {
+  console.log('init');
 	webpack.init(env);
 
   process.env.EMBER_HMR_ENABLED = 'true';
@@ -56,8 +59,11 @@ module.exports = (env) => {
 	// https://docs.nativescript.org/webpack
 
   // Use ember-native webpack configuration (includes embroider adapter)
+  console.log('configureEmberNative');
   configureEmberNative(webpack);
+  console.log('configureEmberNative done');
 
+  console.log('chainWebpack');
   webpack.chainWebpack((config) => {
     // Add .gjs and .gts extensions
     config.resolve.extensions.add('.gjs');
@@ -69,6 +75,7 @@ module.exports = (env) => {
   });
 
   // HMR loaders for routes, controllers, templates
+  console.log('chainWebpack 2');
   webpack.chainWebpack((config) => {
     config.module
       .rule('gts/gjs')
@@ -92,6 +99,7 @@ module.exports = (env) => {
     config.module.rule('xml').include.add(fs.realpathSync(unitTestRunnerPath));
   });
 
+  console.log('chainWebpack 3');
   webpack.chainWebpack((config) => {
     config.plugin('DefinePlugin').tap((args) => {
       Object.assign(args[0], {
@@ -106,6 +114,7 @@ module.exports = (env) => {
     });
   });
 
+  console.log('chainWebpack 4');
   webpack.chainWebpack((config) => {
     config.externals(
       // make sure to keep pre-defined externals
@@ -116,6 +125,7 @@ module.exports = (env) => {
     );
   });
 
+  console.log('chainWebpack 5');
   webpack.chainWebpack((config) => {
     const fallback = {};
     Object.assign(fallback, {
@@ -141,6 +151,7 @@ module.exports = (env) => {
   });
 
   // Configure webpack resolveLoader for pnpm
+  console.log('chainWebpack 6');
   webpack.chainWebpack((config) => {
     const nativescriptWebpackPath = fs.realpathSync(path.dirname(require.resolve('@nativescript/webpack/package.json')));
     console.log(path.resolve(nativescriptWebpackPath, '..', '..'));
