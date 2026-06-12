@@ -42,9 +42,50 @@ jobs:
 
       - name: build
         run: |
+          echo "=== Memory usage before build ==="
+          free -h
+          df -h
+          echo "=== Process info ==="
+          ps aux --sort=-%mem | head -20
+          
+          echo "=== Building ember-native ==="
           (cd ember-native && pnpm build)
+          
+          echo "=== Memory usage after ember-native build ==="
+          free -h
+          
+          echo "=== Building demo-app with debug logs ==="
           export DEBUG="*"
-          (cd demo-app && pnpm tns build android)
+          export GRADLE_OPTS="-Dorg.gradle.debug=true -Dorg.gradle.logging.level=debug -Xmx4g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heap_dump.hprof"
+          
+          # Monitor memory in background
+          (while true; do 
+            echo "=== Memory check at $(date) ==="
+            free -h
+            echo "=== Top memory consumers ==="
+            ps aux --sort=-%mem | head -10
+            sleep 30
+          done) &
+          MONITOR_PID=$!
+          
+          # Run build with timeout
+          timeout 600 bash -c 'cd demo-app && pnpm tns build android --log trace' || {
+            EXIT_CODE=$?
+            echo "=== Build failed or timed out with exit code: $EXIT_CODE ==="
+            echo "=== Final memory state ==="
+            free -h
+            df -h
+            echo "=== Running processes ==="
+            ps aux --sort=-%mem | head -30
+            kill $MONITOR_PID 2>/dev/null || true
+            exit $EXIT_CODE
+          }
+          
+          kill $MONITOR_PID 2>/dev/null || true
+          
+          echo "=== Memory usage after build ==="
+          free -h
+          df -h
 
       - name: Enable KVM group perms
         run: |
