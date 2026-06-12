@@ -500,7 +500,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d)
+        version: file:ember-native(f6ce921e661bcc564c4b60c472ad3350)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -618,6 +618,9 @@ importers:
 
   ember-native:
     dependencies:
+      '@babel/core':
+        specifier: ^7.22.5
+        version: 7.29.0
       '@babel/plugin-syntax-decorators':
         specifier: ^7.22.5
         version: 7.28.6(@babel/core@7.29.0)
@@ -22218,8 +22221,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(5f1763ad1b55d33b47a21d36e0e7972d):
+  ember-native@file:ember-native(f6ce921e661bcc564c4b60c472ad3350):
     dependencies:
+      '@babel/core': 7.29.0
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
       '@ember/render-modifiers': 3.0.0(e38124df485b593f5d3b009cf43c31c0)
       '@ember/string': 4.0.1
@@ -22250,7 +22254,6 @@ snapshots:
       rollup-plugin-root-import: 1.0.0
       rollup-plugin-styles: 4.0.0(rollup@4.60.1)
     transitivePeerDependencies:
-      - '@babel/core'
       - '@embroider/core'
       - '@glint/template'
       - bufferutil
