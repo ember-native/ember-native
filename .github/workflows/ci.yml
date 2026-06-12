@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - test-ci
   pull_request: {}
 
 concurrency:
