@@ -108,6 +108,15 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
     return false;
   }
 
+  get publicApi() {
+    return {
+      refresh: this.refresh.bind(this),
+      scrollToIndex: this.scrollToIndex.bind(this),
+      scrollToIndexAnimated: this.scrollToIndexAnimated.bind(this),
+      isItemAtIndexVisible: this.isItemAtIndexVisible.bind(this),
+    };
+  }
+
   setupListView = modifier(
     function setupListView(
       this: ListView<T>,
@@ -210,6 +219,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
 
   <template>
     <list-view {{this.setupListView}} items={{@items}} ...attributes />
+    {{yield this.publicApi to='publicApi'}}
     {{#each this.items key=this.itemKey as |item|}}
       {{#in-element item.element}}
         {{yield item.item to='item'}}
