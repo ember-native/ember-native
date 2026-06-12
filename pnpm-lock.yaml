@@ -240,8 +240,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1(karma@4.4.1)(qunit@2.25.0)
       nativescript:
-        specifier: ^9.0.1
-        version: 9.0.5(@types/node@25.6.0)
+        specifier: ^9.0.6
+        version: 9.0.6(@types/node@25.6.0)
       nyc:
         specifier: 18.0.0
         version: 18.0.0
@@ -9848,8 +9848,8 @@ packages:
   nativescript-ui-sidedrawer@15.2.3:
     resolution: {integrity: sha512-shnHlXuB+p9OBAqJobqUpHo2xTGB7FcEHls0D8Ru/IT94g7JLNZbVPSNO9nnHqzp9V63DAEOZ/evZu2JLS5/QA==}
 
-  nativescript@9.0.5:
-    resolution: {integrity: sha512-5/FVvojTZNgTNJ72FlJ6DMXTaHZdLhgmbslPwtoT5vzqQIRnmXXoRXiTS8UPSDSCv+cK3g1mHYr75nEjiYiQLQ==}
+  nativescript@9.0.6:
+    resolution: {integrity: sha512-l0FoivFzHhQlivOWb7YdRjgNAHDCriYnsVxwsyg3EKc0AKp2L8vwdJgcFF2LXbmlp5/amJeDnThc2iVSihNCmg==}
     engines: {node: '>=20.0.0'}
     hasBin: true
 
@@ -13128,7 +13128,6 @@ packages:
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-compile-cache-lib@3.0.1:
@@ -16888,7 +16887,7 @@ snapshots:
       common-ancestor-path: 1.0.1
       hosted-git-info: 9.0.2
       json-stringify-nice: 1.1.4
-      lru-cache: 11.3.3
+      lru-cache: 11.3.5
       minimatch: 10.2.5
       nopt: 9.0.0
       npm-install-checks: 8.0.0
@@ -16933,10 +16932,10 @@ snapshots:
       '@gar/promise-retry': 1.0.3
       '@npmcli/promise-spawn': 9.0.1
       ini: 6.0.0
-      lru-cache: 11.3.3
+      lru-cache: 11.3.5
       npm-pick-manifest: 11.0.3
       proc-log: 6.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       which: 6.0.1
 
   '@npmcli/installed-package-contents@4.0.0':
@@ -16987,7 +16986,7 @@ snapshots:
       hosted-git-info: 9.0.2
       json-parse-even-better-errors: 5.0.0
       proc-log: 6.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       spdx-expression-parse: 4.0.0
 
   '@npmcli/promise-spawn@8.0.3':
@@ -20414,7 +20413,7 @@ snapshots:
       '@npmcli/fs': 5.0.0
       fs-minipass: 3.0.3
       glob: 13.0.6
-      lru-cache: 11.3.3
+      lru-cache: 11.3.5
       minipass: 7.1.3
       minipass-collect: 2.0.1
       minipass-flush: 1.0.7
@@ -26562,7 +26561,7 @@ snapshots:
     dependencies:
       nativescript-ui-core: 15.2.3
 
-  nativescript@9.0.5(@types/node@25.6.0):
+  nativescript@9.0.6(@types/node@25.6.0):
     dependencies:
       '@foxt/js-srp': 0.0.3-patch2
       '@nativescript/doctor': 2.0.17
@@ -26810,7 +26809,7 @@ snapshots:
       npm-install-checks: 8.0.0
       npm-normalize-package-bin: 5.0.0
       npm-package-arg: 13.0.2
-      semver: 7.7.3
+      semver: 7.7.4
 
   npm-registry-fetch@19.1.1:
     dependencies:
@@ -31121,7 +31120,7 @@ snapshots:
 
   xcode@3.0.1:
     dependencies:
-      simple-plist: 1.4.0
+      simple-plist: 1.3.1
       uuid: 7.0.3
 
   xdg-basedir@5.1.0: {}
