@@ -26,26 +26,15 @@ jobs:
       attestations: write
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.23.0
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v5
       - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: npm install -g npm@latest # ensure that the globally installed npm is new enough to support OIDC
       - name: Publish to NPM
         run: NPM_CONFIG_PROVENANCE=true pnpm release-plan publish
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
-      - name: fetch tags
-        id: fetch-tags
-        run: echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
-      - name: invoke docs publish
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Push dist
-          ref: ${{ steps.fetch-tags.outputs.latest_tag }}
