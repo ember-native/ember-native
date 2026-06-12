@@ -43,6 +43,7 @@ jobs:
       - name: build
         run: |
           (cd ember-native && pnpm build)
+          export DEBUG="*"
           (cd demo-app && pnpm tns build android)
 
       - name: Enable KVM group perms
