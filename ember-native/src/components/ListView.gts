@@ -6,6 +6,7 @@ import type {
   ItemEventData,
   EventData,
 } from '@nativescript/core';
+import { Color } from '@nativescript/core';
 import { tracked } from '@glimmer/tracking';
 import NativeElementNode from '../dom/native/NativeElementNode.ts';
 import DocumentNode from '../dom/nodes/DocumentNode.ts';
@@ -35,6 +36,12 @@ interface ListViewInterface<T> {
   };
   Blocks: {
     item: [T | null];
+    publicApi: [{
+      refresh: () => void;
+      scrollToIndex: (index: number) => void;
+      scrollToIndexAnimated: (index: number) => void;
+      isItemAtIndexVisible: (index: number) => boolean;
+    }];
   };
 }
 
@@ -204,7 +211,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
       }
       
       if (listViewComponent.args.separatorColor !== undefined) {
-        listView.nativeView.separatorColor = listViewComponent.args.separatorColor;
+        listView.nativeView.separatorColor = new Color(listViewComponent.args.separatorColor);
       }
       
       if (listViewComponent.args.rowHeight !== undefined) {
