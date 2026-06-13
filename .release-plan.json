@@ -1,15 +1,11 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "minor",
-      "oldVersion": "3.1.0",
-      "newVersion": "3.2.0",
+      "impact": "patch",
+      "oldVersion": "3.2.0",
+      "newVersion": "3.2.1",
       "tagName": "latest",
       "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
@@ -18,5 +14,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2026-06-12)\n\n* ember-native 3.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#354](https://github.com/ember-native/ember-native/pull/354) update list view to support all params ([@patricklx](https://github.com/patricklx))\n  * [#324](https://github.com/ember-native/ember-native/pull/324) add native-slot modifier ([@patricklx](https://github.com/patricklx))\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#353](https://github.com/ember-native/ember-native/pull/353) remove listener as it could break other native listeners ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-06-13)\n\n* ember-native 3.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#362](https://github.com/ember-native/ember-native/pull/362) Export NativeElementNode from index.ts ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
