@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-06-13)
+
+* ember-native 3.2.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#362](https://github.com/ember-native/ember-native/pull/362) Export NativeElementNode from index.ts ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-06-12)
 
 * ember-native 3.2.0 (minor)
