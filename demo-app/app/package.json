@@ -1,7 +1,0 @@
-{
-  "name": "ember-native-demo",
-  "main": "native/boot.js",
-    "android": {
-        "v8Flags": "--expose_gc"
-    }
-}
