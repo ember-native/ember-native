@@ -54,6 +54,9 @@ module.exports = async function registerEmbroiderVirtualModules(virtualModules) 
     } catch (err) {
       console.warn(`Failed to create virtual module ${modulePath}:`, err.message);
     }
+    virtualModules.writeModule('./test.js', '// Empty virtual module\nmodule.exports = {};')
+    virtualModules.writeModule(path.resolve(process.cwd(), 'test.js'), '// Empty virtual module\nmodule.exports = {};')
+    virtualModules.writeModule(path.resolve(process.cwd(), 'app', 'test.js'), '// Empty virtual module\nmodule.exports = {};')
   });
 
   await Promise.all(promises);
