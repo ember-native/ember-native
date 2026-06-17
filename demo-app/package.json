@@ -26,7 +26,7 @@
     "@glimmer/validator": "^0.95.0",
     "@nativescript/core": "~8.9.7",
     "@nativescript/theme": "^3.1.0",
-    "@nativescript/unit-test-runner": "~3.0.0",
+    "@nativescript/unit-test-runner": "~4.0.1",
     "@valor/nativescript-websockets": "^2.0.2",
     "@warp-drive/core": "^5.8.1",
     "@warp-drive/json-api": "^5.8.1",

@@ -56,8 +56,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       '@nativescript/unit-test-runner':
-        specifier: ~3.0.0
-        version: 3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
+        specifier: ~4.0.1
+        version: 4.0.1(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.3
@@ -2807,8 +2807,8 @@ packages:
   '@nativescript/types@8.9.1':
     resolution: {integrity: sha512-mMgnpDQVDDARx+WyoNP2jZD4UcwZEmPuieFgipfA0LkwGaB0mcVKAXPruW0qxAkuXtgS0qY+qgpON06nDfJmMQ==}
 
-  '@nativescript/unit-test-runner@3.0.4':
-    resolution: {integrity: sha512-NsUq0M0y5PWS8MbRcfsnCRtnvAL+ueUvtIeaYNDg12+9LHzD3995tp5NfYfWBxQ/lUCDot+AeB2XDl5v8ROSLQ==}
+  '@nativescript/unit-test-runner@4.0.1':
+    resolution: {integrity: sha512-vByHmBsUFGpzZew23tJgeLv3DAVSoPPSHYKCQiFUi3JH4hb4Kbs/Wl08/iasbOiqody3qHGlsm8ciOtXYpAIAw==}
 
   '@nativescript/webpack@5.0.33':
     resolution: {integrity: sha512-moMjgjyt6Z18pMNADkEGT9gthk87sZivO4nrNlo8lQsA3RnHcEWg7hMhXBbjzkpMJIm1e4tJZofsBdf0wKGrLQ==}
@@ -17055,9 +17055,9 @@ snapshots:
       '@nativescript/types-android': 8.9.0
       '@nativescript/types-ios': 8.9.1
 
-  '@nativescript/unit-test-runner@3.0.4(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
+  '@nativescript/unit-test-runner@4.0.1(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
     dependencies:
-      '@nativescript/hook': 2.0.0
+      '@nativescript/hook': 3.0.5
       glob-regex: 0.3.2
 
   '@nativescript/webpack@5.0.33(b7f4614b61699839f561fbd394ac5387)':
