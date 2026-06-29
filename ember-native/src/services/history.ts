@@ -35,7 +35,7 @@ export default class HistoryService extends Service {
       this.stack = [...this.stack];
       const transition = this.nativeRouter.transitionTo(
         from.name,
-        from.params?.['model'],
+        from.params,
         {
           queryParams: from.queryParams,
         },
