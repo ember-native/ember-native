@@ -68,8 +68,8 @@ importers:
         specifier: ^5.8.1
         version: 5.8.1(5c1f64a3d0d12c2c3ea5c43b8c2a868a)
       '@warp-drive/schema-record':
-        specifier: ^5.8.1
-        version: 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
+        specifier: ^5.8.2
+        version: 5.8.2(c8332dc3f90c0e60eb130a3a85f980b9)
       chromedriver:
         specifier: ^137.0.1
         version: 137.0.4
@@ -4414,16 +4414,22 @@ packages:
   '@warp-drive/build-config@5.8.1':
     resolution: {integrity: sha512-uT0zdNf7vdHEYYdYJ/1+coE0MwRiV6dg/dTwAaYtlsTFd57NrxE+s+1qd5aAjuwdB/GVlBP/D/IlUwWggbxXbg==}
 
+  '@warp-drive/build-config@5.8.2':
+    resolution: {integrity: sha512-QU/6tSexAi/t149upEK3P04yGXdEwieTfQ5ihBON3A/3xGipveGIVJx6B8EYCot0AC2n91GmTc8ezzQmAK64/g==}
+
   '@warp-drive/core@5.8.1':
     resolution: {integrity: sha512-7Id5mvUjqRqlG2Tgz8Y/k1M5gmcUExfSWW3XBDbMDotF63YcmgukDLO145cFJtqiO3q8nZXC8PoftYCmoTwhuA==}
+
+  '@warp-drive/core@5.8.2':
+    resolution: {integrity: sha512-6dtfOaHK+9ErQMy6OlewRJw2nkAPb2CPMoTFncsZBbEAQlyn1zwjTSpk1Czr5TOc0YQ84vrTK6IOwTzdHG4r+A==}
 
   '@warp-drive/json-api@5.8.1':
     resolution: {integrity: sha512-JnxNUGUIwfvqBJkO9HRSighpE0HSyyrE1dmgK1KljDJm45U7frx3PtWykB4AoRDWx9+HSEVS1Dj4QRlXGK0IZQ==}
     peerDependencies:
       '@warp-drive/core': 5.8.1
 
-  '@warp-drive/schema-record@5.8.1':
-    resolution: {integrity: sha512-S3/fQU6o3rHfpp1vZ1wz0XlmvcxMg/PRz7TT83SW3pPAogHZGcX7C1m2A6/HsBpn4SBW8hIokqIqDiIF4keWpA==}
+  '@warp-drive/schema-record@5.8.2':
+    resolution: {integrity: sha512-0v5+yF7Kjg9CDdVIpQupJ/M3UbV0tH7qs992F2KsSLlDnM+dQcVs9yDgPYtltq1j0LZ9yhwBeMNyVQ7hoM2hrQ==}
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -16197,6 +16203,22 @@ snapshots:
       - '@babel/core'
       - supports-color
 
+  '@embroider/macros@1.20.4(7727beade5f526b31da91186c63ace33)':
+    dependencies:
+      '@embroider/shared-internals': 3.1.1
+      assert-never: 1.4.0
+      babel-import-util: 3.0.1
+      ember-cli-babel: 8.3.1(@babel/core@7.29.0)
+      find-up: 5.0.0
+      lodash: 4.18.1
+      resolve: 1.22.12
+      semver: 7.8.4
+    optionalDependencies:
+      '@glint/template': 1.7.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
   '@embroider/macros@1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
       '@embroider/shared-internals': 3.1.1
@@ -19468,10 +19490,22 @@ snapshots:
   '@warp-drive/build-config@5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
       babel-import-util: 2.1.1
       babel-plugin-debug-macros: 2.0.0(@babel/core@7.29.0)
       semver: 7.7.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glint/template'
+      - supports-color
+
+  '@warp-drive/build-config@5.8.2(c8332dc3f90c0e60eb130a3a85f980b9)':
+    dependencies:
+      '@embroider/addon-shim': 1.9.0
+      '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
+      babel-import-util: 2.1.1
+      babel-plugin-debug-macros: 2.0.0(@babel/core@7.29.0)
+      semver: 7.8.4
     transitivePeerDependencies:
       - '@babel/core'
       - '@glint/template'
@@ -19481,6 +19515,15 @@ snapshots:
     dependencies:
       '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
       '@warp-drive/build-config': 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glint/template'
+      - supports-color
+
+  '@warp-drive/core@5.8.2(c8332dc3f90c0e60eb130a3a85f980b9)':
+    dependencies:
+      '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@warp-drive/build-config': 5.8.2(c8332dc3f90c0e60eb130a3a85f980b9)
     transitivePeerDependencies:
       - '@babel/core'
       - '@glint/template'
@@ -19497,10 +19540,10 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  '@warp-drive/schema-record@5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)':
+  '@warp-drive/schema-record@5.8.2(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
-      '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
-      '@warp-drive/core': 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@warp-drive/core': 5.8.2(c8332dc3f90c0e60eb130a3a85f980b9)
     transitivePeerDependencies:
       - '@babel/core'
       - '@glint/template'
@@ -23167,7 +23210,7 @@ snapshots:
       '@babel/runtime': 7.29.2
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
       '@floating-ui/dom': 1.7.6
       '@glimmer/component': 2.1.1
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
@@ -23192,7 +23235,7 @@ snapshots:
       '@babel/runtime': 7.29.2
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.2(7727beade5f526b31da91186c63ace33)
+      '@embroider/macros': 1.20.4(7727beade5f526b31da91186c63ace33)
       '@floating-ui/dom': 1.7.6
       '@glimmer/component': 2.1.1
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
@@ -23218,7 +23261,7 @@ snapshots:
       '@babel/runtime': 7.29.2
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.2(7727beade5f526b31da91186c63ace33)
+      '@embroider/macros': 1.20.4(7727beade5f526b31da91186c63ace33)
       '@floating-ui/dom': 1.7.6
       '@glimmer/component': 2.1.1
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
@@ -23244,7 +23287,7 @@ snapshots:
       '@babel/runtime': 7.29.2
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
       '@floating-ui/dom': 1.7.6
       '@glimmer/component': 2.1.1
       decorator-transforms: 2.3.1(@babel/core@7.29.0)

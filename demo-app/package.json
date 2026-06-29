@@ -30,7 +30,7 @@
     "@valor/nativescript-websockets": "^2.0.2",
     "@warp-drive/core": "^5.8.1",
     "@warp-drive/json-api": "^5.8.1",
-    "@warp-drive/schema-record": "^5.8.1",
+    "@warp-drive/schema-record": "^5.8.2",
     "chromedriver": "^137.0.1",
     "ember-compatibility-helpers": "^1.2.7",
     "ember-load-initializers": "^3.0.1",
