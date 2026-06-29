@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "patch",
-      "oldVersion": "3.2.0",
-      "newVersion": "3.2.1",
+      "oldVersion": "3.2.1",
+      "newVersion": "3.2.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2026-06-13)\n\n* ember-native 3.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#362](https://github.com/ember-native/ember-native/pull/362) Export NativeElementNode from index.ts ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-06-29)\n\n* ember-native 3.2.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#374](https://github.com/ember-native/ember-native/pull/374) Pass full params object in transitionTo call ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
