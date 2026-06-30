@@ -81,6 +81,20 @@ function createResolverPlugin() {
             return;
           }
 
+          // Let webpack resolve most relative paths normally. But relative imports
+          // emitted by Embroider's virtual entrypoint need to flow back through the
+          // Embroider resolver so app reexports like
+          // ./instance-initializers/ember-native/history.js can map into dist/_app_.
+          const isRelativeRequest = request.request.startsWith('.');
+          const isEmbroiderEntrypointIssuer =
+            typeof issuer === 'string' &&
+            issuer.includes(`${path.sep}app${path.sep}-embroider-entrypoint.js`);
+
+          if (isRelativeRequest && !isEmbroiderEntrypointIssuer) {
+            callback();
+            return;
+          }
+
           // Create a context compatible with vite plugins
           // The resolver expects a context with a resolve method
           const context = {

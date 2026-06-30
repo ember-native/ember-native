@@ -1,4 +1,5 @@
 const path = require('node:path');
+const fs = require('node:fs');
 
 let resolverPlugin;
 
@@ -43,9 +44,28 @@ module.exports = async function registerEmbroiderVirtualModules(virtualModules) 
           }
         }
 
+        if (typeof content === 'string') {
+          content = content
+            .replace(
+              /^\s*import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from\s+["']\.\/test\.js["'];?\s*$/gm,
+              'const $1 = {};'
+            )
+            .replace(/^\s*import\s+['"]\.\/test\.js['"];\s*$/gm, '')
+            .replace(/^\s*import\s+['"]\.\/test\.js['"]\s*$/gm, '');
+        }
+
+        const finalContent = content || '// Empty virtual module\nmodule.exports = {};';
+        const appRelativeModulePath = path.resolve(process.cwd(), 'app', modulePath);
+
         // Write the virtual module using the passed instance
-        virtualModules.writeModule(modulePath, content || '// Empty virtual module\nmodule.exports = {};');
-        virtualModules.writeModule(result.id, content || '// Empty virtual module\nmodule.exports = {};');
+        virtualModules.writeModule(modulePath, finalContent);
+        virtualModules.writeModule(result.id, finalContent);
+
+        if (!fs.existsSync(appRelativeModulePath)) {
+          virtualModules.writeModule(appRelativeModulePath, finalContent);
+          console.log(`✓ Created virtual module: ${appRelativeModulePath}`);
+        }
+
         console.log(`✓ Created virtual module: ${modulePath}`);
         console.log(`✓ Created virtual module: ${result.id}`);
       } else {
@@ -54,9 +74,6 @@ module.exports = async function registerEmbroiderVirtualModules(virtualModules) 
     } catch (err) {
       console.warn(`Failed to create virtual module ${modulePath}:`, err.message);
     }
-    virtualModules.writeModule('./test.js', '// Empty virtual module\nmodule.exports = {};')
-    virtualModules.writeModule(path.resolve(process.cwd(), 'test.js'), '// Empty virtual module\nmodule.exports = {};')
-    virtualModules.writeModule(path.resolve(process.cwd(), 'app', 'test.js'), '// Empty virtual module\nmodule.exports = {};')
   });
 
   await Promise.all(promises);
