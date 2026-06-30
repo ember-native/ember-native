@@ -45,13 +45,25 @@ module.exports = async function registerEmbroiderVirtualModules(virtualModules) 
         }
 
         if (typeof content === 'string') {
+          let testModuleVar = null;
+          const namespaceImportPattern =
+            /^\s*import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from\s+["']\.\/test\.js["'];?\s*$/gm;
+
+          content = content.replace(namespaceImportPattern, (_match, variableName) => {
+            testModuleVar = variableName;
+            return '';
+          });
+
           content = content
-            .replace(
-              /^\s*import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from\s+["']\.\/test\.js["'];?\s*$/gm,
-              'const $1 = {};'
-            )
             .replace(/^\s*import\s+['"]\.\/test\.js['"];\s*$/gm, '')
             .replace(/^\s*import\s+['"]\.\/test\.js['"]\s*$/gm, '');
+
+          if (testModuleVar) {
+            content = content.replace(
+              new RegExp(`(["']ember-native-demo/test["']\\s*:\\s*)${testModuleVar}\\b`, 'g'),
+              '$1{}'
+            );
+          }
         }
 
         const finalContent = content || '// Empty virtual module\nmodule.exports = {};';
