@@ -3,6 +3,7 @@ import { NativeScriptConfig } from '@nativescript/core';
 export default {
   id: 'org.nativescript.embernativedemo',
   appPath: 'app',
+  main: "app/boot.js",
   appResourcesPath: 'App_Resources',
   android: {
     v8Flags: '--expose_gc',

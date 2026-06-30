@@ -1,3 +1,5 @@
+
+
 /**
  * Webpack adapter for @embroider/vite plugins
  *
@@ -79,6 +81,20 @@ function createResolverPlugin() {
             return;
           }
 
+          // Let webpack resolve most relative paths normally. But relative imports
+          // emitted by Embroider's virtual entrypoint need to flow back through the
+          // Embroider resolver so app reexports like
+          // ./instance-initializers/ember-native/history.js can map into dist/_app_.
+          const isRelativeRequest = request.request.startsWith('.');
+          const isEmbroiderEntrypointIssuer =
+            typeof issuer === 'string' &&
+            issuer.includes(`${path.sep}app${path.sep}-embroider-entrypoint.js`);
+
+          if (isRelativeRequest && !isEmbroiderEntrypointIssuer) {
+            callback();
+            return;
+          }
+
           // Create a context compatible with vite plugins
           // The resolver expects a context with a resolve method
           const context = {
@@ -138,8 +154,20 @@ function createResolverPlugin() {
  */
 module.exports = function configureEmbroiderWebpackAdapter(webpack) {
   const ResolverPlugin = createResolverPlugin();
+  const WebpackVirtualModules = require('webpack-virtual-modules');
+  const registerVirtualModules = require('./embroider-virtual-modules-plugin.js');
 
   webpack.chainWebpack((config) => {
+    // Create and register both plugins together
+    const virtualModules = new WebpackVirtualModules();
+
+    // Register webpack-virtual-modules plugin first (as instance)
+    config
+      .plugin('webpack-virtual-modules')
+      .use(virtualModules);
+
+    void registerVirtualModules(virtualModules);
+
     // Add resolver plugin if available
     if (ResolverPlugin) {
       config.resolve
@@ -149,7 +177,7 @@ module.exports = function configureEmbroiderWebpackAdapter(webpack) {
 
     // Configure .gts/.gjs file handling using the embroider-template-tag-loader
     // This loader wraps @embroider/vite's templateTag() plugin
-    const loaderPath = path.resolve(__dirname, 'embroider-template-tag-loader.js');
+    const templateTagLoaderPath = path.resolve(__dirname, 'embroider-template-tag-loader.js');
 
     config.module
       .rule('gts/gjs')
@@ -158,7 +186,7 @@ module.exports = function configureEmbroiderWebpackAdapter(webpack) {
       .loader('babel-loader')
       .end()
       .use('embroider-template-tag-loader')
-      .loader(loaderPath)
+      .loader(templateTagLoaderPath)
       .end();
 
     // Configure regular .js/.ts files

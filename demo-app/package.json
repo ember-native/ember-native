@@ -140,5 +140,8 @@
       "core-js-pure",
       "nativescript"
     ]
+  },
+  "ember": {
+    "edition": "octane"
   }
 }

@@ -892,6 +892,9 @@ importers:
       typescript-plugin-css-modules:
         specifier: ^5.2.0
         version: 5.2.0(50a63cbfdb6b3194182823c7d1b345e8)
+      webpack-virtual-modules:
+        specifier: ^0.6.2
+        version: 0.6.2
       yui:
         specifier: ^3.18.1
         version: 3.18.1
