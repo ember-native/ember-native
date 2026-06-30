@@ -1,6 +1,8 @@
 const path = require('node:path');
 const fs = require('node:fs');
 
+const APP_MODULES_TO_EXCLUDE = ['boot', 'test'];
+
 let resolverPlugin;
 
 try {
@@ -45,23 +47,34 @@ module.exports = async function registerEmbroiderVirtualModules(virtualModules) 
         }
 
         if (typeof content === 'string') {
-          let testModuleVar = null;
-          const namespaceImportPattern =
-            /^\s*import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from\s+["']\.\/test\.js["'];?\s*$/gm;
+          const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+          const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+          const modulePrefix = packageJson.name;
+          const excludedModuleVars = new Map();
 
-          content = content.replace(namespaceImportPattern, (_match, variableName) => {
-            testModuleVar = variableName;
-            return '';
-          });
+          for (const moduleName of APP_MODULES_TO_EXCLUDE) {
+            const namespaceImportPattern = new RegExp(
+              `^\\s*import\\s+\\*\\s+as\\s+([A-Za-z_$][\\w$]*)\\s+from\\s+["']\\./${moduleName}\\.js["'];?\\s*$`,
+              'gm'
+            );
 
-          content = content
-            .replace(/^\s*import\s+['"]\.\/test\.js['"];\s*$/gm, '')
-            .replace(/^\s*import\s+['"]\.\/test\.js['"]\s*$/gm, '');
+            content = content.replace(namespaceImportPattern, (_match, variableName) => {
+              excludedModuleVars.set(moduleName, variableName);
+              return '';
+            });
 
-          if (testModuleVar) {
+            const sideEffectImportPattern = new RegExp(
+              `^\\s*import\\s+["']\\./${moduleName}\\.js["'];?\\s*$`,
+              'gm'
+            );
+
+            content = content.replace(sideEffectImportPattern, '');
+          }
+
+          for (const [moduleName, variableName] of excludedModuleVars) {
             content = content.replace(
-              new RegExp(`(["']ember-native-demo/test["']\\s*:\\s*)${testModuleVar}\\b`, 'g'),
-              '$1{}'
+              new RegExp(`^\\s*["']${modulePrefix}/${moduleName}["']\\s*:\\s*${variableName},?\\s*$`, 'gm'),
+              ''
             );
           }
         }
