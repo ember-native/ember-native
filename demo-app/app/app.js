@@ -31,4 +31,4 @@ export default class App extends EmberApplication {
   }
 }
 
-loadInitializers(App, ENV.modulePrefix, modules);
+loadInitializers(App, ENV.modulePrefix, compatModules);
