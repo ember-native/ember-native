@@ -36,7 +36,7 @@
     "ember-concurrency": "^5.2.0",
     "ember-focus-trap": "^1.1.1",
     "ember-modifier": "^4.3.0",
-    "ember-power-select": "^8.12.1",
+    "ember-power-select": "^9.0.1",
     "ember-repl": "7.0.1",
     "ember-route-template": "^1.0.3",
     "form-data-utils": "^0.6.0",
