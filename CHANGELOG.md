@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-07-01)
+
+* ember-native 3.3.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#379](https://github.com/ember-native/ember-native/pull/379) Support virtual modules ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-06-29)
 
 * ember-native 3.2.2 (patch)
