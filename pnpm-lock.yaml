@@ -505,8 +505,8 @@ importers:
         specifier: ^9.0.3
         version: 9.0.3
       ember-primitives:
-        specifier: ^0.57.0
-        version: 0.57.0(27de5646043baa5a095cba9342d3e321)
+        specifier: ^0.59.1
+        version: 0.59.1(27de5646043baa5a095cba9342d3e321)
       ember-qunit:
         specifier: ^9.0.4
         version: 9.0.4(ccac685a9f0303164367b88029c1ee61)
@@ -1614,6 +1614,10 @@ packages:
 
   '@babel/runtime@7.29.2':
     resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.29.7':
+    resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.28.6':
@@ -7109,8 +7113,8 @@ packages:
       '@glint/template':
         optional: true
 
-  ember-primitives@0.57.0:
-    resolution: {integrity: sha512-bZIQLhTHEBI7/v/5GA8k3MqrR89Vo0AE1IXXuGMEW9Xy8AK3Ia8zwyd7Scezn1AwLJmtQbucjp1Xc/eP2vwlQw==}
+  ember-primitives@0.59.1:
+    resolution: {integrity: sha512-4iQeSfl4BCXcvW9MdizBDTNE0hDrJcbhzS6Qf41P8XQ7rl1QUM6/6aNIRlAzLXLaECA4fLt38gm2ZNxRiViNNA==}
     hasBin: true
     peerDependencies:
       '@ember/test-helpers': '>= 3.2.0'
@@ -15514,6 +15518,8 @@ snapshots:
 
   '@babel/runtime@7.29.2': {}
 
+  '@babel/runtime@7.29.7': {}
+
   '@babel/template@7.28.6':
     dependencies:
       '@babel/code-frame': 7.29.0
@@ -23241,7 +23247,7 @@ snapshots:
 
   ember-primitives@0.40.0(27de5646043baa5a095cba9342d3e321):
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -23266,7 +23272,7 @@ snapshots:
 
   ember-primitives@0.48.2(6a500c5dbe9f02c04f8d01d6a319fd3f):
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.20.4(7727beade5f526b31da91186c63ace33)
@@ -23292,7 +23298,7 @@ snapshots:
 
   ember-primitives@0.51.0(6a500c5dbe9f02c04f8d01d6a319fd3f):
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.20.4(7727beade5f526b31da91186c63ace33)
@@ -23318,7 +23324,7 @@ snapshots:
 
   ember-primitives@0.53.1(27de5646043baa5a095cba9342d3e321):
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -23342,9 +23348,9 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  ember-primitives@0.57.0(27de5646043baa5a095cba9342d3e321):
+  ember-primitives@0.59.1(27de5646043baa5a095cba9342d3e321):
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/addon-shim': 1.9.0
       '@floating-ui/dom': 1.7.6
