@@ -110,7 +110,7 @@
     "ember-template-imports": "^4.2.0",
     "ember-template-lint": "^7.9.1",
     "ember-vite-hmr": "^2.0.6",
-    "ember-welcome-page": "^7.0.2",
+    "ember-welcome-page": "^8.0.5",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-ember": "^12.3.1",
