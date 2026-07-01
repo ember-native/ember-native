@@ -1,0 +1,14 @@
+import { _ as _defineProperty } from '../../_rollupPluginBabelHelpers-apNPIsxw.js';
+import ElementNode from './ElementNode.js';
+
+class CommentNode extends ElementNode {
+  constructor(text) {
+    super('comment');
+    _defineProperty(this, "text", void 0);
+    this.nodeType = 8;
+    this.text = text;
+  }
+}
+
+export { CommentNode as default };
+//# sourceMappingURL=CommentNode.js.map
