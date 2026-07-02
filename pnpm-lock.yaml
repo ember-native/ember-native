@@ -213,8 +213,8 @@ importers:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-ember:
-        specifier: ^12.3.1
-        version: 12.7.5(edec6f523371f2ec272bdcc2cc39cf67)
+        specifier: ^13.4.0
+        version: 13.4.0(edec6f523371f2ec272bdcc2cc39cf67)
       eslint-plugin-n:
         specifier: ^17.23.1
         version: 17.24.0(0d62767105e9a39fc494591cb6137847)
@@ -422,7 +422,7 @@ importers:
         version: 1.7.7
       '@nullvoxpopuli/eslint-configs':
         specifier: ^6.0.0
-        version: 6.0.0(b17a1cce3fd00b29af92f020bc3e896d)
+        version: 6.0.0(41d093722832a7dcdb2b0bb42402e33d)
       '@rollup/plugin-babel':
         specifier: ^7.0.0
         version: 7.0.0(e10c821eb081679c9c0a37d91ab94083)
@@ -538,8 +538,8 @@ importers:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@1.21.7))
       eslint-plugin-ember:
-        specifier: ^12.3.1
-        version: 12.7.5(a26d6855d289e772202468423cdb8c52)
+        specifier: ^13.4.0
+        version: 13.4.0(a26d6855d289e772202468423cdb8c52)
       eslint-plugin-n:
         specifier: ^17.21.3
         version: 17.24.0(717face55a559967bf1b77f9b43bd1f1)
@@ -821,8 +821,8 @@ importers:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-ember:
-        specifier: ^12.3.1
-        version: 12.7.5(edec6f523371f2ec272bdcc2cc39cf67)
+        specifier: ^13.4.0
+        version: 13.4.0(edec6f523371f2ec272bdcc2cc39cf67)
       eslint-plugin-ember-template-lint:
         specifier: ^0.21.0
         version: 0.21.0(ab66717fb115867bb9f9fe8ee3bdb1dd)
@@ -7513,18 +7513,8 @@ packages:
     peerDependencies:
       ember-template-lint: ^6.0.0
 
-  eslint-plugin-ember@12.7.5:
-    resolution: {integrity: sha512-2zLEpu3xcKjykgsKkj8sU2GwdxADFTH5XPBvuIrNBP253JxHSz2P21isUuRB50kGoR2KL+eUHNgV0j7IPCav1w==}
-    engines: {node: 18.* || 20.* || >= 21}
-    peerDependencies:
-      '@typescript-eslint/parser': '*'
-      eslint: '>= 8'
-    peerDependenciesMeta:
-      '@typescript-eslint/parser':
-        optional: true
-
-  eslint-plugin-ember@13.3.2:
-    resolution: {integrity: sha512-A/Sy+rfwpqOYwinU6chNZjzOPcbxg0JI69cSnM6uxUfeLRYGp0eYd9SiVB/j2QWAltGF/HAC6r8UMV+qKxUV2A==}
+  eslint-plugin-ember@13.4.0:
+    resolution: {integrity: sha512-D7fDHqTEFPMw8bnvMLGmLsLqenUj0/cCKrg7/WTB4dv+MaSS6JjR4TYycOE9n5jKbIgOlmXA2zMUDya7sVkl0Q==}
     engines: {node: '>= 20.19'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -16345,7 +16335,7 @@ snapshots:
       pkg-entry-points: 1.1.2
       resolve-package-path: 4.0.3
       resolve.exports: 2.0.3
-      semver: 7.8.4
+      semver: 7.8.5
       typescript-memoize: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -17703,11 +17693,11 @@ snapshots:
   '@npmcli/fs@1.1.1':
     dependencies:
       '@gar/promisify': 1.1.3
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@npmcli/fs@5.0.0':
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@npmcli/git@6.0.3':
     dependencies:
@@ -17717,7 +17707,7 @@ snapshots:
       npm-pick-manifest: 10.0.0
       proc-log: 5.0.0
       promise-retry: 2.0.1
-      semver: 7.8.4
+      semver: 7.8.5
       which: 5.0.0
 
   '@npmcli/git@7.0.2':
@@ -17728,7 +17718,7 @@ snapshots:
       lru-cache: 11.3.3
       npm-pick-manifest: 11.0.3
       proc-log: 6.1.0
-      semver: 7.8.4
+      semver: 7.8.5
       which: 6.0.1
 
   '@npmcli/installed-package-contents@4.0.0':
@@ -17749,7 +17739,7 @@ snapshots:
       json-parse-even-better-errors: 5.0.0
       pacote: 21.0.4
       proc-log: 6.1.0
-      semver: 7.8.4
+      semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
 
@@ -17779,7 +17769,7 @@ snapshots:
       hosted-git-info: 9.0.2
       json-parse-even-better-errors: 5.0.0
       proc-log: 6.1.0
-      semver: 7.8.4
+      semver: 7.8.5
       spdx-expression-parse: 4.0.0
 
   '@npmcli/promise-spawn@8.0.3':
@@ -17837,7 +17827,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@nullvoxpopuli/eslint-configs@6.0.0(b17a1cce3fd00b29af92f020bc3e896d)':
+  '@nullvoxpopuli/eslint-configs@6.0.0(41d093722832a7dcdb2b0bb42402e33d)':
     dependencies:
       '@babel/core': 7.29.0
       '@eslint/js': 9.39.4
@@ -17856,7 +17846,7 @@ snapshots:
     optionalDependencies:
       '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
       '@typescript-eslint/eslint-plugin': 8.58.1(5f633a6f9e1b761db26e0cd0fb7363de)
-      eslint-plugin-ember: 12.7.5(a26d6855d289e772202468423cdb8c52)
+      eslint-plugin-ember: 13.4.0(a26d6855d289e772202468423cdb8c52)
       eslint-plugin-qunit: 8.2.6(eslint@9.39.4(jiti@1.21.7))
       prettier: 3.8.2
     transitivePeerDependencies:
@@ -18332,7 +18322,7 @@ snapshots:
       ramda: '@pnpm/ramda@0.28.1'
       right-pad: 1.1.1
       rxjs: 7.8.2
-      semver: 7.8.4
+      semver: 7.8.5
       stacktracey: 2.2.0
       string-length: 4.0.2
       strip-ansi: 6.0.1
@@ -18458,7 +18448,7 @@ snapshots:
       detect-libc: 2.1.2
       execa: safe-execa@0.1.2
       mem: 8.1.1
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@pnpm/pnpmfile@5.0.7(@pnpm/logger@5.2.0)':
     dependencies:
@@ -19295,7 +19285,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.61.0
       debug: 4.4.3(supports-color@9.4.0)
       minimatch: 10.2.5
-      semver: 7.8.4
+      semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.9.3)
       typescript: 5.9.3
@@ -19545,7 +19535,7 @@ snapshots:
       '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
       babel-import-util: 2.1.1
       babel-plugin-debug-macros: 2.0.0(@babel/core@7.29.0)
-      semver: 7.8.4
+      semver: 7.8.5
     transitivePeerDependencies:
       - '@babel/core'
       - '@glint/template'
@@ -22484,7 +22474,7 @@ snapshots:
       '@one-ini/wasm': 0.2.1
       commander: 14.0.3
       minimatch: 10.2.5
-      semver: 7.8.4
+      semver: 7.8.5
 
   ee-first@1.1.1: {}
 
@@ -22806,7 +22796,7 @@ snapshots:
       fs-extra: 9.1.0
       resolve: 1.22.12
       rsvp: 4.8.5
-      semver: 7.8.4
+      semver: 7.8.5
       stagehand: 1.0.1
       walk-sync: 2.2.0
     transitivePeerDependencies:
@@ -23051,7 +23041,7 @@ snapshots:
       '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
       '@eslint/js': 9.39.4
       eslint-config-prettier: 10.1.8(eslint@9.39.4(jiti@1.21.7))
-      eslint-plugin-ember: 13.3.2(5c771a234250e3fd6b6c32a0b01b497f)
+      eslint-plugin-ember: 13.4.0(5c771a234250e3fd6b6c32a0b01b497f)
       eslint-plugin-n: 18.1.0(c7cc3430450b6be053812bb7bd6cc9be)
       eslint-plugin-qunit: 8.2.6(eslint@9.39.4(jiti@1.21.7))
       globals: 17.6.0
@@ -23897,12 +23887,12 @@ snapshots:
   eslint-compat-utils@0.5.1(eslint@9.39.4(jiti@1.21.7)):
     dependencies:
       eslint: 9.39.4(jiti@1.21.7)
-      semver: 7.8.4
+      semver: 7.7.4
 
   eslint-compat-utils@0.5.1(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       eslint: 9.39.4(jiti@2.6.1)
-      semver: 7.8.4
+      semver: 7.7.4
 
   eslint-config-airbnb-base@15.0.0(2d62f98ecec7de0127f5bda1e1378fc4):
     dependencies:
@@ -24000,43 +23990,7 @@ snapshots:
       - eslint
       - supports-color
 
-  eslint-plugin-ember@12.7.5(a26d6855d289e772202468423cdb8c52):
-    dependencies:
-      '@ember-data/rfc395-data': 0.0.4
-      css-tree: 3.2.1
-      ember-eslint-parser: 0.5.3(a26d6855d289e772202468423cdb8c52)
-      ember-rfc176-data: 0.3.18
-      eslint: 9.39.4(jiti@1.21.7)
-      eslint-utils: 3.0.0(eslint@9.39.4(jiti@1.21.7))
-      estraverse: 5.3.0
-      lodash.camelcase: 4.3.0
-      lodash.kebabcase: 4.1.1
-      requireindex: 1.2.0
-      snake-case: 3.0.4
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.58.1(717face55a559967bf1b77f9b43bd1f1)
-    transitivePeerDependencies:
-      - '@babel/core'
-
-  eslint-plugin-ember@12.7.5(edec6f523371f2ec272bdcc2cc39cf67):
-    dependencies:
-      '@ember-data/rfc395-data': 0.0.4
-      css-tree: 3.2.1
-      ember-eslint-parser: 0.5.3(edec6f523371f2ec272bdcc2cc39cf67)
-      ember-rfc176-data: 0.3.18
-      eslint: 9.39.4(jiti@2.6.1)
-      eslint-utils: 3.0.0(eslint@9.39.4(jiti@2.6.1))
-      estraverse: 5.3.0
-      lodash.camelcase: 4.3.0
-      lodash.kebabcase: 4.1.1
-      requireindex: 1.2.0
-      snake-case: 3.0.4
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.58.1(0d62767105e9a39fc494591cb6137847)
-    transitivePeerDependencies:
-      - '@babel/core'
-
-  eslint-plugin-ember@13.3.2(5c771a234250e3fd6b6c32a0b01b497f):
+  eslint-plugin-ember@13.4.0(5c771a234250e3fd6b6c32a0b01b497f):
     dependencies:
       '@ember-data/rfc395-data': 0.0.4
       aria-query: 5.3.2
@@ -24058,6 +24012,56 @@ snapshots:
       svg-tags: 1.0.0
     optionalDependencies:
       '@typescript-eslint/parser': 8.61.0(717face55a559967bf1b77f9b43bd1f1)
+    transitivePeerDependencies:
+      - '@babel/core'
+
+  eslint-plugin-ember@13.4.0(a26d6855d289e772202468423cdb8c52):
+    dependencies:
+      '@ember-data/rfc395-data': 0.0.4
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      css-tree: 3.2.1
+      editorconfig: 3.0.2
+      ember-eslint-parser: 0.5.3(a26d6855d289e772202468423cdb8c52)
+      ember-rfc176-data: 0.3.18
+      eslint: 9.39.4(jiti@1.21.7)
+      eslint-utils: 3.0.0(eslint@9.39.4(jiti@1.21.7))
+      estraverse: 5.3.0
+      html-tags: 3.3.1
+      language-tags: 1.0.9
+      lodash.camelcase: 4.3.0
+      lodash.kebabcase: 4.1.1
+      mathml-tag-names: 4.0.0
+      requireindex: 1.2.0
+      snake-case: 3.0.4
+      svg-tags: 1.0.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.58.1(717face55a559967bf1b77f9b43bd1f1)
+    transitivePeerDependencies:
+      - '@babel/core'
+
+  eslint-plugin-ember@13.4.0(edec6f523371f2ec272bdcc2cc39cf67):
+    dependencies:
+      '@ember-data/rfc395-data': 0.0.4
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      css-tree: 3.2.1
+      editorconfig: 3.0.2
+      ember-eslint-parser: 0.5.3(edec6f523371f2ec272bdcc2cc39cf67)
+      ember-rfc176-data: 0.3.18
+      eslint: 9.39.4(jiti@2.6.1)
+      eslint-utils: 3.0.0(eslint@9.39.4(jiti@2.6.1))
+      estraverse: 5.3.0
+      html-tags: 3.3.1
+      language-tags: 1.0.9
+      lodash.camelcase: 4.3.0
+      lodash.kebabcase: 4.1.1
+      mathml-tag-names: 4.0.0
+      requireindex: 1.2.0
+      snake-case: 3.0.4
+      svg-tags: 1.0.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.58.1(0d62767105e9a39fc494591cb6137847)
     transitivePeerDependencies:
       - '@babel/core'
 
@@ -25866,7 +25870,7 @@ snapshots:
 
   is-bun-module@2.0.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   is-callable@1.2.7: {}
 
@@ -26900,7 +26904,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   make-error@1.3.6: {}
 
@@ -27729,7 +27733,7 @@ snapshots:
       make-fetch-happen: 15.0.5
       nopt: 9.0.0
       proc-log: 6.1.0
-      semver: 7.8.4
+      semver: 7.8.5
       tar: 7.5.9
       tinyglobby: 0.2.17
       which: 6.0.1
@@ -27742,7 +27746,7 @@ snapshots:
     dependencies:
       growly: 1.3.0
       is-wsl: 2.2.0
-      semver: 7.8.4
+      semver: 7.7.4
       shellwords: 0.1.1
       uuid: 8.3.2
       which: 2.0.2
@@ -27768,7 +27772,7 @@ snapshots:
   normalize-package-data@8.0.0:
     dependencies:
       hosted-git-info: 9.0.2
-      semver: 7.8.4
+      semver: 7.8.5
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -27785,11 +27789,11 @@ snapshots:
 
   npm-install-checks@7.1.2:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   npm-install-checks@8.0.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   npm-normalize-package-bin@4.0.0: {}
 
@@ -27799,7 +27803,7 @@ snapshots:
     dependencies:
       hosted-git-info: 8.1.0
       proc-log: 5.0.0
-      semver: 7.8.4
+      semver: 7.8.5
       validate-npm-package-name: 6.0.2
 
   npm-package-arg@13.0.2:
@@ -27819,14 +27823,14 @@ snapshots:
       npm-install-checks: 7.1.2
       npm-normalize-package-bin: 4.0.0
       npm-package-arg: 12.0.2
-      semver: 7.8.4
+      semver: 7.8.5
 
   npm-pick-manifest@11.0.3:
     dependencies:
       npm-install-checks: 8.0.0
       npm-normalize-package-bin: 5.0.0
       npm-package-arg: 13.0.2
-      semver: 7.8.4
+      semver: 7.8.5
 
   npm-registry-fetch@19.1.1:
     dependencies:
@@ -28227,14 +28231,14 @@ snapshots:
       ky: 1.14.3
       registry-auth-token: 5.1.1
       registry-url: 6.0.1
-      semver: 7.8.4
+      semver: 7.8.5
 
   package-json@8.1.1:
     dependencies:
       got: 12.6.1
       registry-auth-token: 5.1.1
       registry-url: 6.0.1
-      semver: 7.8.4
+      semver: 7.8.5
 
   package-name-regex@4.0.3: {}
 
@@ -30028,7 +30032,7 @@ snapshots:
 
   semver-diff@4.0.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   semver@2.3.2: {}
 
@@ -30416,7 +30420,7 @@ snapshots:
       get-stdin: 9.0.0
       git-hooks-list: 3.2.0
       is-plain-obj: 4.1.0
-      semver: 7.8.4
+      semver: 7.7.4
       sort-object-keys: 1.1.3
       tinyglobby: 0.2.16
 
