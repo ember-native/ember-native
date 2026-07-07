@@ -5,6 +5,8 @@ const APP_MODULES_TO_EXCLUDE = ['boot', 'test'];
 
 let resolverPlugin;
 
+// register more virtual modules
+
 try {
   const { resolver } = require('@embroider/vite');
   resolverPlugin = resolver();
