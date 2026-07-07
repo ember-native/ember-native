@@ -749,8 +749,8 @@ importers:
         specifier: ^8.9.7
         version: 8.9.9
       '@release-it-plugins/lerna-changelog':
-        specifier: ^8.0.1
-        version: 8.0.1(release-it@15.11.0(encoding@0.1.13))
+        specifier: ^9.0.0
+        version: 9.0.0(e20538eb716a1b4716a5be56dc33619f)
       '@rollup/plugin-babel':
         specifier: ^7.0.0
         version: 7.0.0(e10c821eb081679c9c0a37d91ab94083)
@@ -4008,11 +4008,15 @@ packages:
     peerDependencies:
       prettier: ^3.0.0
 
-  '@release-it-plugins/lerna-changelog@8.0.1':
-    resolution: {integrity: sha512-T3bdj8TWa+msrEKxeoXoRTXtr/YG5oE1zOxXvv+AKAI2Ng3RLIiY2bpJa85+TEe2wdaVdYlyPQPn1DOq3f+jAw==}
-    engines: {node: '>=20'}
+  '@release-it-plugins/lerna-changelog@9.0.0':
+    resolution: {integrity: sha512-Nxq1XLggMMlrEUmsjiS1VMwHMkx7vzDMi86jQ/wC7peDHTARtArWLR+NNaFPD5qUG2IsrsNCLM5NxoQbuGdH7g==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
-      release-it: ^17.0.0 || ^18.0.0 || ^19.0.0
+      prettier: ^3.0.0
+      release-it: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
+    peerDependenciesMeta:
+      prettier:
+        optional: true
 
   '@replit/codemirror-lang-svelte@6.0.0':
     resolution: {integrity: sha512-U2OqqgMM6jKelL0GNWbAmqlu1S078zZNoBqlJBW+retTc5M4Mha6/Y2cf4SVg6ddgloJvmcSpt4hHrVoM4ePRA==}
@@ -9248,6 +9252,10 @@ packages:
     resolution: {integrity: sha512-XXADHxXmvT9+CRxhXg56LJovE+bmWnEWB78LB83VZTprKTmaC5QfruXocxzTZ2Kl0DNwKuBdlIhjL8LeY8Sf8Q==}
     engines: {node: '>= 12'}
 
+  ip-address@10.2.0:
+    resolution: {integrity: sha512-/+S6j4E9AHvW9SWMSEY9Xfy66O5PWvVEJ08O0y5JGyEKQpojb0K0GKpz/v5HJ/G0vi3D2sjGK78119oXZeE0qA==}
+    engines: {node: '>= 12'}
+
   ip-regex@4.3.0:
     resolution: {integrity: sha512-B9ZWJxHHOHUhUjCPrMpLD4xEq35bUTClHM1S6CBU5ixQnkZmwipwgc96vAd7AAGM9TGHvJR+Uss+/Ak6UphK+Q==}
     engines: {node: '>=8'}
@@ -10183,6 +10191,10 @@ packages:
 
   make-fetch-happen@15.0.5:
     resolution: {integrity: sha512-uCbIa8jWWmQZt4dSnEStkVC6gdakiinAm4PiGsywIkguF0eWMdcjDz0ECYhUolFU3pFLOev9VNPCEygydXnddg==}
+    engines: {node: ^20.17.0 || >=22.9.0}
+
+  make-fetch-happen@15.0.6:
+    resolution: {integrity: sha512-Je0fLJ0F5atA7F+eIlLzk+Wkcl57JDf4kf+EW8xiP5E31xOQxkIxTbgf1Oi1Lw9tRI9UEMRdI5Vz2xTzoNU1Jw==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   make-fetch-happen@9.1.0:
@@ -12988,6 +13000,10 @@ packages:
     resolution: {integrity: sha512-HLpt+uLy/pxB+bum/9DzAgiKS8CX1EvbWxI4zlmgGCExImLdiad2iCwXT5Z4c9c3Eq8rP2318mPW2c+QbtjK8A==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
+  socks@2.8.9:
+    resolution: {integrity: sha512-LJhUYUvItdQ0LkJTmPeaEObWXAqFyfmP85x0tch/ez9cahmhlBBLbIqDFnvBnUJGagb0JbIQrkBs1wJ+yRYpEw==}
+    engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
+
   sort-keys@4.2.0:
     resolution: {integrity: sha512-aUYIEU/UviqPgc8mHR6IW1EGxkAXpeRETYcrzg8cLAvUPZcpAlleSXHV2mY7G12GphSH6Gzv+4MMVSSkbdteHg==}
     engines: {node: '>=8'}
@@ -13551,6 +13567,10 @@ packages:
 
   tmp@0.2.5:
     resolution: {integrity: sha512-voyz6MApa1rQGUxT3E+BK7/ROe8itEx7vD8/HEvt4xwXucvQ5G5oeEiHkmHZJuBO21RpOf+YYm9MOivj709jow==}
+    engines: {node: '>=14.14'}
+
+  tmp@0.2.7:
+    resolution: {integrity: sha512-e0votIpp4Uo2AJYSzVHV6xCcawuiez3DzqDAbrTc3YxBkplN6e+dM13ZeIcZnDg/QpSuU2zfZ3rzwY8ukEnaXw==}
     engines: {node: '>=14.14'}
 
   tmpl@1.0.5:
@@ -14615,6 +14635,10 @@ packages:
 
   yargs@17.7.2:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
+    engines: {node: '>=12'}
+
+  yargs@17.7.3:
+    resolution: {integrity: sha512-GZtjxm/J/4TSxuL3FNYjCmLktBTnIw/rVmKSIyKeYAZpmJB2ig9VauCC5xsa82GNKVKDAqpOn3KVzNt0zmrU0g==}
     engines: {node: '>=12'}
 
   yauzl@2.10.0:
@@ -19508,16 +19532,18 @@ snapshots:
     dependencies:
       prettier: 3.8.2
 
-  '@release-it-plugins/lerna-changelog@8.0.1(release-it@15.11.0(encoding@0.1.13))':
+  '@release-it-plugins/lerna-changelog@9.0.0(e20538eb716a1b4716a5be56dc33619f)':
     dependencies:
-      execa: 5.1.1
+      execa: 9.6.1
       lerna-changelog: 2.2.0
       lodash: 4.18.1
       mdast-util-from-markdown: 2.0.3
       release-it: 15.11.0(encoding@0.1.13)
-      tmp: 0.2.5
+      tmp: 0.2.7
       validate-peer-dependencies: 2.2.0
-      which: 5.0.0
+      which: 6.0.1
+    optionalDependencies:
+      prettier: 3.8.2
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -19781,7 +19807,7 @@ snapshots:
       '@sigstore/bundle': 4.0.0
       '@sigstore/core': 3.2.0
       '@sigstore/protobuf-specs': 0.5.1
-      make-fetch-happen: 15.0.5
+      make-fetch-happen: 15.0.6
       proc-log: 6.1.0
     transitivePeerDependencies:
       - supports-color
@@ -24511,7 +24537,7 @@ snapshots:
       globby: 11.1.0
       ora: 5.4.1
       slash: 3.0.0
-      tmp: 0.2.5
+      tmp: 0.2.7
       workerpool: 6.5.1
     transitivePeerDependencies:
       - supports-color
@@ -26785,6 +26811,8 @@ snapshots:
 
   ip-address@10.1.0: {}
 
+  ip-address@10.2.0: {}
+
   ip-regex@4.3.0: {}
 
   ip@1.1.9: {}
@@ -27549,7 +27577,7 @@ snapshots:
       make-fetch-happen: 9.1.0
       p-map: 3.0.0
       progress: 2.0.3
-      yargs: 17.7.2
+      yargs: 17.7.3
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -27872,6 +27900,23 @@ snapshots:
   make-error@1.3.6: {}
 
   make-fetch-happen@15.0.5:
+    dependencies:
+      '@gar/promise-retry': 1.0.3
+      '@npmcli/agent': 4.0.0
+      '@npmcli/redact': 4.0.0
+      cacache: 20.0.4
+      http-cache-semantics: 4.2.0
+      minipass: 7.1.3
+      minipass-fetch: 5.0.2
+      minipass-flush: 1.0.7
+      minipass-pipeline: 1.2.4
+      negotiator: 1.0.0
+      proc-log: 6.1.0
+      ssri: 13.0.1
+    transitivePeerDependencies:
+      - supports-color
+
+  make-fetch-happen@15.0.6:
     dependencies:
       '@gar/promise-retry': 1.0.3
       '@npmcli/agent': 4.0.0
@@ -28693,7 +28738,7 @@ snapshots:
       env-paths: 2.2.1
       exponential-backoff: 3.1.3
       graceful-fs: 4.2.11
-      make-fetch-happen: 15.0.5
+      make-fetch-happen: 15.0.6
       nopt: 9.0.0
       proc-log: 6.1.0
       semver: 7.8.5
@@ -31353,7 +31398,7 @@ snapshots:
     dependencies:
       agent-base: 6.0.2
       debug: 4.4.3(supports-color@9.4.0)
-      socks: 2.8.7
+      socks: 2.8.9
     transitivePeerDependencies:
       - supports-color
 
@@ -31368,6 +31413,11 @@ snapshots:
   socks@2.8.7:
     dependencies:
       ip-address: 10.1.0
+      smart-buffer: 4.2.0
+
+  socks@2.8.9:
+    dependencies:
+      ip-address: 10.2.0
       smart-buffer: 4.2.0
 
   sort-keys@4.2.0:
@@ -32094,6 +32144,8 @@ snapshots:
 
   tmp@0.2.5: {}
 
+  tmp@0.2.7: {}
+
   tmpl@1.0.5: {}
 
   to-array@0.1.4: {}
@@ -32274,7 +32326,7 @@ snapshots:
     dependencies:
       '@tufjs/models': 4.1.0
       debug: 4.4.3(supports-color@9.4.0)
-      make-fetch-happen: 15.0.5
+      make-fetch-happen: 15.0.6
     transitivePeerDependencies:
       - supports-color
 
@@ -33305,6 +33357,16 @@ snapshots:
       yargs-parser: 21.1.1
 
   yargs@17.7.2:
+    dependencies:
+      cliui: 8.0.1
+      escalade: 3.2.0
+      get-caller-file: 2.0.5
+      require-directory: 2.1.1
+      string-width: 4.2.3
+      y18n: 5.0.8
+      yargs-parser: 21.1.1
+
+  yargs@17.7.3:
     dependencies:
       cliui: 8.0.1
       escalade: 3.2.0
