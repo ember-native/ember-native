@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "minor",
-      "oldVersion": "3.2.2",
-      "newVersion": "3.3.0",
+      "oldVersion": "3.3.0",
+      "newVersion": "3.4.0",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2026-07-01)\n\n* ember-native 3.3.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#379](https://github.com/ember-native/ember-native/pull/379) Support virtual modules ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-07-07)\n\n* ember-native 3.4.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#385](https://github.com/ember-native/ember-native/pull/385) enhance resolver with additional virtual modules ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }

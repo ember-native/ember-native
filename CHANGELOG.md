@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-07-07)
+
+* ember-native 3.4.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#385](https://github.com/ember-native/ember-native/pull/385) enhance resolver with additional virtual modules ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-07-01)
 
 * ember-native 3.3.0 (minor)
