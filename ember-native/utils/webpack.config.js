@@ -4,11 +4,16 @@
  *
  * This configuration uses @embroider/vite plugins via the webpack adapter
  * with automatic fallback to custom loaders if unavailable.
+ *
+ * @param {object} webpack - the @nativescript/webpack instance
+ * @param {object} [options] - optional configuration
+ * @param {string[]} [options.virtualModules] - additional virtual module paths
+ *   to register alongside ember-native's built-in ones.
  */
-module.exports = (webpack) => {
+module.exports = (webpack, options = {}) => {
   try {
     const configureAdapter = require('./embroider-webpack-adapter.js');
-    configureAdapter(webpack);
+    configureAdapter(webpack, options);
     console.log('✓ Using @embroider/vite webpack adapter');
   } catch (e) {
     console.warn('⚠ Failed to load embroider adapter, using fallback loaders:', e.message);

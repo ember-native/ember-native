@@ -152,7 +152,8 @@ function createResolverPlugin() {
 /**
  * Configures webpack to use @embroider/vite plugins via adapters
  */
-module.exports = function configureEmbroiderWebpackAdapter(webpack) {
+module.exports = function configureEmbroiderWebpackAdapter(webpack, options = {}) {
+  const additionalVirtualModules = options.virtualModules || [];
   const ResolverPlugin = createResolverPlugin();
   const WebpackVirtualModules = require('webpack-virtual-modules');
   const registerVirtualModules = require('./embroider-virtual-modules-plugin.js');
@@ -166,7 +167,7 @@ module.exports = function configureEmbroiderWebpackAdapter(webpack) {
       .plugin('webpack-virtual-modules')
       .use(virtualModules);
 
-    void registerVirtualModules(virtualModules);
+    void registerVirtualModules(virtualModules, additionalVirtualModules);
 
     // Add resolver plugin if available
     if (ResolverPlugin) {

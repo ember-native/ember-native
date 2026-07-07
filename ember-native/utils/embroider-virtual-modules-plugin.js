@@ -5,7 +5,11 @@ const APP_MODULES_TO_EXCLUDE = ['boot', 'test'];
 
 let resolverPlugin;
 
-// register more virtual modules
+// Virtual modules that are always registered by ember-native.
+const DEFAULT_VIRTUAL_MODULE_PATHS = [
+  '@embroider/virtual/compat-modules',
+  '-embroider-implicit-modules.js'
+];
 
 try {
   const { resolver } = require('@embroider/vite');
@@ -14,11 +18,13 @@ try {
   console.warn('Failed to load @embroider/vite resolver plugin:', e.message);
 }
 
-module.exports = async function registerEmbroiderVirtualModules(virtualModules) {
+module.exports = async function registerEmbroiderVirtualModules(virtualModules, additionalVirtualModules = []) {
+  // Merge the built-in virtual modules with any provided by the end user,
+  // de-duplicating so a user-supplied path can't be registered twice.
   const virtualModulePaths = [
-    '@embroider/virtual/compat-modules',
-    '-embroider-implicit-modules.js'
-  ];
+    ...DEFAULT_VIRTUAL_MODULE_PATHS,
+    ...additionalVirtualModules,
+  ].filter((modulePath, index, all) => all.indexOf(modulePath) === index);
 
   const pluginContext = {
     parse: (code) => ({ code }),
