@@ -88,16 +88,16 @@ module.exports = async function registerEmbroiderVirtualModules(virtualModules, 
         }
 
         const finalContent = content || '// Empty virtual module\nmodule.exports = {};';
-        const appRelativeModulePath = path.resolve(process.cwd(), 'app', modulePath);
 
-        // Write the virtual module using the passed instance
+        // Write the virtual module using the passed instance. We intentionally do
+        // NOT also register a copy under `app/<modulePath>`: NativeScript's virtual
+        // entry point does a `require.context('~/', true, ...)` scan over the app
+        // directory, and webpack-virtual-modules cannot fully synthesize `lstat`
+        // for the synthetic intermediate directories (e.g. `app/@embroider`) that
+        // an app-relative registration would imply, causing a nondeterministic
+        // ENOENT depending on which virtual module was registered last.
         virtualModules.writeModule(modulePath, finalContent);
         virtualModules.writeModule(result.id, finalContent);
-
-        if (!fs.existsSync(appRelativeModulePath)) {
-          virtualModules.writeModule(appRelativeModulePath, finalContent);
-          console.log(`✓ Created virtual module: ${appRelativeModulePath}`);
-        }
 
         console.log(`✓ Created virtual module: ${modulePath}`);
         console.log(`✓ Created virtual module: ${result.id}`);

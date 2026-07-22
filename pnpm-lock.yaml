@@ -663,9 +663,6 @@ importers:
       ember-cli-moment-shim:
         specifier: ^3.8.0
         version: 3.8.0(c8332dc3f90c0e60eb130a3a85f980b9)
-      ember-concurrency:
-        specifier: ^5.2.0
-        version: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-get-config:
         specifier: ^2.1.1
         version: 2.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -675,9 +672,6 @@ importers:
       ember-template-lint-plugin-prettier:
         specifier: ^5.0.0
         version: 5.0.0(e4b457844cb8e295271a76c120546863)
-      ember-truth-helpers:
-        specifier: ^4.0.3
-        version: 4.0.3(6d319b1a0d9582607008b9b09e953766)
       prettier-linter-helpers:
         specifier: ^1.0.0
         version: 1.0.1
@@ -799,6 +793,9 @@ importers:
       css-loader:
         specifier: ^7.1.2
         version: 7.1.4(webpack@5.106.1)
+      ember-concurrency:
+        specifier: ^5.2.0
+        version: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-eslint-parser:
         specifier: 0.5.3
         version: 0.5.3(edec6f523371f2ec272bdcc2cc39cf67)
@@ -24178,13 +24175,11 @@ snapshots:
       ember-cli-babel: 8.3.1(@babel/core@7.29.0)
       ember-cli-htmlbars: 7.0.1(0e419c6a72fae3437e21935b6846107c)
       ember-cli-moment-shim: 3.8.0(c8332dc3f90c0e60eb130a3a85f980b9)
-      ember-concurrency: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-get-config: 2.1.1(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-maybe-import-regenerator: 1.0.0
       ember-modifier: 4.3.0(@babel/core@7.29.0)
       ember-source: 6.12.0(@glimmer/component@2.1.1)(rsvp@4.8.5)
       ember-template-lint-plugin-prettier: 5.0.0(e4b457844cb8e295271a76c120546863)
-      ember-truth-helpers: 4.0.3(6d319b1a0d9582607008b9b09e953766)
       loader.js: 4.7.0
       prettier-linter-helpers: 1.0.1
       rollup-plugin-astroturf: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(92da73d1530e30368d103b0eb4ee5f48)
