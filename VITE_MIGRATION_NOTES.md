@@ -653,6 +653,45 @@ produces a clean `0` exit immediately after `TOTAL: 7 SUCCESS`, no hang and
 no crash. This is existing, unrelated-to-this-migration behavior, not
 something this pass changed.
 
+## Publishing `utils/vite.config.js` for consuming apps, and keeping webpack (`ember-native-todo.md` sub-task 4)
+
+`utils/vite.config.js` (added alongside the `a134ee4` demo-app switch, see
+its own docstring for the plugin wiring and usage snippet) is already the
+addon's public, documented entry point for consuming apps that want to
+build with `@nativescript/vite` - it's exported via `package.json`'s
+`"./utils/*": "./dist/utils/*"` wildcard exactly like
+`utils/webpack.config.js` always has been, ships in `dist/` through the
+normal `pnpm build` (`build:utils` compiles `utils/*.js`/`*.ts` with `tsc`),
+and needs no separate opt-in. `demo-app/vite.config.ts` is a live example of
+a consuming app importing and `mergeConfig`-ing it with
+`@nativescript/vite`'s `typescriptConfig()`.
+
+**Decision on `utils/webpack.config.js`: kept, not removed or hard-deprecated,
+but documented as the legacy/backward-compat path** (see the docstrings now
+on `utils/webpack.config.js` and `utils/embroider-webpack-adapter.js`). Two
+reasons this isn't a straightforward "delete it, everyone moves to vite":
+
+1. It is not just a convenience for apps slow to migrate - it is a *hard
+   requirement* for `nativescript test android`, independent of what
+   bundler an app's main build uses. As documented in the section above,
+   `@nativescript/unit-test-runner` has no Vite integration at all, so even
+   an app fully migrated to `@nativescript/vite` for `build`/`debug` (like
+   `demo-app` itself) still needs `utils/webpack.config.js` wired up
+   through a second, webpack-only NativeScript config for its test build.
+   Removing the webpack path from the addon would break testing for every
+   consuming app, not just the ones that haven't adopted Vite yet.
+2. Apps that haven't upgraded their own build tooling to
+   `@nativescript/vite` yet still need a working main-build path too. There
+   is no forcing function to require that upgrade alongside an `ember-native`
+   version bump.
+
+Consuming-app guidance going forward: use `utils/vite.config.js` for new
+apps and for the main `build`/`debug` flow of any app able to move off
+`@nativescript/webpack`; keep `utils/webpack.config.js` around only for
+`nativescript test android` (or for apps that haven't migrated their main
+build yet). Both configs are maintained - `utils/webpack.config.js` isn't
+frozen or unsupported, just no longer where new features land first.
+
 ## Still open (see `ember-native-todo.md` for the full breakdown)
 
 1. **Release build launch-screen hang** (see "Current status" above) - JS
@@ -676,11 +715,7 @@ something this pass changed.
    doing (`@nativescript/vite`'s own generic HMR still applies at the
    bundler level, independent of this) but scope it as its own item rather
    than assuming it's a regression to fix.
-3. Deciding whether to keep `@nativescript/webpack` support in the addon
-   long-term (now required by both `nativescript test android` and by any
-   consuming app not yet on Vite) or deprecate it now that Vite is proven to
-   work for the main build/debug path - see `ember-native-todo.md` sub-task 4.
-4. If `nativescript`/`@nativescript/vite` ship a fix for the missing
+3. If `nativescript`/`@nativescript/vite` ship a fix for the missing
    `copyViteBundleToNative` call in `compileWithoutWatch` (see above), drop
    `patches/nativescript@9.0.6.patch`.
 

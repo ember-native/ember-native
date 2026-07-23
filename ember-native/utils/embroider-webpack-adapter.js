@@ -1,10 +1,16 @@
 
 
 /**
- * Webpack adapter for @embroider/vite plugins
+ * Webpack adapter for @embroider/vite plugins.
  *
  * This adapter allows using @embroider/vite's resolver() and templateTag() plugins
- * in webpack builds, similar to how they're used in rollup.config.mjs
+ * in webpack builds, similar to how they're used in rollup.config.mjs.
+ *
+ * LEGACY: only used by utils/webpack.config.js, which is itself kept around
+ * for backward compat / the @nativescript/webpack-only test path - see that
+ * file's docstring. Under @nativescript/vite (utils/vite.config.js),
+ * @embroider/vite's plugins are handed to Vite directly and none of this
+ * bridging is needed.
  */
 
 const path = require('path');
