@@ -33,9 +33,15 @@ export default class HistoryService extends Service {
     if (h?.from) {
       const from = h.from;
       this.stack = [...this.stack];
+      // `from.params` is always an object, even `{}` for routes with no
+      // dynamic segments (e.g. `index`). Passing that empty object through
+      // as a context/model makes Ember's router throw "More context
+      // objects were passed than there are dynamic segments for the
+      // route", so only forward it when it actually holds a segment value.
+      const hasDynamicSegments = from.params && Object.keys(from.params).length > 0;
       const transition = this.nativeRouter.transitionTo(
         from.name,
-        from.params,
+        hasDynamicSegments ? from.params : undefined,
         {
           queryParams: from.queryParams,
         },
