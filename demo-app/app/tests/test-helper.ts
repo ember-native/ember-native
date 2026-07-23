@@ -9,7 +9,11 @@ import NativeElementNode from 'ember-native/dom/native/NativeElementNode';
 import { Frame, Application, StackLayout } from '@nativescript/core';
 
 const context = (require as any).context('./', true, /.*\.(xml)/);
-globalThis.registerWebpackModules(context);
+if (typeof (globalThis as any).registerBundlerModules === 'function') {
+  (globalThis as any).registerBundlerModules(context);
+} else {
+  (globalThis as any).registerWebpackModules(context);
+}
 
 const onClosing = (NativeBridge as any).prototype.onClosing;
 NativeBridge.prototype.onClosing = function (websocket, code, reason) {
