@@ -54,7 +54,7 @@
     "@eslint/js": "^10.0.1",
     "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@types/node": "^25.6.0",
+    "@types/node": "^26.1.1",
     "astroturf": "^1.2.0",
     "ember-cli-babel": "^8.2.0",
     "ember-cli-htmlbars": "^7.0.1",
