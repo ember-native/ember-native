@@ -6,6 +6,17 @@ const configureEmberNative = require('ember-native/utils/webpack.config.js');
 const { execSync } = require("node:child_process");
 
 module.exports = (env) => {
+  // @nativescript/webpack (5.x) defaults to emitting an ESM bundle
+  // (.mjs chunks) for android/ios now that @nativescript/core (9.x) ships
+  // as "type": "module". The Android build toolchain's Static Binding
+  // Generator (js_parser.js, shipped inside @nativescript/android) does
+  // not understand .mjs bundle output and silently produces zero parsed
+  // files, which then fails the Gradle build with a missing
+  // sbg-bindings.txt error. Opting back into the CommonJS bundle output
+  // keeps the native build tooling working; this is a supported flag on
+  // the @nativescript/webpack config, not a hack around it.
+  env.commonjs = true;
+
 	webpack.init(env);
 
   process.env.EMBER_HMR_ENABLED = 'true';
