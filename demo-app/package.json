@@ -38,6 +38,7 @@
     "ember-native": "link:../ember-native",
     "ember-native-devtools": "^3.0.1",
     "ember-source": "^6.12.0",
+    "loader.js": "^4.7.0",
     "nativescript-ui-listview": "^15.2.3",
     "nativescript-ui-sidedrawer": "^15.2.3",
     "octokit": "^5.0.5",
@@ -62,11 +63,10 @@
     "@nativescript/android": "^9.0.5",
     "@nativescript/core": "^9.0.20",
     "@nativescript/types": "^9.0.0",
-    "@nativescript/webpack": "^5.0.38",
+    "@nativescript/vite": "^2.0.3",
     "@types/qunit": "2.19.13",
     "@warp-drive-mirror/legacy": "^5.8.1",
     "babel-import-util": "^3.0.0",
-    "babel-loader": "^10.0.0",
     "babel-plugin-ember-template-compilation": "^3.0.1",
     "browserify-fs": "^1.0.0",
     "buffer": "^6.0.3",
@@ -103,7 +103,8 @@
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.38.0",
     "url": "^0.11.4",
-    "util": "^0.12.5"
+    "util": "^0.12.5",
+    "vite": "^7.3.2"
   },
   "exports": {
     "./tests/*": "./tests/*",

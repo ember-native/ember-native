@@ -1,0 +1,526 @@
+# Vite migration notes (`@nativescript/webpack` → `@nativescript/vite`)
+
+Technical reference for switching `demo-app`'s bundler from
+`@nativescript/webpack` to `@nativescript/vite` (`nativescript` CLI 9.0.6,
+`@nativescript/vite` 2.0.3, `@embroider/vite` 1.7.2). Read this before
+touching the bundler setup again. As with `NATIVESCRIPT_UPGRADE_NOTES.md`,
+almost every issue here is **silent**: `vite build` exits 0, the Gradle
+build succeeds, and the app still crashes on-device with a generic,
+cause-less error. **A green build proves nothing** - see the Prerequisite
+section before trusting any change here.
+
+## Current status
+
+- `nativescript build android` / `nativescript debug android` (dev/debug
+  mode): **verified working** on a real emulator (`Medium_Phone_API_33`,
+  API 33) from a completely clean `platforms/` + `.ns-vite-build/` +
+  `node_modules/.embroider/` state - real build, real install, real launch,
+  real interaction (navigated into "List View", saw the RadListView/ListView
+  content render). No stale build state involved.
+- `nativescript build android --release`: **builds and boots without
+  crashing** (all issues below are fixed there too), but does not get past
+  the NativeScript launch screen to the app's actual content in the time
+  observed (tens of seconds). This is a **different, not-yet-diagnosed
+  issue** from everything else in this document - JS evaluation completes
+  cleanly (`Ember : 6.12.0` prints, no exception, no "Module evaluation
+  promise rejected") but the launch-screen-to-content transition
+  (`Application.launchEvent` → `app.visit('/')` in `demo-app/app/boot.js`)
+  doesn't visibly complete. Needs a follow-up investigation with more time
+  than this pass had (e.g. instrument `boot()` in `app/boot.js` directly,
+  check whether `Application.launchEvent` fires at all in release/optimized
+  mode, check `nativescript-optimized` vs `nativescript-optimized-with-inspector`
+  runtime differences beyond just the inspector globals already found below).
+- `nativescript test android` / CI's `app-test.yml`: **not addressed** -
+  tracked separately, see `ember-native-todo.md` sub-task 3.
+
+## Why this was possible now
+
+NativeScript 9.x ships a first-class, CLI-integrated Vite bundler
+(`@nativescript/vite`; `nativescript` CLI ≥ 9.0.x reads a `bundler` field in
+`nativescript.config.ts` and shells out to either `webpack` or `vite`
+generically - see `lib/services/bundler/bundler-compiler-service.js` in the
+`nativescript` package). Before this, NativeScript only understood webpack,
+so this project's `ember-native/utils/embroider-webpack-adapter.js` existed
+purely to bridge `@embroider/vite`'s Vite/Rollup plugins (`resolver()`,
+`templateTag()`) into webpack's very different loader/plugin API by hand.
+Once NativeScript can run a *real* Vite, `@embroider/vite`'s plugins can be
+handed to it directly - none of that bridging code is needed for the Vite
+path. It stays in the repo (`utils/webpack.config.js`,
+`utils/embroider-webpack-adapter.js`, `utils/embroider-virtual-modules-plugin.js`,
+`utils/embroider-template-tag-loader.js`, `utils/hmr-loader.js`) for apps
+that still build with `@nativescript/webpack`; only `demo-app` moved to Vite.
+
+## The moving parts
+
+- **`nativescript.config.ts`**: `bundler: 'vite'` + `bundlerConfigPath:
+  'vite.config.ts'`. The only thing that tells the CLI to use Vite.
+- **`demo-app/vite.config.ts`**: merges `@nativescript/vite`'s
+  `typescriptConfig({ mode })` (NativeScript's own base config) with
+  `ember-native/utils/vite.config.js` (the Ember/Embroider half:
+  `classicEmberSupport()` + `ember()` from `@embroider/vite`, plus
+  `@rollup/plugin-babel` for the existing `demo-app/babel.config.cjs`, plus
+  the fixes below). Order matters: the Ember plugins are merged in *first*
+  so Embroider's `enforce: 'pre'` resolver gets first refusal on resolving a
+  given specifier, ahead of `@nativescript/vite`'s own resolver. The
+  merged config also explicitly re-sorts `resolve.alias` (see "alias
+  ordering" below) and sets `resolve.preserveSymlinks: false` (see
+  "preserveSymlinks" below) - both *after* the two configs are merged,
+  since `mergeConfig`'s own array-append semantics get these wrong by
+  default.
+- **`ember-native/utils/vite.config.js`** (new): the reusable
+  Ember/Embroider-side Vite config, analogous to `utils/webpack.config.js`
+  for the webpack path. Exports `configureEmberNativeVite(options)`.
+
+## `preserveSymlinks: true` vs pnpm - the recurring root cause
+
+`@nativescript/vite`'s own base config
+(`@nativescript/vite/configuration/base.js`) hardcodes
+`resolve.preserveSymlinks: true`, with no comment explaining why (plausibly
+for `npm link`-style NativeScript plugin development, where you want a
+linked plugin's own dependency resolution to happen from the *link
+location*, not the real target directory). This is fundamentally
+incompatible with how pnpm's virtual store works: a real npm dependency at
+`node_modules/.pnpm/pkg@1.0.0/node_modules/pkg` gets its *own* peer
+dependencies pre-resolved as sibling symlinks inside that same
+`.pnpm/pkg@1.0.0/node_modules/` directory - real-path (`preserveSymlinks:
+false`) resolution finds them there; symlink-preserving resolution instead
+walks up from wherever the *symlink* sits (e.g. `demo-app/node_modules/pkg`)
+and misses them entirely, since pnpm intentionally doesn't hoist arbitrary
+transitive deps to `demo-app/node_modules`.
+
+This produced multiple, distinct-looking failures that were all this one
+root cause:
+
+- `@glimmer/validator`'s real (non-ember-source-bundled) copy imports
+  `@glimmer/global-context` as a peer - failed under `preserveSymlinks:
+  true` with `[vite:load-fallback] Could not load @glimmer/global-context`.
+- `@warp-drive/json-api` imports `fuse.js` - same failure shape.
+- Both are resolvable fine with plain Node `require()` (which is real-path
+  based by default), proving it's a Vite/esbuild-side resolution setting,
+  not a genuinely-missing package.
+
+**Fix**: `demo-app/vite.config.ts` explicitly overrides
+`resolve.preserveSymlinks: false` in a config object merged in *after* both
+halves are combined (`mergeConfig(merged, { resolve: { preserveSymlinks:
+false } })`) - if you instead tried to set it inside
+`configureEmberNativeVite()`'s returned config (the *first* argument to the
+first `mergeConfig` call), `@nativescript/vite`'s `true` would win, since
+`mergeConfig` prefers the second argument's scalar values.
+
+**Caveat**: `demo-app/package.json` needed `loader.js` added as a direct
+dependency (it's only a `peerDependency` of `ember-native`, and pnpm doesn't
+create the same peer-injection symlinks for `link:`-protocol local
+workspace packages that it does for real registry packages) - this was
+already true and unrelated to the `preserveSymlinks` fix; don't revert it
+if you ever flip `preserveSymlinks` back to `true` for some other reason,
+since that's the one case this recurring bug class actually *needs*
+`preserveSymlinks: true`-style resolution-from-the-symlink to work.
+
+## `source-map-js` - a different, non-pnpm-specific resolution bug
+
+Separately, `@nativescript/vite/helpers/commonjs-plugins.js` ships its own
+compat shim for `css-tree`'s dependency on `source-map-js`
+(`source-map-js-subpath-compat`, working around the exact same "acorn/
+css-what/source-map-js ESM misclassification" family of bugs documented in
+`NATIVESCRIPT_UPGRADE_NOTES.md`). Its `load()` hook returns a *virtual*
+module (`\0source-map-generator-virtual`) whose own body does `import * as
+sourceMapJs from 'source-map-js'` - but a virtual module has no real
+on-disk `fromFile`, so bare-specifier resolution has no real directory to
+walk up from, and even with `preserveSymlinks: false` this failed with
+`[vite:load-fallback] Could not load source-map-js`.
+
+**Fix**: added `public-hoist-pattern[]=source-map-js` to `.npmrc`, following
+the same pattern already used for `ember-source`/`ember-primitives` -
+hoisting it to the workspace root's real `node_modules/source-map-js` gives
+every resolver (including one starting from a virtual module with no real
+directory) a normal, findable path.
+
+## `loader.js` - three different ways to get CJS/ESM interop wrong
+
+`ember-native/src/setup.ts` needs the real `require`/`define` functions
+from `loader.js` (the classic AMD loader shim `ember-source` depends on at
+boot - see `NATIVESCRIPT_UPGRADE_NOTES.md` issue 7 for the
+`registerBundlerModules` stub this interacts with). `loader.js` is a
+classic v1 Ember addon (it contributes its content via `app.import()` in
+its own `index.js`, not via being `import`ed) that has no exports field.
+Getting a working reference to its `{ require, define }` object under
+Vite/Rollup took three attempts:
+
+1. **Bare specifier** (`import * as loader from 'loader.js'`): fails at
+   *build* time with `Failed to resolve entry for package 'loader.js'`,
+   because Embroider's compat adapter auto-upgrades v1 addons into a v2
+   "rewritten package" with no `main`/`module`/`exports` entry (v1 addons
+   aren't meant to be `import`ed directly - only consumed via their
+   Broccoli tree contributions).
+2. **Namespace import of the real file**
+   (`import * as loader from 'loader.js/dist/loader/loader.js'`): builds
+   fine, but *silently* breaks at runtime. `build.js` has no
+   statically-detectable named exports (it's a CJS file doing
+   `module.exports = { require, define }` inside a UMD factory function),
+   so `@rollup/plugin-commonjs` can't verify `loader.require`/
+   `loader.define` against a known export list - and instead of leaving
+   them as real property lookups, Rollup **inlines each access as a literal
+   `void 0`** with no build warning. `globalThis.requireModule =
+   loader.require` compiles to `globalThis.requireModule = void 0`, and the
+   crash only surfaces later, deep in `ember-native/src/setup-inspector-support.ts`,
+   as a cause-less `globalThis.define is not a function`.
+3. **Default import** (`import loaderModule from '...'`): also fails, but
+   at *build* time this time - `"default" is not exported by
+   .../loader.js/dist/loader/loader.js`. `build.js`'s internal nested
+   `require()` calls (a vendored grapheme-splitter helper) put it in
+   `@rollup/plugin-commonjs`'s lazy `"withRequireFunction"` mode, which only
+   produces a real `default` export via a synthetic entry-proxy module that
+   the plugin's own `resolveId` hook generates - but `@embroider/vite`'s
+   resolver has `enforce: 'pre'` and always claims resolution first, so
+   that proxy is never created (see the `json-to-ast` section below - same
+   underlying mechanism).
+
+**Fix** (what's actually in `ember-native/src/setup.ts` now): import the
+`__require` named export directly - `import { __require as requireLoader }
+from 'loader.js/dist/loader/loader.js'; const loader = requireLoader()`.
+`@rollup/plugin-commonjs`'s `transform` hook always adds a real `__require`
+export to a wrapped CJS module's *compiled output*, regardless of who
+resolved the id or what import style was used elsewhere - so this
+sidesteps the whole resolveId-ordering problem instead of depending on it.
+
+**If you see `X is not a function` or `X is undefined` for something that's
+supposed to come from a CJS package accessed via a namespace import**,
+suspect this exact Rollup optimization first. It produces *zero* build
+warnings and the failure surfaces arbitrarily far from the real cause.
+
+## `json-to-ast` - the same `withRequireFunction` problem, but we don't control the import site
+
+`@warp-drive/json-api/dist/index.js` does `import jsonToAst from
+'json-to-ast'` (a plain default import, not something we authored). Same
+root cause as loader.js's default-import attempt above: `json-to-ast`'s CJS
+bundle needs commonjs's synthetic entry-proxy for a real `default` export,
+and `@embroider/vite`'s `enforce: 'pre'` resolver claims resolution first,
+so the proxy is never generated - fails at build time with `"default" is
+not exported by json-to-ast/build.js`.
+
+Since we don't control `@warp-drive/json-api`'s source, the fix is a
+resolve alias pointing `json-to-ast` at a hand-written shim
+(`ember-native/utils/json-to-ast-esm-shim.js`) that does the same
+`__require`-based trick as the loader.js fix:
+```js
+import { __require } from 'json-to-ast/build.js';
+export default __require();
+```
+**The alias must use a regex, not a plain string**: `{ find: 'json-to-ast',
+replacement: ... }` also matches `json-to-ast/build.js` (Vite's string
+aliases match subpaths too, appending the remainder), which would redirect
+the shim's own subpath import right back at itself. Use `{ find:
+/^json-to-ast$/, replacement: ... }` for an exact match only.
+
+**Alias ordering also matters and isn't automatic**: `mergeConfig` appends
+`ember-native/utils/vite.config.js`'s `resolve.alias` entries (normalized to
+array form) *after* `@nativescript/vite`'s own, but Vite's alias resolution
+is first-match-wins. `demo-app/vite.config.ts` explicitly re-sorts the
+merged array (matching by `replacement` value) to move ours to the front,
+so they can't be shadowed by one of `@nativescript/vite`'s own broader
+platform-resolution aliases.
+
+## `structuredClone` - a bare top-level global reference in `@warp-drive`
+
+`@warp-drive`'s internal graph code does `const cp = structuredClone;` at
+*module top level* (not lazily inside a function). The NativeScript Android
+runtime's embedded V8 doesn't implement `structuredClone`, so this throws a
+`ReferenceError` the moment that module evaluates.
+
+The obvious fix - polyfilling `globalThis.structuredClone` from app code
+(`ember-native/src/setup.ts` already does this defensively, and a
+`demo-app/app/polyfills.ts` was tried too) - **does not work**, and this is
+worth understanding generally, not just for this one symptom:
+`@nativescript/vite`/`@embroider/vite` always emit a separate `vendor.mjs`
+chunk that the app's own `bundle.mjs` **statically imports from** (its
+first, hoisted statement). Real ES module semantics guarantee a module's
+static import dependencies are fully evaluated before a single line of its
+own body runs - there is no JS you can put in `bundle.mjs` (or anything it
+imports) that runs *before* `vendor.mjs`, because `vendor.mjs` **is** one of
+its dependencies. Any bare unguarded global reference in code that ends up
+in the vendor chunk can only be fixed at or before the vendor chunk itself.
+
+**Fix**: a genuine build-time text substitution, in
+`ember-native/utils/vite.config.js`, using `@rollup/plugin-replace`:
+```js
+replace({
+  preventAssignment: true,
+  delimiters: ['(?<![_$a-zA-Z0-9\\xA0-\\uFFFF.])', '(?![_$a-zA-Z0-9\\xA0-\\uFFFF])(?!\\.)'],
+  values: {
+    structuredClone: '(globalThis.structuredClone || function (value) { return JSON.parse(JSON.stringify(value)); })',
+  },
+})
+```
+Every bare `structuredClone` reference becomes this fallback expression
+*before* chunking/ordering is even relevant. Two things to get right if you
+copy this pattern for another global:
+- Vite's own `define` config can't express this: it's implemented via
+  esbuild's `define`, which only accepts an identifier or a JS literal as
+  the replacement value, not an arbitrary fallback expression - it throws
+  `Invalid define value (must be an entity name or JS literal)`.
+- The default `@rollup/plugin-replace` delimiters guard against matching
+  `structuredClone.foo` (a *following* dot) but not `foo.structuredClone` (a
+  *preceding* dot, i.e. an unrelated property of the same name) - without
+  adding `.` to the negative lookbehind too, the replacement text's own
+  `globalThis.structuredClone` reference gets recursively matched and
+  mangled into invalid syntax (`globalThis.(globalThis.structuredClone ||
+  ...)`).
+
+## `console.debug` - same class of bug, simpler fix
+
+Ember's own internals call `console.debug(...)` directly during
+`Application.create()` (i.e. on every app boot) - the NativeScript Android
+console global only implements `log`/`warn`/`error`. Unlike
+`structuredClone`, this one *is* fixable with a plain top-level polyfill in
+`ember-native/src/setup.ts` (`if (typeof console.debug === 'undefined')
+{ console.debug = ... }`), because it's reached from `bundle.mjs`'s own
+code path (via `Application.create()`), not from inside the eagerly-loaded
+`vendor.mjs` dependency chunk. The general lesson: whether a "polyfill a
+missing global from app code" fix works at all depends entirely on which
+chunk the code needing the polyfill lands in relative to the chunk setting
+it up - always verify on-device, don't assume by analogy.
+
+## Test files got bundled into the production app - `staticAppPaths`
+
+`app/test.js` / `app/tests/**` (this project's actual QUnit test
+entry/suite - see `app/tests/test-helper.ts`) were getting eagerly imported
+into **every** regular `nativescript build/debug android`, not just
+`nativescript test android`, silently replacing the real app's UI with
+`@nativescript/unit-test-runner`'s "Unit Test Runner" screen.
+
+Root cause: NativeScript requires every native-facing file (pages, native
+setup, *and* tests) to live under `app/`, unlike classic ember-cli's
+convention of a separate top-level `tests/` directory. Embroider's
+`getAppFiles()` (`@embroider/core/dist/src/virtual-entrypoint.js`) does a
+raw `walk-sync` over the **entire** `app/` directory to build the
+classic-resolver module registry every `app/app.js` build eagerly imports
+(`Resolver.withModules(compatModules)`) - it has a small hardcoded ignore
+list (`app.js`, `engine.js`, `assets`, `testem.js`, `node_modules`) but
+nothing for `test.js`/`tests/`. Two important dead ends first:
+- `EmberApp`'s `trees.app` (a Broccoli-level exclude via `broccoli-funnel`)
+  has **no effect** here - `getAppFiles()` reads straight from the raw
+  on-disk `app/` directory, bypassing the classic Broccoli pipeline
+  entirely.
+- Gating just the `runTestApp(...)` *call* at runtime doesn't help either:
+  `@nativescript/vite` always sets Rollup's `inlineDynamicImports: true`
+  (only 3 fixed output files - `bundle`/`vendor`/`runtime` - are ever
+  loaded on device), so even a *dynamic* `import()` inside the gated
+  branch still gets its target module's top-level code eagerly evaluated
+  at app boot - proved empirically by wrapping the qunit/test-helpers
+  imports in `import()` and watching the crash persist unchanged.
+
+**Fix**: `demo-app/ember-cli-build.cjs` passes a third argument to
+`compatBuild(app, buildOnce, { staticAppPaths: ['tests', 'test.js'] })`.
+`staticAppPaths` is Embroider's supported mechanism for exactly this: paths
+listed there are excluded from `otherAppFiles` (`@embroider/core/dist/src/app-files.js`)
+on the assumption the app wires them up itself - which `app/test.js`
+already does (its own `require.context` scan over `-test.*` files).
+`nativescript test android` (a separate, not-yet-working path - see "still
+open" below) is unaffected, since it doesn't go through this registry.
+
+## `console.debug is not a function` in `setup-inspector-support.ts` - only in release builds
+
+The above fixes were enough for `nativescript build/debug android`
+(regular debug builds), but `--release` builds still crashed identically.
+Bisected (see "Debugging technique" below) to
+`@nativescript/core/debugger/webinspector-dom.js` - **third-party code, not
+ember-native's own** - which applies a `@DomainDispatcher('DOM')` decorator
+to a class **at its own module top level**:
+```js
+DOMDomainDebugger = __decorate([inspectorCommands.DomainDispatcher('DOM'), ...], DOMDomainDebugger);
+```
+`DomainDispatcher(domain)` returns `(klass) => __registerDomainDispatcher(domain, klass)`,
+and `__decorate` calls that closure immediately - so merely **importing**
+`@nativescript/core/debugger/webinspector-dom` (which
+`ember-native/src/setup-inspector-support.ts` does at its own top level)
+calls `__registerDomainDispatcher`, a native-injected global that only the
+`"-with-inspector"` Android runtime variant provides. NativeScript's build
+log shows exactly this distinction and easy to miss:
+```
++ adding nativescript runtime package dependency: nativescript-optimized-with-inspector   # debug
++ adding nativescript runtime package dependency: nativescript-optimized                  # release
+```
+Release builds intentionally use the plain runtime, so
+`__registerDomainDispatcher` genuinely doesn't exist there - this isn't a
+Vite bug, it's ember-native's inspector-support code never having been
+gated for release builds at all (plausibly this always crashed release
+builds even under webpack and nobody had built an unsigned/debug-keystore
+release APK to notice, since normal debug-signed testing never exercises
+this).
+
+Wrapping just the *call* to `setupInspectorSupport(ENV)` in try/catch
+(`demo-app/app/native/setup-ember-native.ts`) is good practice (devtools
+wiring should never be allowed to crash the real app) but **does not fix
+this crash** - the throw happens at import time, before the call. The
+import itself has to not happen in a release build.
+
+**Fix**: gate the *import* with `import.meta.env.DEV` (Vite's build-time
+constant - substituted before tree-shaking, so unlike a runtime condition
+this lets Rollup prove the whole branch, including the import, is
+unreachable dead code in a production build and remove it from the bundle
+entirely, not just defer it at runtime):
+```js
+if (import.meta.env.DEV) {
+  import('ember-native/setup-inspector-support').then(({ setupInspectorSupport }) => {
+    try { setupInspectorSupport(ENV); } catch (e) { console.error(...); }
+  });
+}
+```
+Needed `/// <reference types="vite/client" />` added to
+`demo-app/references.d.ts` for TypeScript to know about `import.meta.env`.
+
+## Debugging technique: bisecting a crash inside `.ns-vite-build/*.mjs`
+
+Every crash in this document surfaced as the exact same generic,
+cause-less on-device error:
+```
+Cannot instantiate module .../app/bundle.mjs
+Error: Module evaluation promise rejected: .../app/vendor.mjs
+```
+(or `bundle.mjs` directly, once `vendor.mjs` itself was clean). Neither
+`adb logcat` nor the on-device error overlay ever names the real
+underlying exception or a useful line number for these ("File:
+(<unknown>:1:265)" is meaningless - it's the position inside the runtime's
+generic `require()` wrapper, not the real code). This is a fundamentally
+different debugging situation from `NATIVESCRIPT_UPGRADE_NOTES.md`'s
+console.log-bisection technique, because these are ES modules loaded via a
+native `import()` whose rejection reason isn't surfaced at all, not CJS
+`require()` calls you can interleave logging into one at a time.
+
+What actually worked, for both the (readable, unminified) dev build and the
+(minified, single-line) release build:
+1. Copy `.ns-vite-build/bundle.mjs` (or `vendor.mjs`) directly into
+   `platforms/android/app/src/main/assets/app/`, edit it in place, and
+   re-run **only** `./gradlew assembleDebug` (or `assembleRelease -Prelease
+   -PksPath=... -PksPassword=... -Palias=... -Ppassword=...` - note these
+   are the actual Gradle property names in `platforms/android/app/build.gradle`;
+   the `nativescript build android --release --key-store-*` CLI flags are
+   different names for the same thing). This takes ~20-30s per iteration
+   instead of the ~3min full `nativescript build android` (which re-runs
+   the whole Vite/Embroider prebuild pipeline unnecessarily for this).
+2. Insert `console.log('checkpoint N')` at *known-safe* points - for the
+   unminified dev build, lines matching `^(function|const|var|let|class|export)`
+   are almost always real top-level statement boundaries; for the minified
+   release build, track bracket/paren/bracket depth and string state
+   character-by-character and only split on top-level `;` (a naive
+   line-based approach doesn't work on single-line minified output, and a
+   naive *unicode-unaware* depth tracker will get confused by regex
+   literals and template interpolation - if checkpoints fire out of order
+   or duplicate, suspect the tokenizer, not the app).
+3. Binary-search which checkpoint stops firing to narrow the crash site,
+   then read the surrounding code directly (a full source map round-trip
+   wasn't necessary for any of the bugs found this pass).
+4. Once a suspect line is found, wrap *just that statement* in
+   `try { ... } catch (e) { console.log('FAILED', e.message, e.stack); }`
+   and rebuild once more to get the real `Error.message` - this is what
+   actually identified `console.debug is not a function` and
+   `__registerDomainDispatcher is not defined` (as opposed to just knowing
+   "something near line X throws").
+
+**Always delete `.ns-vite-build/`, `tmp/`, `node_modules/.embroider/`, and
+especially `platforms/` before trusting a "successful" build.** A stale
+`platforms/android/app/src/main/assets/app/` directory from a previous
+(possibly pre-migration, webpack-based) build will make Gradle's
+`UP-TO-DATE` caching silently reuse old JS content instead of the real
+current Vite output - several of the debugging dead-ends during this pass
+came from re-testing against exactly this kind of stale state without
+realizing it.
+
+## A real, upstream `nativescript` CLI bug: `build`/`test` never copy the Vite output
+
+Completely independent of anything above: a **truly clean** `platforms/`
+directory (freshly created, never previously built) fails
+`nativescript build android` at the Gradle/Static-Binding-Generator step
+with:
+```
+Error executing Static Binding Generator: Couldn't find '.../sbg-bindings.txt' bindings input file.
+```
+because `platforms/android/app/src/main/assets/app/` ends up **completely
+empty** (just `package.json`) even though the Vite build genuinely
+succeeded and `.ns-vite-build/{bundle,vendor}.mjs` exist on disk. Traced to
+`nativescript/lib/services/bundler/bundler-compiler-service.js`:
+- `compileWithWatch` (used by `nativescript debug android`, i.e. the watch
+  mode) listens for an IPC message from the vite child process
+  (`@nativescript/vite/helpers/ns-cli-plugins.js`'s `cliPlugin`, whose
+  `closeBundle()` hook does `process.send({ emittedFiles, ... })`) and only
+  *then* calls `copyViteBundleToNative(distOutput, destDir)` to copy
+  `.ns-vite-build` into the native project.
+- `compileWithoutWatch` (used by `nativescript build android` **and**
+  `nativescript test android`, i.e. every non-interactive invocation) never
+  calls `copyViteBundleToNative` at all - it just waits for the vite child
+  process to exit with code 0 and resolves.
+
+This is a real gap in `nativescript`/`@nativescript/vite`'s own
+integration (webpack never needed this: `@nativescript/webpack` writes
+directly into the platform destination itself, so there was never anything
+for the CLI to copy after the fact). It only went unnoticed here because a
+`platforms/` directory that already had *some* content (even stale content
+from before the migration) let Gradle's incremental caching quietly reuse
+the old assets, masking the fact that nothing new was ever copied.
+
+**Fix**: patched via `pnpm patch nativescript@9.0.6`
+(`patches/nativescript@9.0.6.patch`, registered in the root `package.json`'s
+`pnpm.patchedDependencies`, same mechanism as the existing
+`@nativescript/core`/`@nativescript/unit-test-runner` patches) - added the
+same `copyViteBundleToNative(distOutput, destDir)` call to
+`compileWithoutWatch`'s `close` handler, gated on `this.getBundler() ===
+'vite'`. If `nativescript`/`@nativescript/vite` fix this upstream in a
+later version, this patch (and the version pin in
+`pnpm.patchedDependencies`) needs to be dropped, not just left stacked on
+top.
+
+## What did NOT need to change
+
+- `demo-app/babel.config.cjs` - picked up automatically by
+  `@rollup/plugin-babel`'s default config-file discovery.
+- `demo-app/ember-cli-build.cjs`'s use of `compatBuild(app, buildOnce)` -
+  already written for `@embroider/vite` (predates this migration); only the
+  third `staticAppPaths` argument was added.
+- `ember-native/src/setup.ts`'s `registerBundlerModules` stub (see
+  `NATIVESCRIPT_UPGRADE_NOTES.md` issue 7) - `@nativescript/vite`'s own
+  `createBundlerContextPlugin` calls the *real* `global.registerBundlerModules`
+  the same way webpack's `require.context`-based one did.
+- Node built-in polyfill shims (`stream-browserify`, `https-browserify`,
+  `buffer`, etc.) in `demo-app/package.json` - left in place un-audited;
+  Vite's dependency graph never surfaced a need to remove them.
+
+## Still open (see `ember-native-todo.md` for the full breakdown)
+
+1. **Release build launch-screen hang** (see "Current status" above) - JS
+   evaluates cleanly with no exception, but the UI never visibly transitions
+   past the NativeScript launch screen. Needs its own bisection pass.
+2. `nativescript test android` / CI's `app-test.yml` - `@nativescript/unit-test-runner`'s
+   own `bundle-app-root.xml`/`bundle-main-page.xml` live inside
+   `node_modules/@nativescript/unit-test-runner`, outside the `app/`
+   directory `@nativescript/vite`'s `createBundlerContextPlugin` walks;
+   nothing wires that path up for Vite yet. The old webpack config
+   explicitly added it to its `xml` module rule's `include`.
+3. Porting `ember-native/utils/hmr-loader.js` (the webpack *loader* that
+   appends `import.meta.hot.accept()` boilerplate to route/controller/
+   template source) to a real Vite `transform` hook plugin - not done in
+   this pass, so fine-grained route/controller/template HMR doesn't fire
+   yet under Vite (`@nativescript/vite`'s own generic HMR still applies at
+   the bundler level, independent of this).
+4. Deciding whether to keep `@nativescript/webpack` support in the addon
+   long-term or deprecate it now that Vite is proven to work for the main
+   build/debug path.
+5. If `nativescript`/`@nativescript/vite` ship a fix for the missing
+   `copyViteBundleToNative` call in `compileWithoutWatch` (see above), drop
+   `patches/nativescript@9.0.6.patch`.
+
+## Prerequisite: verify on a real build, same as the NativeScript 9.x upgrade
+
+Config-level success (`vite build` exiting 0, even a full `nativescript
+build android` exiting 0) does not mean the app boots, and does not mean a
+*previous* successful-looking run wasn't actually testing stale cached
+output from before your change. Every time you touch this configuration:
+```bash
+cd demo-app
+rm -rf node_modules/.embroider tmp .ns-vite-build platforms   # do not skip platforms/
+npx nativescript build android
+adb uninstall org.nativescript.embernativedemo
+adb install platforms/android/app/build/outputs/apk/debug/app-debug.apk
+adb shell am start -n org.nativescript.embernativedemo/com.tns.NativeScriptActivity
+adb shell dumpsys activity activities | grep topResumedActivity   # NativeScriptActivity, not ErrorReportActivity
+adb logcat -d --pid=<pid>   # or screencap -p to see the on-device error UI / real content
+```

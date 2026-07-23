@@ -19,7 +19,15 @@ function getLatestChange(obj: any) {
 
 let modulePrefix!: string;
 let podModulePrefix!: string;
-if ((module as any).hot) {
+// `import.meta.hot` is Vite's native HMR flag. `module.hot` is webpack's
+// equivalent; guarded with `typeof module !== 'undefined'` because `module`
+// isn't declared at all in a real ESM/Vite bundle (referencing it directly
+// would throw a ReferenceError during module evaluation, breaking app boot
+// on every build, not just dev).
+const hotModuleReplacementActive =
+  Boolean((import.meta as any).hot) ||
+  (typeof module !== 'undefined' && Boolean((module as any).hot));
+if (hotModuleReplacementActive) {
   const ModuleMap = new Map();
 
   (window as any).emberHotReloadPlugin = {
@@ -113,7 +121,7 @@ if ((module as any).hot) {
   };
 }
 
-export default class WebpackHotReload extends Service {
+export default class ViteHotReload extends Service {
   declare container: any;
   @service() router!: RouterService;
 
@@ -237,11 +245,11 @@ export default class WebpackHotReload extends Service {
 }
 
 // Don't remove this declaration: this is what enables TypeScript to resolve
-// this service using `Owner.lookup('service:hot-reload')`, as well
-// as to check when you pass the service name as an argument to the decorator,
-// like `@service('hot-reload') declare altName: HotReloadService;`.
+// this service using `Owner.lookup('service:ember-native/vite-hot-reload')`,
+// as well as to check when you pass the service name as an argument to the
+// decorator, like `@service('ember-native/vite-hot-reload') declare altName: ViteHotReload;`.
 declare module '@ember/service' {
   interface Registry {
-    'hot-reload': WebpackHotReload;
+    'ember-native/vite-hot-reload': ViteHotReload;
   }
 }

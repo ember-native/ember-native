@@ -21,7 +21,7 @@
 !README.md
 !references.d.ts
 !tsconfig.json
-!webpack.config.js
+!vite.config.ts
 !karma.conf.js
 !tsconfig.spec.json
 !config.js

@@ -1,7 +1,7 @@
 import ApplicationInstance from '@ember/application/instance';
 
 function patchResolver(application: ApplicationInstance) {
-  application.__container__.lookup('service:vite-hot-reload');
+  application.__container__.lookup('service:ember-native/vite-hot-reload');
   const resolver =
     (application.__registry__.resolver as any)?._fallback ||
     (application.__registry__.fallback?.resolver as any)._fallback ||

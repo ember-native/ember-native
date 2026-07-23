@@ -1,4 +1,38 @@
-import * as loader from 'loader.js';
+// A direct subpath import, not the bare `loader.js` specifier: loader.js is a
+// classic v1 Ember addon (contributes its content via `app.import()`/the
+// vendor tree, see its own index.js). Embroider's compat adapter auto-upgrades
+// v1 addons into a v2 "rewritten package" with no `main`/`module`/`exports`
+// entry (they're not meant to be `import`ed directly), so resolving the bare
+// package name under @embroider/vite's real resolver fails with "Failed to
+// resolve entry for package 'loader.js'". The subpath below reaches the real
+// file directly, sidestepping the addon-rewrite redirect entirely.
+//
+// This imports the `__require` binding, not a default/namespace import of
+// the module itself - two things both fail here:
+// - `import * as loader`: build.js has no statically-detectable named
+//   exports (it's a CJS file assigning `module.exports = { require, define }`
+//   from inside a UMD factory function), so @rollup/plugin-commonjs can't
+//   verify a namespace import's `.require`/`.define` property accesses
+//   against a known export list - and rather than leaving them as real
+//   runtime property lookups, Rollup inlines each as a literal `void 0`,
+//   silently turning `loader.require`/`loader.define` into `undefined` with
+//   no build warning or runtime error at the call site (only later, when
+//   something tries to *call* `undefined`).
+// - `import loader from '...'` (default import): build.js's internal nested
+//   `require()` calls (a vendored grapheme-splitter helper) put it in
+//   @rollup/plugin-commonjs's lazy "withRequireFunction" wrapped mode, which
+//   only emits a real `default` export via a synthetic entry-proxy module
+//   that the plugin's own `resolveId` hook generates - but @embroider/vite's
+//   resolver has `enforce: 'pre'` and always claims resolution first, so
+//   that proxy is never created (see json-to-ast-esm-shim.js for the same
+//   failure mode, in a case where we don't control the import site and have
+//   to fix it via an alias instead).
+// `__require` is different: it's a *named* export the transform always adds
+// to the wrapped module's own compiled output (regardless of who resolved
+// the id), so importing it directly and calling it ourselves sidesteps the
+// whole resolveId-ordering problem.
+import { __require as requireLoader } from 'loader.js/dist/loader/loader.js';
+const loader = requireLoader() as unknown as { require: unknown; define: unknown };
 import { registerElements } from './dom/setup-registry.ts';
 import { SimpleDynamicAttribute } from '@glimmer/runtime';
 import ElementNode from './dom/nodes/ElementNode.ts';
@@ -22,6 +56,19 @@ globalThis.warn = (...args) => console.warn(...args);
 if (typeof console.warn === 'undefined') {
   console.warn = function(...args: any[]) {
     console.log('[WARN]', ...args);
+  };
+}
+
+// Polyfill console.debug if not available. The NativeScript Android
+// runtime's console global only implements log/warn/error - Ember's own
+// internals (reached from `Application.create()`, i.e. on every app boot,
+// not just in some rare code path) call `console.debug(...)` directly,
+// which throws `console.debug is not a function` and aborts app boot with
+// no further detail (the native module loader only reports it as a generic
+// "Module evaluation promise rejected").
+if (typeof console.debug === 'undefined') {
+  console.debug = function(...args: any[]) {
+    console.log('[DEBUG]', ...args);
   };
 }
 

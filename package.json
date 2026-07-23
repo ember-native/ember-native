@@ -36,7 +36,8 @@
     },
     "patchedDependencies": {
       "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch",
-      "@nativescript/core@9.0.20": "patches/@nativescript__core@9.0.20.patch"
+      "@nativescript/core@9.0.20": "patches/@nativescript__core@9.0.20.patch",
+      "nativescript@9.0.6": "patches/nativescript@9.0.6.patch"
     },
     "onlyBuiltDependencies": [
       "@nativescript/core",
