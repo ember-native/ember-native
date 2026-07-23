@@ -30,8 +30,11 @@ section before trusting any change here.
   check whether `Application.launchEvent` fires at all in release/optimized
   mode, check `nativescript-optimized` vs `nativescript-optimized-with-inspector`
   runtime differences beyond just the inspector globals already found below).
-- `nativescript test android` / CI's `app-test.yml`: **not addressed** -
-  tracked separately, see `ember-native-todo.md` sub-task 3.
+- `nativescript test android` / CI's `app-test.yml`: **confirmed this still
+  requires `@nativescript/webpack`** (no equivalent exists in
+  `@nativescript/vite`) and **verified working** on a real emulator via a
+  second, webpack-only NativeScript config selected with `--config` - see
+  "`nativescript test android` still requires webpack" below.
 - Coarse-grained route/controller/template hot reload
   (`src/services/vite-hot-reload.ts` +
   `src/instance-initializers/vite-hot-reload.ts`, formerly
@@ -188,6 +191,28 @@ from 'loader.js/dist/loader/loader.js'; const loader = requireLoader()`.
 export to a wrapped CJS module's *compiled output*, regardless of who
 resolved the id or what import style was used elsewhere - so this
 sidesteps the whole resolveId-ordering problem instead of depending on it.
+
+**This one bit `nativescript test android` too** (see "still requires
+webpack" below): `__require` only exists because of `@rollup/plugin-commonjs`;
+webpack never synthesizes it, so the exact same import resolved to
+`undefined` there, crashing with `(0, ...__require) is not a function`.
+`setup.ts` now imports *both* forms - `import { __require as requireLoader }
+from '...'; import * as loaderModule from '...'; const loader = requireLoader
+? requireLoader() : loaderModule;` - and picks whichever one its actual
+bundler populated. Webpack's namespace-import interop for a CJS module gives
+a real object with genuine runtime property lookups (`.require`/`.define`
+aren't statically inlined the way Rollup does it), so the fallback branch
+resolves correctly. This has to be a *namespace* import, not the *default*
+import attempt #3 above already ruled out: even though `loaderModule` is
+only ever read when `requireLoader` is falsy (webpack), Rollup still
+statically resolves every import declaration it sees regardless of which
+runtime branch is actually taken - a default import here hits the exact
+`withRequireFunction` proxy problem from attempt #3 and fails Vite's build
+outright with `"default" is not exported by .../loader.js` (confirmed by
+trying it - `nativescript build android` broke immediately). A namespace
+import doesn't have that failure mode; at worst its properties are silently
+`undefined` if actually read, and this code only reads it when `webpack`,
+not Vite/Rollup, is the active bundler.
 
 **If you see `X is not a function` or `X is undefined` for something that's
 supposed to come from a CJS package accessed via a namespace import**,
@@ -513,22 +538,127 @@ This service implements *coarse-grained* HMR: on a route/controller/template
 module replacement it clears the relevant container caches and calls
 `router.refresh()`. It only activates in response to
 `window.emberHotReloadPlugin.canAcceptNew()`/`.subscribe()` calls, which
-currently come from nothing in the Vite path (see item 3 below) - so today
+currently come from nothing in the Vite path (see item 2 below) - so today
 the ported service is correct and wired up, but dormant until something
 drives it. It does not need further porting; it's already bundler-agnostic.
+
+## `nativescript test android` still requires webpack (`ember-native-todo.md` sub-task 3)
+
+Confirmed: `@nativescript/unit-test-runner` only wires up its test
+entrypoint and karma integration through `@nativescript/webpack`'s hook
+convention. Its `nativescript.webpack.js` (auto-loaded by
+`@nativescript/webpack` from a dependency's package root) calls
+`webpack.chainWebpack((config, env) => { if (env.unitTesting) {...} })` to
+swap the whole `bundle` entry over to `test.ts`/`test.js`, prepend
+`@nativescript/core/globals`/`bundle-entry-points`, unignore XML files under
+both `app/tests/` and the runner's own
+`node_modules/@nativescript/unit-test-runner`, and wire in coverage/AOT
+tweaks. `env.unitTesting` comes from the `nativescript` CLI's own `test`
+command (`TestCommandBase.execute` in
+`nativescript/lib/commands/test.js`: `this.$options.env.unitTesting =
+true;`), which then calls the same `run`/prepare/bundle pipeline as
+`build`/`debug` - there's no separate "test bundler" concept at the CLI
+level, just this one env flag. **`@nativescript/vite` has no equivalent at
+all** - grepping its source (`node_modules/@nativescript/vite`) for
+`unitTesting`/`karma`/`test.ts` turns up nothing. It doesn't know what a
+test entrypoint is, so switching the whole project to `bundler: 'vite'` (as
+`nativescript.config.ts` now does for `build`/`debug android`) makes
+`nativescript test android` silently bundle the *regular app* instead of
+the test harness - the CLI itself has no way to detect this and complain.
+
+**Fix - a second, webpack-only NativeScript config used only for testing:**
+- `demo-app/nativescript.test.config.ts` (new): the same fields as
+  `nativescript.config.ts`, except `bundler: 'webpack'` and
+  `bundlerConfigPath: 'webpack.config.js'`.
+- `demo-app/webpack.config.js` (restored - deleted by the `a134ee4` vite
+  switch): the same config already proven working for testing before that
+  commit (see PR #393's commit message - "verified locally... 7/7 tests
+  passing"), lightly cleaned of leftover debug `console.log`s.
+- `demo-app/package.json`'s `test`/`debug-test` scripts and
+  `.github/workflows/app-test.yml`'s "run tests" step now pass `--config
+  nativescript.test.config.ts` explicitly. `build`/`debug android` keep
+  using the default `nativescript.config.ts` (vite) - only `test android`
+  opts into the webpack-only override.
+- `@nativescript/webpack`/`babel-loader` devDependencies, dropped from
+  `demo-app/package.json` by the vite switch, are back.
+
+This works because the `nativescript` CLI's project config isn't a single
+global file: `ProjectConfigService.detectProjectConfigs()`
+(`nativescript/lib/services/project-config-service.js`) checks
+`process.env.NATIVESCRIPT_CONFIG_NAME` / the `--config`/`-c` CLI flag
+*before* falling back to `nativescript.config.ts`, and `getBundler()`
+(`bundler-compiler-service.js`) re-reads `bundler`/`bundlerConfigPath` fresh
+from whichever config resolves, on every command invocation - there's no
+caching across CLI invocations to worry about.
+
+Getting the actual test *run* green (not just the webpack build compiling)
+surfaced two further bugs, both real and both independent of vite/webpack
+per se, but only ever exercised via the now-restored webpack test path (it
+was effectively dead/unbuilt between the vite switch and this pass):
+
+1. **`ember-native/src/setup.ts`'s `loader.js` import didn't work under
+   webpack** - see the addendum in the "`loader.js`" section above. Fixed
+   there by falling back to a namespace import when the Rollup-only
+   `__require` named export isn't populated.
+2. **QUnit's own browser-environment auto-detection is fooled by
+   `ember-native`'s DOM shim.** `app/test.js` imports
+   `./native/setup-ember-native` (which calls `ember-native`'s `setup()`,
+   installing `globalThis.window = globalThis` and `globalThis.document =
+   new DocumentNode()` - the fake DOM Glimmer rendering needs, not a real
+   browser DOM) before `./tests/test-helper` gets a chance to import
+   `qunit`/`ember-qunit`. `qunit.js` runs two separate environment checks
+   once, at its own module-load time:
+   - An HTML-reporter bootstrap gated on `if (!window || !document)
+     return;` ("don't load the HTML Reporter on non-browser
+     environments") - with both already truthy, it proceeded and crashed
+     with `TypeError: elem.addEventListener is not a function` the moment
+     it tried to attach a real DOM listener to NativeScript's `globalThis`.
+   - A separate `QUnit.urlParams` populator gated on `window &&
+     window.location` alone. `ember-qunit`'s own bundled
+     `qunit-configuration.js` unconditionally reads
+     `QUnit.urlParams.devmode` right after import - so naively fixing the
+     first bug (e.g. by just delaying `document`) trades it for `Cannot
+     read properties of undefined (reading 'devmode')` instead.
+
+   Fixed with a new `app/tests/qunit-browser-shim.js`, imported first
+   (before the bare `qunit` package, which is imported before
+   `./native/setup-ember-native`) in `app/test.js`: sets `globalThis.window
+   = { location: {...} }` - enough to satisfy the `urlParams` populator -
+   without setting `document`, so the HTML-reporter check still correctly
+   reads this as a non-browser environment. `ember-native`'s `setup()`
+   (imported right after) overwrites `window` with the real `globalThis`
+   reference and adds `document` for the rest of the app/Ember/Glimmer
+   rendering; qunit only reads these globals once, at its own import time,
+   so it never notices the swap. **Import order in `app/test.js` is
+   load-bearing** - read that file's own comment before reordering
+   anything in it or in `app/tests/test-helper.ts`.
+
+Verified end-to-end on a real Android emulator (`sdk_gphone64_arm64`, API
+33) via `cd demo-app && npx nativescript test android --emulator --config
+nativescript.test.config.ts`, from a fresh `adb uninstall` each time: real
+webpack build, real Gradle build, real install, real app launch, real
+karma/socket.io connection from the device back to the host, `TOTAL: 7
+SUCCESS`, process exit code `0`.
+
+**If you run this locally and it hangs forever after printing `TOTAL: 7
+SUCCESS` instead of exiting** (or exits nonzero via a `TypeError: The "code"
+argument must be of type number. Received type string ('SIGTERM')` coming
+from `nativescript`'s `karma-execution.js`/`karma`'s `Server.close`), that's
+`demo-app/karma.conf.js`'s `singleRun: process.env.CI` - karma only
+self-terminates after a single run when `CI` is set, which GitHub Actions
+always exports for every job but a local shell normally doesn't. Set
+`CI=true` when reproducing this locally (`CI=true npx nativescript test
+android --emulator --config nativescript.test.config.ts`); confirmed this
+produces a clean `0` exit immediately after `TOTAL: 7 SUCCESS`, no hang and
+no crash. This is existing, unrelated-to-this-migration behavior, not
+something this pass changed.
 
 ## Still open (see `ember-native-todo.md` for the full breakdown)
 
 1. **Release build launch-screen hang** (see "Current status" above) - JS
    evaluates cleanly with no exception, but the UI never visibly transitions
    past the NativeScript launch screen. Needs its own bisection pass.
-2. `nativescript test android` / CI's `app-test.yml` - `@nativescript/unit-test-runner`'s
-   own `bundle-app-root.xml`/`bundle-main-page.xml` live inside
-   `node_modules/@nativescript/unit-test-runner`, outside the `app/`
-   directory `@nativescript/vite`'s `createBundlerContextPlugin` walks;
-   nothing wires that path up for Vite yet. The old webpack config
-   explicitly added it to its `xml` module rule's `include`.
-3. `ember-native/utils/hmr-loader.js` (the webpack *loader* that would
+2. `ember-native/utils/hmr-loader.js` (the webpack *loader* that would
    append `import.meta.hot.accept()`/`canAcceptNew()` boilerplate to
    route/controller/template source, the only caller of
    `vite-hot-reload.ts`'s `canAcceptNew`) and `utils/babel-plugin.ts` (a
@@ -546,10 +676,11 @@ drives it. It does not need further porting; it's already bundler-agnostic.
    doing (`@nativescript/vite`'s own generic HMR still applies at the
    bundler level, independent of this) but scope it as its own item rather
    than assuming it's a regression to fix.
-4. Deciding whether to keep `@nativescript/webpack` support in the addon
-   long-term or deprecate it now that Vite is proven to work for the main
-   build/debug path.
-5. If `nativescript`/`@nativescript/vite` ship a fix for the missing
+3. Deciding whether to keep `@nativescript/webpack` support in the addon
+   long-term (now required by both `nativescript test android` and by any
+   consuming app not yet on Vite) or deprecate it now that Vite is proven to
+   work for the main build/debug path - see `ember-native-todo.md` sub-task 4.
+4. If `nativescript`/`@nativescript/vite` ship a fix for the missing
    `copyViteBundleToNative` call in `compileWithoutWatch` (see above), drop
    `patches/nativescript@9.0.6.patch`.
 
@@ -569,3 +700,5 @@ adb shell am start -n org.nativescript.embernativedemo/com.tns.NativeScriptActiv
 adb shell dumpsys activity activities | grep topResumedActivity   # NativeScriptActivity, not ErrorReportActivity
 adb logcat -d --pid=<pid>   # or screencap -p to see the on-device error UI / real content
 ```
+
+This applies just as much when switching *between* `nativescript build/debug android` (Vite) and `nativescript test android --config nativescript.test.config.ts` (webpack) on the same checkout, since both write into the same `platforms/android/app/src/main/assets/app/` - running one right after the other without wiping `platforms/` first was observed to produce a stale mix of `.mjs` (Vite) and `.js` (webpack) output that crashed on launch with `Failed to load component from module: bundle-app-root`, a *different* error from any of the ones documented above and unrelated to this migration's actual code changes (confirmed by re-running from a clean `platforms/` immediately after).

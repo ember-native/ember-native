@@ -7,8 +7,8 @@
 // resolve entry for package 'loader.js'". The subpath below reaches the real
 // file directly, sidestepping the addon-rewrite redirect entirely.
 //
-// This imports the `__require` binding, not a default/namespace import of
-// the module itself - two things both fail here:
+// Neither a namespace nor a default import of the module itself works under
+// @nativescript/vite (Rollup):
 // - `import * as loader`: build.js has no statically-detectable named
 //   exports (it's a CJS file assigning `module.exports = { require, define }`
 //   from inside a UMD factory function), so @rollup/plugin-commonjs can't
@@ -27,12 +27,30 @@
 //   that proxy is never created (see json-to-ast-esm-shim.js for the same
 //   failure mode, in a case where we don't control the import site and have
 //   to fix it via an alias instead).
-// `__require` is different: it's a *named* export the transform always adds
-// to the wrapped module's own compiled output (regardless of who resolved
-// the id), so importing it directly and calling it ourselves sidesteps the
-// whole resolveId-ordering problem.
+// `__require` sidesteps both: it's a *named* export the transform always
+// adds to the wrapped module's own compiled output (regardless of who
+// resolved the id), so importing it directly and calling it ourselves avoids
+// the whole resolveId-ordering problem.
+//
+// @nativescript/webpack (still used for `nativescript test android`, see
+// nativescript.test.config.ts/webpack.config.js and VITE_MIGRATION_NOTES.md)
+// has no `@rollup/plugin-commonjs`, so it never synthesizes `__require` -
+// there `requireLoader` below is simply `undefined` (a normal
+// missing-export property read; webpack warns, doesn't error). Fall back to
+// a namespace import there instead: webpack's namespace-import interop for a
+// CJS module is a real runtime object (`.require`/`.define` are genuine
+// property lookups, not statically inlined the way Rollup does it), so it
+// resolves correctly. This can't just be `import loaderModule from '...'`
+// (a *default* import) instead: unlike the namespace import above, Rollup's
+// default-import handling for this file hits the `withRequireFunction`
+// proxy problem described above and fails the *build* outright with
+// `"default" is not exported by .../loader.js`, even though `requireLoader`
+// (checked first, below) would've made this branch dead code at runtime -
+// Rollup still statically resolves every import it sees regardless of
+// which branch runtime logic ends up taking.
 import { __require as requireLoader } from 'loader.js/dist/loader/loader.js';
-const loader = requireLoader() as unknown as { require: unknown; define: unknown };
+import * as loaderModule from 'loader.js/dist/loader/loader.js';
+const loader = (requireLoader ? requireLoader() : loaderModule) as unknown as { require: unknown; define: unknown };
 import { registerElements } from './dom/setup-registry.ts';
 import { SimpleDynamicAttribute } from '@glimmer/runtime';
 import ElementNode from './dom/nodes/ElementNode.ts';

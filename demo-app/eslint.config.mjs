@@ -61,7 +61,7 @@ export default ts.config(
      * https://eslint.org/docs/latest/use/configure/ignore
      */
     {
-        ignores: ['dist/', 'node_modules/', 'coverage/', '!**/.*', 'hooks/', 'platforms', 'App_Resources', 'references.d.ts', 'nativescript.config.ts'],
+        ignores: ['dist/', 'node_modules/', 'coverage/', '!**/.*', 'hooks/', 'platforms', 'App_Resources', 'references.d.ts', 'nativescript.config.ts', 'nativescript.test.config.ts'],
     },
     /**
      * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options

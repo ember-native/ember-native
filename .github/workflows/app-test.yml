@@ -85,4 +85,4 @@ jobs:
           disable-animations: true
           script: |
             adb uninstall "org.nativescript.embernativedemo" || echo "pass";
-            cd demo-app && npx -y nativescript test android --emulator
+            cd demo-app && npx -y nativescript test android --emulator --config nativescript.test.config.ts

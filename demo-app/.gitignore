@@ -22,6 +22,8 @@
 !references.d.ts
 !tsconfig.json
 !vite.config.ts
+!webpack.config.js
+!nativescript.test.config.ts
 !karma.conf.js
 !tsconfig.spec.json
 !config.js
