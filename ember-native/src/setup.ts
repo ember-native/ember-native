@@ -5,7 +5,14 @@ import ElementNode from './dom/nodes/ElementNode.ts';
 import { _backburner } from '@ember/runloop';
 import DocumentNode from './dom/nodes/DocumentNode.ts';
 
-globalThis.registerBundlerModules = () => null;
+// ember-native's own root view is created via `Application.run({ create: ... })`,
+// so it never needs @nativescript/core's moduleName/XML-based module registry.
+// Only stub this out as a fallback when the real implementation isn't present -
+// @nativescript/unit-test-runner's own bundle-app-root/bundle-main-page XML pages
+// (used to host the QUnit test runner UI) rely on the real one to resolve.
+if (typeof globalThis.registerBundlerModules !== 'function') {
+  globalThis.registerBundlerModules = () => null;
+}
 globalThis.structuredClone = (x) => JSON.parse(JSON.stringify(x));
 
 // this is used by warp-drive, and should somehow be setup by ember.js. did not figure out where...

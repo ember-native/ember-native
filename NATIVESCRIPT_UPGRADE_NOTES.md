@@ -254,6 +254,64 @@ you bump `@nativescript/android`/`@nativescript/core`/`@nativescript/types`
 majors, and confirm the logged `TNS.Runtime Version` matches the npm
 package version before debugging anything else.
 
+## Issue 7: a pre-existing `registerBundlerModules` stub broke the test app, not the upgrade's own renamed helper
+
+**Symptom:** after fixing the `registerWebpackModules` →
+`registerBundlerModules` rename (see the "test app" job's git history),
+the test app still crashed on launch with
+
+```
+Error: Failed to load component from module: bundle-app-root
+```
+
+immediately hanging the "test app" CI job until its 30-minute timeout.
+
+**Cause:** `ember-native/src/setup.ts` has always unconditionally set
+`globalThis.registerBundlerModules = () => null;` on startup (predates
+this upgrade, added in the "demo warp drive" work). This is harmless for
+the real app, which creates its root view via `Application.run({ create:
+... })` and never touches the moduleName/XML resolver. But
+`@nativescript/unit-test-runner`'s own `app/main.js` (the QUnit test
+harness UI) *does* use the classic `Application.run({ moduleName:
+"bundle-app-root" })` path, and depends on the real `@nativescript/core`
+`registerBundlerModules` to register its own `bundle-app-root.xml` /
+`bundle-main-page.xml` pages. Because `ember-native`'s setup module always
+runs before the test harness needs to register anything, the stub
+permanently clobbered the real implementation, and
+`resolveModuleName('bundle-app-root', 'xml')` came back empty. This
+predates the 9.x bump but only started failing CI now because the
+`registerWebpackModules`→`registerBundlerModules` rename made the test
+runner's own `typeof global.registerWebpackModules !== "undefined"` guard
+take the `registerBundlerModules` branch instead of a no-longer-existing
+`registerWebpackModules`, exposing the stub for the first time.
+
+**How it was found:** the on-device error only names the failing module,
+not why registration silently produced nothing. Confirmed with a local
+Android emulator run (`nativescript test android --emulator`, see
+"Prerequisite" above) and temporary `console.log` instrumentation directly
+inside the resolved `node_modules/.pnpm/@nativescript+core@.../globals/index.js`
+copy of `registerBundlerModules`/`getRegisteredModules` to see that the
+function was being invoked with a fully-populated `require.context`, yet
+zero entries reached the module registry — meaning something upstream had
+already replaced the real function reference before it was called from
+`@nativescript/unit-test-runner`.
+
+**Fix:** in `ember-native/src/setup.ts`, only install the no-op stub if
+`registerBundlerModules` doesn't already exist as a function, instead of
+unconditionally overwriting it:
+
+```diff
+-globalThis.registerBundlerModules = () => null;
++if (typeof globalThis.registerBundlerModules !== 'function') {
++  globalThis.registerBundlerModules = () => null;
++}
+```
+
+`@nativescript/core/globals/index.js` always runs before `ember-native`'s
+own setup module in both the app and test entry chunks, so this leaves
+production app behavior unchanged and only stops clobbering the real
+implementation when it's present.
+
 ## Version bump summary
 
 | Package | Before | After |
@@ -274,6 +332,9 @@ package version before debugging anything else.
 - `patches/@nativescript__core@9.0.20.patch` +
   `package.json#pnpm.patchedDependencies` — the `acorn`/`css-what`/`tslib`
   import-syntax patches (Issues 1 and 4).
+- `ember-native/src/setup.ts` — made the `registerBundlerModules` stub
+  conditional so it no longer clobbers the real implementation the test
+  runner needs (Issue 7).
 
 ## Known pre-existing issue found during manual testing (not caused by this upgrade)
 
