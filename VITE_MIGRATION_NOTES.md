@@ -32,6 +32,10 @@ section before trusting any change here.
   runtime differences beyond just the inspector globals already found below).
 - `nativescript test android` / CI's `app-test.yml`: **not addressed** -
   tracked separately, see `ember-native-todo.md` sub-task 3.
+- Coarse-grained route/controller/template hot reload
+  (`src/services/vite-hot-reload.ts` +
+  `src/instance-initializers/vite-hot-reload.ts`, formerly
+  `webpack-hot-reload.ts`): **ported to Vite**, see "HMR service" below.
 
 ## Why this was possible now
 
@@ -47,8 +51,10 @@ Once NativeScript can run a *real* Vite, `@embroider/vite`'s plugins can be
 handed to it directly - none of that bridging code is needed for the Vite
 path. It stays in the repo (`utils/webpack.config.js`,
 `utils/embroider-webpack-adapter.js`, `utils/embroider-virtual-modules-plugin.js`,
-`utils/embroider-template-tag-loader.js`, `utils/hmr-loader.js`) for apps
-that still build with `@nativescript/webpack`; only `demo-app` moved to Vite.
+`utils/embroider-template-tag-loader.js`) for apps that still build with
+`@nativescript/webpack`; only `demo-app` moved to Vite. (`utils/hmr-loader.js`
+is *not* part of that active webpack bridging - see "Still open" item 3: it
+has never actually been wired into `webpack.config.js`, for either bundler.)
 
 ## The moving parts
 
@@ -484,6 +490,33 @@ top.
   `buffer`, etc.) in `demo-app/package.json` - left in place un-audited;
   Vite's dependency graph never surfaced a need to remove them.
 
+## HMR service (`ember-native-todo.md` sub-task 2)
+
+`src/services/webpack-hot-reload.ts` +
+`src/instance-initializers/webpack-hot-reload.ts` were renamed to
+`vite-hot-reload.ts` as part of the `a134ee4` commit (demo-app's webpack →
+vite switch) and made dual-mode rather than webpack-only:
+
+- The activation check is now
+  `Boolean(import.meta.hot) || (typeof module !== 'undefined' &&
+  Boolean(module.hot))` instead of a bare `module.hot` check, so the same
+  service works whether the consuming app bundles with `@nativescript/vite`
+  or the still-supported `@nativescript/webpack` path.
+- The dynamic `__import()` call already used `import()` (with a
+  `/* @vite-ignore */` hint, harmless under webpack), so no bundler-specific
+  module-loading code needed to change.
+- `package.json`'s `ember-addon.app-js` map and the exported
+  `declare module '@ember/service'` registry entry were updated to
+  `vite-hot-reload` alongside the rename (`service:ember-native/vite-hot-reload`).
+
+This service implements *coarse-grained* HMR: on a route/controller/template
+module replacement it clears the relevant container caches and calls
+`router.refresh()`. It only activates in response to
+`window.emberHotReloadPlugin.canAcceptNew()`/`.subscribe()` calls, which
+currently come from nothing in the Vite path (see item 3 below) - so today
+the ported service is correct and wired up, but dormant until something
+drives it. It does not need further porting; it's already bundler-agnostic.
+
 ## Still open (see `ember-native-todo.md` for the full breakdown)
 
 1. **Release build launch-screen hang** (see "Current status" above) - JS
@@ -495,12 +528,24 @@ top.
    directory `@nativescript/vite`'s `createBundlerContextPlugin` walks;
    nothing wires that path up for Vite yet. The old webpack config
    explicitly added it to its `xml` module rule's `include`.
-3. Porting `ember-native/utils/hmr-loader.js` (the webpack *loader* that
-   appends `import.meta.hot.accept()` boilerplate to route/controller/
-   template source) to a real Vite `transform` hook plugin - not done in
-   this pass, so fine-grained route/controller/template HMR doesn't fire
-   yet under Vite (`@nativescript/vite`'s own generic HMR still applies at
-   the bundler level, independent of this).
+3. `ember-native/utils/hmr-loader.js` (the webpack *loader* that would
+   append `import.meta.hot.accept()`/`canAcceptNew()` boilerplate to
+   route/controller/template source, the only caller of
+   `vite-hot-reload.ts`'s `canAcceptNew`) and `utils/babel-plugin.ts` (a
+   template-AST transform gated on the same `EMBER_HMR_ENABLED` env var,
+   using webpack-only `import.meta.webpackHot`) turn out to **already be
+   dead code, independent of this migration** - `git log -S hmr-loader` /
+   `-S babel-plugin` on the addon show neither file has ever been
+   referenced from `utils/webpack.config.js`, `embroider-webpack-adapter.js`,
+   or anywhere else since `hmr-loader.js` was added in `f5282b6` (Nov 2024).
+   Fine-grained HMR was apparently never wired up even for webpack. Porting
+   `hmr-loader.js`'s logic to a real Vite `transform` hook (keyed off
+   `resourcePath`/`id` the way Rollup/Vite plugins expect, replacing the
+   webpack-loader `this.resourcePath` signature) and wiring it into
+   `utils/vite.config.js` would be new work, not a restoration - worth
+   doing (`@nativescript/vite`'s own generic HMR still applies at the
+   bundler level, independent of this) but scope it as its own item rather
+   than assuming it's a regression to fix.
 4. Deciding whether to keep `@nativescript/webpack` support in the addon
    long-term or deprecate it now that Vite is proven to work for the main
    build/debug path.
