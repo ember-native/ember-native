@@ -1,0 +1,19 @@
+diff --git a/dist/index.js b/dist/index.js
+index a661111916b73fd2e7d7c8b3574737ebd35ee098..fdbc3f8ab5669507044c566edd40cdde022390c6 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1,5 +1,13 @@
+ import { macroCondition, isDevelopingApp } from '@embroider/macros';
+-import { warn } from '@ember/debug';
++import { warn as warn$imported } from '@ember/debug';
++// under this Vite/Rollup pipeline, this named import
++// sometimes fails to link (ReferenceError: warn is not defined at the call
++// site below), while @ember/debug's real `warn` implementation is still
++// present elsewhere in the bundle (just not connected to this binding) -
++// same class of cross-module ESM linking issue as the CJS-interop bugs
++// documented in VITE_MIGRATION_NOTES.md. `warn` is a dev-only debug helper
++// (not essential), so falling back to a no-op is safe.
++const warn = typeof warn$imported === 'function' ? warn$imported : function () {};
+ import Token from './token.js';
+ 
+ // this ensures that if @ember/test-waiters exists in multiple places in the

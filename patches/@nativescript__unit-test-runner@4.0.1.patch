@@ -47,10 +47,10 @@ index c3f1be101f3737e3cb1758771bf64ae5a69f2f7e..e7aa3529fb404a5a50caeefb4018c823
 +    page.bindingContext = getMainViewModel();
  }
 diff --git a/app/main-view-model.js b/app/main-view-model.js
-index c644dc668623a0fe73c221e210f2806e24cb6f7b..6d40bc4a4aa408c5bc22fe5db133afa4d6a07a00 100644
+index c644dc668623a0fe73c221e210f2806e24cb6f7b..b3489ab67faf732aada37901721262be7619d236 100644
 --- a/app/main-view-model.js
 +++ b/app/main-view-model.js
-@@ -4,6 +4,26 @@ import { KarmaFilesService } from './services/karma-files-service';
+@@ -4,6 +4,40 @@ import { KarmaFilesService } from './services/karma-files-service';
  import { TestExecutionService } from './services/test-execution-service';
  import { killProcess } from "./stop-process";
  import { executeWebpackTests } from "./services/webpack-test-runner";
@@ -71,13 +71,27 @@ index c644dc668623a0fe73c221e210f2806e24cb6f7b..6d40bc4a4aa408c5bc22fe5db133afa4
 +// exact same source once cached dep-optimization state differed) - a
 +// namespace import never depends on that static analysis succeeding.
 +import * as configModule from '../config';
-+const config = configModule.default || configModule;
 +import * as socketIOModule from 'socket.io-client';
-+const io = socketIOModule.default || socketIOModule;
++// `configModule.default || configModule` (the previous fallback) is unsafe:
++// when Rollup's CJS interop can't prove a safe-to-eagerly-evaluate module
++// (true for this package's auto-generated config.js, and possibly others),
++// it synthesizes a *lazy* namespace object exposing only a `__require()`
++// accessor - no `default`, so the `||` falls through to the frozen
++// namespace object itself, and this file's own later `config.options = ...`
++// mutation then throws (assigning to a frozen object in strict-mode ESM).
++// DIAGNOSTIC-VERIFIED as the actual on-device `vendor.mjs` module
++// evaluation crash - see VITE_MIGRATION_NOTES.md.
++function resolveCjsInterop(ns) {
++    if (ns.default !== undefined) return ns.default;
++    if (typeof ns.__require === 'function') return ns.__require();
++    return ns;
++}
++const config = resolveCjsInterop(configModule);
++const io = resolveCjsInterop(socketIOModule);
  function enableSocketIoDebugging() {
      console.log('enabling socket.io debugging');
      global.localStorage = {
-@@ -11,7 +31,6 @@ function enableSocketIoDebugging() {
+@@ -11,7 +45,6 @@ function enableSocketIoDebugging() {
      };
      global.window = global;
  }
@@ -85,7 +99,7 @@ index c644dc668623a0fe73c221e210f2806e24cb6f7b..6d40bc4a4aa408c5bc22fe5db133afa4
  config.options = config.options || {};
  if (isAndroid)
      config.ips = (config.ips || []).concat(['10.0.2.2']);
-@@ -166,8 +185,7 @@ export class TestBrokerViewModel extends Observable {
+@@ -166,8 +199,7 @@ export class TestBrokerViewModel extends Observable {
              }
          };
          this.updateView({ serverInfo: `connected to ${this.baseUrl}` });
@@ -95,7 +109,7 @@ index c644dc668623a0fe73c221e210f2806e24cb6f7b..6d40bc4a4aa408c5bc22fe5db133afa4
          socket.on('connect', err => {
              console.log('NSUTR: successfully connected to karma');
              delete global.navigator;
-@@ -237,8 +255,28 @@ export class TestBrokerViewModel extends Observable {
+@@ -237,8 +269,28 @@ export class TestBrokerViewModel extends Observable {
          return result;
      }
  }

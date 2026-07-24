@@ -1,0 +1,101 @@
+diff --git a/dist/adapter.js b/dist/adapter.js
+index 839c2a78e9c1e50c63a787bd1fcd118ef49e9079..c00b7a6d6618e5b8864f510131493bc486c9b2dc 100644
+--- a/dist/adapter.js
++++ b/dist/adapter.js
+@@ -1,5 +1,11 @@
+ import TestAdapter from '@ember/test/adapter';
+-import * as QUnit from 'qunit';
++import * as QUnit$ns from 'qunit';
++// qunit.js's CJS export (`module.exports = QUnit` inside a
++// nested exportQUnit() function, not a statically-traceable top-level
++// assignment) defeats Rollup's static named-export detection, producing a
++// frozen namespace object exposing only a lazy __require() accessor - same
++// bug class as @nativescript/unit-test-runner's config.js.
++const QUnit = QUnit$ns.config !== undefined ? QUnit$ns : (typeof QUnit$ns.__require === 'function' ? QUnit$ns.__require() : QUnit$ns);
+ 
+ function nonTestDoneCallback() {}
+ let Adapter = TestAdapter.extend({
+diff --git a/dist/index.js b/dist/index.js
+index 6f1b3ebc90b6e359554e890c89e313cf7943be8f..ec8453ba7c08d3be97a176b9b178f98201ef4c78 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -6,7 +6,13 @@ export { nonTestDoneCallback } from './adapter.js';
+ import './qunit-configuration.js';
+ import { _backburner } from '@ember/runloop';
+ import { getTestMetadata, setupContext, teardownContext, setupRenderingContext, setupApplicationContext, validateErrorHandler, resetOnerror } from '@ember/test-helpers';
+-import * as QUnit from 'qunit';
++import * as QUnit$ns from 'qunit';
++// qunit.js's CJS export (`module.exports = QUnit` inside a
++// nested exportQUnit() function, not a statically-traceable top-level
++// assignment) defeats Rollup's static named-export detection, producing a
++// frozen namespace object exposing only a lazy __require() accessor - same
++// bug class as @nativescript/unit-test-runner's config.js.
++const QUnit = QUnit$ns.config !== undefined ? QUnit$ns : (typeof QUnit$ns.__require === 'function' ? QUnit$ns.__require() : QUnit$ns);
+ import { installTestNotIsolatedHook } from './test-isolation-validation.js';
+ 
+ /* globals Testem */
+diff --git a/dist/qunit-configuration.js b/dist/qunit-configuration.js
+index fcb0f83bb27a8d57323b4166e29ee3a7a46234a8..6637fffb52cb3af0ecf102632f91b863432f0a41 100644
+--- a/dist/qunit-configuration.js
++++ b/dist/qunit-configuration.js
+@@ -1,4 +1,17 @@
+-import * as QUnit from 'qunit';
++import * as QUnit$ns from 'qunit';
++// qunit.js's CJS export (`module.exports = QUnit` inside a
++// nested exportQUnit() function, not a statically-traceable top-level
++// assignment) defeats Rollup's static named-export detection, producing a
++// frozen namespace object exposing only a lazy __require() accessor - same
++// bug class as @nativescript/unit-test-runner's config.js.
++const QUnit = QUnit$ns.config !== undefined ? QUnit$ns : (typeof QUnit$ns.__require === 'function' ? QUnit$ns.__require() : QUnit$ns);
++// qunit.js only assigns itself to `window.QUnit` (making it available as a
++// bare global to test files, the standard Ember-CLI convention) when it
++// detects a browser-like `window`/`document` pair - NativeScript has
++// neither, so consuming apps' own `*-test.*` files (which reference the
++// bare `QUnit` global, not an import) would otherwise hit
++// `ReferenceError: QUnit is not defined`.
++globalThis.QUnit = QUnit;
+ 
+ QUnit.config.autostart = false;
+ QUnit.config.urlConfig.push({
+@@ -9,5 +22,7 @@ QUnit.config.urlConfig.push({
+   id: 'devmode',
+   label: 'Development mode'
+ });
+-QUnit.config.testTimeout = QUnit.urlParams.devmode ? null : 60000; //Default Test Timeout 60 Seconds
+-//# sourceMappingURL=qunit-configuration.js.map
++// `QUnit.urlParams` is only populated when a real browser `location` is
++// available (see @ember/test-helpers's own equivalent `document.location`
++// guard) - NativeScript has neither, so it stays undefined here.
++QUnit.config.testTimeout = QUnit.urlParams && QUnit.urlParams.devmode ? null : 60000; //Default Test Timeout 60 Seconds
+diff --git a/dist/test-isolation-validation.js b/dist/test-isolation-validation.js
+index c0b4fed4f99972a0dbe6393cc846e345b657bec4..04014412ef613942798b53571bb8ccc24e63aecf 100644
+--- a/dist/test-isolation-validation.js
++++ b/dist/test-isolation-validation.js
+@@ -1,4 +1,10 @@
+-import * as QUnit from 'qunit';
++import * as QUnit$ns from 'qunit';
++// qunit.js's CJS export (`module.exports = QUnit` inside a
++// nested exportQUnit() function, not a statically-traceable top-level
++// assignment) defeats Rollup's static named-export detection, producing a
++// frozen namespace object exposing only a lazy __require() accessor - same
++// bug class as @nativescript/unit-test-runner's config.js.
++const QUnit = QUnit$ns.config !== undefined ? QUnit$ns : (typeof QUnit$ns.__require === 'function' ? QUnit$ns.__require() : QUnit$ns);
+ import { _cancelTimers } from '@ember/runloop';
+ import { isSettled, getSettledState, getDebugInfo, waitUntil } from '@ember/test-helpers';
+ 
+diff --git a/dist/test-loader.js b/dist/test-loader.js
+index 31bfe5710f55fcfdb0d95ba26ae1b6a5389b6a02..c8a9121a2fc72a3761804d0fd9e684dfe463f8c8 100644
+--- a/dist/test-loader.js
++++ b/dist/test-loader.js
+@@ -1,4 +1,10 @@
+-import * as QUnit from 'qunit';
++import * as QUnit$ns from 'qunit';
++// qunit.js's CJS export (`module.exports = QUnit` inside a
++// nested exportQUnit() function, not a statically-traceable top-level
++// assignment) defeats Rollup's static named-export detection, producing a
++// frozen namespace object exposing only a lazy __require() accessor - same
++// bug class as @nativescript/unit-test-runner's config.js.
++const QUnit = QUnit$ns.config !== undefined ? QUnit$ns : (typeof QUnit$ns.__require === 'function' ? QUnit$ns.__require() : QUnit$ns);
+ 
+ /* globals requirejs, require */
+ 

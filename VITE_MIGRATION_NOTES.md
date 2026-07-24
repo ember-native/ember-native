@@ -1241,14 +1241,219 @@ in order:
    build-time issue, and the next step is auditing exactly which of the
    `nodeBuiltinAliases` entries (there are nine) is the problem by
    re-adding them one at a time.
-Whichever of these two reproduces the crash pins down which of "the
-plugin's injected content" vs. "the resolve.alias list" is the actual
-cause (or, if *neither* crashes, the cause is specifically in
-`test-helper.ts`'s real body - `ember-qunit`/`qunit-dom`/
-`@valor/nativescript-websockets`/`setup-ember-native`/`NativeElementNode` -
-and the "isolate test-helper.ts's real imports one at a time" plan from
-earlier in this section is the right next move after all, just with the
-plugin explicitly held *absent* this time to avoid the contamination this
-update ran into). Each iteration is one `vite build` (~3min) + the fast
-gradlew loop (~20-30s) - see the earlier "Debugging technique" section for
-the full loop and the stale-`platforms/`-directory pitfall.
+
+**Update (following session): the queued plan above was run and resolved
+the original mystery, then uncovered and fixed six more, separate real
+bugs stacked behind it.** Step 1 of the plan (plugin present, `test.js`
+stubbed) *did* crash - implicating the plugin's injected content, as
+step 1's own note predicted. Bisecting inside `unitTestRunnerContextPlugin()`'s
+file walk (js-only vs. xml/css-only, then excluding `main-view-model.js` +
+its four importers specifically) narrowed it to `main-view-model.js`
+itself - not `socket.io-client` (ruled out by aliasing it to the empty
+module and confirming the crash persisted). From there, plain reading plus
+one more targeted diagnostic (dumping `Object.keys()` of the resolved
+`config`/`QUnit` objects at the actual crash site) found the real cause,
+and five more of the same general shape further down the boot sequence
+once this one stopped masking them. All are now fixed via `pnpm patch`
+(new patches: `ember-qunit@9.0.4`, `@ember/test-waiters`,
+`@ember/test-helpers`) plus two tracked `demo-app` file changes. In the
+order they were hit (each one only became visible once the previous one
+stopped crashing first):
+
+1. **`config.js`'s CJS interop resolves to a *frozen* object, and
+   `main-view-model.js`'s own code mutates it** (`patches/@nativescript__unit-test-runner@4.0.1.patch`).
+   `import * as configModule from '../config'; const config =
+   configModule.default || configModule;` - the `.default` fallback assumed
+   Rollup would always synthesize a `default` export for this plain
+   `module.exports = {...}`/`export default {...}` file. Instead, for this
+   specific file, Rollup produces a *lazy* CJS-interop wrapper: a frozen
+   namespace object exposing only a `__require()` accessor, no `default` at
+   all. The `||` therefore falls through to the frozen wrapper itself, and
+   `main-view-model.js`'s own `config.options = config.options || {}` /
+   `config.ips = (...)` a few lines later throw
+   (`TypeError: Cannot add property options, object is not extensible`-
+   shaped, assigning to a frozen object in strict-mode ESM). Confirmed by
+   dumping `Object.keys(QUnit3)`/similar mid-build to see the frozen
+   wrapper's actual shape. **Fix**: replaced the fragile `.default ||`
+   fallback with a `resolveCjsInterop()` helper that explicitly checks for
+   `.default`, falls back to calling `.__require()` if that's a function,
+   and only then falls back to the raw namespace - applied to both the
+   `config` and `socket.io-client` resolutions in `main-view-model.js`.
+   This is also the reason a *separately regenerated* `config.js` (the
+   NativeScript CLI's own `test init`/karma-config bootstrapping
+   overwrites this patch-added file with a fresh CJS
+   `module.exports = {...}` version whenever the real CLI test flow runs,
+   clobbering the patch's `export default` version) never mattered either
+   way - the fix works regardless of which shape `config.js` is in at
+   build time.
+2. **`ember-qunit`'s own files hit the identical bug class importing
+   `qunit` itself** (`patches/ember-qunit@9.0.4.patch`). `qunit.js`'s real
+   CJS export (`module.exports = QUnit` - a whole external object of
+   unknown-to-Rollup shape, assigned deep inside a nested `exportQUnit()`
+   function, not a statically-traceable top-level assignment) defeats
+   Rollup's export detection the same way `config.js` did, and all five of
+   `ember-qunit`'s `dist/*.js` files (`qunit-configuration.js`,
+   `test-isolation-validation.js`, `adapter.js`, `index.js`,
+   `test-loader.js`) do `import * as QUnit from 'qunit';` then use
+   `QUnit.config`/`QUnit.urlParams`/etc. directly - the exact same
+   frozen-wrapper problem, at a fifth-away layer once fix 1 stopped masking
+   it. **Fix**: same `resolveCjsInterop`-shaped rename-and-resolve pattern,
+   applied per file (`import * as QUnit$ns from 'qunit'; const QUnit =
+   QUnit$ns.config !== undefined ? QUnit$ns : (typeof QUnit$ns.__require
+   === 'function' ? QUnit$ns.__require() : QUnit$ns);`).
+3. **`QUnit.urlParams` is `undefined` outside a browser, and
+   `qunit-configuration.js` dereferences it unconditionally** (same
+   `ember-qunit` patch). `QUnit.config.testTimeout = QUnit.urlParams.devmode
+   ? ... : ...` throws `TypeError: Cannot read properties of undefined
+   (reading 'devmode')` once fix 2 correctly resolved `QUnit` itself -
+   `qunit.js` only populates `urlParams` when it can parse a real
+   `location.search`, which NativeScript has no equivalent of. **Fix**:
+   `QUnit.urlParams && QUnit.urlParams.devmode`.
+4. **qunit.js never becomes a global, and this repo's own `*-test.gts`
+   files rely on the bare `QUnit` global (standard Ember-CLI convention -
+   they don't import it)** (same `ember-qunit` patch).
+   `basics-test.gts`/`list-view-test.gts`/`rad-list-view-test.gts` all
+   reference `QUnit.module(...)`/`QUnit.test(...)` as a bare, undeclared
+   identifier - in a real browser, `qunit.js`'s own `exportQUnit()` sets
+   `window.QUnit = QUnit` so this "just works"; NativeScript has no
+   `window`/`document` for that branch to ever trigger, so `QUnit` was a
+   `ReferenceError` waiting to happen the moment these test files' own code
+   ran (masked until fix 3, since nothing got that far before). **Fix**:
+   added `globalThis.QUnit = QUnit;` right after resolving the real object
+   in `qunit-configuration.js` (which is guaranteed to run, via
+   `ember-qunit`'s own `index.js` importing it, before any test file does).
+5. **`@ember/test-helpers`'s deprecation/warning query-param support
+   assumes `document.location` exists** (`patches/@ember__test-helpers.patch`,
+   both `dist/-internal/deprecations.js` and `dist/-internal/warnings.js`).
+   `if (typeof URLSearchParams !== 'undefined') { const queryParams = new
+   URLSearchParams(document.location.search.substring(1)); ... }` - guards
+   the browser-only `URLSearchParams` global but not `document` itself
+   (NativeScript's JS runtime happens to expose a real `URLSearchParams`
+   built-in, so this branch *is* entered - a partial browser-API surface is
+   almost worse than none, since the guard that would normally protect this
+   looks sufficient but isn't). Real `ReferenceError: document is not
+   defined`, at plain module-evaluation time (this file's whole body runs
+   as a side effect of `@ember/test-helpers` being imported at all). **Fix**:
+   `typeof URLSearchParams !== 'undefined' && typeof document !== 'undefined'
+   && document.location`.
+6. **`@ember/test-waiters`'s own `warn` import silently fails to link**
+   (`patches/@ember__test-waiters.patch`). `import { warn } from
+   '@ember/debug'; ... buildWaiter(name) { ... warn(...); ... }` - under
+   this specific Vite/Rollup/embroider-vite pipeline, this named import
+   resolves to nothing at all (not `undefined` - a genuine unbound
+   identifier), while the real `@ember/debug` `warn` implementation is
+   still present elsewhere in the same `vendor.mjs` bundle (as `_warn`/a
+   renamed local) - a linking failure specific to this one import site, not
+   a CJS-interop problem this time (`@ember/debug` is Ember's own package,
+   already real ESM). Result: `ReferenceError: warn is not defined` the
+   moment `buildWaiter("@ember/test-waiters:promise-waiter")` runs (an
+   unconditional top-level call in this package, made for the two default
+   waiters). Root cause not fully chased down (would need digging into why
+   Rollup drops this one specific cross-module binding) - the pragmatic
+   fix, matching the "defensive resolve, don't rely on the import working"
+   pattern used throughout this pass: `import { warn as warn$imported }
+   from '@ember/debug'; const warn = typeof warn$imported === 'function' ?
+   warn$imported : function () {};` (a dev-only debug/logging helper, so a
+   no-op fallback is safe).
+7. **Vite's own `__vitePreload` dynamic-import helper assumes a real
+   DOM** (`demo-app/app/boot.js`, not a patch - this is Vite-generated code
+   inlined fresh into every build, not something in `node_modules`).
+   Every real `import()` expression - including `boot.js`'s own `void
+   import('./test.js')` - gets wrapped by Vite in `__vitePreload(() =>
+   import(...), deps)`, which (when the target chunk has CSS dependencies
+   to preload, which it does - `assets/vendor.css`) calls
+   `document.getElementsByTagName(...)`/`.querySelector(...)`/
+   `.createElement("link")`/`.head.appendChild(...)`, entirely unguarded.
+   Tried `build.modulePreload: false` in `vite.test.config.ts` first - this
+   does **not** suppress the wrapper (it only stops Vite injecting a real
+   `<link rel=modulepreload>` browser polyfill script; kept anyway, since
+   it's still correct to have it off for a non-browser target). Two
+   distinct failures here, hit in sequence as each was fixed:
+   - `document` itself doesn't exist yet at the point `__vitePreload` first
+     runs (`ReferenceError: document is not defined`) - `ember-native`'s
+     own `document` shim (from `./native/main`'s import graph) *does*
+     eventually exist by the time `boot.js`'s own top-level code runs
+     (confirmed - it's not a true "undefined" the way fix 5 was), so the
+     fix is adding the specific missing methods (`getElementsByTagName`,
+     `querySelector`, `head`) as no-ops directly onto it in `boot.js`,
+     right after `const document = globalThis.document;` and before the
+     `__NS_UNIT_TESTING__` branch that triggers the dynamic import.
+   - `document.createElement` *does* already exist (it's `ember-native`'s
+     real native-element factory, used throughout the app for actual
+     `label`/`button`/etc. elements - so it can't be stubbed out wholesale)
+     but throws `TypeError: No known component for element link.` when
+     called with `"link"` (not a real NativeScript component). Fix: wrap
+     it, falling through to a stub object only when the *real* factory
+     throws, leaving real element creation completely untouched:
+     ```js
+     const nativeCreateElement = document.createElement.bind(document);
+     document.createElement = (tagName) => {
+       try { return nativeCreateElement(tagName); }
+       catch (e) { return { setAttribute() {}, relList: undefined }; }
+     };
+     ```
+
+After all seven fixes, the on-device symptom changed completely: no more
+generic `Cannot instantiate module bundle.mjs` / `Module evaluation promise
+rejected` at all. The JS side now runs cleanly through Ember's own boot
+banner (`[DEBUG] DEBUG: Ember : 6.12.0` prints, confirming
+`Application.create()` succeeded) and into the dynamically-imported
+`test.js` chunk. **A new, different, and much later-stage failure remains,
+not yet fixed:**
+
+```
+com.tns.NativeScriptException: Failed to create JavaScript extend wrapper
+for class 'com/tns/NativeScriptActivity'
+```
+
+This reproduces consistently (not a cold-start flake - confirmed by
+force-stopping and relaunching the already-installed APK twice more, same
+result every time, and by a full from-scratch rebuild off the committed
+patches alone, no leftover diagnostic state). Working theory, not yet
+confirmed: `boot.js`'s dynamic `import('./test.js')` is genuinely
+asynchronous (real ES dynamic `import()`, unlike webpack's
+`require.context`-based synchronous loading of the equivalent code on the
+webpack test path) and is deliberately **not awaited** (`void import(...)`
+- see the comment already in `boot.js` explaining why). `@nativescript/unit-test-runner`'s
+own `Application.run({ moduleName: "bundle-app-root" })` call - which is
+what actually registers `NativeScriptActivity`'s JS-extend wrapper for a
+*test* run (the normal `boot()` path in `boot.js`'s `else` branch, which
+does register it, is entirely skipped in test mode) - lives deep inside
+that same dynamically-imported chunk, reached only via `test-helper.ts`'s
+own top-level `runTestApp({...})` call. If Android's native side tries to
+instantiate `NativeScriptActivity` before that dynamic import's module
+body has actually finished running, the JS-extend class doesn't exist yet
+and this exact error results - a genuine architectural difference between
+the sync (webpack) and async (Vite) test-entry mechanisms, not another
+instance of the CJS-interop/browser-API-assumption bug class fixed above.
+**Next steps for whoever picks this up**:
+1. Confirm the timing-race theory directly: add a `console.log` immediately
+   before and after the `import('./test.js')` call in `boot.js`, and
+   another as the very first line of `test-helper.ts`, then check the
+   logcat ordering relative to the "Failed to create JavaScript extend
+   wrapper" exception - if the exception's timestamp falls between the
+   "before" and "after"/`test-helper.ts`-start logs, the race is confirmed.
+2. If confirmed, the real fix likely needs `Application.run(...)`'s
+   moduleName registration to happen *before* Android tries to instantiate
+   the Activity - options worth trying: (a) making `boot.js`'s dynamic
+   import genuinely block app startup somehow (NativeScript's
+   `Application.run` native call may have its own hook for this - check
+   whether `create()`'s callback can itself be `async` and awaited by the
+   native layer, or whether there's a documented way to defer Activity
+   creation until a JS-side "ready" signal); (b) restructuring so the
+   `moduleName`-registering call happens synchronously in `bundle.mjs`
+   itself (not inside the dynamically-imported chunk) when
+   `__NS_UNIT_TESTING__` is set, even though the qunit/ember-qunit/test
+   *content* stays dynamically imported - i.e., split "register the
+   Activity's moduleName" from "run the actual tests" into two separate
+   steps with different sync/async requirements; (c) checking whether
+   `@nativescript/vite`'s own generated entry has an `awaited`-dynamic-import
+   variant, or whether top-level `await` in `boot.js` (NativeScript's own
+   ESM loader concerns noted in the existing comment there) is actually
+   safe to use for this one specific case despite the stated general
+   preference against it.
+3. Whichever fix lands, retest with `pnpm test:vite`/`debug-test:vite`
+   (the full CLI flow, not just the fast `gradlew` loop) to confirm a real
+   `TOTAL: N SUCCESS` QUnit run completes end-to-end before considering
+   this task done or opening a PR - `ember-native-todo.md` explicitly
+   flags this as the remaining gate.

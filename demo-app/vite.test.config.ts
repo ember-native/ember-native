@@ -99,6 +99,22 @@ export default defineConfig(({ mode }) => {
       'process.browser': 'true',
     },
     build: {
+      // Vite's own dynamic-import "module preload" runtime helper
+      // (`__vitePreload`, auto-injected wherever a real `import()` appears -
+      // here, `boot.js`'s `import('./test.js')`) assumes a browser: when it
+      // has CSS/asset deps to preload for the target chunk (it does here -
+      // `assets/vendor.css`), it does a bare, unguarded
+      // `document.getElementsByTagName(...)`/`document.querySelector(...)`.
+      // NativeScript has no `document` global at all, so this throws
+      // `ReferenceError: document is not defined` *synchronously*, the
+      // instant `import('./test.js')` is reached - not a rejected promise,
+      // an immediate throw, which is what made this so hard to isolate from
+      // the outside (identical generic "Module evaluation promise rejected"
+      // NativeScript error as every other bug this session, despite the
+      // real cause being here). There's no real `<link>`-based preloading
+      // to do on this platform anyway, so disabling the feature entirely is
+      // correct, not just a workaround.
+      modulePreload: false,
       rollupOptions: {
         // `ws` (a socket.io-client transitive dependency) optionally
         // requires these native addons for perf, wrapped in try/catch so it
