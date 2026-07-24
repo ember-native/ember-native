@@ -59,7 +59,16 @@ export default defineConfig(({ mode }) => {
     aliases.filter((a) => emberNativeReplacements.has(a.replacement)),
     aliases.filter((a) => !emberNativeReplacements.has(a.replacement)),
   ];
-  merged.resolve!.alias = [...ours, ...rest];
+  merged.resolve!.alias = [
+    // `app/boot.js` (package.json's `main`, the only entry
+    // @nativescript/vite ever builds) resolves this bare specifier
+    // statically - see boot.js's own docstring for why the real/test entry
+    // split happens here instead of a runtime branch or dynamic import
+    // inside one shared file.
+    { find: 'demo-app-entry', replacement: require.resolve('./boot-test.js') },
+    ...ours,
+    ...rest,
+  ];
 
   return mergeConfig(merged, {
     resolve: {
@@ -81,14 +90,6 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [unitTestRunnerContextPlugin()],
     define: {
-      // Read by demo-app/app/boot.js to swap its entry over to ./test.js.
-      // This config is only ever used for `nativescript test android`, so
-      // it's unconditionally true here rather than sourced from the CLI's
-      // `--env.unitTesting` flag (unlike webpack, which reuses the same
-      // config for both build and test and needs that flag to tell them
-      // apart - see nativescript.test.vite.config.ts for why Vite needs its
-      // own dedicated config instead).
-      __NS_UNIT_TESTING__: 'true',
       // Mirrors webpack.config.js's DefinePlugin `__TEST_RUNNER_STAY_OPEN__`
       // - @nativescript/unit-test-runner's TestBrokerViewModel.complete()
       // reads this to decide whether to kill the process after the run
@@ -100,20 +101,15 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       // Vite's own dynamic-import "module preload" runtime helper
-      // (`__vitePreload`, auto-injected wherever a real `import()` appears -
-      // here, `boot.js`'s `import('./test.js')`) assumes a browser: when it
-      // has CSS/asset deps to preload for the target chunk (it does here -
-      // `assets/vendor.css`), it does a bare, unguarded
-      // `document.getElementsByTagName(...)`/`document.querySelector(...)`.
-      // NativeScript has no `document` global at all, so this throws
-      // `ReferenceError: document is not defined` *synchronously*, the
-      // instant `import('./test.js')` is reached - not a rejected promise,
-      // an immediate throw, which is what made this so hard to isolate from
-      // the outside (identical generic "Module evaluation promise rejected"
-      // NativeScript error as every other bug this session, despite the
-      // real cause being here). There's no real `<link>`-based preloading
-      // to do on this platform anyway, so disabling the feature entirely is
-      // correct, not just a workaround.
+      // (`__vitePreload`, auto-injected around any real `import()`
+      // expression in the bundle) assumes a browser - it does an unguarded
+      // `document.getElementsByTagName(...)`/`document.querySelector(...)`/
+      // `.createElement("link")` to preload a chunk's CSS/asset deps, which
+      // throws on NativeScript's non-browser `document` shim. `boot-test.js`
+      // itself has no dynamic imports (see its docstring for why that
+      // matters for a different bug), but disabling this browser-only
+      // feature is still correct for a NativeScript build in general, in
+      // case anything else in the graph ever introduces one.
       modulePreload: false,
       rollupOptions: {
         // `ws` (a socket.io-client transitive dependency) optionally

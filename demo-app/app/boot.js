@@ -1,95 +1,56 @@
-// NativeScript has no index.html, so ember-vite-hmr's usual
-// transformIndexHtml-injected `<script>` (which sets up
-// `globalThis.emberHotReloadPlugin`) never runs. Import it directly instead,
-// before anything else so it's in place before Ember boots and looks up
-// `service:vite-hot-reload`. No-op (tree-shaken away) outside dev/HMR mode.
-import 'ember-vite-hmr/setup-ember-hmr';
-import app from './native/main';
-import { Application as NativeApplication } from '@nativescript/core/application/application';
-
-function boot() {
-  return new Promise((resolve, reject) => {
-    NativeApplication.on(NativeApplication.launchEvent, () => {
-      setTimeout(() => {
-        resolve()
-      }, 0)
-    });
-    try {
-      NativeApplication.run({ create: () => {
-          return app.rootElement.nativeView;
-        } });
-    } catch (e) {
-      reject(e);
-    }
-  });
-}
-
-const document = globalThis.document;
-
-// Vite's own dynamic-import "module preload" runtime helper
-// (`__vitePreload`, auto-injected around every real `import()` expression -
-// including `./test.js` below) assumes a browser: when the target chunk has
-// CSS deps to preload (it does here), it does an unguarded
-// `document.getElementsByTagName(...)`/`.querySelector(...)`/
-// `.createElement("link")`/`.head.appendChild(...)`. `ember-native`'s own
-// `document` shim (set up by `./native/main`'s own import graph, already
-// evaluated by this point) is a virtual-DOM stand-in, not a real
-// `Document` - `build.modulePreload: false` in vite.test.config.ts doesn't
-// suppress this wrapper (it only stops Vite injecting a real
-// `<link rel=modulepreload>` polyfill). Patch in no-op fallbacks for
-// whichever of these the real shim doesn't already provide; nothing in
-// this flow needs them to do anything real.
-if (typeof document.getElementsByTagName !== 'function') {
-  document.getElementsByTagName = () => [];
-}
-if (typeof document.querySelector !== 'function') {
-  document.querySelector = () => null;
-}
-if (!document.head) {
-  document.head = { appendChild() {} };
-}
-// `document.createElement` *does* already exist here - it's
-// `ember-native`'s real element factory, used throughout the actual app to
-// create native UI elements (`label`, `button`, ...) - so it can't just be
-// stubbed out wholesale. But `__vitePreload` calls it with `"link"`, which
-// isn't a real NativeScript component, and the real factory throws
-// (`TypeError: No known component for element link.`) rather than
-// returning null/undefined for an unknown tag. Wrap it: fall through to
-// the stub only for tag names the real factory doesn't recognize, so real
-// element creation elsewhere is untouched.
-const nativeCreateElement = document.createElement.bind(document);
-document.createElement = (tagName) => {
-  try {
-    return nativeCreateElement(tagName);
-  } catch (e) {
-    return { setAttribute() {}, relList: undefined };
-  }
-};
-
-// `__NS_UNIT_TESTING__` is a Vite `define` set only by vite.test.config.ts
-// (see that file for where it reads the CLI's `unitTesting` env flag).
-// @nativescript/vite always builds whatever package.json's `main` field
-// points to - unlike webpack, it has no separate per-command entry-swap
-// mechanism - so `nativescript test android --config
-// nativescript.test.vite.config.ts` still boots through this exact file
-// too. When false (the default/normal build), esbuild's `define` constant
-// folding dead-code-eliminates this whole branch, including the dynamic
-// `import()`, so none of `./test.js`'s qunit/ember-qunit/unit-test-runner
-// dependency graph reaches the real app bundle.
-if (typeof __NS_UNIT_TESTING__ !== 'undefined' && __NS_UNIT_TESTING__) {
-  // `./test.js` calls @nativescript/unit-test-runner's own `Application.run`
-  // once karma instructs it to - boot() below must not also run the app.
-  // Not awaited - nothing in this module runs after this branch, and
-  // top-level await's module-loader requirements are an unnecessary risk
-  // on NativeScript's own (non-browser) ESM module loader.
-  void import('./test.js');
-} else {
-  boot().then(() => {
-    app.visit('/', {
-      document: document,
-      isInteractive: true
-    })
-  });
-
-  globalThis.app = app;
-}
+// `@nativescript/vite` always builds whatever `package.json`'s `main` field
+// points to (this file) - unlike webpack, which lets
+// `@nativescript/unit-test-runner`'s own `nativescript.webpack.js` hook
+// replace the entire webpack `entry` with `test.js` for test builds, Vite
+// has no equivalent per-build entry override. Instead, this file stays a
+// tiny, always-static dispatcher: the bare `demo-app-entry` specifier is
+// aliased differently per Vite config - `vite.config.ts` (real app builds)
+// points it at `../boot-app.js`, `vite.test.config.ts` (`nativescript test
+// android`) points it at `../boot-test.js`. Both are plain static imports,
+// so whichever one is selected is evaluated synchronously as part of this
+// module's own linking - no dynamic `import()` involved. This matters for
+// the test build specifically: `@nativescript/unit-test-runner`'s
+// `Application.run({ moduleName: "bundle-app-root" })` (in `boot-test.js`'s
+// import graph) registers `NativeScriptActivity`'s JS-extend wrapper, and
+// Android tries to instantiate that Activity essentially as soon as the
+// process starts - a dynamic import here previously deferred that
+// registration into a later microtask, after Android had already tried and
+// failed ("Failed to create JavaScript extend wrapper for class
+// 'com/tns/NativeScriptActivity'"). See VITE_MIGRATION_NOTES.md's
+// "eager-vs-lazy-import problem" section for the full diagnostic history.
+//
+// `boot-app.js`/`boot-test.js` deliberately live one level up, *outside*
+// `app/` (unlike this file, which must stay under `app/` to satisfy
+// NativeScript's own `appPath`/`main` convention) - Ember CLI's classic
+// module-compat registry (`Resolver.withModules(...)`) eagerly imports
+// *every* file under `app/` for its AMD-style namespace wrapper,
+// independently of this alias and of which Vite config is active. With
+// both real-content files sitting there instead of just this dispatcher,
+// that registry was separately, unconditionally importing both of them in
+// every build - running `boot-app.js`'s `NativeApplication.run()` a second
+// time on top of `boot-test.js`'s test-runner-triggered
+// `Application.run({ moduleName: ... })` during test builds (crashing
+// module evaluation), and pulling `boot-test.js`'s entire qunit/ember-qunit
+// dependency graph into production builds. Moving both out of `app/`
+// removes them from that scan entirely - this dispatcher importing one of
+// them by bare specifier is the only real reference left in either case.
+//
+// `@nativescript/vite`'s own generated entry (`main-entry.js`) registers
+// `NativeScriptActivity`'s JS-extend wrapper via a fire-and-forget dynamic
+// `import('@nativescript/core/ui/frame/activity.android.js?ns-keep')`,
+// deferred to a `launchEvent` listener / `setTimeout(..., 0)` - an
+// inherently racy mechanism (Android's own Activity-launch step can win the
+// race before that deferred callback ever runs, reproducibly for a large
+// enough JS bundle - "Failed to create JavaScript extend wrapper for class
+// 'com/tns/NativeScriptActivity'"). Importing the same module here too,
+// statically, forces Rollup to register it synchronously as part of this
+// file's own linking - well before that `setTimeout(0)` can fire - so the
+// class exists no matter how the race would've gone. The framework's own
+// deferred import still runs afterwards; re-importing an already-evaluated
+// ES module is a no-op, not a double registration. `?ns-keep` matches
+// `main-entry.js`'s own specifier so Rollup canonicalizes both references
+// to the same module instead of tree-shaking this one away as unused (its
+// exports are genuinely unused - only the module's own side effect of
+// registering the class matters).
+import '@nativescript/core/ui/frame/activity.android.js?ns-keep';
+import 'demo-app-entry';

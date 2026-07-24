@@ -1457,3 +1457,205 @@ instance of the CJS-interop/browser-API-assumption bug class fixed above.
    `TOTAL: N SUCCESS` QUnit run completes end-to-end before considering
    this task done or opening a PR - `ember-native-todo.md` explicitly
    flags this as the remaining gate.
+
+## Follow-up session: three more real bugs fixed, one new blocker found (socket.io XHR hang)
+
+Continuing from the "eager-vs-lazy-import problem" section above. Took
+approach (b) from that section's next-steps list - split the shared
+`boot.js` entry into separate real/test content files, selected per-Vite-config
+instead of via a runtime branch - and along the way found two more real,
+previously-undiscovered bugs specific to that split, plus a third,
+unrelated bug in `@nativescript/vite` itself. All three are fixed. A fourth,
+distinct problem (not an entry/bundling issue at all) was found immediately
+after and is the new blocker - see its own subsection below.
+
+### Fix 1: static per-config entry split (resolves the original race)
+
+`demo-app/app/boot.js` is now a tiny, always-static dispatcher:
+```js
+import '@nativescript/core/ui/frame/activity.android.js?ns-keep'; // see Fix 3
+import 'demo-app-entry';
+```
+`demo-app-entry` is a bare specifier aliased differently per Vite config -
+`vite.config.ts` points it at `demo-app/boot-app.js` (the real app's old
+`boot()`/`app.visit()` logic, moved verbatim), `vite.test.config.ts` points
+it at `demo-app/boot-test.js` (a static `import './app/test.js'`, replacing
+the old dynamic `import('./test.js')`). Both are plain static imports, so
+whichever one is selected is evaluated synchronously as part of `boot.js`'s
+own linking - this is what actually fixes the original
+`Failed to create JavaScript extend wrapper for class
+'com/tns/NativeScriptActivity'` race: `@nativescript/unit-test-runner`'s
+`Application.run({ moduleName: "bundle-app-root" })` (reached synchronously
+now, via `boot-test.js` -> `app/test.js` -> `app/tests/test-helper.ts`) runs
+before Android ever gets a chance to try instantiating the Activity, instead
+of after (dynamic import).
+
+### Fix 2: `boot-app.js`/`boot-test.js` must live *outside* `app/`
+
+First attempt put both new files under `app/` (next to `boot.js`, for
+co-location). This reintroduced a *different*, previously-undiscovered bug:
+Ember CLI's classic module-compat registry (`Resolver.withModules(...)`,
+built from `compatModules` in the compiled output - needed for anything
+still resolving modules by `<app-name>/whatever` string name) imports
+*every* file under `app/` for its AMD-style namespace wrapper, completely
+independently of the `demo-app-entry` alias or which Vite config is active.
+With real content in both files instead of just `boot.js`'s dispatcher, this
+registry was a second, separate static reference to each of them, with two
+distinct consequences:
+- **In test builds**: `boot-app.js`'s content (a real `NativeApplication.run({create: ...})`
+  call) ran as a side effect of the registry scan, on top of `boot-test.js`'s
+  test-runner-triggered `Application.run({ moduleName: ... })` - two
+  `Application.run()`/`NativeApplication.run()` calls in the same process,
+  reproducing the exact generic `Module evaluation promise rejected:
+  .../bundle.mjs` crash class from earlier in this document. Bisected with
+  the same checkpoint-`console.log` technique described above (see "Debugging
+  technique" section) - checkpoints placed at top-level statement boundaries
+  throughout `bundle.mjs` narrowed the crash to right after `boot-app.js`'s
+  inlined `function boot() {...}`/`const document$1 = ...` content, which had
+  no business being in a *test* bundle at all.
+- **In the real production build**: the reverse problem - `boot-test.js`'s
+  content (`import './app/test.js'`) got swept in too, pulling the entire
+  qunit/ember-qunit/`@nativescript/unit-test-runner` dependency graph into
+  the shipped app. Confirmed directly: a fresh `pnpm run build`'s
+  `.ns-vite-build/bundle.mjs` contained a real, unconditional
+  `runTestApp({...})` call and compiled `*-test.gts` assertion bodies
+  (`assert.dom(this.element).containsText(...)`) - this had been true all
+  along, undetected, because the *old* shared `boot.js`'s reference to
+  `test.js` was behind a **dynamic** `import()`, which Rollup keeps in its
+  own lazy chunk even when eagerly "imported" by the compat scanner; a
+  **static** import doesn't get that protection and inlines eagerly no
+  matter who imports it.
+
+Fix: moved both files to `demo-app/boot-app.js` / `demo-app/boot-test.js`
+(one level up, siblings of `vite.config.ts`) - outside Ember CLI's `app/`
+tree entirely, so the classic-compat scanner (which only walks `appPath`)
+never discovers them. `boot.js` itself must stay under `app/` (NativeScript's
+`appPath`/`main` convention), but its only content is the bare-specifier
+`import 'demo-app-entry'` dispatch - since ES modules memoize by resolved
+path, the compat scanner *also* importing `boot.js` a second time is a
+harmless no-op re-reference to the same already-evaluated module, not a
+second execution.
+
+**Gotcha this surfaced**: `demo-app/.gitignore` is an allowlist
+(`*` then `!exceptions`), scoped to `app/**/*` plus a fixed list of root
+files. Moving files to the `demo-app/` root silently made git stop tracking
+them - added explicit `!boot-app.js`/`!boot-test.js` lines. Worth checking
+this file again if any *other* new root-level file is ever added here.
+
+### Fix 3: `@nativescript/vite`'s own Android Activity registration is racy without HMR
+
+Even with fixes 1-2 in place, `nativescript test android`'s real on-device
+run reproduced the *original* `Failed to create JavaScript extend wrapper`
+crash one more time - a second, unrelated source of the same symptom.
+`main-entry.js` (in `@nativescript/vite` itself, not our code) has two
+completely different code paths for registering `NativeScriptActivity`'s
+JS-extend wrapper on Android, chosen by `hmrActive = isDevMode &&
+!!cliFlags.hmr` (both computed from the Vite `mode`/CLI flags the
+`nativescript` CLI passes down - **not** from whether `ember-vite-hmr`'s
+`hmr()` plugin happens to be in a project's own `vite.config.ts`, a
+red herring this pass chased for a while before checking the actual
+source): when `hmrActive`, it does a synchronous `require`-like call via
+`__nsVendorRequire`; otherwise (the branch both `pnpm run build` and
+`pnpm run test:vite` actually take here - neither passes `--hmr`), it does
+a fire-and-forget, genuinely async `import('@nativescript/core/ui/frame/activity.android.js?ns-keep')`,
+deferred to a `launchEvent` listener / `setTimeout(..., 0)`. This is an
+inherent race against Android's own Activity-instantiation step, independent
+of anything in this project's own code - empirically, the smaller production
+bundle happened to consistently win that race (verified booting correctly
+on-device, screenshot-checked - see below) while the larger test bundle
+(qunit/ember-qunit/etc. still add real weight even after Fix 2) consistently
+lost it.
+
+Along the way, this also re-surfaced the `__vitePreload`/`document` bug
+documented earlier in this file (`document.getElementsByTagName is not a
+function`, this time inside `main-entry.js`'s own try/catch, logged as
+`[ns-entry] failed to import android activity module` rather than crashing
+outright) - re-added the same no-op DOM shims, but now in `boot-test.js`
+specifically (not a shared `boot.js`), since production doesn't hit this
+code path.
+
+Neither of those shims fixes the *timing* race itself, though - only the
+symptom of the deferred import throwing early. The actual fix: added a
+**second, static** import of the same module to `boot.js` itself -
+`import '@nativescript/core/ui/frame/activity.android.js?ns-keep';` (the
+exact same specifier + `?ns-keep` query `main-entry.js` uses, so Rollup's
+`preserve-imports.js` canonicalizes both references to the identical module
+instead of tree-shaking this one away as unused - confirmed via a real
+Rollup warning at build time: `activity.android.js is dynamically imported
+by virtual:entry-with-polyfills but also statically imported by
+app/boot.js, dynamic import will not move module into another chunk`).
+This forces the class registration to happen synchronously, deterministically,
+before any `setTimeout(0)` can fire - applies to both builds, not just the
+racy one, removing the reliance on timing luck for production too.
+
+**Verified**: fresh `pnpm run build` boots cleanly on-device (`topResumedActivity`
+stays `NativeScriptActivity`, not `ErrorReportActivity`; screenshot showed
+the real "Ember Nativescript Examples" list-view content, not a blank/error
+screen). Fresh `pnpm run test:vite` (fast `gradlew` loop) also boots cleanly
+now, reaching `NSUTR: found karma at 10.0.2.2` / `connecting to karma` -
+the entire `Failed to create JavaScript extend wrapper` failure class,
+across all three of its distinct root causes found across this and the
+previous session, is now gone.
+
+### New blocker: `socket.io-client`'s polling transport hangs, not a code/timing bug
+
+With all three bugs above fixed, `nativescript test android`'s real
+`pnpm test:vite` run gets *past* Activity creation and into
+`TestBrokerViewModel.connectToKarma()` (`@nativescript/unit-test-runner/app/main-view-model.js`,
+patched in `patches/@nativescript__unit-test-runner@4.0.1.patch`) - which
+correctly discovers karma's host (`NSUTR: found karma at 10.0.2.2`) and
+attempts `io.connect(...)` - then hangs and eventually reports
+`NSUTR: socket.io error on connect: timeout`.
+
+Ruled out, with direct on-device evidence (not just assumption):
+- **Not network reachability**: `adb shell` on the emulator, using raw `nc`
+  to send a manual HTTP GET for karma's actual socket.io polling endpoint
+  (`GET /socket.io/?EIO=3&transport=polling HTTP/1.1` to `10.0.2.2:<port>`),
+  gets an immediate, correct `200 OK` with a real engine.io handshake
+  payload (`{"sid":"...","upgrades":["websocket"],...}`). The same URL from
+  the host machine via `curl` responds identically and instantly.
+- **Not a WebSocket-specific issue**: forcing `transports: ['polling']`
+  (ruling out the `@valor/nativescript-websockets` bridge entirely) in a
+  quick unpatched-source diagnostic still timed out identically - the
+  `engine.io-client`-level `error` event fired with a bare `Error: timeout`
+  (no further detail), not a `connect_error` from a failed upgrade attempt.
+- **Not the earlier CJS-interop bug class**: `io.connect(...)` itself is
+  reached and called (confirmed via a diagnostic `console.log` right before
+  it, and `Object.keys(io)` showing a real `Manager`/`Socket`/`connect`
+  shape) - the resolved `socket.io-client` module itself is fine.
+
+Since a bare TCP+HTTP round-trip to the *exact same URL* from the exact
+same device succeeds instantly, but `engine.io-client`'s own
+`XMLHttpRequest`-based polling transport never completes (not even a
+malformed-response error - a bare timeout, meaning the request itself
+seemingly never resolves/rejects), the remaining suspects are specific to
+how `engine.io-client`'s `polling-xhr` module constructs/drives its
+`XMLHttpRequest` calls under NativeScript's own XHR implementation
+(`@nativescript/core/globals`) - e.g. reliance on a `readystatechange`
+sequence, `withCredentials`, or a synchronous-vs-async assumption that
+doesn't hold here, even though the app's own `fetch()`-based `context.json`
+request (a different code path) works fine. Not yet root-caused.
+
+**Do not mark the vite-only test task done or open a PR yet** -
+`ember-native-todo.md` (and `main-view-model.js`'s own patch comments)
+explicitly gate that on a real `TOTAL: N SUCCESS` run, which this blocks.
+**Next session, start here**:
+1. Instrument `engine.io-client`'s `polling-xhr.js` (via a new pnpm patch,
+   same pattern as the existing `ember-qunit`/`@ember/test-helpers` ones)
+   directly - log every `XMLHttpRequest` lifecycle event
+   (`onreadystatechange`, `onload`, `onerror`, `ontimeout`, the actual
+   `readyState`/`status` values over time) around its `request()`/`poll()`
+   methods to see whether the XHR ever fires *any* event at all, or is
+   truly inert.
+2. If it's truly inert, compare against how the *webpack* test path's own
+   (already-verified-working, "`TOTAL: 7 SUCCESS`") socket connection
+   manages this - same `socket.io-client@2.1.1` version, same
+   `@nativescript/core` XHR implementation, so whatever differs is
+   specific to the Vite/Rollup build output itself (e.g. a CJS-interop
+   default-binding issue on `XMLHttpRequest` similar to the `config.js`/
+   `qunit` ones fixed earlier, silently producing a non-functional stub).
+3. Only once a real `TOTAL: N SUCCESS` run is confirmed via
+   `pnpm test:vite` (the full CLI flow) should webpack actually be removed -
+   `nativescript.test.config.ts`/`webpack.config.js`/the `@nativescript/webpack`
+   and `babel-loader` devDependencies still need to stay until then, since
+   they're `nativescript test android`'s only currently-working path.

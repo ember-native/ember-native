@@ -1,8 +1,11 @@
+import { createRequire } from 'node:module';
 import { defineConfig, mergeConfig } from 'vite';
 import { typescriptConfig } from '@nativescript/vite';
 import { hmr } from 'ember-vite-hmr';
 // eslint-disable-next-line import/no-unresolved
 import configureEmberNativeVite from 'ember-native/utils/vite.config.js';
+
+const require = createRequire(import.meta.url);
 
 export default defineConfig(({ mode }) => {
   const emberNativeConfig = configureEmberNativeVite();
@@ -24,7 +27,15 @@ export default defineConfig(({ mode }) => {
     aliases.filter((a) => emberNativeReplacements.has(a.replacement)),
     aliases.filter((a) => !emberNativeReplacements.has(a.replacement)),
   ];
-  merged.resolve!.alias = [...ours, ...rest];
+  merged.resolve!.alias = [
+    // `app/boot.js` (package.json's `main`, the only entry @nativescript/vite
+    // ever builds) resolves this bare specifier statically - see boot.js's
+    // own docstring for why the real/test entry split happens here instead
+    // of a runtime branch or dynamic import inside one shared file.
+    { find: 'demo-app-entry', replacement: require.resolve('./boot-app.js') },
+    ...ours,
+    ...rest,
+  ];
   return mergeConfig(merged, {
     resolve: { preserveSymlinks: false },
     // ember-vite-hmr's own plugin is `enforce: 'post'`, so it always runs
