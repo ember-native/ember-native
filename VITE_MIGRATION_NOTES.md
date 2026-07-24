@@ -834,7 +834,7 @@ chunk present).
 `nativescript.test.vite.config.ts` mirrors `nativescript.test.config.ts` but
 with `bundler: 'vite'`, `bundlerConfigPath: 'vite.test.config.ts'`.
 
-### `--no-watch` is required (a real upstream bug, not a preference)
+### `-- no-watch` is required (a real upstream bug, not a preference)
 
 `nativescript test android`'s `TestCommandBase` defaults `$options.watch` to
 `true` (same CLI option `debug`/`build` use), which routes the bundler
@@ -1659,3 +1659,186 @@ explicitly gate that on a real `TOTAL: N SUCCESS` run, which this blocks.
    `nativescript.test.config.ts`/`webpack.config.js`/the `@nativescript/webpack`
    and `babel-loader` devDependencies still need to stay until then, since
    they're `nativescript test android`'s only currently-working path.
+
+## Follow-up session: switch the karma socket to WebSocket-only, skip XHR polling entirely
+
+The previous session's next-steps plan (above) assumed the fix would be
+inside `engine.io-client`'s XHR polling transport itself. It never got
+there: forcing `transports: ['polling']` had already been tried (see above,
+"not a WebSocket-specific issue") to rule out `@valor/nativescript-websockets`,
+but the inverse - forcing `transports: ['websocket']`, i.e. skip polling's
+XHR handshake *entirely* and connect straight over a real native WebSocket -
+had not been. That's the actual fix, not XHR instrumentation.
+
+- `engine.io-client@3.2.1`'s default `transports` option is `['polling',
+  'websocket']` (`lib/socket.js:71`) - it always does an XHR polling
+  handshake first regardless of WebSocket availability, only upgrading to
+  WebSocket afterwards. Since the XHR polling handshake itself is what
+  hangs (confirmed: raw TCP/HTTP to the same URL works instantly, the
+  `engine.io-client`-level XHR never resolves), the fix is to skip polling
+  outright: `patches/@nativescript__unit-test-runner@4.0.1.patch`'s
+  `io.connect(...)` call now passes `transports: ['websocket']`.
+- `engine.io-client`'s websocket transport module
+  (`lib/transports/websocket.js`) resolves its WebSocket implementation via
+  `var BrowserWebSocket = global.WebSocket || global.MozWebSocket;` at its
+  own **module top level**, and (since `vite.config.js`'s `define: {window:
+  'globalThis'}` makes `typeof window === 'undefined'` evaluate to `false`
+  everywhere, including inside this dependency) never falls back to
+  requiring the Node `ws` package either. So `global.WebSocket` has to
+  already exist by the time this module first evaluates.
+  `@valor/nativescript-websockets` (already an unused `demo-app`
+  devDependency from an earlier, never-wired-in prep step) does exactly
+  that as a side effect of being imported (`global.WebSocket = WebSocket`,
+  a real native-socket-backed implementation, not an XHR polyfill) - added
+  as the very first import in `boot-test.js`, ahead of `./app/test.js`, so
+  ES module execution order guarantees it runs before `engine.io-client`'s
+  websocket module (reached transitively through `test.js` →
+  `test-helper.ts` → ... → `main-view-model.js`) ever loads.
+- This avoids `XMLHttpRequest` entirely for the karma connection rather than
+  trying to fix whatever is wrong with NativeScript's XHR implementation
+  under this pipeline (still not root-caused, and no longer blocking -
+  moot once nothing exercises it here).
+
+**Verification status: implemented but not yet confirmed on-device.** A
+`pnpm test:vite` run was started to verify this, but the Android emulator
+(`emulator-5554`) wedged mid-session into an unkillable, uninterruptible
+kernel state (`kill -9` had no effect, CPU time frozen) for reasons
+unrelated to this change (a stale `test:vite` process from a prior session
+was found still running against the same device and killed first, which
+may or may not be related). A device-less `vite build --config
+vite.test.config.ts` sanity check was tried as a fallback and failed, but
+on an unrelated, expected-under-that-invocation error (`EISDIR` resolving
+`@nativescript/core`'s `activity.android.js` platform file) - `@nativescript/vite`'s
+platform-suffix resolution plugins are injected by the `nativescript` CLI
+itself, not present in a bare `vite build`, so this is an artifact of
+skipping the CLI wrapper, not a real regression. **Next session: once the
+emulator is available again, this still needs a real `pnpm test:vite` run
+reaching `TOTAL: N SUCCESS` before the "vite-only test path"/"fully remove
+webpack" todo items can be marked done.**
+
+## Follow-up session: reviewing patches for "can this be fixed with a global instead of a patch" (per `ember-native-todo.md`)
+
+Audited every entry in `pnpm.patchedDependencies` for whether the same fix
+could be achieved by setting up a global/environment shim in app code
+instead of patching the dependency's own files. Conclusion: most can't -
+they're genuine CJS/ESM interop or bundler-shape bugs, not environment gaps
+- but two are a strong candidate for removal, not yet acted on because it
+needs the same on-device verification the socket.io fix above does:
+
+- **`@ember/test-helpers`, `@ember/test-waiters`**: both patches exist
+  because `document.location` is `undefined` when their dist code checks
+  `typeof URLSearchParams !== 'undefined'` (test-helpers) or does `import {
+  warn } from '@ember/debug'` failing to link (test-waiters, unrelated -
+  see below) at their own module top level. **But** `ember-native/src/setup.ts`'s
+  `setup()` (called from `demo-app/app/native/setup-ember-native.ts:6`)
+  already does `document.location = globalThis.window.location = { search:
+  '', ... }` as a real side effect - and per `demo-app/app/test.js`'s
+  import order (`qunit-browser-shim` → `qunit` → `setup-ember-native` →
+  `test-helper`), that runs **before** `test-helper.ts`'s import of
+  `ember-qunit`/`@ember/test-helpers` ever evaluates. If that ordering
+  holds through Rollup's actual chunking (ES module evaluation order is a
+  language-level guarantee, so it should), the *unpatched* `@ember/test-helpers`
+  code should just work today - `document.location` already exists by the
+  time it's checked. The `@ember/test-waiters` patch's `warn` fallback is a
+  separate, real ESM-linking issue unrelated to `document.location` and
+  would still be needed regardless.
+  **Not yet removed**: this is a hypothesis based on static reading of the
+  import graph, not a verified fact - removing a patch that's part of a
+  currently-working test path without on-device confirmation would be
+  reckless. Next session, with the emulator back: temporarily drop
+  `@ember/test-helpers` from `pnpm.patchedDependencies` (keep
+  `@ember/test-waiters`, editing only its `warn` fallback in), rerun `pnpm
+  test:vite`, and only remove the patch file for real if it still passes.
+- **`ember-qunit`** (all 5 files), **`@nativescript/core`**, **`log-symbols`**:
+  all fix a different, structural problem - a CJS module's `module.exports
+  = X` assignment happening inside a nested function call rather than a
+  statically-traceable top-level assignment (`qunit`, `tslib`, `acorn`,
+  `css-what`) or a genuinely-missing optional dependency
+  (`is-unicode-supported`, a `nativescript` build-tool-side issue, not app
+  runtime). Rollup's static CJS/ESM interop can't prove these safe to
+  bind as a plain default/named export, so it produces a frozen namespace
+  object with only a lazy `__require()` escape hatch. No global variable
+  can fix this class of bug - it's about how Rollup *statically analyzes an
+  import statement*, not about a missing runtime environment feature. The
+  existing `resolveCjsInterop`/namespace-import-with-fallback pattern (also
+  used in `@nativescript__unit-test-runner`'s own patch) is the right kind
+  of fix; an alias to a hand-written ESM shim (the pattern `utils/json-to-ast-esm-shim.js`
+  already uses for the same class of problem) is the other reasonable
+  option, but isn't obviously simpler than what's there for 5 small files.
+- **`nativescript@9.0.6`**: a genuine upstream CLI bug (`copyViteBundleToNative`
+  never called on the non-watch path - see "A real, upstream `nativescript`
+  CLI bug" section above). No environment shim in app code can reach into
+  the `nativescript` CLI's own build orchestration; this can only be fixed
+  by patching the CLI (or waiting for an upstream fix and dropping the
+  patch + version pin).
+- **`ember-vite-hmr@2.0.7`**: two independent fixes. The `!server` guard
+  (skip HMR-only virtual-module rewriting when there's no dev server, i.e.
+  every `nativescript build`/`test` one-shot build) is inherent to the
+  difference between `vite dev` and `vite build` - not an environment gap.
+  The `document.body` guard *is* arguably an environment gap - `ember-native`'s
+  DOM shim never implements `document.body` since it's a web-only concept
+  (cloning the whole page for error-recovery re-rendering). Giving
+  `document` a stub `body` could avoid needing this patch line, but the
+  underlying feature (web error-recovery re-rendering) still wouldn't work
+  correctly on NativeScript even with a fake body, so skipping it outright
+  (current behavior) is more correct than faking enough of a DOM to limp
+  past the check - not changed.
+
+## Follow-up session: does `@glimmer/env` really need a custom Vite alias?
+
+Reviewed whether `utils/vite.config.js`'s `{ find: '@glimmer/env',
+replacement: require.resolve('./glimmer-env.js') }` alias (mirrored in
+`utils/webpack.config.js`) is actually necessary, per the premise that
+"`@glimmer/env` should be resolved by embroider into ember-source, no
+custom resolve should be needed." That premise doesn't hold up:
+
+- `@glimmer/env` **is** a real, standalone npm package (`@glimmer/env@0.1.7`,
+  a transitive dependency pulled in by `ember-source`/`@glimmer/*`), not
+  something `@embroider/core` synthesizes content for. `@embroider/shared-internals`'s
+  `emberVirtualPackages` set (which includes `@glimmer/env`) only affects
+  one thing: `Resolver.reliablyResolvable()`'s dependency-declaration check
+  (`module-resolver.js:1115-1126`), i.e. "don't complain that this import
+  isn't a declared dependency." Its own comment says why: `@glimmer/env`
+  imports are expected **to get compiled away by babel** (`babel-plugin-debug-macros`,
+  wired in via `ember-cli-babel`/`@embroider/compat`'s `oldDebugMacros()`,
+  which replaces `import { DEBUG, CI } from '@glimmer/env'` with inlined
+  macro conditions) before any bundler needs to resolve the module for
+  real - the `emberVirtualPackages` set exists only so a build tool
+  scanning *pre-transpiled* code (its own words: "like snowpack") doesn't
+  treat the bare specifier as a hard error while that's still true.
+  Confirmed empirically that `ember-source`'s own published `dist/ember.debug.js`/`ember.prod.js`
+  contain **no** raw `@glimmer/env` import - the real content is registered
+  directly into Ember's classic AMD loader (`d('@glimmer/env', glimmerEnv)`),
+  which is a runtime module registry, not something Vite/Rollup's static
+  ESM resolution ever sees.
+- So in the common case (first-party app/addon source, always babel-transformed
+  by `demo-app/babel.config.cjs`'s `babelCompatSupport()` before Rollup
+  resolves anything), the import is genuinely eliminated and no resolution
+  ever happens - matching the premise.
+- **But**: under this repo's specific pnpm layout, `@glimmer/env` is a real
+  package that's only ever a *transitive* dependency (of `ember-source`,
+  `@glimmer/component`, etc.) - pnpm's strict, non-hoisted `node_modules`
+  never symlinks it into `demo-app/node_modules/@glimmer/`, since
+  `demo-app` itself never declares it as a direct dependency. Confirmed
+  empirically: `require.resolve('@glimmer/env')` run from `demo-app` throws
+  `MODULE_NOT_FOUND` - plain Node/Vite module resolution genuinely cannot
+  find this "virtual" package on disk here, regardless of what embroider's
+  own dependency-validation logic permits. Vite's esbuild-based dependency
+  pre-bundling/scan phase operates on raw, not-yet-babel-transformed source
+  and can encounter the bare specifier before the real babel-based Rollup
+  pipeline would have eliminated it - at which point pnpm's strict layout
+  makes it a real, unresolvable-by-normal-means package, not just an
+  embroider-blessed virtual one.
+- **Conclusion: the alias should stay.** It's the correct, minimal fix for
+  a real pnpm-strict-resolution gap that's specific to this package
+  manager's layout, not a workaround for a bug in embroider or a
+  redundant/unnecessary custom resolve. The one thing worth reconsidering
+  (not changed this session, low priority): the alias's `glimmer-env.js`
+  stub hardcodes `DEBUG = true`, `CI = false` unconditionally, which is
+  only meaningful as a fallback for content that reaches the bundler
+  already-compiled-but-unstripped - it doesn't (and structurally can't)
+  vary with actual build mode the way babel's macro substitution does for
+  first-party code. That's fine as a fallback (dev-only builds go through
+  this path in practice), but isn't "production-accurate" if it were ever
+  exercised in a release build - worth a comment update, not a behavior
+  change.

@@ -47,7 +47,7 @@ index c3f1be101f3737e3cb1758771bf64ae5a69f2f7e..e7aa3529fb404a5a50caeefb4018c823
 +    page.bindingContext = getMainViewModel();
  }
 diff --git a/app/main-view-model.js b/app/main-view-model.js
-index c644dc668623a0fe73c221e210f2806e24cb6f7b..b3489ab67faf732aada37901721262be7619d236 100644
+index c644dc668623a0fe73c221e210f2806e24cb6f7b..40e67da74a4eca0190afcc88305032128e801496 100644
 --- a/app/main-view-model.js
 +++ b/app/main-view-model.js
 @@ -4,6 +4,40 @@ import { KarmaFilesService } from './services/karma-files-service';
@@ -99,17 +99,28 @@ index c644dc668623a0fe73c221e210f2806e24cb6f7b..b3489ab67faf732aada37901721262be
  config.options = config.options || {};
  if (isAndroid)
      config.ips = (config.ips || []).concat(['10.0.2.2']);
-@@ -166,8 +199,7 @@ export class TestBrokerViewModel extends Observable {
+@@ -166,8 +199,18 @@ export class TestBrokerViewModel extends Observable {
              }
          };
          this.updateView({ serverInfo: `connected to ${this.baseUrl}` });
 -        let io = require('../socket.io');
 -        const socket = this.socket = io.connect(this.baseUrl, { forceBase64: true });
-+        const socket = this.socket = io.connect(this.baseUrl, { forceBase64: true, jsonp: false, reconnection: false });
++        // `transports: ['websocket']` - engine.io-client's default
++        // (`['polling', 'websocket']`) always starts with an XHR polling
++        // handshake, which hangs indefinitely under NativeScript's XHR
++        // implementation for reasons never fully root-caused (see
++        // VITE_MIGRATION_NOTES.md's socket.io section) even though raw
++        // TCP/HTTP to the same endpoint works fine. Skipping polling
++        // entirely and going straight to a real native WebSocket (via
++        // `@valor/nativescript-websockets`, imported before this module in
++        // boot-test.js so `global.WebSocket` exists before engine.io-client's
++        // websocket transport module evaluates) avoids XHR altogether
++        // instead of trying to fix it.
++        const socket = this.socket = io.connect(this.baseUrl, { forceBase64: true, jsonp: false, reconnection: false, transports: ['websocket'] });
          socket.on('connect', err => {
              console.log('NSUTR: successfully connected to karma');
              delete global.navigator;
-@@ -237,8 +269,28 @@ export class TestBrokerViewModel extends Observable {
+@@ -237,8 +280,28 @@ export class TestBrokerViewModel extends Observable {
          return result;
      }
  }

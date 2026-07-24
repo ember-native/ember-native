@@ -21,7 +21,7 @@ patchedDependencies:
     hash: 23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc
     path: patches/@nativescript__core@9.0.20.patch
   '@nativescript/unit-test-runner@4.0.1':
-    hash: 6276c820aba2dca3b05174029ee54c84d6925075557ce03b332d04748e06a262
+    hash: 96c9cb36fac8c949e74a13d0d7c34a89c74f2db372722c066a8e1c8e556a3e6f
     path: patches/@nativescript__unit-test-runner@4.0.1.patch
   ember-qunit@9.0.4:
     hash: 4e1f02d01f236a053b1ce8b6bbe423b6f2bbb47f1b67af37083a63b2b1ce5683
@@ -75,7 +75,7 @@ importers:
         version: 3.1.0
       '@nativescript/unit-test-runner':
         specifier: ~4.0.1
-        version: 4.0.1(patch_hash=6276c820aba2dca3b05174029ee54c84d6925075557ce03b332d04748e06a262)
+        version: 4.0.1(patch_hash=96c9cb36fac8c949e74a13d0d7c34a89c74f2db372722c066a8e1c8e556a3e6f)
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.3
@@ -21872,7 +21872,7 @@ snapshots:
       '@nativescript/types-android': 9.0.0
       '@nativescript/types-ios': 9.0.0
 
-  '@nativescript/unit-test-runner@4.0.1(patch_hash=6276c820aba2dca3b05174029ee54c84d6925075557ce03b332d04748e06a262)':
+  '@nativescript/unit-test-runner@4.0.1(patch_hash=96c9cb36fac8c949e74a13d0d7c34a89c74f2db372722c066a8e1c8e556a3e6f)':
     dependencies:
       '@nativescript/hook': 3.0.5
       glob-regex: 0.3.2

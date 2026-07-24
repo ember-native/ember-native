@@ -18,6 +18,18 @@
 // `require.context`-based test entry always behaved - see
 // VITE_MIGRATION_NOTES.md's "eager-vs-lazy-import problem" section for the
 // full diagnostic history.
+//
+// Imported *before* `./app/test.js` (whose graph eventually reaches
+// `@nativescript/unit-test-runner`'s `socket.io-client`/`engine.io-client`):
+// this sets `global.WebSocket` to a real native implementation as a module
+// top-level side effect. `engine.io-client`'s websocket transport reads
+// `global.WebSocket` at its own module top level too, so it has to already
+// exist by the time that module first evaluates - ESM import order
+// guarantees that here since this line comes first textually. See the
+// patched `io.connect(...)` call in
+// `patches/@nativescript__unit-test-runner@4.0.1.patch` for why this
+// replaces XHR polling instead of just polyfilling XHR itself.
+import '@valor/nativescript-websockets';
 import './app/test.js';
 
 // Separately: `@nativescript/vite`'s own generated entry (`main-entry.js`)
