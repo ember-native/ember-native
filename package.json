@@ -35,8 +35,13 @@
       "ember-eslint-parser": "0.5.3"
     },
     "patchedDependencies": {
-      "@nativescript/unit-test-runner": "patches/@nativescript__unit-test-runner.patch",
-      "@nativescript/core@9.0.20": "patches/@nativescript__core@9.0.20.patch"
+      "@nativescript/core@9.0.20": "patches/@nativescript__core@9.0.20.patch",
+      "nativescript@9.0.6": "patches/nativescript@9.0.6.patch",
+      "ember-vite-hmr@2.0.7": "patches/ember-vite-hmr@2.0.7.patch",
+      "@nativescript/unit-test-runner@4.0.1": "patches/@nativescript__unit-test-runner@4.0.1.patch",
+      "ember-qunit@9.0.4": "patches/ember-qunit@9.0.4.patch",
+      "@ember/test-waiters": "patches/@ember__test-waiters.patch",
+      "@ember/test-helpers": "patches/@ember__test-helpers.patch"
     },
     "onlyBuiltDependencies": [
       "@nativescript/core",

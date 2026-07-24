@@ -1,0 +1,26 @@
+diff --git a/dist/-internal/deprecations.js b/dist/-internal/deprecations.js
+index 811662eecb5a803d6388a0e60a47e47f389b396f..735bb62aec49622a96a9d0150c0f986a6276cb4c 100644
+--- a/dist/-internal/deprecations.js
++++ b/dist/-internal/deprecations.js
+@@ -53,7 +53,7 @@ function getDeprecationsDuringCallbackForContext(context, callback) {
+ // This provides (when the environment supports) queryParam support for deprecations:
+ // * squelch deprecations by name via: `/tests/index.html?disabledDeprecations=this-property-fallback,some-other-thing`
+ // * enable a debuggger when a deprecation by a specific name is encountered via: `/tests/index.html?debugDeprecations=some-other-thing` when the
+-if (typeof URLSearchParams !== 'undefined') {
++if (typeof URLSearchParams !== 'undefined' && typeof document !== 'undefined' && document.location) {
+   const queryParams = new URLSearchParams(document.location.search.substring(1));
+   const disabledDeprecations = queryParams.get('disabledDeprecations');
+   const debugDeprecations = queryParams.get('debugDeprecations');
+diff --git a/dist/-internal/warnings.js b/dist/-internal/warnings.js
+index 04b06add3e38a873e0c729bc070b8df0228a5b67..8652bc1abd436fdf875c6b339317c7005fe727d2 100644
+--- a/dist/-internal/warnings.js
++++ b/dist/-internal/warnings.js
+@@ -55,7 +55,7 @@ function getWarningsDuringCallbackForContext(context, callback) {
+ // This provides (when the environment supports) queryParam support for warnings:
+ // * squelch warnings by name via: `/tests/index.html?disabledWarnings=this-property-fallback,some-other-thing`
+ // * enable a debuggger when a warning by a specific name is encountered via: `/tests/index.html?debugWarnings=some-other-thing` when the
+-if (typeof URLSearchParams !== 'undefined') {
++if (typeof URLSearchParams !== 'undefined' && typeof document !== 'undefined' && document.location) {
+   const queryParams = new URLSearchParams(document.location.search.substring(1));
+   const disabledWarnings = queryParams.get('disabledWarnings');
+   const debugWarnings = queryParams.get('debugWarnings');

@@ -21,7 +21,15 @@
 !README.md
 !references.d.ts
 !tsconfig.json
+!vite.config.ts
+!vite.test.config.ts
+!boot-app.js
+!boot-test.js
+!vite-plugins
+!vite-plugins/**/*
 !webpack.config.js
+!nativescript.test.config.ts
+!nativescript.test.vite.config.ts
 !karma.conf.js
 !tsconfig.spec.json
 !config.js

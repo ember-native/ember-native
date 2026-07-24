@@ -54,6 +54,7 @@
     "@eslint/js": "^10.0.1",
     "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-replace": "^6.0.3",
     "@types/node": "^25.6.0",
     "astroturf": "^1.2.0",
     "ember-cli-babel": "^8.2.0",
@@ -62,6 +63,7 @@
     "ember-get-config": "^2.1.1",
     "ember-maybe-import-regenerator": "^1.0.0",
     "ember-template-lint-plugin-prettier": "^5.0.0",
+    "json-to-ast": "^2.1.0",
     "prettier-linter-helpers": "^1.0.0",
     "rollup-plugin-astroturf": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a",
     "rollup-plugin-postcss": "^4.0.2",
@@ -155,12 +157,10 @@
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
       "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
       "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
-      "./instance-initializers/ember-native/webpack-hot-reload.js": "./dist/_app_/instance-initializers/ember-native/webpack-hot-reload.js",
       "./modifiers/ember-native/index.js": "./dist/_app_/modifiers/ember-native/index.js",
       "./modifiers/ember-native/native-slot.js": "./dist/_app_/modifiers/ember-native/native-slot.js",
       "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js",
-      "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js",
-      "./services/ember-native/webpack-hot-reload.js": "./dist/_app_/services/ember-native/webpack-hot-reload.js"
+      "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js"
     }
   },
   "exports": {

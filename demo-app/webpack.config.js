@@ -3,8 +3,13 @@ const path = require('path');
 
 const webpack = require('@nativescript/webpack');
 const configureEmberNative = require('ember-native/utils/webpack.config.js');
-const { execSync } = require("node:child_process");
+const { execSync } = require('node:child_process');
 
+// This config is only used for `nativescript test android` (via
+// nativescript.test.config.ts's `bundlerConfigPath`). The main
+// `build`/`debug android` flow uses vite.config.ts instead - see
+// VITE_MIGRATION_NOTES.md for why @nativescript/unit-test-runner still
+// needs webpack.
 module.exports = (env) => {
   // @nativescript/webpack (5.x) defaults to emitting an ESM bundle
   // (.mjs chunks) for android/ios now that @nativescript/core (9.x) ships
@@ -17,12 +22,12 @@ module.exports = (env) => {
   // the @nativescript/webpack config, not a hack around it.
   env.commonjs = true;
 
-	webpack.init(env);
+  webpack.init(env);
 
   process.env.EMBER_HMR_ENABLED = 'true';
 
-	// Learn how to customize:
-	// https://docs.nativescript.org/webpack
+  // Learn how to customize:
+  // https://docs.nativescript.org/webpack
 
   // Use ember-native webpack configuration (includes embroider adapter)
   configureEmberNative(webpack);
@@ -31,7 +36,6 @@ module.exports = (env) => {
     // Add .gjs and .gts extensions
     config.resolve.extensions.add('.gjs');
     config.resolve.extensions.add('.gts');
-    // Test-specific aliases
     // App-specific aliases
     config.resolve.alias.set('~', '/app');
     config.resolve.alias.delete('@');
@@ -70,7 +74,6 @@ module.exports = (env) => {
           browser: true
         }
       });
-      console.log('define plugin', args);
       return args;
     });
   });
@@ -112,10 +115,6 @@ module.exports = (env) => {
   // Configure webpack resolveLoader for pnpm
   webpack.chainWebpack((config) => {
     const nativescriptWebpackPath = fs.realpathSync(path.dirname(require.resolve('@nativescript/webpack/package.json')));
-    console.log(path.resolve(nativescriptWebpackPath, '..', '..'));
-    console.log(fs.readdirSync(path.resolve(nativescriptWebpackPath, '..', '..')));
-    console.log(path.resolve(nativescriptWebpackPath, 'dist', 'loaders'))
-    console.log(fs.readdirSync(path.resolve(nativescriptWebpackPath, 'dist', 'loaders')));
     config.resolveLoader.modules
       .add(path.resolve(__dirname, 'node_modules'))
       .add(path.resolve(nativescriptWebpackPath, '..', '..'))
@@ -123,25 +122,26 @@ module.exports = (env) => {
       .end();
   });
 
-	let conf = webpack.resolveConfig();
-  console.log('conf', conf)
-  //console.log('module.rules', conf.module.rules.map(r => r.use))
+  const conf = webpack.resolveConfig();
 
-  // Wrap config in async function to run Embroider prebuild
-  return (() => {
-    try {
-      require('@embroider/vite');
-      console.log('🔨 Running Embroider prebuild...');
-      execSync('pnpm ember build', {
-        env: {
-          ...process.env,
-          EMBROIDER_PREBUILD: 'true',
-        }
-      })
-      console.log('✓ Embroider prebuild completed');
-    } catch (e) {
-      console.warn('⚠ Embroider prebuild failed:', e?.message || e);
-    }
-    return conf;
-  })();
+  // @embroider/vite's resolver (bridged into webpack by
+  // ember-native/utils/embroider-webpack-adapter.js) reads Embroider's
+  // compat-build output (app-files manifest, virtual re-exports, etc.) from
+  // disk rather than generating it on the fly the way its real Vite/Rollup
+  // plugins do. Force a synchronous `ember build` first so that output
+  // exists before webpack starts resolving modules against it.
+  try {
+    require('@embroider/vite');
+    execSync('pnpm ember build', {
+      env: {
+        ...process.env,
+        EMBROIDER_PREBUILD: 'true',
+      },
+      stdio: 'inherit',
+    });
+  } catch (e) {
+    console.warn('⚠ Embroider prebuild failed:', e?.message || e);
+  }
+
+  return conf;
 };

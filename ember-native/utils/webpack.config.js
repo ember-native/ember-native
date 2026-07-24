@@ -1,8 +1,21 @@
 /**
- * Configures webpack for ember-native using @embroider/vite adapter
+ * Configures @nativescript/webpack for ember-native using the @embroider/vite
+ * adapter (embroider-webpack-adapter.js bridges @embroider/vite's
+ * resolver()/templateTag() plugins into webpack by hand).
  *
- * This configuration uses @embroider/vite plugins via the webpack adapter
- * with automatic fallback to custom loaders if unavailable.
+ * LEGACY / backward-compat path. New apps, and apps able to move off
+ * @nativescript/webpack, should use utils/vite.config.js with
+ * @nativescript/vite instead - it hands @embroider/vite's plugins to Vite
+ * directly with no bridging required, and is where new features land first.
+ * This file is kept, not deprecated outright, because
+ * @nativescript/unit-test-runner (`nativescript test android`) has no Vite
+ * equivalent as of this writing - it only wires up its test
+ * entrypoint/karma integration through @nativescript/webpack's
+ * `chainWebpack` hook convention, so even apps whose main build/debug flow
+ * has moved to Vite still need this config for their test build (see
+ * demo-app/webpack.config.js + demo-app/nativescript.test.config.ts for how
+ * to keep both bundlers side by side, and VITE_MIGRATION_NOTES.md for the
+ * full writeup).
  *
  * @param {object} webpack - the @nativescript/webpack instance
  * @param {object} [options] - optional configuration

@@ -1,7 +1,7 @@
 const {
   babelCompatSupport,
 } = require('@embroider/compat/babel');
-const hmrPlugin = require('ember-native/utils/babel-plugin.js');
+const hmrPlugin = require('ember-vite-hmr/lib/babel-plugin');
 const macros = require("@embroider/macros/src/macros-config");
 const { babelPlugin } = require('@warp-drive/core/build-config');
 

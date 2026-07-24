@@ -17,6 +17,7 @@
 !CONTRIBUTING.md
 !LICENSE.md
 !NATIVESCRIPT_UPGRADE_NOTES.md
+!VITE_MIGRATION_NOTES.md
 !package.json
 !pnpm-lock.yaml
 !pnpm-workspace.yaml

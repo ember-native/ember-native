@@ -1,0 +1,41 @@
+diff --git a/dist/instance-initializers/vite-hot-reload.js b/dist/instance-initializers/vite-hot-reload.js
+index 0b55269dabbced92dc8927b14b24d826966fa29e..8113bfb88d9acfbd946f85fae8d9150433a26c80 100644
+--- a/dist/instance-initializers/vite-hot-reload.js
++++ b/dist/instance-initializers/vite-hot-reload.js
+@@ -12,6 +12,13 @@ function patchResolver(application) {
+   };
+ }
+ function supportErrorRecovery(appInstance) {
++  // NativeScript's DOM shim (ember-native's src/dom/*) doesn't implement a
++  // `document.body` - this feature is web-only (it clones the real page
++  // body to recover from an unrecoverable Ember render error); skip it
++  // rather than crashing app boot on every launch.
++  if (!globalThis.document?.body) {
++    return;
++  }
+   const bodyHtml = globalThis.document.body.cloneNode(true);
+   const renderer = appInstance.__container__.lookup('renderer:-dom');
+   const router = appInstance.__container__.lookup('service:router');
+diff --git a/dist/lib/hmr.js b/dist/lib/hmr.js
+index 2bbac08c94f6f0471cb2c48aa348f7b2a82dcbee..1a9be6efb0619bbe98e7f75652aae9db8952841d 100644
+--- a/dist/lib/hmr.js
++++ b/dist/lib/hmr.js
+@@ -346,6 +346,18 @@ function hmr(enableViteHmrForModes = ['development']) {
+                                 // Skip node_modules imports
+                                 continue;
+                             }
++                            if (!server) {
++                                // The `/ember-vite-hmr/virtual/component:...` id this would
++                                // reference can only be served by this plugin's `load()` hook
++                                // via a running Vite dev server (`server.transformRequest`).
++                                // Bundlers that never call `configureServer` - e.g.
++                                // @nativescript/vite, which always does a one-shot/watched
++                                // `vite build` instead of `vite dev` - would otherwise fail
++                                // the whole build with an ENOENT trying to read that fake path
++                                // off disk. Coarse-grained (route/controller/template) reload
++                                // below doesn't depend on `server` and still works.
++                                continue;
++                            }
+                             const sourceId = imp.source.replace(/@embroider\/virtual/g, 'embroider_virtual');
+                             const virtualPath = `/ember-vite-hmr/virtual/component:${sourceId}::${imp.specifier}.gjs`;
+                             hotReloadStatements.push(`

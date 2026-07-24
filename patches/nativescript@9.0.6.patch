@@ -1,0 +1,27 @@
+diff --git a/lib/services/bundler/bundler-compiler-service.js b/lib/services/bundler/bundler-compiler-service.js
+index 4ea8fdfce29d6455474422959e0714dffcfde30e..82a6e99db12fee347d37cea3d5120719bc6b4996 100644
+--- a/lib/services/bundler/bundler-compiler-service.js
++++ b/lib/services/bundler/bundler-compiler-service.js
+@@ -219,6 +219,22 @@ class BundlerCompilerService extends events_1.EventEmitter {
+                     delete this.bundlerProcesses[platformData.platformNameLowerCase];
+                     const exitCode = typeof arg === "number" ? arg : arg && arg.code;
+                     if (exitCode === 0) {
++                        // Unlike compileWithWatch, this non-watch path (used by `build`/`test`,
++                        // as opposed to `debug`'s watch mode) never received the vite child
++                        // process's IPC "build complete" message telling it which files to
++                        // copy - it only waited for the process to exit. For webpack this was
++                        // fine (webpack itself writes directly into the platform destination
++                        // directory), but @nativescript/vite always writes to
++                        // `.ns-vite-build` and relies on the CLI to copy that into the native
++                        // project; nothing did that here, so `build`/`test` produced an empty
++                        // (SBG-failing) native assets directory even though the vite build
++                        // itself succeeded. Do the same one-shot full copy `compileWithWatch`
++                        // does for its first build.
++                        if (this.getBundler() === "vite") {
++                            const distOutput = path.join(projectData.projectDir, ".ns-vite-build");
++                            const destDir = path.join(platformData.appDestinationDirectoryPath, this.$options.hostProjectModuleName);
++                            this.copyViteBundleToNative(distOutput, destDir);
++                        }
+                         resolve();
+                     }
+                     else {
