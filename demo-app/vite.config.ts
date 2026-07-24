@@ -1,5 +1,6 @@
 import { defineConfig, mergeConfig } from 'vite';
 import { typescriptConfig } from '@nativescript/vite';
+import { hmr } from 'ember-vite-hmr';
 // eslint-disable-next-line import/no-unresolved
 import configureEmberNativeVite from 'ember-native/utils/vite.config.js';
 
@@ -26,5 +27,8 @@ export default defineConfig(({ mode }) => {
   merged.resolve!.alias = [...ours, ...rest];
   return mergeConfig(merged, {
     resolve: { preserveSymlinks: false },
+    // ember-vite-hmr's own plugin is `enforce: 'post'`, so it always runs
+    // after the plugins above regardless of array position.
+    plugins: [hmr()],
   });
 });

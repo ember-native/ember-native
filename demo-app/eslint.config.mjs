@@ -61,7 +61,7 @@ export default ts.config(
      * https://eslint.org/docs/latest/use/configure/ignore
      */
     {
-        ignores: ['dist/', 'node_modules/', 'coverage/', '!**/.*', 'hooks/', 'platforms', 'App_Resources', 'references.d.ts', 'nativescript.config.ts', 'nativescript.test.config.ts'],
+        ignores: ['dist/', 'node_modules/', 'coverage/', '!**/.*', 'hooks/', 'platforms', 'App_Resources', 'references.d.ts', 'nativescript.config.ts', 'nativescript.test.config.ts', 'nativescript.test.vite.config.ts'],
     },
     /**
      * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
@@ -90,7 +90,9 @@ export default ts.config(
             parserOptions: parserOptions.esm.js,
             globals: {
                 ...globals.browser,
-                ...emberNativeGlobals.emberNativeGlobals
+                ...emberNativeGlobals.emberNativeGlobals,
+                // Vite `define` in vite.test.config.ts - see app/boot.js.
+                __NS_UNIT_TESTING__: 'readonly',
             },
         },
     },

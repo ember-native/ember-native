@@ -14,9 +14,12 @@ patchedDependencies:
   '@nativescript/core@9.0.20':
     hash: 23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc
     path: patches/@nativescript__core@9.0.20.patch
-  '@nativescript/unit-test-runner':
-    hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
-    path: patches/@nativescript__unit-test-runner.patch
+  '@nativescript/unit-test-runner@4.0.1':
+    hash: ee0c6f2d04be7e0e9ab5189409b8376a9852e94dc4849d10920ad9716eadeb6e
+    path: patches/@nativescript__unit-test-runner@4.0.1.patch
+  ember-vite-hmr@2.0.7:
+    hash: 3b9a0fd2c07c1c1c13f48653105f7f04fd861213ef8f066da13bc2bb505d7b81
+    path: patches/ember-vite-hmr@2.0.7.patch
   nativescript@9.0.6:
     hash: 43de23a3af51d6e0ef6bb93213fa0d420a070a94f75b44a0cabf7f97d424bbf6
     path: patches/nativescript@9.0.6.patch
@@ -63,7 +66,7 @@ importers:
         version: 3.1.0
       '@nativescript/unit-test-runner':
         specifier: ~4.0.1
-        version: 4.0.1(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
+        version: 4.0.1(patch_hash=ee0c6f2d04be7e0e9ab5189409b8376a9852e94dc4849d10920ad9716eadeb6e)
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.3
@@ -218,6 +221,9 @@ importers:
       ember-template-lint:
         specifier: ^7.9.1
         version: 7.9.3
+      ember-vite-hmr:
+        specifier: ^2.0.6
+        version: 2.0.7(patch_hash=3b9a0fd2c07c1c1c13f48653105f7f04fd861213ef8f066da13bc2bb505d7b81)(acee11b44b98e80098e71e0980b3b8de)
       eslint:
         specifier: ^9.27.0
         version: 9.39.4(jiti@2.6.1)
@@ -275,6 +281,9 @@ importers:
       socket.io:
         specifier: ^4.8.1
         version: 4.8.3
+      socket.io-client:
+        specifier: 2.1.1
+        version: 2.1.1
       stream-browserify:
         specifier: ^3.0.0
         version: 3.0.0
@@ -542,7 +551,7 @@ importers:
         version: 7.9.3
       ember-vite-hmr:
         specifier: ^2.0.6
-        version: 2.0.7(acee11b44b98e80098e71e0980b3b8de)
+        version: 2.0.7(patch_hash=3b9a0fd2c07c1c1c13f48653105f7f04fd861213ef8f066da13bc2bb505d7b81)(acee11b44b98e80098e71e0980b3b8de)
       ember-welcome-page:
         specifier: ^8.0.5
         version: 8.0.5(@babel/core@7.29.0)
@@ -21854,7 +21863,7 @@ snapshots:
       '@nativescript/types-android': 9.0.0
       '@nativescript/types-ios': 9.0.0
 
-  '@nativescript/unit-test-runner@4.0.1(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
+  '@nativescript/unit-test-runner@4.0.1(patch_hash=ee0c6f2d04be7e0e9ab5189409b8376a9852e94dc4849d10920ad9716eadeb6e)':
     dependencies:
       '@nativescript/hook': 3.0.5
       glob-regex: 0.3.2
@@ -28654,7 +28663,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-vite-hmr@2.0.7(acee11b44b98e80098e71e0980b3b8de):
+  ember-vite-hmr@2.0.7(patch_hash=3b9a0fd2c07c1c1c13f48653105f7f04fd861213ef8f066da13bc2bb505d7b81)(acee11b44b98e80098e71e0980b3b8de):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-typescript': 7.28.6(@babel/core@7.29.0)

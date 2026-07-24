@@ -35,10 +35,11 @@ section before trusting any change here.
   `@nativescript/vite`) and **verified working** on a real emulator via a
   second, webpack-only NativeScript config selected with `--config` - see
   "`nativescript test android` still requires webpack" below.
-- Coarse-grained route/controller/template hot reload
-  (`src/services/vite-hot-reload.ts` +
-  `src/instance-initializers/vite-hot-reload.ts`, formerly
-  `webpack-hot-reload.ts`): **ported to Vite**, see "HMR service" below.
+- Fine- and coarse-grained HMR (helpers/modifiers/components, and
+  route/controller/template): **real HMR wired up in `demo-app` via the
+  published `ember-vite-hmr` package**, replacing the addon's own
+  vendored-but-dormant `vite-hot-reload.ts` service - see "HMR service"
+  below.
 
 ## Why this was possible now
 
@@ -56,8 +57,11 @@ path. It stays in the repo (`utils/webpack.config.js`,
 `utils/embroider-webpack-adapter.js`, `utils/embroider-virtual-modules-plugin.js`,
 `utils/embroider-template-tag-loader.js`) for apps that still build with
 `@nativescript/webpack`; only `demo-app` moved to Vite. (`utils/hmr-loader.js`
-is *not* part of that active webpack bridging - see "Still open" item 3: it
-has never actually been wired into `webpack.config.js`, for either bundler.)
+*is* wired into `webpack.config.js`'s `gts/gjs`/`js/ts` rules (restored
+alongside the rest of that file in the "`nativescript test android`" work
+below) - it's the code it *injects* that's dead, not the wiring: it checks
+`import.meta.hot`, which webpack never defines, so the injected branch never
+runs. See "Still open" item 2.)
 
 ## The moving parts
 
@@ -515,32 +519,77 @@ top.
   `buffer`, etc.) in `demo-app/package.json` - left in place un-audited;
   Vite's dependency graph never surfaced a need to remove them.
 
-## HMR service (`ember-native-todo.md` sub-task 2)
+## HMR service (`ember-native-todo.md` sub-task 2, then superseded by real `ember-vite-hmr`)
 
 `src/services/webpack-hot-reload.ts` +
 `src/instance-initializers/webpack-hot-reload.ts` were renamed to
 `vite-hot-reload.ts` as part of the `a134ee4` commit (demo-app's webpack →
-vite switch) and made dual-mode rather than webpack-only:
+vite switch) and made dual-mode rather than webpack-only (activation check
+`Boolean(import.meta.hot) || (typeof module !== 'undefined' &&
+Boolean(module.hot))`). This service implemented *coarse-grained* HMR only:
+on a route/controller/template module replacement it clears the relevant
+container caches and calls `router.refresh()`. It only ever activated in
+response to `window.emberHotReloadPlugin.canAcceptNew()`/`.subscribe()`
+calls, which came from nothing in the Vite path - so it was correct and
+wired up, but permanently dormant (see the old "Still open" item 2, below,
+for why).
 
-- The activation check is now
-  `Boolean(import.meta.hot) || (typeof module !== 'undefined' &&
-  Boolean(module.hot))` instead of a bare `module.hot` check, so the same
-  service works whether the consuming app bundles with `@nativescript/vite`
-  or the still-supported `@nativescript/webpack` path.
-- The dynamic `__import()` call already used `import()` (with a
-  `/* @vite-ignore */` hint, harmless under webpack), so no bundler-specific
-  module-loading code needed to change.
-- `package.json`'s `ember-addon.app-js` map and the exported
-  `declare module '@ember/service'` registry entry were updated to
-  `vite-hot-reload` alongside the rename (`service:ember-native/vite-hot-reload`).
+**Superseded and removed** as part of installing `ember-vite-hmr` (the
+published npm package, same author as this addon - `vite-hot-reload.ts` was
+effectively an early, vendored prototype of exactly that package) into
+`demo-app`:
 
-This service implements *coarse-grained* HMR: on a route/controller/template
-module replacement it clears the relevant container caches and calls
-`router.refresh()`. It only activates in response to
-`window.emberHotReloadPlugin.canAcceptNew()`/`.subscribe()` calls, which
-currently come from nothing in the Vite path (see item 2 below) - so today
-the ported service is correct and wired up, but dormant until something
-drives it. It does not need further porting; it's already bundler-agnostic.
+- `ember-vite-hmr` ships its own `service:vite-hot-reload` +
+  `instance-initializers/vite-hot-reload` + `instance-initializers/setup-hmr-manager`,
+  auto-merged into any consuming app's tree the same way `ember-native`'s own
+  `app-js` map works, the moment the package is a dependency - no per-app
+  opt-in needed once it's installed. Its service is a strict superset of
+  `ember-native`'s own: same container-cache-invalidation +
+  `router.refresh()` logic, *plus* resolver patching for hot-versioned route
+  names, error-recovery re-render on an unrecoverable Ember render error, and
+  component/route/controller state preservation across reloads
+  (`setup-hmr-manager.js`).
+- Both services independently call
+  `Object.defineProperty(this.router._router, '_routerMicrolib', {...})`
+  with no `configurable: true` on the descriptor - having both active at
+  once (i.e. leaving `ember-native`'s own service in place after adding
+  `ember-vite-hmr` as a dependency) throws `TypeError: Cannot redefine
+  property: _routerMicrolib` the moment the second one's instance-initializer
+  runs, crashing app boot. `ember-native`'s copy had to go, not just become
+  unused.
+- Removed `src/services/vite-hot-reload.ts` +
+  `src/instance-initializers/vite-hot-reload.ts`, and the corresponding
+  `ember-addon.app-js` entries from `package.json`. No other code in this
+  repo referenced `service:ember-native/vite-hot-reload` directly (confirmed
+  via `grep -r vite-hot-reload`), so this has no in-repo blast radius beyond
+  the addon's own public surface. Consuming apps that want HMR now depend on
+  `ember-vite-hmr` directly, same as any other Ember app would.
+- `ember-vite-hmr`'s usual activation path is a `transformIndexHtml`-injected
+  `<script>` importing `ember-vite-hmr/setup-ember-hmr` (the module that
+  actually creates `globalThis.emberHotReloadPlugin`) - NativeScript has no
+  `index.html`, so that hook never fires. Fixed by importing
+  `ember-vite-hmr/setup-ember-hmr` directly as the first line of
+  `demo-app/app/boot.js`, ahead of everything else, so the global exists
+  before Ember boots and `ember-vite-hmr`'s own instance-initializer looks it
+  up. The module self-gates on `import.meta.hot`, so this import is a no-op
+  (tree-shaken away entirely) outside dev/HMR builds - safe to import
+  unconditionally rather than threading a mode check through `boot.js`.
+- `demo-app/vite.config.ts` adds `ember-vite-hmr`'s `hmr()` plugin (its own
+  `enforce: 'post'`, so array position relative to `ember-native`'s/
+  `@nativescript/vite`'s plugins doesn't matter) and
+  `demo-app/babel.config.cjs` now imports the babel plugin/template
+  transform from `ember-vite-hmr/lib/babel-plugin` instead of
+  `ember-native/utils/babel-plugin.js` (the vendored version's AST-rewrite
+  format doesn't match what `ember-vite-hmr`'s own Vite `transform()` hook
+  expects, so it's a swap, not an addition - both were mutually exclusive
+  anyway, gated on different env vars that were never both true at once).
+- `ember-native/utils/babel-plugin.ts` and `utils/hmr-loader.js` are
+  untouched - they're still used by `demo-app/webpack.config.js`'s
+  `nativescript test android` path (see "Still open" item 2). They don't
+  conflict with `ember-vite-hmr` at all: entirely separate code, gated on
+  a different env var (`EMBER_HMR_ENABLED`, only ever set in
+  `webpack.config.js`), and their injected runtime check
+  (`import.meta.hot`) never evaluates truthy under webpack regardless.
 
 ## `nativescript test android` still requires webpack (`ember-native-todo.md` sub-task 3)
 
@@ -697,24 +746,28 @@ frozen or unsupported, just no longer where new features land first.
 1. **Release build launch-screen hang** (see "Current status" above) - JS
    evaluates cleanly with no exception, but the UI never visibly transitions
    past the NativeScript launch screen. Needs its own bisection pass.
-2. `ember-native/utils/hmr-loader.js` (the webpack *loader* that would
-   append `import.meta.hot.accept()`/`canAcceptNew()` boilerplate to
-   route/controller/template source, the only caller of
-   `vite-hot-reload.ts`'s `canAcceptNew`) and `utils/babel-plugin.ts` (a
-   template-AST transform gated on the same `EMBER_HMR_ENABLED` env var,
-   using webpack-only `import.meta.webpackHot`) turn out to **already be
-   dead code, independent of this migration** - `git log -S hmr-loader` /
-   `-S babel-plugin` on the addon show neither file has ever been
-   referenced from `utils/webpack.config.js`, `embroider-webpack-adapter.js`,
-   or anywhere else since `hmr-loader.js` was added in `f5282b6` (Nov 2024).
-   Fine-grained HMR was apparently never wired up even for webpack. Porting
-   `hmr-loader.js`'s logic to a real Vite `transform` hook (keyed off
-   `resourcePath`/`id` the way Rollup/Vite plugins expect, replacing the
-   webpack-loader `this.resourcePath` signature) and wiring it into
-   `utils/vite.config.js` would be new work, not a restoration - worth
-   doing (`@nativescript/vite`'s own generic HMR still applies at the
-   bundler level, independent of this) but scope it as its own item rather
-   than assuming it's a regression to fix.
+2. **Resolved for Vite, left alone for webpack.** `ember-native/utils/hmr-loader.js`
+   (a webpack *loader* that appends `canAcceptNew()` boilerplate to
+   route/controller/template source) *is* wired into
+   `demo-app/webpack.config.js`'s `gts/gjs`/`js/ts` rules (correcting an
+   earlier version of this note, which claimed it was never referenced
+   anywhere - true when first written, no longer true once sub-task 3
+   restored `webpack.config.js` verbatim from its pre-migration state). But
+   the code it *injects* checks `import.meta.hot`, which webpack never
+   defines (webpack's equivalent is `import.meta.webpackHot`/`module.hot`),
+   so the injected branch is permanently dead regardless of wiring - a
+   real bug in the original implementation, not a wiring gap. Same story for
+   `utils/babel-plugin.ts`, gated on `EMBER_HMR_ENABLED` (only ever set
+   `true` in `webpack.config.js`) but otherwise inert.
+   For the **Vite** path (`demo-app`'s main `build`/`debug android` flow),
+   this is now moot: real fine- and coarse-grained HMR is wired up via the
+   published `ember-vite-hmr` package instead of porting this addon's own
+   dead code - see the "HMR service" section above. `utils/hmr-loader.js` /
+   `utils/babel-plugin.ts` remain in the addon, unchanged, solely for the
+   webpack test path; actually fixing their `import.meta.hot` bug for
+   webpack (so `nativescript test android` gets working fine-grained HMR
+   too) would be new, separate work - low value, since nobody interactively
+   iterates against the test bundle.
 3. If `nativescript`/`@nativescript/vite` ship a fix for the missing
    `copyViteBundleToNative` call in `compileWithoutWatch` (see above), drop
    `patches/nativescript@9.0.6.patch`.
@@ -737,3 +790,465 @@ adb logcat -d --pid=<pid>   # or screencap -p to see the on-device error UI / re
 ```
 
 This applies just as much when switching *between* `nativescript build/debug android` (Vite) and `nativescript test android --config nativescript.test.config.ts` (webpack) on the same checkout, since both write into the same `platforms/android/app/src/main/assets/app/` - running one right after the other without wiping `platforms/` first was observed to produce a stale mix of `.mjs` (Vite) and `.js` (webpack) output that crashed on launch with `Failed to load component from module: bundle-app-root`, a *different* error from any of the ones documented above and unrelated to this migration's actual code changes (confirmed by re-running from a clean `platforms/` immediately after).
+
+## `nativescript test android` with a Vite-only bundler (no webpack at all)
+
+Sub-task 3 (above) concluded testing needed webpack because `@nativescript/vite`
+has zero unit-test-runner/karma integration. That's still true, but it's
+possible to build the *bespoke wiring* Vite needs instead of falling back to
+webpack. This section documents that path: `demo-app/nativescript.test.vite.config.ts`
++ `demo-app/vite.test.config.ts` (+ `demo-app/vite-plugins/unit-test-runner-context.ts`),
+selected via the new `test:vite`/`debug-test:vite` package.json scripts.
+**Status: build + native Gradle/SBG build + install all verified working
+end-to-end on a real emulator; app launch still crashes during `vendor.mjs`
+module evaluation - not yet root-caused. See "Still open" at the end of this
+section for exactly where to resume.**
+
+### Why a whole second config, not just a flag
+
+`@nativescript/webpack`'s `nativescript.webpack.js` hook swaps the whole
+webpack `entry` over to `test.ts`/`test.js` when the CLI's `test` command
+sets `env.unitTesting = true` - one config, two behaviors. `@nativescript/vite`
+has no such hook: its `mainEntryPlugin` always builds whichever file
+`demo-app/package.json`'s **`main`** field points to (not
+`nativescript.config.ts`'s own `main` field, which vite ignores entirely),
+with no override point. So the entry swap has to happen a different way:
+`demo-app/app/boot.js` now branches at build time on a Vite `define`,
+`__NS_UNIT_TESTING__`, set unconditionally `true` only by
+`vite.test.config.ts`:
+```js
+if (typeof __NS_UNIT_TESTING__ !== 'undefined' && __NS_UNIT_TESTING__) {
+  void import('./test.js');   // not awaited - nothing runs after in this file
+} else {
+  boot().then(() => { app.visit('/', {...}) });
+  globalThis.app = app;
+}
+```
+esbuild's `define` does real dead-code elimination for `if (false) {...}`,
+including the dynamic `import()` inside it, so `./test.js`'s whole
+qunit/ember-qunit/`@nativescript/unit-test-runner` dependency graph never
+reaches the real app's production bundle - confirmed by inspecting
+`.ns-vite-build/` output for a normal `vite.config.ts` build (no `test-*.mjs`
+chunk present).
+
+`nativescript.test.vite.config.ts` mirrors `nativescript.test.config.ts` but
+with `bundler: 'vite'`, `bundlerConfigPath: 'vite.test.config.ts'`.
+
+### `--no-watch` is required (a real upstream bug, not a preference)
+
+`nativescript test android`'s `TestCommandBase` defaults `$options.watch` to
+`true` (same CLI option `debug`/`build` use), which routes the bundler
+through `BundlerCompilerService.compileWithWatch` instead of
+`compileWithoutWatch`. Under `@nativescript/vite`, this spawns
+`vite build --watch`. **Observed, reproducible on this checkout: `vite build
+--watch` never writes any files to `.ns-vite-build/` within the whole
+lifetime of a `nativescript test android` run** (confirmed by waiting 3+
+minutes past `✓ N modules transformed` with the output directory still
+empty on disk, both through the full CLI flow and reproduced in isolation
+by running `npx vite build --config vite.test.config.ts --mode development
+--watch -- <same --env.* flags nativescript passes>` directly). Since
+`@nativescript/vite`'s own IPC "build complete" message
+(`ns-cli-plugins.js`'s `cliPlugin`) still fires (with `emittedFiles: []`),
+`BundlerCompilerService.copyViteBundleToNative` copies from a directory
+that's empty on disk, silently producing a native `assets/app/` with only
+`package.json` in it - which then fails Gradle's Static Binding Generator
+step with the exact same `Couldn't find 'sbg-bindings.txt'` symptom as the
+already-documented "vite never copies its output" bug above, but from a
+different, watch-mode-specific root cause. (A same-shaped size-stability
+retry loop patched into `copyViteBundleToNative` was tried and *didn't*
+help - the directory really does stay empty the whole time, not just
+briefly - so this isn't a timing race worth papering over there; ruled out
+and reverted.)
+
+**Fix**: pass `--no-watch` (`demo-app/package.json`'s `test:vite`/
+`debug-test:vite` scripts already do). This routes through
+`compileWithoutWatch` instead, i.e. a plain non-watch `vite build`, which
+*does* write real output (verified: `bundle.mjs` ~150KB, `vendor.mjs` ~5MB
+with real content, both confirmed on disk after the build step) - the
+already-existing `nativescript@9.0.6.patch` fix for `compileWithoutWatch`
+(see the "real, upstream nativescript CLI bug" section above) then copies
+it correctly, and the Gradle/SBG build succeeds. If `@nativescript/vite`
+fixes `--watch` mode's file writing upstream, this flag could potentially
+be dropped - but there's no interactive/HMR benefit to watch mode for a
+one-shot test run anyway, so there's little reason to revisit even then.
+
+### Rollup/CJS-interop build-time fixes (`demo-app/vite.test.config.ts`)
+
+All discovered by iterating `npx vite build --config vite.test.config.ts
+--mode development -- --env.unitTesting --env.android --env.appPath=app
+--env.appResourcesPath=App_Resources` directly (much faster than the full
+CLI per iteration) until it exits 0:
+
+1. **`bufferutil`/`utf-8-validate`**: `ws` (a `socket.io-client` transitive
+   dependency) does `require('bufferutil')`/`require('utf-8-validate')`
+   inside a `try/catch`, meant to fall back to pure JS when these optional
+   native addons aren't installed (they aren't - deliberately, NativeScript
+   has no native Node addon support). `@rollup/plugin-commonjs` resolves
+   `require(...)` calls statically at build time, so it hard-fails the
+   whole build on the missing package instead of leaving a runtime
+   `require` for that `try/catch` to actually catch. Fixed via
+   `build.rollupOptions.external`.
+2. **`generator-function`'s dual-package `exports` map**: pulled in
+   transitively by the `util` Node-polyfill package (itself needed by the
+   `socket.io-client` chain). Its `index.mjs` does `import
+   getGeneratorFunction from './index.js'`, relying on Node's own CJS/ESM
+   interop to synthesize a `default` export - Rollup's static analysis
+   doesn't reproduce that here and fails the build ("default" is not
+   exported by index.js). Fixed via a `resolve.alias` redirecting the bare
+   `generator-function` specifier to the package's own plain-CJS
+   `legacy.js` (its `main` field target, which Rollup's commonjs plugin
+   converts correctly) - resolved as a real filesystem path (not
+   `require.resolve('generator-function/legacy.js')`, which Node's own
+   `exports` map enforcement rejects before Rollup ever sees it).
+3. **Node built-in polyfills**: `ws`/`xmlhttprequest-ssl`/`debug` reference
+   `fs`/`http`/`https`/`crypto`/`tty`/`os`/`net`/`tls`/`zlib`/
+   `child_process`/`stream`/`url`/`querystring`/`buffer` (mostly inside
+   feature-detection branches never actually taken on NativeScript).
+   `@nativescript/vite`'s default handling for bare Node built-in
+   specifiers ("externalized for browser compatibility") leaves them as
+   literal unresolved `import 'fs'` etc. in the output - fine for a real
+   browser target that just never executes that branch, but NativeScript's
+   JS environment has no such module *at all*, so an eager top-level
+   `import` of one crashes the entire `vendor.mjs` evaluation immediately
+   (this was the fix for the *first* on-device crash found - see below for
+   why it wasn't the only one). Fixed via `resolve.alias`, mirroring
+   `webpack.config.js`'s existing `resolve.fallback` list: real polyfills
+   (`stream-browserify`, `stream-http`, `https-browserify`, `url`,
+   `querystring-es3`, `buffer` - all already `demo-app` devDependencies from
+   the webpack era) for the ones webpack had real polyfills for; a small
+   `demo-app/vite-plugins/empty-module.js` (`export default {};`) for the
+   rest, since Vite's alias has no `false`-shorthand equivalent to
+   webpack's `resolve.fallback: { x: false }`.
+4. **`socket.io-client`'s own default export**: `import io from
+   'socket.io-client'` fails ("default" is not exported) - the package does
+   `module.exports = exports = lookup` and only *afterwards* mutates that
+   function object with `exports.connect = ...` etc., which confuses
+   `@rollup/plugin-commonjs`'s static default-export detection even though
+   the identical file works fine required directly under webpack/Node.
+   Fixed in the `@nativescript/unit-test-runner` pnpm patch (see next
+   section) - `import * as socketIOModule from 'socket.io-client'; const io
+   = socketIOModule.default || socketIOModule;` (namespace import, which
+   doesn't require Rollup to statically prove a `default` binding exists).
+   The same fix applies to the patch-added `config.js` (converted to a real
+   ESM `export default` there, also namespace-imported defensively for the
+   same reason) - **this one was flaky**: the exact same source passed
+   under `vite build --watch` but failed under a plain `vite build` with
+   supposedly-identical cached dep-optimization state, which is why both
+   imports use the defensive namespace-import pattern rather than relying
+   on the default import working "most of the time".
+
+### `@nativescript/unit-test-runner`'s own webpack-only API usage (pnpm patch)
+
+Extended `patches/@nativescript__unit-test-runner@4.0.1.patch` (previously
+just the socket connect-options fix) - see the patch file for the literal
+diffs, summarized here:
+
+- **`app/main.js`, `app/bundle-app.js`**: both call `require.context("./",
+  true, /.*\.(js|css|xml)/)` at module top level to self-register this
+  package's own XML/JS/CSS into NativeScript's core module registry
+  (`global.registerBundlerModules`) - `require.context` is webpack-only;
+  under Vite, `require` is a dummy stub (`@nativescript/vite`'s main-entry
+  polyfill: `function() { return {}; }`) with no `.context`. Guarded to
+  skip when unavailable - the Vite-side replacement is
+  `demo-app/vite-plugins/unit-test-runner-context.ts` (below).
+- **`app/main-view-model.js`**: `require('../config')` /
+  `require('../socket.io')` were real (non-`.context`) CJS requires that
+  only ever resolved because webpack bundles them at compile time - under
+  Vite's dummy `require` stub these silently returned `{}`, breaking both
+  karma host/port discovery and the karma socket connection with no error
+  at all. Fixed with real static imports (see point 4 above for why they're
+  namespace imports specifically). `config.js` (a patch-added file, karma
+  connection config auto-generated by `nativescript test init` against
+  *this machine's* LAN IP at some point in the past - not something this
+  pass touched beyond the export syntax) converted from `module.exports =
+  {...}` to `export default {...}` to match.
+
+### The eager-vs-lazy-import problem (the actual on-device crash, still open)
+
+`demo-app/vite-plugins/unit-test-runner-context.ts` is the Vite-side
+replacement for `@nativescript/unit-test-runner`'s own disabled
+`require.context` call: it walks that package's `app/` directory (which
+`@nativescript/vite`'s own `virtual:ns-bundler-context` - see
+`configuration/typescript.js` - does *not* cover; that one's scoped to the
+consuming app's own `app/` only) and builds a virtual module, injected into
+`virtual:entry-with-polyfills` right after the `@nativescript/core/bundle-entry-points`
+marker (same injection point `@nativescript/vite`'s own bundler-context
+plugin uses), that imports and registers matching XML/CSS/JS files the same
+way `registerBundlerModules` does.
+
+The fundamental problem with this approach, discovered through on-device
+bisection (see "Debugging technique" above for the checkpoint method - same
+technique, reused here): **webpack's `require.context` gives a *lazy*
+registry** - `context(moduleId)` only actually `require()`s (and thus only
+actually *executes*) a matched file's top-level code the moment something
+looks its moduleName up (e.g. `Frame` navigation) - but **a real static ESM
+`import`, which is the only tool available for eagerly building a
+Vite/Rollup virtual module, always evaluates immediately**, the instant
+`vendor.mjs` itself loads - before *anything* in the app, including
+`Application.run()`, has been called even once. Two concrete manifestations
+found and fixed by excluding the offending files from eager import
+(details/reasoning in the plugin's own comments):
+
+1. `app.js`/`bundle-app.js`/`main.js` each call `Application.run(...)`
+   themselves at module top level - none of the three are ever looked up by
+   moduleName in this app's actual test flow, so excluding them from eager
+   import is a straightforward, zero-cost fix.
+2. `main-view-model.js` did `export var mainViewModel = new
+   TestBrokerViewModel()` - a real, eager singleton whose constructor calls
+   `Http.getString(...)` (via `KarmaHostResolver`), which needs a running
+   `Application`/native Android context to not crash. Tried making its
+   import *lazy via a dynamic `import()`* (triggered from
+   `test-helper.ts`, well after `setApplication`) first - **this did not
+   work**: even though a genuinely separate output chunk was produced,
+   Rollup's own chunking still merged the singleton's actual code into the
+   shared `vendor.mjs` chunk (evaluated eagerly) rather than the
+   lazily-loaded chunk, since other, unrelated eager imports also reach the
+   same file transitively-ish or Rollup's dedup heuristic decided so
+   regardless - bisection confirmed the exact same crash, same
+   `TestBrokerViewModel` code, still present in `vendor.mjs` after that
+   change. **Real fix**: made the singleton lazy at the *language* level
+   instead (a `getMainViewModel()` factory function, `main-view-model.js`'s
+   three importers - `bundle-main-page.js`, `run-details.js`,
+   `test-run-page.js` - and the fourth, unused-but-still-eagerly-walked
+   `main-page.js`, all updated to call it instead of importing a
+   pre-built value) - portable to either bundler's chunking behavior,
+   since it no longer depends on *when* the module itself is evaluated,
+   only on *when the function is called*.
+
+**Still open**: after both fixes above, the on-device crash persists,
+still reported as the same generic `Cannot instantiate module bundle.mjs /
+Error: Module evaluation promise rejected: vendor.mjs` with no further
+detail (see "Debugging technique" above for why `adb logcat`/the on-device
+error overlay never name the real exception for this class of error).
+Bisection (same checkpoint-insertion technique, `.ns-vite-build/vendor.mjs`
+copied directly into `platforms/android/app/src/main/assets/app/` +
+`./gradlew assembleDebug` + install + start, ~20-30s/iteration - do **not**
+use the full `nativescript test android` CLI for this, it reruns the whole
+~3min Vite build every time) has narrowed the crash to somewhere in the
+range **lines 71649-72167 of a freshly-built `.ns-vite-build/vendor.mjs`**
+(current checkout state) - the `stream-http`/`https-browserify`/
+`xmlhttprequest-ssl` polyfill definitions (all `requireXxx()`-wrapped, i.e.
+apparently lazy, per Rollup's standard commonjs-interop lazy-init pattern -
+none of the checkpoint-inserted lines in this range are themselves inside
+an unwrapped top-level statement that looks obviously unsafe on inspection,
+which is what makes this one harder than the previous two).
+
+**Important caveat for whoever continues this**: a `try { <region> } catch
+(e) { console.log(...) }` wrap of this range - first the naive
+line-picked version, then redone with a real brace/paren/bracket-depth
+tracker (skipping strings/comments) to guarantee syntactically balanced
+`try`/`catch` boundaries, covering generously past the bisected range
+(lines 71426-72202) - **did not trigger the catch either time**, i.e. did
+not reproduce/capture the crash at all despite covering the range the
+checkpoint bisection pointed to. Since the checkpoint bisection also
+produced at least one confirmed false negative earlier in this same
+session (a checkpoint at the `class RootLayout extends RootLayoutBase`
+line, part of unrelated `@nativescript/core` UI code, initially read as
+"not reached" and was used to narrow the search, then on a later
+re-check - prompted by exactly this kind of contradiction - turned out to
+fire fine), **don't fully trust a single checkpoint result from this
+technique in this codebase** - re-run any checkpoint that materially
+changes the search direction at least once before trusting it. The
+mismatch between "bisection says the crash is in this range" and "wrapping
+that exact range in try/catch doesn't catch anything" was not resolved
+before this pass ran out of time; it means either a checkpoint result
+somewhere in the narrowing chain was another false negative/positive (most
+likely - re-verify each step from scratch, in particular re-check whether
+checkpoints inside lazy `requireXxx()` wrapper function bodies were
+correctly interpreted as "not proof the function was ever called", only
+"not proof it wasn't"), or the crash isn't a plain synchronous throw
+reachable by wrapping textual regions at all (e.g. something evaluated via
+`Function`/indirect `eval`, or generated dynamically). Next steps for
+whoever picks this up:
+1. Re-verify the 71649-72167 bisection result from scratch (re-run both
+   boundary checkpoints again before trusting them) rather than assuming
+   this pass's numbers are correct.
+2. If reproducible, widen the balanced try/catch net further out in both
+   directions - the whole `socket.io-client`/`engine.io-client`/`ws`/
+   `xmlhttprequest-ssl` dependency cluster, roughly lines 60000-90000 in
+   the current build - using the brace-depth-tracking approach (a naive
+   line-picked wrap produced several `SyntaxError: Unexpected token
+   'catch'` dead ends by cutting mid-function; a depth tracker that
+   doesn't account for regex literals/template interpolation will produce
+   *false* "balanced" points too - verify by actually attempting the
+   build/install, not just by the tracker's own output).
+3. **Already tried, did not help, but worth knowing**: a global
+   `unhandledrejection`/`process.on('unhandledRejection', ...)` listener
+   installed by prepending it to the very top of `vendor.mjs`'s text
+   caught nothing either (no log output at all from the handler, not even
+   confirmation it registered) - consistent with the failure being a
+   genuinely *synchronous* throw during module evaluation/linking (native
+   runtime wraps the whole thing in a promise per the ES module spec
+   regardless), happening at a point V8/the native runtime's own module
+   machinery handles before handing control to any of `vendor.mjs`'s own
+   JS body code - which would also explain why textual try/catch wraps
+   placed *inside* `vendor.mjs`'s body haven't caught it either, even ones
+   bisection pointed at directly.
+4. **Done, and this is the important lead to start from**: temporarily
+   removing `unitTestRunnerContextPlugin()` from `vite.test.config.ts`'s
+   `plugins` array entirely (i.e. no `@nativescript/unit-test-runner`
+   content walked/eagerly registered at all - `vendor.mjs` drops from
+   ~5.1MB to ~4.4MB) and rebuilding/redeploying via the fast
+   `./gradlew assembleDebug` loop (**cleaning
+   `platforms/android/app/src/main/assets/app/` completely and copying
+   `.ns-vite-build/` fresh before rebuilding** - a first attempt at this
+   diagnostic was contaminated by stale `.mjs` chunks left over in that
+   directory from an earlier full-CLI run, which also has a *different*,
+   easy-to-mistake-for-progress SBG symptom: `Error executing Static
+   Binding Generator: File already exists ... NativeScriptActivity` -
+   that's leftover duplicate `.java` bindings from stale chunks, not a
+   real code problem; always `rm -rf platforms/android/app/src/main/assets/app`
+   and re-copy fresh when testing this way) - **the exact same crash still
+   happens**, byte-identical error message, with `unitTestRunnerContextPlugin()`
+   entirely out of the picture. **This means every hour spent bisecting
+   inside `unit-test-runner-context.ts`'s eagerly-walked content (points 1-3
+   above, and the earlier "eager-vs-lazy-import" section) was chasing code
+   that, while genuinely buggy and worth having fixed regardless, is not
+   the actual crash.** The real cause is somewhere in what's left: `qunit`,
+   `ember-qunit`, or `@nativescript/unit-test-runner`'s own `app/main.js`
+   (still statically imported via `test-helper.ts`'s `import { runTestApp }
+   from "@nativescript/unit-test-runner"` regardless of the plugin).
+   Initially suspected `qunit.js`'s own UMD wrapper (takes
+   `window`/`document`/`global` as *function parameters*, a common
+   browser+Node dual-compat pattern, and its module-level
+   `exportQUnit(QUnit2)` call branches on `window$1 && document2`) - **ruled
+   out on inspection**: `requireQunit()` (the whole qunit module body,
+   including `exportQUnit(QUnit2)`) is itself one of Rollup's standard
+   lazy-init CJS-interop wrappers (`function requireQunit() { if
+   (hasRequiredQunit) return qunit.exports; ...}`), and grepping every
+   built `.mjs` file for actual *callers* of `requireQunit(` (as opposed to
+   its own definition/`__name` registration) found none at all - the
+   `test.js` chunk's own `import 'qunit'` (side-effect-only, no named
+   binding) appears to have been dropped entirely rather than compiled into
+   a call, plausibly because `qunit`'s `package.json` declares
+   `"sideEffects": false` and Rollup's tree-shaking (`moduleSideEffects` in
+   `@nativescript/vite`'s `base.js` defers to that when its own regex
+   patterns don't match) took that at face value despite the real
+   `window`/`document`-global side effects living inside. Whether or not
+   that's *also* a real (separate, lower-priority) bug, it means qunit's
+   own module body isn't what's crashing here - it's provably never
+   invoked in this build at all.
+   **Not yet checked, still on the list**: `ember-qunit` (its `dist` files
+   produced many "X is not exported by qunit.js" warnings during the build
+   - see point 4 in "Rollup/CJS-interop build-time fixes" above for why
+   those didn't fail the *build*, but they're still worth checking for a
+   *runtime* effect), `qunit-dom`, `@valor/nativescript-websockets`, and
+   `@nativescript/unit-test-runner`'s own `app/main.js` (still statically
+   imported via `test-helper.ts`'s `import { runTestApp } from
+   "@nativescript/unit-test-runner"` regardless of the plugin - confirmed
+   present in this diagnostic build's `test-*.mjs` chunk imports, aliased
+   as `runTestApp`). The fastest path from here is the same fast
+   gradlew-loop diagnostic used to rule out qunit: strip one candidate at a
+   time (comment out its import, or - for `main.js` - temporarily stub
+   `runTestApp` to a no-op) from `test-helper.ts`, rebuild just
+   `vite.test.config.ts` (~3min), redeploy via the fast
+   `./gradlew assembleDebug` loop (~20-30s), and check whether the crash
+   signature changes - much faster than textual bisection inside an
+   already-built bundle, which this pass spent considerable time on
+   without a conclusive result (and which produced at least one confirmed
+   false-negative checkpoint result along the way - see the caveat above).
+
+### Follow-up (later in this same pass): confirmed it's `test.js`'s content, not the plugin or the Node-builtin aliases
+
+Ran the "strip one candidate, rebuild, redeploy" plan from point 4 above
+across several combinations (`plugins: [unitTestRunnerContextPlugin()]` in
+or out; the `nodeBuiltinAliases` in or out; `app/test.js` replaced with a
+single `console.log(...)` or left as the real file) - four full rebuild +
+gradlew-loop cycles, results:
+
+| `unitTestRunnerContextPlugin()` | `nodeBuiltinAliases` | `app/test.js` | Result |
+|---|---|---|---|
+| out | in | real | same `vendor.mjs` crash |
+| in  | in | stubbed to one `console.log` | same `vendor.mjs` crash |
+| out | out | stubbed to one `console.log` | **no crash** - `DIAGNOSTIC_TEST_JS_LOADED` logged, boot proceeds to a *different*, later, expected failure (`Failed to create JavaScript extend wrapper for class 'com/tns/NativeScriptActivity'` - expected, since a stubbed `test.js` never loads the Ember app graph that registers the Activity's JS extend, not a real bug) |
+| in  | out (generator-function + `bufferutil`/`utf-8-validate` external only, needed for the build to succeed at all) | real | same `vendor.mjs` crash |
+
+Row 3 is the only one that didn't crash, and it's the only one with
+`app/test.js` stubbed out - rows 1 and 4 prove the crash happens with
+`unitTestRunnerContextPlugin()` fully absent (row 1) *and* with the
+`nodeBuiltinAliases` fully absent (row 4), as long as `test.js`'s real
+content loads. **Conclusion: neither `unitTestRunnerContextPlugin()`'s
+eagerly-registered content nor the `nodeBuiltinAliases`/`generator-function`
+alias are the actual crash cause** - both are still correct, necessary
+fixes (removing either breaks something else - the original "externalized
+Node built-in" crash for the aliases, a real build failure for
+generator-function/bufferutil), just not *this* bug. The initial suspicion
+that landed on `qunit.js`'s own module body (see point 4's "not yet
+checked" list) was investigated and ruled out on inspection (`requireQunit`
+is never called anywhere in the built output - `import 'qunit'` appears to
+have been dropped by Rollup's tree-shaking, likely because `qunit`'s
+`package.json` declares `"sideEffects": false`) - but that inspection
+predates this table and should be re-verified now that the real
+conclusion is narrower: **the cause is somewhere in `app/test.js`'s actual
+dependency graph** - `ember-qunit`, `qunit-dom`,
+`@valor/nativescript-websockets` (+ its `bridge.android` import),
+`ember-native`'s own `setup-ember-native`/`NativeElementNode`, or
+`@nativescript/unit-test-runner`'s `app/main.js` (imported via
+`test-helper.ts`'s `import { runTestApp } from
+"@nativescript/unit-test-runner"` - present regardless of the plugin, and
+not yet individually ruled out despite the guard patch making its
+`require.context` call itself safe - something *else* in that file, or in
+what it transitively imports, hasn't been checked in isolation).
+
+**Update, same session, immediately after writing the table above**: took
+this exact next step - `test-helper.ts` temporarily reduced to just
+`import { runTestApp } from "@nativescript/unit-test-runner"; console.log('DIAGNOSTIC...')`.
+**Still crashed, and the `console.log` never printed** - narrowing it to
+`@nativescript/unit-test-runner`'s own `app/main.js` (the only thing that
+import reaches) or something evaluated before it. Went one step further:
+temporarily stripped `app/main.js` itself down to dropping its `./app.css`
+import and the (already-guarded, so theoretically inert)
+`require.context` block entirely, keeping only the `Application`/
+`registerTestRunner` imports and a `console.log`. **Still crashed, console.log
+still didn't print.** At this point it became clear the diagnostic itself
+was compromised: `unitTestRunnerContextPlugin()` was still active in
+`vite.test.config.ts` for both of these last two checks (only
+`test.js`/`test-helper.ts`/`main.js` *content* was changed, not the plugin
+list), and the plugin's injection into `virtual:entry-with-polyfills` is
+*unconditional* - it runs regardless of what `test-helper.ts` ends up
+importing. So every experiment in this update, unlike row 1 of the table
+above, still had the *entire* `unitTestRunnerContextPlugin()`-injected
+content (bundle-app-root.xml, run-details/test-run-page code, the
+now-lazy-singleton `main-view-model.js`, `config.js`, `socket.io-client`,
+etc.) present in `vendor.mjs` throughout. Combined with row 1 (plugin
+*fully removed*, aliases in, real `test.js` → still crashed) and row 3
+(plugin *and* aliases removed, `test.js` stubbed → no crash), the isolation
+so far is genuinely contradictory on its own terms and **was not resolved
+before this pass ran out of time** - all diagnostic edits (to
+`vite.test.config.ts`, `app/test.js`, `app/tests/test-helper.ts`, and the
+installed copy of `@nativescript/unit-test-runner/app/main.js`) were
+reverted back to the real, intended versions before finishing up; none of
+the diagnostic states were committed.
+
+**Next session, start here** - the four-row table plus this update leave
+exactly two variables not yet tested in isolation from each other:
+`unitTestRunnerContextPlugin()` (present/absent) crossed with `test.js`'s
+real content (present/stubbed), with the *aliases* held constant (in, since
+they're needed for the build to succeed regardless). Run these two, freshly,
+in order:
+1. Plugin **present**, `test.js` **stubbed** to one `console.log` (not
+   tried yet in this exact combination) - if this crashes, the plugin's
+   *unconditionally-injected* content is implicated after all (contradicts
+   the "ruled out" framing above, since that only tested plugin *absent*
+   cases) and the next step is bisecting *inside* what the plugin injects
+   by trimming `unit-test-runner-context.ts`'s file walk down file-by-file
+   (start by excluding `.xml`/`.css` and keeping only `.js`, then the
+   reverse, to split it further).
+2. Plugin **absent**, `test.js` **stubbed**, but this time *without* also
+   removing the `nodeBuiltinAliases`/`generator-function` alias (row 3
+   removed both at once, conflating two variables) - if this crashes, the
+   aliases (not the plugin) are implicated despite fixing a real, separate
+   build-time issue, and the next step is auditing exactly which of the
+   `nodeBuiltinAliases` entries (there are nine) is the problem by
+   re-adding them one at a time.
+Whichever of these two reproduces the crash pins down which of "the
+plugin's injected content" vs. "the resolve.alias list" is the actual
+cause (or, if *neither* crashes, the cause is specifically in
+`test-helper.ts`'s real body - `ember-qunit`/`qunit-dom`/
+`@valor/nativescript-websockets`/`setup-ember-native`/`NativeElementNode` -
+and the "isolate test-helper.ts's real imports one at a time" plan from
+earlier in this section is the right next move after all, just with the
+plugin explicitly held *absent* this time to avoid the contamination this
+update ran into). Each iteration is one `vite build` (~3min) + the fast
+gradlew loop (~20-30s) - see the earlier "Debugging technique" section for
+the full loop and the stale-`platforms/`-directory pitfall.

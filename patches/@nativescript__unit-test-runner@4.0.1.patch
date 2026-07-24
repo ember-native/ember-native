@@ -1,0 +1,196 @@
+diff --git a/app/bundle-app.js b/app/bundle-app.js
+index fa71e2bdb6069ebfbf79c3c857d5c5591931300a..b871da043873231a22e6ef86317567850e04c70d 100644
+--- a/app/bundle-app.js
++++ b/app/bundle-app.js
+@@ -1,10 +1,13 @@
+ import { Application } from "@nativescript/core";
+ import "./app.css";
+-const context = require.context("./", true, /.*\.(js|css|xml)/);
+-if (typeof global.registerWebpackModules !== "undefined") {
+-    global.registerWebpackModules(context);
+-}
+-else {
+-    global.registerBundlerModules(context);
++// See app/main.js for why this is guarded - `require.context` is webpack-only.
++if (typeof require !== "undefined" && typeof require.context === "function") {
++    const context = require.context("./", true, /.*\.(js|css|xml)/);
++    if (typeof global.registerWebpackModules !== "undefined") {
++        global.registerWebpackModules(context);
++    }
++    else {
++        global.registerBundlerModules(context);
++    }
+ }
+ Application.run({ moduleName: "bundle-app-root" });
+diff --git a/app/bundle-main-page.js b/app/bundle-main-page.js
+index c3f1be101f3737e3cb1758771bf64ae5a69f2f7e..e7aa3529fb404a5a50caeefb4018c823e424045f 100644
+--- a/app/bundle-main-page.js
++++ b/app/bundle-main-page.js
+@@ -1,5 +1,5 @@
+-import { mainViewModel } from "./main-view-model";
++import { getMainViewModel } from "./main-view-model";
+ export function pageLoaded(args) {
+     var page = args.object;
+-    page.bindingContext = mainViewModel;
++    page.bindingContext = getMainViewModel();
+ }
+diff --git a/app/main-page.js b/app/main-page.js
+index c3f1be101f3737e3cb1758771bf64ae5a69f2f7e..e7aa3529fb404a5a50caeefb4018c823e424045f 100644
+--- a/app/main-page.js
++++ b/app/main-page.js
+@@ -1,5 +1,5 @@
+-import { mainViewModel } from "./main-view-model";
++import { getMainViewModel } from "./main-view-model";
+ export function pageLoaded(args) {
+     var page = args.object;
+-    page.bindingContext = mainViewModel;
++    page.bindingContext = getMainViewModel();
+ }
+diff --git a/app/main-view-model.js b/app/main-view-model.js
+index c644dc668623a0fe73c221e210f2806e24cb6f7b..6d40bc4a4aa408c5bc22fe5db133afa4d6a07a00 100644
+--- a/app/main-view-model.js
++++ b/app/main-view-model.js
+@@ -4,6 +4,26 @@ import { KarmaFilesService } from './services/karma-files-service';
+ import { TestExecutionService } from './services/test-execution-service';
+ import { killProcess } from "./stop-process";
+ import { executeWebpackTests } from "./services/webpack-test-runner";
++// Static ESM imports instead of the original `require('../config')` /
++// `require('../socket.io')` - those are real (non-`.context`) CJS requires
++// that only resolve because webpack bundles them at compile time; under
++// Vite, `require` is a dummy stub (see @nativescript/vite's main-entry
++// polyfill) that returns `{}`, silently breaking both karma host discovery
++// (config.ips/port would be undefined) and the karma socket connection
++// itself. Works identically under webpack (CJS/ESM interop there is a
++// non-issue) so this isn't bundler-conditional.
++//
++// Both use namespace imports + a `.default` fallback rather than a plain
++// default import (`import x from 'y'`): @rollup/plugin-commonjs's static
++// default-export detection for these two is unreliable across otherwise
++// identical builds (observed passing under `vite build --watch`, then
++// hard-failing "default" is not exported" under a plain `vite build` of the
++// exact same source once cached dep-optimization state differed) - a
++// namespace import never depends on that static analysis succeeding.
++import * as configModule from '../config';
++const config = configModule.default || configModule;
++import * as socketIOModule from 'socket.io-client';
++const io = socketIOModule.default || socketIOModule;
+ function enableSocketIoDebugging() {
+     console.log('enabling socket.io debugging');
+     global.localStorage = {
+@@ -11,7 +31,6 @@ function enableSocketIoDebugging() {
+     };
+     global.window = global;
+ }
+-var config = require('../config');
+ config.options = config.options || {};
+ if (isAndroid)
+     config.ips = (config.ips || []).concat(['10.0.2.2']);
+@@ -166,8 +185,7 @@ export class TestBrokerViewModel extends Observable {
+             }
+         };
+         this.updateView({ serverInfo: `connected to ${this.baseUrl}` });
+-        let io = require('../socket.io');
+-        const socket = this.socket = io.connect(this.baseUrl, { forceBase64: true });
++        const socket = this.socket = io.connect(this.baseUrl, { forceBase64: true, jsonp: false, reconnection: false });
+         socket.on('connect', err => {
+             console.log('NSUTR: successfully connected to karma');
+             delete global.navigator;
+@@ -237,8 +255,28 @@ export class TestBrokerViewModel extends Observable {
+         return result;
+     }
+ }
+-export var mainViewModel = new TestBrokerViewModel();
++// Lazy singleton, not `export var mainViewModel = new TestBrokerViewModel()`
++// (a real, eager module-top-level side effect) - the constructor calls
++// `Http.getString(...)` (via `KarmaHostResolver`), which needs a running
++// `Application` (native Android context) or it crashes. Under webpack,
++// `require.context`'s lazy registry means this file - and thus this
++// constructor call - only actually runs once `bundle-main-page`/
++// `run-details`/`test-run-page` are first looked up by moduleName, well
++// after `Application.run()`. Rollup/Vite has no bundler-level equivalent
++// laziness for a module that's already part of the bundle (see
++// demo-app/vite-plugins/unit-test-runner-context.ts's docstring for the
++// general version of this problem) - even code only reachable via a
++// dynamic `import()` can still end up merged into an eagerly-evaluated
++// vendor chunk by Rollup's own chunking, so the singleton has to be lazy
++// at the *language* level instead, portable to either bundler.
++var _mainViewModel;
++export function getMainViewModel() {
++    if (!_mainViewModel) {
++        _mainViewModel = new TestBrokerViewModel();
++    }
++    return _mainViewModel;
++}
+ global.__onUncaughtError = error => {
+     console.log("NSUTR: uncaught error");
+-    mainViewModel.error(error.message);
++    getMainViewModel().error(error.message);
+ };
+diff --git a/app/main.js b/app/main.js
+index f05bc3bbbf690d613b7840ed9ccf3053c936e3d6..0276ecaa3c20d0b8cb66f6ff538c9f060bf18501 100644
+--- a/app/main.js
++++ b/app/main.js
+@@ -1,12 +1,23 @@
+ import { Application } from "@nativescript/core";
+ import "./app.css";
+ import { registerTestRunner } from "./services/webpack-test-runner";
+-const context = require.context("./", true, /.*\.(js|css|xml)/);
+-if (typeof global.registerWebpackModules !== "undefined") {
+-    global.registerWebpackModules(context);
+-}
+-else {
+-    global.registerBundlerModules(context);
++// `require.context` is a webpack-only API - under Vite, `require` is a
++// dummy stub (see @nativescript/vite's main-entry polyfill) with no
++// `.context`, so this would throw. Guard it and skip: under Vite, this
++// package's own XML/JS/CSS files (bundle-app-root, bundle-main-page,
++// run-details, test-run-page, etc.) are registered ahead of time instead,
++// by a dedicated Vite plugin in the consuming app's test bundler config
++// (see demo-app/vite.test.config.ts) - it has to run before this module
++// does regardless, since `bundle-app-root` is looked up the moment
++// `Application.run` below is called.
++if (typeof require !== "undefined" && typeof require.context === "function") {
++    const context = require.context("./", true, /.*\.(js|css|xml)/);
++    if (typeof global.registerWebpackModules !== "undefined") {
++        global.registerWebpackModules(context);
++    }
++    else {
++        global.registerBundlerModules(context);
++    }
+ }
+ export function runTestApp(options = {}) {
+     if (options === null || options === void 0 ? void 0 : options.runTests) {
+diff --git a/app/run-details.js b/app/run-details.js
+index 54b95a7f2fe885441ddb9665bb57daa5fa88e3b4..b6a2362dd92821eb55a477b0815e03de1503e2e4 100644
+--- a/app/run-details.js
++++ b/app/run-details.js
+@@ -1,6 +1,6 @@
+-import { mainViewModel } from "./main-view-model";
++import { getMainViewModel } from "./main-view-model";
+ export function pageLoaded(args) {
+     var page = args.object;
+-    var broker = mainViewModel;
++    var broker = getMainViewModel();
+     page.bindingContext = broker;
+ }
+diff --git a/app/test-run-page.js b/app/test-run-page.js
+index 21187fa5bcf60f40d75e4ee7d643a0631d23df01..982c022d68a87f51bd652bc89c7b74fdf790200f 100644
+--- a/app/test-run-page.js
++++ b/app/test-run-page.js
+@@ -1,7 +1,7 @@
+-import { mainViewModel } from "./main-view-model";
++import { getMainViewModel } from "./main-view-model";
+ export function pageNavigatedTo(args) {
+     var page = args.object;
+-    var broker = mainViewModel;
++    var broker = getMainViewModel();
+     page.bindingContext = broker;
+     broker.executeTestRun();
+ }
+diff --git a/config.js b/config.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..45166271bb3946c7ae1d024227dbd30e18f9d080
+--- /dev/null
++++ b/config.js
+@@ -0,0 +1 @@
++export default {"port":"9879","ips":["127.0.0.1","192.168.2.8"],"options":{"watch":true,"bundle":true,"appDirectoryRelativePath":"app"}}
