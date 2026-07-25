@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-07-25)
+
+* ember-native 4.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-native`
+  * [#393](https://github.com/ember-native/ember-native/pull/393) Upgrade NativeScript to 9.x (core, android, types, webpack, CLI) ([@patricklx](https://github.com/patricklx))
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#398](https://github.com/ember-native/ember-native/pull/398) Replace pnpm patches with a custom webpack plugin ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#394](https://github.com/ember-native/ember-native/pull/394) Fix crash on Android hardware back button for routes without dynamic segments ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-07-22)
 
 * ember-native 3.4.1 (patch)
