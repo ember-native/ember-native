@@ -26,6 +26,10 @@ module.exports = (webpack, options = {}) => {
     );
   });
 
+  // Build-time source patches for third-party dependencies, replacing what
+  // used to be `pnpm patch`-maintained diffs mutating node_modules.
+  require('./webpack-dependency-patches.js')(webpack);
+
   // Something in this resolution graph (most likely Embroider's custom
   // resolver plugin, which is built around ESM/Vite-style resolution)
   // ends up classifying plain CommonJS `.js` files pulled in from
