@@ -10,14 +10,6 @@ overrides:
   '@embroider/addon-shim': 1.9.0
   ember-eslint-parser: 0.5.3
 
-patchedDependencies:
-  '@nativescript/core@9.0.20':
-    hash: 23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc
-    path: patches/@nativescript__core@9.0.20.patch
-  '@nativescript/unit-test-runner':
-    hash: 6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84
-    path: patches/@nativescript__unit-test-runner.patch
-
 importers:
 
   .:
@@ -54,13 +46,13 @@ importers:
         version: 0.95.0
       '@nativescript/core':
         specifier: ~9.0.20
-        version: 9.0.20(patch_hash=23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc)
+        version: 9.0.20
       '@nativescript/theme':
         specifier: ^3.1.0
         version: 3.1.0
       '@nativescript/unit-test-runner':
         specifier: ~4.0.1
-        version: 4.0.1(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)
+        version: 4.0.1
       '@valor/nativescript-websockets':
         specifier: ^2.0.2
         version: 2.0.3
@@ -503,7 +495,7 @@ importers:
         version: 3.0.1(6d319b1a0d9582607008b9b09e953766)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(8ab069fe7c5733b78ee73ca67151a4a9)
+        version: file:ember-native(28b5aff14a8d9e32c6f06f6bf46755fd)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -744,7 +736,7 @@ importers:
         version: 1.7.7
       '@nativescript/core':
         specifier: ^9.0.20
-        version: 9.0.20(patch_hash=23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc)
+        version: 9.0.20
       '@release-it-plugins/lerna-changelog':
         specifier: ^9.0.0
         version: 9.0.0(e20538eb716a1b4716a5be56dc33619f)
@@ -18484,7 +18476,7 @@ snapshots:
 
   '@nativescript/android@9.0.5': {}
 
-  '@nativescript/core@9.0.20(patch_hash=23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc)':
+  '@nativescript/core@9.0.20':
     dependencies:
       '@csstools/css-calc': 2.1.4(f5bbab77a7781b6ee795024fdb514bb3)
       '@csstools/css-color-parser': 3.1.0(f5bbab77a7781b6ee795024fdb514bb3)
@@ -18520,7 +18512,7 @@ snapshots:
       '@nativescript/types-android': 9.0.0
       '@nativescript/types-ios': 9.0.0
 
-  '@nativescript/unit-test-runner@4.0.1(patch_hash=6d4efff75b8bc7c4ca3390f985d30d188d6572249de25fa4779a9b1ff6eb2c84)':
+  '@nativescript/unit-test-runner@4.0.1':
     dependencies:
       '@nativescript/hook': 3.0.5
       glob-regex: 0.3.2
@@ -24135,7 +24127,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(8ab069fe7c5733b78ee73ca67151a4a9):
+  ember-native@file:ember-native(28b5aff14a8d9e32c6f06f6bf46755fd):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.29.0)
@@ -24146,7 +24138,7 @@ snapshots:
       '@embroider/vite': 1.7.2(825268110b2c61f5afc6ae2d1d050560)
       '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
-      '@nativescript/core': 9.0.20(patch_hash=23b40f46bd9a3e5c64cc9a175b44058a6abd1c04a72d0a65a4ee53fd5b132dcc)
+      '@nativescript/core': 9.0.20
       '@rollup/plugin-alias': 6.0.0(rollup@4.60.1)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.1)
       '@types/node': 25.6.0
