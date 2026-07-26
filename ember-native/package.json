@@ -17,6 +17,9 @@
     "dist",
     "types"
   ],
+  "bin": {
+    "ember-native-nativescript": "./dist/utils/nativescript-cli.js"
+  },
   "scripts": {
     "build": "pnpm build:js && pnpm build:utils && pnpm build:types",
     "build:js": "rollup --config",

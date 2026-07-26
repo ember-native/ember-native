@@ -2769,3 +2769,97 @@ was already known. `pnpm --filter ember-native lint` and `demo-app`'s own
 nativescript-cli.js`); the 7 pre-existing `demo-app` lint errors reproduce
 identically on an unmodified `git HEAD` checkout and are unrelated to this
 change.
+
+## Follow-up session: shipped the CLI monkeypatch as a real published binary, not a demo-app-local script
+
+PR #396 review feedback: `ember-native` is a library other people install into
+their own NativeScript/Ember apps, not just a monorepo with one demo app. The
+previous session's fix for the "real, upstream `nativescript` CLI bug" (see
+above) - `demo-app/scripts/nativescript-cli.js` - only protected this repo's
+own `demo-app`. Any consuming app using `@nativescript/vite` hits the exact
+same upstream bug (`compileWithoutWatch` never copying Vite's output into the
+native platform project), and had no way to get this fix short of copy-pasting
+the script into their own app.
+
+**Checked for an upstream fix/alternative first**, rather than assuming a
+workaround was still needed: `npm view nativescript versions` shows the latest
+stable is still `9.0.6` (unfixed), but unpacking the `9.0.7-next.*`/`9.1.0-*`
+prerelease tarballs and reading `lib/services/bundler/bundler-compiler-service.js`
+directly shows `compileWithoutWatch` already calls `copyViteBundleToNative`
+itself there - upstream has fixed this, just not in a released stable version
+yet, and no tracking GitHub issue for it was found (searched
+`NativeScript/nativescript-cli`'s issues). So: no alternative fix available
+today, but this is expected to become moot once a `9.0.7`/`9.1.0` stable ships.
+
+**Fix**: moved the monkeypatch from `demo-app/scripts/nativescript-cli.js` into
+the addon itself, `ember-native/utils/nativescript-cli.js` (copied to
+`dist/utils/` by the existing `rollup-plugin-copy` step, same as
+`vite.config.js`/`vite-dependency-patches.js`), and published it as a real CLI
+binary via `ember-native`'s new `package.json` `"bin"` entry:
+`ember-native-nativescript`. Any consuming app can now point their
+`build`/`test`/`debug`/`run`/`prepare` scripts at `ember-native-nativescript`
+instead of `nativescript`/`tns` directly, the same way this repo's `demo-app`
+now does.
+
+Two things changed versus the original script to make it work as a published
+package binary rather than an in-repo script, both necessary because a v2
+addon like `ember-native` never depends on `nativescript` itself (only
+consuming apps do):
+
+1. **Module resolution now targets the invoking project's `cwd`, not
+   `__dirname`.** The original script lived inside `demo-app/scripts/`, a real
+   subdirectory of `demo-app`, so a plain `require('nativescript/...')`
+   naturally found `demo-app`'s own `nativescript` dependency by walking up
+   from there. Shipped as a package binary, the file's real on-disk location
+   is wherever `ember-native` itself is installed (e.g. under a workspace's
+   own `node_modules/.pnpm` store) - a directory that has no reason to have
+   `nativescript` reachable from it under pnpm's strict, non-hoisted
+   `node_modules` layout (confirmed empirically: `require.resolve('nativescript/
+   package.json')` from inside `ember-native/`'s own package directory throws
+   `Cannot find module`). Fixed by resolving every `nativescript/*` require via
+   `require.resolve(request, { paths: [process.cwd()] })` instead - this
+   finds it starting from the *invoking project's* working directory (e.g.
+   `demo-app/`, which does declare `nativescript` as a real dependency),
+   exactly where `nativescript`/`tns` itself would be resolved from if invoked
+   directly. Confirmed working: from `demo-app/`, `require.resolve('nativescript/
+   package.json', { paths: [process.cwd()] })` resolves correctly; from
+   `ember-native/`, the same call still (correctly) throws - this binary must
+   be run with the consuming app's directory as `cwd`, same constraint
+   `nativescript` itself already has.
+2. **Feature-detects the upstream fix instead of hardcoding a version
+   cutoff.** Since the fix already exists upstream in prerelease form (see
+   above) and could ship as a stable release at any point a consuming app
+   might upgrade to, the wrapper reads `compileWithoutWatch`'s own source
+   (`.toString()`) and checks whether it already contains
+   `copyViteBundleToNative`; if so, it skips installing the monkeypatch
+   entirely (patching on top of an already-fixed method would copy twice).
+   This means the exact same published binary keeps working correctly - as a
+   transparent pass-through - once/if a consuming app upgrades to whatever
+   `nativescript` version first ships the real fix, with no new release of
+   `ember-native` required to "turn off" the workaround.
+
+`demo-app/package.json`'s `run`/`test`/`build`/`debug-test`/`debug`/
+`prepare-android` scripts and both CLI-invoking steps in
+`.github/workflows/app-test.yml` were switched from `node scripts/
+nativescript-cli.js <args>` to `pnpm exec ember-native-nativescript <args>`
+(`ember-native-nativescript` resolves to `ember-native`'s new bin via pnpm's
+workspace `link:` symlink, so `demo-app` picking it up requires nothing beyond
+the existing `pnpm install`/`ember-native`-build step CI already runs first).
+`demo-app/scripts/nativescript-cli.js` was deleted.
+
+**Verified**: `pnpm --filter ember-native build` (rollup + tsc) produces
+`ember-native/dist/utils/nativescript-cli.js`; a subsequent `pnpm install`
+correctly links `demo-app/node_modules/.bin/ember-native-nativescript` to it
+(confirmed it fails to link with a clear `ENOENT` before the addon is built,
+and succeeds after - expected, matches this repo's existing "build the addon
+first" CI ordering). `pnpm exec ember-native-nativescript --version` from
+`demo-app/` prints `9.0.6` and checks for updates, i.e. runs the real CLI.
+A fully clean `rm -rf .ns-vite-build tmp platforms && pnpm exec
+ember-native-nativescript build android` from `demo-app/` succeeds end to end
+and produces real `bundle.mjs`/`vendor.mjs` content in
+`platforms/android/app/src/main/assets/app/` (not an empty directory, the
+original bug's symptom) - confirming the monkeypatch still applies correctly
+through its new resolution path against the real (still-unfixed) installed
+`nativescript@9.0.6`. `pnpm --filter ember-native lint` passes on the new
+file; `pnpm --filter demo-app lint:js` reproduces exactly the same 7
+pre-existing, already-documented errors, no new ones.
