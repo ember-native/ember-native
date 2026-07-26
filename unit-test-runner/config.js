@@ -1,0 +1,1 @@
+module.exports = {"port":"9878","ips":["127.0.0.1","192.168.2.8"],"options":{"watch":false,"bundle":true,"appDirectoryRelativePath":"app","id":"98246489"}}

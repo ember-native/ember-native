@@ -122,7 +122,6 @@ export default ts.config(
       '**/*.cjs',
       'babel.config.js',
       'rollup.config.mjs',
-      'webpack.config.js',
       'utils/*.js'
     ],
     plugins: {
@@ -141,7 +140,7 @@ export default ts.config(
    * ESM node files
    */
   {
-    files: ['**/*.mjs'],
+    files: ['**/*.mjs', 'utils/json-to-ast-esm-shim.js', 'utils/qunit-esm-shim.js'],
     plugins: {
       n,
     },

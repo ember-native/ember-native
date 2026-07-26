@@ -44,7 +44,7 @@ jobs:
       - name: build
         run: |
           (cd ember-native && pnpm build)
-          (cd demo-app && pnpm tns build android)
+          (cd demo-app && node scripts/nativescript-cli.js build android)
 
       - name: Enable KVM group perms
         run: |
@@ -85,4 +85,4 @@ jobs:
           disable-animations: true
           script: |
             adb uninstall "org.nativescript.embernativedemo" || echo "pass";
-            cd demo-app && npx -y nativescript test android --emulator
+            cd demo-app && node scripts/nativescript-cli.js test android --emulator --config nativescript.test.vite.config.ts --no-watch

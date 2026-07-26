@@ -17,6 +17,7 @@
 !CONTRIBUTING.md
 !LICENSE.md
 !NATIVESCRIPT_UPGRADE_NOTES.md
+!VITE_MIGRATION_NOTES.md
 !package.json
 !pnpm-lock.yaml
 !pnpm-workspace.yaml
@@ -24,3 +25,7 @@
 !RELEASE.md
 !patches
 !patches/*
+!unit-test-runner
+!unit-test-runner/**/*
+!karma-launcher
+!karma-launcher/**/*

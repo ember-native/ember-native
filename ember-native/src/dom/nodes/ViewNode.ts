@@ -3,6 +3,14 @@ import DocumentNode from './DocumentNode.ts';
 
 function* elementIterator(el: any): Generator<any, void, unknown> {
   yield el;
+  // Some nodes reachable during a test run (observed via `@ember/test-helpers`'
+  // `visit()`/`getRootElement()` walking the tree before the app's own render
+  // has fully settled) don't carry a real, ViewNode-derived `childNodes`
+  // array - treat that as a leaf instead of crashing the whole walk with
+  // "childNodes is not iterable" and losing every match past that point.
+  if (!Array.isArray(el.childNodes)) {
+    return;
+  }
   for (const child of el.childNodes) {
     yield* elementIterator(child);
   }

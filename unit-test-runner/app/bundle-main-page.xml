@@ -1,0 +1,7 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
+    <GridLayout class="landingContainer">
+        <Image src="{{ imageSrc }}" stretch="aspectFit" class="landingBackground" width="150"/>
+
+        <Label text="{{ serverInfo }}" class="landingText"/>
+    </GridLayout>
+</Page>
