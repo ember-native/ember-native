@@ -32,7 +32,18 @@ function resolveFromProject(request) {
   return require.resolve(request, { paths: [process.cwd()] });
 }
 
-require(resolveFromProject('nativescript/lib/bootstrap'));
+let bootstrapPath;
+try {
+  bootstrapPath = resolveFromProject('nativescript/lib/bootstrap');
+} catch {
+  console.error(
+    `ember-native-nativescript: could not find \`nativescript\` from ${process.cwd()} - ` +
+      'run this from a project that depends on `nativescript` (see the ember-native README).'
+  );
+  process.exit(1);
+}
+
+require(bootstrapPath);
 
 const {
   BundlerCompilerService,
