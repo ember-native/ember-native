@@ -221,7 +221,7 @@ importers:
         version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-ember:
         specifier: ^12.3.1
-        version: 12.7.5(edec6f523371f2ec272bdcc2cc39cf67)
+        version: 12.7.5(10714a43e0580163384e4fc50c4f9cd7)
       eslint-plugin-n:
         specifier: ^17.23.1
         version: 17.24.0(0d62767105e9a39fc494591cb6137847)
@@ -243,7 +243,7 @@ importers:
       karma-coverage:
         specifier: 2.2.1
         version: 2.2.1
-      karma-nativescript-launcher:
+      karma-ember-native-launcher:
         specifier: link:../karma-launcher
         version: link:../karma-launcher
       karma-qunit:
@@ -23493,6 +23493,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/parser@8.61.0(0d62767105e9a39fc494591cb6137847)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.61.0
+      '@typescript-eslint/types': 8.61.0
+      '@typescript-eslint/typescript-estree': 8.61.0(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.61.0
+      debug: 4.4.3(supports-color@9.4.0)
+      eslint: 9.39.4(jiti@2.6.1)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
+
   '@typescript-eslint/parser@8.61.0(717face55a559967bf1b77f9b43bd1f1)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.61.0
@@ -27640,6 +27653,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  ember-eslint-parser@0.5.3(10714a43e0580163384e4fc50c4f9cd7):
+    dependencies:
+      '@babel/core': 7.29.0
+      '@babel/eslint-parser': 7.28.6(35c79763e2f529503c5fce6757258eb9)
+      '@glimmer/syntax': 0.92.3
+      content-tag: 2.0.3
+      eslint-scope: 7.2.2
+      html-tags: 3.3.1
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.61.0(0d62767105e9a39fc494591cb6137847)
+    transitivePeerDependencies:
+      - eslint
+
   ember-eslint-parser@0.5.3(5c771a234250e3fd6b6c32a0b01b497f):
     dependencies:
       '@babel/core': 7.29.0
@@ -28689,6 +28715,24 @@ snapshots:
       - '@babel/core'
       - eslint
       - supports-color
+
+  eslint-plugin-ember@12.7.5(10714a43e0580163384e4fc50c4f9cd7):
+    dependencies:
+      '@ember-data/rfc395-data': 0.0.4
+      css-tree: 3.2.1
+      ember-eslint-parser: 0.5.3(10714a43e0580163384e4fc50c4f9cd7)
+      ember-rfc176-data: 0.3.18
+      eslint: 9.39.4(jiti@2.6.1)
+      eslint-utils: 3.0.0(eslint@9.39.4(jiti@2.6.1))
+      estraverse: 5.3.0
+      lodash.camelcase: 4.3.0
+      lodash.kebabcase: 4.1.1
+      requireindex: 1.2.0
+      snake-case: 3.0.4
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.61.0(0d62767105e9a39fc494591cb6137847)
+    transitivePeerDependencies:
+      - '@babel/core'
 
   eslint-plugin-ember@12.7.5(a26d6855d289e772202468423cdb8c52):
     dependencies:

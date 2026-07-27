@@ -4,7 +4,7 @@ import App from '../native/main';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';
 import { start } from 'ember-qunit';
-import { runTestApp } from "@nativescript/unit-test-runner";
+import { runTestApp } from '@nativescript/unit-test-runner';
 import { NativeBridge } from '@valor/nativescript-websockets/bridge.android';
 import NativeElementNode from 'ember-native/dom/native/NativeElementNode';
 import { Frame, Application, StackLayout } from '@nativescript/core';

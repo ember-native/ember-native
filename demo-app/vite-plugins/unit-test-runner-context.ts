@@ -9,9 +9,16 @@ export const UNIT_TEST_RUNNER_CONTEXT_VIRTUAL_ID = 'virtual:ns-unit-test-runner-
 
 /**
  * `@nativescript/unit-test-runner` (our own local `unit-test-runner/`
- * workspace package - a from-scratch replacement for the upstream npm
- * package of the same name, see VITE_MIGRATION_NOTES.md's "Our own unit
- * test runner" section) needs its XML/CSS/JS files (`bundle-app-root`,
+ * workspace package, published standalone as `ember-native-unit-test-runner`
+ * but aliased back to this exact name in `demo-app/package.json` - the
+ * `nativescript` CLI's `TestExecutionService` hardcodes
+ * `node_modules/@nativescript/unit-test-runner/config.js` as the path it
+ * writes fresh karma connection info to before every real
+ * `nativescript test android` run (`constants.js`'s `TEST_RUNNER_NAME`), so
+ * consuming apps must always depend on it under this literal name regardless
+ * of its published package name - a Vite/bundle-mode port of the upstream
+ * `@nativescript/unit-test-runner`, see VITE_MIGRATION_NOTES.md's "Our own
+ * unit test runner" section) needs its XML/CSS/JS files (`bundle-app-root`,
  * `bundle-main-page`, `main-view-model`, `run-details`, `test-run-page`,
  * ...) registered into NativeScript's core module registry so that
  * `Application.run({ moduleName: "bundle-app-root" })` and the page

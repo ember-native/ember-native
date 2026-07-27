@@ -226,7 +226,7 @@ export class TestBrokerViewModel extends Observable {
       this.updateBanner('connected');
       this.updateView({ isConnected: true });
       socket.emit('register', {
-        // Use the id `karma-nativescript-launcher` was assigned for this
+        // Use the id `karma-ember-native-launcher` was assigned for this
         // run when it's available (see that package's own `self.start` in
         // ../../karma-launcher/index.js) instead of always making one up
         // here. Karma core's singleRun completion
