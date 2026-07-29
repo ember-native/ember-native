@@ -24,7 +24,8 @@
     "prettier": "^3.6.2",
     "prettier-plugin-ember-template-tag": "^2.1.0",
     "release-plan": "^0.17.4",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wait-on": "^9.0.0"
   },
   "engines": {
     "node": ">= 20.*",

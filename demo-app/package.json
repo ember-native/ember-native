@@ -6,6 +6,8 @@
   "scripts": {
     "devtools": "ember-devtools",
     "run": "ember-native-nativescript debug android",
+    "dev:android": "concurrently -k -n vite,ns \"pnpm run dev:server:android\" \"wait-on tcp:5173 && pnpm run run\"",
+    "dev:server:android": "vite serve -- --env.android --env.hmr",
     "test": "ember-native-nativescript test android --config nativescript.test.vite.config.ts --no-watch",
     "build": "ember-native-nativescript build android",
     "debug-test": "ember-native-nativescript test android --debug-brk --config nativescript.test.vite.config.ts --no-watch",
@@ -80,7 +82,7 @@
     "ember-resolver": "^13.1.1",
     "ember-routable-component": "^1.2.0",
     "ember-template-lint": "^7.9.1",
-    "ember-vite-hmr": "^2.0.6",
+    "ember-vite-hmr": "^2.2.3",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-ember": "^12.3.1",
