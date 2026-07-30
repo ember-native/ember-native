@@ -45,6 +45,55 @@ runner that changes `cwd` (e.g. Nx or Turborepo's `--cwd`) to somewhere without
 `nativescript` in scope.
 
 
+Setting up an app's `vite.config.ts`
+------------------------------------------------------------------------------
+
+An ember-native app needs `@nativescript/vite`'s own config merged together
+with a handful of Ember/Embroider- and ember-native-specific plugins and
+alias fixes. Rather than hand-rolling that merge (subtle to get right - see
+`demo-app/vite.config.ts` before this helper existed, in git history, for
+what that used to look like), use `ember-native/utils/nativescript-vite.config.js`:
+
+```ts
+// vite.config.ts
+import { createRequire } from 'node:module';
+import { defineConfig, mergeConfig } from 'vite';
+import { typescriptConfig } from '@nativescript/vite';
+import { hmr } from 'ember-vite-hmr';
+import configureNativeScriptVite from 'ember-native/utils/nativescript-vite.config.js';
+
+const require = createRequire(import.meta.url);
+
+export default defineConfig(({ mode }) =>
+  configureNativeScriptVite({
+    mode,
+    mergeConfig,
+    typescriptConfig,
+    hmr,
+    require,
+    entry: require.resolve('./boot-app.js'),
+  }),
+);
+```
+
+`mergeConfig`/`typescriptConfig`/`hmr`/`require` are passed through from your
+own imports (rather than re-imported inside the helper) so the exact `vite`
+instance driving your dev server is always the one used - see the helper's
+own JSDoc for why that matters. `entry` points at whatever file your app's
+`app/boot.js` should actually run (see `demo-app/app/boot.js` for the
+bare-specifier-alias dispatcher pattern this enables).
+
+Customize via extra options: `vendorExclude` (extra package names to skip in
+`@nativescript/vite`'s HMR vendor-bundle step - safe to over-list), `hmrHost`
+(override the Android-emulator HMR host guess for a real device or LAN dev
+server), `babel` (forwarded into the addon's own babel plugin config),
+`plugins` (extra Vite plugins), and `extend` (any other Vite config,
+merged in last). A one-shot bundler config that never runs the dev server
+(e.g. a Vite-only `nativescript test` config) just omits `hmr`/`require` -
+see `demo-app/vite.test.config.ts` for a full example that also adds its own
+test-only plugins, aliases, and `define`s via `plugins`/`extend`.
+
+
 Contributing
 ------------------------------------------------------------------------------
 

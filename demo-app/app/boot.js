@@ -3,10 +3,12 @@
 // `@nativescript/unit-test-runner`'s own `nativescript.webpack.js` hook
 // replace the entire webpack `entry` with `test.js` for test builds, Vite
 // has no equivalent per-build entry override. Instead, this file stays a
-// tiny, always-static dispatcher: the bare `demo-app-entry` specifier is
-// aliased differently per Vite config - `vite.config.ts` (real app builds)
-// points it at `../boot-app.js`, `vite.test.config.ts` (`nativescript test
-// android`) points it at `../boot-test.js`. Both are plain static imports,
+// tiny, always-static dispatcher: the bare `ember-native-app-entry` specifier
+// (aliased by `ember-native/utils/nativescript-vite.config.js`'s
+// `configureNativeScriptVite()`, via its `entry` option) is aliased
+// differently per Vite config - `vite.config.ts` (real app builds) points it
+// at `../boot-app.js`, `vite.test.config.ts` (`nativescript test android`)
+// points it at `../boot-test.js`. Both are plain static imports,
 // so whichever one is selected is evaluated synchronously as part of this
 // module's own linking - no dynamic `import()` involved. This matters for
 // the test build specifically: `@nativescript/unit-test-runner`'s
@@ -53,4 +55,4 @@
 // exports are genuinely unused - only the module's own side effect of
 // registering the class matters).
 import '@nativescript/core/ui/frame/activity.android.js?ns-keep';
-import 'demo-app-entry';
+import 'ember-native-app-entry';
