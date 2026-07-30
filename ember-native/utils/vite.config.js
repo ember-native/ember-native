@@ -10,18 +10,20 @@
  * need these bridged into webpack by hand - see VITE_MIGRATION_NOTES.md;
  * webpack support has since been fully removed.)
  *
- * Usage in an app's vite.config.ts:
+ * Consuming apps should not call this directly - use
+ * `ember-native/utils/nativescript-vite.config.js`'s `configureNativeScriptVite()`
+ * instead, which wraps this together with `@nativescript/vite`'s own
+ * `typescriptConfig()` and the alias-ordering/`NS_HMR_HOST`/`@vite/env` fixes
+ * both need (see that file's docstring for the full usage example, and why a
+ * hand-rolled `mergeConfig(configureEmberNativeVite(), typescriptConfig({ mode }))`
+ * in an app's own `vite.config.ts` - the pattern this file used to document
+ * here - reproduces bugs that helper already fixes).
  *
- *   import { defineConfig, mergeConfig } from 'vite';
- *   import { typescriptConfig } from '@nativescript/vite';
- *   import configureEmberNativeVite from 'ember-native/utils/vite.config.js';
- *
- *   export default defineConfig(({ mode }) => {
- *     // ember-native's plugins (classicEmberSupport/ember/babel) are passed
- *     // as the first argument so their `enforce: 'pre'` resolver/template-tag
- *     // plugins run before @nativescript/vite's own resolver.
- *     return mergeConfig(configureEmberNativeVite(), typescriptConfig({ mode }));
- *   });
+ * This file stays a separate module (rather than folding into
+ * `nativescript-vite.config.js`) only because it's also usable standalone by
+ * a hypothetical non-`@nativescript/vite` Vite consumer that needs just the
+ * Ember/Embroider plugin wiring, with no NativeScript-specific config layered
+ * on top.
  *
  * @param {object} [options]
  * @param {object} [options.babel] - overrides merged into the default

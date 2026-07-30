@@ -705,15 +705,26 @@ something this pass changed.
 ## Publishing `utils/vite.config.js` for consuming apps, and keeping webpack (`ember-native-todo.md` sub-task 4)
 
 `utils/vite.config.js` (added alongside the `a134ee4` demo-app switch, see
-its own docstring for the plugin wiring and usage snippet) is already the
-addon's public, documented entry point for consuming apps that want to
-build with `@nativescript/vite` - it's exported via `package.json`'s
+its own docstring for the plugin wiring) is exported via `package.json`'s
 `"./utils/*": "./dist/utils/*"` wildcard exactly like
 `utils/webpack.config.js` always has been, ships in `dist/` through the
 normal `pnpm build` (`build:utils` compiles `utils/*.js`/`*.ts` with `tsc`),
-and needs no separate opt-in. `demo-app/vite.config.ts` is a live example of
-a consuming app importing and `mergeConfig`-ing it with
-`@nativescript/vite`'s `typescriptConfig()`.
+and needs no separate opt-in.
+
+**Superseded as the recommended public entry point** by
+`utils/nativescript-vite.config.js`'s `configureNativeScriptVite()` (added in
+the `cbf73ad` "simplify demo setup" pass): that helper wraps
+`configureEmberNativeVite()` (this file's export) together with
+`@nativescript/vite`'s own `typescriptConfig()` and the alias-reordering /
+`NS_HMR_HOST` / `@vite/env` dev-server fixes documented throughout this file
+- all of which a consuming app previously had to hand-roll itself by
+`mergeConfig`-ing `utils/vite.config.js` directly, as `demo-app/vite.config.ts`
+used to. `demo-app/vite.config.ts` and `vite.test.config.ts` are now live
+examples of the new, much shorter call site; see
+`nativescript-vite.config.js`'s own docstring for the full usage example.
+`utils/vite.config.js` itself is still exported and still does the
+Ember/Embroider-side plugin wiring described below, but new apps should reach
+it through `configureNativeScriptVite()` rather than calling it directly.
 
 **Decision on `utils/webpack.config.js`: kept, not removed or hard-deprecated,
 but documented as the legacy/backward-compat path** (see the docstrings now
@@ -734,11 +745,12 @@ reasons this isn't a straightforward "delete it, everyone moves to vite":
    is no forcing function to require that upgrade alongside an `ember-native`
    version bump.
 
-Consuming-app guidance going forward: use `utils/vite.config.js` for new
+Consuming-app guidance going forward: use
+`utils/nativescript-vite.config.js`'s `configureNativeScriptVite()` for new
 apps and for the main `build`/`debug` flow of any app able to move off
 `@nativescript/webpack`; keep `utils/webpack.config.js` around only for
 `nativescript test android` (or for apps that haven't migrated their main
-build yet). Both configs are maintained - `utils/webpack.config.js` isn't
+build yet). Both paths are maintained - `utils/webpack.config.js` isn't
 frozen or unsupported, just no longer where new features land first.
 
 ## Still open (see `ember-native-todo.md` for the full breakdown)
