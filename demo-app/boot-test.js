@@ -1,5 +1,5 @@
 // Test-only entry content, selected via `vite.test.config.ts`'s
-// `demo-app-entry` alias (see `app/boot.js` for why this indirection exists
+// `ember-native-app-entry` alias (see `app/boot.js` for why this indirection exists
 // instead of a runtime branch inside one shared file). Lives outside `app/`
 // (alongside its `boot-app.js` counterpart) - see that file's docstring for
 // why: Ember CLI's classic module-compat registry eagerly imports every

@@ -7,7 +7,7 @@ import { NativeScriptConfig } from '@nativescript/core';
 // history). `@nativescript/vite` always builds whatever package.json's
 // `main` field points to (app/boot.js) regardless of which
 // nativescript.*.config.ts selected it - the entry swap to the test-only
-// content is done via boot.js's `demo-app-entry` alias, which
+// content is done via boot.js's `ember-native-app-entry` alias, which
 // vite.test.config.ts points at ../boot-test.js (see both files' own
 // docstrings).
 //
