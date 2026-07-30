@@ -153,19 +153,39 @@ module.exports = function configureNativeScriptVite(options) {
         ...(options.vendorExclude || []),
       ].join(',');
     }
-    // Only Android needs a default: on the emulator, `10.0.2.2` is the NAT
-    // alias the guest OS maps to the host's loopback, and it's the only
-    // address this project's `network_security_config.xml` cleartext
-    // allowlist permits (see `demo-app`'s Android App_Resources). iOS already
-    // defaults to `localhost` correctly and has no such cleartext
-    // restriction to work around.
-    if (!process.env.NS_HMR_HOST && getCliPlatform() === 'android') {
-      process.env.NS_HMR_HOST = options.hmrHost || '10.0.2.2';
-    }
   }
 
   const emberNativeConfig = configureEmberNativeVite({ babel: options.babel });
   const merged = mergeConfig(emberNativeConfig, typescriptConfig({ mode }));
+
+  if (hmr) {
+    // `typescriptConfig()` above (@nativescript/vite's `baseConfig`) already
+    // read `process.env.NS_HMR_HOST` to pick `merged.server.host` - on
+    // Android that's `0.0.0.0` unless the env var was set, and that value is
+    // now permanently baked into `merged`. Only *after* that point is it safe
+    // to default `NS_HMR_HOST` here: `ember-vite-hmr`'s own plugin re-reads
+    // this same env var lazily, later, to pick the *client's* HMR websocket
+    // host, but the dev server's actual bind address is `merged.server.host`,
+    // frozen above. Setting `NS_HMR_HOST` any earlier (e.g. before this
+    // `typescriptConfig()` call) would instead make the dev server itself try
+    // to bind to that address - fine for a real LAN IP, but `10.0.2.2` isn't
+    // one; it's only a NAT alias the Android emulator's guest OS maps to the
+    // host's loopback, and the host has no such interface to bind
+    // (`EADDRNOTAVAIL`).
+    //
+    // Without this, `guessLanHost()` picks the dev machine's real LAN IP for
+    // the client's websocket URL whenever the server is wildcard-bound
+    // (`0.0.0.0`, i.e. always on Android here), but that IP is never in this
+    // app's Android `network_security_config.xml` cleartext allowlist (only
+    // `10.0.2.2` is), so the HMR websocket connection is always rejected.
+    // Default it to `10.0.2.2` to match what the network security config
+    // actually allows - only for Android, since iOS already defaults to
+    // `localhost` (no cleartext restriction to work around) and forcing
+    // `10.0.2.2` there would break it instead.
+    if (!process.env.NS_HMR_HOST && getCliPlatform() === 'android') {
+      process.env.NS_HMR_HOST = options.hmrHost || '10.0.2.2';
+    }
+  }
 
   // `mergeConfig` appends ember-native's `resolve.alias` entries (normalized
   // to array form) after @nativescript/vite's own, but Vite's alias
