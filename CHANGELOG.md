@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-07-30)
+
+* ember-native 4.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#399](https://github.com/ember-native/ember-native/pull/399) Fix HistoryService#back() using stale params for routes with dynamic segments ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-07-25)
 
 * ember-native 4.0.0 (major)
