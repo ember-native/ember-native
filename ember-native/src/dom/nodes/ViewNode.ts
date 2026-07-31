@@ -43,8 +43,16 @@ export default class ViewNode {
   }
 
   getElementByTagName(tagName: string) {
+    // `tagName`'s own setter (below) always normalizes through `normalizeElementName` (strips
+    // dashes, lowercases), so a stored element's `.tagName` is never the literal tag written in a
+    // template (e.g. `<text-view>` reads back as `'textview'`, not `'text-view'`). Without
+    // normalizing the search argument the same way, this comparison could never match anything
+    // for a dashed or mixed-case tag name - which silently broke every `querySelector`/
+    // `triggerEvent` call site (including inside `@ember/test-helpers` itself) that looked up an
+    // element by its template tag name instead of an id/class.
+    const normalizedTagName = normalizeElementName(tagName);
     for (const el of elementIterator(this)) {
-      if (el.nodeType === 1 && el.tagName === tagName) return el;
+      if (el.nodeType === 1 && el.tagName === normalizedTagName) return el;
     }
   }
 
