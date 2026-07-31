@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-07-31)
+
+* ember-native 4.0.2 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#401](https://github.com/ember-native/ember-native/pull/401) Fix HistoryService#back() still reading stale RouteInfo params ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-07-30)
 
 * ember-native 4.0.1 (patch)
