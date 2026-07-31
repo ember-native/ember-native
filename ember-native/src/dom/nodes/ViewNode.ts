@@ -23,9 +23,18 @@ export default class ViewNode {
   _meta: any;
 
   get textContent() {
+    // Reads via `getAttribute`, not the plain `.text`/`.html` properties directly:
+    // `NativeElementNode#getAttribute` reflects the underlying native view's real property value
+    // (e.g. a `<label>`'s displayed text), which a dynamic `text={{...}}` binding updates via
+    // `setAttribute` - it never touches a plain `.text` field on the JS wrapper object itself, so
+    // reading that field directly always read back `undefined` for a native element whose content
+    // was set the normal way, no matter what the native view actually displayed. Plain nodes
+    // without a `NativeElementNode`-specific override (e.g. `TextNode`) fall back to `ViewNode`'s
+    // own `getAttribute`, which is just `this[key]` - the same plain-property read as before, so
+    // this is a strict improvement, not a behavior change, for anything that isn't a native view.
     const contents = [];
     for (const el of elementIterator(this)) {
-      contents.push(el.text || el.html);
+      contents.push(el.getAttribute('text') || el.getAttribute('html'));
     }
     return contents.filter((c) => !!c).join(' ');
   }
