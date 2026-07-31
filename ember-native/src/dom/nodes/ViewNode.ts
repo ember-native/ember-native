@@ -32,8 +32,14 @@ export default class ViewNode {
     // without a `NativeElementNode`-specific override (e.g. `TextNode`) fall back to `ViewNode`'s
     // own `getAttribute`, which is just `this[key]` - the same plain-property read as before, so
     // this is a strict improvement, not a behavior change, for anything that isn't a native view.
+    //
+    // Only a leaf (no children) contributes its own text/html: a native widget given text content
+    // as a child (e.g. `<button>hello</button>`) mirrors that child's content onto its own
+    // `.text` - it's still kept as a real child `TextNode` too, so counting both the parent's own
+    // `getAttribute('text')` and its child's would double every such string.
     const contents = [];
     for (const el of elementIterator(this)) {
+      if (Array.isArray(el.childNodes) && el.childNodes.length > 0) continue;
       contents.push(el.getAttribute('text') || el.getAttribute('html'));
     }
     return contents.filter((c) => !!c).join(' ');
