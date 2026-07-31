@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "patch",
-      "oldVersion": "4.0.0",
-      "newVersion": "4.0.1",
+      "oldVersion": "4.0.1",
+      "newVersion": "4.0.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2026-07-30)\n\n* ember-native 4.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#399](https://github.com/ember-native/ember-native/pull/399) Fix HistoryService#back() using stale params for routes with dynamic segments ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-07-31)\n\n* ember-native 4.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#401](https://github.com/ember-native/ember-native/pull/401) Fix HistoryService#back() still reading stale RouteInfo params ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
