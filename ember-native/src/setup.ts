@@ -261,6 +261,18 @@ export function setup() {
     origin: '',
     protocol: 'none',
   } as any;
+  // `window` is `globalThis` itself here, not a real DOM `EventTarget` - but callers assume it
+  // behaves like one (e.g. this file's own `document.body` getter below, and test frameworks like
+  // QUnit, which unconditionally call `window.addEventListener('unhandledrejection', ...)` during
+  // its own boot and crash otherwise). Mix in the same listener bookkeeping as the `EventTarget`
+  // polyfill above rather than making `globalThis` extend it (it can't - it's a fixed object, not
+  // a class instance).
+  if (typeof g.addEventListener !== 'function') {
+    const windowEventTarget = new (globalThis.EventTarget as any)();
+    g.addEventListener = windowEventTarget.addEventListener.bind(windowEventTarget);
+    g.removeEventListener = windowEventTarget.removeEventListener.bind(windowEventTarget);
+    g.dispatchEvent = windowEventTarget.dispatchEvent.bind(windowEventTarget);
+  }
   const document = new DocumentNode() as unknown as Document;
   (document as unknown as any).location = globalThis.window.location;
 
