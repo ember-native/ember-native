@@ -7,21 +7,25 @@ import type { Transition } from 'router_js';
 import { registerDestructor } from '@ember/destroyable';
 
 /**
- * A snapshot of the route `back()` should return to, captured at push time (see `setup()`
- * below) rather than read lazily off the live `Transition` at pop time. `Transition['from']` is
- * a `RouteInfo` whose `params`/`queryParams` are only reliable while that route is still the
- * *current* one - router_js reuses and updates a route's `RouteInfo` as the router moves on, so
- * a stack entry sitting under other, later transitions can have its `from.params` read back
- * empty (or otherwise stale) by the time an old entry is finally popped, even though the route
- * had real params when it was current. Storing plain, copied values here instead means `back()`
- * always transitions with the params the route actually had when it was left.
+ * A snapshot of the URL `back()` should return to, captured from `router.currentURL` in
+ * `routeWillChange` - while the route being left is still the router's actual current route -
+ * rather than read off `Transition['from']`'s `RouteInfo` at any later point.
+ *
+ * `RouteInfo` is an object router_js owns and keeps mutating/reusing for a route across
+ * transitions, most visibly for a same-route dynamic-segment change (e.g. `commit-detail`'s
+ * `navigateToParent`, which transitions from `commit-detail` back to `commit-detail` under a
+ * different sha) - so its `params`/`queryParams` are not a reliable point-in-time snapshot no
+ * matter how early after the transition they're read. `b69ef22` moved this capture from `back()`
+ * reading it lazily at pop time to `setup()` copying it eagerly at push time (in
+ * `routeDidChange`), which closes the widest version of the gap but not all of it: the same
+ * route's `RouteInfo` can already read back empty by the time `routeDidChange` fires for it a
+ * second time. `currentURL` is a plain string the router computes once per settled transition -
+ * once read here it can't be mutated out from under us the way a `RouteInfo`'s properties can,
+ * and it round-trips the full destination (route, dynamic segments, and query params alike)
+ * through `router.transitionTo` without needing to reconstruct any of them separately.
  */
 type HistoryEntry = {
-  from: {
-    name: string;
-    params: Record<string, unknown>;
-    queryParams: Record<string, unknown>;
-  };
+  url: string;
   data: Transition['data'];
 };
 
@@ -35,14 +39,16 @@ export default class HistoryService extends Service {
     registerDestructor(this, () =>
       Application.android?.off('activityBackPressed', this.activityBackPressed),
     );
+    this.router.on('routeWillChange', (transition) => {
+      // The route being left is still current at this point - `didTransition` (which flips
+      // `currentURL` to the destination) hasn't run yet. See the `HistoryEntry` doc comment
+      // above for why this is read here instead of off `transition.from` later on.
+      transition.data['fromURL'] = this.router.currentURL;
+    });
     this.router.on('routeDidChange', (transition) => {
       if (transition.from && !transition.data['isBack']) {
         this.stack.push({
-          from: {
-            name: transition.from.name,
-            params: { ...transition.from.params },
-            queryParams: { ...transition.from.queryParams },
-          },
+          url: transition.data['fromURL'] as string,
           data: transition.data,
         });
         this.stack = [...this.stack];
@@ -56,23 +62,9 @@ export default class HistoryService extends Service {
 
   back = () => {
     const h = this.stack.pop();
-    if (h?.from) {
-      const from = h.from;
+    if (h?.url) {
       this.stack = [...this.stack];
-      // `from.params` is always an object, even `{}` for routes with no
-      // dynamic segments (e.g. `index`). Passing that empty object through
-      // as a context/model makes Ember's router throw "More context
-      // objects were passed than there are dynamic segments for the
-      // route", so only forward it when it actually holds a segment value.
-      const hasDynamicSegments = from.params && Object.keys(from.params).length > 0;
-      const transition = this.nativeRouter.transitionTo(
-        from.name,
-        hasDynamicSegments ? from.params : undefined,
-        {
-          queryParams: from.queryParams,
-        },
-        h.data['transition'] as any,
-      );
+      const transition = this.nativeRouter.transitionToURL(h.url, h.data['transition'] as any);
       transition.data['isBack'] = true;
       return true;
     }

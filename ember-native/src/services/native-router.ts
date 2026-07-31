@@ -24,4 +24,20 @@ export default class NativeRouter extends Service {
     t.data['transition'] = backTransition || transition;
     return t;
   }
+
+  /**
+   * Same as {@link transitionTo}, but for transitioning to a full URL (route + dynamic segments
+   * + query params already resolved into one string) rather than reconstructing them from a
+   * route name and separate models/query-params - see `HistoryService`'s doc comment for why
+   * `back()` uses this instead.
+   */
+  transitionToURL(
+    url: string,
+    transition?: { transition: NavigationTransition; animated: boolean },
+  ) {
+    setNextTransition(transition?.transition, transition?.animated);
+    const t = this.router.transitionTo(url);
+    t.data['transition'] = transition;
+    return t;
+  }
 }
