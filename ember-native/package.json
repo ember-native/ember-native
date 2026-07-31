@@ -1,6 +1,6 @@
 {
   "name": "ember-native",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Use the Ember framework with Nativescript",
   "keywords": [
     "ember-addon"
