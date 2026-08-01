@@ -24,7 +24,9 @@
   },
   "include": [
     "app/**/*",
-    "types/*"
+    "types/*",
+    "*.ts",
+    "vite-plugins/**/*"
   ],
   "files": [
     "./references.d.ts"

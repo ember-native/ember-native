@@ -16,7 +16,7 @@ import '@valor/nativescript-websockets';
 // NativeScript's JS runtime has no `Buffer` global; polyfill it for the test
 // runner's socket transport, which expects one.
 import * as bufferModule from 'buffer';
-global.Buffer = (bufferModule.default !== undefined ? bufferModule.default : bufferModule.__require ? bufferModule.__require() : bufferModule).Buffer;
+globalThis.Buffer = (bufferModule.default !== undefined ? bufferModule.default : bufferModule.__require ? bufferModule.__require() : bufferModule).Buffer;
 import './app/test.js';
 
 // Vite's dynamic-import "module preload" helper assumes a browser DOM
@@ -47,7 +47,7 @@ const nativeCreateElement = document.createElement.bind(document);
 document.createElement = (tagName) => {
   try {
     return nativeCreateElement(tagName);
-  } catch (e) {
+  } catch {
     return {
       setAttribute() {},
       addEventListener(type, cb) {

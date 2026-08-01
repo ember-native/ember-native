@@ -2,7 +2,6 @@ import { createRequire } from 'node:module';
 import { defineConfig, mergeConfig } from 'vite';
 import { typescriptConfig } from '@nativescript/vite';
 import { hmr } from 'ember-vite-hmr';
-// eslint-disable-next-line import/no-unresolved
 import configureNativeScriptVite from 'ember-native/utils/nativescript-vite.config.js';
 
 const require = createRequire(import.meta.url);

@@ -2,7 +2,6 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { defineConfig, mergeConfig } from 'vite';
 import { typescriptConfig } from '@nativescript/vite';
-// eslint-disable-next-line import/no-unresolved
 import configureNativeScriptVite from 'ember-native/utils/nativescript-vite.config.js';
 import { unitTestRunnerContextPlugin } from './vite-plugins/unit-test-runner-context';
 

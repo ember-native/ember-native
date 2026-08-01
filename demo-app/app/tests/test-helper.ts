@@ -21,7 +21,7 @@ if (typeof require !== 'undefined' && typeof (require as any).context === 'funct
     (globalThis as any).registerWebpackModules(context);
   }
 } else {
-  const xmlModules = import.meta.glob('./test-root-view.xml', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+  const xmlModules = import.meta.glob('./test-root-view.xml', { eager: true, query: '?raw', import: 'default' });
   const testRootViewXml = xmlModules['./test-root-view.xml'];
   (globalThis as any).registerModule('test-root-view.xml', () => testRootViewXml);
 }
