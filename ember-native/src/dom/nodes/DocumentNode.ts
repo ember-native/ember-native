@@ -43,6 +43,11 @@ export default class DocumentNode extends ViewNode {
   documentElement = {
     dataset: {},
   };
+  // There's no async page-loading phase in a native app - the "document" is available
+  // immediately, unlike a browser's parse-then-load sequence. QUnit checks this before
+  // registering a `window` `load` listener to autostart: without it fixed at `'complete'`,
+  // it waits for a `load` event that a native app never fires, and tests never start.
+  readyState = 'complete';
 
   static getInstance() {
     if (!document) {

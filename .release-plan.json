@@ -1,19 +1,11 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "major",
-      "oldVersion": "3.4.1",
-      "newVersion": "4.0.0",
+      "impact": "patch",
+      "oldVersion": "4.0.2",
+      "newVersion": "4.0.3",
       "tagName": "latest",
       "constraints": [
-        {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
-        },
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
@@ -22,5 +14,5 @@
       "pkgJSONPath": "./ember-native/package.json"
     }
   },
-  "description": "## Release (2026-07-25)\n\n* ember-native 4.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-native`\n  * [#393](https://github.com/ember-native/ember-native/pull/393) Upgrade NativeScript to 9.x (core, android, types, webpack, CLI) ([@patricklx](https://github.com/patricklx))\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#398](https://github.com/ember-native/ember-native/pull/398) Replace pnpm patches with a custom webpack plugin ([@patricklx](https://github.com/patricklx))\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#394](https://github.com/ember-native/ember-native/pull/394) Fix crash on Android hardware back button for routes without dynamic segments ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-07-31)\n\n* ember-native 4.0.3 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#403](https://github.com/ember-native/ember-native/pull/403) Give window a real addEventListener and mark document ready at boot ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
