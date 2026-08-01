@@ -31,9 +31,24 @@ export default class ViewNode {
   _meta: any;
 
   get textContent() {
+    // Reads via `getAttribute`, not the plain `.text`/`.html` properties directly:
+    // `NativeElementNode#getAttribute` reflects the underlying native view's real property value
+    // (e.g. a `<label>`'s displayed text), which a dynamic `text={{...}}` binding updates via
+    // `setAttribute` - it never touches a plain `.text` field on the JS wrapper object itself, so
+    // reading that field directly always read back `undefined` for a native element whose content
+    // was set the normal way, no matter what the native view actually displayed. Plain nodes
+    // without a `NativeElementNode`-specific override (e.g. `TextNode`) fall back to `ViewNode`'s
+    // own `getAttribute`, which is just `this[key]` - the same plain-property read as before, so
+    // this is a strict improvement, not a behavior change, for anything that isn't a native view.
+    //
+    // Only a leaf (no children) contributes its own text/html: a native widget given text content
+    // as a child (e.g. `<button>hello</button>`) mirrors that child's content onto its own
+    // `.text` - it's still kept as a real child `TextNode` too, so counting both the parent's own
+    // `getAttribute('text')` and its child's would double every such string.
     const contents = [];
     for (const el of elementIterator(this)) {
-      contents.push(el.text || el.html);
+      if (Array.isArray(el.childNodes) && el.childNodes.length > 0) continue;
+      contents.push(el.getAttribute('text') || el.getAttribute('html'));
     }
     return contents.filter((c) => !!c).join(' ');
   }
@@ -51,8 +66,16 @@ export default class ViewNode {
   }
 
   getElementByTagName(tagName: string) {
+    // `tagName`'s own setter (below) always normalizes through `normalizeElementName` (strips
+    // dashes, lowercases), so a stored element's `.tagName` is never the literal tag written in a
+    // template (e.g. `<text-view>` reads back as `'textview'`, not `'text-view'`). Without
+    // normalizing the search argument the same way, this comparison could never match anything
+    // for a dashed or mixed-case tag name - which silently broke every `querySelector`/
+    // `triggerEvent` call site (including inside `@ember/test-helpers` itself) that looked up an
+    // element by its template tag name instead of an id/class.
+    const normalizedTagName = normalizeElementName(tagName);
     for (const el of elementIterator(this)) {
-      if (el.nodeType === 1 && el.tagName === tagName) return el;
+      if (el.nodeType === 1 && el.tagName === normalizedTagName) return el;
     }
   }
 
