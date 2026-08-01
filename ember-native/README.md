@@ -94,6 +94,59 @@ see `demo-app/vite.test.config.ts` for a full example that also adds its own
 test-only plugins, aliases, and `define`s via `plugins`/`extend`.
 
 
+Bootstrapping an app
+------------------------------------------------------------------------------
+
+An ember-native app needs a handful of one-time wiring steps that are the
+same for every app and easy to get subtly wrong (see git history for
+`demo-app/app/native/setup-ember-native.ts`/`app/app.js` before these helpers
+existed). `ember-native` exports three functions/classes to cover them - the
+rest of each file below is genuinely app-specific and stays yours to write.
+
+`app/native/setup-ember-native.ts` (imported first, before anything else that
+touches the DOM or Ember) just needs:
+
+```ts
+import { setupEmberNativeApp } from 'ember-native';
+import { ENV } from '~/config/env';
+
+setupEmberNativeApp(ENV);
+```
+
+`setupEmberNativeApp` installs ember-native's DOM shim, wires up Chrome
+DevTools support in dev builds only (tree-shaken out of release builds), and
+sets `ENV.rootElement` to the app's root native view.
+
+`app/app.js`'s `App` class extends `NativeApplication` instead of
+`@ember/application` directly - it's the same class otherwise, with your own
+`rootElement`/`modulePrefix`/`Resolver`/etc:
+
+```js
+import { NativeApplication } from 'ember-native';
+
+export default class App extends NativeApplication {
+  rootElement = ENV.rootElement;
+  autoboot = ENV.autoboot;
+  modulePrefix = ENV.modulePrefix;
+  podModulePrefix = `${ENV.modulePrefix}/pods`;
+  Resolver = Resolver.withModules(compatModules);
+}
+```
+
+`app/native/main.ts` (your NativeScript entry point) creates and registers
+the app instance via `createNativeApplication`:
+
+```ts
+import './setup-ember-native';
+import './register-elements'; // your own custom native elements, if any
+import App from '../app';
+import ENV from '~/config/env';
+import { createNativeApplication } from 'ember-native';
+
+export default createNativeApplication(App, ENV);
+```
+
+
 Contributing
 ------------------------------------------------------------------------------
 
