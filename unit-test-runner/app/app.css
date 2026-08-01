@@ -1,0 +1,81 @@
+.landingContainer {
+    background-color: white;
+}
+
+.landingBackground {
+    horizontal-align: center;
+    vertical-align: top;
+}
+
+.landingText {
+    color: white;
+    horizontal-align: center;
+    vertical-align: center;
+    font-size: 24;
+}
+
+.landingButton {
+    color: white;
+    vertical-align: bottom;
+}
+.statusBar {
+    background-color: #65ADF1;
+    color: white;
+    padding: 10;
+}
+
+.statusText {
+    horizontal-align: right;
+}
+
+.testsTotal {
+    font-size: 18;
+}
+
+.testsPassed {
+    font-size: 18;
+    color: green;
+}
+
+.testsFailed {
+    font-size: 18;
+    color: red;
+}
+
+.testProgress {
+}
+
+.passedTest {
+    background-color: green;
+    color: white;
+}
+
+.passedTestTitle {
+    font-size: 14;
+}
+
+.passedTestDetails {
+    font-size: 10;
+}
+
+.failedTest {
+    background-color: red;
+    color: white;
+}
+
+.failedTestTitle {
+    font-size: 14;
+}
+
+.failedTestDetails {
+    font-size: 10;
+    color: black;
+}
+
+.btn-primary {
+  background-color: #65ADF1;
+  padding: 8 5 8 5;
+  width: 250;
+  color: white;
+  border-radius: 6;
+}

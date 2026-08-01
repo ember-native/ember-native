@@ -1,0 +1,6 @@
+# The `nativescript` CLI unconditionally fetches karma's socket.io.js and
+# writes it here on every `nativescript test android` run (hardcoded path,
+# see config.js's comment) even though this package no longer imports it -
+# `main-view-model.js` uses the real `socket.io-client` npm package instead.
+socket.io.js
+node_modules

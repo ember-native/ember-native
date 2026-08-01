@@ -12,4 +12,6 @@ export default {
   cli: {
     packageManager: 'pnpm',
   },
+  bundler: 'vite',
+  bundlerConfigPath: 'vite.config.ts',
 } as NativeScriptConfig;

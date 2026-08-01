@@ -17,12 +17,15 @@
     "test": "turbo run test --output-logs errors-only"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.29.0",
+    "@babel/plugin-syntax-typescript": "^7.28.0",
     "@glint/core": "^1.5.0",
     "concurrently": "^9.2.1",
     "prettier": "^3.6.2",
     "prettier-plugin-ember-template-tag": "^2.1.0",
     "release-plan": "^0.17.4",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wait-on": "^9.0.0"
   },
   "engines": {
     "node": ">= 20.*",
@@ -36,7 +39,6 @@
     },
     "onlyBuiltDependencies": [
       "@nativescript/core",
-      "@nativescript/unit-test-runner",
       "@parcel/watcher",
       "chromedriver",
       "core-js",

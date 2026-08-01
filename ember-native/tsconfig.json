@@ -55,6 +55,7 @@
     "types/globals.d.ts",
     "types/glint.d.ts",
     "types/ember.d.ts",
+    "types/import-meta-env.d.ts",
     "index.d.ts",
     "src/**/*",
     "src/**/*.gts",
