@@ -13,6 +13,9 @@
   },
   "license": "Apache-2.0",
   "author": "Patrick Pircher",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.js",
   "files": [
     "index.js",
