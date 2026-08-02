@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-08-02)
+
+* ember-native 5.0.0 (major)
+* karma-ember-native-launcher 2.0.0 (major)
+* ember-native-unit-test-runner 2.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-native`
+  * [#396](https://github.com/ember-native/ember-native/pull/396) Migrate demo-app from @nativescript/webpack to @nativescript/vite ([@patricklx](https://github.com/patricklx))
+* `ember-native`, `karma-ember-native-launcher`, `ember-native-unit-test-runner`
+  * [#396](https://github.com/ember-native/ember-native/pull/396) Migrate demo-app from @nativescript/webpack to @nativescript/vite ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#405](https://github.com/ember-native/ember-native/pull/405) Fix querySelector/getElementByTagName never matching a dashed tag name ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-07-31)
 
 * ember-native 4.0.3 (patch)

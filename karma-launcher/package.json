@@ -1,6 +1,6 @@
 {
   "name": "karma-ember-native-launcher",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Karma browser launcher for `nativescript test android`/`nativescript test ios`, used by Ember Native's own test suite. A patched fork of NativeScript's karma-nativescript-launcher (Apache-2.0) that reports its own launcher id back to karma on device registration, fixing a bug where `singleRun` never completes and the test process hangs forever after the last test finishes.",
   "keywords": [
     "karma-plugin",

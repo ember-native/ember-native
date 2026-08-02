@@ -1,18 +1,48 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "patch",
-      "oldVersion": "4.0.2",
-      "newVersion": "4.0.3",
+      "impact": "major",
+      "oldVersion": "4.0.3",
+      "newVersion": "5.0.0",
       "tagName": "latest",
       "constraints": [
+        {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
+    },
+    "karma-ember-native-launcher": {
+      "impact": "major",
+      "oldVersion": "1.0.0",
+      "newVersion": "2.0.0",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        }
+      ],
+      "pkgJSONPath": "./karma-launcher/package.json"
+    },
+    "ember-native-unit-test-runner": {
+      "impact": "major",
+      "oldVersion": "1.0.0",
+      "newVersion": "2.0.0",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        }
+      ],
+      "pkgJSONPath": "./unit-test-runner/package.json"
     }
   },
-  "description": "## Release (2026-07-31)\n\n* ember-native 4.0.3 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#403](https://github.com/ember-native/ember-native/pull/403) Give window a real addEventListener and mark document ready at boot ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-08-02)\n\n* ember-native 5.0.0 (major)\n* karma-ember-native-launcher 2.0.0 (major)\n* ember-native-unit-test-runner 2.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-native`\n  * [#396](https://github.com/ember-native/ember-native/pull/396) Migrate demo-app from @nativescript/webpack to @nativescript/vite ([@patricklx](https://github.com/patricklx))\n* `ember-native`, `karma-ember-native-launcher`, `ember-native-unit-test-runner`\n  * [#396](https://github.com/ember-native/ember-native/pull/396) Migrate demo-app from @nativescript/webpack to @nativescript/vite ([@patricklx](https://github.com/patricklx))\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#405](https://github.com/ember-native/ember-native/pull/405) Fix querySelector/getElementByTagName never matching a dashed tag name ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
