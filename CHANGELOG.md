@@ -3,13 +3,15 @@
 ## Release (2026-08-02)
 
 * ember-native 5.0.0 (major)
-* karma-ember-native-launcher 2.0.0 (major)
-* ember-native-unit-test-runner 2.0.0 (major)
+* karma-ember-native-launcher 1.0.0 (new)
+* ember-native-unit-test-runner 1.0.0 (new)
 
 #### :boom: Breaking Change
 * `ember-native`
   * [#396](https://github.com/ember-native/ember-native/pull/396) Migrate demo-app from @nativescript/webpack to @nativescript/vite ([@patricklx](https://github.com/patricklx))
-* `ember-native`, `karma-ember-native-launcher`, `ember-native-unit-test-runner`
+
+#### :tada: New Packages
+* `karma-ember-native-launcher`, `ember-native-unit-test-runner`
   * [#396](https://github.com/ember-native/ember-native/pull/396) Migrate demo-app from @nativescript/webpack to @nativescript/vite ([@patricklx](https://github.com/patricklx))
 
 #### :bug: Bug Fix
