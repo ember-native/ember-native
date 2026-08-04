@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.29.0",
-    "@ember/test-waiters": "^4.1.1",
+    "@ember/test-waiters": "^4.1.2",
     "@embroider/macros": "^1.19.5",
     "@glimmer/validator": "^0.95.0",
     "@nativescript/core": "~9.0.20",
