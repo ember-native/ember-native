@@ -162,11 +162,57 @@ module.exports = function configureEmberNativeVite(options = {}) {
  * `@ember/test-helpers`), that short-circuit no longer protects this call,
  * and a placeholder without `createElement` throws a few lines into the
  * chunk, before any app code (including `setup()`) has had a chance to run.
+ *
+ * The same short-circuit hazard bit a second, unrelated vendor: `document`
+ * being "defined" also un-short-circuits `typeof document === 'undefined'`
+ * guards in *any* vendor-bundled library, not just the two above - root
+ * caused downstream (in a consumer app, then reproduced against this repo's
+ * own `demo-app`) to `@glimmer/runtime`'s legacy DOM-compat detection, which
+ * on `ember-source <= 6.9.x` still runs at `@glimmer/runtime`'s own module
+ * top level (removed in later `ember-source` versions, which is why this
+ * repo's own `demo-app` - pinned to `ember-source ^6.12.0` - never hit it):
+ * `applyTextNodeMergingFix()`'s feature test does
+ * `document.createElement('div').appendChild(document.createTextNode('first'))`
+ * and inspects `childNodes.length` afterwards. Against the placeholder above,
+ * `createElement('div')` returns a plain `{}` with no `appendChild`, and
+ * `createTextNode` doesn't exist at all - either throws a `TypeError` at
+ * `vendor.mjs` module-evaluation time, again surfacing only as the
+ * contentless `Module evaluation promise rejected: vendor.mjs` boot crash,
+ * indistinguishable on-device from the `@ember/test-helpers` failure this
+ * banner was originally added to fix. The placeholder `document` therefore
+ * needs `createTextNode`/`createComment`/`createElementNS`, and the elements
+ * `createElement`/`createElementNS` return need a real `appendChild` (that
+ * actually records children in `childNodes`, so length-based feature tests
+ * like `applyTextNodeMergingFix()`'s see accurate results and skip the fix
+ * rather than mis-detecting merging support) and a no-op
+ * `insertAdjacentHTML`, since those are the DOM-compat-detection entry
+ * points other vendored libraries have been found to call unconditionally at
+ * module top level.
  */
 function earlyGlobalsBanner() {
   const banner = [
     "if (typeof globalThis.document === 'undefined') {",
-    "  globalThis.document = { location: { search: '' }, createElement: function () { return {}; } };",
+    '  var createEmberNativePlaceholderElement = function () {',
+    '    return {',
+    '      childNodes: [],',
+    '      appendChild: function (child) {',
+    '        this.childNodes.push(child);',
+    '        return child;',
+    '      },',
+    '      insertAdjacentHTML: function () {},',
+    '    };',
+    '  };',
+    '  globalThis.document = {',
+    "    location: { search: '' },",
+    '    createElement: createEmberNativePlaceholderElement,',
+    '    createElementNS: createEmberNativePlaceholderElement,',
+    '    createTextNode: function (data) {',
+    '      return { nodeType: 3, data: data };',
+    '    },',
+    '    createComment: function (data) {',
+    '      return { nodeType: 8, data: data };',
+    '    },',
+    '  };',
     '}',
     "if (typeof globalThis.MouseEvent === 'undefined') {",
     '  globalThis.MouseEvent = function MouseEvent(type, eventOpts) {',
