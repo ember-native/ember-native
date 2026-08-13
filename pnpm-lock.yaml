@@ -223,7 +223,7 @@ importers:
         version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-ember:
         specifier: ^12.3.1
-        version: 12.7.5(5ff893536b5be6763174ded7d398637d)
+        version: 12.7.5(84740c278c3325a0cf2a0506dc099481)
       eslint-plugin-n:
         specifier: ^17.23.1
         version: 17.24.0(0d62767105e9a39fc494591cb6137847)
@@ -735,6 +735,9 @@ importers:
       rollup-plugin-styles:
         specifier: ^4.0.0
         version: 4.0.0(rollup@4.60.1)
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
     devDependencies:
       '@babel/eslint-parser':
         specifier: ^7.28.5
@@ -919,9 +922,6 @@ importers:
       sass-embedded:
         specifier: ^1.90.0
         version: 1.99.0
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
       typescript-eslint:
         specifier: ^8.38.0
         version: 8.58.1(0d62767105e9a39fc494591cb6137847)
@@ -23827,6 +23827,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/parser@8.61.0(0d62767105e9a39fc494591cb6137847)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.61.0
+      '@typescript-eslint/types': 8.61.0
+      '@typescript-eslint/typescript-estree': 8.61.0(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.61.0
+      debug: 4.4.3(supports-color@9.4.0)
+      eslint: 9.39.4(jiti@2.6.1)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
+
   '@typescript-eslint/parser@8.61.0(717face55a559967bf1b77f9b43bd1f1)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.61.0
@@ -28149,6 +28162,23 @@ snapshots:
       - eslint
       - typescript
 
+  ember-eslint-parser@0.5.13(84740c278c3325a0cf2a0506dc099481):
+    dependencies:
+      '@babel/core': 7.29.0
+      '@babel/eslint-parser': 7.28.6(35c79763e2f529503c5fce6757258eb9)
+      '@glimmer/syntax': 0.95.0
+      '@typescript-eslint/tsconfig-utils': 8.65.0(typescript@5.9.3)
+      content-tag: 2.0.3
+      eslint-scope: 7.2.2
+      html-tags: 3.3.1
+      mathml-tag-names: 2.1.3
+      svg-tags: 1.0.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.61.0(0d62767105e9a39fc494591cb6137847)
+    transitivePeerDependencies:
+      - eslint
+      - typescript
+
   ember-eslint-parser@0.5.13(b21a5c2d82ffcddaa5ddcd8b5e86f59d):
     dependencies:
       '@babel/core': 7.29.0
@@ -28334,6 +28364,7 @@ snapshots:
       rollup-plugin-postcss: 4.0.2(postcss@8.5.16)
       rollup-plugin-root-import: 1.0.0
       rollup-plugin-styles: 4.0.0(rollup@4.60.1)
+      typescript: 5.9.3
     transitivePeerDependencies:
       - '@embroider/core'
       - '@glint/template'
@@ -29230,6 +29261,25 @@ snapshots:
       snake-case: 3.0.4
     optionalDependencies:
       '@typescript-eslint/parser': 8.58.1(0d62767105e9a39fc494591cb6137847)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - typescript
+
+  eslint-plugin-ember@12.7.5(84740c278c3325a0cf2a0506dc099481):
+    dependencies:
+      '@ember-data/rfc395-data': 0.0.4
+      css-tree: 3.2.1
+      ember-eslint-parser: 0.5.13(84740c278c3325a0cf2a0506dc099481)
+      ember-rfc176-data: 0.3.18
+      eslint: 9.39.4(jiti@2.6.1)
+      eslint-utils: 3.0.0(eslint@9.39.4(jiti@2.6.1))
+      estraverse: 5.3.0
+      lodash.camelcase: 4.3.0
+      lodash.kebabcase: 4.1.1
+      requireindex: 1.2.0
+      snake-case: 3.0.4
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.61.0(0d62767105e9a39fc494591cb6137847)
     transitivePeerDependencies:
       - '@babel/core'
       - typescript
