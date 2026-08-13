@@ -35,6 +35,7 @@ module.exports = function configureEmberNativeVite(options = {}) {
   const { babel } = require('@rollup/plugin-babel');
   const replace = require('@rollup/plugin-replace');
   const dependencySourcePatches = require('./vite-dependency-patches.js');
+  const javaProxySbgHintPlugin = require('./javaproxy-sbg-hint.js');
 
   return {
     resolve: {
@@ -104,6 +105,16 @@ module.exports = function configureEmberNativeVite(options = {}) {
       }),
       earlyGlobalsBanner(),
       dependencySourcePatches(),
+      // Every ember-native Android app depends on @nativescript/core, whose
+      // own application.android.js registers its lifecycle/component
+      // callbacks via `@JavaProxy(...)` - a pattern the Static Binding
+      // Generator can't see through on its own (see javaproxy-sbg-hint.js's
+      // own docstring for the full mechanism). Without this, every release
+      // build throws `LookedUpClassNotFound` at boot. On by default here
+      // (rather than left for each app to opt into) since it's required for
+      // any of them to boot at all in release mode, and is a no-op for any
+      // file that doesn't contain a `@JavaProxy`-decorated class.
+      javaProxySbgHintPlugin(),
     ],
   };
 };
