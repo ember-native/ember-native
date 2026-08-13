@@ -37,7 +37,7 @@
     "start:types": "glint --declaration --watch",
     "debug:types": "glint --debug-intermediate-representation",
     "prepack": "pnpm build",
-    "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
+    "test": "node --test utils/*.test.js"
   },
   "peerDependencies": {
     "@glimmer/component": "*",
@@ -76,7 +76,8 @@
     "rollup-plugin-astroturf": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-root-import": "^1.0.0",
-    "rollup-plugin-styles": "^4.0.0"
+    "rollup-plugin-styles": "^4.0.0",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.5",
@@ -140,7 +141,6 @@
     "router_js": "^8.0.6",
     "sass": "^1.94.2",
     "sass-embedded": "^1.90.0",
-    "typescript": "^5.9.2",
     "typescript-eslint": "^8.38.0",
     "typescript-plugin-css-modules": "^5.2.0",
     "yui": "^3.18.1"

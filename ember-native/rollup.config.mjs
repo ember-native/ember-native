@@ -117,6 +117,11 @@ export default {
         { src: '../LICENSE.md', dest: '.' },
         { src: './utils/**/*', dest: './dist/utils' },
       ],
+      // *.test.js files live alongside the utils they test (see
+      // javaproxy-sbg-hint.test.js) and run via `pnpm test` straight out of
+      // `utils/`, before this copy step - they don't need to ship in the
+      // published package.
+      ignore: ['**/*.test.js'],
     }),
   ],
 };
