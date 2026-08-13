@@ -173,11 +173,93 @@ module.exports = function configureEmberNativeVite(options = {}) {
  * `@ember/test-helpers`), that short-circuit no longer protects this call,
  * and a placeholder without `createElement` throws a few lines into the
  * chunk, before any app code (including `setup()`) has had a chance to run.
+ *
+ * The same short-circuit hazard bit a second, unrelated vendor: `document`
+ * being "defined" also un-short-circuits `typeof document === 'undefined'`
+ * guards in *any* vendor-bundled library, not just the two above - root
+ * caused downstream (in a consumer app, then reproduced against this repo's
+ * own `demo-app`) to `@glimmer/runtime`'s legacy DOM-compat detection, which
+ * on `ember-source <= 6.9.x` still runs at `@glimmer/runtime`'s own module
+ * top level (removed in later `ember-source` versions, which is why this
+ * repo's own `demo-app` - pinned to `ember-source ^6.12.0` - never hit it):
+ * `applyTextNodeMergingFix()`'s feature test does
+ * `document.createElement('div').appendChild(document.createTextNode('first'))`
+ * and inspects `childNodes.length` afterwards. Against the placeholder above,
+ * `createElement('div')` returns a plain `{}` with no `appendChild`, and
+ * `createTextNode` doesn't exist at all - either throws a `TypeError` at
+ * `vendor.mjs` module-evaluation time, again surfacing only as the
+ * contentless `Module evaluation promise rejected: vendor.mjs` boot crash,
+ * indistinguishable on-device from the `@ember/test-helpers` failure this
+ * banner was originally added to fix. The placeholder `document` therefore
+ * needs `createTextNode`/`createComment`/`createElementNS`, and the elements
+ * `createElement`/`createElementNS` return need a real `appendChild` (that
+ * actually records children in `childNodes`, so length-based feature tests
+ * like `applyTextNodeMergingFix()`'s see accurate results and skip the fix
+ * rather than mis-detecting merging support) and an `insertAdjacentHTML` that
+ * also records a child, not a no-op - a no-op isn't enough on its own.
+ * `applyTextNodeMergingFix()`'s feature test does
+ * `document.createElement('div').appendChild(createTextNode('first'))` then
+ * `insertAdjacentHTML('beforeend', 'second')`, and checks
+ * `childNodes.length === 2` to conclude no fix is needed; against a no-op it
+ * always saw `1` and unconditionally applied the "useless comment" DOM-churn
+ * workaround on every render. Worse, `applySVGInnerHTMLFix()`'s feature test
+ * does `createElementNS(svgNamespace, 'svg')` then
+ * `insertAdjacentHTML('beforeend', ...)`, checking `childNodes.length === 1
+ * && firstChild.namespaceURI === SVG_NAMESPACE`; against a no-op it always
+ * saw `childNodes.length === 0` and unconditionally installed its SVG-fix
+ * `insertHTMLBefore` override, which closes over a `div` created from *this*
+ * placeholder `document` for the module's lifetime - the very first real
+ * inline-SVG render later calls `div.insertAdjacentHTML(...)` then reads
+ * `div.firstChild.firstChild`, crashing on the still-empty placeholder
+ * `div`. Having `insertAdjacentHTML` record a placeholder child node
+ * (inheriting the parent's `namespaceURI`, so an SVG element's recorded
+ * child reports the SVG namespace) makes both feature tests see the same
+ * "no fix needed" result a real DOM would, so neither subclass - and
+ * therefore neither bug - is ever reached.
  */
 function earlyGlobalsBanner() {
   const banner = [
     "if (typeof globalThis.document === 'undefined') {",
-    "  globalThis.document = { location: { search: '' }, createElement: function () { return {}; } };",
+    '  var createEmberNativePlaceholderElement = function (namespaceURI) {',
+    '    return {',
+    '      namespaceURI: namespaceURI,',
+    '      childNodes: [],',
+    '      firstChild: null,',
+    '      lastChild: null,',
+    '      appendChild: function (child) {',
+    '        this.childNodes.push(child);',
+    '        this.firstChild = this.childNodes[0];',
+    '        this.lastChild = child;',
+    '        return child;',
+    '      },',
+    '      insertAdjacentHTML: function (position) {',
+    '        var child = { nodeType: 1, namespaceURI: this.namespaceURI };',
+    "        if (position === 'afterbegin') {",
+    '          this.childNodes.unshift(child);',
+    '        } else {',
+    '          this.childNodes.push(child);',
+    '        }',
+    '        this.firstChild = this.childNodes[0];',
+    '        this.lastChild = this.childNodes[this.childNodes.length - 1];',
+    '        return child;',
+    '      },',
+    '    };',
+    '  };',
+    '  globalThis.document = {',
+    "    location: { search: '' },",
+    '    createElement: function () {',
+    '      return createEmberNativePlaceholderElement();',
+    '    },',
+    '    createElementNS: function (namespaceURI) {',
+    '      return createEmberNativePlaceholderElement(namespaceURI);',
+    '    },',
+    '    createTextNode: function (data) {',
+    '      return { nodeType: 3, data: data };',
+    '    },',
+    '    createComment: function (data) {',
+    '      return { nodeType: 8, data: data };',
+    '    },',
+    '  };',
     '}',
     "if (typeof globalThis.MouseEvent === 'undefined') {",
     '  globalThis.MouseEvent = function MouseEvent(type, eventOpts) {',
