@@ -184,28 +184,64 @@ module.exports = function configureEmberNativeVite(options = {}) {
  * `createElement`/`createElementNS` return need a real `appendChild` (that
  * actually records children in `childNodes`, so length-based feature tests
  * like `applyTextNodeMergingFix()`'s see accurate results and skip the fix
- * rather than mis-detecting merging support) and a no-op
- * `insertAdjacentHTML`, since those are the DOM-compat-detection entry
- * points other vendored libraries have been found to call unconditionally at
- * module top level.
+ * rather than mis-detecting merging support) and an `insertAdjacentHTML` that
+ * also records a child, not a no-op - a no-op isn't enough on its own.
+ * `applyTextNodeMergingFix()`'s feature test does
+ * `document.createElement('div').appendChild(createTextNode('first'))` then
+ * `insertAdjacentHTML('beforeend', 'second')`, and checks
+ * `childNodes.length === 2` to conclude no fix is needed; against a no-op it
+ * always saw `1` and unconditionally applied the "useless comment" DOM-churn
+ * workaround on every render. Worse, `applySVGInnerHTMLFix()`'s feature test
+ * does `createElementNS(svgNamespace, 'svg')` then
+ * `insertAdjacentHTML('beforeend', ...)`, checking `childNodes.length === 1
+ * && firstChild.namespaceURI === SVG_NAMESPACE`; against a no-op it always
+ * saw `childNodes.length === 0` and unconditionally installed its SVG-fix
+ * `insertHTMLBefore` override, which closes over a `div` created from *this*
+ * placeholder `document` for the module's lifetime - the very first real
+ * inline-SVG render later calls `div.insertAdjacentHTML(...)` then reads
+ * `div.firstChild.firstChild`, crashing on the still-empty placeholder
+ * `div`. Having `insertAdjacentHTML` record a placeholder child node
+ * (inheriting the parent's `namespaceURI`, so an SVG element's recorded
+ * child reports the SVG namespace) makes both feature tests see the same
+ * "no fix needed" result a real DOM would, so neither subclass - and
+ * therefore neither bug - is ever reached.
  */
 function earlyGlobalsBanner() {
   const banner = [
     "if (typeof globalThis.document === 'undefined') {",
-    '  var createEmberNativePlaceholderElement = function () {',
+    '  var createEmberNativePlaceholderElement = function (namespaceURI) {',
     '    return {',
+    '      namespaceURI: namespaceURI,',
     '      childNodes: [],',
+    '      firstChild: null,',
+    '      lastChild: null,',
     '      appendChild: function (child) {',
     '        this.childNodes.push(child);',
+    '        this.firstChild = this.childNodes[0];',
+    '        this.lastChild = child;',
     '        return child;',
     '      },',
-    '      insertAdjacentHTML: function () {},',
+    '      insertAdjacentHTML: function (position) {',
+    '        var child = { nodeType: 1, namespaceURI: this.namespaceURI };',
+    "        if (position === 'afterbegin') {",
+    '          this.childNodes.unshift(child);',
+    '        } else {',
+    '          this.childNodes.push(child);',
+    '        }',
+    '        this.firstChild = this.childNodes[0];',
+    '        this.lastChild = this.childNodes[this.childNodes.length - 1];',
+    '        return child;',
+    '      },',
     '    };',
     '  };',
     '  globalThis.document = {',
     "    location: { search: '' },",
-    '    createElement: createEmberNativePlaceholderElement,',
-    '    createElementNS: createEmberNativePlaceholderElement,',
+    '    createElement: function () {',
+    '      return createEmberNativePlaceholderElement();',
+    '    },',
+    '    createElementNS: function (namespaceURI) {',
+    '      return createEmberNativePlaceholderElement(namespaceURI);',
+    '    },',
     '    createTextNode: function (data) {',
     '      return { nodeType: 3, data: data };',
     '    },',
