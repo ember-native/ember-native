@@ -37,7 +37,7 @@
     "start:types": "glint --declaration --watch",
     "debug:types": "glint --debug-intermediate-representation",
     "prepack": "pnpm build",
-    "test": "node --test utils/*.test.js"
+    "test": "node --test utils/*.test.js src/dom/native/*.test.ts"
   },
   "peerDependencies": {
     "@glimmer/component": "*",
