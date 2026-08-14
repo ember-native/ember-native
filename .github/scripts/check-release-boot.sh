@@ -14,14 +14,18 @@ for _ in $(seq 1 30); do
 done
 if [ -z "$pid" ]; then
   echo "Release app never started"
-  adb logcat -d '*:E'
+  adb logcat -d
   exit 1
 fi
 
 sleep 5
 if [ -z "$(adb shell pidof org.nativescript.embernativedemo | tr -d '\r' || true)" ]; then
   echo "Release app started then died"
-  adb logcat -d '*:E'
+  # Unfiltered: NativeScript logs the underlying JS error (e.g. under the
+  # "JS" tag) at Info/Debug level, below what a '*:E' filter would show -
+  # only the generic wrapping "Module evaluation promise rejected" survives
+  # an error-only filter.
+  adb logcat -d
   exit 1
 fi
 
