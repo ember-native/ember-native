@@ -1,5 +1,6 @@
 import { KeyframeAnimation } from '@nativescript/core/ui/animation/keyframe-animation';
 import { LayoutBase } from '@nativescript/core/ui/layouts/layout-base';
+import { ActionBar, ActionItem } from '@nativescript/core/ui/action-bar';
 import {
   ContentView,
   type EventData,
@@ -15,6 +16,7 @@ import { type ViewBase } from '@nativescript/core/ui/core/view-base';
 import { TextBase } from '@nativescript/core/ui/text-base';
 import ElementNode from '../nodes/ElementNode.ts';
 import ViewNode, { type EventListener } from '../nodes/ViewNode.ts';
+import { removeActionBarChild } from './action-item-removal.ts';
 
 function camelize(kebab: string): string {
   return kebab.replace(/-+(\w)/g, (_m, l) => l.toUpperCase());
@@ -392,6 +394,18 @@ export default class NativeElementNode<
         (parentView as any).content = null;
       }
       if (childNode.nodeType === 8) {
+        parentView._removeView(childView);
+      }
+    } else if (parentView instanceof ActionBar && childView instanceof ActionItem) {
+      if (childNode.parentNode !== parentNode) {
+        return;
+      }
+      // actionItems is nulled out by ActionBarBase.disposeNativeView(), which
+      // can run before this fires during teardown - fall back to the plain
+      // view-child removal in that case, same as before this branch existed.
+      if (parentView.actionItems) {
+        removeActionBarChild(parentView, childView);
+      } else {
         parentView._removeView(childView);
       }
     } else if (parentView instanceof View) {
