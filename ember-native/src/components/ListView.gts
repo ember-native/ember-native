@@ -53,6 +53,7 @@ type Ref<T> = {
 
 export default class ListView<T> extends Component<ListViewInterface<T>> {
   @tracked elementRefs: Ref<T>[] = [];
+  private elementRefsByNativeView = new Map<StackLayout, Ref<T>>();
   private listViewElement?: NativeElementNode<NativeListView>;
 
   get items(): Ref<T>[] {
@@ -82,6 +83,7 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
         ((listView.nativeView as any)._realizedItems).delete(
           elementRef.element.nativeView,
         );
+        this.elementRefsByNativeView.delete(elementRef.element.nativeView);
       }
     }
     this.elementRefs = this.elementRefs.filter(
@@ -136,11 +138,13 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
         listViewComponent.cleanup(listView);
         const sl = DocumentNode.createElement('stack-layout');
         listView.appendChild(sl);
-        listViewComponent.elementRefs.push({
+        const ref: Ref<T> = {
           element: sl,
           item: null,
           index,
-        });
+        };
+        listViewComponent.elementRefs.push(ref);
+        listViewComponent.elementRefsByNativeView.set(sl.nativeView, ref);
         listViewComponent.elementRefs = [...listViewComponent.elementRefs];
         return sl.nativeView;
       }
@@ -150,8 +154,8 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
         stackLayout: StackLayout,
         index: number,
       ) => {
-        const ref = listViewComponent.elementRefs.find(
-          (e) => e.element.nativeView === stackLayout,
+        const ref = listViewComponent.elementRefsByNativeView.get(
+          stackLayout,
         )!;
         if (ref.index === index) {
           return;
