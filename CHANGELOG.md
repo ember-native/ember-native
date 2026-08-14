@@ -2,6 +2,18 @@
 
 ## Release (2026-08-14)
 
+* ember-native 5.0.2 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#419](https://github.com/ember-native/ember-native/pull/419) Add CI check for release build boot on demo app ([@patricklx](https://github.com/patricklx))
+  * [#421](https://github.com/ember-native/ember-native/pull/421) Fix ActionBar <action-item> removal losing ActionItems bookkeeping ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+## Release (2026-08-14)
+
 * ember-native 5.0.1 (patch)
 
 #### :bug: Bug Fix

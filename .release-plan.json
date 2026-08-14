@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "patch",
-      "oldVersion": "5.0.0",
-      "newVersion": "5.0.1",
+      "oldVersion": "5.0.1",
+      "newVersion": "5.0.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -20,5 +20,5 @@
       "oldVersion": "1.0.0"
     }
   },
-  "description": "## Release (2026-08-14)\n\n* ember-native 5.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#418](https://github.com/ember-native/ember-native/pull/418) Fix Glimmer bridging bookkeeping in ListView/RadListView ([@patricklx](https://github.com/patricklx))\n  * [#416](https://github.com/ember-native/ember-native/pull/416) Make earlyGlobalsBanner()'s placeholder document robust ([@patricklx](https://github.com/patricklx))\n  * [#414](https://github.com/ember-native/ember-native/pull/414) Fix release-build boot crash for classes registered via @JavaProxy ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-08-14)\n\n* ember-native 5.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#419](https://github.com/ember-native/ember-native/pull/419) Add CI check for release build boot on demo app ([@patricklx](https://github.com/patricklx))\n  * [#421](https://github.com/ember-native/ember-native/pull/421) Fix ActionBar <action-item> removal losing ActionItems bookkeeping ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
