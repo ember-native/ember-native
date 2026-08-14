@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Known pre-existing failure: the release build currently crashes at boot,
-# tracked at https://github.com/ember-native/ember-native/issues/420. Until
-# that's fixed, treat a boot failure as a warning instead of failing the job,
-# so this check doesn't block unrelated PRs.
 fail() {
-  echo "::warning::$1 - see https://github.com/ember-native/ember-native/issues/420 (known issue, check non-blocking for now)"
-  exit 0
+  echo "::error::$1"
+  exit 1
 }
 
 adb uninstall "org.nativescript.embernativedemo" || echo "pass"
