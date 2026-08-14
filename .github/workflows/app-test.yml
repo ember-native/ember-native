@@ -15,7 +15,7 @@ jobs:
   test:
     name: test app
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -45,6 +45,12 @@ jobs:
         run: |
           (cd ember-native && pnpm build)
           (cd demo-app && pnpm exec ember-native-nativescript build android)
+
+      - name: build release apk
+        run: |
+          keytool -genkeypair -v -keystore demo-app/release.keystore -alias releasekey -keyalg RSA -keysize 2048 -validity 10000 -storepass ci-keystore -keypass ci-keystore -dname "CN=CI, OU=CI, O=CI, L=CI, S=CI, C=US"
+          (cd demo-app && pnpm exec ember-native-nativescript build android --release --key-store-path release.keystore --key-store-password ci-keystore --key-store-alias releasekey --key-store-alias-password ci-keystore --copy-to release.apk)
+          ls -l demo-app/release.apk
 
       - name: Enable KVM group perms
         run: |
@@ -84,5 +90,34 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            set -e
             adb uninstall "org.nativescript.embernativedemo" || echo "pass";
             cd demo-app && pnpm exec ember-native-nativescript test android --emulator --config nativescript.test.vite.config.ts --no-watch
+
+            adb uninstall "org.nativescript.embernativedemo" || echo "pass";
+            adb install release.apk
+            adb logcat -c
+            adb shell monkey -p org.nativescript.embernativedemo -c android.intent.category.LAUNCHER 1
+            pid=""
+            for _ in $(seq 1 30); do
+              pid=$(adb shell pidof org.nativescript.embernativedemo | tr -d '\r' || true)
+              [ -n "$pid" ] && break
+              sleep 2
+            done
+            if [ -z "$pid" ]; then
+              echo "Release app never started"
+              adb logcat -d '*:E'
+              exit 1
+            fi
+            sleep 5
+            if [ -z "$(adb shell pidof org.nativescript.embernativedemo | tr -d '\r' || true)" ]; then
+              echo "Release app started then died"
+              adb logcat -d '*:E'
+              exit 1
+            fi
+            if adb logcat -d | grep -q "FATAL EXCEPTION"; then
+              echo "Release app crashed on launch"
+              adb logcat -d | grep -A 30 "FATAL EXCEPTION"
+              exit 1
+            fi
+            echo "Release app started successfully"
