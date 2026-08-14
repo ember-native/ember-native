@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-08-14)
+
+* ember-native 5.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#418](https://github.com/ember-native/ember-native/pull/418) Fix Glimmer bridging bookkeeping in ListView/RadListView ([@patricklx](https://github.com/patricklx))
+  * [#416](https://github.com/ember-native/ember-native/pull/416) Make earlyGlobalsBanner()'s placeholder document robust ([@patricklx](https://github.com/patricklx))
+  * [#414](https://github.com/ember-native/ember-native/pull/414) Fix release-build boot crash for classes registered via @JavaProxy ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-08-02)
 
 * ember-native 5.0.0 (major)
