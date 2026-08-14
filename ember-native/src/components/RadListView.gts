@@ -9,22 +9,48 @@ import NativeElementNode from '../dom/native/NativeElementNode.ts';
 import DocumentNode from '../dom/nodes/DocumentNode.ts';
 import type { StackLayout } from '@nativescript/core';
 
-class TrackedMap extends Map<any, any> {
-  @tracked counter = 0;
-  set(key: any, value: any): this {
-    this.counter += 1;
-    super.set(key, value);
+class Ref<T> {
+  @tracked value: T;
+  constructor(value: T) {
+    this.value = value;
+  }
+}
+
+// A Map whose per-key values are individually tracked, so updating one
+// entry only invalidates consumers of that entry rather than everything
+// that reads the map (e.g. an `entries()`-derived list).
+class TrackedMap<K, V> {
+  @tracked private structure = 0;
+  private map = new Map<K, Ref<V>>();
+
+  set(key: K, value: V): this {
+    const existing = this.map.get(key);
+    if (existing) {
+      existing.value = value;
+    } else {
+      this.map.set(key, new Ref(value));
+      this.structure += 1;
+    }
     return this;
   }
 
-  get(key: any): any {
-    if (this.counter === 0) return null;
-    return super.get(key);
+  get(key: K): V | undefined {
+    return this.map.get(key)?.value;
   }
 
-  entries(): any {
-    if (this.counter === 0) return super.entries();
-    return super.entries();
+  delete(key: K): boolean {
+    const deleted = this.map.delete(key);
+    if (deleted) {
+      this.structure += 1;
+    }
+    return deleted;
+  }
+
+  keys(): K[] {
+    // Read `structure` so callers that only need the set of keys (not the
+    // values) don't get invalidated by unrelated per-key value updates.
+    void this.structure;
+    return [...this.map.keys()];
   }
 }
 
@@ -44,13 +70,14 @@ interface RadListViewInterface<T> {
 export default class RadListView<T = any> extends Component<
   RadListViewInterface<T>
 > {
-  elementRefs: TrackedMap = new TrackedMap();
+  elementRefs: TrackedMap<NativeElementNode<StackLayout>, T> =
+    new TrackedMap();
   @tracked private listView: NativeElementNode<NativeRadListView> | undefined;
   private declare headerElement: NativeElementNode<StackLayout>;
   private declare footerElement: NativeElementNode<StackLayout>;
 
   cleanup(listView: NativeElementNode<NativeRadListView>) {
-    for (const [element] of [...this.elementRefs.entries()]) {
+    for (const element of this.elementRefs.keys()) {
       const n = element.nativeView.nativeViewProtected;
       if (!n || !n.getWindowToken()) {
         this.elementRefs.delete(element);
@@ -70,10 +97,16 @@ export default class RadListView<T = any> extends Component<
   }
 
   get items() {
-    return [...this.elementRefs.entries()].map(([element, item]) => {
+    const elementRefs = this.elementRefs;
+    // Only the set of keys is read here, so updating a single row's
+    // bindingContext (via elementRefs.set) doesn't invalidate this getter
+    // for the other rows; `item` is read per-row in the template instead.
+    return elementRefs.keys().map((element) => {
       return {
-        item,
         element,
+        get item() {
+          return elementRefs.get(element);
+        },
       };
     });
   }
