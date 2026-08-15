@@ -231,25 +231,33 @@ leaf element's current `text`/`html` via `getAttribute`, which for a native
 element (`NativeElementNode#getAttribute`) reads the underlying native
 view's real, current property value - there is no microtask, native layout
 pass, or debounced write anywhere between a `text={{...}}` binding (or a
-child `TextNode` update) and the value `textContent` sees; the update is
-synchronous JS all the way down to the native property assignment. So
-`await click(...)`/`await rerender()` (which just await `settled()`) are
+child `TextNode` update) and the value `textContent` reads: a property
+write (NativeScript core's `Property.set`) always updates its JS-side
+cache, the thing `getAttribute`/`textContent` actually read, synchronously.
+So `await click(...)`/`await rerender()` (which just await `settled()`) are
 always enough - `.textContent` does not need `getAttribute('text')` as a
 workaround after a tap or other interaction.
 
-Two things can still make `.textContent` look wrong if you're not expecting
-them, neither of which is a staleness bug:
+A few things can still make `.textContent` look wrong if you're not
+expecting them, none of which is a staleness bug:
 
 - Leaf contents are joined with a single space and empty/falsy segments are
   dropped, so e.g. `<button>counter: {{state.counter}}</button>` reads back
   as `'counter:  0'` (two spaces - `'counter: '` and `'0'` are separate text
   nodes) rather than `'counter: 0'`.
+- Whitespace *between* elements in a template is itself a real, non-empty
+  text node and gets counted the same way: `<button>a</button>` and
+  `<label ... />` written on separate, indented lines read back with that
+  literal newline/indentation between them (e.g. `'a \n  b'`). Put sibling
+  elements on one line, with no whitespace between them, when asserting on
+  their combined `textContent`.
 - `getAttribute` returns `null` for an element whose `nativeView` isn't set
-  (e.g. mid-teardown, or a recycled `ListView`/`RadListView` row between
-  native recycle callbacks) - that element silently contributes nothing to
-  `textContent` rather than throwing, so a query that happens to hit such an
-  element mid-recycle reads back a shorter string, not necessarily an
-  outright empty one.
+  (e.g. mid-teardown - `NativeElementNode`'s `ActionBar`/`ActionItem`
+  removal path has a case where `actionItems` is nulled out before removal
+  fires, see `onRemovedChild` in `NativeElementNode.ts`) - that element
+  silently contributes nothing to `textContent` rather than throwing, so a
+  query that happens to hit such an element mid-teardown reads back a
+  shorter string, not necessarily an outright empty one.
 
 
 Contributing
