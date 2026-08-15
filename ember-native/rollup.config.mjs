@@ -4,16 +4,41 @@ import postcss from 'rollup-plugin-postcss';
 import { babel } from '@rollup/plugin-babel';
 import copy from 'rollup-plugin-copy';
 import { Addon } from '@embroider/addon-dev/rollup';
+import reexportsGuard from './rollup-app-reexports-guard.js';
 
 // rollup-plugin-astroturf mjs has wrong import specifiers...
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const astroturf = require('rollup-plugin-astroturf');
 
+const { analyzeAppReexports } = reexportsGuard;
+
 const addon = new Addon({
   srcDir: 'src',
   destDir: 'dist',
 });
+
+const assertAppReexportsMatchTargets = () => {
+  const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+  return {
+    name: 'assert-app-reexports-match-targets',
+    generateBundle(_options, bundle) {
+      const { mismatches, unrecognized } = analyzeAppReexports(bundle, pkg.name);
+      if (mismatches.length === 0 && unrecognized.length === 0) return;
+
+      const lines = [
+        ...mismatches.map(
+          (m) =>
+            `  "${m.fileName}" reexports [${m.missing.join(', ')}] from "${m.targetFileName}", but that module only exports: ${m.targetExports.join(', ') || '(nothing)'}`,
+        ),
+        ...unrecognized.map((u) => `  "${u.fileName}": ${u.reason}`),
+      ];
+      throw new Error(
+        `addon.appReexports() emitted _app_ stub(s) this check couldn't verify:\n${lines.join('\n')}`,
+      );
+    },
+  };
+};
 
 const rootImport = (options) => ({
   resolveId: (importee) => {
@@ -49,6 +74,17 @@ export default {
     // These are the modules that should get reexported into the traditional
     // "app" tree. Things in here should also be in publicEntrypoints above, but
     // not everything in publicEntrypoints necessarily needs to go here.
+    //
+    // `**/index.{js,ts,gts,gjs}` is excluded: today the only files matching
+    // that pattern are top-level barrel files (`components/index.gts`,
+    // `modifiers/index.ts`) that only re-export named bindings, not a
+    // default export. addon-dev unconditionally assumes every reexported
+    // file has a default export, so without this exclude it emits
+    // `export { default } from "..."` stubs for these too, referencing a
+    // default export that doesn't exist. This exclude is scoped to the
+    // current directory layout, not a general rule - if a colocated
+    // default-exporting component like `components/foo/index.gts` is ever
+    // added, this glob would need narrowing so it doesn't also swallow that.
     addon.appReexports(
       [
         'components/**/*.{js,ts,gts,gjs}',
@@ -59,6 +95,7 @@ export default {
         'instance-initializers/**/*.{js,ts}',
       ],
       {
+        exclude: ['**/index.{js,ts,gts,gjs}'],
         mapFilename: (fn) => {
           const parts = fn.split('/');
           parts.splice(1, 0, 'ember-native');
@@ -66,6 +103,13 @@ export default {
         },
       },
     ),
+
+    // Regression guard: fail the build if any `_app_` reexport stub claims
+    // an export that its target module doesn't actually have (e.g. the
+    // `export { default }` mismatch above). See
+    // rollup-app-reexports-guard.test.js for the fast, direct version of
+    // this same check.
+    assertAppReexportsMatchTargets(),
 
     // Follow the V2 Addon rules about dependencies. Your code can import from
     // `dependencies` and `peerDependencies` as well as standard Ember-provided

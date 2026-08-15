@@ -20,6 +20,8 @@
 !package.json
 !README.md
 !rollup.config.mjs
+!rollup-app-reexports-guard.js
+!rollup-app-reexports-guard.test.js
 !tsconfig.json
 !.npmrc
 !eslint
