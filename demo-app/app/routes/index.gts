@@ -5,7 +5,7 @@ import Component from "@glimmer/component";
 
 
 
-class Page extends Component {
+export class Page extends Component {
     @service('ember-native/history') history;
     <template>
         <page>

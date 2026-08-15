@@ -147,6 +147,82 @@ export default createNativeApplication(App, ENV);
 ```
 
 
+Testing page-rooted components
+------------------------------------------------------------------------------
+
+A NativeScript `Page` only gets a working `.frame` (and, by extension, a
+working `<action-bar>`) when it is a direct native child of a `<frame>`
+element - see `Page.frame`/`isFrame` in `@nativescript/core`, and
+`ember-native/src/dom/native/FrameElement.ts` for how `<frame>` wires a
+`<page>` child up via `Frame.navigate()`. Every top-level route/screen
+component in an ember-native app renders a `<page>` (see
+`demo-app/app/routes/index.gts`), but `setupRenderingTest` from `ember-qunit`
+never provides a `<frame>` ancestor - rendering such a component directly
+crashes with `TypeError: page.frame._getNavBarVisible is not a function` the
+moment its `<action-bar>` loads.
+
+Glimmer templates are compiled statically, so a component's real template
+can't be introspected or have its `<page>` wrapper stripped at runtime.
+Instead, use `withTemplateForTest` (from
+`ember-native/test-support/with-template-for-testing`) to render a test-only
+double of the component with a substitute template - the same content minus
+the `<page>`/`<action-bar>` wrapper - while keeping the original class's
+services, args, and lifecycle intact:
+
+`withTemplateForTest` takes a component class, so a route module built with
+`ember-routable-component`'s `RoutableComponentRoute()` needs to export the
+`<page>`-rooted component itself, not just the generated `Route` (see
+`demo-app/app/routes/index.gts`, which exports both `Page` and the
+`IndexRoute` built from it):
+
+```gts
+// my-app/routes/index.gts
+import RoutableComponentRoute from 'ember-routable-component';
+import Component from '@glimmer/component';
+
+export class Page extends Component {
+  <template>
+    <page>
+      <action-bar title="Ember Nativescript Examples"></action-bar>
+      <stack-layout>
+        {{! ... }}
+      </stack-layout>
+    </page>
+  </template>
+}
+
+export default class IndexRoute extends RoutableComponentRoute(Page) {}
+```
+
+```gts
+import { setupRenderingTest } from 'my-app/tests/helpers';
+import { render } from '@ember/test-helpers';
+import { withTemplateForTest } from 'ember-native/test-support/with-template-for-testing';
+import { Page as IndexPage } from 'my-app/routes/index';
+
+QUnit.module('Integration | Component | index page', function (hooks) {
+  setupRenderingTest(hooks);
+
+  QUnit.test('renders the list of examples', async function (assert) {
+    const TestableIndexPage = withTemplateForTest(IndexPage, <template>
+      <stack-layout>
+        {{! ...same content as IndexPage's template, minus <page>/<action-bar> }}
+      </stack-layout>
+    </template>);
+
+    await render(<template><TestableIndexPage /></template>);
+    assert.dom(this.element).containsText('List View');
+  });
+});
+```
+
+This only exercises the component's non-`<page>` content - it can't verify
+`<action-bar>` rendering or real navigation-frame behavior. Test those
+end-to-end instead, via `setupApplicationTest` + `visit()` (see
+`demo-app/app/tests/integration/main-page-test.ts`), which boots the real
+app and its native `Application`.
+
+
 Contributing
 ------------------------------------------------------------------------------
 
