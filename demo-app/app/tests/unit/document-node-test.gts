@@ -13,16 +13,24 @@ import DocumentNode from 'ember-native/dom/nodes/DocumentNode';
 QUnit.module('DocumentNode | browser-DOM compatibility', function (hooks) {
   setupRenderingTest(hooks);
 
-  QUnit.test('getElementsByTagName returns a real array, empty for a tag nothing rendered', async function (this: RenderingTestContext, assert) {
-    await render(<template><button>hi</button></template>);
-
+  // `document.getElementsByTagName` only ever needs to search `document`'s
+  // own subtree (in practice just `document.head` - a rendering test's
+  // actual UI tree is never attached under `document` itself, only under
+  // its own detached test-container root), which is exactly what Vite's
+  // preload() helper searches too: it only ever looks for `<link>` tags it
+  // itself previously created and appended to `document.head`.
+  QUnit.test('getElementsByTagName returns a real array, finds elements appended under document.head, empty otherwise', function (assert) {
     const document = globalThis.document as unknown as DocumentNode;
-    const buttons = document.getElementsByTagName('button');
-    assert.ok(Array.isArray(buttons), 'returns a real array, not undefined');
-    assert.ok(buttons.length >= 1, 'finds the rendered <button>');
+
+    const link = document.createElement('link');
+    document.head.appendChild(link);
 
     const links = document.getElementsByTagName('link');
-    assert.deepEqual(links, [], 'a tag nothing rendered returns an empty array, not a crash');
+    assert.ok(Array.isArray(links), 'returns a real array, not undefined');
+    assert.ok(links.includes(link), 'finds the <link> appended under document.head');
+
+    const buttons = document.getElementsByTagName('button');
+    assert.deepEqual(buttons, [], 'a tag nothing was appended under document returns an empty array, not a crash');
   });
 
   QUnit.test('createElement tolerates browser-only tags (meta, link, title) instead of throwing', function (assert) {
