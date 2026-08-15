@@ -9,6 +9,11 @@ settings:
 overrides:
   '@embroider/addon-shim': 1.9.0
 
+patchedDependencies:
+  nativescript-ui-listview@15.2.3:
+    hash: b91189740b26ae7cc5b90d8f0e8201ededacf77e4cbec978e6ccc8d9151a4629
+    path: ember-native/patches/nativescript-ui-listview@15.2.3.patch
+
 importers:
 
   .:
@@ -102,7 +107,7 @@ importers:
         version: 4.7.0
       nativescript-ui-listview:
         specifier: ^15.2.3
-        version: 15.2.3
+        version: 15.2.3(patch_hash=b91189740b26ae7cc5b90d8f0e8201ededacf77e4cbec978e6ccc8d9151a4629)
       nativescript-ui-sidedrawer:
         specifier: ^15.2.3
         version: 15.2.3
@@ -223,7 +228,7 @@ importers:
         version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-ember:
         specifier: ^12.3.1
-        version: 12.7.5(84740c278c3325a0cf2a0506dc099481)
+        version: 12.7.5(5ff893536b5be6763174ded7d398637d)
       eslint-plugin-n:
         specifier: ^17.23.1
         version: 17.24.0(0d62767105e9a39fc494591cb6137847)
@@ -894,7 +899,7 @@ importers:
         version: 4.7.0
       nativescript-ui-listview:
         specifier: ^15.2.3
-        version: 15.2.3
+        version: 15.2.3(patch_hash=b91189740b26ae7cc5b90d8f0e8201ededacf77e4cbec978e6ccc8d9151a4629)
       prettier:
         specifier: ^3.6.2
         version: 3.8.2
@@ -23827,19 +23832,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.61.0(0d62767105e9a39fc494591cb6137847)':
-    dependencies:
-      '@typescript-eslint/scope-manager': 8.61.0
-      '@typescript-eslint/types': 8.61.0
-      '@typescript-eslint/typescript-estree': 8.61.0(typescript@5.9.3)
-      '@typescript-eslint/visitor-keys': 8.61.0
-      debug: 4.4.3(supports-color@9.4.0)
-      eslint: 9.39.4(jiti@2.6.1)
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
   '@typescript-eslint/parser@8.61.0(717face55a559967bf1b77f9b43bd1f1)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.61.0
@@ -28162,23 +28154,6 @@ snapshots:
       - eslint
       - typescript
 
-  ember-eslint-parser@0.5.13(84740c278c3325a0cf2a0506dc099481):
-    dependencies:
-      '@babel/core': 7.29.0
-      '@babel/eslint-parser': 7.28.6(35c79763e2f529503c5fce6757258eb9)
-      '@glimmer/syntax': 0.95.0
-      '@typescript-eslint/tsconfig-utils': 8.65.0(typescript@5.9.3)
-      content-tag: 2.0.3
-      eslint-scope: 7.2.2
-      html-tags: 3.3.1
-      mathml-tag-names: 2.1.3
-      svg-tags: 1.0.0
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.61.0(0d62767105e9a39fc494591cb6137847)
-    transitivePeerDependencies:
-      - eslint
-      - typescript
-
   ember-eslint-parser@0.5.13(b21a5c2d82ffcddaa5ddcd8b5e86f59d):
     dependencies:
       '@babel/core': 7.29.0
@@ -29261,25 +29236,6 @@ snapshots:
       snake-case: 3.0.4
     optionalDependencies:
       '@typescript-eslint/parser': 8.58.1(0d62767105e9a39fc494591cb6137847)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - typescript
-
-  eslint-plugin-ember@12.7.5(84740c278c3325a0cf2a0506dc099481):
-    dependencies:
-      '@ember-data/rfc395-data': 0.0.4
-      css-tree: 3.2.1
-      ember-eslint-parser: 0.5.13(84740c278c3325a0cf2a0506dc099481)
-      ember-rfc176-data: 0.3.18
-      eslint: 9.39.4(jiti@2.6.1)
-      eslint-utils: 3.0.0(eslint@9.39.4(jiti@2.6.1))
-      estraverse: 5.3.0
-      lodash.camelcase: 4.3.0
-      lodash.kebabcase: 4.1.1
-      requireindex: 1.2.0
-      snake-case: 3.0.4
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.61.0(0d62767105e9a39fc494591cb6137847)
     transitivePeerDependencies:
       - '@babel/core'
       - typescript
@@ -33098,7 +33054,7 @@ snapshots:
 
   nativescript-ui-core@15.2.3: {}
 
-  nativescript-ui-listview@15.2.3:
+  nativescript-ui-listview@15.2.3(patch_hash=b91189740b26ae7cc5b90d8f0e8201ededacf77e4cbec978e6ccc8d9151a4629):
     dependencies:
       nativescript-ui-core: 15.2.3
 

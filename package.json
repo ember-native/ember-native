@@ -45,7 +45,10 @@
       "esbuild",
       "nativescript",
       "unrs-resolver"
-    ]
+    ],
+    "patchedDependencies": {
+      "nativescript-ui-listview@15.2.3": "ember-native/patches/nativescript-ui-listview@15.2.3.patch"
+    }
   },
   "packageManager": "pnpm@10.23.0",
   "volta": {
