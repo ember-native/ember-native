@@ -223,6 +223,35 @@ end-to-end instead, via `setupApplicationTest` + `visit()` (see
 app and its native `Application`.
 
 
+Reading text content in tests
+------------------------------------------------------------------------------
+
+`ViewNode#textContent` (`ember-native/src/dom/nodes/ViewNode.ts`) reads each
+leaf element's current `text`/`html` via `getAttribute`, which for a native
+element (`NativeElementNode#getAttribute`) reads the underlying native
+view's real, current property value - there is no microtask, native layout
+pass, or debounced write anywhere between a `text={{...}}` binding (or a
+child `TextNode` update) and the value `textContent` sees; the update is
+synchronous JS all the way down to the native property assignment. So
+`await click(...)`/`await rerender()` (which just await `settled()`) are
+always enough - `.textContent` does not need `getAttribute('text')` as a
+workaround after a tap or other interaction.
+
+Two things can still make `.textContent` look wrong if you're not expecting
+them, neither of which is a staleness bug:
+
+- Leaf contents are joined with a single space and empty/falsy segments are
+  dropped, so e.g. `<button>counter: {{state.counter}}</button>` reads back
+  as `'counter:  0'` (two spaces - `'counter: '` and `'0'` are separate text
+  nodes) rather than `'counter: 0'`.
+- `getAttribute` returns `null` for an element whose `nativeView` isn't set
+  (e.g. mid-teardown, or a recycled `ListView`/`RadListView` row between
+  native recycle callbacks) - that element silently contributes nothing to
+  `textContent` rather than throwing, so a query that happens to hit such an
+  element mid-recycle reads back a shorter string, not necessarily an
+  outright empty one.
+
+
 Contributing
 ------------------------------------------------------------------------------
 
