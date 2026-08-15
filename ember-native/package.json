@@ -15,6 +15,7 @@
     "addon-main.cjs",
     "declarations",
     "dist",
+    "patches",
     "types"
   ],
   "bin": {

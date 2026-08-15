@@ -223,6 +223,49 @@ end-to-end instead, via `setupApplicationTest` + `visit()` (see
 app and its native `Application`.
 
 
+Known `nativescript-ui-listview` bugs (drag-reorder on Android)
+------------------------------------------------------------------------------
+
+`RadListView.gts` renders `<rad-list-view>` on top of
+[`nativescript-ui-listview`](https://github.com/NativeScript/plugins)'s
+`RadListView`/`ReorderWithHandlesBehavior`. As of `nativescript-ui-listview@15.2.3`
+(the version this package currently pins), Android's `reorderMode="Drag"`
+drag-and-drop reordering has two real upstream bugs:
+
+- A crash: `nsViewForItem.eachChildView` is called on `undefined` when a
+  `ViewHolder` is mid-recycle while a drag gesture starts (e.g. the bound
+  items array changes underneath an in-progress drag).
+- A UX bug: the drag image drifts horizontally instead of staying constrained
+  to vertical (Y-axis-only) movement, which is the expected behavior for a
+  vertically-scrolling list.
+
+Because `nativescript-ui-listview` is `ember-native`'s own dependency, every
+app using drag-reorder list views is exposed to both. pnpm's
+`patchedDependencies` isn't read from a published package's own
+`package.json` - only from the *installing* project's workspace root (see
+[pnpm/pnpm#8023](https://github.com/pnpm/pnpm/issues/8023)) - so this
+package's own patch (`ember-native/patches/nativescript-ui-listview@15.2.3.patch`,
+applied automatically within this monorepo) does not apply itself to a
+consumer app's install. If your app installs `nativescript-ui-listview`
+directly and uses drag-reorder, add the same patch to your own workspace
+root `package.json`:
+
+```json
+{
+  "pnpm": {
+    "patchedDependencies": {
+      "nativescript-ui-listview@15.2.3": "node_modules/ember-native/patches/nativescript-ui-listview@15.2.3.patch"
+    }
+  }
+}
+```
+
+Both bugs have also been reported upstream:
+[NativeScript/plugins#672](https://github.com/NativeScript/plugins/issues/672)
+- once a fixed release ships, this package's pin and patch will be dropped in
+favor of it.
+
+
 Contributing
 ------------------------------------------------------------------------------
 

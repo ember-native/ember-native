@@ -1,0 +1,45 @@
+diff --git a/index.android.js b/index.android.js
+index e0e9a6f4483e2ec72236623874561d1b14a27381..77a24400768a8d2c319289dd504e2ac9ac2979ac 100644
+--- a/index.android.js
++++ b/index.android.js
+@@ -35,16 +35,33 @@ function ensureExtendedReorderWithHandlesBehavior() {
+         var reorderHandle = undefined;
+         if (nsOwner) {
+             var nsViewForItem = nsOwner._listViewAdapter.getViewForItem(nsOwner.getItemAtIndex(originalItemIndex));
+-            nsViewForItem.eachChildView(function (view) {
+-                if (view instanceof ReorderHandle) {
+-                    reorderHandle = view;
+-                    return false;
+-                }
+-                return true;
+-            });
++            // originalItemIndex can be RecyclerView.NO_POSITION (-1) - and nsViewForItem can be
++            // undefined - when the itemView's ViewHolder is mid-recycle/detached while a drag
++            // gesture starts. Patched: upstream called .eachChildView on nsViewForItem
++            // unconditionally, crashing with "Cannot read properties of undefined (reading
++            // 'eachChildView')".
++            if (nsViewForItem) {
++                nsViewForItem.eachChildView(function (view) {
++                    if (view instanceof ReorderHandle) {
++                        reorderHandle = view;
++                        return false;
++                    }
++                    return true;
++                });
++            }
+         }
+         return reorderHandle === undefined ? itemView : reorderHandle.nativeViewProtected;
+     };
++    // Patched: constrain the drag image to the y axis. Upstream's moveReorderImage(startX,
++    // startY, currentX, currentY) offsets the dragged item's bitmap by (currentX - startX,
++    // currentY - startY), so it drifts horizontally too. Pinning currentX to startX zeroes that
++    // delta while leaving vertical tracking untouched, which is the correct behavior for a
++    // vertically-scrolling list. This is the only live call site (onShortPressDrag, used by
++    // reorderMode="Drag"); ItemReorderBehavior's onLongPressDrag also calls moveReorderImage but
++    // is a no-op override in this class since "Drag" mode never uses long-press.
++    ExtendedReorderWithHandlesBehavior.prototype.moveReorderImage = function (startX, startY, currentX, currentY) {
++        _super.prototype.moveReorderImage.call(this, startX, startY, startX, currentY);
++    };
+     return ExtendedReorderWithHandlesBehavior;
+ }(com.telerik.widget.list.ReorderWithHandlesBehavior));
+     ExtendedReorderWithHandlesBehaviorClass = ExtendedReorderWithHandlesBehavior;

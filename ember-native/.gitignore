@@ -7,6 +7,8 @@
 !lib/**/*
 !types
 !types/**/*
+!patches
+!patches/**/*
 !.eslintignore
 !.eslintrc.cjs
 !.gitignore
