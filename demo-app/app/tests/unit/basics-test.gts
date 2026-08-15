@@ -74,10 +74,7 @@ QUnit.module('Basics | rendering & modifier', function(hooks) {
     const toggle = () => {
       state.label = state.label === 'off' ? 'on' : 'off';
     };
-    await render(<template>
-      <button {{on 'tap' toggle}}>toggle</button>
-      <label text={{state.label}} />
-    </template>);
+    await render(<template><button {{on 'tap' toggle}}>toggle</button><label text={{state.label}} /></template>);
     assert.equal(this.element.textContent.trim(), 'toggle off');
 
     await click('button');
