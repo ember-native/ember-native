@@ -169,11 +169,36 @@ double of the component with a substitute template - the same content minus
 the `<page>`/`<action-bar>` wrapper - while keeping the original class's
 services, args, and lifecycle intact:
 
+`withTemplateForTest` takes a component class, so a route module built with
+`ember-routable-component`'s `RoutableComponentRoute()` needs to export the
+`<page>`-rooted component itself, not just the generated `Route` (see
+`demo-app/app/routes/index.gts`, which exports both `Page` and the
+`IndexRoute` built from it):
+
+```gts
+// my-app/routes/index.gts
+import RoutableComponentRoute from 'ember-routable-component';
+import Component from '@glimmer/component';
+
+export class Page extends Component {
+  <template>
+    <page>
+      <action-bar title="Ember Nativescript Examples"></action-bar>
+      <stack-layout>
+        {{! ... }}
+      </stack-layout>
+    </page>
+  </template>
+}
+
+export default class IndexRoute extends RoutableComponentRoute(Page) {}
+```
+
 ```gts
 import { setupRenderingTest } from 'my-app/tests/helpers';
 import { render } from '@ember/test-helpers';
 import { withTemplateForTest } from 'ember-native/test-support/with-template-for-testing';
-import IndexPage from 'my-app/routes/index';
+import { Page as IndexPage } from 'my-app/routes/index';
 
 QUnit.module('Integration | Component | index page', function (hooks) {
   setupRenderingTest(hooks);

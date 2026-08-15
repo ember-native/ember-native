@@ -3,6 +3,7 @@ import { render } from "@ember/test-helpers";
 import { RenderingTestContext } from "@ember/test-helpers/setup-rendering-context";
 import Component from "@glimmer/component";
 import { withTemplateForTest } from "ember-native/test-support/with-template-for-testing";
+import { Page as IndexPage } from "~/routes/index";
 
 // A stand-in for a route/screen component whose real template is rooted at
 // `<page>`, the way every top-level route in this app is written (see
@@ -38,5 +39,19 @@ QUnit.module('Basics | page rendering', function(hooks) {
 
         await render(<template><TestableExamplePage /></template>);
         assert.equal(this.element.textContent.trim(), 'hello page');
+    });
+
+    QUnit.test('renders a real route\'s <page>-rooted component via withTemplateForTest', async function(this: RenderingTestContext, assert) {
+        // Proves the pattern against `demo-app/app/routes/index.gts`'s actual
+        // `Page` component (exported alongside its `RoutableComponentRoute`
+        // default export), not just a synthetic stand-in.
+        const TestableIndexPage = withTemplateForTest(IndexPage, <template>
+            <stack-layout>
+                <label>List View</label>
+            </stack-layout>
+        </template>);
+
+        await render(<template><TestableIndexPage /></template>);
+        assert.equal(this.element.textContent.trim(), 'List View');
     });
 });
