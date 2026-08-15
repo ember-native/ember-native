@@ -1,4 +1,4 @@
-import { createElement } from '../element-registry.ts';
+import { createElement, isKnownView, normalizeElementName } from '../element-registry.ts';
 import CommentNode from './CommentNode.ts';
 import ElementNode from './ElementNode.ts';
 import PropertyNode from './PropertyNode.ts';
@@ -98,6 +98,19 @@ export default class DocumentNode extends ViewNode {
   ): NativeElementsTagNameMap[T] {
     if (tagName === 'property') {
       return this.createPropertyNode(tagName) as any;
+    }
+    if (!isKnownView(tagName)) {
+      // Browser-only tags (`meta`, `link`, `title`, ...) have no native
+      // NativeScript counterpart and were never meant to be rendered - but
+      // Vite's own runtime (the `__vitePreload` module-preload helper, run
+      // for every dynamic import) creates/queries them unconditionally, the
+      // same way it would against a real browser `document`. Throwing here
+      // crashed that generic code path; an inert element that just
+      // participates harmlessly in the tree (no native view, never
+      // rendered) is enough to satisfy it.
+      const e = new ElementNode(tagName as string);
+      e._ownerDocument = this.getInstance();
+      return e as any;
     }
     const e = createElement(tagName);
     e._ownerDocument = this.getInstance();
@@ -223,8 +236,19 @@ export default class DocumentNode extends ViewNode {
     };
   }
 
+  // Fakes the single `<meta name=".../config/environment" content="...">`
+  // tag `@embroider/config-meta-loader`/ember-cli's classic
+  // `app-config-from-meta.js` read config from in a real browser DOM - there
+  // is no such tag here (NativeScript has no HTML `<head>` to serialize one
+  // into), so `setupEmberNativeApp` stashes the raw config object on
+  // `this.config` instead (see `setup-app.ts`) and this fakes the lookup.
+  // Matched by substring, not `selector.startsWith('meta')`: a broader match
+  // would also swallow unrelated `meta[...]` lookups (e.g. Vite's own
+  // `meta[property=csp-nonce]` probe in its module-preload runtime helper)
+  // and hand back this app's entire config as a fake attribute value instead
+  // of correctly reporting "no such element".
   querySelectorAll(selector: string) {
-    if (selector.startsWith('meta')) {
+    if (selector.includes('config/environment')) {
       const config = this.config;
       return {
         getAttribute(): string {
@@ -232,5 +256,36 @@ export default class DocumentNode extends ViewNode {
         },
       };
     }
+  }
+
+  // Overrides `ViewNode#querySelector` only for the `meta` pseudo-element
+  // faked by `querySelectorAll` above - needed because the real caller
+  // (`@embroider/config-meta-loader`/ember-cli's classic config loading)
+  // uses the singular `querySelector`, not `querySelectorAll`. Everything
+  // else (`#id`, `.class`, plain tag names - including
+  // `@ember/test-helpers`' own `document.querySelector('#ember-testing')`,
+  // and any other `meta[...]` lookup that isn't the config tag) falls
+  // through to the real tree-walking implementation inherited from
+  // `ViewNode`.
+  querySelector(selector: string) {
+    return this.querySelectorAll(selector) || super.querySelector(selector);
+  }
+
+  // Vite's runtime module-preload helper (run for every dynamic import, in
+  // both dev and prod) calls `document.getElementsByTagName('link')`
+  // unconditionally to dedupe already-injected preload links - unlike
+  // `querySelector`/`querySelectorAll`, nothing on `ViewNode` provided a
+  // plural, list-returning tag lookup (only the singular
+  // `getElementByTagName`), so this always threw `TypeError:
+  // document.getElementsByTagName is not a function`.
+  getElementsByTagName(tagName: string) {
+    const normalizedTagName = normalizeElementName(tagName);
+    const results: ViewNode[] = [];
+    for (const el of elementIterator(this)) {
+      if (el.nodeType === 1 && el.tagName === normalizedTagName) {
+        results.push(el);
+      }
+    }
+    return results;
   }
 }
