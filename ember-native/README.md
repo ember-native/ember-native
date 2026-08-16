@@ -114,8 +114,8 @@ setupEmberNativeApp(ENV);
 ```
 
 `setupEmberNativeApp` installs ember-native's DOM shim, wires up Chrome
-DevTools support in dev builds only (tree-shaken out of release builds), and
-sets `ENV.rootElement` to the app's root native view.
+DevTools support in dev builds only via `maybeSetupInspectorSupport` (see
+below), and sets `ENV.rootElement` to the app's root native view.
 
 `app/app.js`'s `App` class extends `NativeApplication` instead of
 `@ember/application` directly - it's the same class otherwise, with your own
@@ -145,6 +145,41 @@ import { createNativeApplication } from 'ember-native';
 
 export default createNativeApplication(App, ENV);
 ```
+
+
+Chrome DevTools support
+------------------------------------------------------------------------------
+
+`setupEmberNativeApp` already wires up Chrome DevTools protocol support for
+you, so most apps don't need to think about this at all. It only matters if
+you have a custom entry point that doesn't go through `setupEmberNativeApp`
+(or you want to trigger inspector support separately, e.g. later than app
+boot) and need to call it yourself - use `maybeSetupInspectorSupport`:
+
+```ts
+import { maybeSetupInspectorSupport } from 'ember-native';
+import { ENV } from '~/config/env';
+
+maybeSetupInspectorSupport(ENV);
+```
+
+This is a no-op in release builds, tree-shaken out of the bundle entirely
+rather than merely skipped at runtime. That distinction matters: the module
+`maybeSetupInspectorSupport` loads under the hood
+(`ember-native/setup-inspector-support`) statically imports
+`@nativescript/core/debugger/webinspector-dom`, which throws the moment it's
+evaluated on NativeScript's plain (non-`-with-inspector`) release runtime.
+Because ES module imports are hoisted, wrapping a static `import` of that
+module in a runtime `if (__DEV__)` check doesn't help - the import still runs
+and crashes before the guard ever executes. `maybeSetupInspectorSupport`
+performs the import as a dynamic `import()` internally, gated on
+`import.meta.env.DEV`, so Rollup can prove the whole branch is dead code in a
+production build and drop it instead of merely deferring it. Prefer this
+helper over importing `ember-native/setup-inspector-support` directly -
+that module's own `setupInspectorSupport` export is only safe behind this
+exact dynamic-import pattern, and getting it wrong silently breaks every
+release build that imports the module path at all, even unconditionally at
+the top of an otherwise-unrelated file.
 
 
 Testing page-rooted components
