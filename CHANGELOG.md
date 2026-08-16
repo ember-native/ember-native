@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2026-08-16)
+
+* ember-native 5.0.3 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#425](https://github.com/ember-native/ember-native/pull/425) Fix broken default-export _app_ reexport stubs for index barrel files ([@patricklx](https://github.com/patricklx))
+  * [#426](https://github.com/ember-native/ember-native/pull/426) Add maybeSetupInspectorSupport as the safe inspector-support entrypoint ([@patricklx](https://github.com/patricklx))
+  * [#428](https://github.com/ember-native/ember-native/pull/428) Add regression test + docs for textContent after a native tap ([@patricklx](https://github.com/patricklx))
+  * [#429](https://github.com/ember-native/ember-native/pull/429) Add DocumentNode.getElementsByTagName/querySelector so Vite's preload helper stops crashing ([@patricklx](https://github.com/patricklx))
+  * [#423](https://github.com/ember-native/ember-native/pull/423) Add withTemplateForTest helper + docs for testing <page>-rooted components ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-08-14)
 
 * ember-native 5.0.2 (patch)
