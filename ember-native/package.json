@@ -37,7 +37,7 @@
     "start:types": "glint --declaration --watch",
     "debug:types": "glint --debug-intermediate-representation",
     "prepack": "pnpm build",
-    "test": "node --test utils/*.test.js src/dom/native/*.test.ts"
+    "test": "node --test utils/*.test.js src/dom/native/*.test.ts *.test.js"
   },
   "peerDependencies": {
     "@glimmer/component": "*",
@@ -159,9 +159,7 @@
       "./components/ember-native/InspectorSupport.js": "./dist/_app_/components/ember-native/InspectorSupport.js",
       "./components/ember-native/ListView.js": "./dist/_app_/components/ember-native/ListView.js",
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
-      "./components/ember-native/index.js": "./dist/_app_/components/ember-native/index.js",
       "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
-      "./modifiers/ember-native/index.js": "./dist/_app_/modifiers/ember-native/index.js",
       "./modifiers/ember-native/native-slot.js": "./dist/_app_/modifiers/ember-native/native-slot.js",
       "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js",
       "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js"
