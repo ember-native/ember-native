@@ -49,4 +49,35 @@ QUnit.module('Basics | rendering & modifier', function(hooks) {
         await click('button');
         assert.equal(clicked, true);
     })
+
+  // Regression test for a reported timing bug: a consumer's tests had to read
+  // `getAttribute('text')` instead of `.textContent` right after tapping a native
+  // element, because `.textContent` was observed to intermittently read back stale
+  // (empty) text on a CI emulator. `click()` already awaits `settled()`, so if a
+  // native tap's resulting text update were deferred past that (a microtask, a
+  // native layout pass, etc.) this test would catch it.
+  //
+  // Uses a `<label>` whose `text` is a dynamic *attribute* binding, not a child
+  // `TextNode`: a child-`TextNode` case (e.g. `<button>counter: {{...}}</button>`,
+  // see the tests above) reads `TextNode`'s own plain `.text` field either way and
+  // wouldn't distinguish this from the bug fixed in #405 (`textContent` reading a
+  // native element's always-`undefined` plain `.text` field instead of going
+  // through `getAttribute`, which reflects the real native view property) - only
+  // an attribute-bound native element forces the read through
+  // `NativeElementNode#getAttribute` -> `nativeView.text`.
+  QUnit.test('textContent reflects an attribute-bound text change caused by a native tap, immediately after click() resolves', async function(this: RenderingTestContext, assert) {
+    class State {
+      @tracked label = 'off';
+    };
+
+    const state = new State();
+    const toggle = () => {
+      state.label = state.label === 'off' ? 'on' : 'off';
+    };
+    await render(<template><button {{on 'tap' toggle}}>toggle</button><label text={{state.label}} /></template>);
+    assert.equal(this.element.textContent.trim(), 'toggle off');
+
+    await click('button');
+    assert.equal(this.element.textContent.trim(), 'toggle on');
+  });
 });
