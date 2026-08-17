@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-08-17)
+
+* ember-native 5.0.4 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#431](https://github.com/ember-native/ember-native/pull/431) fix(RadListView): avoid backtracking-rerender assertion from TrackedMap.structure ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-08-16)
 
 * ember-native 5.0.3 (patch)
