@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { modifier } from 'ember-modifier';
 import { tracked } from '@glimmer/tracking';
+import { isTracking } from '@glimmer/validator';
 import {
   RadListView as NativeRadListView,
   ListViewViewType,
@@ -22,6 +23,46 @@ class Ref<T> {
 class TrackedMap<K, V> {
   @tracked private structure = 0;
   private map = new Map<K, Ref<V>>();
+  // True while a deferred `structure` bump is already queued, so a burst of
+  // structural changes in one tick coalesces into a single increment - see
+  // `bumpStructure`.
+  private structureBumpScheduled = false;
+
+  // Bump the tracked `structure` tag synchronously in the common case, but
+  // defer to a microtask when we're currently inside an active autotracking
+  // frame.
+  //
+  // `set`/`delete` are driven synchronously by the native RadListView (a
+  // cell's `bindingContext` setter on bind -> `set`, and `cleanup` on
+  // `itemRecyclingInternal` -> `delete`). During a route transition that tears
+  // this list's outlet down, one of those can fire *inside* the outlet-swap
+  // render computation, which has already read `structure` via the `items`
+  // getter's `keys()`. Bumping the tag there trips Glimmer's backtracking
+  // assertion ("attempted to update `structure`... already used previously in
+  // the same computation"). Deferring in that case lets the current
+  // computation close first; the underlying `map` is still mutated
+  // synchronously (so the very next read sees correct data), only the tag's
+  // revalidation slips one microtask later.
+  //
+  // The `isTracking()` guard keeps the hot path synchronous: plain scrolling
+  // recycles cells from native scroll callbacks that run *outside* any tracking
+  // frame, so an unconditional microtask defer would force an extra Glimmer
+  // revalidation pass per recycle on top of the native scroll frames, making
+  // fast scrolling visibly sluggish.
+  private bumpStructure(): void {
+    if (!isTracking()) {
+      this.structure += 1;
+      return;
+    }
+    if (this.structureBumpScheduled) {
+      return;
+    }
+    this.structureBumpScheduled = true;
+    queueMicrotask(() => {
+      this.structureBumpScheduled = false;
+      this.structure += 1;
+    });
+  }
 
   set(key: K, value: V): this {
     const existing = this.map.get(key);
@@ -29,7 +70,7 @@ class TrackedMap<K, V> {
       existing.value = value;
     } else {
       this.map.set(key, new Ref(value));
-      this.structure += 1;
+      this.bumpStructure();
     }
     return this;
   }
@@ -41,7 +82,7 @@ class TrackedMap<K, V> {
   delete(key: K): boolean {
     const deleted = this.map.delete(key);
     if (deleted) {
-      this.structure += 1;
+      this.bumpStructure();
     }
     return deleted;
   }
