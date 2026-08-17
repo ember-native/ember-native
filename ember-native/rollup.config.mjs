@@ -86,6 +86,11 @@ export default {
     // component like `components/foo/index.gts` still gets reexported
     // normally - it's matched against the pre-mapFilename bundle key
     // (e.g. `components/index.js`), which is one segment deep for barrels.
+    //
+    // `components/tracked-map*` are likewise excluded: they're internal
+    // helper modules backing RadListView (a plain data structure and its
+    // Glimmer signal wiring), not resolvable Ember components, and export no
+    // default - so the same `export { default }` stub assumption would break.
     addon.appReexports(
       [
         'components/**/*.{js,ts,gts,gjs}',
@@ -96,7 +101,7 @@ export default {
         'instance-initializers/**/*.{js,ts}',
       ],
       {
-        exclude: ['*/index.{js,ts,gts,gjs}'],
+        exclude: ['*/index.{js,ts,gts,gjs}', 'components/tracked-map*.{js,ts}'],
         mapFilename: (fn) => {
           const parts = fn.split('/');
           parts.splice(1, 0, 'ember-native');

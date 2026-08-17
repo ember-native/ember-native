@@ -7,52 +7,9 @@ import {
 } from 'nativescript-ui-listview';
 import NativeElementNode from '../dom/native/NativeElementNode.ts';
 import DocumentNode from '../dom/nodes/DocumentNode.ts';
+import TrackedMap from './tracked-map.ts';
+import { glimmerTrackedMapHooks } from './tracked-map-glimmer.ts';
 import type { StackLayout } from '@nativescript/core';
-
-class Ref<T> {
-  @tracked value: T;
-  constructor(value: T) {
-    this.value = value;
-  }
-}
-
-// A Map whose per-key values are individually tracked, so updating one
-// entry only invalidates consumers of that entry rather than everything
-// that reads the map (e.g. an `entries()`-derived list).
-class TrackedMap<K, V> {
-  @tracked private structure = 0;
-  private map = new Map<K, Ref<V>>();
-
-  set(key: K, value: V): this {
-    const existing = this.map.get(key);
-    if (existing) {
-      existing.value = value;
-    } else {
-      this.map.set(key, new Ref(value));
-      this.structure += 1;
-    }
-    return this;
-  }
-
-  get(key: K): V | undefined {
-    return this.map.get(key)?.value;
-  }
-
-  delete(key: K): boolean {
-    const deleted = this.map.delete(key);
-    if (deleted) {
-      this.structure += 1;
-    }
-    return deleted;
-  }
-
-  keys(): K[] {
-    // Read `structure` so callers that only need the set of keys (not the
-    // values) don't get invalidated by unrelated per-key value updates.
-    void this.structure;
-    return [...this.map.keys()];
-  }
-}
 
 interface RadListViewInterface<T> {
   Element: NativeElementNode<NativeRadListView>;
@@ -70,8 +27,9 @@ interface RadListViewInterface<T> {
 export default class RadListView<T = any> extends Component<
   RadListViewInterface<T>
 > {
-  elementRefs: TrackedMap<NativeElementNode<StackLayout>, T> =
-    new TrackedMap();
+  elementRefs: TrackedMap<NativeElementNode<StackLayout>, T> = new TrackedMap(
+    glimmerTrackedMapHooks(),
+  );
   @tracked private listView: NativeElementNode<NativeRadListView> | undefined;
   private declare headerElement: NativeElementNode<StackLayout>;
   private declare footerElement: NativeElementNode<StackLayout>;
