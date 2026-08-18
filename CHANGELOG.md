@@ -1,5 +1,17 @@
 # Changelog
 
+## Release (2026-08-18)
+
+* ember-native 5.0.5 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#435](https://github.com/ember-native/ember-native/pull/435) perf(RadListView): key rows by stable element, not item value ([@patricklx](https://github.com/patricklx))
+  * [#433](https://github.com/ember-native/ember-native/pull/433) perf(ListView): use per-row TrackedMap tracking to fix fast-scroll lag ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-08-17)
 
 * ember-native 5.0.4 (patch)
