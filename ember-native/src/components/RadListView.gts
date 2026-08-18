@@ -48,10 +48,15 @@ export default class RadListView<T = any> extends Component<
   }
 
   get itemKey() {
-    if (this.args.key) {
-      return 'item.' + this.args.key;
-    }
-    return 'item';
+    // Key rows by the stable stack-layout element, not the item value.
+    // The native RadListView recycles a row by rebinding its bindingContext
+    // (-> `elementRefs.set(element, newItem)`), which changes the row's
+    // `item`. Keying by `item` would make Glimmer treat a recycled row as a
+    // brand-new one and tear down/rebuild its `{{#in-element}}` block every
+    // recycle (and risk duplicate keys when two rows transiently share a
+    // value). Keying by the element keeps the block mounted and reused - the
+    // per-row `item` getter drives the content update instead.
+    return 'element';
   }
 
   get items() {
