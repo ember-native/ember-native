@@ -67,22 +67,32 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
   get items() {
     const elementRefs = this.elementRefs;
     const args = this.args;
-    // Only the set of keys (the realized row elements) is read here, so
-    // rebinding a single row's index (via `elementRefs.set`) doesn't
-    // invalidate this getter for the other rows; `item` is read per-row in
-    // the template instead.
-    return elementRefs.keys().map((element) => {
-      return {
-        element,
-        get item(): T | null {
-          const index = elementRefs.get(element);
-          if (index === undefined) {
-            return null;
-          }
-          return args.items[index] ?? null;
-        },
-      };
-    });
+    // Exclude rows whose bound index is out of range for the current items
+    // (e.g. after the list shrinks, recycled rows still exist as keys but
+    // point past the end). Rendering those would yield a `null` item into
+    // the `:item` block. Reading each row's index here does subscribe this
+    // getter to that row's value cell, so a single row's index changing
+    // re-runs the filter - but that's exactly when a row can cross the
+    // in-range boundary, so it's the correct (and still per-row-scoped)
+    // dependency.
+    return elementRefs
+      .keys()
+      .filter((element) => {
+        const index = elementRefs.get(element);
+        return index !== undefined && index < args.items.length;
+      })
+      .map((element) => {
+        return {
+          element,
+          get item(): T | null {
+            const index = elementRefs.get(element);
+            if (index === undefined) {
+              return null;
+            }
+            return args.items[index] ?? null;
+          },
+        };
+      });
   }
 
   get itemKey() {
