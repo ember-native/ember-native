@@ -10,6 +10,8 @@ import { Color } from '@nativescript/core';
 import { tracked } from '@glimmer/tracking';
 import NativeElementNode from '../dom/native/NativeElementNode.ts';
 import DocumentNode from '../dom/nodes/DocumentNode.ts';
+import TrackedMap from './tracked-map.ts';
+import { glimmerTrackedMapHooks } from './tracked-map-glimmer.ts';
 
 interface ListViewInterface<T> {
   Element: NativeElementNode<NativeListView>;
@@ -45,50 +47,61 @@ interface ListViewInterface<T> {
   };
 }
 
-type Ref<T> = {
-  index: number;
-  item: T | null;
-  element: NativeElementNode<any>;
-};
-
 export default class ListView<T> extends Component<ListViewInterface<T>> {
-  @tracked elementRefs: Ref<T>[] = [];
-  private elementRefsByNativeView = new Map<StackLayout, Ref<T>>();
-  private listViewElement?: NativeElementNode<NativeListView>;
+  // Maps each realized row's stack-layout element to the item index it is
+  // currently bound to. Each index is stored in its own tracked cell, so a
+  // single row recycling during scroll only invalidates that one row's
+  // `{{#in-element}}` block instead of forcing every visible row to
+  // re-render (the previous whole-array reassignment did the latter, which
+  // is what caused the fast-scroll lag).
+  private elementRefs: TrackedMap<NativeElementNode<StackLayout>, number> =
+    new TrackedMap(glimmerTrackedMapHooks());
+  // Plain (untracked) native-view -> element index for O(1) lookup on the hot
+  // recycle path; kept in sync with `elementRefs`.
+  private elementsByNativeView = new Map<
+    StackLayout,
+    NativeElementNode<StackLayout>
+  >();
+  @tracked private listViewElement?: NativeElementNode<NativeListView>;
 
-  get items(): Ref<T>[] {
-    return this.elementRefs
-      .filter((x) => x.index < this.args.items.length)
-      .map(({ element, index }) => {
-        return {
-          index,
-          item: this.args.items[index] || null,
-          element,
-        };
-      });
+  get items() {
+    const elementRefs = this.elementRefs;
+    const args = this.args;
+    // Read ONLY the set of keys (the realized row elements) here, never any
+    // per-row value. A recycle rebinds a single row's index via
+    // `elementRefs.set`, which bumps only that row's value cell - so it must
+    // not be read in this getter, or every recycle would re-run the whole
+    // `keys().map()` and re-diff the `{{#each}}` (that array rebuild per
+    // scroll frame is the cost we're avoiding). The per-row `inRange`/`item`
+    // getters below each read only their own row's cell, so a recycle
+    // invalidates just that one row's `{{#in-element}}` block.
+    return elementRefs.keys().map((element) => {
+      return {
+        element,
+        // True when this row's bound index is valid for the current items.
+        // After the list shrinks, a recycled row still exists as a key but
+        // may point past the end; the template guards on this so such a row
+        // renders nothing rather than yielding a `null` item into `:item`.
+        get inRange(): boolean {
+          const index = elementRefs.get(element);
+          return index !== undefined && index < args.items.length;
+        },
+        get item(): T | null {
+          const index = elementRefs.get(element);
+          if (index === undefined) {
+            return null;
+          }
+          return args.items[index] ?? null;
+        },
+      };
+    });
   }
 
   get itemKey() {
-    if (this.args.key) {
-      return 'item.' + this.args.key;
-    }
-    return 'item';
-  }
-
-  cleanup(listView: NativeElementNode<NativeListView>) {
-    for (const elementRef of this.elementRefs) {
-      const n = elementRef.element.nativeView.nativeViewProtected;
-      if (!n || !n.getWindowToken()) {
-        elementRef.element.parentNode?.removeChild(elementRef.element);
-        ((listView.nativeView as any)._realizedItems).delete(
-          elementRef.element.nativeView,
-        );
-        this.elementRefsByNativeView.delete(elementRef.element.nativeView);
-      }
-    }
-    this.elementRefs = this.elementRefs.filter(
-      (e) => !!e.element.nativeView.nativeViewProtected?.getWindowToken(),
-    );
+    // Rows are keyed by the stable stack-layout element rather than the
+    // item value, so recycling a row (rebinding it to a new index) reuses
+    // the same `{{#in-element}}` destination instead of tearing it down.
+    return 'element';
   }
 
   // Public methods
@@ -126,6 +139,20 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
     };
   }
 
+  cleanup(listView: NativeElementNode<NativeListView>) {
+    for (const element of this.elementRefs.keys()) {
+      const n = element.nativeView.nativeViewProtected;
+      if (!n || !n.getWindowToken()) {
+        element.parentNode?.removeChild(element);
+        ((listView.nativeView as any)._realizedItems).delete(
+          element.nativeView,
+        );
+        this.elementRefs.delete(element);
+        this.elementsByNativeView.delete(element.nativeView);
+      }
+    }
+  }
+
   setupListView = modifier(
     function setupListView(
       this: ListView<T>,
@@ -136,16 +163,10 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
       
       function _getDefaultItemContent(index: number) {
         listViewComponent.cleanup(listView);
-        const sl = DocumentNode.createElement('stack-layout');
+        const sl = DocumentNode.createElement('stack-layout') as NativeElementNode<StackLayout>;
         listView.appendChild(sl);
-        const ref: Ref<T> = {
-          element: sl,
-          item: null,
-          index,
-        };
-        listViewComponent.elementRefs.push(ref);
-        listViewComponent.elementRefsByNativeView.set(sl.nativeView, ref);
-        listViewComponent.elementRefs = [...listViewComponent.elementRefs];
+        listViewComponent.elementRefs.set(sl, index);
+        listViewComponent.elementsByNativeView.set(sl.nativeView, sl);
         return sl.nativeView;
       }
       (listView.nativeView as any)._getDefaultItemContent =
@@ -154,14 +175,15 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
         stackLayout: StackLayout,
         index: number,
       ) => {
-        const ref = listViewComponent.elementRefsByNativeView.get(
-          stackLayout,
-        )!;
-        if (ref.index === index) {
+        const element = listViewComponent.elementsByNativeView.get(stackLayout);
+        if (!element) {
           return;
         }
-        ref.index = index;
-        listViewComponent.elementRefs = [...listViewComponent.elementRefs];
+        if (listViewComponent.elementRefs.get(element) === index) {
+          return;
+        }
+        // Rebind just this row; only this row's tracked cell bumps.
+        listViewComponent.elementRefs.set(element, index);
       };
       
       // Event handlers
@@ -233,7 +255,9 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
     {{yield this.publicApi to='publicApi'}}
     {{#each this.items key=this.itemKey as |item|}}
       {{#in-element item.element}}
-        {{yield item.item to='item'}}
+        {{#if item.inRange}}
+          {{yield item.item to='item'}}
+        {{/if}}
       {{/in-element}}
     {{/each}}
   </template>
