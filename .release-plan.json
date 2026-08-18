@@ -2,8 +2,8 @@
   "solution": {
     "ember-native": {
       "impact": "patch",
-      "oldVersion": "5.0.2",
-      "newVersion": "5.0.3",
+      "oldVersion": "5.0.3",
+      "newVersion": "5.0.4",
       "tagName": "latest",
       "constraints": [
         {
@@ -20,5 +20,5 @@
       "oldVersion": "1.0.0"
     }
   },
-  "description": "## Release (2026-08-16)\n\n* ember-native 5.0.3 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#425](https://github.com/ember-native/ember-native/pull/425) Fix broken default-export _app_ reexport stubs for index barrel files ([@patricklx](https://github.com/patricklx))\n  * [#426](https://github.com/ember-native/ember-native/pull/426) Add maybeSetupInspectorSupport as the safe inspector-support entrypoint ([@patricklx](https://github.com/patricklx))\n  * [#428](https://github.com/ember-native/ember-native/pull/428) Add regression test + docs for textContent after a native tap ([@patricklx](https://github.com/patricklx))\n  * [#429](https://github.com/ember-native/ember-native/pull/429) Add DocumentNode.getElementsByTagName/querySelector so Vite's preload helper stops crashing ([@patricklx](https://github.com/patricklx))\n  * [#423](https://github.com/ember-native/ember-native/pull/423) Add withTemplateForTest helper + docs for testing <page>-rooted components ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-08-17)\n\n* ember-native 5.0.4 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#431](https://github.com/ember-native/ember-native/pull/431) fix(RadListView): avoid backtracking-rerender assertion from TrackedMap.structure ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
