@@ -67,32 +67,34 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
   get items() {
     const elementRefs = this.elementRefs;
     const args = this.args;
-    // Exclude rows whose bound index is out of range for the current items
-    // (e.g. after the list shrinks, recycled rows still exist as keys but
-    // point past the end). Rendering those would yield a `null` item into
-    // the `:item` block. Reading each row's index here does subscribe this
-    // getter to that row's value cell, so a single row's index changing
-    // re-runs the filter - but that's exactly when a row can cross the
-    // in-range boundary, so it's the correct (and still per-row-scoped)
-    // dependency.
-    return elementRefs
-      .keys()
-      .filter((element) => {
-        const index = elementRefs.get(element);
-        return index !== undefined && index < args.items.length;
-      })
-      .map((element) => {
-        return {
-          element,
-          get item(): T | null {
-            const index = elementRefs.get(element);
-            if (index === undefined) {
-              return null;
-            }
-            return args.items[index] ?? null;
-          },
-        };
-      });
+    // Read ONLY the set of keys (the realized row elements) here, never any
+    // per-row value. A recycle rebinds a single row's index via
+    // `elementRefs.set`, which bumps only that row's value cell - so it must
+    // not be read in this getter, or every recycle would re-run the whole
+    // `keys().map()` and re-diff the `{{#each}}` (that array rebuild per
+    // scroll frame is the cost we're avoiding). The per-row `inRange`/`item`
+    // getters below each read only their own row's cell, so a recycle
+    // invalidates just that one row's `{{#in-element}}` block.
+    return elementRefs.keys().map((element) => {
+      return {
+        element,
+        // True when this row's bound index is valid for the current items.
+        // After the list shrinks, a recycled row still exists as a key but
+        // may point past the end; the template guards on this so such a row
+        // renders nothing rather than yielding a `null` item into `:item`.
+        get inRange(): boolean {
+          const index = elementRefs.get(element);
+          return index !== undefined && index < args.items.length;
+        },
+        get item(): T | null {
+          const index = elementRefs.get(element);
+          if (index === undefined) {
+            return null;
+          }
+          return args.items[index] ?? null;
+        },
+      };
+    });
   }
 
   get itemKey() {
@@ -253,7 +255,9 @@ export default class ListView<T> extends Component<ListViewInterface<T>> {
     {{yield this.publicApi to='publicApi'}}
     {{#each this.items key=this.itemKey as |item|}}
       {{#in-element item.element}}
-        {{yield item.item to='item'}}
+        {{#if item.inRange}}
+          {{yield item.item to='item'}}
+        {{/if}}
       {{/in-element}}
     {{/each}}
   </template>
