@@ -78,7 +78,7 @@
     "ember-auto-import": "^2.10.0",
     "ember-cli": "~6.12.0",
     "ember-cli-version-checker": "^5.1.2",
-    "ember-qunit": "^9.0.4",
+    "ember-qunit": "^9.1.0",
     "ember-resolver": "^13.1.1",
     "ember-routable-component": "^1.2.0",
     "ember-template-lint": "^7.9.1",
