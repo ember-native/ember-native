@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2026-08-18)
 
 * ember-native 5.0.5 (patch)
