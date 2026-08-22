@@ -80,7 +80,7 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.28.5",
+    "@babel/eslint-parser": "^8.0.1",
     "@babel/types": "^7.28.5",
     "@ember/optional-features": "^3.0.0",
     "@embroider/addon-dev": "^8.1.0",
