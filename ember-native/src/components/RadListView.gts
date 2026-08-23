@@ -80,11 +80,19 @@ export default class RadListView<T = any> extends Component<
       listView: NativeElementNode<NativeRadListView>,
     ) {
       this.listView = listView;
-      listView.nativeView.on('itemRecyclingInternal', () => {
-        this.cleanup(listView);
-      });
       const listViewComponent = this;
       function _getDefaultItemContent() {
+        // Prune any window-detached rows only when a new row element is actually being
+        // realized - matching ListView's `_getDefaultItemContent`. Previously `cleanup`
+        // was wired to fire on *every* `itemRecyclingInternal` event, i.e. on every cell
+        // recycle during a scroll, sweeping the whole `elementRefs` map each time (O(n) per
+        // recycle -> O(n^2) per screenful) and, whenever it deleted an entry, bumping the
+        // TrackedMap's `structure` signal - which re-runs the `items` getter's
+        // `keys().map()` and re-diffs the entire `{{#each}}`. That whole-list rebuild on the
+        // scroll path is exactly the fast-scroll lag ListView was already fixed to avoid.
+        // A brand-new element is only realized when the native list runs out of recyclable
+        // views, so this keeps cleanup off the steady-state scroll path.
+        listViewComponent.cleanup(listView);
         const sl = DocumentNode.createElement('stack-layout');
         listView.appendChild(sl);
         Object.defineProperty(sl.nativeView, 'parent', {
