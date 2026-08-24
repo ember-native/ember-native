@@ -113,4 +113,12 @@ export default class TrackedMap<K, V> {
     this.structure.read();
     return [...this.map.keys()];
   }
+
+  // Untracked entry count. Deliberately does NOT read `structure`, so it can
+  // be used on native (non-tracked) callback paths to cheaply decide whether a
+  // structural change is even necessary, without pulling the caller into
+  // autotracking.
+  get size(): number {
+    return this.map.size;
+  }
 }

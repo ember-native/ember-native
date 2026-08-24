@@ -35,6 +35,16 @@ export default class RadListView<T = any> extends Component<
   private declare footerElement: NativeElementNode<StackLayout>;
 
   cleanup(listView: NativeElementNode<NativeRadListView>) {
+    // Only sweep when there are more realized rows than items being displayed,
+    // i.e. the list actually shrank and left rows orphaned/window-detached.
+    // During steady-state scroll the realized-row count tracks the visible
+    // window and never exceeds `@items.length`, so this guard keeps the O(n)
+    // sweep - and the `elementRefs.delete` that dirties the TrackedMap's
+    // `structure` signal and re-diffs the whole `{{#each}}` - off the hot
+    // recycle path that caused fast-scroll lag.
+    if (this.elementRefs.size <= (this.args.items?.length ?? 0)) {
+      return;
+    }
     for (const element of this.elementRefs.keys()) {
       const n = element.nativeView.nativeViewProtected;
       if (!n || !n.getWindowToken()) {
@@ -81,17 +91,19 @@ export default class RadListView<T = any> extends Component<
     ) {
       this.listView = listView;
       const listViewComponent = this;
+      // Prune window-detached rows when the native list recycles cells. The
+      // `cleanup` guard makes this a cheap no-op during steady-state scroll
+      // (realized rows never exceed `@items.length`) and only performs the
+      // O(n) sweep + structure bump when the list actually shrank and left
+      // rows orphaned - e.g. `@items` going from 2 entries to 1. Without this,
+      // a shrink recycles a row without realizing a new element, so the stale
+      // row's content would linger in the tree.
+      listView.nativeView.on('itemRecyclingInternal', () => {
+        listViewComponent.cleanup(listView);
+      });
       function _getDefaultItemContent() {
-        // Prune any window-detached rows only when a new row element is actually being
-        // realized - matching ListView's `_getDefaultItemContent`. Previously `cleanup`
-        // was wired to fire on *every* `itemRecyclingInternal` event, i.e. on every cell
-        // recycle during a scroll, sweeping the whole `elementRefs` map each time (O(n) per
-        // recycle -> O(n^2) per screenful) and, whenever it deleted an entry, bumping the
-        // TrackedMap's `structure` signal - which re-runs the `items` getter's
-        // `keys().map()` and re-diffs the entire `{{#each}}`. That whole-list rebuild on the
-        // scroll path is exactly the fast-scroll lag ListView was already fixed to avoid.
-        // A brand-new element is only realized when the native list runs out of recyclable
-        // views, so this keeps cleanup off the steady-state scroll path.
+        // Also prune on element realize (matching ListView's
+        // `_getDefaultItemContent`) so a brand-new row triggers a sweep too.
         listViewComponent.cleanup(listView);
         const sl = DocumentNode.createElement('stack-layout');
         listView.appendChild(sl);
