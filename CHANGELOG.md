@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-08-24)
+
+* ember-native 5.0.6 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#439](https://github.com/ember-native/ember-native/pull/439) perf(RadListView): keep cleanup off the hot recycle path, prune only on shrink ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-08-18)
 
 * ember-native 5.0.5 (patch)
