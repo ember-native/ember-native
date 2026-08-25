@@ -81,7 +81,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.5",
-    "@babel/types": "^7.28.5",
+    "@babel/types": "^8.0.4",
     "@ember/optional-features": "^3.0.0",
     "@embroider/addon-dev": "^8.1.0",
     "@embroider/compat": "^4.1.11",
