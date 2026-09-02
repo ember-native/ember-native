@@ -43,7 +43,7 @@ export class Page extends Component {
                 </action-bar>
                 <stack-layout>
                     {{(this.start)}}
-                    <ListView @items={{this.list}}>
+                    <ListView height="100%" @items={{this.list}}>
                         <:item as |item|>
                             <LinkTo @route='list-view.item' @model={{hash index=item}}>
                                 <label>
