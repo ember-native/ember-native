@@ -5,30 +5,18 @@ import { on } from "@ember/modifier";
 import { hash } from "@ember/helper";
 import { service } from "@ember/service";
 import Component from "@glimmer/component";
-import {tracked} from "@glimmer/tracking";
 import LinkTo from '../ui/components/link-to';
 import { incrementPageConstructCount } from '../lib/list-view-render-count';
 
 export class Page extends Component {
     @service('ember-native/history') history!: HistoryService;
-    @tracked list = ['a', 'b', 'c'];
+    list = ['a', 'b', 'c'];
 
     constructor(...args: ConstructorParameters<typeof Component>) {
         super(...args);
         incrementPageConstructCount();
     }
 
-    start = () => {
-        const lists = [
-            ['a', 'b', 'c'],
-            ['a', 'b', 'c', 'd', 'e'],
-            ['1', '2', '3'],
-            ['1', '2', '3', '4', '5']
-        ];
-        setInterval(() => {
-            this.list = lists[Math.floor(Math.random() * lists.length)];
-        }, 200);
-    }
     <template>
         <PageStackOutlet @routeName='list-view' as |isChildActive|>
             <page id='list-view-page' visibility={{if isChildActive 'collapse' 'visible'}}>
@@ -42,7 +30,6 @@ export class Page extends Component {
                     />
                 </action-bar>
                 <stack-layout>
-                    {{(this.start)}}
                     <ListView height="100%" @items={{this.list}}>
                         <:item as |item|>
                             <LinkTo @route='list-view.item' @model={{hash index=item}}>
