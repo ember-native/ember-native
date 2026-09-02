@@ -1,4 +1,4 @@
-import { visit, click, settled } from '@ember/test-helpers';
+import { visit, click, settled, waitFor } from '@ember/test-helpers';
 import { setupApplicationTest } from '../helpers';
 import ENV from '~/config/env';
 import { pageConstructCount } from '~/lib/list-view-render-count';
@@ -23,6 +23,11 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       );
 
       // Tap the first row - navigates into the nested `list-view.item` route.
+      // `ListView` rows are realized by a native (Android RecyclerView)
+      // layout/bind pass that isn't tracked by Ember's run loop, so the row's
+      // `<button>` isn't guaranteed to exist the moment `settled()` resolves
+      // - `waitFor` polls until it does.
+      await waitFor('button');
       await click('button');
       const itemPage = ENV.rootElement.getElementById('item-page');
       assert.true(
