@@ -362,9 +362,15 @@ class Wizard extends Component {
 ```
 
 ```gts
-// step-one.gts - every pushed component must accept `@isActive` and apply
-// it to its own root element's `visibility`
-class StepOne extends Component {
+// step-one.gts - a pushed component that uses `@isActive` needs it declared
+// in its own Args signature, and applies it to its own root element's
+// `visibility`. A pushed component that ignores `@isActive` entirely (e.g.
+// static content with nothing to hide) doesn't need either.
+interface StepOneSignature {
+  Args: { isActive: boolean };
+}
+
+class StepOne extends Component<StepOneSignature> {
   <template>
     <stack-layout visibility={{if @isActive 'visible' 'collapse'}}>
       {{! ...this step's own content... }}
