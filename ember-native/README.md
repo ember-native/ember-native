@@ -329,34 +329,38 @@ evicted - only `activeKey` changes when navigating back and forth.
 ```gts
 import { PageStackView } from 'ember-native/components/index';
 import PageStack from 'ember-native/page-stack';
-import { component } from '@ember/helper';
+import { on } from '@ember/modifier';
+import { fn } from '@ember/helper';
+import StepOne from './step-one';
 
 class Wizard extends Component {
   stack = new PageStack();
-
-  constructor(owner, args) {
-    super(owner, args);
-    this.stack.push(component(StepOne), 'step-one');
-  }
-
-  next = () => {
-    this.stack.push(component(StepTwo, { onDone: this.finish }), 'step-two');
-  };
-
+  push = (content, key) => this.stack.push(content, key);
   back = () => this.stack.pop();
 
   <template>
     <PageStackView @stack={{this.stack}} />
+    <button {{on 'tap' (fn this.push StepOne 'step-one')}}>Start</button>
   </template>
 }
 ```
 
-Each pushed entry is a curried component (from the `component` helper, or
-just a bare component class with no args) - `PageStackView` renders
-`<entry.content />` for every entry ever pushed, showing only the one whose
-`key` matches `stack.activeKey`. `pop()` reactivates the previous entry
-without destroying either one; `evict(key)` removes an entry for good, so
-pushing it again later renders it fresh.
+An entry's `content` is anything invokable as a component - a bare component
+class (as pushed above, with no args), or, for a step that needs args bound
+in, a curried component built with the `{{component}}` template helper at
+the call site, e.g. from `StepOne`'s own template (`@push` passed down from
+`Wizard` above):
+
+```gts
+<button {{on 'tap' (fn @push (component StepTwo onDone=@onDone) 'step-two')}}>
+  Next
+</button>
+```
+
+`PageStackView` renders `<entry.content />` for every entry ever pushed,
+showing only the one whose `key` matches `stack.activeKey`. `pop()`
+reactivates the previous entry without destroying either one; `evict(key)`
+removes an entry for good, so pushing it again later renders it fresh.
 
 ### A caveat: querying by tag name across a stack
 

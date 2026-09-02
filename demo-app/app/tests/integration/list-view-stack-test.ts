@@ -13,6 +13,15 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       await visit('/list-view');
       const constructCountAfterFirstVisit = pageConstructCount;
 
+      // The same `<page>` element throughout - PageStackOutlet must never
+      // remove/recreate it, only toggle its wrapper's `visibility`.
+      const listPage = ENV.rootElement.getElementById('list-view-page');
+      assert.equal(
+        listPage?.parentNode?.getAttribute('visibility'),
+        'visible',
+        'list wrapper starts visible'
+      );
+
       // Tap the first row - navigates into the nested `list-view.item` route.
       await click('button');
       const itemPage = ENV.rootElement.getElementById('item-page');
@@ -20,15 +29,33 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
         !!itemPage?.getElementByTagName('actionbar')?.getAttribute('title')?.startsWith('Item'),
         'navigated to the item route'
       );
+      assert.equal(
+        listPage?.parentNode?.getAttribute('visibility'),
+        'collapse',
+        'list wrapper is collapsed, not removed, while the item route is active'
+      );
+      assert.equal(
+        itemPage?.parentNode?.getAttribute('visibility'),
+        'visible',
+        'item wrapper is visible'
+      );
 
       const history = this.owner.lookup('service:ember-native/history') as HistoryService;
       history.back();
       await settled();
 
-      const listPage = ENV.rootElement.getElementById('list-view-page');
       assert.true(
         !!listPage?.getElementByTagName('actionbar')?.getAttribute('title')?.includes('List View'),
         'back on the list route'
+      );
+      assert.equal(
+        listPage?.parentNode?.getAttribute('visibility'),
+        'visible',
+        'list wrapper is visible again after going back'
+      );
+      assert.notOk(
+        ENV.rootElement.getElementById('item-page'),
+        'the item route was torn down by going back'
       );
       assert.equal(
         pageConstructCount,
