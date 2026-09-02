@@ -30,8 +30,8 @@ export class Page extends Component {
         }, 200);
     }
     <template>
-        <PageStackOutlet @routeName='list-view'>
-            <page id='list-view-page'>
+        <PageStackOutlet @routeName='list-view' as |isChildActive|>
+            <page id='list-view-page' visibility={{if isChildActive 'collapse' 'visible'}}>
                 <action-bar title="List View">
                     <navigation-button
                         {{on 'tap' this.history.back}}

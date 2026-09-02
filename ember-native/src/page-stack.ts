@@ -8,8 +8,14 @@ export interface PageStackEntry {
   // A renderable value - typically a curried component obtained from the
   // `component` helper (e.g. `(component DetailPage item=item)`), so it can
   // be invoked in a template as `<entry.content />` with its args already
-  // bound. Rendered by `PageStackView`.
-  content: ComponentLike;
+  // bound. Rendered by `PageStackView`, which invokes it with an `@isActive`
+  // boolean - the component is responsible for applying it as its own root
+  // element's `visibility` (e.g. `visibility={{if @isActive 'visible'
+  // 'collapse'}}`). `PageStackView` deliberately doesn't wrap entries in a
+  // container of its own to toggle for them: a `<page>` can only be a
+  // direct child of a `<frame>` (or the app's own root), so wrapping one
+  // here would crash at runtime ("Page can only be nested inside Frame").
+  content: ComponentLike<{ Args: { isActive: boolean } }>;
 }
 
 /**
@@ -32,7 +38,10 @@ export default class PageStack {
   }
 
   /** Pushes (or, if `key` is already present, reactivates) an entry. */
-  push(content: ComponentLike, key: PageStackEntry['key'] = nextKey++) {
+  push(
+    content: PageStackEntry['content'],
+    key: PageStackEntry['key'] = nextKey++,
+  ) {
     if (!this.entries.some((entry) => entry.key === key)) {
       this.entries = [...this.entries, { key, content }];
     }

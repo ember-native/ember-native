@@ -10,18 +10,25 @@ export interface PageStackOutletSignature {
     routeName: string;
   };
   Blocks: {
-    default: [];
+    // `isChildActive` - apply it as the `visibility` of your own `<page>`
+    // directly (e.g. `visibility={{if isChildActive 'collapse' 'visible'}}`).
+    // This component deliberately renders no native element of its own: a
+    // `<page>` can only be a direct child of a `<frame>` (or the app's own
+    // root) - wrapping it in a container here to toggle its visibility
+    // would break that and crash at runtime ("Page can only be nested
+    // inside Frame").
+    default: [isChildActive: boolean];
   };
 }
 
-// Wraps a route's own content (yielded) alongside `{{outlet}}`, toggling
-// `visibility` between the two instead of letting the outlet's content
-// replace the parent's. Ember never tears down a route's rendered output
+// Yields whether one of `@routeName`'s child routes is currently active,
+// alongside `{{outlet}}`. Ember never tears down a route's rendered output
 // while any of its child routes are active, so the yielded content (e.g. a
-// list `<page>`) is already never destroyed by entering a child route
-// (e.g. an item detail `<page>`) - this component only makes that state
-// visible/hidden correctly, so navigating back to the parent shows it
-// instantly instead of appearing to require a re-render.
+// list `<page>`) is already never destroyed by entering a child route (e.g.
+// an item detail `<page>`) - toggling its own `visibility` off that boolean
+// is all that's needed to make that state visible/hidden correctly, so
+// navigating back to the parent shows it instantly instead of appearing to
+// require a re-render.
 export default class PageStackOutlet extends Component<PageStackOutletSignature> {
   @service router!: Router;
 
@@ -32,15 +39,11 @@ export default class PageStackOutlet extends Component<PageStackOutletSignature>
   }
 
   <template>
-    <stack-layout visibility={{if this.isChildActive 'collapse' 'visible'}}>
-      {{yield}}
-    </stack-layout>
-    <stack-layout visibility={{if this.isChildActive 'visible' 'collapse'}}>
-      {{! template-lint-disable no-outlet-outside-routes }}
-      {{! This component IS the intended place for a route's child content to
-          render, as an alternative to a bare outlet directly in a route
-          template - the rule's file-path heuristic can't know that. }}
-      {{outlet}}
-    </stack-layout>
+    {{yield this.isChildActive}}
+    {{! template-lint-disable no-outlet-outside-routes }}
+    {{! This component IS the intended place for a route's child content to
+        render, as an alternative to a bare outlet directly in a route
+        template - the rule's file-path heuristic can't know that. }}
+    {{outlet}}
   </template>
 }

@@ -14,12 +14,12 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       const constructCountAfterFirstVisit = pageConstructCount;
 
       // The same `<page>` element throughout - PageStackOutlet must never
-      // remove/recreate it, only toggle its wrapper's `visibility`.
+      // remove/recreate it, only toggle its own `visibility`.
       const listPage = ENV.rootElement.getElementById('list-view-page');
       assert.equal(
-        listPage?.parentNode?.getAttribute('visibility'),
+        listPage?.getAttribute('visibility'),
         'visible',
-        'list wrapper starts visible'
+        'list page starts visible'
       );
 
       // Tap the first row - navigates into the nested `list-view.item` route.
@@ -30,14 +30,9 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
         'navigated to the item route'
       );
       assert.equal(
-        listPage?.parentNode?.getAttribute('visibility'),
+        listPage?.getAttribute('visibility'),
         'collapse',
-        'list wrapper is collapsed, not removed, while the item route is active'
-      );
-      assert.equal(
-        itemPage?.parentNode?.getAttribute('visibility'),
-        'visible',
-        'item wrapper is visible'
+        'list page is collapsed, not removed, while the item route is active'
       );
 
       const history = this.owner.lookup('service:ember-native/history') as HistoryService;
@@ -49,9 +44,9 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
         'back on the list route'
       );
       assert.equal(
-        listPage?.parentNode?.getAttribute('visibility'),
+        listPage?.getAttribute('visibility'),
         'visible',
-        'list wrapper is visible again after going back'
+        'list page is visible again after going back'
       );
       assert.notOk(
         ENV.rootElement.getElementById('item-page'),

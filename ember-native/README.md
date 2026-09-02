@@ -270,6 +270,15 @@ give you the equivalent for Ember-router-driven and manually-driven
 navigation respectively, by keeping the relevant component(s) mounted and
 only toggling `visibility` between them.
 
+A `<page>` can only be a direct child of a `<frame>` (or the app's own root -
+see "Testing page-rooted components" above) - wrapping one in an extra
+container to toggle its visibility crashes at runtime with `Page can only be
+nested inside Frame`. So neither `PageStackOutlet` nor `PageStackView`
+introduces a wrapper of its own: both hand you a plain boolean instead, which
+you apply as the `visibility` of your own root element directly (the same
+pattern `demo-app/app/routes/list-view.gts` already uses for its back
+button's `visibility`).
+
 ### Sub-routes, via `PageStackOutlet`
 
 Ember never tears down a route's rendered output while any of its child
@@ -277,9 +286,11 @@ routes are active - the parent route's own component simply isn't destroyed
 by entering a child route. What's missing without `PageStackOutlet` is
 somewhere for the child's `<page>` to render other than replacing the
 parent's: a bare `{{outlet}}` swaps the parent's content out to make room for
-it. `PageStackOutlet` instead renders both, toggling which is visible, so
-navigating into a child route and back is instant - the parent's `<page>`
-was never re-rendered because it was never removed:
+it. `PageStackOutlet` renders both the parent's own content and `{{outlet}}`,
+yielding whether a child route is currently active so you can collapse the
+parent's `<page>` while it is - navigating into a child route and back is
+then instant, because the parent's `<page>` was never re-rendered, only
+hidden and shown again:
 
 ```gts
 // routes/list-view.gts
@@ -287,8 +298,8 @@ import { PageStackOutlet } from 'ember-native/components/index';
 
 class Page extends Component {
   <template>
-    <PageStackOutlet @routeName='list-view'>
-      <page>
+    <PageStackOutlet @routeName='list-view' as |isChildActive|>
+      <page visibility={{if isChildActive 'collapse' 'visible'}}>
         {{! ...the list-view route's own content... }}
       </page>
     </PageStackOutlet>
@@ -309,6 +320,10 @@ class Page extends Component {
 }
 ```
 
+The child route's own `<page>` needs no visibility handling of its own -
+Ember only mounts it while it's (part of) the active route, so it should
+simply be visible whenever it's mounted.
+
 `@routeName` must match the owning route's own name (`'list-view'`, not
 `'list-view.item'`) - `PageStackOutlet` compares it against the router's
 `currentRouteName` to decide whether a descendant route is active. This
@@ -324,7 +339,8 @@ For navigation that isn't router-driven (e.g. a wizard, or master/detail
 inside a single route), use the `PageStack` class directly: it's a small
 tracked stack of entries that, once pushed, stay mounted until explicitly
 evicted - only `activeKey` changes when navigating back and forth.
-`PageStackView` renders one for you:
+`PageStackView` renders one for you, invoking each pushed entry with an
+`@isActive` boolean:
 
 ```gts
 import { PageStackView } from 'ember-native/components/index';
@@ -345,6 +361,18 @@ class Wizard extends Component {
 }
 ```
 
+```gts
+// step-one.gts - every pushed component must accept `@isActive` and apply
+// it to its own root element's `visibility`
+class StepOne extends Component {
+  <template>
+    <stack-layout visibility={{if @isActive 'visible' 'collapse'}}>
+      {{! ...this step's own content... }}
+    </stack-layout>
+  </template>
+}
+```
+
 An entry's `content` is anything invokable as a component - a bare component
 class (as pushed above, with no args), or, for a step that needs args bound
 in, a curried component built with the `{{component}}` template helper at
@@ -357,10 +385,11 @@ the call site, e.g. from `StepOne`'s own template (`@push` passed down from
 </button>
 ```
 
-`PageStackView` renders `<entry.content />` for every entry ever pushed,
-showing only the one whose `key` matches `stack.activeKey`. `pop()`
-reactivates the previous entry without destroying either one; `evict(key)`
-removes an entry for good, so pushing it again later renders it fresh.
+`PageStackView` renders `<entry.content @isActive={{...}} />` for every
+entry ever pushed, `@isActive` true only for the one whose `key` matches
+`stack.activeKey`. `pop()` reactivates the previous entry without destroying
+either one; `evict(key)` removes an entry for good, so pushing it again
+later renders it fresh.
 
 ### A caveat: querying by tag name across a stack
 
