@@ -258,6 +258,117 @@ end-to-end instead, via `setupApplicationTest` + `visit()` (see
 app and its native `Application`.
 
 
+Page stacks - avoiding re-renders when navigating back and forth
+------------------------------------------------------------------------------
+
+NativeScript's own `Frame` keeps every navigated-to `Page` around in a native
+backstack, so going back to one shows the same, already-laid-out native view
+instead of recreating it. This app's routes don't render under a real
+`<frame>` (see "Testing page-rooted components" above), so that behavior
+isn't available for free - `PageStackOutlet` and `PageStack`/`PageStackView`
+give you the equivalent for Ember-router-driven and manually-driven
+navigation respectively, by keeping the relevant component(s) mounted and
+only toggling `visibility` between them.
+
+### Sub-routes, via `PageStackOutlet`
+
+Ember never tears down a route's rendered output while any of its child
+routes are active - the parent route's own component simply isn't destroyed
+by entering a child route. What's missing without `PageStackOutlet` is
+somewhere for the child's `<page>` to render other than replacing the
+parent's: a bare `{{outlet}}` swaps the parent's content out to make room for
+it. `PageStackOutlet` instead renders both, toggling which is visible, so
+navigating into a child route and back is instant - the parent's `<page>`
+was never re-rendered because it was never removed:
+
+```gts
+// routes/list-view.gts
+import { PageStackOutlet } from 'ember-native/components/index';
+
+class Page extends Component {
+  <template>
+    <PageStackOutlet @routeName='list-view'>
+      <page>
+        {{! ...the list-view route's own content... }}
+      </page>
+    </PageStackOutlet>
+  </template>
+}
+```
+
+```gts
+// routes/list-view/item.gts - a child route of `list-view` above
+class Page extends Component {
+  <template>
+    <page>
+      {{! ...the item detail route's own content, including its own
+           back button wired to the `history` service, e.g. via
+           `demo-app/app/routes/list-view.gts`'s pattern... }}
+    </page>
+  </template>
+}
+```
+
+`@routeName` must match the owning route's own name (`'list-view'`, not
+`'list-view.item'`) - `PageStackOutlet` compares it against the router's
+`currentRouteName` to decide whether a descendant route is active. This
+composes for arbitrarily deep nesting: if `list-view.item` itself wraps its
+own content in another `PageStackOutlet` (`@routeName='list-view.item'`), a
+further child route stacks on top of it the same way, independently of the
+`list-view` outlet above it. See `demo-app/app/routes/list-view.gts` and
+`demo-app/app/routes/list-view/item.gts` for a complete example.
+
+### Manual stacks, via `PageStack`/`PageStackView`
+
+For navigation that isn't router-driven (e.g. a wizard, or master/detail
+inside a single route), use the `PageStack` class directly: it's a small
+tracked stack of entries that, once pushed, stay mounted until explicitly
+evicted - only `activeKey` changes when navigating back and forth.
+`PageStackView` renders one for you:
+
+```gts
+import { PageStackView } from 'ember-native/components/index';
+import PageStack from 'ember-native/page-stack';
+import { component } from '@ember/helper';
+
+class Wizard extends Component {
+  stack = new PageStack();
+
+  constructor(owner, args) {
+    super(owner, args);
+    this.stack.push(component(StepOne), 'step-one');
+  }
+
+  next = () => {
+    this.stack.push(component(StepTwo, { onDone: this.finish }), 'step-two');
+  };
+
+  back = () => this.stack.pop();
+
+  <template>
+    <PageStackView @stack={{this.stack}} />
+  </template>
+}
+```
+
+Each pushed entry is a curried component (from the `component` helper, or
+just a bare component class with no args) - `PageStackView` renders
+`<entry.content />` for every entry ever pushed, showing only the one whose
+`key` matches `stack.activeKey`. `pop()` reactivates the previous entry
+without destroying either one; `evict(key)` removes an entry for good, so
+pushing it again later renders it fresh.
+
+### A caveat: querying by tag name across a stack
+
+Once more than one page is mounted at a time (either kind of stack),
+`document`/`ViewNode` lookups that search the whole tree by tag - e.g.
+`ENV.rootElement.getElementByTagName('actionbar')` - can match the
+*collapsed* page's element instead of the visible one, since they don't
+filter on `visibility`. Prefer `getElementById` scoped to a known page (give
+each stacked `<page>` a distinct `id`) over a blanket tag search once a
+route uses `PageStackOutlet` - see `demo-app/app/tests/integration/list-view-stack-test.ts`.
+
+
 Reading text content in tests
 ------------------------------------------------------------------------------
 
