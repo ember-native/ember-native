@@ -35,7 +35,15 @@ export default class PageStackOutlet extends Component<PageStackOutletSignature>
   get isChildActive(): boolean {
     const current = this.router.currentRouteName;
     const owner = this.args.routeName;
-    return !!current && current !== owner && current.startsWith(`${owner}.`);
+    // A route with children (like `@routeName` here) gets an implicit
+    // `<owner>.index` route of its own - visiting `owner`'s own URL with no
+    // further path resolves `currentRouteName` to that, not to `owner`. It
+    // isn't a "real" child route rendering anything of its own, so treat it
+    // the same as being on `owner` directly.
+    if (!current || current === owner || current === `${owner}.index`) {
+      return false;
+    }
+    return current.startsWith(`${owner}.`);
   }
 
   <template>
