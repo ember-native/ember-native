@@ -397,6 +397,43 @@ entry ever pushed, `@isActive` true only for the one whose `key` matches
 either one; `evict(key)` removes an entry for good, so pushing it again
 later renders it fresh.
 
+### Animating the transition, via `pageTransition`
+
+Toggling `visibility` directly (as above) swaps pages instantly - there's no
+equivalent of `Frame`'s animated push/pop transitions. `pageTransition` (a
+modifier, `ember-native/modifiers/index`) gets you the closest approximation
+available without a real `<frame>`: apply it in place of the `visibility`
+binding, on the same element:
+
+```gts
+import { pageTransition } from 'ember-native/modifiers/index';
+
+<page id='list-view-page' {{pageTransition (if isChildActive false true)}}>
+```
+
+Its one positional argument is whether the page should be active/visible,
+same sense as `PageStackView`'s `@isActive`. Becoming active fades the page
+in from transparent (`opacity` `0` -> `1` over an optional `duration` in ms,
+default `200`); becoming inactive collapses it immediately, with no fade-out.
+That asymmetry isn't an oversight: fading the outgoing page out too would
+require briefly leaving two pages `visible` at once so they can cross-fade,
+and the `stack-layout` root can't lay out two full-size pages side by side
+without squeezing each into half the space - see the caveat above about
+`<page>` only ever being able to nest under a `<frame>` or the app's own
+root. A real overlapping crossfade, or a directional slide like `Frame`'s
+default transition, would need an overlapping container (e.g. an
+`absolute-layout` per stacked page) instead of `stack-layout` - out of scope
+here, since that's the app's own root element, shared by every consumer.
+
+Because the fade-in is a real native animation, its completion isn't tracked
+by Ember's run loop - `await settled()` (or `click()`/`visit()`, which call
+it internally) resolves as soon as the *reactive* state (routing,
+`visibility`) has settled, not once `opacity` has finished animating to `1`.
+Assertions against `visibility`/other attributes are unaffected (they're set
+synchronously, before the animation starts); if a test needs to assert
+against `opacity` itself, poll for the end state instead of assuming
+`settled()` covers it.
+
 ### A caveat: querying by tag name across a stack
 
 Once more than one page is mounted at a time (either kind of stack),
@@ -406,6 +443,54 @@ Once more than one page is mounted at a time (either kind of stack),
 filter on `visibility`. Prefer `getElementById` scoped to a known page (give
 each stacked `<page>` a distinct `id`) over a blanket tag search once a
 route uses `PageStackOutlet` - see `demo-app/app/tests/integration/list-view-stack-test.ts`.
+
+
+Animated router navigation, via a real `<frame>`
+------------------------------------------------------------------------------
+
+`pageTransition` above approximates a transition without needing a real
+`<frame>`. If your app *does* render its routes under one (unlike this
+package's own `demo-app` - see "Testing page-rooted components" above for
+why that one doesn't), `NativeScript`'s own animated push/pop transitions are
+available through `NativeRouter` (`ember-native/services/native-router`) and
+`HistoryService` (`ember-native/services/history`) instead.
+
+`NativeRouter#transitionTo(name, model, queryParams, transition,
+backTransition)` sets the given `transition` (a NativeScript
+`NavigationTransition`, e.g. `{ name: 'slide', duration: 250 }`) just before
+calling the normal Ember `Router#transitionTo` - `FrameElement` (the `<frame>`
+DOM shim) picks it up the next time a `<page>` is appended/inserted under it
+and passes it straight to the underlying `Frame#navigate()`, which is what
+actually plays the animation. `backTransition`, if given, is what plays when
+navigating back *out* of the destination (stored on the transition and
+replayed by `HistoryService#back()`), letting a push and its corresponding
+pop use different transitions (e.g. slide-in-from-right forward, slide-out-
+to-right back) the same way `Frame`'s own backstack does natively:
+
+```ts
+this.nativeRouter.transitionTo(
+  'list-view.item',
+  item,
+  undefined,
+  { transition: { name: 'slide', direction: 'left' }, animated: true },
+  { transition: { name: 'slide', direction: 'right' }, animated: true },
+);
+```
+
+`HistoryService#back()` (also wired to Android's hardware back button) pops
+its own stack of visited URLs and replays the stored transition via
+`NativeRouter#transitionToURL`, so a consumer generally only needs to call
+`transitionTo` on the way in and `history.back()` on the way out - see
+`demo-app/app/routes/list-view.gts`'s own back button for the latter (used
+there without the `<frame>`/animation piece, since that app doesn't render
+under one).
+
+Note that `FrameElement#appendChild`/`#onInsertedChild` always navigate with
+`clearHistory: true, backstackVisible: false` - every navigation replaces the
+frame's own native backstack rather than pushing onto it, so `<frame>`-based
+apps get animated transitions from this but not a native backstack of their
+own (that's what `PageStackOutlet`/`PageStack` above are for, independent of
+whether you're using a `<frame>`).
 
 
 Reading text content in tests

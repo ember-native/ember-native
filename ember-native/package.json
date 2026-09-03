@@ -163,6 +163,7 @@
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
       "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",
       "./modifiers/ember-native/native-slot.js": "./dist/_app_/modifiers/ember-native/native-slot.js",
+      "./modifiers/ember-native/page-transition.js": "./dist/_app_/modifiers/ember-native/page-transition.js",
       "./services/ember-native/history.js": "./dist/_app_/services/ember-native/history.js",
       "./services/ember-native/native-router.js": "./dist/_app_/services/ember-native/native-router.js"
     }
