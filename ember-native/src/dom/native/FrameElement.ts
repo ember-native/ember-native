@@ -71,6 +71,7 @@ export default class FrameElement extends NativeElementNode {
       childNode.nativeView instanceof Page &&
       this.currentPage !== childNode.nativeView
     ) {
+      this.currentPage = childNode.nativeView;
       this.nativeView.navigate({
         create: () => childNode.nativeView,
         clearHistory: true,
