@@ -68,10 +68,14 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       // one shot (see FrameElement.ts's probeLog) so karma's live-redrawing
       // reporter can't drop any of them, then remove this whole block.
       await new Promise((resolve) => setTimeout(resolve, 6500));
-      console.log(
-        '[frame-probe-dump]',
-        JSON.stringify((globalThis as any).__frameProbeLog),
-      );
+      // One line per entry (not one giant JSON array) - GH Actions truncates
+      // very long single log lines, which was cutting off the later
+      // entries. Logged in a tight synchronous loop so karma's live-
+      // redrawing reporter has no async gap to interleave into.
+      const entries = (globalThis as any).__frameProbeLog as unknown[];
+      for (let i = 0; i < entries.length; i++) {
+        console.log(`[frame-probe-dump] ${i}/${entries.length}`, JSON.stringify(entries[i]));
+      }
     }
   );
 });
