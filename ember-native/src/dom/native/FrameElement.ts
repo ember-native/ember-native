@@ -1,10 +1,29 @@
 import { Frame } from '@nativescript/core/ui/frame';
+import { isFrame } from '@nativescript/core/ui/frame/frame-helpers';
 import type { NavigationTransition, View } from '@nativescript/core';
 
 import { createElement } from '../element-registry.ts';
 import ViewNode from '../nodes/ViewNode.ts';
 import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
+
+// PROBE (todo #525 follow-up) - remove before merging.
+function probeLog(label: string, page: Page, frame: Frame) {
+  const state = () =>
+    JSON.stringify({
+      isFrameOfPage: isFrame((page as any).frame),
+      queueLen: (frame as any)._navigationQueue?.length,
+      currentPageId: (frame as any).currentPage?._domId,
+      thisPageId: (page as any)._domId,
+    });
+  console.log(`[frame-probe] ${label} sync`, state());
+  setTimeout(() => console.log(`[frame-probe] ${label} +0ms`, state()), 0);
+  setTimeout(() => console.log(`[frame-probe] ${label} +500ms`, state()), 500);
+  setTimeout(
+    () => console.log(`[frame-probe] ${label} +1500ms`, state()),
+    1500,
+  );
+}
 
 let nextTransition: {
   transition: NavigationTransition | undefined;
@@ -72,14 +91,22 @@ export default class FrameElement extends NativeElementNode {
       this.currentPage !== childNode.nativeView
     ) {
       this.currentPage = childNode.nativeView;
+      console.log(
+        '[frame-probe] onInsertedChild navigate() start, queueLen before=',
+        (this.nativeView as any)._navigationQueue?.length,
+      );
       this.nativeView.navigate({
         create: () => childNode.nativeView,
-        clearHistory: true,
-        backstackVisible: false,
+        // PROBE: backstack-preserving instead of clearHistory:true, to see
+        // whether a second navigate() queued shortly after the first stalls
+        // when history isn't being cleared.
+        clearHistory: false,
+        backstackVisible: true,
         transition: nextTransition?.transition || {},
         animated: nextTransition?.animated,
       });
       nextTransition = null;
+      probeLog('onInsertedChild->' + childNode.nativeView.id, childNode.nativeView as Page, this.nativeView);
     }
   }
 
@@ -94,6 +121,22 @@ export default class FrameElement extends NativeElementNode {
 
     if (childNode.parentNode !== this) {
       return;
+    }
+
+    console.log(
+      '[frame-probe] removeChild',
+      (childNode as any).nativeView?.id,
+      'backstack before goBack, canGoBack=',
+      this.nativeView.canGoBack?.(),
+    );
+    // PROBE: if the removed node is the frame's current page and it can go
+    // back, drive the frame's own backstack instead of leaving it stuck.
+    if (
+      childNode.nativeView === this.currentPage &&
+      this.nativeView.canGoBack?.()
+    ) {
+      this.nativeView.goBack();
+      probeLog('afterGoBack', this.currentPage as Page, this.nativeView);
     }
 
     childNode.parentNode = null;
