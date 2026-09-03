@@ -64,8 +64,14 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       );
 
       // PROBE (todo #525 follow-up) - keep the app alive long enough to
-      // observe FrameElement's delayed [frame-probe] log lines, then remove.
+      // observe FrameElement's delayed probe entries, then dump them all in
+      // one shot (see FrameElement.ts's probeLog) so karma's live-redrawing
+      // reporter can't drop any of them, then remove this whole block.
       await new Promise((resolve) => setTimeout(resolve, 6500));
+      console.log(
+        '[frame-probe-dump]',
+        JSON.stringify((globalThis as any).__frameProbeLog),
+      );
     }
   );
 });

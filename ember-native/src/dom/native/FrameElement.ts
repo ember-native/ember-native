@@ -8,17 +8,24 @@ import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
 
 // PROBE (todo #525 follow-up) - remove before merging.
+// Accumulates into a global array (instead of console.log-ing immediately)
+// so a single, un-interleaved dump at the very end of the test survives
+// karma's live-redrawing progress reporter, which otherwise appears to
+// silently drop console.log lines that land mid-redraw.
+(globalThis as any).__frameProbeLog = (globalThis as any).__frameProbeLog || [];
 function probeLog(label: string, page: Page, frame: Frame) {
-  const state = () =>
-    JSON.stringify({
-      isFrameOfPage: isFrame((page as any).frame),
-      queueLen: (frame as any)._navigationQueue?.length,
-      currentPageId: (frame as any).currentPage?.id,
-      thisPageId: (page as any).id,
-    });
-  console.log(`[frame-probe] ${label} sync`, state());
+  const entries: any[] = (globalThis as any).__frameProbeLog;
+  const state = () => ({
+    label,
+    t: Date.now(),
+    isFrameOfPage: isFrame((page as any).frame),
+    queueLen: (frame as any)._navigationQueue?.length,
+    currentPageId: (frame as any).currentPage?.id,
+    thisPageId: (page as any).id,
+  });
+  entries.push({ ...state(), when: 'sync' });
   for (const delay of [0, 500, 1500, 3000, 6000]) {
-    setTimeout(() => console.log(`[frame-probe] ${label} +${delay}ms`, state()), delay);
+    setTimeout(() => entries.push({ ...state(), when: `+${delay}ms` }), delay);
   }
 }
 
@@ -88,10 +95,11 @@ export default class FrameElement extends NativeElementNode {
       this.currentPage !== childNode.nativeView
     ) {
       this.currentPage = childNode.nativeView;
-      console.log(
-        '[frame-probe] onInsertedChild navigate() start, queueLen before=',
-        (this.nativeView as any)._navigationQueue?.length,
-      );
+      (globalThis as any).__frameProbeLog.push({
+        when: 'navigate() start',
+        target: childNode.nativeView.id,
+        queueLenBefore: (this.nativeView as any)._navigationQueue?.length,
+      });
       this.nativeView.navigate({
         create: () => childNode.nativeView,
         // PROBE: backstack-preserving instead of clearHistory:true, to see
@@ -120,12 +128,11 @@ export default class FrameElement extends NativeElementNode {
       return;
     }
 
-    console.log(
-      '[frame-probe] removeChild',
-      (childNode as any).nativeView?.id,
-      'backstack before goBack, canGoBack=',
-      this.nativeView.canGoBack?.(),
-    );
+    (globalThis as any).__frameProbeLog.push({
+      when: 'removeChild',
+      target: (childNode as any).nativeView?.id,
+      canGoBack: this.nativeView.canGoBack?.(),
+    });
     // PROBE: if the removed node is the frame's current page and it can go
     // back, drive the frame's own backstack instead of leaving it stuck.
     if (
