@@ -16,7 +16,11 @@ function createFakeView(): AnimatableViewLike & {
     animateCalls,
     animate(options) {
       animateCalls.push(options);
-      return Promise.resolve();
+      const promise = Promise.resolve() as Promise<void> & {
+        cancel?: () => void;
+      };
+      promise.cancel = () => {};
+      return promise;
     },
   };
 }
@@ -80,5 +84,66 @@ test('a fade-in half-finished by an interruption resolves harmlessly once collap
     view.visibility,
     'collapse',
     'the stale fade-in has nothing left to apply on resolve',
+  );
+});
+
+test('active -> inactive -> active before the first fade-in resolves cancels the stale animation', () => {
+  const view = createFakeView();
+  let cancelled = false;
+  view.animate = (options) => {
+    view.animateCalls.push(options);
+    const promise = new Promise<void>(() => {}) as Promise<void> & {
+      cancel?: () => void;
+    };
+    promise.cancel = () => {
+      cancelled = true;
+    };
+    return promise;
+  };
+
+  applyPageTransition(view, true, true, 200);
+  assert.equal(cancelled, false, 'nothing to cancel on the first activation');
+
+  applyPageTransition(view, false, true, 200);
+  applyPageTransition(view, true, true, 200);
+  assert.equal(
+    cancelled,
+    true,
+    'the still-running first fade-in is cancelled before the second one starts',
+  );
+  assert.equal(
+    view.animateCalls.length,
+    2,
+    'both fade-ins were requested, one cancelled and one left running',
+  );
+});
+
+test('a fade-in that already finished is not spuriously cancelled by a later activation', async () => {
+  const view = createFakeView();
+  let cancelCalls = 0;
+  view.animate = (options) => {
+    view.animateCalls.push(options);
+    const promise = Promise.resolve() as Promise<void> & {
+      cancel?: () => void;
+    };
+    promise.cancel = () => {
+      cancelCalls++;
+    };
+    return promise;
+  };
+
+  applyPageTransition(view, true, true, 200);
+  // Let the fade-in's own `.then()` cleanup (clearing its tracked entry once
+  // it resolves) run before navigating away and back.
+  await Promise.resolve();
+  await Promise.resolve();
+
+  applyPageTransition(view, false, true, 200);
+  applyPageTransition(view, true, true, 200);
+
+  assert.equal(
+    cancelCalls,
+    0,
+    'the first fade-in already finished, so there is nothing left to cancel',
   );
 });
