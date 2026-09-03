@@ -62,6 +62,10 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
         constructCountAfterFirstVisit,
         'the list-view Page instance was not re-created by navigating into the item route and back'
       );
+
+      // PROBE (todo #525 follow-up) - keep the app alive long enough to
+      // observe FrameElement's delayed [frame-probe] log lines, then remove.
+      await new Promise((resolve) => setTimeout(resolve, 6500));
     }
   );
 });

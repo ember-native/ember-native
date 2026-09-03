@@ -13,16 +13,13 @@ function probeLog(label: string, page: Page, frame: Frame) {
     JSON.stringify({
       isFrameOfPage: isFrame((page as any).frame),
       queueLen: (frame as any)._navigationQueue?.length,
-      currentPageId: (frame as any).currentPage?._domId,
-      thisPageId: (page as any)._domId,
+      currentPageId: (frame as any).currentPage?.id,
+      thisPageId: (page as any).id,
     });
   console.log(`[frame-probe] ${label} sync`, state());
-  setTimeout(() => console.log(`[frame-probe] ${label} +0ms`, state()), 0);
-  setTimeout(() => console.log(`[frame-probe] ${label} +500ms`, state()), 500);
-  setTimeout(
-    () => console.log(`[frame-probe] ${label} +1500ms`, state()),
-    1500,
-  );
+  for (const delay of [0, 500, 1500, 3000, 6000]) {
+    setTimeout(() => console.log(`[frame-probe] ${label} +${delay}ms`, state()), delay);
+  }
 }
 
 let nextTransition: {
