@@ -38,10 +38,14 @@ class StepTwo extends Component<StepSignature> {
 }
 
 // Regression coverage for the manual `PageStack`/`PageStackView` primitive
-// documented in the README's "Manual stacks" section - unlike
-// `PageStackOutlet`, nothing else in this app exercises it, and this
-// repo's own history is that inspection-clean `.gts` code has repeatedly
-// failed real on-device CI in ways local glint/eslint never catch.
+// documented in the README's "Manual stacks" section - unlike router-driven
+// navigation (see `FrameElement`/`FrameOutlet`), this is for navigation
+// that isn't driven by the Ember router (wizards, master/detail within one
+// route), so it still keeps every pushed entry mounted side by side and
+// toggles `visibility` rather than driving a real `Frame` backstack.
+// Nothing else in this app exercises it, and this repo's own history is
+// that inspection-clean `.gts` code has repeatedly failed real on-device CI
+// in ways local glint/eslint never catch.
 QUnit.module('Unit | PageStack', function (hooks) {
   setupRenderingTest(hooks);
 

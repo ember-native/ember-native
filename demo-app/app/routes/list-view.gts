@@ -1,7 +1,6 @@
 import RoutableComponentRoute from 'ember-routable-component';
 import type HistoryService from 'ember-native/services/history';
-import { ListView, PageStackOutlet } from 'ember-native/components/index';
-import { pageTransition } from 'ember-native/modifiers/index';
+import { ListView, FrameOutlet } from 'ember-native/components/index';
 import { on } from "@ember/modifier";
 import { hash } from "@ember/helper";
 import { service } from "@ember/service";
@@ -19,8 +18,8 @@ export class Page extends Component {
     }
 
     <template>
-        <PageStackOutlet @routeName='list-view' as |isChildActive|>
-            <page id='list-view-page' {{pageTransition (if isChildActive false true)}}>
+        <FrameOutlet>
+            <page id='list-view-page'>
                 <action-bar title="List View">
                     <navigation-button
                         {{on 'tap' this.history.back}}
@@ -42,7 +41,7 @@ export class Page extends Component {
                     </ListView>
                 </stack-layout>
             </page>
-        </PageStackOutlet>
+        </FrameOutlet>
     </template>
 }
 

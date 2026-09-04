@@ -156,9 +156,9 @@
     "type": "addon",
     "main": "addon-main.cjs",
     "app-js": {
+      "./components/ember-native/FrameOutlet.js": "./dist/_app_/components/ember-native/FrameOutlet.js",
       "./components/ember-native/InspectorSupport.js": "./dist/_app_/components/ember-native/InspectorSupport.js",
       "./components/ember-native/ListView.js": "./dist/_app_/components/ember-native/ListView.js",
-      "./components/ember-native/PageStackOutlet.js": "./dist/_app_/components/ember-native/PageStackOutlet.js",
       "./components/ember-native/PageStackView.js": "./dist/_app_/components/ember-native/PageStackView.js",
       "./components/ember-native/RadListView.js": "./dist/_app_/components/ember-native/RadListView.js",
       "./instance-initializers/ember-native/history.js": "./dist/_app_/instance-initializers/ember-native/history.js",

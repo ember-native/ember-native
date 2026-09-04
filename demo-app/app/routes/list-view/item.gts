@@ -29,10 +29,12 @@ export class Page extends Component<PageSignature> {
     </template>
 }
 
-// Navigating here and back is handled by `PageStackOutlet` in the parent
-// `list-view` route (see `demo-app/app/routes/list-view.gts`) - going back
-// shows the list instantly, without re-rendering it, because it was never
-// torn down while this route was active.
+// Navigating here pushes this page onto the real `Frame` backstack
+// (`FrameElement` in `ember-native/src/dom/native/FrameElement.ts`);
+// going back pops it. The parent `list-view` route's own page (wrapped in
+// `FrameOutlet` - see `demo-app/app/routes/list-view.gts`) is never torn
+// down while this route is active, so returning to it shows the list
+// instantly instead of re-rendering it.
 export default class ListViewItemRoute extends RoutableComponentRoute(Page) {
     model(params: { index: string }) {
         return { index: params.index };

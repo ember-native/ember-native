@@ -5,6 +5,7 @@ import type NativeRouter from './native-router.ts';
 import type Router from '@ember/routing/router';
 import type { Transition } from 'router_js';
 import { registerDestructor } from '@ember/destroyable';
+import { setOnUnexpectedBack } from '../dom/native/FrameElement.ts';
 
 /**
  * A snapshot of the URL `back()` should return to, captured from `router.currentURL` in
@@ -39,6 +40,16 @@ export default class HistoryService extends Service {
     registerDestructor(this, () =>
       Application.android?.off('activityBackPressed', this.activityBackPressed),
     );
+
+    // iOS's edge swipe-back gesture pops the frame natively, with no event
+    // to intercept/cancel the way Android's hardware back key has (see
+    // `activityBackPressed` above) - by the time this fires the frame has
+    // already visually gone back a page. `back()` here just resyncs Ember's
+    // router state to match, it never drives the (already-happened) native
+    // pop itself. See `FrameElement`'s `setOnUnexpectedBack` doc comment.
+    setOnUnexpectedBack(() => this.back());
+    registerDestructor(this, () => setOnUnexpectedBack(null));
+
     this.router.on('routeWillChange', (transition) => {
       // The route being left is still current at this point - `didTransition` (which flips
       // `currentURL` to the destination) hasn't run yet. See the `HistoryEntry` doc comment

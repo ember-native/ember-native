@@ -258,57 +258,76 @@ end-to-end instead, via `setupApplicationTest` + `visit()` (see
 app and its native `Application`.
 
 
-Page stacks - avoiding re-renders when navigating back and forth
+Router-driven navigation, via a real `<frame>` backstack
 ------------------------------------------------------------------------------
 
-NativeScript's own `Frame` keeps every navigated-to `Page` around in a native
-backstack, so going back to one shows the same, already-laid-out native view
-instead of recreating it. This app's routes do render under a real `<frame>`
-(see "Animated router navigation" below) and a single forward navigation
-through it works reliably, but reusing that backstack to skip re-rendering
-when navigating *back* to an already-visited route is not currently safe:
-re-inserting an already-navigated-away-from `Page` instance into the frame
-(rather than the fresh one every ordinary route transition creates) triggers
-`Frame#navigate()` non-deterministically in on-device testing - the second
-navigation sometimes never fires, and when it does its resolution is
-unconfirmed. Until that's root-caused, `PageStackOutlet` and
-`PageStack`/`PageStackView` give you the equivalent behavior without touching
-the frame's backstack at all - by keeping the relevant component(s) mounted
-and only toggling `visibility` between them.
+Routes render under a real `<frame>` - see "Testing page-rooted components"
+above, and `InspectorSupport`'s `<frame>{{yield}}</frame>` wrapping the root
+`{{outlet}}` in `demo-app/app/routes/application.gts`. `FrameElement` (the
+`<frame>` DOM shim, `ember-native/src/dom/native/FrameElement.ts`) drives
+NativeScript's own native backstack from it directly: navigating into a
+route pushes its `<page>` with `Frame#navigate()`; navigating back pops it
+with `Frame#goBack()`. There's no visibility toggling and no re-rendering on
+the way back - `goBack()` returns to the exact same, already-laid-out `Page`
+instance NativeScript already has in its backstack, the same way any
+ordinary (non-Ember) NativeScript app's back navigation works.
 
-A `<page>` can only be a direct child of a `<frame>` (or the app's own root -
-see "Testing page-rooted components" above) - wrapping one in an extra
-container to toggle its visibility crashes at runtime with `Page can only be
-nested inside Frame`. So neither `PageStackOutlet` nor `PageStackView`
-introduces a wrapper of its own: both hand you a plain boolean instead, which
-you apply as the `visibility` of your own root element directly (the same
-pattern `demo-app/app/routes/list-view.gts` already uses for its back
-button's `visibility`).
+### Why insert/remove don't call `navigate()`/`goBack()` directly
 
-### Sub-routes, via `PageStackOutlet`
+`Frame#navigate()`/`#goBack()` are asynchronous and internally queued - a
+call can sit for hundreds of ms before `Frame#currentPage`/`#backStack`
+reflect it - while Ember can insert and remove a `<page>` node in the same
+synchronous render pass. Calling `navigate()`/`goBack()` straight from
+`onInsertedChild`/`removeChild` races that gap: a route can transition away
+before its own forward `navigate()` has even started, at which point
+`canGoBack()` still reads `false`, so a naive `goBack()` silently no-ops and
+leaves the frame out of sync with Ember's routes - confirmed on-device via
+the `investigate/frame-page-stack-probe` branch's CI runs.
+
+So `onInsertedChild`/`removeChild` never touch the native frame - they only
+update `childNodes` (recording *intent*) and schedule `reconcile()`, which
+diffs the desired page stack (`childNodes` filtered to `Page` instances, in
+DOM order) against the frame's actual one (`backStack` + `currentPage`) and
+performs exactly one native step, then waits for the frame's own
+`navigatedTo` event - which only fires once a queued navigation has truly
+settled - before checking again. Re-diffing after every settle, rather than
+computing a fixed list of steps up front, means it self-heals even if Ember
+makes several changes before the frame catches up (e.g. a fast
+forward-then-back collapses to a no-op once the drain finishes).
+
+One consequence of this design: a page is only ever pushed with a *fresh*
+`Page` instance (whatever Ember just created) - going back always uses
+`goBack()`, resuming the frame's own preserved backstack entry, never a
+second `navigate()` to a `Page` instance that's already been backstacked
+once. (An earlier version of this file noted that a second `navigate()` to
+an already-used `Page` instance was unreliable on-device - this design
+doesn't do that; avoiding it is the reason `goBack()` exists at all.)
+
+### Sub-routes, via `FrameOutlet`
 
 Ember never tears down a route's rendered output while any of its child
 routes are active - the parent route's own component simply isn't destroyed
-by entering a child route. What's missing without `PageStackOutlet` is
-somewhere for the child's `<page>` to render other than replacing the
-parent's: a bare `{{outlet}}` swaps the parent's content out to make room for
-it. `PageStackOutlet` renders both the parent's own content and `{{outlet}}`,
-yielding whether a child route is currently active so you can collapse the
-parent's `<page>` while it is - navigating into a child route and back is
-then instant, because the parent's `<page>` was never re-rendered, only
-hidden and shown again:
+by entering a child route. A `<page>` can only be a direct child of a
+`<frame>` though (see "Testing page-rooted components" above) - a bare
+`{{outlet}}` placed *inside* a route's own `<page>` would nest a child
+route's `<page>` inside it instead, which NativeScript rejects at runtime
+("Page can only be nested inside Frame"). `FrameOutlet` renders its block
+(the route's own `<page>`) and `{{outlet}}` (a child route's `<page>`, if
+one is active) as siblings instead, so both land as direct children of the
+enclosing `<frame>`, in route-depth order - exactly the stack `FrameElement`
+expects:
 
 ```gts
 // routes/list-view.gts
-import { PageStackOutlet } from 'ember-native/components/index';
+import { FrameOutlet } from 'ember-native/components/index';
 
 class Page extends Component {
   <template>
-    <PageStackOutlet @routeName='list-view' as |isChildActive|>
-      <page visibility={{if isChildActive 'collapse' 'visible'}}>
+    <FrameOutlet>
+      <page id='list-view-page'>
         {{! ...the list-view route's own content... }}
       </page>
-    </PageStackOutlet>
+    </FrameOutlet>
   </template>
 }
 ```
@@ -317,7 +336,7 @@ class Page extends Component {
 // routes/list-view/item.gts - a child route of `list-view` above
 class Page extends Component {
   <template>
-    <page>
+    <page id='item-page'>
       {{! ...the item detail route's own content, including its own
            back button wired to the `history` service, e.g. via
            `demo-app/app/routes/list-view.gts`'s pattern... }}
@@ -326,27 +345,104 @@ class Page extends Component {
 }
 ```
 
-The child route's own `<page>` needs no visibility handling of its own -
-Ember only mounts it while it's (part of) the active route, so it should
-simply be visible whenever it's mounted.
+Neither page needs any visibility handling of its own - navigating into
+`list-view.item` pushes `item-page` onto the real backstack (animated by
+whatever transition `NativeRouter#transitionTo` staged - see below);
+navigating back pops it and shows the exact same `list-view-page` instance,
+laid out exactly as NativeScript left it.
 
-`@routeName` must match the owning route's own name (`'list-view'`, not
-`'list-view.item'`) - `PageStackOutlet` compares it against the router's
-`currentRouteName` to decide whether a descendant route is active. This
-composes for arbitrarily deep nesting: if `list-view.item` itself wraps its
-own content in another `PageStackOutlet` (`@routeName='list-view.item'`), a
-further child route stacks on top of it the same way, independently of the
-`list-view` outlet above it. See `demo-app/app/routes/list-view.gts` and
+This composes for arbitrarily deep nesting: if `list-view.item` itself wraps
+its own content in another `FrameOutlet`, a further child route stacks on
+top of it the same way. See `demo-app/app/routes/list-view.gts` and
 `demo-app/app/routes/list-view/item.gts` for a complete example.
 
-### Manual stacks, via `PageStack`/`PageStackView`
+### Animated navigation, via `NativeRouter`/`HistoryService`
+
+`NativeRouter#transitionTo(name, model, queryParams, transition,
+backTransition)` (`ember-native/services/native-router`) sets the given
+`transition` (a NativeScript `NavigationTransition`, e.g. `{ name: 'slide',
+duration: 250 }`) just before calling the normal Ember `Router#transitionTo`
+- `FrameElement` picks it up the next time it pushes a `<page>` for this
+route change and passes it straight to `Frame#navigate()`, which is what
+actually plays the animation. `backTransition`, if given, is what plays when
+navigating back *out* of the destination (stored on the transition and
+replayed by `HistoryService#back()`), letting a push and its corresponding
+pop use different transitions (e.g. slide-in-from-right forward, slide-out-
+to-right back):
+
+```ts
+this.nativeRouter.transitionTo(
+  'list-view.item',
+  item,
+  undefined,
+  { transition: { name: 'slide', direction: 'left' }, animated: true },
+  { transition: { name: 'slide', direction: 'right' }, animated: true },
+);
+```
+
+`HistoryService#back()` (also wired to Android's hardware back button - see
+below) pops its own stack of visited URLs and replays the stored transition
+via `NativeRouter#transitionToURL`, so a consumer generally only needs to
+call `transitionTo` on the way in and `history.back()` on the way out - see
+`demo-app/app/routes/list-view.gts`/`demo-app/app/routes/list-view/item.gts`'s
+own back buttons for a working example either direction.
+
+### Hardware back and native gestures
+
+Android's hardware back key is handled by `HistoryService`, not by `Frame`'s
+own default back handling: it listens for `Application.android`'s
+`activityBackPressed` event and, when it successfully drives an Ember
+transition, cancels the event (`args.cancel = true`) - `Frame`'s own
+fallback `goBack()` (which NativeScript's `Activity.onBackPressed` only
+reaches if nothing cancels the event first) is never reached. Every back
+navigation stays funneled through Ember this way, whatever triggered it.
+
+iOS's edge swipe-back gesture is a separate, UI-driven path with no
+equivalent event to cancel - by the time anything finds out, the frame has
+already popped natively; there's no "driving" it through Ember first the way
+`activityBackPressed`/`HistoryService#back()` drive a hardware back key
+press. Rather than disable the gesture, `FrameElement` listens for the
+frame's own `navigatedTo` event and, when a page moves back a step that
+*wasn't* its own `reconcile()` doing it, calls whatever handler
+`setNextTransition`'s sibling export `setOnUnexpectedBack` was given -
+`HistoryService#setup()` sets it to its own `back()`. That resyncs Ember's
+router state (and `HistoryService`'s own stack) to match the page the
+gesture already put on screen, rather than trying to drive the native pop
+itself - the gesture's own native animation already played, so `back()`
+here is just catching Ember up to it, the same way it would if this were a
+router-initiated back.
+
+### A caveat: querying by tag name across a stack
+
+Once more than one page has been pushed, `document`/`ViewNode` lookups that
+search the whole tree by tag - e.g.
+`ENV.rootElement.getElementByTagName('actionbar')` - can match a backstacked
+page's element instead of the currently-shown one: a backstacked `<page>`
+stays a real child of `<frame>` (and of the DOM tree `ViewNode` walks) even
+though NativeScript isn't currently displaying it. Prefer `getElementById`
+scoped to a known page (give each stacked `<page>` a distinct `id`) over a
+blanket tag search - see
+`demo-app/app/tests/integration/list-view-stack-test.ts`.
+
+The same caveat applies to `PageStack`/`PageStackView` below, for the same
+underlying reason: every pushed entry stays mounted, just not all `visible`.
+
+Manual stacks, via `PageStack`/`PageStackView`
+------------------------------------------------------------------------------
 
 For navigation that isn't router-driven (e.g. a wizard, or master/detail
-inside a single route), use the `PageStack` class directly: it's a small
-tracked stack of entries that, once pushed, stay mounted until explicitly
-evicted - only `activeKey` changes when navigating back and forth.
+inside a single route), use the `PageStack` class directly instead: it's a
+small tracked stack of entries that, once pushed, stay mounted until
+explicitly evicted - only `activeKey` changes when navigating back and
+forth, and (unlike the router-driven navigation above) it's not backed by a
+real `Frame` backstack, so it toggles `visibility` between entries instead.
 `PageStackView` renders one for you, invoking each pushed entry with an
-`@isActive` boolean:
+`@isActive` boolean rather than wrapping it in a container of its own to
+toggle - a `<page>` can only be a direct child of a `<frame>` (or the app's
+own root - see "Testing page-rooted components" above), so wrapping one to
+toggle its visibility would crash at runtime with `Page can only be nested
+inside Frame`; apply `@isActive` as the `visibility` of your own root
+element directly instead:
 
 ```gts
 import { PageStackView } from 'ember-native/components/index';
@@ -414,7 +510,7 @@ in place of the `visibility` binding, on the same element:
 ```gts
 import { pageTransition } from 'ember-native/modifiers/index';
 
-<page id='list-view-page' {{pageTransition (if isChildActive false true)}}>
+<stack-layout {{pageTransition @isActive}}>
 ```
 
 Its one positional argument is whether the page should be active/visible,
@@ -439,77 +535,6 @@ Assertions against `visibility`/other attributes are unaffected (they're set
 synchronously, before the animation starts); if a test needs to assert
 against `opacity` itself, poll for the end state instead of assuming
 `settled()` covers it.
-
-### A caveat: querying by tag name across a stack
-
-Once more than one page is mounted at a time (either kind of stack),
-`document`/`ViewNode` lookups that search the whole tree by tag - e.g.
-`ENV.rootElement.getElementByTagName('actionbar')` - can match the
-*collapsed* page's element instead of the visible one, since they don't
-filter on `visibility`. Prefer `getElementById` scoped to a known page (give
-each stacked `<page>` a distinct `id`) over a blanket tag search once a
-route uses `PageStackOutlet` - see `demo-app/app/tests/integration/list-view-stack-test.ts`.
-
-
-Animated router navigation, via a real `<frame>`
-------------------------------------------------------------------------------
-
-`pageTransition` above approximates a transition without touching a `<frame>`
-you navigate through directly - it's what `PageStackOutlet`/`PageStackView`
-use, since they intentionally avoid the frame's backstack (see "Page stacks"
-above). If your routes *do* render under a `<frame>` you navigate through -
-as this package's own `demo-app` does, via `InspectorSupport`'s
-`<frame>{{yield}}</frame>` wrapping the root `{{outlet}}`
-(`demo-app/app/routes/application.gts`) - `NativeScript`'s own animated
-push/pop transitions are available through `NativeRouter`
-(`ember-native/services/native-router`) and `HistoryService`
-(`ember-native/services/history`) instead.
-
-`NativeRouter#transitionTo(name, model, queryParams, transition,
-backTransition)` sets the given `transition` (a NativeScript
-`NavigationTransition`, e.g. `{ name: 'slide', duration: 250 }`) just before
-calling the normal Ember `Router#transitionTo` - `FrameElement` (the `<frame>`
-DOM shim) picks it up the next time a `<page>` is appended/inserted under it
-and passes it straight to the underlying `Frame#navigate()`, which is what
-actually plays the animation. `backTransition`, if given, is what plays when
-navigating back *out* of the destination (stored on the transition and
-replayed by `HistoryService#back()`), letting a push and its corresponding
-pop use different transitions (e.g. slide-in-from-right forward, slide-out-
-to-right back) the same way `Frame`'s own backstack does natively:
-
-```ts
-this.nativeRouter.transitionTo(
-  'list-view.item',
-  item,
-  undefined,
-  { transition: { name: 'slide', direction: 'left' }, animated: true },
-  { transition: { name: 'slide', direction: 'right' }, animated: true },
-);
-```
-
-`HistoryService#back()` (also wired to Android's hardware back button) pops
-its own stack of visited URLs and replays the stored transition via
-`NativeRouter#transitionToURL`, so a consumer generally only needs to call
-`transitionTo` on the way in and `history.back()` on the way out - see
-`demo-app/app/routes/list-view.gts`'s own back button for an example that
-*does* animate this way (it undoes `index -> list-view`, entered via a
-`LinkTo`, which always goes through `NativeRouter#transitionTo` and so
-always has a transition stored for `history.back()` to replay).
-`demo-app/app/routes/list-view/item.gts`'s own back button is the
-exception: it undoes the nested `list-view -> list-view.item` hop, which
-`PageStackOutlet` handles by toggling `list-view-page`'s `visibility`
-rather than removing/re-inserting it under the `<frame>` (see "Page
-stacks" above) - so even though a transition is still stored for that hop,
-there's no `<page>` insertion for `FrameElement` to attach it to, and it's
-never replayed.
-
-Note that `FrameElement#appendChild`/`#onInsertedChild` always navigate with
-`clearHistory: true, backstackVisible: false` - every navigation replaces the
-frame's own native backstack rather than pushing onto it, so `<frame>`-based
-apps get animated transitions from this but not a native backstack of their
-own (that's what `PageStackOutlet`/`PageStack` above are for, independent of
-whether you're using a `<frame>`).
-
 
 Reading text content in tests
 ------------------------------------------------------------------------------
