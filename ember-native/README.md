@@ -408,8 +408,8 @@ later renders it fresh.
 Toggling `visibility` directly (as above) swaps pages instantly - there's no
 equivalent of `Frame`'s animated push/pop transitions. `pageTransition` (a
 modifier, `ember-native/modifiers/index`) gets you the closest approximation
-available without a real `<frame>`: apply it in place of the `visibility`
-binding, on the same element:
+available without touching a `<frame>`'s own navigation/backstack: apply it
+in place of the `visibility` binding, on the same element:
 
 ```gts
 import { pageTransition } from 'ember-native/modifiers/index';
@@ -491,12 +491,17 @@ this.nativeRouter.transitionTo(
 its own stack of visited URLs and replays the stored transition via
 `NativeRouter#transitionToURL`, so a consumer generally only needs to call
 `transitionTo` on the way in and `history.back()` on the way out - see
-`demo-app/app/routes/list-view.gts`'s own back button for the latter. That
-particular route doesn't animate its back button because it navigates via
-`PageStackOutlet`/`pageTransition` (see "Page stacks" above) rather than
-`NativeRouter#transitionTo`, so no transition is ever stored for
-`history.back()` to replay there - not because the app doesn't render under
-a `<frame>` (it does, as noted above).
+`demo-app/app/routes/list-view.gts`'s own back button for an example that
+*does* animate this way (it undoes `index -> list-view`, entered via a
+`LinkTo`, which always goes through `NativeRouter#transitionTo` and so
+always has a transition stored for `history.back()` to replay).
+`demo-app/app/routes/list-view/item.gts`'s own back button is the
+exception: it undoes the nested `list-view -> list-view.item` hop, which
+`PageStackOutlet` handles by toggling `list-view-page`'s `visibility`
+rather than removing/re-inserting it under the `<frame>` (see "Page
+stacks" above) - so even though a transition is still stored for that hop,
+there's no `<page>` insertion for `FrameElement` to attach it to, and it's
+never replayed.
 
 Note that `FrameElement#appendChild`/`#onInsertedChild` always navigate with
 `clearHistory: true, backstackVisible: false` - every navigation replaces the
