@@ -38,3 +38,26 @@ if adb logcat -d | grep -q "FATAL EXCEPTION"; then
 fi
 
 echo "Release app started successfully"
+
+# Process survival alone doesn't catch a real, previously-shipped-silently
+# class of bug: the app boots, JS evaluation completes, routing fires, and
+# the ActionBar title even renders - but the actual route content underneath
+# it silently never does (Glimmer no-ops rendering a component whose scope
+# binding never resolved, with zero JS/native error). The ActionBar title is
+# not a reliable content signal by itself - it rendered in the exact build
+# that had this bug - so assert on the index route's real body content
+# ("List View", one of its four nav buttons) instead.
+content=""
+for _ in $(seq 1 10); do
+  adb shell uiautomator dump /sdcard/window_dump.xml >/dev/null 2>&1 || true
+  content=$(adb exec-out cat /sdcard/window_dump.xml 2>/dev/null || true)
+  echo "$content" | grep -q 'text="List View"' && break
+  sleep 2
+done
+if ! echo "$content" | grep -q 'text="List View"'; then
+  adb logcat -d
+  echo "$content"
+  fail "Release app booted but the index route's real content ('List View') never rendered - UI hierarchy dump above"
+fi
+
+echo "Release app rendered real content successfully"
