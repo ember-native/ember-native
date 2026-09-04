@@ -491,9 +491,12 @@ this.nativeRouter.transitionTo(
 its own stack of visited URLs and replays the stored transition via
 `NativeRouter#transitionToURL`, so a consumer generally only needs to call
 `transitionTo` on the way in and `history.back()` on the way out - see
-`demo-app/app/routes/list-view.gts`'s own back button for the latter (used
-there without the `<frame>`/animation piece, since that app doesn't render
-under one).
+`demo-app/app/routes/list-view.gts`'s own back button for the latter. That
+particular route doesn't animate its back button because it navigates via
+`PageStackOutlet`/`pageTransition` (see "Page stacks" above) rather than
+`NativeRouter#transitionTo`, so no transition is ever stored for
+`history.back()` to replay there - not because the app doesn't render under
+a `<frame>` (it does, as noted above).
 
 Note that `FrameElement#appendChild`/`#onInsertedChild` always navigate with
 `clearHistory: true, backstackVisible: false` - every navigation replaces the
