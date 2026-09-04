@@ -2,20 +2,38 @@ import RoutableComponentRoute from 'ember-routable-component';
 import type HistoryService from 'ember-native/services/history';
 import { ListView, FrameOutlet } from 'ember-native/components/index';
 import { on } from "@ember/modifier";
-import { hash } from "@ember/helper";
+import { hash, fn } from "@ember/helper";
 import { service } from "@ember/service";
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import LinkTo from '../ui/components/link-to';
 import { incrementPageConstructCount } from '../lib/list-view-render-count';
 
 export class Page extends Component {
     @service('ember-native/history') history!: HistoryService;
     list = ['a', 'b', 'c'];
+    // Tracked on this route's own (long-lived) component instance rather
+    // than the item route's, so tapping a row and going back to look at
+    // another one keeps the previous row's selected state visible -
+    // demonstrating that `FrameOutlet` never tears this page down while
+    // `list-view.item` is active.
+    @tracked selected: string | null = null;
 
     constructor(...args: ConstructorParameters<typeof Component>) {
         super(...args);
         incrementPageConstructCount();
     }
+
+    get rows() {
+        return this.list.map((value) => ({
+            value,
+            isSelected: value === this.selected,
+        }));
+    }
+
+    select = (value: string) => {
+        this.selected = value;
+    };
 
     <template>
         <FrameOutlet>
@@ -30,10 +48,15 @@ export class Page extends Component {
                     />
                 </action-bar>
                 <stack-layout>
-                    <ListView height="100%" @items={{this.list}}>
-                        <:item as |item|>
-                            <LinkTo @route='list-view.item' @model={{hash index=item}}>
-                                {{item}}
+                    <ListView height="100%" @items={{this.rows}}>
+                        <:item as |row|>
+                            <LinkTo
+                                @route='list-view.item'
+                                @model={{hash index=row.value}}
+                                {{on 'tap' (fn this.select row.value)}}
+                                backgroundColor="{{if row.isSelected '#aecbfa' '#e0e0e0'}}"
+                            >
+                                {{row.value}}
                             </LinkTo>
                         </:item>
                     </ListView>
