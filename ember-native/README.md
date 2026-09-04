@@ -263,12 +263,18 @@ Page stacks - avoiding re-renders when navigating back and forth
 
 NativeScript's own `Frame` keeps every navigated-to `Page` around in a native
 backstack, so going back to one shows the same, already-laid-out native view
-instead of recreating it. This app's routes don't render under a real
-`<frame>` (see "Testing page-rooted components" above), so that behavior
-isn't available for free - `PageStackOutlet` and `PageStack`/`PageStackView`
-give you the equivalent for Ember-router-driven and manually-driven
-navigation respectively, by keeping the relevant component(s) mounted and
-only toggling `visibility` between them.
+instead of recreating it. This app's routes do render under a real `<frame>`
+(see "Animated router navigation" below) and a single forward navigation
+through it works reliably, but reusing that backstack to skip re-rendering
+when navigating *back* to an already-visited route is not currently safe:
+re-inserting an already-navigated-away-from `Page` instance into the frame
+(rather than the fresh one every ordinary route transition creates) triggers
+`Frame#navigate()` non-deterministically in on-device testing - the second
+navigation sometimes never fires, and when it does its resolution is
+unconfirmed. Until that's root-caused, `PageStackOutlet` and
+`PageStack`/`PageStackView` give you the equivalent behavior without touching
+the frame's backstack at all - by keeping the relevant component(s) mounted
+and only toggling `visibility` between them.
 
 A `<page>` can only be a direct child of a `<frame>` (or the app's own root -
 see "Testing page-rooted components" above) - wrapping one in an extra
@@ -448,12 +454,16 @@ route uses `PageStackOutlet` - see `demo-app/app/tests/integration/list-view-sta
 Animated router navigation, via a real `<frame>`
 ------------------------------------------------------------------------------
 
-`pageTransition` above approximates a transition without needing a real
-`<frame>`. If your app *does* render its routes under one (unlike this
-package's own `demo-app` - see "Testing page-rooted components" above for
-why that one doesn't), `NativeScript`'s own animated push/pop transitions are
-available through `NativeRouter` (`ember-native/services/native-router`) and
-`HistoryService` (`ember-native/services/history`) instead.
+`pageTransition` above approximates a transition without touching a `<frame>`
+you navigate through directly - it's what `PageStackOutlet`/`PageStackView`
+use, since they intentionally avoid the frame's backstack (see "Page stacks"
+above). If your routes *do* render under a `<frame>` you navigate through -
+as this package's own `demo-app` does, via `InspectorSupport`'s
+`<frame>{{yield}}</frame>` wrapping the root `{{outlet}}`
+(`demo-app/app/routes/application.gts`) - `NativeScript`'s own animated
+push/pop transitions are available through `NativeRouter`
+(`ember-native/services/native-router`) and `HistoryService`
+(`ember-native/services/history`) instead.
 
 `NativeRouter#transitionTo(name, model, queryParams, transition,
 backTransition)` sets the given `transition` (a NativeScript
