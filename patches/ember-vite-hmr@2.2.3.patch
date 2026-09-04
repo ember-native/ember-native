@@ -1,0 +1,25 @@
+diff --git a/dist/lib/hmr.js b/dist/lib/hmr.js
+index 84f7df6f8d5675b34a19942a05aad6b57f67e31e..1671c528e085c488a2e78bf456674770f47e8712 100644
+--- a/dist/lib/hmr.js
++++ b/dist/lib/hmr.js
+@@ -224,9 +224,17 @@ export function hmr(enableViteHmrForModes = ['development']) {
+         },
+         configResolved(config) {
+             base = config.base;
+-            process.env.EMBER_VITE_HMR_ENABLED = enableViteHmrForModes
+-                .includes(config.mode)
+-                .toString();
++            // `import.meta.hot` is only truthy when a live Vite dev server is
++            // actually serving the module (`command === 'serve'`) - a `vite
++            // build` output has no dev server at runtime regardless of
++            // `mode`, so the `if (import.meta.hot)` guards this plugin
++            // injects are permanently dead code there, silently leaving any
++            // imported component used directly as a `<template>` tag
++            // unresolved (`undefined`) in that build. Requiring
++            // `command === 'serve'` too closes that gap.
++            process.env.EMBER_VITE_HMR_ENABLED = (
++                config.command === 'serve' && enableViteHmrForModes.includes(config.mode)
++            ).toString();
+         },
+         resolveId(id, importer, meta) {
+             return __awaiter(this, void 0, void 0, function* () {
