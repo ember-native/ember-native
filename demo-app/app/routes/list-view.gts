@@ -33,9 +33,7 @@ export class Page extends Component {
                     <ListView height="100%" @items={{this.list}}>
                         <:item as |item|>
                             <LinkTo @route='list-view.item' @model={{hash index=item}}>
-                                <label>
-                                    {{item}}
-                                </label>
+                                {{item}}
                             </LinkTo>
                         </:item>
                     </ListView>
