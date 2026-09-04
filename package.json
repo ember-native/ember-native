@@ -45,10 +45,7 @@
       "esbuild",
       "nativescript",
       "unrs-resolver"
-    ],
-    "patchedDependencies": {
-      "ember-vite-hmr@2.2.3": "patches/ember-vite-hmr@2.2.3.patch"
-    }
+    ]
   },
   "packageManager": "pnpm@10.23.0",
   "volta": {

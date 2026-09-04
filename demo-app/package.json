@@ -82,7 +82,7 @@
     "ember-resolver": "^13.1.1",
     "ember-routable-component": "^1.2.0",
     "ember-template-lint": "^7.9.1",
-    "ember-vite-hmr": "^2.2.3",
+    "ember-vite-hmr": "^2.2.4",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-ember": "^12.3.1",

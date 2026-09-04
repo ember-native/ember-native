@@ -9,11 +9,6 @@ settings:
 overrides:
   '@embroider/addon-shim': 1.9.0
 
-patchedDependencies:
-  ember-vite-hmr@2.2.3:
-    hash: 662b5e4069697b2d7c25a6919a10452c76d049f8f6b25ddb08930aba098f3090
-    path: patches/ember-vite-hmr@2.2.3.patch
-
 importers:
 
   .:
@@ -218,8 +213,8 @@ importers:
         specifier: ^7.9.1
         version: 7.9.3
       ember-vite-hmr:
-        specifier: ^2.2.3
-        version: 2.2.3(patch_hash=662b5e4069697b2d7c25a6919a10452c76d049f8f6b25ddb08930aba098f3090)(0ed42b029f435693ba6bf3311d7c8c23)
+        specifier: ^2.2.4
+        version: 2.2.4(0ed42b029f435693ba6bf3311d7c8c23)
       eslint:
         specifier: ^9.27.0
         version: 9.39.4(jiti@2.6.1)
@@ -558,8 +553,8 @@ importers:
         specifier: ^7.9.1
         version: 7.9.3
       ember-vite-hmr:
-        specifier: ^2.2.3
-        version: 2.2.3(patch_hash=662b5e4069697b2d7c25a6919a10452c76d049f8f6b25ddb08930aba098f3090)(402ce1ee4ebef71fb4c62cbfa3fe462f)
+        specifier: ^2.2.4
+        version: 2.2.4(402ce1ee4ebef71fb4c62cbfa3fe462f)
       ember-welcome-page:
         specifier: ^8.0.5
         version: 8.0.5(@babel/core@7.29.0)
@@ -1319,6 +1314,10 @@ packages:
 
   '@babel/helper-validator-identifier@8.0.0':
     resolution: {integrity: sha512-kXxQVZHNOctSJJsqzmcbPSCEkM6oHNnDIkua7g9RCO9xRHj2eCiKvRx2KPdfWR9QxcGWnK/oArrtunmie3rL9g==}
+    engines: {node: ^22.18.0 || >=24.11.0}
+
+  '@babel/helper-validator-identifier@8.0.4':
+    resolution: {integrity: sha512-4wFaiLd0bVo4cIoTXI3zKI038NIWE/cr3jvBjejOVYVxV/m8Ltav1USiGzG1fmS5J2RhgEOgXNNK46cRPnRsrg==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/helper-validator-option@7.27.1':
@@ -2254,6 +2253,10 @@ packages:
 
   '@babel/types@8.0.0':
     resolution: {integrity: sha512-K8ponJDxBwDHigkeFqaqT5wLGl4bTlwMafR8k7b5CPxr6Ww+UG9ls8Yx6Tcpboxu97eeGVEEyKcHmEyOwN1vSw==}
+    engines: {node: ^22.18.0 || >=24.11.0}
+
+  '@babel/types@8.0.4':
+    resolution: {integrity: sha512-eY+Yn3dCqTGmyiq2QRU66lA5FL8lqqqvecHt0fF3uHONIa7ToYsaCiWV8lOKqAs0Rb2SjixiKFROngnulPtt2g==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@bazel/runfiles@6.5.0':
@@ -9083,8 +9086,8 @@ packages:
     peerDependencies:
       ember-source: '>=3.28.0'
 
-  ember-vite-hmr@2.2.3:
-    resolution: {integrity: sha512-aeTHjuPf6HRTkTP2PnOwkYz1XoNVzTAREmiLj/tQ1+2c/ytCd3G2mgSiH+q+QOww7uNI2WxUVxUP4Qjsc4T6fw==}
+  ember-vite-hmr@2.2.4:
+    resolution: {integrity: sha512-UiywX8AVV/AFdbbkcYIsr0Co7DY+NKx7xJV1nbyM5PYMsXv9YTPNMljW0dLXrZPncwFkSiq7BEXWcBxvxsdk9w==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@embroider/compat': '*'
@@ -17441,6 +17444,8 @@ snapshots:
 
   '@babel/helper-validator-identifier@8.0.0': {}
 
+  '@babel/helper-validator-identifier@8.0.4': {}
+
   '@babel/helper-validator-option@7.27.1': {}
 
   '@babel/helper-validator-option@7.29.7': {}
@@ -17718,9 +17723,9 @@ snapshots:
       '@babel/core': 7.29.0
       '@babel/helper-plugin-utils': 7.29.7
 
-  '@babel/plugin-syntax-flow@7.28.6(@babel/core@7.29.0)':
+  '@babel/plugin-syntax-flow@7.28.6(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.29.7
 
   '@babel/plugin-syntax-import-assertions@7.28.6(@babel/core@7.29.0)':
@@ -17756,6 +17761,11 @@ snapshots:
   '@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0)':
     dependencies:
       '@babel/core': 7.29.0
+      '@babel/helper-plugin-utils': 7.29.7
+
+  '@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.7)':
+    dependencies:
+      '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.29.7
 
   '@babel/plugin-syntax-private-property-in-object@7.14.5(@babel/core@7.29.0)':
@@ -18192,11 +18202,11 @@ snapshots:
       '@babel/core': 7.29.0
       '@babel/helper-plugin-utils': 7.29.7
 
-  '@babel/plugin-transform-flow-strip-types@7.27.1(@babel/core@7.29.0)':
+  '@babel/plugin-transform-flow-strip-types@7.27.1(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.29.7
-      '@babel/plugin-syntax-flow': 7.28.6(@babel/core@7.29.0)
+      '@babel/plugin-syntax-flow': 7.28.6(@babel/core@7.29.7)
 
   '@babel/plugin-transform-for-of@7.27.1(@babel/core@7.29.0)':
     dependencies:
@@ -18390,12 +18400,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@babel/plugin-transform-modules-commonjs@7.29.7(@babel/core@7.29.7)':
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.29.7)
+      '@babel/helper-plugin-utils': 7.29.7
+    transitivePeerDependencies:
+      - supports-color
+
   '@babel/plugin-transform-modules-systemjs@7.29.0(@babel/core@7.29.0)':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/helper-module-transforms': 7.28.6(@babel/core@7.29.0)
       '@babel/helper-plugin-utils': 7.29.7
-      '@babel/helper-validator-identifier': 7.28.5
+      '@babel/helper-validator-identifier': 7.29.7
       '@babel/traverse': 7.29.7
     transitivePeerDependencies:
       - supports-color
@@ -18405,7 +18423,7 @@ snapshots:
       '@babel/core': 7.29.7
       '@babel/helper-module-transforms': 7.28.6(@babel/core@7.29.7)
       '@babel/helper-plugin-utils': 7.29.7
-      '@babel/helper-validator-identifier': 7.28.5
+      '@babel/helper-validator-identifier': 7.29.7
       '@babel/traverse': 7.29.7
     transitivePeerDependencies:
       - supports-color
@@ -19334,12 +19352,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/preset-flow@7.27.1(@babel/core@7.29.0)':
+  '@babel/preset-flow@7.27.1(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      '@babel/plugin-transform-flow-strip-types': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-flow-strip-types': 7.27.1(@babel/core@7.29.7)
 
   '@babel/preset-modules@0.1.6-no-external-plugins(@babel/core@7.29.0)':
     dependencies:
@@ -19355,20 +19373,20 @@ snapshots:
       '@babel/types': 7.29.7
       esutils: 2.0.3
 
-  '@babel/preset-typescript@7.28.5(@babel/core@7.29.0)':
+  '@babel/preset-typescript@7.28.5(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.0)
-      '@babel/plugin-transform-modules-commonjs': 7.29.7(@babel/core@7.29.0)
-      '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.0)
+      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.7)
+      '@babel/plugin-transform-modules-commonjs': 7.29.7(@babel/core@7.29.7)
+      '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.7)
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/register@7.28.6(@babel/core@7.29.0)':
+  '@babel/register@7.28.6(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
       clone-deep: 4.0.1
       find-cache-dir: 2.1.0
       make-dir: 2.1.0
@@ -19457,6 +19475,11 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 8.0.0
       '@babel/helper-validator-identifier': 8.0.0
+
+  '@babel/types@8.0.4':
+    dependencies:
+      '@babel/helper-string-parser': 8.0.0
+      '@babel/helper-validator-identifier': 8.0.4
 
   '@bazel/runfiles@6.5.0': {}
 
@@ -24981,9 +25004,9 @@ snapshots:
       esutils: 2.0.3
       js-tokens: 3.0.2
 
-  babel-core@7.0.0-bridge.0(@babel/core@7.29.0):
+  babel-core@7.0.0-bridge.0(@babel/core@7.29.7):
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
 
   babel-helper-builder-binary-assignment-operator-visitor@6.24.1:
     dependencies:
@@ -28719,12 +28742,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-vite-hmr@2.2.3(patch_hash=662b5e4069697b2d7c25a6919a10452c76d049f8f6b25ddb08930aba098f3090)(0ed42b029f435693ba6bf3311d7c8c23):
+  ember-vite-hmr@2.2.4(0ed42b029f435693ba6bf3311d7c8c23):
     dependencies:
       '@babel/core': 7.29.7
       '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.7)
       '@babel/traverse': 7.29.7
-      '@babel/types': 7.29.7
+      '@babel/types': 8.0.4
       '@embroider/addon-shim': 1.9.0
       '@embroider/compat': 4.1.17(aeb5d9f8bdcfb5e866a2a41764179e3d)
       '@glimmer/syntax': 0.95.0
@@ -28739,12 +28762,12 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-vite-hmr@2.2.3(patch_hash=662b5e4069697b2d7c25a6919a10452c76d049f8f6b25ddb08930aba098f3090)(402ce1ee4ebef71fb4c62cbfa3fe462f):
+  ember-vite-hmr@2.2.4(402ce1ee4ebef71fb4c62cbfa3fe462f):
     dependencies:
       '@babel/core': 7.29.7
       '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.7)
       '@babel/traverse': 7.29.7
-      '@babel/types': 7.29.7
+      '@babel/types': 8.0.4
       '@embroider/addon-shim': 1.9.0
       '@embroider/compat': 4.1.17(aeb5d9f8bdcfb5e866a2a41764179e3d)
       '@glimmer/syntax': 0.95.0
@@ -31638,17 +31661,17 @@ snapshots:
 
   jscodeshift@0.15.2(df563b4db34a4f08227991cffd9a99b7):
     dependencies:
-      '@babel/core': 7.29.0
+      '@babel/core': 7.29.7
       '@babel/parser': 7.29.2
-      '@babel/plugin-transform-class-properties': 7.28.6(@babel/core@7.29.0)
-      '@babel/plugin-transform-modules-commonjs': 7.28.6(@babel/core@7.29.0)
-      '@babel/plugin-transform-nullish-coalescing-operator': 7.28.6(@babel/core@7.29.0)
-      '@babel/plugin-transform-optional-chaining': 7.28.6(@babel/core@7.29.0)
-      '@babel/plugin-transform-private-methods': 7.28.6(@babel/core@7.29.0)
-      '@babel/preset-flow': 7.27.1(@babel/core@7.29.0)
-      '@babel/preset-typescript': 7.28.5(@babel/core@7.29.0)
-      '@babel/register': 7.28.6(@babel/core@7.29.0)
-      babel-core: 7.0.0-bridge.0(@babel/core@7.29.0)
+      '@babel/plugin-transform-class-properties': 7.28.6(@babel/core@7.29.7)
+      '@babel/plugin-transform-modules-commonjs': 7.28.6(@babel/core@7.29.7)
+      '@babel/plugin-transform-nullish-coalescing-operator': 7.28.6(@babel/core@7.29.7)
+      '@babel/plugin-transform-optional-chaining': 7.28.6(@babel/core@7.29.7)
+      '@babel/plugin-transform-private-methods': 7.28.6(@babel/core@7.29.7)
+      '@babel/preset-flow': 7.27.1(@babel/core@7.29.7)
+      '@babel/preset-typescript': 7.28.5(@babel/core@7.29.7)
+      '@babel/register': 7.28.6(@babel/core@7.29.7)
+      babel-core: 7.0.0-bridge.0(@babel/core@7.29.7)
       chalk: 4.1.2
       flow-parser: 0.309.0
       graceful-fs: 4.2.11
