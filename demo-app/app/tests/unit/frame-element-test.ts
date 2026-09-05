@@ -1,62 +1,174 @@
 import { setupRenderingTest } from '~/tests/helpers';
+import { waitUntil } from '@ember/test-helpers';
 import { createElement } from 'ember-native/dom/element-registry';
 
-// Regression coverage for FrameElement.onInsertedChild not tracking
-// `currentPage` (only `appendChild` did, pre-fix) - see
-// ember-native/src/dom/native/FrameElement.ts. This reproduces the exact
-// "navigate away and back" sequence PageStackOutlet needs (a route's <page>
-// component instance is kept alive and reinserted, rather than destroyed and
-// recreated), which is also the case that most directly exposed the bug:
-// without the fix, re-inserting the very first page after a second page had
-// been shown left the frame silently stuck showing the second page, because
-// `currentPage` still pointed at the first page's own nativeView and the
-// `this.currentPage !== childNode.nativeView` guard in `onInsertedChild`
-// incorrectly compared equal.
+// Regression coverage for `FrameElement`'s reconciler (see its class doc
+// comment in ember-native/src/dom/native/FrameElement.ts) - it drives a
+// *real* `Frame` backstack from the `<page>` elements Ember mounts as this
+// element's children (`navigate()`/`goBack()`, gated by the frame's own
+// `navigatedTo` event), instead of the old strategy of keeping every
+// route's page mounted side by side and toggling `visibility`.
 //
-// A real route transition inserts new content via `insertBefore` (with the
-// outgoing page still present as `referenceNode`) before removing the old
-// page - which is exactly what routes `onInsertedChild` through, as opposed
-// to `appendChild`'s own inline navigate() call (only exercised for the very
-// first page ever mounted into a frame). `nativeView.navigate` is stubbed
-// here rather than awaited for real, since the real native transition is an
-// async, Android-animation-driven attach (confirmed via on-device
-// instrumentation - see .pjp-runner/todo.md's todo #525 write-up) that isn't
-// needed to prove this fix: what's under test is FrameElement's own
-// decision of *whether* and *with what* to call `navigate()`, not whether
-// NativeScript's native frame finishes attaching it.
-QUnit.module('FrameElement | Frame.navigate() wiring', function (hooks) {
+// `Frame.navigate()`/`goBack()` are genuinely asynchronous and internally
+// queued in the real app - a CI probe run (`investigate/frame-page-stack-
+// probe`) confirmed a page can be inserted *and removed again* before its
+// own forward `navigate()` has even started processing, at which point
+// `canGoBack()` still reads `false`. To exercise that timing deterministically
+// (rather than depending on real on-device animation/attach latency, which
+// isn't available to a detached, off-screen `Frame` in a rendering test
+// anyway), `navigate()`/`goBack()` are stubbed here to settle on a
+// microtask - genuinely asynchronous, but not tied to real device timing -
+// and drive the frame's real `backStack`/`currentPage`/`navigatedTo`
+// machinery by hand, so `FrameElement`'s own constructor-installed listener
+// and `reconcile()` diff logic run for real.
+function installFakeNativeNavigation(nativeFrame: any) {
+  nativeFrame._fakeBackStack = [];
+  nativeFrame._fakeCurrentEntry = undefined;
+
+  Object.defineProperty(nativeFrame, 'backStack', {
+    configurable: true,
+    get: () => nativeFrame._fakeBackStack,
+  });
+  Object.defineProperty(nativeFrame, 'currentPage', {
+    configurable: true,
+    get: () => nativeFrame._fakeCurrentEntry?.resolvedPage,
+  });
+
+  nativeFrame.canGoBack = () => nativeFrame._fakeBackStack.length > 0;
+
+  nativeFrame.navigate = (options: any) => {
+    queueMicrotask(() => {
+      const prevEntry = nativeFrame._fakeCurrentEntry;
+      if (options.clearHistory) {
+        nativeFrame._fakeBackStack = [];
+      } else if (prevEntry) {
+        nativeFrame._fakeBackStack = [...nativeFrame._fakeBackStack, prevEntry];
+      }
+      const entry = { resolvedPage: options.create(), entry: options };
+      nativeFrame._fakeCurrentEntry = entry;
+      nativeFrame.notify({
+        eventName: 'navigatedTo',
+        object: nativeFrame,
+        isBack: false,
+        entry,
+      });
+    });
+  };
+
+  nativeFrame.goBack = (backstackEntry: any) => {
+    queueMicrotask(() => {
+      const index = nativeFrame._fakeBackStack.indexOf(backstackEntry);
+      nativeFrame._fakeBackStack = nativeFrame._fakeBackStack.slice(0, index);
+      nativeFrame._fakeCurrentEntry = backstackEntry;
+      nativeFrame.notify({
+        eventName: 'navigatedTo',
+        object: nativeFrame,
+        isBack: true,
+        entry: backstackEntry,
+      });
+    });
+  };
+}
+
+QUnit.module('FrameElement | real Frame backstack', function (hooks) {
   setupRenderingTest(hooks);
 
-  QUnit.test('re-inserting a previously-shown page (navigating back) still navigates the frame to it', function (assert) {
-    const frame = createElement('frame');
-    const page1 = createElement('page');
-    const page2 = createElement('page');
+  QUnit.test(
+    'pushing and popping a nested page drives a real backstack, reusing the same page instance',
+    async function (assert) {
+      const frame = createElement('frame');
+      installFakeNativeNavigation(frame.nativeView);
+      const page1 = createElement('page');
+      const page2 = createElement('page');
 
-    const navigatedTo: unknown[] = [];
-    frame.nativeView.navigate = ((options: { create: () => unknown }) => {
-      navigatedTo.push(options.create());
-    }) as typeof frame.nativeView.navigate;
+      frame.appendChild(page1);
+      await waitUntil(() => frame.nativeView.currentPage === page1.nativeView);
+      assert.false(frame.nativeView.canGoBack(), 'nothing to go back to on initial mount');
 
-    // Initial mount: the very first page a frame ever receives.
-    frame.appendChild(page1);
-    assert.deepEqual(navigatedTo, [page1.nativeView], 'navigates to the first page on initial mount');
-    assert.equal(frame.currentPage, page1.nativeView, 'currentPage tracks the first page');
+      // A nested route's page is appended as a sibling *after* the
+      // parent's own (see `FrameOutlet`) - Ember keeps the parent mounted,
+      // it's never removed here.
+      frame.appendChild(page2);
+      await waitUntil(() => frame.nativeView.currentPage === page2.nativeView);
+      assert.true(frame.nativeView.canGoBack(), 'the parent page is now on the real backstack');
+      assert.strictEqual(frame.nativeView.backStack.length, 1);
+      assert.strictEqual(frame.nativeView.backStack[0]?.resolvedPage, page1.nativeView);
 
-    // Route transition: the new page is inserted before the outgoing one is removed.
-    frame.insertBefore(page2, page1);
-    assert.deepEqual(navigatedTo, [page1.nativeView, page2.nativeView], 'navigates to the second page on transition');
-    assert.equal(frame.currentPage, page2.nativeView, 'currentPage tracks the second page');
-    frame.removeChild(page1);
+      // Navigating back up removes the child's page - Ember never destroys
+      // page1's component/page instance, so this is the exact same node.
+      frame.removeChild(page2);
+      await waitUntil(() => !frame.nativeView.canGoBack());
+      assert.strictEqual(
+        frame.nativeView.currentPage,
+        page1.nativeView,
+        'back to the same parent page instance, not a re-created one',
+      );
+    },
+  );
 
-    // Navigate back: page1's own component/page instance is reused (kept
-    // alive), so the very same node is reinserted - this is the case the
-    // pre-fix `currentPage` bookkeeping missed entirely.
-    frame.insertBefore(page1, page2);
-    assert.deepEqual(
-      navigatedTo,
-      [page1.nativeView, page2.nativeView, page1.nativeView],
-      'navigates back to the first page instead of silently staying on the second',
-    );
-    assert.equal(frame.currentPage, page1.nativeView, 'currentPage tracks the first page again after navigating back');
-  });
+  QUnit.test(
+    "removing a page before its own forward navigate() has settled still converges correctly",
+    async function (assert) {
+      const frame = createElement('frame');
+      installFakeNativeNavigation(frame.nativeView);
+      const page1 = createElement('page');
+      const page2 = createElement('page');
+
+      frame.appendChild(page1);
+      await waitUntil(() => frame.nativeView.currentPage === page1.nativeView);
+
+      // Insert and remove page2 in the same synchronous tick - the
+      // reconciler hasn't even had a microtask to look at this yet, let
+      // alone had page2's own `navigate()` start, so this reproduces the
+      // probe's exact race instead of only the happy path.
+      frame.appendChild(page2);
+      frame.removeChild(page2);
+
+      await waitUntil(
+        () => frame.nativeView.currentPage === page1.nativeView && !frame.nativeView.canGoBack(),
+      );
+      assert.strictEqual(
+        frame.nativeView.currentPage,
+        page1.nativeView,
+        'settles back on page1, not stuck on page2',
+      );
+      assert.false(
+        frame.nativeView.canGoBack(),
+        'the backstack is empty - page2 never actually stuck around',
+      );
+    },
+  );
+
+  QUnit.test(
+    'a two-level-deep push and pop converges one native step at a time',
+    async function (assert) {
+      const frame = createElement('frame');
+      installFakeNativeNavigation(frame.nativeView);
+      const page1 = createElement('page');
+      const page2 = createElement('page');
+      const page3 = createElement('page');
+
+      frame.appendChild(page1);
+      await waitUntil(() => frame.nativeView.currentPage === page1.nativeView);
+      frame.appendChild(page2);
+      await waitUntil(() => frame.nativeView.currentPage === page2.nativeView);
+      frame.appendChild(page3);
+      await waitUntil(() => frame.nativeView.currentPage === page3.nativeView);
+      assert.strictEqual(frame.nativeView.backStack.length, 2);
+
+      // Going back one level at a time (each settling before the next
+      // starts) issues one native `goBack()` step per level - the
+      // reconciler never has two native operations in flight together.
+      frame.removeChild(page3);
+      await waitUntil(() => frame.nativeView.currentPage === page2.nativeView);
+      assert.strictEqual(frame.nativeView.backStack.length, 1);
+
+      frame.removeChild(page2);
+      await waitUntil(
+        () => frame.nativeView.currentPage === page1.nativeView && !frame.nativeView.canGoBack(),
+      );
+      assert.strictEqual(frame.nativeView.currentPage, page1.nativeView);
+      assert.false(frame.nativeView.canGoBack());
+    },
+  );
 });
