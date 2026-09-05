@@ -120,8 +120,8 @@ importers:
         specifier: ^7.29.0
         version: 7.29.0
       '@babel/eslint-parser':
-        specifier: ^7.28.5
-        version: 7.28.6(35c79763e2f529503c5fce6757258eb9)
+        specifier: ^8.0.1
+        version: 8.0.1(35c79763e2f529503c5fce6757258eb9)
       '@babel/plugin-transform-runtime':
         specifier: ^7.27.3
         version: 7.29.0(@babel/core@7.29.0)
@@ -376,8 +376,8 @@ importers:
         specifier: ^7.29.0
         version: 7.29.0
       '@babel/eslint-parser':
-        specifier: ^7.28.5
-        version: 7.28.6(ffe5d09d8cdb5480405909425b88960a)
+        specifier: ^8.0.1
+        version: 8.0.1(ffe5d09d8cdb5480405909425b88960a)
       '@babel/plugin-transform-runtime':
         specifier: ^7.27.3
         version: 7.29.0(@babel/core@7.29.0)
@@ -446,7 +446,7 @@ importers:
         version: 1.7.7
       '@nullvoxpopuli/eslint-configs':
         specifier: ^6.0.0
-        version: 6.0.0(74dba56a028539c830d2dcc9bf34fac9)
+        version: 6.0.0(b298ff33b6e49e6d78862f01bb9fbbad)
       '@rollup/plugin-babel':
         specifier: ^7.0.0
         version: 7.0.0(e10c821eb081679c9c0a37d91ab94083)
@@ -740,8 +740,8 @@ importers:
         version: 5.9.3
     devDependencies:
       '@babel/eslint-parser':
-        specifier: ^7.28.5
-        version: 7.28.6(35c79763e2f529503c5fce6757258eb9)
+        specifier: ^8.0.1
+        version: 8.0.1(35c79763e2f529503c5fce6757258eb9)
       '@babel/types':
         specifier: ^7.28.5
         version: 7.29.0
@@ -846,7 +846,7 @@ importers:
         version: 5.2.0(c8332dc3f90c0e60eb130a3a85f980b9)
       ember-eslint-parser:
         specifier: ^0.14.4
-        version: 0.14.4(fdd6e503624edf3ea80437713f74ecd7)
+        version: 0.14.4(76ee18d322975027c8246371ed08f4c4)
       ember-modifier:
         specifier: ^4.3.0
         version: 4.3.0(@babel/core@7.29.0)
@@ -1130,12 +1130,19 @@ packages:
     resolution: {integrity: sha512-RgHBCvtjbOK2gXSNBNIkNoEc9qoVEtau3hj8gEqKQuL3HZAibKarWFEI3Lfm6EYKkLalOh8eSrj9b+ch9H/VBA==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/eslint-parser@7.28.6':
-    resolution: {integrity: sha512-QGmsKi2PBO/MHSQk+AAgA9R6OHQr+VqnniFE0eMWZcVcfBZoA2dKn2hUsl3Csg/Plt9opRUWdY7//VXsrIlEiA==}
+  '@babel/eslint-parser@7.29.7':
+    resolution: {integrity: sha512-zxt+UJTOMKvUt3yOg+D58MLuz334pHp93qifMFcjIIO+9hN6t+ufw2gi7vDPMpxvfnHRR+3VVXvIjineCcgyXw==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
       eslint: ^7.5.0 || ^8.0.0 || ^9.0.0
+
+  '@babel/eslint-parser@8.0.1':
+    resolution: {integrity: sha512-2javO8pAQv/ld6sS6OcxoLAlzZEZy+xm99bnoAfMhzKSumKhdF5wylpbZB7XTorWr3KLPtx5K95eduJPOy1mzA==}
+    engines: {node: ^22.18.0 || >=24.11.0}
+    peerDependencies:
+      '@babel/core': ^8.0.0
+      eslint: ^9.0.0 || ^10.0.0
 
   '@babel/generator@7.29.1':
     resolution: {integrity: sha512-qsaF+9Qcm2Qv8SRIMMscAvG4O3lJ0F1GuMo5HR/Bp02LopNgnZBC/EkbevHFeGs4ls/oPz9v+Bsmzbkbe+0dUw==}
@@ -14532,11 +14539,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  semver@7.8.4:
-    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   semver@7.8.5:
     resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
@@ -17042,7 +17044,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/eslint-parser@7.28.6(35c79763e2f529503c5fce6757258eb9)':
+  '@babel/eslint-parser@7.29.7(35c79763e2f529503c5fce6757258eb9)':
     dependencies:
       '@babel/core': 7.29.0
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
@@ -17050,13 +17052,29 @@ snapshots:
       eslint-visitor-keys: 2.1.0
       semver: 6.3.1
 
-  '@babel/eslint-parser@7.28.6(ffe5d09d8cdb5480405909425b88960a)':
+  '@babel/eslint-parser@7.29.7(ffe5d09d8cdb5480405909425b88960a)':
     dependencies:
       '@babel/core': 7.29.0
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
       eslint: 9.39.4(jiti@1.21.7)
       eslint-visitor-keys: 2.1.0
       semver: 6.3.1
+
+  '@babel/eslint-parser@8.0.1(35c79763e2f529503c5fce6757258eb9)':
+    dependencies:
+      '@babel/core': 7.29.0
+      eslint: 9.39.4(jiti@2.6.1)
+      eslint-scope: 9.1.2
+      eslint-visitor-keys: 5.0.1
+      semver: 7.8.5
+
+  '@babel/eslint-parser@8.0.1(ffe5d09d8cdb5480405909425b88960a)':
+    dependencies:
+      '@babel/core': 7.29.0
+      eslint: 9.39.4(jiti@1.21.7)
+      eslint-scope: 9.1.2
+      eslint-visitor-keys: 5.0.1
+      semver: 7.8.5
 
   '@babel/generator@7.29.1':
     dependencies:
@@ -17173,7 +17191,7 @@ snapshots:
       '@babel/core': 7.29.0
       '@babel/helper-annotate-as-pure': 8.0.0
       regexpu-core: 6.4.0
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@babel/helper-define-polyfill-provider@0.6.8(@babel/core@7.29.0)':
     dependencies:
@@ -20108,7 +20126,7 @@ snapshots:
       find-up: 5.0.0
       lodash: 4.18.1
       resolve: 1.22.12
-      semver: 7.8.4
+      semver: 7.8.5
     optionalDependencies:
       '@glint/template': 1.7.3
     transitivePeerDependencies:
@@ -20124,7 +20142,7 @@ snapshots:
       find-up: 5.0.0
       lodash: 4.18.1
       resolve: 1.22.12
-      semver: 7.8.4
+      semver: 7.8.5
     optionalDependencies:
       '@glint/template': 1.7.7
     transitivePeerDependencies:
@@ -20164,7 +20182,7 @@ snapshots:
       minimatch: 3.1.5
       pkg-entry-points: 1.1.1
       resolve-package-path: 4.0.3
-      semver: 7.7.4
+      semver: 7.8.5
       typescript-memoize: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -20181,7 +20199,7 @@ snapshots:
       minimatch: 3.1.5
       pkg-entry-points: 1.1.1
       resolve-package-path: 4.0.3
-      semver: 7.7.4
+      semver: 7.8.5
       typescript-memoize: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -22164,7 +22182,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@nullvoxpopuli/eslint-configs@6.0.0(74dba56a028539c830d2dcc9bf34fac9)':
+  '@nullvoxpopuli/eslint-configs@6.0.0(b298ff33b6e49e6d78862f01bb9fbbad)':
     dependencies:
       '@babel/core': 7.29.0
       '@eslint/js': 9.39.4
@@ -22173,7 +22191,7 @@ snapshots:
       ember-eslint: 0.7.0(cd2b3bf51516e76bdc16901d0318e0d1)
       eslint: 9.39.4(jiti@1.21.7)
       eslint-import-resolver-typescript: 4.4.5(9ea1bcdcf8e44ce76ac93c9fee6b90ff)
-      eslint-plugin-decorator-position: 6.1.0(5a70c72a2e0f36fc6621af4e08b24441)
+      eslint-plugin-decorator-position: 6.1.0(101fd39045f63d398b7010f0db190f1e)
       eslint-plugin-import: 2.32.0(7f96d263d5b12d211fe65d5e7fab3633)
       eslint-plugin-json: 4.0.1
       eslint-plugin-n: 18.1.0(c7cc3430450b6be053812bb7bd6cc9be)
@@ -22181,7 +22199,7 @@ snapshots:
       globals: 17.6.0
       prettier-plugin-ember-template-tag: 2.1.6(prettier@3.8.2)
     optionalDependencies:
-      '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
+      '@babel/eslint-parser': 8.0.1(ffe5d09d8cdb5480405909425b88960a)
       '@typescript-eslint/eslint-plugin': 8.58.1(5f633a6f9e1b761db26e0cd0fb7363de)
       eslint-plugin-ember: 12.7.5(b21a5c2d82ffcddaa5ddcd8b5e86f59d)
       eslint-plugin-qunit: 8.2.6(eslint@9.39.4(jiti@1.21.7))
@@ -23976,7 +23994,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.58.1
       debug: 4.4.3(supports-color@9.4.0)
       minimatch: 10.2.5
-      semver: 7.7.4
+      semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.9.3)
       typescript: 5.9.3
@@ -24360,7 +24378,7 @@ snapshots:
       '@embroider/macros': 1.20.4(c8332dc3f90c0e60eb130a3a85f980b9)
       babel-import-util: 2.1.1
       babel-plugin-debug-macros: 2.0.0(@babel/core@7.29.0)
-      semver: 7.7.4
+      semver: 7.8.5
     transitivePeerDependencies:
       - '@babel/core'
       - '@glint/template'
@@ -25165,7 +25183,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.29.0
       babel-import-util: 2.1.1
-      semver: 7.7.4
+      semver: 7.8.5
 
   babel-plugin-ember-data-packages-polyfill@0.1.2:
     dependencies:
@@ -27094,7 +27112,7 @@ snapshots:
       postcss-modules-values: 4.0.0(postcss@8.5.16)
       postcss-value-parser: 4.2.0
       schema-utils: 3.3.0
-      semver: 7.7.4
+      semver: 7.8.5
       webpack: 5.106.1(postcss@8.5.16)
 
   css-loader@5.2.7(webpack@5.106.1(postcss@8.5.22)):
@@ -27108,7 +27126,7 @@ snapshots:
       postcss-modules-values: 4.0.0(postcss@8.5.16)
       postcss-value-parser: 4.2.0
       schema-utils: 3.3.0
-      semver: 7.7.4
+      semver: 7.8.5
       webpack: 5.106.1(postcss@8.5.22)
 
   css-loader@7.1.3(webpack@5.105.2(esbuild@0.28.1)):
@@ -28151,7 +28169,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-eslint-parser@0.13.0(0b816e1a2e0cb464ff3763d0a341509c):
+  ember-eslint-parser@0.13.0(b559fa2b1211a74dd302096a3feab4b1):
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@typescript-eslint/tsconfig-utils': 8.65.0(typescript@5.9.3)
@@ -28162,12 +28180,12 @@ snapshots:
       mathml-tag-names: 4.0.0
       svg-tags: 1.0.0
     optionalDependencies:
-      '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
+      '@babel/eslint-parser': 7.29.7(ffe5d09d8cdb5480405909425b88960a)
       '@typescript-eslint/parser': 8.61.0(717face55a559967bf1b77f9b43bd1f1)
     transitivePeerDependencies:
       - typescript
 
-  ember-eslint-parser@0.14.4(fdd6e503624edf3ea80437713f74ecd7):
+  ember-eslint-parser@0.14.4(76ee18d322975027c8246371ed08f4c4):
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@typescript-eslint/tsconfig-utils': 8.65.0(typescript@5.9.3)
@@ -28178,7 +28196,7 @@ snapshots:
       mathml-tag-names: 4.0.0
       svg-tags: 1.0.0
     optionalDependencies:
-      '@babel/eslint-parser': 7.28.6(35c79763e2f529503c5fce6757258eb9)
+      '@babel/eslint-parser': 8.0.1(35c79763e2f529503c5fce6757258eb9)
       '@typescript-eslint/parser': 8.58.1(0d62767105e9a39fc494591cb6137847)
     transitivePeerDependencies:
       - typescript
@@ -28186,7 +28204,7 @@ snapshots:
   ember-eslint-parser@0.5.13(5ff893536b5be6763174ded7d398637d):
     dependencies:
       '@babel/core': 7.29.0
-      '@babel/eslint-parser': 7.28.6(35c79763e2f529503c5fce6757258eb9)
+      '@babel/eslint-parser': 7.29.7(35c79763e2f529503c5fce6757258eb9)
       '@glimmer/syntax': 0.95.0
       '@typescript-eslint/tsconfig-utils': 8.65.0(typescript@5.9.3)
       content-tag: 2.0.3
@@ -28203,7 +28221,7 @@ snapshots:
   ember-eslint-parser@0.5.13(b21a5c2d82ffcddaa5ddcd8b5e86f59d):
     dependencies:
       '@babel/core': 7.29.0
-      '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
+      '@babel/eslint-parser': 7.29.7(ffe5d09d8cdb5480405909425b88960a)
       '@glimmer/syntax': 0.95.0
       '@typescript-eslint/tsconfig-utils': 8.65.0(typescript@5.9.3)
       content-tag: 2.0.3
@@ -28219,10 +28237,10 @@ snapshots:
 
   ember-eslint@0.7.0(cd2b3bf51516e76bdc16901d0318e0d1):
     dependencies:
-      '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
+      '@babel/eslint-parser': 7.29.7(ffe5d09d8cdb5480405909425b88960a)
       '@eslint/js': 9.39.4
       eslint-config-prettier: 10.1.8(eslint@9.39.4(jiti@1.21.7))
-      eslint-plugin-ember: 13.3.2(ec3c5244a12fda87de96eadce129cb08)
+      eslint-plugin-ember: 13.3.2(9e4049049653c87d6a4dde4262d19705)
       eslint-plugin-n: 18.1.0(c7cc3430450b6be053812bb7bd6cc9be)
       eslint-plugin-qunit: 8.2.6(eslint@9.39.4(jiti@1.21.7))
       globals: 17.6.0
@@ -29235,7 +29253,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-decorator-position@6.1.0(5a70c72a2e0f36fc6621af4e08b24441):
+  eslint-plugin-decorator-position@6.1.0(101fd39045f63d398b7010f0db190f1e):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-proposal-decorators': 7.29.7(@babel/core@7.29.0)
@@ -29244,7 +29262,7 @@ snapshots:
       eslint: 9.39.4(jiti@1.21.7)
       snake-case: 3.0.4
     optionalDependencies:
-      '@babel/eslint-parser': 7.28.6(ffe5d09d8cdb5480405909425b88960a)
+      '@babel/eslint-parser': 8.0.1(ffe5d09d8cdb5480405909425b88960a)
     transitivePeerDependencies:
       - supports-color
 
@@ -29302,14 +29320,14 @@ snapshots:
       - '@babel/core'
       - typescript
 
-  eslint-plugin-ember@13.3.2(ec3c5244a12fda87de96eadce129cb08):
+  eslint-plugin-ember@13.3.2(9e4049049653c87d6a4dde4262d19705):
     dependencies:
       '@ember-data/rfc395-data': 0.0.4
       aria-query: 5.3.2
       axobject-query: 4.1.0
       css-tree: 3.2.1
       editorconfig: 3.0.2
-      ember-eslint-parser: 0.13.0(0b816e1a2e0cb464ff3763d0a341509c)
+      ember-eslint-parser: 0.13.0(b559fa2b1211a74dd302096a3feab4b1)
       ember-rfc176-data: 0.3.18
       eslint: 9.39.4(jiti@1.21.7)
       eslint-utils: 3.0.0(eslint@9.39.4(jiti@1.21.7))
@@ -31521,7 +31539,7 @@ snapshots:
       '@babel/parser': 7.29.3
       '@istanbuljs/schema': 0.1.6
       istanbul-lib-coverage: 3.2.2
-      semver: 7.7.4
+      semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
 
@@ -33343,7 +33361,7 @@ snapshots:
     dependencies:
       hosted-git-info: 9.0.2
       proc-log: 6.1.0
-      semver: 7.7.4
+      semver: 7.8.5
       validate-npm-package-name: 7.0.2
 
   npm-packlist@10.0.4:
@@ -35996,8 +36014,6 @@ snapshots:
 
   semver@7.7.4: {}
 
-  semver@7.8.4: {}
-
   semver@7.8.5: {}
 
   send@0.18.0:
@@ -36457,7 +36473,7 @@ snapshots:
       detect-newline: 4.0.1
       git-hooks-list: 4.2.1
       is-plain-obj: 4.1.0
-      semver: 7.7.4
+      semver: 7.8.5
       sort-object-keys: 2.1.0
       tinyglobby: 0.2.17
 
