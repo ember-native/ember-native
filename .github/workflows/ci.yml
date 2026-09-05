@@ -23,5 +23,5 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm --filter ember-native lint
       - run: pnpm build
-      - run: pnpm --filter demo-app lint
+      - run: pnpm --filter ember-native-demo lint
       - run: pnpm --filter docs-app lint
