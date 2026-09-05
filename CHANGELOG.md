@@ -1,5 +1,23 @@
 # Changelog
 
+## Release (2026-09-05)
+
+* ember-native 5.1.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#443](https://github.com/ember-native/ember-native/pull/443) Add page stacks so navigating back and forth skips re-rendering ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#444](https://github.com/ember-native/ember-native/pull/444) Fix FrameElement.onInsertedChild not tracking currentPage ([@patricklx](https://github.com/patricklx))
+
+#### :house: Internal
+* [#446](https://github.com/ember-native/ember-native/pull/446) Fix demo app release-build blank content (ember-vite-hmr HMR gate) ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-08-24)
 
 * ember-native 5.0.6 (patch)
