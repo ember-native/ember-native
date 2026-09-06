@@ -1,25 +1,46 @@
 # Router Transitions
 
-to use the native transitions you have to use the `native-router` service.
-
-e.g.
+Routes render under a real NativeScript `Frame`, so navigating between them
+can play the same native, animated push/pop transitions any (non-Ember)
+NativeScript app can. To trigger one, use the `native-router` service instead
+of `@ember/routing/route-info`/the router service directly:
 
 ```js
 import Component from "@glimmer/component";
+import { service } from "@ember/service";
 
 export default class Page extends Component {
   @service("ember-native/native-router") nativeRouter;
 
   goto() {
-    this.nativeRouter.transitionTo("route-name", model || null, {
+    this.nativeRouter.transitionTo("route-name", model || null, queryParams, {
       transition: myTransition,
-      animated: true || false,
+      animated: true,
     });
   }
 }
 ```
 
-where my transition has the following interface:
+`transitionTo(name, model, queryParams, transition, backTransition)` sets the
+given `transition` just before calling the normal Ember `Router#transitionTo`.
+It's picked up the next time a `<page>` is pushed for this route change and
+passed straight to NativeScript's `Frame#navigate()`, which plays the
+animation. The optional `backTransition` is what plays when navigating back
+_out_ of the destination instead (replayed by the `history` service's
+`back()`), letting a push and its corresponding pop use different
+transitions:
+
+```js
+this.nativeRouter.transitionTo(
+  "route-name",
+  model,
+  undefined,
+  { transition: { name: "slide", direction: "left" }, animated: true },
+  { transition: { name: "slide", direction: "right" }, animated: true },
+);
+```
+
+`transition`/`backTransition` are each `{ transition: NavigationTransition, animated: boolean }`, where `NavigationTransition` is:
 
 ```ts
 // copied from nativescript source
@@ -59,3 +80,10 @@ interface NavigationTransition {
   curve?: any;
 }
 ```
+
+See [Sub-routes and back navigation](./frame-outlet) for how child routes
+stack on top of a parent route without re-rendering it, and how back
+navigation (hardware back button, iOS edge-swipe) stays in sync with Ember's
+router. For navigation that isn't router-driven at all (a wizard,
+master/detail inside a single route), see
+[Manual stacks, via `PageStack`/`PageStackView`](./page-stack) instead.
