@@ -25,6 +25,7 @@ import { on } from "@ember/modifier";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
+import RoutableComponentRoute from "ember-routable-component";
 import type HistoryService from "ember-native/services/history";
 
 class Page extends Component {
@@ -69,10 +70,10 @@ class Page extends Component {
   </template>
 }
 
-export default Page;
+export default class IndexRoute extends RoutableComponentRoute(Page) {}
 ```
 
-See [Setup](../1-get-started/setup) for how a `<page>`-rooted component like
-this one gets exported as an actual `Route`, and
+See [Testing page-rooted components](../6-testing) for how a `<page>`-rooted
+component like this one gets exported as an actual `Route`, and
 [Sub-routes and back navigation](../4-router-transitions/frame-outlet) for
 `history`/navigating to a nested route.

@@ -27,6 +27,7 @@ import { on } from "@ember/modifier";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
+import RoutableComponentRoute from "ember-routable-component";
 import type HistoryService from "ember-native/services/history";
 
 class Page extends Component {
@@ -73,7 +74,7 @@ class Page extends Component {
   </template>
 }
 
-export default Page;
+export default class IndexRoute extends RoutableComponentRoute(Page) {}
 ```
 
 `RadListView` isn't registered as a native element by default - register it
