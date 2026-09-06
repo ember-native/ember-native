@@ -1,11 +1,13 @@
 # Rad List View Component
 
-an extract how in it can be used
+Wraps `nativescript-ui-listview`'s `RadListView`, adding optional header and
+footer blocks:
 
 ```gts
 import { RadListView } from "ember-native/components";
+
 <template>
-  <RadListView @items={{this.list}}>
+  <RadListView height="100%" @items={{this.list}}>
     <:header><label>header</label></:header>
     <:item as |item|>
       <label>
@@ -17,46 +19,47 @@ import { RadListView } from "ember-native/components";
 </template>
 ```
 
-full example
+A fuller example, as a route's page:
 
 ```gts
-import { ListView } from "ember-native/components";
-import RoutableComponentRoute from "ember-routable-component";
-import { LinkTo } from "ember-ative/components";
+import { RadListView } from "ember-native/components";
 import { on } from "@ember/modifier";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
+import type HistoryService from "ember-native/services/history";
+
 class Page extends Component {
-  @service history;
+  @service("ember-native/history") history!: HistoryService;
   @tracked list = ["a", "b", "c"];
-  start = () => {
+
+  constructor(...args: ConstructorParameters<typeof Component>) {
+    super(...args);
     const lists = [
       ["a", "b", "c"],
       ["a", "b", "c", "d", "e"],
       ["1", "2", "3"],
-      ["1", "2", "3", 4, 5],
+      ["1", "2", "3", "4", "5"],
     ];
     setInterval(() => {
       this.list = lists[Math.floor(Math.random() * lists.length)];
     }, 200);
-  };
+  }
+
   <template>
     <page>
-      <actionBar title="MyApp">
-        <navigationButton
+      <action-bar title="MyApp">
+        <navigation-button
           {{on "tap" this.history.back}}
-          visibility="{{unless this.history.stack.length 'collapse'}}"
+          visibility="{{if this.history.stack.length 'visible' 'collapse'}}"
           android.position="left"
           text="Go back"
           android.systemIcon="ic_menu_back"
         />
-      </actionBar>
-      <stackLayout>
-        <label text="Hello world 2!"></label>
-        <LinkTo @route="test" @text="test" />
-        {{(this.start)}}
-        <RadListView @items={{this.list}}>
+      </action-bar>
+      <stack-layout>
+        <label text="Hello world!"></label>
+        <RadListView height="100%" @items={{this.list}}>
           <:header><label>header</label></:header>
           <:item as |item|>
             <label>
@@ -65,16 +68,13 @@ class Page extends Component {
           </:item>
           <:footer><label>footer</label></:footer>
         </RadListView>
-      </stackLayout>
+      </stack-layout>
     </page>
   </template>
 }
 
-// this will generate a Route class and use the provided template
-export default class IndexRoute extends RoutableComponentRoute(Page) {
-  activate() {
-    console.log("activate");
-  }
-}
-``;
+export default Page;
 ```
+
+`RadListView` isn't registered as a native element by default - register it
+yourself first, see [Integrate plugin elements](../2-dom/integrate-plugin-elements).

@@ -5,13 +5,16 @@ Glint is supported, you just need to import
 - `import ember-native/types/glint`
 - `import ember-native/types/globals`
 
-to support elements coming from other plugins you need to register them
+to support elements coming from other plugins you need to register them - see
+[Integrate plugin elements](../2-dom/integrate-plugin-elements) for the full
+runtime registration + Glint type augmentation steps:
 
 ```ts
-type ViewBase = import("@nativescript/core").ViewBase;
-type NativeElementNode<T extends ViewBase> = import("../dom/native/NativeElementNode").default<T>;
-interface HTMLElementTagNameMap {
-  "rad-list-view": NativeElementNode<import("nativescript-ui-listview").RadListView>;
-  "rad-side-drawer": NativeElementNode<import("nativescript-ui-sidedrawer").RadSideDrawer>;
+import type NativeElementNode from "ember-native/dom/native/NativeElementNode";
+
+declare module "ember-native/dom/native-elements-tag-name-map" {
+  interface NativeElementsTagNameMap {
+    "rad-side-drawer": NativeElementNode<import("nativescript-ui-sidedrawer").RadSideDrawer>;
+  }
 }
 ```
