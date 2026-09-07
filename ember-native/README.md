@@ -295,6 +295,33 @@ computing a fixed list of steps up front, means it self-heals even if Ember
 makes several changes before the frame catches up (e.g. a fast
 forward-then-back collapses to a no-op once the drain finishes).
 
+### Cross-tree jumps into a nested route
+
+Diffing against the frame's actual stack usually finds a non-empty common
+prefix (in-tree navigation only ever changes the last level or two), but a
+jump to an unrelated route tree - e.g. reaching a nested `list-view.item`
+straight from an unrelated top-level route, never having visited `list-view`
+itself - has nothing in common with what the frame currently shows. Naively,
+reconciling that would still take one step per level: push `list-view`,
+settle, push `list-view.item`, settle - materializing and briefly displaying
+the parent page's own transition/animation on the way to a destination that
+was never `list-view` itself.
+
+On Android, `reconcile()` avoids this: it does a single `navigate()` straight
+to the true leaf (`list-view.item`), then splices plain `BackstackEntry`
+objects for the intermediate ancestors (`list-view`) directly into the
+frame's backstack once that transition settles, instead of running each
+ancestor through its own `navigate()`. `Frame._goBackCore` already tolerates
+a backstack entry with no native fragment - it creates one on demand (the
+same path used to recreate a fragment the OS discarded after the activity
+was destroyed) - so a `goBack()`/`HistoryService#back()` into a seeded
+ancestor still lands on a real, correctly-rendered page, confirmed on-device
+via `demo-app/app/tests/integration/list-view-stack-test.ts`'s cross-tree
+jump test. This is Android-only: iOS's `popToViewControllerAnimated` can
+only pop to a view controller that was actually pushed, so a synthetic entry
+there would be an unreachable target - iOS still steps through each
+ancestor.
+
 One consequence of this design: a page is only ever pushed with a *fresh*
 `Page` instance (whatever Ember just created) - going back always uses
 `goBack()`, resuming the frame's own preserved backstack entry, never a

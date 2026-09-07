@@ -1,10 +1,14 @@
 import { Frame } from '@nativescript/core/ui/frame';
 import type { NavigationTransition, View } from '@nativescript/core';
+import { isAndroid } from '@nativescript/core/platform';
+import type { BackstackEntry } from '@nativescript/core/ui/frame/frame-interfaces';
 
 import { createElement } from '../element-registry.ts';
 import ViewNode from '../nodes/ViewNode.ts';
 import NativeElementNode from './NativeElementNode.ts';
 import { Page } from '@nativescript/core/ui/page';
+
+let syntheticBackstackTagCounter = 0;
 
 let nextTransition: {
   transition: NavigationTransition | undefined;
@@ -70,6 +74,11 @@ export default class FrameElement extends NativeElementNode {
   private reconcileScheduled = false;
   private reconciling = false;
   private pendingTransition: typeof nextTransition = null;
+  // Set right before a cross-tree jump's single `navigate()` call settles -
+  // see the `i === 0` branch in `reconcile()` and `seedBackstack()` below.
+  // Holds the ancestor pages (outermost first) that still need a real
+  // backstack entry even though they never got their own transition.
+  private pendingBackstackSeed: Page[] | null = null;
 
   constructor() {
     super('frame', Frame, null);
@@ -85,6 +94,10 @@ export default class FrameElement extends NativeElementNode {
         return;
       }
       this.reconciling = false;
+      if (this.pendingBackstackSeed) {
+        this.seedBackstack(this.pendingBackstackSeed);
+        this.pendingBackstackSeed = null;
+      }
       this.reconcile();
     });
   }
@@ -237,8 +250,22 @@ export default class FrameElement extends NativeElementNode {
       // top-level route in one go) - there's nothing to go back *to* in
       // that case, so replace the stack's base outright instead.
       if (i === 0) {
+        // Cross-tree jump straight into a nested route (`desired.length > 1`):
+        // on Android, do a single native transition straight to the true
+        // leaf and splice synthetic `BackstackEntry` objects for the
+        // intermediate ancestors into the backstack once it settles (see
+        // `seedBackstack`), instead of materializing each ancestor with its
+        // own transition first. iOS's `popToViewControllerAnimated` can only
+        // pop to a view controller that was actually pushed, so a synthetic
+        // entry there would be an unreachable `goBack()`/edge-swipe target -
+        // iOS keeps stepping through each ancestor instead.
+        const seedAncestors = isAndroid && desired.length > 1;
+        if (seedAncestors) {
+          this.pendingBackstackSeed = desired.slice(0, -1);
+        }
+        const leaf = seedAncestors ? desired[desired.length - 1]! : desired[0]!;
         this.nativeView.navigate({
-          create: () => desired[0]!,
+          create: () => leaf,
           clearHistory: true,
           backstackVisible: true,
           transition: transition?.transition || {},
@@ -258,6 +285,40 @@ export default class FrameElement extends NativeElementNode {
       backstackVisible: true,
       transition: transition?.transition || {},
       animated: transition?.animated,
+    });
+  }
+
+  /**
+   * Splices real `BackstackEntry` objects for `ancestors` (outermost first)
+   * into the frame's backstack, below the page it just navigated to,
+   * without running their own `navigate()`/transition/`navigatedTo` cycle.
+   *
+   * Must only run once the triggering `navigate({ clearHistory: true, ... })`
+   * has fully settled - `_updateBackstack`'s `clearHistory` handling tears
+   * down (`resolvedPage = null`) every entry it finds in the backstack at
+   * that point, so splicing any earlier would just have those entries
+   * destroyed again.
+   *
+   * A `BackstackEntry` with no `fragment` is already a real, tolerated
+   * `goBack()` target on Android - `Frame._goBackCore` lazily creates the
+   * fragment on demand (the same path used to recreate fragments the OS
+   * discarded after activity destruction), committing it through a normal
+   * fragment transaction. `fragmentTag` only needs to be unique per frame
+   * (it's how a recreated native fragment re-associates with its JS
+   * backstack entry), and `navDepth` only affects later fragment tags'
+   * cosmetic suffix, not correctness.
+   */
+  private seedBackstack(ancestors: Page[]) {
+    const backStack = (
+      this.nativeView as unknown as { _backStack: BackstackEntry[] }
+    )._backStack;
+    ancestors.forEach((page, index) => {
+      backStack.push({
+        entry: { create: () => page, backstackVisible: true },
+        resolvedPage: page,
+        navDepth: index,
+        fragmentTag: `ember-native-seeded-${syntheticBackstackTagCounter++}`,
+      });
     });
   }
 }
