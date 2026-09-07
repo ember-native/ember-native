@@ -109,4 +109,69 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       );
     }
   );
+
+  QUnit.test(
+    'a cross-tree jump straight into a nested route seeds the ancestor into the backstack in a single transition',
+    async function (assert) {
+      // `index` is an unrelated top-level route - `list-view` (the parent of
+      // the route we're about to jump into) is never visited on its own, so
+      // `FrameElement.reconcile()` sees a common-prefix-zero jump into a
+      // 2-deep desired stack (`list-view` + `list-view.item`) - the case
+      // `seedBackstack` exists for (see `FrameElement.ts`).
+      await visit('/');
+      const frame: Frame = ENV.rootElement.getElementByTagName('frame').nativeView;
+      await waitUntil(() => !!frame.currentPage, { timeout: 5000 });
+      assert.false(frame.canGoBack(), 'nothing to go back to yet');
+
+      await visit('/list-view/a');
+
+      const listPage = ENV.rootElement.getElementById('list-view-page');
+      const listPageNativeView: Page = listPage?.nativeView;
+      const itemPage = ENV.rootElement.getElementById('item-page');
+      const itemPageNativeView: Page = itemPage?.nativeView;
+
+      await waitUntil(() => frame.currentPage === itemPageNativeView, { timeout: 5000 });
+
+      assert.true(
+        frame.canGoBack(),
+        'the list page landed on the real Frame backstack even though it was never its own transition'
+      );
+      assert.equal(
+        frame.backStack.length,
+        1,
+        'exactly one backstack entry - the seeded list page, not the index page or two entries'
+      );
+      assert.true(
+        frame.backStack[0]?.resolvedPage === listPageNativeView,
+        'the seeded backstack entry is the same list-view Page instance Ember rendered'
+      );
+
+      // The discriminating check: a `BackstackEntry` `seedBackstack` spliced
+      // in never went through its own `navigate()`/fragment transaction -
+      // going back to it is what actually proves the lazily-created
+      // fragment/view-controller renders on a real device, not just that
+      // the JS-level `backStack` array looks right.
+      //
+      // Not `history.back()`: `HistoryService`'s stack recorded a single
+      // entry for the whole `/` -> `/list-view/a` jump (one router
+      // transition, however many nested levels it spans), so `back()` would
+      // undo the entire jump and land on `/` again, skipping the seeded
+      // `list-view` entry entirely. Visiting `/list-view` directly instead
+      // is the single in-tree step from `list-view.item` back to its parent
+      // - exactly the case `FrameElement.reconcile()` resolves with a real
+      // `goBack()` to the seeded backstack entry (`i !== 0` in
+      // `reconcile()`, not another cross-tree replace).
+      await visit('/list-view');
+      await waitUntil(() => frame.currentPage === listPageNativeView, { timeout: 5000 });
+
+      assert.true(
+        !!listPage?.getElementByTagName('actionbar')?.getAttribute('title')?.includes('List View'),
+        'going back from the seeded jump renders the real list-view page, not a blank/broken fragment'
+      );
+      assert.false(
+        frame.canGoBack(),
+        'the backstack is empty again after going back to the seeded root'
+      );
+    }
+  );
 });
