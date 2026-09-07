@@ -1,5 +1,19 @@
 # Changelog
 
+## Release (2026-09-07)
+
+* ember-native 5.2.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#451](https://github.com/ember-native/ember-native/pull/451) Seed ancestor pages into the Frame backstack on cross-tree jumps into a nested route ([@patricklx](https://github.com/patricklx))
+
+#### :house: Internal
+* [#448](https://github.com/ember-native/ember-native/pull/448) Fix and expand docs-app content ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-09-05)
 
 * ember-native 5.1.0 (minor)

@@ -2,17 +2,13 @@
   "solution": {
     "ember-native": {
       "impact": "minor",
-      "oldVersion": "5.0.6",
-      "newVersion": "5.1.0",
+      "oldVersion": "5.1.0",
+      "newVersion": "5.2.0",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
@@ -24,5 +20,5 @@
       "oldVersion": "1.0.0"
     }
   },
-  "description": "## Release (2026-09-05)\n\n* ember-native 5.1.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#443](https://github.com/ember-native/ember-native/pull/443) Add page stacks so navigating back and forth skips re-rendering ([@patricklx](https://github.com/patricklx))\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#444](https://github.com/ember-native/ember-native/pull/444) Fix FrameElement.onInsertedChild not tracking currentPage ([@patricklx](https://github.com/patricklx))\n\n#### :house: Internal\n* [#446](https://github.com/ember-native/ember-native/pull/446) Fix demo app release-build blank content (ember-vite-hmr HMR gate) ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-09-07)\n\n* ember-native 5.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#451](https://github.com/ember-native/ember-native/pull/451) Seed ancestor pages into the Frame backstack on cross-tree jumps into a nested route ([@patricklx](https://github.com/patricklx))\n\n#### :house: Internal\n* [#448](https://github.com/ember-native/ember-native/pull/448) Fix and expand docs-app content ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
