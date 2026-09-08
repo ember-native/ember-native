@@ -140,7 +140,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "router_js": "^8.0.6",
     "sass": "^1.94.2",
-    "sass-embedded": "^1.90.0",
+    "sass-embedded": "^1.104.0",
     "typescript-eslint": "^8.38.0",
     "typescript-plugin-css-modules": "^5.2.0",
     "yui": "^3.18.1"
