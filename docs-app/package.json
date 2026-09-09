@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.29.0",
-    "@shikijs/rehype": "^4.0.2",
+    "@shikijs/rehype": "^4.4.3",
     "@universal-ember/docs-support": "0.9.2",
     "assert": "^2.0.0",
     "change-case": "^5.4.4",
