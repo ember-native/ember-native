@@ -172,6 +172,37 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
         frame.canGoBack(),
         'the backstack is empty again after going back to the seeded root'
       );
+
+      // The actual regression this guards against: a seeded (fragment-less)
+      // `BackstackEntry`, once landed on via the `goBack()` above, must not
+      // leave `FrameElement`'s `reconciling` flag stuck. If it did, this
+      // next forward navigate() would never resolve, and - since
+      // `reconcile()` only ever runs again from the settle handler of a
+      // navigation that itself never settles - every future route change
+      // anywhere in the app would silently stop working too. Asserting on
+      // `frame.currentPage`/`frame.backStack` (not just DOM-shim state)
+      // matters here: a stuck `reconciling` still leaves `childNodes`
+      // looking correct, since Ember's own render already happened.
+      await visit('/list-view/a');
+      const itemPageAgain = ENV.rootElement.getElementById('item-page');
+      const itemPageAgainNativeView: Page = itemPageAgain?.nativeView;
+      await waitUntil(() => frame.currentPage === itemPageAgainNativeView, {
+        timeout: 5000,
+      });
+
+      assert.true(
+        !!itemPageAgain?.getElementByTagName('actionbar')?.getAttribute('title')?.startsWith('Item'),
+        'navigating forward again after landing on the seeded entry still reaches the item route'
+      );
+      assert.true(
+        frame.canGoBack(),
+        'the seeded list page is back on the real Frame backstack after the second forward navigate'
+      );
+      assert.equal(
+        frame.backStack.length,
+        1,
+        'exactly one backstack entry again - the list page'
+      );
     }
   );
 });

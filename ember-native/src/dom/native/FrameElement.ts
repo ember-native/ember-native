@@ -336,17 +336,44 @@ export default class FrameElement extends NativeElementNode {
    * (it's how a recreated native fragment re-associates with its JS
    * backstack entry), and `navDepth` only affects later fragment tags'
    * cosmetic suffix, not correctness.
+   *
+   * `frameId` is not cosmetic, though, and must match this frame's own
+   * `android.frameId` - NativeScript's Android transition bookkeeping
+   * (`fragment.transitions.android.js`'s `waitingQueue`/`completedEntries`)
+   * keys purely off `entry.frameId` to decide when a navigation's exit and
+   * enter transitions have *both* finished, not off any reference back to
+   * the frame itself. A seeded entry that's later `goBack()`-ed onto and
+   * then navigated away from again takes part in exactly that bookkeeping
+   * as the outgoing `currentEntry` - if its `frameId` were left `undefined`
+   * (the default `entry.frameId` is never assigned outside `_navigateCore`,
+   * which seeded entries never go through), its own transition-end would
+   * land in a separate `waitingQueue` bucket keyed by `undefined` instead
+   * of sharing the real frame's bucket with the incoming page. That lets a
+   * `setCurrent()` fire off that stray bucket alone, out of step with the
+   * still in-flight real navigation - which can null out `_executingContext`
+   * early and fire a premature `navigatedTo` for the *previous* page, which
+   * in turn resets `FrameElement.reconciling` and re-enters `reconcile()`
+   * while the genuine navigation is still running. The resulting duplicate
+   * `navigate()` call has nothing to legitimately queue behind (the
+   * wrongly-nulled `_executingContext` no longer blocks it) and hits
+   * `_setAndroidFragmentTransitions`'s own "previous navigation finish"
+   * guard, throwing inside a `setTimeout` callback - `reconciling` is left
+   * stuck `true` forever, and every future `reconcile()` call silently
+   * no-ops. Setting `frameId` here puts seeded entries on the same footing
+   * as real ones for this bookkeeping, closing that gap.
    */
   private seedBackstack(pages: Page[]) {
     const backStack = (
       this.nativeView as unknown as { _backStack: BackstackEntry[] }
     )._backStack;
+    const frameId = this.nativeView.android.frameId;
     pages.forEach((page, index) => {
       backStack.push({
         entry: { create: () => page, backstackVisible: true },
         resolvedPage: page,
         navDepth: index,
         fragmentTag: `ember-native-seeded-${syntheticBackstackTagCounter++}`,
+        frameId,
       });
     });
   }
