@@ -1,6 +1,7 @@
 import { setupRenderingTest } from '~/tests/helpers';
 import { waitUntil } from '@ember/test-helpers';
 import { createElement } from 'ember-native/dom/element-registry';
+import { isAndroid } from '@nativescript/core/platform';
 
 // Regression coverage for `FrameElement`'s reconciler (see its class doc
 // comment in ember-native/src/dom/native/FrameElement.ts) - it drives a
@@ -22,27 +23,34 @@ import { createElement } from 'ember-native/dom/element-registry';
 // machinery by hand, so `FrameElement`'s own constructor-installed listener
 // and `reconcile()` diff logic run for real.
 function installFakeNativeNavigation(nativeFrame: any) {
-  nativeFrame._fakeBackStack = [];
+  // `_backStack` (not a separate fake array) - `FrameElement.seedBackstack`
+  // splices synthetic entries directly into the real Frame's private
+  // `_backStack` field (there's no public API for it), so the fake has to
+  // read/write that same field for a seeded entry to show up through the
+  // public `backStack` getter below.
+  nativeFrame._backStack = [];
   nativeFrame._fakeCurrentEntry = undefined;
+  nativeFrame._navigateCallCount = 0;
 
   Object.defineProperty(nativeFrame, 'backStack', {
     configurable: true,
-    get: () => nativeFrame._fakeBackStack,
+    get: () => nativeFrame._backStack,
   });
   Object.defineProperty(nativeFrame, 'currentPage', {
     configurable: true,
     get: () => nativeFrame._fakeCurrentEntry?.resolvedPage,
   });
 
-  nativeFrame.canGoBack = () => nativeFrame._fakeBackStack.length > 0;
+  nativeFrame.canGoBack = () => nativeFrame._backStack.length > 0;
 
   nativeFrame.navigate = (options: any) => {
+    nativeFrame._navigateCallCount++;
     queueMicrotask(() => {
       const prevEntry = nativeFrame._fakeCurrentEntry;
       if (options.clearHistory) {
-        nativeFrame._fakeBackStack = [];
+        nativeFrame._backStack = [];
       } else if (prevEntry) {
-        nativeFrame._fakeBackStack = [...nativeFrame._fakeBackStack, prevEntry];
+        nativeFrame._backStack = [...nativeFrame._backStack, prevEntry];
       }
       const entry = { resolvedPage: options.create(), entry: options };
       nativeFrame._fakeCurrentEntry = entry;
@@ -57,8 +65,8 @@ function installFakeNativeNavigation(nativeFrame: any) {
 
   nativeFrame.goBack = (backstackEntry: any) => {
     queueMicrotask(() => {
-      const index = nativeFrame._fakeBackStack.indexOf(backstackEntry);
-      nativeFrame._fakeBackStack = nativeFrame._fakeBackStack.slice(0, index);
+      const index = nativeFrame._backStack.indexOf(backstackEntry);
+      nativeFrame._backStack = nativeFrame._backStack.slice(0, index);
       nativeFrame._fakeCurrentEntry = backstackEntry;
       nativeFrame.notify({
         eventName: 'navigatedTo',
@@ -169,6 +177,63 @@ QUnit.module('FrameElement | real Frame backstack', function (hooks) {
       );
       assert.strictEqual(frame.nativeView.currentPage, page1.nativeView);
       assert.false(frame.nativeView.canGoBack());
+    },
+  );
+
+  QUnit.test(
+    'pushing two nested pages in the same batch collapses into a single native step on Android',
+    async function (assert) {
+      // Simulates a single Ember route transition that activates two
+      // nested routes at once (both `<page>`s land in `childNodes` before
+      // `reconcile()` gets a microtask to look at either) - the scenario
+      // `navigateToLeaf`'s skip-ahead-and-seed path exists for (see
+      // `FrameElement`'s class doc comment and `navigateToLeaf`).
+      const frame = createElement('frame');
+      installFakeNativeNavigation(frame.nativeView);
+      const page1 = createElement('page');
+      const page2 = createElement('page');
+      const page3 = createElement('page');
+
+      frame.appendChild(page1);
+      await waitUntil(() => frame.nativeView.currentPage === page1.nativeView);
+
+      frame.appendChild(page2);
+      frame.appendChild(page3);
+      await waitUntil(() => frame.nativeView.currentPage === page3.nativeView);
+
+      const navigateCallCount = (frame.nativeView as any)._navigateCallCount;
+      if (isAndroid) {
+        assert.strictEqual(
+          navigateCallCount,
+          2,
+          'one navigate() for the initial page1 mount, one for the collapsed page2+page3 push',
+        );
+        assert.strictEqual(frame.nativeView.backStack.length, 2);
+        assert.strictEqual(frame.nativeView.backStack[0]?.resolvedPage, page1.nativeView);
+        assert.strictEqual(
+          frame.nativeView.backStack[1]?.resolvedPage,
+          page2.nativeView,
+          'page2 was seeded into the backstack even though it never ran its own transition',
+        );
+      } else {
+        assert.strictEqual(
+          navigateCallCount,
+          3,
+          'iOS steps through page2 before page3 - a synthetic backstack entry would be an unreachable popToViewController target',
+        );
+      }
+
+      // Going back should land on page2, whether it got there via a seeded
+      // entry (Android) or its own transition (iOS) - either way it's the
+      // same page2 instance, not a fresh one.
+      frame.removeChild(page3);
+      await waitUntil(() => frame.nativeView.currentPage === page2.nativeView);
+      assert.strictEqual(frame.nativeView.backStack.length, 1);
+
+      frame.removeChild(page2);
+      await waitUntil(
+        () => frame.nativeView.currentPage === page1.nativeView && !frame.nativeView.canGoBack(),
+      );
     },
   );
 });
