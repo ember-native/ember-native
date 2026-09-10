@@ -65,19 +65,30 @@ export function setOnUnexpectedBack(handler: (() => void) | null) {
  * it's actually done) and performs exactly one native step - either
  * `navigate()` or `goBack()` - then waits for the frame's own
  * `navigatedTo` event (which only fires once a queued navigation has truly
- * settled) before checking again. Re-diffing after every settle, instead
- * of computing a fixed list of steps up front, means it self-heals even if
- * Ember makes several changes before the frame catches up - e.g. a fast
- * forward-then-back collapses to a no-op once the drain finishes.
+ * settled, i.e. its transition has finished animating) before checking
+ * again. Re-diffing after every settle, instead of computing a fixed list
+ * of steps up front, means it self-heals even if Ember makes several
+ * changes before the frame catches up - e.g. a fast forward-then-back
+ * collapses to a no-op once the drain finishes.
+ *
+ * Because a step only completes once its transition finishes animating,
+ * more than one native step for a single Ember change (e.g. a route
+ * transition that activates several nested routes at once, so more than
+ * one new `<page>` appears in the same synchronous batch) would mean
+ * several full transitions playing back to back. `navigateToLeaf` avoids
+ * that on Android by jumping straight to the deepest page in one
+ * transition and backfilling the skipped pages into the backstack
+ * afterward (see `seedBackstack`) - see its own doc comment for why this
+ * can't apply on iOS.
  */
 export default class FrameElement extends NativeElementNode {
   private reconcileScheduled = false;
   private reconciling = false;
   private pendingTransition: typeof nextTransition = null;
-  // Set right before a cross-tree jump's single `navigate()` call settles -
-  // see the `i === 0` branch in `reconcile()` and `seedBackstack()` below.
-  // Holds the ancestor pages (outermost first) that still need a real
-  // backstack entry even though they never got their own transition.
+  // Set right before a `navigateToLeaf()` call that skipped over one or more
+  // intermediate pages settles - see `reconcile()` and `seedBackstack()`
+  // below. Holds those skipped pages (outermost first), which still need a
+  // real backstack entry even though they never got their own transition.
   private pendingBackstackSeed: Page[] | null = null;
 
   constructor() {
@@ -250,38 +261,53 @@ export default class FrameElement extends NativeElementNode {
       // top-level route in one go) - there's nothing to go back *to* in
       // that case, so replace the stack's base outright instead.
       if (i === 0) {
-        // Cross-tree jump straight into a nested route (`desired.length > 1`):
-        // on Android, do a single native transition straight to the true
-        // leaf and splice synthetic `BackstackEntry` objects for the
-        // intermediate ancestors into the backstack once it settles (see
-        // `seedBackstack`), instead of materializing each ancestor with its
-        // own transition first. iOS's `popToViewControllerAnimated` can only
-        // pop to a view controller that was actually pushed, so a synthetic
-        // entry there would be an unreachable `goBack()`/edge-swipe target -
-        // iOS keeps stepping through each ancestor instead.
-        const seedAncestors = isAndroid && desired.length > 1;
-        if (seedAncestors) {
-          this.pendingBackstackSeed = desired.slice(0, -1);
-        }
-        const leaf = seedAncestors ? desired[desired.length - 1]! : desired[0]!;
-        this.nativeView.navigate({
-          create: () => leaf,
-          clearHistory: true,
-          backstackVisible: true,
-          transition: transition?.transition || {},
-          animated: transition?.animated,
-        });
+        // Cross-tree jump straight into a nested route (`desired.length > 1`).
+        this.navigateToLeaf(desired, 0, true, transition);
       } else {
         this.nativeView.goBack(backStack[i - 1]);
       }
       return;
     }
 
-    // Everything the frame currently shows is still wanted - push the next
-    // desired page on top.
+    // Everything the frame currently shows is still wanted - push forward
+    // to the next desired page(s).
+    this.navigateToLeaf(desired, i, false, transition);
+  }
+
+  /**
+   * Navigates in a single native step from wherever the frame currently is
+   * to `desired[desired.length - 1]`, even when that skips over one or more
+   * pages in `desired.slice(fromIndex)` that never got their own transition
+   * - e.g. a cross-tree jump straight into a nested route (`fromIndex === 0`
+   * with `clearHistory: true`), or an Ember transition that activates
+   * several nested routes deeper than the currently-active one in one go
+   * (`fromIndex > 0` with `clearHistory: false`). Each skipped page still
+   * needs a real backstack entry so `goBack()`/edge-swipe later lands on it
+   * correctly - that's what `seedBackstack` (spliced in once this
+   * `navigate()` settles - see the `navigatedTo` handler above) is for.
+   *
+   * Only on Android: iOS's `popToViewControllerAnimated` can only pop to a
+   * view controller that was actually pushed, so a synthetic entry there
+   * would be an unreachable `goBack()`/edge-swipe target - iOS keeps
+   * stepping through each intermediate page with its own transition
+   * instead, via `reconcile()`'s normal one-step-at-a-time loop.
+   */
+  private navigateToLeaf(
+    desired: Page[],
+    fromIndex: number,
+    clearHistory: boolean,
+    transition: typeof nextTransition,
+  ) {
+    const seedSkipped = isAndroid && desired.length - fromIndex > 1;
+    if (seedSkipped) {
+      this.pendingBackstackSeed = desired.slice(fromIndex, -1);
+    }
+    const leaf = seedSkipped
+      ? desired[desired.length - 1]!
+      : desired[fromIndex]!;
     this.nativeView.navigate({
-      create: () => desired[i]!,
-      clearHistory: false,
+      create: () => leaf,
+      clearHistory,
       backstackVisible: true,
       transition: transition?.transition || {},
       animated: transition?.animated,
@@ -289,15 +315,18 @@ export default class FrameElement extends NativeElementNode {
   }
 
   /**
-   * Splices real `BackstackEntry` objects for `ancestors` (outermost first)
-   * into the frame's backstack, below the page it just navigated to,
-   * without running their own `navigate()`/transition/`navigatedTo` cycle.
+   * Splices real `BackstackEntry` objects for `pages` (outermost first)
+   * into the frame's backstack, below the page `navigateToLeaf` just
+   * navigated to, without running their own `navigate()`/transition/
+   * `navigatedTo` cycle.
    *
-   * Must only run once the triggering `navigate({ clearHistory: true, ... })`
-   * has fully settled - `_updateBackstack`'s `clearHistory` handling tears
+   * Must only run once the triggering `navigate()` has fully settled - with
+   * `clearHistory: true`, `_updateBackstack`'s clearHistory handling tears
    * down (`resolvedPage = null`) every entry it finds in the backstack at
    * that point, so splicing any earlier would just have those entries
-   * destroyed again.
+   * destroyed again; with `clearHistory: false`, splicing early would race
+   * `_updateBackstack`'s own push of the previously-current entry, landing
+   * these pages in the wrong order.
    *
    * A `BackstackEntry` with no `fragment` is already a real, tolerated
    * `goBack()` target on Android - `Frame._goBackCore` lazily creates the
@@ -308,11 +337,11 @@ export default class FrameElement extends NativeElementNode {
    * backstack entry), and `navDepth` only affects later fragment tags'
    * cosmetic suffix, not correctness.
    */
-  private seedBackstack(ancestors: Page[]) {
+  private seedBackstack(pages: Page[]) {
     const backStack = (
       this.nativeView as unknown as { _backStack: BackstackEntry[] }
     )._backStack;
-    ancestors.forEach((page, index) => {
+    pages.forEach((page, index) => {
       backStack.push({
         entry: { create: () => page, backstackVisible: true },
         resolvedPage: page,
