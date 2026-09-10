@@ -330,6 +330,28 @@ once. (An earlier version of this file noted that a second `navigate()` to
 an already-used `Page` instance was unreliable on-device - this design
 doesn't do that; avoiding it is the reason `goBack()` exists at all.)
 
+### Forward pushes across several nested routes at once
+
+The same `navigateToLeaf` step used for cross-tree jumps also applies when
+the frame is already showing a valid prefix of the desired stack but the
+route transition activates more than one new nested route beyond it in a
+single go (e.g. a deep link or a programmatic transition landing two levels
+deeper than whatever's currently on screen). Naively, `reconcile()`'s normal
+one-step-at-a-time loop would push each new page in its own `navigate()` and
+wait for it to fully settle before pushing the next - N sequential animated
+transitions, each one briefly showing an intermediate page the user never
+meant to stop on, adding real, visible delay on top of the (expected,
+by-design) cost of the animation itself.
+
+On Android, `reconcile()` avoids this the same way it avoids it for
+cross-tree jumps: a single `navigate()` straight to the true leaf, with the
+skipped intermediate pages spliced into the backstack via `seedBackstack`
+once that transition settles, instead of running each of them through its
+own `navigate()`. This is Android-only, for the same reason as the
+cross-tree case: iOS's `popToViewControllerAnimated` can only pop to a view
+controller that was actually pushed, so iOS still steps through each
+intermediate page with its own transition.
+
 ### Sub-routes, via `FrameOutlet`
 
 Ember never tears down a route's rendered output while any of its child
