@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-09-10)
+
+* ember-native 5.3.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-native`
+  * [#459](https://github.com/ember-native/ember-native/pull/459) Collapse multi-level forward frame pushes into a single transition ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-09-07)
 
 * ember-native 5.2.0 (minor)
