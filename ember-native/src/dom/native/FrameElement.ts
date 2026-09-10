@@ -94,6 +94,9 @@ export default class FrameElement extends NativeElementNode {
   constructor() {
     super('frame', Frame, null);
     this.nativeView.on(Page.navigatedToEvent, (args: any) => {
+      console.log(
+        `[frame-diag] navigatedTo fired reconciling=${this.reconciling} isBack=${args?.isBack} entry=${args?.entry?.fragmentTag} frameId=${this.nativeView.android?.frameId}`,
+      );
       if (!this.reconciling) {
         // Not a step we issued - a native UI gesture (iOS's edge swipe-back
         // is the only one enabled today) drove this instead. Nothing for
@@ -235,6 +238,9 @@ export default class FrameElement extends NativeElementNode {
     ) {
       i++;
     }
+    console.log(
+      `[frame-diag] reconcile() desired.length=${desired.length} actual.length=${actual.length} i=${i}`,
+    );
 
     // Read-and-clear unconditionally, in sync or not: this reconcile() call
     // is the only thing whatever route change staged `pendingTransition`
@@ -305,6 +311,9 @@ export default class FrameElement extends NativeElementNode {
     const leaf = seedSkipped
       ? desired[desired.length - 1]!
       : desired[fromIndex]!;
+    console.log(
+      `[frame-diag] navigateToLeaf fromIndex=${fromIndex} clearHistory=${clearHistory} seedSkipped=${seedSkipped} skippedCount=${this.pendingBackstackSeed?.length ?? 0}`,
+    );
     this.nativeView.navigate({
       create: () => leaf,
       clearHistory,
