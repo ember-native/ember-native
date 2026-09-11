@@ -1,14 +1,14 @@
 {
   "solution": {
     "ember-native": {
-      "impact": "minor",
-      "oldVersion": "5.2.0",
-      "newVersion": "5.3.0",
+      "impact": "patch",
+      "oldVersion": "5.3.0",
+      "newVersion": "5.3.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./ember-native/package.json"
@@ -20,5 +20,5 @@
       "oldVersion": "1.0.0"
     }
   },
-  "description": "## Release (2026-09-10)\n\n* ember-native 5.3.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-native`\n  * [#459](https://github.com/ember-native/ember-native/pull/459) Collapse multi-level forward frame pushes into a single transition ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2026-09-11)\n\n* ember-native 5.3.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-native`\n  * [#460](https://github.com/ember-native/ember-native/pull/460) Fix permanent frame navigation freeze from seeded backstack entries ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
 }
