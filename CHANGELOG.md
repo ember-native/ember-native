@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-09-11)
+
+* ember-native 5.3.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-native`
+  * [#460](https://github.com/ember-native/ember-native/pull/460) Fix permanent frame navigation freeze from seeded backstack entries ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2026-09-10)
 
 * ember-native 5.3.0 (minor)
