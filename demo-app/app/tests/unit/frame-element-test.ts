@@ -1,7 +1,6 @@
 import { setupRenderingTest } from '~/tests/helpers';
 import { waitUntil } from '@ember/test-helpers';
 import { createElement } from 'ember-native/dom/element-registry';
-import { isAndroid } from '@nativescript/core/platform';
 
 // Regression coverage for `FrameElement`'s reconciler (see its class doc
 // comment in ember-native/src/dom/native/FrameElement.ts) - it drives a
@@ -23,11 +22,6 @@ import { isAndroid } from '@nativescript/core/platform';
 // machinery by hand, so `FrameElement`'s own constructor-installed listener
 // and `reconcile()` diff logic run for real.
 function installFakeNativeNavigation(nativeFrame: any) {
-  // `_backStack` (not a separate fake array) - `FrameElement.seedBackstack`
-  // splices synthetic entries directly into the real Frame's private
-  // `_backStack` field (there's no public API for it), so the fake has to
-  // read/write that same field for a seeded entry to show up through the
-  // public `backStack` getter below.
   nativeFrame._backStack = [];
   nativeFrame._fakeCurrentEntry = undefined;
   nativeFrame._navigateCallCount = 0;
@@ -181,12 +175,12 @@ QUnit.module('FrameElement | real Frame backstack', function (hooks) {
   );
 
   QUnit.test(
-    'pushing two nested pages in the same batch collapses into a single native step on Android',
+    'pushing two nested pages in the same batch settles as one reconcile step on Android',
     async function (assert) {
       // Simulates a single Ember route transition that activates two
       // nested routes at once (both `<page>`s land in `childNodes` before
       // `reconcile()` gets a microtask to look at either) - the scenario
-      // `navigateToLeaf`'s skip-ahead-and-seed path exists for (see
+      // `navigateToLeaf`'s batched-`navigate()` path exists for (see
       // `FrameElement`'s class doc comment and `navigateToLeaf`).
       const frame = createElement('frame');
       installFakeNativeNavigation(frame.nativeView);
@@ -201,31 +195,25 @@ QUnit.module('FrameElement | real Frame backstack', function (hooks) {
       frame.appendChild(page3);
       await waitUntil(() => frame.nativeView.currentPage === page3.nativeView);
 
+      // Both platforms end up issuing a real `navigate()` per page (one for
+      // page1's initial mount, one each for page2/page3) - what differs is
+      // *when*: on Android, `navigateToLeaf` issues page2's and page3's
+      // `navigate()` calls back to back in the same synchronous batch
+      // (page2's unanimated, only page3's animated), relying on `Frame`'s
+      // own internal navigation queue to serialize them, instead of waiting
+      // for a full `reconcile()`/settle round trip between them the way iOS
+      // does.
       const navigateCallCount = (frame.nativeView as any)._navigateCallCount;
-      if (isAndroid) {
-        assert.strictEqual(
-          navigateCallCount,
-          2,
-          'one navigate() for the initial page1 mount, one for the collapsed page2+page3 push',
-        );
-        assert.strictEqual(frame.nativeView.backStack.length, 2);
-        assert.strictEqual(frame.nativeView.backStack[0]?.resolvedPage, page1.nativeView);
-        assert.strictEqual(
-          frame.nativeView.backStack[1]?.resolvedPage,
-          page2.nativeView,
-          'page2 was seeded into the backstack even though it never ran its own transition',
-        );
-      } else {
-        assert.strictEqual(
-          navigateCallCount,
-          3,
-          'iOS steps through page2 before page3 - a synthetic backstack entry would be an unreachable popToViewController target',
-        );
-      }
+      assert.strictEqual(navigateCallCount, 3);
+      assert.strictEqual(frame.nativeView.backStack.length, 2);
+      assert.strictEqual(frame.nativeView.backStack[0]?.resolvedPage, page1.nativeView);
+      assert.strictEqual(
+        frame.nativeView.backStack[1]?.resolvedPage,
+        page2.nativeView,
+        'page2 landed on the real backstack even though its own navigate() never left this batch',
+      );
 
-      // Going back should land on page2, whether it got there via a seeded
-      // entry (Android) or its own transition (iOS) - either way it's the
-      // same page2 instance, not a fresh one.
+      // Going back should land on page2, the same instance either way.
       frame.removeChild(page3);
       await waitUntil(() => frame.nativeView.currentPage === page2.nativeView);
       assert.strictEqual(frame.nativeView.backStack.length, 1);
@@ -233,6 +221,18 @@ QUnit.module('FrameElement | real Frame backstack', function (hooks) {
       frame.removeChild(page2);
       await waitUntil(
         () => frame.nativeView.currentPage === page1.nativeView && !frame.nativeView.canGoBack(),
+      );
+
+      // The actual regression this guards against: landing on a page that
+      // arrived via an unanimated, batched `navigate()` must not leave
+      // `FrameElement`'s reconciling lifecycle stuck - a further forward
+      // push afterward has to settle too.
+      frame.appendChild(page2);
+      await waitUntil(() => frame.nativeView.currentPage === page2.nativeView);
+      assert.strictEqual(
+        frame.nativeView.currentPage,
+        page2.nativeView,
+        'navigating forward again after the batched push still settles',
       );
     },
   );

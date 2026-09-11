@@ -117,7 +117,8 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       // the route we're about to jump into) is never visited on its own, so
       // `FrameElement.reconcile()` sees a common-prefix-zero jump into a
       // 2-deep desired stack (`list-view` + `list-view.item`) - the case
-      // `seedBackstack` exists for (see `FrameElement.ts`).
+      // `navigateToLeaf`'s multi-page batching exists for (see
+      // `FrameElement.ts`).
       await visit('/');
       const frame: Frame = ENV.rootElement.getElementByTagName('frame').nativeView;
       await waitUntil(() => !!frame.currentPage, { timeout: 5000 });
@@ -146,11 +147,11 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
         'the seeded backstack entry is the same list-view Page instance Ember rendered'
       );
 
-      // The discriminating check: a `BackstackEntry` `seedBackstack` spliced
-      // in never went through its own `navigate()`/fragment transaction -
-      // going back to it is what actually proves the lazily-created
-      // fragment/view-controller renders on a real device, not just that
-      // the JS-level `backStack` array looks right.
+      // The discriminating check: `list-view`'s own page got an unanimated
+      // `navigate()` batched ahead of `list-view.item`'s (see
+      // `navigateToLeaf`) - going back to it is what actually proves that
+      // real, queued `navigate()` renders and settles correctly on a real
+      // device, not just that the JS-level `backStack` array looks right.
       //
       // Not `history.back()`: `HistoryService`'s stack recorded a single
       // entry for the whole `/` -> `/list-view/a` jump (one router
@@ -171,6 +172,38 @@ QUnit.module('Acceptance | list-view page stack', function (hooks) {
       assert.false(
         frame.canGoBack(),
         'the backstack is empty again after going back to the seeded root'
+      );
+
+      // The actual regression this guards against: landing back on a page
+      // that was pushed via an unanimated, batched `navigate()` (rather
+      // than its own `reconcile()` step) must not leave `FrameElement`'s
+      // `reconciling` flag stuck. If it did, this next forward navigate()
+      // would never resolve, and - since `reconcile()` only ever runs again
+      // from the settle handler of a navigation that itself never settles -
+      // every future route change anywhere in the app would silently stop
+      // working too. Asserting on `frame.currentPage`/`frame.backStack`
+      // (not just DOM-shim state) matters here: a stuck `reconciling` still
+      // leaves `childNodes` looking correct, since Ember's own render
+      // already happened.
+      await visit('/list-view/a');
+      const itemPageAgain = ENV.rootElement.getElementById('item-page');
+      const itemPageAgainNativeView: Page = itemPageAgain?.nativeView;
+      await waitUntil(() => frame.currentPage === itemPageAgainNativeView, {
+        timeout: 5000,
+      });
+
+      assert.true(
+        !!itemPageAgain?.getElementByTagName('actionbar')?.getAttribute('title')?.startsWith('Item'),
+        'navigating forward again after landing on the seeded entry still reaches the item route'
+      );
+      assert.true(
+        frame.canGoBack(),
+        'the seeded list page is back on the real Frame backstack after the second forward navigate'
+      );
+      assert.equal(
+        frame.backStack.length,
+        1,
+        'exactly one backstack entry again - the list page'
       );
     }
   );
