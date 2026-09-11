@@ -307,28 +307,39 @@ settle, push `list-view.item`, settle - materializing and briefly displaying
 the parent page's own transition/animation on the way to a destination that
 was never `list-view` itself.
 
-On Android, `reconcile()` avoids this: it does a single `navigate()` straight
-to the true leaf (`list-view.item`), then splices plain `BackstackEntry`
-objects for the intermediate ancestors (`list-view`) directly into the
-frame's backstack once that transition settles, instead of running each
-ancestor through its own `navigate()`. `Frame._goBackCore` already tolerates
-a backstack entry with no native fragment - it creates one on demand (the
-same path used to recreate a fragment the OS discarded after the activity
-was destroyed) - so a `goBack()`/`HistoryService#back()` into a seeded
-ancestor still lands on a real, correctly-rendered page, confirmed on-device
-via `demo-app/app/tests/integration/list-view-stack-test.ts`'s cross-tree
-jump test. This is Android-only: iOS's `popToViewControllerAnimated` can
-only pop to a view controller that was actually pushed, so a synthetic entry
-there would be an unreachable target - iOS still steps through each
-ancestor.
+On Android, `reconcile()` avoids playing a full animated transition per
+level: `navigateToLeaf` issues a real `navigate()` for every intermediate
+ancestor (`list-view`) *and* the true leaf (`list-view.item`) back to back,
+in the same synchronous batch, instead of waiting for each one to fully
+settle before issuing the next - only the last (real destination) call is
+animated, the rest pass `animated: false` via `Frame`'s own internal
+navigation queue. Each intermediate page still runs its own real fragment
+transaction/layout pass and can be visible for a frame or two while queued
+ones resolve - what this avoids is N full timed transition animations
+playing back to back, not the underlying native work itself (no perf
+measurement backs a stronger claim than that). Confirmed on-device, via
+`demo-app/app/tests/integration/list-view-stack-test.ts`'s cross-tree jump
+test, that `goBack()`/`HistoryService#back()` into `list-view` afterward
+lands on a real, correctly-rendered page - and, critically, that a further
+forward navigate afterward still settles too. This is Android-only: iOS's
+`popToViewControllerAnimated` can only pop to a view controller that was
+actually pushed, so queuing unanimated pushes ahead of time doesn't help
+there - iOS still steps through each ancestor with its own transition.
 
-One consequence of this design: a page is only ever pushed with a *fresh*
-`Page` instance (whatever Ember just created) - going back always uses
-`goBack()`, resuming the frame's own preserved backstack entry, never a
-second `navigate()` to a `Page` instance that's already been backstacked
-once. (An earlier version of this file noted that a second `navigate()` to
-an already-used `Page` instance was unreliable on-device - this design
-doesn't do that; avoiding it is the reason `goBack()` exists at all.)
+An earlier version of this instead issued a single real `navigate()` to the
+leaf and spliced synthetic, fragment-less `BackstackEntry` objects for the
+skipped ancestors directly into `Frame`'s private `_backStack`. That was
+cheaper, but those synthetic entries never went through
+`_setAndroidFragmentTransitions`, so they had no enter/exit/reenter/return
+transition listeners of their own - `goBack()`-ing onto one left
+NativeScript's Android transition bookkeeping
+(`fragment.transitions.android.js`'s `waitingQueue`, keyed by `frameId` and
+expecting a matched pair of listeners per step) with only one side ever
+registering, which could desync a subsequent navigation and permanently
+freeze the frame's `reconcile()` loop (every future route change anywhere in
+the app silently stopped working). Every page is now pushed via a real
+`navigate()`, so every backstack entry gets the same paired listener setup
+as any other, closing that whole bug class.
 
 ### Forward pushes across several nested routes at once
 
@@ -344,13 +355,13 @@ meant to stop on, adding real, visible delay on top of the (expected,
 by-design) cost of the animation itself.
 
 On Android, `reconcile()` avoids this the same way it avoids it for
-cross-tree jumps: a single `navigate()` straight to the true leaf, with the
-skipped intermediate pages spliced into the backstack via `seedBackstack`
-once that transition settles, instead of running each of them through its
-own `navigate()`. This is Android-only, for the same reason as the
-cross-tree case: iOS's `popToViewControllerAnimated` can only pop to a view
-controller that was actually pushed, so iOS still steps through each
-intermediate page with its own transition.
+cross-tree jumps: `navigateToLeaf` issues a real, unanimated `navigate()`
+for each skipped page and an animated one for the true leaf, all back to
+back in the same batch, instead of running each of them through its own
+fully-settled `navigate()`/transition round trip. This is Android-only, for
+the same reason as the cross-tree case: iOS's `popToViewControllerAnimated`
+can only pop to a view controller that was actually pushed, so iOS still
+steps through each intermediate page with its own transition.
 
 ### Sub-routes, via `FrameOutlet`
 
