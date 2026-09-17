@@ -324,7 +324,10 @@ lands on a real, correctly-rendered page - and, critically, that a further
 forward navigate afterward still settles too. This is Android-only: iOS's
 `popToViewControllerAnimated` can only pop to a view controller that was
 actually pushed, so queuing unanimated pushes ahead of time doesn't help
-there - iOS still steps through each ancestor with its own transition.
+there - iOS still steps through each ancestor with its own (default,
+unstaged) transition, one `reconcile()` settle at a time, reserving the
+app's actually-staged transition for the true destination rather than
+whichever ancestor happens to settle first.
 
 An earlier version of this instead issued a single real `navigate()` to the
 leaf and spliced synthetic, fragment-less `BackstackEntry` objects for the
@@ -361,7 +364,11 @@ back in the same batch, instead of running each of them through its own
 fully-settled `navigate()`/transition round trip. This is Android-only, for
 the same reason as the cross-tree case: iOS's `popToViewControllerAnimated`
 can only pop to a view controller that was actually pushed, so iOS still
-steps through each intermediate page with its own transition.
+steps through each intermediate page with its own transition, one
+`reconcile()` settle at a time - `navigateToLeaf` still makes sure the app's
+staged transition ends up on the true destination rather than an
+intermediate page, carrying it forward through `pendingTransition` across
+however many settles remain.
 
 ### Sub-routes, via `FrameOutlet`
 
