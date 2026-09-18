@@ -70,7 +70,7 @@
     "@types/qunit": "2.19.13",
     "@warp-drive-mirror/legacy": "^5.8.1",
     "babel-import-util": "^3.0.0",
-    "babel-plugin-ember-template-compilation": "^3.0.1",
+    "babel-plugin-ember-template-compilation": "^4.0.0",
     "browserify-fs": "^1.0.0",
     "buffer": "^6.0.3",
     "content-tag": "^4.0.0",
