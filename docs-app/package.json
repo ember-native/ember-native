@@ -35,7 +35,7 @@
     "decorator-transforms": "^2.3.0",
     "ember-basic-dropdown": "^8.11.0",
     "ember-concurrency": "^5.2.0",
-    "ember-focus-trap": "^1.1.1",
+    "ember-focus-trap": "^2.0.0",
     "ember-modifier": "^4.3.0",
     "ember-power-select": "^8.12.1",
     "ember-repl": "7.0.1",
