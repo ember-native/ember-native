@@ -333,9 +333,28 @@ export default class FrameElement extends NativeElementNode {
    * view controller that was actually pushed, so queuing several
    * unanimated pushes ahead of time doesn't help there the way it does on
    * Android - iOS keeps stepping through each intermediate page with its
-   * own animated transition instead, via `reconcile()`'s normal
+   * own (default, unstaged) transition instead, via `reconcile()`'s normal
    * one-step-at-a-time loop (this method navigates to just
-   * `desired[fromIndex]` there).
+   * `desired[fromIndex]` there). Because that loop calls this method once
+   * per settled step rather than once for the whole batch, `isLeaf` is
+   * computed from `fromIndex`/`desired.length` rather than from `pages`
+   * itself - on iOS `pages` always has a single entry, so comparing against
+   * its own length would call every step "the leaf". Whichever step isn't
+   * actually the leaf gets `transition` handed back to `pendingTransition`
+   * so the next `reconcile()` step this settle triggers still has it -
+   * otherwise it would either play on the wrong (ancestor) step or be lost
+   * entirely before it ever reaches the true destination.
+   *
+   * Non-leaf steps pass `animated: false` on Android (proven safe by
+   * `navigatedToEvent` still firing there - see the class doc comment/#460)
+   * but `animated: undefined` (deferring to `Frame`'s own default, which is
+   * `true`) on iOS - deliberately, not an oversight: this repo's CI has no
+   * iOS runner (`app-test.yml` is Android-emulator-only), so whether an
+   * unanimated push still fires iOS's `navigatedToEvent` has never been
+   * verified here. Getting that wrong would silently stall this same
+   * `pendingSettleCount` drain forever - the exact failure class #460 fixed,
+   * just relocated to iOS. Leave this `undefined` until that's checked
+   * on-device.
    */
   private navigateToLeaf(
     desired: Page[],
@@ -346,13 +365,16 @@ export default class FrameElement extends NativeElementNode {
     const pages = isAndroid ? desired.slice(fromIndex) : [desired[fromIndex]!];
     this.pendingSettleCount = pages.length;
     pages.forEach((page, index) => {
-      const isLeaf = index === pages.length - 1;
+      const isLeaf = fromIndex + index === desired.length - 1;
+      if (!isLeaf && !isAndroid) {
+        this.pendingTransition = transition;
+      }
       this.nativeView.navigate({
         create: () => page,
         clearHistory: clearHistory && index === 0,
         backstackVisible: true,
         transition: isLeaf ? transition?.transition || {} : {},
-        animated: isLeaf ? transition?.animated : false,
+        animated: isLeaf ? transition?.animated : isAndroid ? false : undefined,
       });
     });
   }
