@@ -142,7 +142,7 @@ importers:
         version: 4.6.5(@glint/template@1.7.7)
       '@embroider/vite':
         specifier: ^1.5.0
-        version: 1.7.2(d0b858ef317c795ff9c3becee0f96977)
+        version: 1.7.2(b4325e80b3593eb4f4c210cfccf51120)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -166,7 +166,7 @@ importers:
         version: 9.0.0
       '@nativescript/vite':
         specifier: ^2.0.3
-        version: 2.0.3(19479d56a9e9cf50a3bea1268898bd6d)
+        version: 2.0.3(7677590b05173f0f3354fa3a744141e0)
       '@types/qunit':
         specifier: 2.19.13
         version: 2.19.13
@@ -295,7 +295,7 @@ importers:
         version: 0.12.5
       vite:
         specifier: ^7.3.2
-        version: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+        version: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
 
   docs-app:
     dependencies:
@@ -307,7 +307,7 @@ importers:
         version: 4.4.3
       '@universal-ember/docs-support':
         specifier: 0.9.2
-        version: 0.9.2(2189c74f128087c18094239a768ded36)
+        version: 0.9.2(4dbd39ff9dbd1716d04784dc83db11d4)
       assert:
         specifier: ^2.0.0
         version: 2.1.0
@@ -334,7 +334,7 @@ importers:
         version: 8.12.1(ef315e96db9c4295e686dceb0ce937a8)
       ember-repl:
         specifier: 7.0.1
-        version: 7.0.1(97a2ca31a8e4cf9a385bac208eb0c5f1)
+        version: 7.0.1(ddb9b70054f9e7b8e6e6898e21c22d6b)
       ember-route-template:
         specifier: ^1.0.3
         version: 1.0.3
@@ -351,8 +351,8 @@ importers:
         specifier: ^2.2.1
         version: 2.2.2(highlight.js@11.11.1)
       kolay:
-        specifier: ^4.1.0
-        version: 4.1.0(b186acb6a5fb3b0afbb6a8a87202195b)
+        specifier: ^5.4.0
+        version: 5.4.0(332e2570174f338673cc491cc2cafeed)
       lorem-ipsum:
         specifier: ^3.0.0
         version: 3.0.0
@@ -413,13 +413,13 @@ importers:
         version: 4.6.5(@glint/template@1.7.7)
       '@embroider/test-setup':
         specifier: ^4.0.0
-        version: 4.0.0(bc33d037a126efd1ea7de1d97efbc9ec)
+        version: 4.0.0(637360ddf2f685539074dcc21265c824)
       '@embroider/vite':
         specifier: ^1.1.3
-        version: 1.7.2(580c0dfd4116bfded085246bbe5882b5)
+        version: 1.7.2(6b7c74a0c9559f002e3fcae4a3d0d9d9)
       '@embroider/webpack':
         specifier: 4.1.2
-        version: 4.1.2(971a4fbd0dd5f8dc50b0916a03f05ce8)
+        version: 4.1.2(5bedb67d7e7c0101cf1cd80d5d8535a8)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@1.21.7))
@@ -452,7 +452,7 @@ importers:
         version: 7.0.0(e10c821eb081679c9c0a37d91ab94083)
       '@tailwindcss/typography':
         specifier: ^0.5.20
-        version: 0.5.20(tailwindcss@3.4.19(yaml@2.8.3))
+        version: 0.5.20(tailwindcss@3.4.19(yaml@2.9.1))
       '@tsconfig/ember':
         specifier: ^3.0.12
         version: 3.0.12
@@ -479,7 +479,7 @@ importers:
         version: 8.58.1(717face55a559967bf1b77f9b43bd1f1)
       astroturf:
         specifier: ^1.2.0
-        version: 1.2.0(webpack@5.106.1(postcss@8.5.16))
+        version: 1.2.0(df9e119ba5a87b078041da2cc8b85a44)
       autoprefixer:
         specifier: ^10.5.0
         version: 10.5.0(postcss@8.5.16)
@@ -497,10 +497,10 @@ importers:
         version: 4.1.1
       ember-a11y-testing:
         specifier: ^7.1.3
-        version: 7.1.3(2d5004dff093b53cf806dddcad01f215)
+        version: 7.1.3(65ae8132710b95b051933f4fd6033236)
       ember-auto-import:
         specifier: ^2.10.0
-        version: 2.13.1(c39788b786afceb3d5232f0295c2972d)
+        version: 2.13.1(250da5a39f05a2ed5157c579fd63b614)
       ember-cli:
         specifier: ~6.12.0
         version: 6.12.0(19ab88252c5e1eb3d31cde5dbb727cdb)
@@ -527,7 +527,7 @@ importers:
         version: 3.0.1(cc8cad6b2644672ec8a53791bfc61df2)
       ember-native:
         specifier: workspace:*
-        version: file:ember-native(73174dc3a71af4d88a4e8209a556321e)
+        version: file:ember-native(78c85e29f651209bc8cd353691e3db04)
       ember-page-title:
         specifier: ^9.0.3
         version: 9.0.3
@@ -554,7 +554,7 @@ importers:
         version: 7.9.3
       ember-vite-hmr:
         specifier: ^2.2.4
-        version: 2.2.4(31c0e2461c978543c0253976bccd7f89)
+        version: 2.2.4(949f135d59b8c1cb2f9aaa332f69999f)
       ember-welcome-page:
         specifier: ^8.0.5
         version: 8.0.5(@babel/core@7.29.0)
@@ -578,7 +578,7 @@ importers:
         version: 8.2.6(eslint@9.39.4(jiti@1.21.7))
       file-loader:
         specifier: ^6.2.0
-        version: 6.2.0(webpack@5.106.1(postcss@8.5.16))
+        version: 6.2.0(df9e119ba5a87b078041da2cc8b85a44)
       globals:
         specifier: ^17.12.0
         version: 17.12.0
@@ -602,7 +602,7 @@ importers:
         version: 16.1.1(postcss@8.5.16)
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.2.1(ac4dddff9d74089e50292c0ac3784622)
+        version: 8.2.1(0571f0c19a8e40d0c978f294d5e95fde)
       prettier:
         specifier: ^3.6.2
         version: 3.8.2
@@ -623,13 +623,13 @@ importers:
         version: 12.0.0
       rollup-plugin-astroturf:
         specifier: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a
-        version: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(ea35db7a61a41cd12f220231b592dd76)
+        version: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(a77785cd5443b20dc0f7be730125d602)
       svg-inline-loader:
         specifier: ^0.8.2
         version: 0.8.2
       tailwindcss:
         specifier: ^3.4.14
-        version: 3.4.19(yaml@2.8.3)
+        version: 3.4.19(yaml@2.9.1)
       typedoc:
         specifier: ^0.28.14
         version: 0.28.18(typescript@5.9.3)
@@ -641,7 +641,7 @@ importers:
         version: 8.58.1(717face55a559967bf1b77f9b43bd1f1)
       vite:
         specifier: ^7.1.2
-        version: 7.3.2(2e5de8cc25dc2caf6ff93f9b17c1a0d0)
+        version: 7.3.2(dd414e737393da9d5b9d5b6459537199)
 
   ember-native:
     dependencies:
@@ -677,7 +677,7 @@ importers:
         version: 1.9.0
       '@embroider/vite':
         specifier: ^1.4.2
-        version: 1.7.2(88a8b62c34869095ec994c02cdcdd204)
+        version: 1.7.2(d8fad02be343ebd1e4ebac8faa13df0e)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -2331,8 +2331,14 @@ packages:
   '@codemirror/autocomplete@6.20.1':
     resolution: {integrity: sha512-1cvg3Vz1dSSToCNlJfRA2WSI4ht3K+WplO0UMOgmUYPivCyy2oueZY6Lx7M9wThm7SDUBViRmuT+OG/i8+ON9A==}
 
+  '@codemirror/autocomplete@6.20.3':
+    resolution: {integrity: sha512-tlosUqb+3BbxCxZdu4tKeRghPFC+QM7q4X5YhKV2eCmPG+1r2F3f4AaSz5sCrFqUtX4Jh20VFTKecl16MgiV9g==}
+
   '@codemirror/commands@6.10.3':
     resolution: {integrity: sha512-JFRiqhKu+bvSkDLI+rUhJwSxQxYb759W5GBezE8Uc8mHLqC9aV/9aTC7yJSqCtB3F00pylrLCwnyS91Ap5ej4Q==}
+
+  '@codemirror/commands@6.11.1':
+    resolution: {integrity: sha512-O/4hG3SC1YwcmQ0d2UVNDs+AsaNWd1iHVxbTeEBuqH+6bExAiPK3iS/BvpY6rZGURALv4ZD3sIgcCmRvw3ehBg==}
 
   '@codemirror/commands@6.8.1':
     resolution: {integrity: sha512-KlGVYufHMQzxbdQONiLyGQDUW0itrLZwq3CcY7xpv9ZLRHqzkBSoteocBHtMCoY7/Ci4xhzSrToIeLg7FxHuaw==}
@@ -2352,6 +2358,9 @@ packages:
   '@codemirror/lang-html@6.4.11':
     resolution: {integrity: sha512-9NsXp7Nwp891pQchI7gPdTwBuSuT3K65NGTHWHNJ55HjYcHLllr0rbIZNdOzas9ztc1EUVBlHou85FFZS4BNnw==}
 
+  '@codemirror/lang-html@6.4.12':
+    resolution: {integrity: sha512-pw2ReWKUqSkbvh76RAT4NYxiogRu+PWkR2ukAwO9uOgrm8uipkzjtKKtNpyeAQwHOqxEeSvAXZ6vr3AfyB9y/w==}
+
   '@codemirror/lang-java@6.0.2':
     resolution: {integrity: sha512-m5Nt1mQ/cznJY7tMfQTJchmrjdjQ71IDs+55d1GAa8DGaB8JXWsVCkVT284C3RTASaY43YknrK2X3hPO/J3MOQ==}
 
@@ -2361,8 +2370,8 @@ packages:
   '@codemirror/lang-javascript@6.2.5':
     resolution: {integrity: sha512-zD4e5mS+50htS7F+TYjBPsiIFGanfVqg4HyUz6WNFikgOPf2BgKlx+TQedI1w6n/IqRBVBbBWmGFdLB/7uxO4A==}
 
-  '@codemirror/lang-jinja@6.0.0':
-    resolution: {integrity: sha512-47MFmRcR8UAxd8DReVgj7WJN1WSAMT7OJnewwugZM4XiHWkOjgJQqvEM1NpMj9ALMPyxmlziEI1opH9IaEvmaw==}
+  '@codemirror/lang-jinja@6.0.1':
+    resolution: {integrity: sha512-P5kyHLObzjtbGj16h+hyvZTxJhSjBEeSx4wMjbnAf3b0uwTy2+F0zGjMZL4PQOm/mh2eGZ5xUDVZXgwP783Nsw==}
 
   '@codemirror/lang-json@6.0.2':
     resolution: {integrity: sha512-x2OtO+AvwEHrEwR0FyyPtfDUiloG3rnVTSZV1W8UteaLL8/MajQd8DpvUb2YVzC+/T18aSDv0H9mu+xw0EStoQ==}
@@ -2376,8 +2385,8 @@ packages:
   '@codemirror/lang-markdown@6.3.3':
     resolution: {integrity: sha512-1fn1hQAPWlSSMCvnF810AkhWpNLkJpl66CRfIy3vVl20Sl4NwChkorCHqpMtNbXr1EuMJsrDnhEpjZxKZ2UX3A==}
 
-  '@codemirror/lang-markdown@6.5.0':
-    resolution: {integrity: sha512-0K40bZ35jpHya6FriukbgaleaqzBLZfOh7HuzqbMxBXkbYMJDxfF39c23xOgxFezR+3G+tR2/Mup+Xk865OMvw==}
+  '@codemirror/lang-markdown@6.5.2':
+    resolution: {integrity: sha512-AwBOdkWYuA//WcM0xO5PfHPUcmz/O2i5o0Nsg1U69SII/loCJlFI1Romd9xp2HYb1kYJRGZotyqRghuHH5n8Kw==}
 
   '@codemirror/lang-php@6.0.2':
     resolution: {integrity: sha512-ZKy2v1n8Fc8oEXj0Th0PUMXzQJ0AIR6TaZU+PbDHExFwdu+guzOA4jmCHS1Nz4vbFezwD7LyBdDnddSJeScMCA==}
@@ -2412,11 +2421,17 @@ packages:
   '@codemirror/language@6.12.3':
     resolution: {integrity: sha512-QwCZW6Tt1siP37Jet9Tb02Zs81TQt6qQrZR2H+eGMcFsL1zMrk2/b9CLC7/9ieP1fjIUMgviLWMmgiHoJrj+ZA==}
 
-  '@codemirror/legacy-modes@6.5.2':
-    resolution: {integrity: sha512-/jJbwSTazlQEDOQw2FJ8LEEKVS72pU0lx6oM54kGpL8t/NJ2Jda3CZ4pcltiKTdqYSRk3ug1B3pil1gsjA6+8Q==}
+  '@codemirror/language@6.12.4':
+    resolution: {integrity: sha512-1q4PaT+o6PbgpkJt4Q8Fv5XJxTy4FUZ4MWETtyiDw3J0Pyr9E2vqcKL+k9wcvjNTIsauxvE7OfmWj3FRPHQ76A==}
+
+  '@codemirror/legacy-modes@6.5.4':
+    resolution: {integrity: sha512-/cZr6qZyl08iYNLGsJ862CXXNI51LryRFRE40ejgoIjXZz0C1rGkD3/Ek5jM/8w1ceRjqtt4qx/KLMh4zBTgew==}
 
   '@codemirror/lint@6.9.5':
     resolution: {integrity: sha512-GElsbU9G7QT9xXhpUg1zWGmftA/7jamh+7+ydKRuT0ORpWS3wOSP0yT1FOlIZa7mIJjpVPipErsyvVqB9cfTFA==}
+
+  '@codemirror/lint@6.9.7':
+    resolution: {integrity: sha512-28/+iWLYxKxsvGYhSYL7zaCZqLz5+FFFDq9tVsvGv9kv8RY4fFAchJ5WX9M3YrrRlTIsECjsXPqeNgnSmNP2dg==}
 
   '@codemirror/search@6.5.11':
     resolution: {integrity: sha512-KmWepDE6jUdL6n8cAAqIpRmLPBZ5ZKnicE8oGU/s3QrAVID+0VhLFrzUucVKHG5035/BSykhExDL/Xm7dHthiA==}
@@ -2424,17 +2439,26 @@ packages:
   '@codemirror/search@6.6.0':
     resolution: {integrity: sha512-koFuNXcDvyyotWcgOnZGmY7LZqEOXZaaxD/j6n18TCLx2/9HieZJ5H6hs1g8FiRxBD0DNfs0nXn17g872RmYdw==}
 
+  '@codemirror/search@6.7.2':
+    resolution: {integrity: sha512-gUYkYhT2+n/+VGZ+8EzE5WFkYZUZYm1VOKDudIsNqh42uRVQJ0a6Yss9sdKT3MeOYfuL1N6AZA57oza0Oyr0LA==}
+
   '@codemirror/state@6.5.2':
     resolution: {integrity: sha512-FVqsPqtPWKVVL3dPSxy8wEF/ymIEuVzF1PK3VbUgrxXpJUSHQWWZz4JMToquRxnkw+36LTamCZG2iua2Ptq0fA==}
 
   '@codemirror/state@6.6.0':
     resolution: {integrity: sha512-4nbvra5R5EtiCzr9BTHiTLc+MLXK2QGiAVYMyi8PkQd3SR+6ixar/Q/01Fa21TBIDOZXgeWV4WppsQolSreAPQ==}
 
+  '@codemirror/state@6.7.5':
+    resolution: {integrity: sha512-QjLbZmY1Au3JiRrDVYFLRD0BZ3SOKS9pR3yjIkd7u27YY8TFD9/Q9fhPnLV5l1mHFSo3hHU/N31vpwEJOx4owQ==}
+
   '@codemirror/view@6.38.0':
     resolution: {integrity: sha512-yvSchUwHOdupXkd7xJ0ob36jdsSR/I+/C+VbY0ffBiL5NiSTEBDfB1ZGWbbIlDd5xgdUkody+lukAdOxYrOBeg==}
 
   '@codemirror/view@6.41.0':
     resolution: {integrity: sha512-6H/qadXsVuDY219Yljhohglve8xf4B8xJkVOEWfA5uiYKiTFppjqsvsfR5iPA0RbvRBoOyTZpbLIxe9+0UR8xA==}
+
+  '@codemirror/view@6.43.12':
+    resolution: {integrity: sha512-Nv0vxQ19NAqvB/c2pFzjIzFlzzJl7jmdtNkwOwGbn0Ks9mFAzibvumz7cQem5cRsFA2cEw2fg+uHZGbcHupLQQ==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -2584,6 +2608,15 @@ packages:
 
   '@embroider/macros@1.20.7':
     resolution: {integrity: sha512-B9KJuqeODyad6rWYFK4yKKKSR9H2OsClMzHREmEx94FrwA9/PS37ebTHWeuzLKspas7UclpYE8sBmxSbi/pWig==}
+    engines: {node: 12.* || 14.* || >= 16}
+    peerDependencies:
+      '@glint/template': ^1.0.0
+    peerDependenciesMeta:
+      '@glint/template':
+        optional: true
+
+  '@embroider/macros@1.21.1':
+    resolution: {integrity: sha512-57jR1QobqR3NKZX8bGi8ljONPfQdmQ01/LAzkwx/InGySyiC1HkvgPT4NdNWAFtK5Q00SYGYMQzJXZg3/zh9cQ==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -3179,11 +3212,20 @@ packages:
   '@floating-ui/core@1.7.5':
     resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
 
+  '@floating-ui/core@1.8.0':
+    resolution: {integrity: sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==}
+
   '@floating-ui/dom@1.7.6':
     resolution: {integrity: sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==}
 
+  '@floating-ui/dom@1.8.0':
+    resolution: {integrity: sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==}
+
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@floating-ui/utils@0.2.12':
+    resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
   '@fontsource/lexend@5.2.11':
     resolution: {integrity: sha512-bShbQr2g2sWl7GJNyIxdllZST1faVbebXN6H7AEEDCRms/g4orDLxWnmTVodOtiErdZVUJURq4jpafZ34nIkTw==}
@@ -3323,6 +3365,9 @@ packages:
 
   '@glint/template@1.7.3':
     resolution: {integrity: sha512-ouB9HjLJ5kDnAhORLx43vTmGukm6uHg5hg+jAoiSlyifQdVINmXIkkGPGCD1HQ0WeIDZ/CmxH7aIZlIyI90AAw==}
+
+  '@glint/template@1.7.4':
+    resolution: {integrity: sha512-39gTESXJmiIzJhcweJQ+44eIX+n+alJpD6HKpX8nPXCggVu2Yq6KP9pA5gwUvWE1/NYZhITiOqdA7UuyVtWMww==}
 
   '@glint/template@1.7.7':
     resolution: {integrity: sha512-jcPdQ3A6cXo5h9RBi0tK4/o5qNn7868Y8xpkwWQNPAd8xQKuRKmG9dGJwUycXvtqISzfrnL1p3MQr3hYN/Ua6Q==}
@@ -3976,11 +4021,14 @@ packages:
   '@lezer/common@1.5.2':
     resolution: {integrity: sha512-sxQE460fPZyU3sdc8lafxiPwJHBzZRy/udNFynGQky1SePYBdhkBl1kOagA9uT3pxR8K09bOrmTUqA9wb/PjSQ==}
 
-  '@lezer/cpp@1.1.5':
-    resolution: {integrity: sha512-DIhSXmYtJKLehrjzDFN+2cPt547ySQ41nA8yqcDf/GxMc+YM736xqltFkvADL2M0VebU5I+3+4ks2Vv+Kyq3Aw==}
+  '@lezer/cpp@1.1.6':
+    resolution: {integrity: sha512-vh9gWWJOXFVY8HBHK3Twzq8MgwG2iN4GSyzBP9sCGTe37P15x2R14VaBQk0VA0ezTRN1KHYBBsHhvpGZ2Xy/pA==}
 
   '@lezer/css@1.3.3':
     resolution: {integrity: sha512-RzBo8r+/6QJeow7aPHIpGVIH59xTcJXp399820gZoMo9noQDRVpJLheIBUicYwKcsbOYoBRoLZlf2720dG/4Tg==}
+
+  '@lezer/css@1.3.6':
+    resolution: {integrity: sha512-YJE78Wcg+zX8f10hiHWQ4Az48Qr/c13eId0VtRQYLBpxHDmDeSrXIlkbl+fJGW42rWC/uoUco9mhBZeVWP/A1g==}
 
   '@lezer/go@1.0.1':
     resolution: {integrity: sha512-xToRsYxwsgJNHTgNdStpcvmbVuKxTapV0dM0wey1geMMRc9aggoVyKgzYp41D2/vVOx+Ii4hmE206kvxIXBVXQ==}
@@ -3991,8 +4039,8 @@ packages:
   '@lezer/html@1.3.13':
     resolution: {integrity: sha512-oI7n6NJml729m7pjm9lvLvmXbdoMoi2f+1pwSDJkl9d68zGr7a9Btz8NdHTGQZtW2DA25ybeuv/SyDb9D5tseg==}
 
-  '@lezer/java@1.1.3':
-    resolution: {integrity: sha512-yHquUfujwg6Yu4Fd1GNHCvidIvJwi/1Xu2DaKl/pfWIA2c1oXkVvawH3NyXhCaFx4OdlYBVX5wvz2f7Aoa/4Xw==}
+  '@lezer/java@1.1.4':
+    resolution: {integrity: sha512-gQylJ2xHV2xXsVqtnAcJrcROvLZJaQiC0tR//+q0k961BxqvyYttusPkJ8d9T1fPDJKHJW2etUH8XbIn9jhVUg==}
 
   '@lezer/javascript@1.5.4':
     resolution: {integrity: sha512-vvYx3MhWqeZtGPwDStM2dwgljd5smolYD2lR2UyFcHfxbBQebqx8yjmFmxtJ/E6nN6u1D9srOiVWm3Rb4tmcUA==}
@@ -4000,17 +4048,23 @@ packages:
   '@lezer/json@1.0.3':
     resolution: {integrity: sha512-BP9KzdF9Y35PDpv04r0VeSTKDeox5vVr3efE7eBbx3r4s3oNLfunchejZhjArmeieBH+nVOpgIiBJpEAv8ilqQ==}
 
+  '@lezer/lr@1.4.10':
+    resolution: {integrity: sha512-rnCpTIBafOx4mRp43xOxDJbFipJm/c0cia/V5TiGlhmMa+wsSdoGmUN3w5Bqrks/09Q/D4tNAmWaT8p6NRi77A==}
+
   '@lezer/lr@1.4.8':
     resolution: {integrity: sha512-bPWa0Pgx69ylNlMlPvBPryqeLYQjyJjqPx+Aupm5zydLIF3NE+6MMLT8Yi23Bd9cif9VS00aUebn+6fDIGBcDA==}
 
   '@lezer/markdown@1.6.3':
     resolution: {integrity: sha512-jpGm5Ps+XErS+xA4urw7ogEGkeZOahVQF21Z6oECF0sj+2liwZopd2+I8uH5I/vZsRuuze3OxBREIANLf6KKUw==}
 
-  '@lezer/php@1.0.5':
-    resolution: {integrity: sha512-W7asp9DhM6q0W6DYNwIkLSKOvxlXRrif+UXBMxzsJUuqmhE7oVU+gS3THO4S/Puh7Xzgm858UNaFi6dxTP8dJA==}
+  '@lezer/markdown@1.7.2':
+    resolution: {integrity: sha512-iTkYvoVcKt3WkeL7qUDyXHONZEwLio4wj8KTNi2dnjQEXBZKMV63BpQrPqfsM+OkvuRbiSTAcycYAsQzLhRNoQ==}
 
-  '@lezer/python@1.1.18':
-    resolution: {integrity: sha512-31FiUrU7z9+d/ElGQLJFXl+dKOdx0jALlP3KEOsGTex8mvj+SoE1FgItcHWK/axkxCHGUSpqIHt6JAWfWu9Rhg==}
+  '@lezer/php@1.0.6':
+    resolution: {integrity: sha512-QJ2xNXPmsm/Z3IpThq8fnJrEIVpxhsIoj6GZBW0JYEd/l9zxpJZW216X4fzqQY4vgpdGIumypvI4uQjd4tnYtw==}
+
+  '@lezer/python@1.1.19':
+    resolution: {integrity: sha512-MhQIURHRytsNzP/YXnqpYKW6la6voAH3kyplTOOiCdjyFY6cWWGFVmYVdHIPrElqSDf4iCDktQCockB9FxuhzQ==}
 
   '@lezer/rust@1.0.2':
     resolution: {integrity: sha512-Lz5sIPBdF2FUXcWeCu1//ojFAZqzTQNRga0aYv6dYXqJqPfMdCAI0NzajWUd4Xijj1IKJLtjoXRPMvTKWBcqKg==}
@@ -4077,6 +4131,9 @@ packages:
 
   '@marijn/find-cluster-break@1.0.2':
     resolution: {integrity: sha512-l0h88YhZFyKdXIFNfSWpyjStDjGHwZ/U7iobcK1cQQD8sejsONdQtTVU+1wVN1PBw40PiiHB1vA5S7VTfQiP9g==}
+
+  '@marijn/find-cluster-break@1.0.4':
+    resolution: {integrity: sha512-Wy0V7+SGUjnF9/TkiM1hKVDPj7jKXduPNboMVtHTA8dySMURWqfg/JZ9E2Sq8JgSJmkl7k7Qe9FLeMSrSraWmQ==}
 
   '@modular-css/processor@28.1.5':
     resolution: {integrity: sha512-1gfGjJgiJ5bZtUlLFfyhZwIwrbRG8SPw3N/iJrQw49VMSwpBH9ZsqFHnsbHYkbxGowmpycSWTL++VVKMyrV86A==}
@@ -6179,9 +6236,8 @@ packages:
     resolution: {integrity: sha512-QVLZu3ZPQEE+HICQyAMZ2yLQhxf0meY/wx6Hx14YcTNj13JB3qHlX3lJ02L3fLGHgERRH71kvYDwiXIguT3AjQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@ungap/structured-clone@1.3.0':
-    resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
-    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
+  '@ungap/structured-clone@1.4.0':
+    resolution: {integrity: sha512-1mEZtMKPM09vDmQt5y7YvmN2+DFTP7Tg0EWXdic8/C6VRnpb33e4ghisCIE3WZjsE2N8mf+QV1Zqh7ZFYLWInQ==}
 
   '@universal-ember/docs-support@0.9.2':
     resolution: {integrity: sha512-Kdg6q9IlySowcOp1Sk1wmMVwyBd8PNBfpM1ujTvJPxSLIDDoNXjR1jJnCrRRT1TTbW60lQqMLGOr+MPr8AnTQw==}
@@ -6616,6 +6672,9 @@ packages:
 
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
+
+  ajv@8.20.0:
+    resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
 
   alien-signals@3.2.1:
     resolution: {integrity: sha512-I8FjmltrfnDFoZedi5CG8DghVYNhzb/Ijluz7tCSJH0xpd0484Kowhbb1XDYOxfJpU1p5wnM2X54dA+IfGyD1g==}
@@ -7402,11 +7461,11 @@ packages:
   brace-expansion@1.1.14:
     resolution: {integrity: sha512-MWPGfDxnyzKU7rNOW9SP/c50vi3xrmrua/+6hfPbCS2ABNWfx24vPidzvC7krjU/RTo235sV776ymlsMtGKj8g==}
 
-  brace-expansion@2.1.0:
-    resolution: {integrity: sha512-TN1kCZAgdgweJhWWpgKYrQaMNHcDULHkWwQIspdtjV4Y5aurRdZpjAqn6yX3FPqTA9ngHCc4hJxMAMgGfve85w==}
+  brace-expansion@1.1.21:
+    resolution: {integrity: sha512-9zeA+KLZNNzglF2TPKRQEDyx6Yby7daAkuy8MiPzpXPsYDWi/DRM8jmwUDxokQjYqBpv5DgPiwD4h4ZZSy1Ujw==}
 
-  brace-expansion@2.1.4:
-    resolution: {integrity: sha512-hGfVzPxthbf3+2yjg/RBs60cB0FhqBS/zvdV/4wn4/BmN0bNMMHPc4V/BbFieqf1TKAGGAHnY4eSjajCl0f2Xg==}
+  brace-expansion@2.1.7:
+    resolution: {integrity: sha512-uZbew1NqdmPDTMJ8ah1y+b+9QEJrfkXFk3RcTQw3X0jW/xRUvFKsg1CfQdSYGdTbXZWExtU3J3ccxtnfw1Fi0g==}
 
   brace-expansion@5.0.5:
     resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
@@ -7978,8 +8037,8 @@ packages:
       '@codemirror/state': ^6.3.3
       '@codemirror/view': ^6.22.3
 
-  codemirror-lang-glimdown@2.0.3:
-    resolution: {integrity: sha512-06txsPLMT3cA0EfonYPPHSl3Gz/mjMqRCkF3DXvuhNdZwmbEm+Fv24ak2ZFGYSe5OzoYdnTqTbLoUrTNT+jbRA==}
+  codemirror-lang-glimdown@2.0.4:
+    resolution: {integrity: sha512-QPle4W828hgA5GKsLlB9q0K/tf9FOt+qVSZqgE07XGxxtCoZLBhTvotQGQayIVSXPdJeDmBVPacZ0MthaZCXVw==}
     peerDependencies:
       '@codemirror/state': ^6.3.3
       '@codemirror/view': ^6.22.3
@@ -7989,8 +8048,8 @@ packages:
     peerDependencies:
       '@codemirror/view': ^6.22.3
 
-  codemirror-lang-glimmer-js@2.0.3:
-    resolution: {integrity: sha512-q+GGu/+0nGAovYm8oHZV4o7vKMEXKoachdv7yaoihby+2abBSkHMMELQSyHiM+VJCpBTOleeeVbCSxZLPkpGHg==}
+  codemirror-lang-glimmer-js@2.0.4:
+    resolution: {integrity: sha512-43IzgHUNFMHxZOkWSk2qeAr0sP3pfAm/LfIQk5lj/gvc08CH3K3omV/4uRTFc/qsdl7d4kTXbfU6PqjT4i70qA==}
     peerDependencies:
       '@codemirror/view': ^6.22.3
 
@@ -7999,8 +8058,8 @@ packages:
     peerDependencies:
       '@lezer/common': ^1.1.2
 
-  codemirror-lang-glimmer@2.0.3:
-    resolution: {integrity: sha512-6qmOv4GiNHkVZx41PPGE0xy0Tl+xCHRVM+VRw7ZvjcPLPd99Dg+aXD5ll0MxI29JpqxoyfszwXxhJ7/kxlnfTQ==}
+  codemirror-lang-glimmer@2.0.4:
+    resolution: {integrity: sha512-HaS43Zwrh9MsK6OBR6Y1XnZ5jelRwtjdZnqk1LDtqW0lVxEtnhG8PQSpnd7GjHhA/Sdp7Xiq7TW2LeeyVNcMrA==}
     peerDependencies:
       '@lezer/common': ^1.1.2
 
@@ -8009,6 +8068,14 @@ packages:
 
   codemirror-languageserver@1.22.0:
     resolution: {integrity: sha512-d7ct+1oDD5j+P6glMhBEpft+MP5W1LPS/wq+6XJKqmX+4au9jpNPtFSAny0RqYJlnlWYIvWn/v6gDalv53Gkqg==}
+    peerDependencies:
+      '@codemirror/autocomplete': ^6.18.6
+      '@codemirror/lint': ^6.8.5
+      '@codemirror/state': ^6.5.2
+      '@codemirror/view': ^6.38.1
+
+  codemirror-languageserver@1.22.1:
+    resolution: {integrity: sha512-Wg76PNzgYAy4YxInzqgS+AKa9meUzDrIsYnBKmFIY1RnClFu3jKI6rjurMfgBmzEewoAWmxOzYKNwvhsB2K8MQ==}
     peerDependencies:
       '@codemirror/autocomplete': ^6.18.6
       '@codemirror/lint': ^6.8.5
@@ -8440,6 +8507,9 @@ packages:
   crelt@1.0.6:
     resolution: {integrity: sha512-VQ2MBenTq1fWZUH9DJNGti7kKv6EeAuYr3cLwxUWhIu1baTaXh4Ib5W2CqHVqib4/MqbYGJqiL3Zb8GJZr3l4g==}
 
+  crelt@1.0.7:
+    resolution: {integrity: sha512-aK6BbWfhf4U/wCcLHKPJl/xa6VkVstRaPywWtMKGwuOLc/wZTyQYuoxgvZnNsBvv7Kg3YTBQYYBCggcviQczuA==}
+
   cross-spawn@6.0.6:
     resolution: {integrity: sha512-VqCUuhcd1iB+dsv8gxPttb5iZh/D0iubSP21g36KXdEuf6I5JiioesUVjpCdHV9MZRUfVFlvwtIUyPfxo5trtw==}
     engines: {node: '>=4.8'}
@@ -8671,6 +8741,9 @@ packages:
 
   decorator-transforms@2.3.1:
     resolution: {integrity: sha512-PDOk74Zqqy0946Lx4ckXxbgG6uhPScOICtrxL/pXmfznxchqNee0TaJISClGJQe6FeT8ohGqsOgdjfahm4FwEw==}
+
+  decorator-transforms@2.3.2:
+    resolution: {integrity: sha512-XcErcjlmCzG5ODgYjt6ZTXwd6S8fPKln/sJmw15ZXkWG2JpoQNwszis+AwF6XSGlOoG7g8MCEO97g+Yw3fk5OQ==}
 
   deep-extend@0.6.0:
     resolution: {integrity: sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==}
@@ -9260,6 +9333,38 @@ packages:
       '@glint/template':
         optional: true
 
+  ember-primitives@0.60.1:
+    resolution: {integrity: sha512-OLUSUM4eqGVaxWGnq3oV1FIBE8JyYUTDTXYWDHd8OHdiFbU10CUJ4A7k6FbpCfBXO7k0Ce+aualiyuIpY28mmg==}
+    hasBin: true
+    peerDependencies:
+      '@ember/test-helpers': '>= 3.2.0'
+      '@ember/test-waiters': '>= 3.0.2'
+      '@glimmer/component': ^2.0.0
+      '@glint/template': ^1.7.4
+      ember-modifier: '>= 4.1.0'
+      ember-resources: '>= 6.1.0'
+    peerDependenciesMeta:
+      '@ember/test-helpers':
+        optional: true
+      '@glint/template':
+        optional: true
+
+  ember-primitives@0.61.1:
+    resolution: {integrity: sha512-bnr9XEQCqYb86a0yBn9hP5xDuWZwmyT12oPzZrNR8GZJmRjVanlvk64NjVbYVKs56/xxs/zYk4/oct5S9MmsIw==}
+    hasBin: true
+    peerDependencies:
+      '@ember/test-helpers': '>= 3.2.0'
+      '@ember/test-waiters': '>= 3.0.2'
+      '@glimmer/component': ^2.0.0
+      '@glint/template': ^1.7.4
+      ember-modifier: '>= 4.1.0'
+      ember-resources: '>= 6.1.0'
+    peerDependenciesMeta:
+      '@ember/test-helpers':
+        optional: true
+      '@glint/template':
+        optional: true
+
   ember-qunit@9.1.0:
     resolution: {integrity: sha512-dE32lSODyv4em0ACBS8PDzrAIPKR75hhSpn/au0qFBlzbdmNA/VVsgv2aoFAVRdlQ0zYJ8EiNPFqsBFciIeXVA==}
     peerDependencies:
@@ -9282,11 +9387,30 @@ packages:
       '@glint/template':
         optional: true
 
+  ember-repl@8.2.3:
+    resolution: {integrity: sha512-sHvrleqx3rBrU1+AjAmxB1ShKPAJGcGAIJhAMdNa2amDbuJ7f7Z7ej5E2QuWD0GJt/OVg3nWU90bafvgLK3A9w==}
+    peerDependencies:
+      '@glint/template': 1.7.4
+    peerDependenciesMeta:
+      '@glint/template':
+        optional: true
+
   ember-resolver@13.2.0:
     resolution: {integrity: sha512-A+BffoSKC0ngiczbgaz/IOY66ovZVRRHHIDDi+d7so5i0By8xuB4nXgZZ6Dv3u/3WwoUyixgUvb0xTUO+MtupA==}
 
   ember-resources@7.0.8:
     resolution: {integrity: sha512-ducprg1ia5p0ElBSx1yY4DZyuKZwTBYcokCSr5yxzxkjKOzP+XIiB8NX2lFLGmMOX/4zALHax2WMPAKMxZ7z5A==}
+    peerDependencies:
+      '@glimmer/component': '>= 1.1.2 || >= 2.0.0'
+      '@glint/template': '>= 1.0.0'
+    peerDependenciesMeta:
+      '@glimmer/component':
+        optional: true
+      '@glint/template':
+        optional: true
+
+  ember-resources@7.1.0:
+    resolution: {integrity: sha512-3Pt/bhXeG6ACHgsDi03R00BH29Tso4j08yFNnQB/h/SZr06zjByQdatlB1YmCI0ebRDU1Z0wZA6c3EtiSQKkkA==}
     peerDependencies:
       '@glimmer/component': '>= 1.1.2 || >= 2.0.0'
       '@glint/template': '>= 1.0.0'
@@ -9415,8 +9539,8 @@ packages:
     resolution: {integrity: sha512-SkE2t82KlkkxQRVMVLAGKxLfORGQfrkx5dkj+vlgXRVNEdPc4eZcR+J/Fvj8C+yKSFH5L0q3NFlyufOVQnCcYQ==}
     engines: {node: '>=10.13.0'}
 
-  enhanced-resolve@5.24.5:
-    resolution: {integrity: sha512-L1l8TNvomm6UVW5B253AGxQagSQr+vGwhMlrrfRS2qmhx46AMpMVJKQYLvWYbysTMY8VoicOvzHzoHMbyzB+4A==}
+  enhanced-resolve@5.25.1:
+    resolution: {integrity: sha512-nGXts5znJzmWPu+mIE9izCOzdg63oJca2mDzGWWTth7sr4aCToKcoyFVBQwN75Ij5Pf6p510EwkTqViTRzDV+w==}
     engines: {node: '>=10.13.0'}
 
   ensure-posix-path@1.1.1:
@@ -9504,6 +9628,9 @@ packages:
 
   es-module-shims@2.8.0:
     resolution: {integrity: sha512-7eBj0nIBTMjg8WspPfHOXVxwvDPeYjTMH7PipzrbecfLS4SFwRvWeakZNsAx0y9yF3TydxrG32tj3y+GKzlpYg==}
+
+  es-module-shims@2.8.4:
+    resolution: {integrity: sha512-ea5srn5L89PWVad6Qle6r2kg+HvvLiL/GHqgNx06eFrkERHkrTFWaqo1w8Sd+XI3Xr0iAG5x3ZQ7mQ/hnQzNpA==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -9975,6 +10102,9 @@ packages:
 
   fast-uri@3.1.0:
     resolution: {integrity: sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==}
+
+  fast-uri@3.1.8:
+    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
 
   fast-wrap-ansi@0.2.0:
     resolution: {integrity: sha512-rLV8JHxTyhVmFYhBJuMujcrHqOT2cnO5Zxj37qROj23CP39GXubJRBUFF0z8KFK77Uc0SukZUf7JZhsVEQ6n8w==}
@@ -11666,6 +11796,9 @@ packages:
   keyborg@2.14.1:
     resolution: {integrity: sha512-/WmmVBa6Me3hIKAOIyIq1sql+6oydQZzGMBDLNfOcJ8710byMsq3KSLS8GQhBJHOMtvnXnUBrDAIbABcZVipcg==}
 
+  keyborg@3.498.0:
+    resolution: {integrity: sha512-EM963ckIg3nCaqF631tWKfy5+t3Lc5/zQ6bj0zucaZnChzeJbXa69W0cE7j09erYZO7s5/dupxyVqPSL8mdxEQ==}
+
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
@@ -11683,6 +11816,10 @@ packages:
 
   kolay@4.1.0:
     resolution: {integrity: sha512-Fkz0c0pHlQkqOkdbjvk3vZAONRZW5K1z/bWTx2Q3Z7SU6a442nm3AzjwAAgJscKYCWPW3s+ncya7l2ucirCueA==}
+    engines: {node: '>= 18'}
+
+  kolay@5.4.0:
+    resolution: {integrity: sha512-sC7YPuIbOwwdvSUczYbU9d9KwuyR+hPiEsINhy2TfJkPuS6JFAfJODNnxaPt+zcxi5zwzUPdOboByqRpnUZH6w==}
     engines: {node: '>= 18'}
 
   ky@1.14.3:
@@ -11809,6 +11946,9 @@ packages:
 
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+
+  linkify-it@5.0.2:
+    resolution: {integrity: sha512-ONTm2jCMAVZjgQa/Fy1kScXsuOoF5NPTsoFBdE1KVIZ2vAh/r9+Bqo+0jINCBYnavTPQZz38QzFTme79ENoN3Q==}
 
   listr2@9.0.5:
     resolution: {integrity: sha512-ME4Fb83LgEgwNw96RKNvKV4VTLuXfoKudAmm2lP8Kk87KaMK0/Xrx/aAkMWmT8mDb+3MlFDspfbCs7adjRxA2g==}
@@ -12069,6 +12209,10 @@ packages:
     resolution: {integrity: sha512-BuU2qnTti9YKgK5N+IeMubp14ZUKUUw7yeJbkjtosvHiP0AZ5c8IAgEMk79D0eC8F23r4Ac/q8cAIFdm2FtyoA==}
     hasBin: true
 
+  markdown-it@14.3.2:
+    resolution: {integrity: sha512-sHHjZ5fJKlgrG4qns2YwVcdNep35h5fERrfkD2YNsb9UFk0UIHarbiTaHKVMlPuWAoiilyK8Fv/jAm11slsY7Q==}
+    hasBin: true
+
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
@@ -12154,6 +12298,9 @@ packages:
   mdurl@2.0.0:
     resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
 
+  mdurl@2.1.0:
+    resolution: {integrity: sha512-1+HBaOx0zi/dQWht8rNv9MYf9qqpqL/kxI0hXImU6Y547zM6Sni8BQibt7ifgMcYtQg41ao3Ivd6cnSM86inpg==}
+
   media-typer@0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
@@ -12221,8 +12368,8 @@ packages:
   micromark-extension-gfm-strikethrough@2.1.0:
     resolution: {integrity: sha512-ADVjpOOkjz1hhkZLlBiYA9cR2Anf8F4HqZUO6e5eDcPQd0Txw5fxLzzxnEkSkfnD0wziSGiv7sYhk/ktvbf1uw==}
 
-  micromark-extension-gfm-table@2.1.1:
-    resolution: {integrity: sha512-t2OU/dXXioARrC6yWfJ4hqB7rct14e8f7m0cbI5hUmDyyIlwv5vEtooptH8INkbLzOatzKuVbQmAYcbWoyz6Dg==}
+  micromark-extension-gfm-table@2.1.2:
+    resolution: {integrity: sha512-pRzm4kDTu0MjlmBkxmS9yYhw60nncfcEwu9NNdPFSQEFXS95ZKyIIyTSHu/o3ReBUrLKYEq+7YaXCRn/bPB4MA==}
 
   micromark-extension-gfm-tagfilter@2.0.0:
     resolution: {integrity: sha512-xHlTOmuCSotIA8TW1mDIM6X2O1SiX5P9IuDtqGonFhEK0qgRI4yeC6vMxEV2dgyr2TiD+2PQ10o+cOhdVAcwfg==}
@@ -13312,6 +13459,10 @@ packages:
   pattern-key-compare@2.0.0:
     resolution: {integrity: sha512-b+yp/Q0KwFotxRgemVsNQ4qyqcA/LxzyfSjqJ7maKSlYTRmaUffwfX07l7KdxkVdc89k6WYtC3SwFCEo8GhbWQ==}
 
+  pattern-key-compare@2.0.1:
+    resolution: {integrity: sha512-U7TlQh5UNim9KG3hTPj1nb13OF+qlpMOOuUrCDyF0yV1qCl83hLOIwPnx6JJ2QQJAzFiZfYyfbeFsIVp+SgKHQ==}
+    engines: {node: '>=20'}
+
   pbxproj-dom@1.2.0:
     resolution: {integrity: sha512-K2czrWqA68AR0q1UXz5EBi/zoxcljrkO4RSJX0jPnVn3iyE0HYnYOzaEEDYMpueczkT/Vtdm3SCc3NM+12kMaQ==}
 
@@ -13902,8 +14053,8 @@ packages:
   proper-lockfile@4.1.2:
     resolution: {integrity: sha512-TjNPblN4BwAWMXU8s9AEz4JmQxnD1NNL7bNOY/AKUzyamc379FWASUhc/K1pL2noVb+XmZKLL68cjzLsiOAMaA==}
 
-  property-information@7.1.0:
-    resolution: {integrity: sha512-TwEZ+X+yCJmYfL7TPUOcvBZ4QfoT5YenQiJuX//0th53DE6w0xxLEtfK3iyryQFddXuvkIk51EEgrJQ0WJkOmQ==}
+  property-information@7.2.0:
+    resolution: {integrity: sha512-IAtzIB6sUiWaJYrX9smp3V46pBGbBeLFRGdh25kg1334VcBlD8HzhPeNIWQH9zhGmo2itIe25EHt9dQP7G5hmg==}
 
   proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
@@ -14283,6 +14434,12 @@ packages:
   repl-sdk@1.4.1:
     resolution: {integrity: sha512-kn1SVldzeYnb2r21e0p1HU90QktOoP/SPe1qlTTVOs08yeSdkCO85Fet35psfcivxcgL+od3QtM8IhSE2D6Thg==}
 
+  repl-sdk@1.6.2:
+    resolution: {integrity: sha512-jGQv4s2IYZmW102DCWWwd14QpkmQdx2QpwiW7axPUsHDN8CPZXVbQVUguAIWpfHhoIJCn+QU+AKq0I8nv3CMMQ==}
+
+  repl-sdk@2.0.0:
+    resolution: {integrity: sha512-yq7u7pQYTBKqaGd327/D1cXRTi0pvi4ZllzBv1yrK7MCUr8kHXmS1OKPC/KdOiIQ/2O7Jg+xX6r7q3pi8mv6Hg==}
+
   replace@1.2.2:
     resolution: {integrity: sha512-C4EDifm22XZM2b2JOYe6Mhn+lBsLBAvLbK8drfUQLTfD1KYl/n3VaW/CDju0Ny4w3xTtegBpg8YNSpFJPUDSjA==}
     engines: {node: '>= 6'}
@@ -14372,6 +14529,10 @@ packages:
 
   resolve.imports@2.0.3:
     resolution: {integrity: sha512-aQaI4EGxTXnhA9EWScjgcpuUAbm51MXGkIHQ0WOEUyFMNjb8Yp/jIKGUu6y1SXMYG3FhTqnnscFNxs2+Pjp9YQ==}
+
+  resolve.imports@2.0.4:
+    resolution: {integrity: sha512-a34I7AnpC0lFtoavZeQLKkmFuQ5KTC0QekrDy1V8iDXb0YPafFMSJ67Lpjsz5M4CZy2/4eTLjOpjVpWKjg4muA==}
+    engines: {node: '>=20'}
 
   resolve@1.22.11:
     resolution: {integrity: sha512-RfqAvLnMl313r7c9oclB1HhUEAezcpLjz95wFH4LVuhk9JF/r22qmVP9AMmOU4vMX7Q8pN8jwNg/CSpdFnMjTQ==}
@@ -14778,6 +14939,10 @@ packages:
 
   schema-utils@4.3.3:
     resolution: {integrity: sha512-eflK8wEtyOE6+hsaRVPxvUKYCpRgzLqDTb8krvAsRIwOGlHoSgYLgBXoubGgLd2fT41/OUYdb48v4k4WWHQurA==}
+    engines: {node: '>= 10.13.0'}
+
+  schema-utils@4.5.0:
+    resolution: {integrity: sha512-zJlMCZ0cAR5p/Y4oVpRoqioDMJcGxaXRrQ/4rP4WyR84vc5z/DolXdbvXeDpTwbtocDFr2rhPqHPErDCUtz2kA==}
     engines: {node: '>= 10.13.0'}
 
   select-hose@2.0.0:
@@ -15430,6 +15595,9 @@ packages:
   style-mod@4.1.3:
     resolution: {integrity: sha512-i/n8VsZydrugj3Iuzll8+x/00GH2vnYsk1eomD8QiRrSAeW6ItbCQDtfXCeJHd0iwiNagqjQkvpvREEPtW3IoQ==}
 
+  style-mod@4.1.4:
+    resolution: {integrity: sha512-XXWIQt633/EpAFx8aZDOTjBzrCaGmhvEQlQo6MVPfa2OzO2cWo+4hV9h+6UkHYlXGfy+ODXKUdP7Pthmcu5ATw==}
+
   styled_string@0.0.1:
     resolution: {integrity: sha512-DU2KZiB6VbPkO2tGSqQ9n96ZstUPjW7X4sGO6V2m1myIQluX0p1Ol8BrA/l6/EesqhMqXOIXs3cJNOy1UuU2BA==}
 
@@ -15525,6 +15693,9 @@ packages:
 
   tabster@8.8.0:
     resolution: {integrity: sha512-eGFXgtvKOQP5BywDI9Ngs+Atm6TRj45epAAqWKyVoi+HmOmdamEB//1H/FttLdNly/+Cz+GJ4RN8TnXTw0KwfA==}
+
+  tabster@8.8.1:
+    resolution: {integrity: sha512-MVwqtSeuwcwGFM4V/TXRN93IGoxhaAQek+highHWZRcDecPy2WlsohvAnngu06EI2qtu3OQZC08Cg+vx78we9Q==}
 
   tagged-tag@1.0.0:
     resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
@@ -15996,6 +16167,13 @@ packages:
     peerDependencies:
       typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x
 
+  typedoc@0.28.16:
+    resolution: {integrity: sha512-x4xW77QC3i5DUFMBp0qjukOTnr/sSg+oEs86nB3LjDslvAmwe/PUGDWbe3GrIqt59oTqoXK5GRK9tAa0sYMiog==}
+    engines: {node: '>= 18', pnpm: '>= 10'}
+    hasBin: true
+    peerDependencies:
+      typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x
+
   typedoc@0.28.18:
     resolution: {integrity: sha512-NTWTUOFRQ9+SGKKTuWKUioUkjxNwtS3JDRPVKZAXGHZy2wCA8bdv2iJiyeePn0xkmK+TCCqZFT0X7+2+FLjngA==}
     engines: {node: '>= 18', pnpm: '>= 10'}
@@ -16155,6 +16333,42 @@ packages:
   unplugin@2.3.11:
     resolution: {integrity: sha512-5uKD0nqiYVzlmCRs01Fhs2BdkEgBS3SAVP6ndrBsuK42iC2+JHyxM05Rm9G8+5mkmRtzMZGY8Ct5+mliZxU/Ww==}
     engines: {node: '>=18.12.0'}
+
+  unplugin@3.4.0:
+    resolution: {integrity: sha512-9skdIFlCsPdFV7wUfZxNsFInlW+7nJmGu2gkTu0OUhF56aXGsHab9x52/QhdJ4lC7ZDPWTxbiC4ANqVlsuaW3w==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      '@farmfe/core': '*'
+      '@rsbuild/core': '*'
+      '@rspack/core': '*'
+      bun-types-no-globals: '*'
+      esbuild: '*'
+      rolldown: '*'
+      rollup: '*'
+      unloader: '*'
+      vite: '*'
+      webpack: '*'
+    peerDependenciesMeta:
+      '@farmfe/core':
+        optional: true
+      '@rsbuild/core':
+        optional: true
+      '@rspack/core':
+        optional: true
+      bun-types-no-globals:
+        optional: true
+      esbuild:
+        optional: true
+      rolldown:
+        optional: true
+      rollup:
+        optional: true
+      unloader:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
 
   unrs-resolver@1.12.2:
     resolution: {integrity: sha512-dmlRxBJJayXjqTwC+JtF1HhJmgf3ftQ3YejFcZrf4+KKtJv0qDsK1pjqaaVjG7wJ5NJ6UVP1OqRMQ71Z4C3rxQ==}
@@ -16399,11 +16613,18 @@ packages:
     resolution: {integrity: sha512-C+r0eKJUIfiDIfwJhria30+TYWPtuHJXHtI7J0YlOmKAo7ogxP20T0zxB7HZQIFhIyvoBPwWskjxrvAtfjyZfA==}
     engines: {node: '>=14.0.0'}
 
+  vscode-jsonrpc@9.0.2:
+    resolution: {integrity: sha512-SbQSV9yRemARxeXw6LU5sS6Zq0e9/DgCCX5yelH263ZQWukbTk8EF8fjTrr1dziasf4GwlJbvTwFnTrnQFWZXQ==}
+    engines: {node: '>=14.0.0'}
+
   vscode-languageserver-protocol@3.17.3:
     resolution: {integrity: sha512-924/h0AqsMtA5yK22GgMtCYiMdCOtWTSGgUOkgEDX+wk2b0x4sAfLiO4NxBxqbiVtz7K7/1/RgVrVI0NClZwqA==}
 
   vscode-languageserver-protocol@3.17.5:
     resolution: {integrity: sha512-mb1bvRJN8SVznADSGWM9u/b07H7Ecg0I3OgXDuLdn307rl/J3A9YD6/eYOssqhecL27hK1IPZAsaqh00i/Jljg==}
+
+  vscode-languageserver-protocol@3.18.3:
+    resolution: {integrity: sha512-DF49+WeV5py4zO5hhobp60jjsDSK0lAqA0OuKBLBvp423HPWQcCbhZz3JgyfIewsEz2f8U+X75xNIFHdiXZm2w==}
 
   vscode-languageserver-textdocument@1.0.12:
     resolution: {integrity: sha512-cxWNPesCnQCcMPeenjKKsOCKQZ/L6Tv19DTRIGuLWe32lyzWhihGVJ/rcckZXJxfdKCFvRLS3fpBIsV/ZGX4zA==}
@@ -16416,6 +16637,9 @@ packages:
 
   vscode-languageserver-types@3.18.0:
     resolution: {integrity: sha512-8TsGPNMIMiiBdkORgRSvLjuiEIiAFtO+KssmYWxQ+uSVvlf7RjK8YKCOjPzZ+YA04jXEV7+7LvkSmHkhpNS99g==}
+
+  vscode-languageserver-types@3.18.3:
+    resolution: {integrity: sha512-XIlzJ7Qp/jzSI1ds7/FwPAWrPeTZA7pAtlW4hdJ1J6xXWJL6dR9QYnDhJOdLzdKhUQ5Mm6mvUMw+3DcOQQasPw==}
 
   vscode-languageserver@8.1.0:
     resolution: {integrity: sha512-eUt8f1z2N2IEUDBsKaNapkz7jl5QpskN2Y0G01T/ItMxBxw1fJwvtySGB9QMecatne8jFIWJGWI61dWjyTLQsw==}
@@ -16639,6 +16863,9 @@ packages:
 
   which-heading-do-i-need@0.2.7:
     resolution: {integrity: sha512-YWMZUOoxOgq/SEcd0bnDjgTFrJQ8quz31RZ9IRxeyjWYsakrT3F3iOKoEhValp4WZ8Ybt0DqpIrwtL0fEwMe4A==}
+
+  which-heading-do-i-need@0.4.1:
+    resolution: {integrity: sha512-NUwKC7rjs6hFqdr6Yu+4Hd9muQEL5XW3QvV8hj/uHSBo8o9FRsWOqArgWcL4IIvUDpS+KCoaRW/8+jHhNL8itQ==}
 
   which-module@2.0.1:
     resolution: {integrity: sha512-iBdZ57RDvnOR9AGBhML2vFZf7h8vmBjhoaZqODJBFWHVtKkDmKuHai3cx5PgVMrX5YDNp27AofYbAwctSS+vhQ==}
@@ -16915,6 +17142,11 @@ packages:
     engines: {node: '>= 14.6'}
     hasBin: true
 
+  yaml@2.9.1:
+    resolution: {integrity: sha512-3NxN8+78OdzbT7C/WjGsyfPAtJaN3FNDsWxv7Y7mcDsT/oOmgW8BpyQQFFBnvZE3j9Y2Sdz1ULFLezL7Eb2yFw==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
   yamlparser@0.0.2:
     resolution: {integrity: sha512-Cou9FCGblEENtn1/8La5wkDM/ISMh2bzu5Wh7dYzCzA0o9jD4YGyLkUJxe84oPBGoB92f+Oy4ZjVhA8S0C2wlQ==}
 
@@ -17017,7 +17249,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@analogjs/vite-plugin-angular@2.6.3(335fe59193537fc617aeb948b36dd69e)':
+  '@analogjs/vite-plugin-angular@2.6.3(140631271babdb47672536baeb3748b4)':
     dependencies:
       magic-string: 0.30.21
       obug: 2.1.4
@@ -17025,9 +17257,9 @@ snapshots:
       tinyglobby: 0.2.17
       ts-morph: 21.0.1
     optionalDependencies:
-      '@angular-devkit/build-angular': 21.2.19(6e51dcc0eeb4de08eece123994b2cc1e)
-      '@angular/build': 21.2.19(464ca316e864c439db8f5eedd84b2bad)
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+      '@angular-devkit/build-angular': 21.2.19(a34117bf6240f5a63f96949e74364a93)
+      '@angular/build': 21.2.19(07b4c14e7001f54f84975983185e3066)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -17039,13 +17271,13 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/build-angular@21.2.19(6e51dcc0eeb4de08eece123994b2cc1e)':
+  '@angular-devkit/build-angular@21.2.19(a34117bf6240f5a63f96949e74364a93)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2102.19(chokidar@5.0.0)
       '@angular-devkit/build-webpack': 0.2102.19(f05d33b89d4adbc0b41afdbbd2b5e12d)
       '@angular-devkit/core': 21.2.19(chokidar@5.0.0)
-      '@angular/build': 21.2.19(0e631027007fa325c3795cfe3d31e619)
+      '@angular/build': 21.2.19(988a22e9aaf0d8c2f70e5ac1c86355e9)
       '@angular/compiler-cli': 21.2.18(9f6e66c8a010f9ab15e136cccceda29e)
       '@babel/core': 7.29.7
       '@babel/generator': 7.29.1
@@ -17100,7 +17332,7 @@ snapshots:
     optionalDependencies:
       esbuild: 0.28.1
       karma: 4.4.1
-      tailwindcss: 3.4.19(yaml@2.8.3)
+      tailwindcss: 3.4.19(yaml@2.9.1)
     transitivePeerDependencies:
       - '@angular/compiler'
       - '@emnapi/core'
@@ -17146,7 +17378,7 @@ snapshots:
     optionalDependencies:
       chokidar: 5.0.0
 
-  '@angular/build@21.2.19(0e631027007fa325c3795cfe3d31e619)':
+  '@angular/build@21.2.19(07b4c14e7001f54f84975983185e3066)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2102.19(chokidar@5.0.0)
@@ -17156,7 +17388,7 @@ snapshots:
       '@babel/helper-annotate-as-pure': 7.27.3
       '@babel/helper-split-export-declaration': 7.24.7
       '@inquirer/confirm': 5.1.21(@types/node@26.2.0)
-      '@vitejs/plugin-basic-ssl': 2.1.4(b856fa2f76cf075d8e0786bbd9468f9f)
+      '@vitejs/plugin-basic-ssl': 2.1.4(fd1ebe0a28669d84c191f71540db5c34)
       beasties: 0.4.1
       browserslist: 4.28.4
       esbuild: 0.28.1
@@ -17177,14 +17409,14 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.9.3
       undici: 7.28.0
-      vite: 7.3.6(3faf55fc6a90800fe49823f1af1ac333)
+      vite: 7.3.6(d1aae5cb0b02d4a86bf95813c8110939)
       watchpack: 2.5.1
     optionalDependencies:
       karma: 4.4.1
       less: 4.4.2
       lmdb: 3.5.1
-      postcss: 8.5.12
-      tailwindcss: 3.4.19(yaml@2.8.3)
+      postcss: 8.5.22
+      tailwindcss: 3.4.19(yaml@2.9.1)
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -17200,7 +17432,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@angular/build@21.2.19(464ca316e864c439db8f5eedd84b2bad)':
+  '@angular/build@21.2.19(988a22e9aaf0d8c2f70e5ac1c86355e9)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2102.19(chokidar@5.0.0)
@@ -17210,7 +17442,7 @@ snapshots:
       '@babel/helper-annotate-as-pure': 7.27.3
       '@babel/helper-split-export-declaration': 7.24.7
       '@inquirer/confirm': 5.1.21(@types/node@26.2.0)
-      '@vitejs/plugin-basic-ssl': 2.1.4(97ce4439cf0679a768d3dd2ecd4d15cf)
+      '@vitejs/plugin-basic-ssl': 2.1.4(bb1a0d058015e8df15a6e4a26ff43cdd)
       beasties: 0.4.1
       browserslist: 4.28.4
       esbuild: 0.28.1
@@ -17231,14 +17463,14 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.9.3
       undici: 7.28.0
-      vite: 7.3.6(aebee2f2ddce5d091dec4112b5dad2ab)
+      vite: 7.3.6(1109bfb4c1b06cd993b8fbbd5aba2144)
       watchpack: 2.5.1
     optionalDependencies:
       karma: 4.4.1
       less: 4.4.2
       lmdb: 3.5.1
-      postcss: 8.5.22
-      tailwindcss: 3.4.19(yaml@2.8.3)
+      postcss: 8.5.12
+      tailwindcss: 3.4.19(yaml@2.9.1)
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -20418,9 +20650,9 @@ snapshots:
 
   '@codemirror/autocomplete@6.20.0':
     dependencies:
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
 
   '@codemirror/autocomplete@6.20.1':
@@ -20430,11 +20662,25 @@ snapshots:
       '@codemirror/view': 6.41.0
       '@lezer/common': 1.5.2
 
+  '@codemirror/autocomplete@6.20.3':
+    dependencies:
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      '@lezer/common': 1.5.2
+
   '@codemirror/commands@6.10.3':
     dependencies:
       '@codemirror/language': 6.12.3
       '@codemirror/state': 6.6.0
       '@codemirror/view': 6.41.0
+      '@lezer/common': 1.5.2
+
+  '@codemirror/commands@6.11.1':
+    dependencies:
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
 
   '@codemirror/commands@6.8.1':
@@ -20446,31 +20692,31 @@ snapshots:
 
   '@codemirror/lang-angular@0.1.4':
     dependencies:
-      '@codemirror/lang-html': 6.4.11
-      '@codemirror/lang-javascript': 6.2.4
-      '@codemirror/language': 6.12.3
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/lang-javascript': 6.2.5
+      '@codemirror/language': 6.12.4
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-cpp@6.0.3':
     dependencies:
-      '@codemirror/language': 6.12.3
-      '@lezer/cpp': 1.1.5
+      '@codemirror/language': 6.12.4
+      '@lezer/cpp': 1.1.6
 
   '@codemirror/lang-css@6.3.1':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
-      '@lezer/css': 1.3.3
+      '@lezer/css': 1.3.6
 
   '@codemirror/lang-go@6.0.1':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
       '@lezer/go': 1.0.1
 
@@ -20486,10 +20732,22 @@ snapshots:
       '@lezer/css': 1.3.3
       '@lezer/html': 1.3.13
 
+  '@codemirror/lang-html@6.4.12':
+    dependencies:
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/lang-css': 6.3.1
+      '@codemirror/lang-javascript': 6.2.5
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      '@lezer/common': 1.5.2
+      '@lezer/css': 1.3.6
+      '@lezer/html': 1.3.13
+
   '@codemirror/lang-java@6.0.2':
     dependencies:
-      '@codemirror/language': 6.12.3
-      '@lezer/java': 1.1.3
+      '@codemirror/language': 6.12.4
+      '@lezer/java': 1.1.4
 
   '@codemirror/lang-javascript@6.2.4':
     dependencies:
@@ -20503,45 +20761,48 @@ snapshots:
 
   '@codemirror/lang-javascript@6.2.5':
     dependencies:
-      '@codemirror/autocomplete': 6.20.1
-      '@codemirror/language': 6.12.3
-      '@codemirror/lint': 6.9.5
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/lint': 6.9.7
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/javascript': 1.5.4
 
-  '@codemirror/lang-jinja@6.0.0':
+  '@codemirror/lang-jinja@6.0.1':
     dependencies:
-      '@codemirror/lang-html': 6.4.11
-      '@codemirror/language': 6.12.3
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-json@6.0.2':
     dependencies:
-      '@codemirror/language': 6.12.3
+      '@codemirror/language': 6.12.4
       '@lezer/json': 1.0.3
 
   '@codemirror/lang-less@6.0.2':
     dependencies:
       '@codemirror/lang-css': 6.3.1
-      '@codemirror/language': 6.12.3
+      '@codemirror/language': 6.12.4
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-liquid@6.3.2':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/lang-html': 6.4.11
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.38.0
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-markdown@6.3.3':
     dependencies:
@@ -20553,87 +20814,87 @@ snapshots:
       '@lezer/common': 1.5.2
       '@lezer/markdown': 1.6.3
 
-  '@codemirror/lang-markdown@6.5.0':
+  '@codemirror/lang-markdown@6.5.2':
     dependencies:
-      '@codemirror/autocomplete': 6.20.1
-      '@codemirror/lang-html': 6.4.11
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
-      '@lezer/markdown': 1.6.3
+      '@lezer/markdown': 1.7.2
 
   '@codemirror/lang-php@6.0.2':
     dependencies:
-      '@codemirror/lang-html': 6.4.11
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
-      '@lezer/php': 1.0.5
+      '@lezer/php': 1.0.6
 
   '@codemirror/lang-python@6.2.1':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
-      '@lezer/python': 1.1.18
+      '@lezer/python': 1.1.19
 
   '@codemirror/lang-rust@6.0.2':
     dependencies:
-      '@codemirror/language': 6.12.3
+      '@codemirror/language': 6.12.4
       '@lezer/rust': 1.0.2
 
   '@codemirror/lang-sass@6.0.2':
     dependencies:
       '@codemirror/lang-css': 6.3.1
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
       '@lezer/sass': 1.1.0
 
   '@codemirror/lang-sql@6.10.0':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-vue@0.1.3':
     dependencies:
-      '@codemirror/lang-html': 6.4.11
-      '@codemirror/lang-javascript': 6.2.4
-      '@codemirror/language': 6.12.3
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/lang-javascript': 6.2.5
+      '@codemirror/language': 6.12.4
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-wast@6.0.2':
     dependencies:
-      '@codemirror/language': 6.12.3
+      '@codemirror/language': 6.12.4
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@codemirror/lang-xml@6.1.0':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.38.0
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/xml': 1.0.6
 
   '@codemirror/lang-yaml@6.1.3':
     dependencies:
-      '@codemirror/autocomplete': 6.18.6
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.5.2
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
       '@lezer/yaml': 1.0.4
 
   '@codemirror/language-data@6.5.2':
@@ -20642,14 +20903,14 @@ snapshots:
       '@codemirror/lang-cpp': 6.0.3
       '@codemirror/lang-css': 6.3.1
       '@codemirror/lang-go': 6.0.1
-      '@codemirror/lang-html': 6.4.11
+      '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-java': 6.0.2
-      '@codemirror/lang-javascript': 6.2.4
-      '@codemirror/lang-jinja': 6.0.0
+      '@codemirror/lang-javascript': 6.2.5
+      '@codemirror/lang-jinja': 6.0.1
       '@codemirror/lang-json': 6.0.2
       '@codemirror/lang-less': 6.0.2
       '@codemirror/lang-liquid': 6.3.2
-      '@codemirror/lang-markdown': 6.3.3
+      '@codemirror/lang-markdown': 6.5.2
       '@codemirror/lang-php': 6.0.2
       '@codemirror/lang-python': 6.2.1
       '@codemirror/lang-rust': 6.0.2
@@ -20659,8 +20920,8 @@ snapshots:
       '@codemirror/lang-wast': 6.0.2
       '@codemirror/lang-xml': 6.1.0
       '@codemirror/lang-yaml': 6.1.3
-      '@codemirror/language': 6.12.3
-      '@codemirror/legacy-modes': 6.5.2
+      '@codemirror/language': 6.12.4
+      '@codemirror/legacy-modes': 6.5.4
 
   '@codemirror/language@6.12.3':
     dependencies:
@@ -20671,15 +20932,30 @@ snapshots:
       '@lezer/lr': 1.4.8
       style-mod: 4.1.3
 
-  '@codemirror/legacy-modes@6.5.2':
+  '@codemirror/language@6.12.4':
     dependencies:
-      '@codemirror/language': 6.12.3
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      '@lezer/common': 1.5.2
+      '@lezer/highlight': 1.2.3
+      '@lezer/lr': 1.4.10
+      style-mod: 4.1.4
+
+  '@codemirror/legacy-modes@6.5.4':
+    dependencies:
+      '@codemirror/language': 6.12.4
 
   '@codemirror/lint@6.9.5':
     dependencies:
       '@codemirror/state': 6.5.2
       '@codemirror/view': 6.38.0
       crelt: 1.0.6
+
+  '@codemirror/lint@6.9.7':
+    dependencies:
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      crelt: 1.0.7
 
   '@codemirror/search@6.5.11':
     dependencies:
@@ -20693,6 +20969,12 @@ snapshots:
       '@codemirror/view': 6.41.0
       crelt: 1.0.6
 
+  '@codemirror/search@6.7.2':
+    dependencies:
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      crelt: 1.0.7
+
   '@codemirror/state@6.5.2':
     dependencies:
       '@marijn/find-cluster-break': 1.0.2
@@ -20700,6 +20982,10 @@ snapshots:
   '@codemirror/state@6.6.0':
     dependencies:
       '@marijn/find-cluster-break': 1.0.2
+
+  '@codemirror/state@6.7.5':
+    dependencies:
+      '@marijn/find-cluster-break': 1.0.4
 
   '@codemirror/view@6.38.0':
     dependencies:
@@ -20713,6 +20999,13 @@ snapshots:
       '@codemirror/state': 6.6.0
       crelt: 1.0.6
       style-mod: 4.1.3
+      w3c-keyname: 2.2.8
+
+  '@codemirror/view@6.43.12':
+    dependencies:
+      '@codemirror/state': 6.7.5
+      crelt: 1.0.7
+      style-mod: 4.1.4
       w3c-keyname: 2.2.8
 
   '@colors/colors@1.5.0':
@@ -20832,6 +21125,19 @@ snapshots:
       - '@glint/template'
       - supports-color
 
+  '@ember/test-helpers@5.4.1(882cf82caec78f226fcbd647b89f3bbe)':
+    dependencies:
+      '@ember/test-waiters': 4.1.2
+      '@embroider/addon-shim': 1.9.0
+      '@embroider/macros': 1.20.2(882cf82caec78f226fcbd647b89f3bbe)
+      '@simple-dom/interface': 1.4.0
+      decorator-transforms: 2.3.1(@babel/core@7.29.0)
+      dom-element-descriptors: 0.5.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glint/template'
+      - supports-color
+
   '@ember/test-helpers@5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
       '@ember/test-waiters': 4.1.2
@@ -20881,11 +21187,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/babel-loader-9@3.1.3(cd2f7b008e8fe957a1811b0cbff8ba13)':
+  '@embroider/babel-loader-9@3.1.3(17f19f03d19e555cfec8a4d025b83e7b)':
     dependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
-      babel-loader: 9.2.1(712b80f2e96a10bf6a77e46c7c8b570b)
+      babel-loader: 9.2.1(48081b43c81cee5ef7230c5dd9fdcf1f)
     transitivePeerDependencies:
       - supports-color
       - webpack
@@ -20981,10 +21287,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/hbs-loader@3.0.5(971a4fbd0dd5f8dc50b0916a03f05ce8)':
+  '@embroider/hbs-loader@3.0.5(5bedb67d7e7c0101cf1cd80d5d8535a8)':
     dependencies:
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   '@embroider/macros@1.20.2(7727beade5f526b31da91186c63ace33)':
     dependencies:
@@ -20998,6 +21304,22 @@ snapshots:
       semver: 7.7.4
     optionalDependencies:
       '@glint/template': 1.7.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
+  '@embroider/macros@1.20.2(882cf82caec78f226fcbd647b89f3bbe)':
+    dependencies:
+      '@embroider/shared-internals': 3.0.2
+      assert-never: 1.4.0
+      babel-import-util: 3.0.1
+      ember-cli-babel: 8.3.1(@babel/core@7.29.0)
+      find-up: 5.0.0
+      lodash: 4.18.1
+      resolve: 1.22.11
+      semver: 7.7.4
+    optionalDependencies:
+      '@glint/template': 1.7.4
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -21050,7 +21372,23 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@embroider/macros@1.20.7(7727beade5f526b31da91186c63ace33)':
+  '@embroider/macros@1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)':
+    dependencies:
+      '@embroider/shared-internals': 3.2.0
+      assert-never: 1.4.0
+      babel-import-util: 3.0.1
+      ember-cli-babel: 8.3.2(@babel/core@7.29.0)
+      find-up: 5.0.0
+      lodash: 4.18.1
+      resolve: 1.22.12
+      semver: 7.8.5
+    optionalDependencies:
+      '@glint/template': 1.7.7
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
+  '@embroider/macros@1.21.1(7727beade5f526b31da91186c63ace33)':
     dependencies:
       '@embroider/shared-internals': 3.2.0
       assert-never: 1.4.0
@@ -21066,7 +21404,23 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@embroider/macros@1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)':
+  '@embroider/macros@1.21.1(882cf82caec78f226fcbd647b89f3bbe)':
+    dependencies:
+      '@embroider/shared-internals': 3.2.0
+      assert-never: 1.4.0
+      babel-import-util: 3.0.1
+      ember-cli-babel: 8.3.2(@babel/core@7.29.0)
+      find-up: 5.0.0
+      lodash: 4.18.1
+      resolve: 1.22.12
+      semver: 7.8.5
+    optionalDependencies:
+      '@glint/template': 1.7.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
+  '@embroider/macros@1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
       '@embroider/shared-internals': 3.2.0
       assert-never: 1.4.0
@@ -21175,14 +21529,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/test-setup@4.0.0(bc33d037a126efd1ea7de1d97efbc9ec)':
+  '@embroider/test-setup@4.0.0(637360ddf2f685539074dcc21265c824)':
     dependencies:
       lodash: 4.18.1
       resolve: 1.22.11
     optionalDependencies:
       '@embroider/compat': 4.1.17(5eb7d8ed04f6279bd025028b6f2cc926)
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
-      '@embroider/webpack': 4.1.2(971a4fbd0dd5f8dc50b0916a03f05ce8)
+      '@embroider/webpack': 4.1.2(5bedb67d7e7c0101cf1cd80d5d8535a8)
 
   '@embroider/util@1.13.5(27d76ede91affd53cfe4795cc5e1e9d2)':
     dependencies:
@@ -21197,7 +21551,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@embroider/vite@1.7.2(580c0dfd4116bfded085246bbe5882b5)':
+  '@embroider/vite@1.7.2(6b7c74a0c9559f002e3fcae4a3d0d9d9)':
     dependencies:
       '@babel/core': 7.29.0
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
@@ -21215,7 +21569,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.46.1
-      vite: 7.3.2(2e5de8cc25dc2caf6ff93f9b17c1a0d0)
+      vite: 7.3.2(dd414e737393da9d5b9d5b6459537199)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -21223,7 +21577,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/vite@1.7.2(88a8b62c34869095ec994c02cdcdd204)':
+  '@embroider/vite@1.7.2(b4325e80b3593eb4f4c210cfccf51120)':
     dependencies:
       '@babel/core': 7.29.0
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
@@ -21241,7 +21595,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.46.1
-      vite: 7.3.6(e55ba2124e62458e58b3d07598d09cc4)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -21249,7 +21603,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/vite@1.7.2(d0b858ef317c795ff9c3becee0f96977)':
+  '@embroider/vite@1.7.2(d8fad02be343ebd1e4ebac8faa13df0e)':
     dependencies:
       '@babel/core': 7.29.0
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
@@ -21267,7 +21621,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.46.1
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+      vite: 7.3.6(49bf7428740a5e0bab4e9de94b825bcd)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -21275,32 +21629,32 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/webpack@4.1.2(971a4fbd0dd5f8dc50b0916a03f05ce8)':
+  '@embroider/webpack@4.1.2(5bedb67d7e7c0101cf1cd80d5d8535a8)':
     dependencies:
       '@babel/core': 7.29.0(supports-color@8.1.1)
       '@babel/preset-env': 7.29.7(@babel/core@7.29.0)(supports-color@8.1.1)
-      '@embroider/babel-loader-9': 3.1.3(cd2f7b008e8fe957a1811b0cbff8ba13)
+      '@embroider/babel-loader-9': 3.1.3(17f19f03d19e555cfec8a4d025b83e7b)
       '@embroider/core': 4.6.5(@glint/template@1.7.7)
-      '@embroider/hbs-loader': 3.0.5(971a4fbd0dd5f8dc50b0916a03f05ce8)
+      '@embroider/hbs-loader': 3.0.5(5bedb67d7e7c0101cf1cd80d5d8535a8)
       '@embroider/shared-internals': 2.9.2(supports-color@8.1.1)
       '@types/supports-color': 8.1.3
       assert-never: 1.4.0
-      babel-loader: 8.4.1(3ed753db272da7f8185b659e070e5465)
-      css-loader: 5.2.7(webpack@5.106.1(postcss@8.5.16))
+      babel-loader: 8.4.1(517d73a07b8ad9d2caa2afd317bb216b)
+      css-loader: 5.2.7(df9e119ba5a87b078041da2cc8b85a44)
       csso: 4.2.0
       debug: 4.4.3(supports-color@8.1.1)
       escape-string-regexp: 4.0.0
       fs-extra: 9.1.0
       jsdom: 25.0.1(supports-color@8.1.1)
       lodash: 4.18.1
-      mini-css-extract-plugin: 2.10.2(webpack@5.106.1(postcss@8.5.16))
+      mini-css-extract-plugin: 2.10.2(df9e119ba5a87b078041da2cc8b85a44)
       semver: 7.8.5
       source-map-url: 0.4.1
-      style-loader: 2.0.0(webpack@5.106.1(postcss@8.5.16))
+      style-loader: 2.0.0(df9e119ba5a87b078041da2cc8b85a44)
       supports-color: 8.1.1
       terser: 5.48.0
-      thread-loader: 3.0.4(webpack@5.106.1(postcss@8.5.16))
-      webpack: 5.106.1(postcss@8.5.16)
+      thread-loader: 3.0.4(df9e119ba5a87b078041da2cc8b85a44)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -21619,12 +21973,23 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.11
 
+  '@floating-ui/core@1.8.0':
+    dependencies:
+      '@floating-ui/utils': 0.2.12
+
   '@floating-ui/dom@1.7.6':
     dependencies:
       '@floating-ui/core': 1.7.5
       '@floating-ui/utils': 0.2.11
 
+  '@floating-ui/dom@1.8.0':
+    dependencies:
+      '@floating-ui/core': 1.8.0
+      '@floating-ui/utils': 0.2.12
+
   '@floating-ui/utils@0.2.11': {}
+
+  '@floating-ui/utils@0.2.12': {}
 
   '@fontsource/lexend@5.2.11': {}
 
@@ -21650,7 +22015,7 @@ snapshots:
   '@glimdown/lezer-glimmer-expression@2.0.3':
     dependencies:
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@glimmer/component@2.1.1':
     dependencies:
@@ -21796,6 +22161,8 @@ snapshots:
       content-tag: 2.0.3
 
   '@glint/template@1.7.3': {}
+
+  '@glint/template@1.7.4': {}
 
   '@glint/template@1.7.7': {}
 
@@ -22551,23 +22918,29 @@ snapshots:
 
   '@lezer/common@1.5.2': {}
 
-  '@lezer/cpp@1.1.5':
+  '@lezer/cpp@1.1.6':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/css@1.3.3':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
+
+  '@lezer/css@1.3.6':
+    dependencies:
+      '@lezer/common': 1.5.2
+      '@lezer/highlight': 1.2.3
+      '@lezer/lr': 1.4.10
 
   '@lezer/go@1.0.1':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/highlight@1.2.3':
     dependencies:
@@ -22577,25 +22950,29 @@ snapshots:
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
-  '@lezer/java@1.1.3':
+  '@lezer/java@1.1.4':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/javascript@1.5.4':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/json@1.0.3':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
+
+  '@lezer/lr@1.4.10':
+    dependencies:
+      '@lezer/common': 1.5.2
 
   '@lezer/lr@1.4.8':
     dependencies:
@@ -22606,41 +22983,46 @@ snapshots:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
 
-  '@lezer/php@1.0.5':
+  '@lezer/markdown@1.7.2':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
 
-  '@lezer/python@1.1.18':
+  '@lezer/php@1.0.6':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
+
+  '@lezer/python@1.1.19':
+    dependencies:
+      '@lezer/common': 1.5.2
+      '@lezer/highlight': 1.2.3
+      '@lezer/lr': 1.4.10
 
   '@lezer/rust@1.0.2':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/sass@1.1.0':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/xml@1.0.6':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lezer/yaml@1.0.4':
     dependencies:
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@lint-todo/utils@13.1.1':
     dependencies:
@@ -22689,6 +23071,8 @@ snapshots:
       js-yaml: 4.2.0
 
   '@marijn/find-cluster-break@1.0.2': {}
+
+  '@marijn/find-cluster-break@1.0.4': {}
 
   '@modular-css/processor@28.1.5(postcss@8.5.16)':
     dependencies:
@@ -22836,11 +23220,11 @@ snapshots:
       '@nativescript/types-android': 9.0.0
       '@nativescript/types-ios': 9.0.0
 
-  '@nativescript/vite@2.0.3(19479d56a9e9cf50a3bea1268898bd6d)':
+  '@nativescript/vite@2.0.3(7677590b05173f0f3354fa3a744141e0)':
     dependencies:
-      '@analogjs/vite-plugin-angular': 2.6.3(335fe59193537fc617aeb948b36dd69e)
-      '@angular-devkit/build-angular': 21.2.19(6e51dcc0eeb4de08eece123994b2cc1e)
-      '@angular/build': 21.2.19(464ca316e864c439db8f5eedd84b2bad)
+      '@analogjs/vite-plugin-angular': 2.6.3(140631271babdb47672536baeb3748b4)
+      '@angular-devkit/build-angular': 21.2.19(a34117bf6240f5a63f96949e74364a93)
+      '@angular/build': 21.2.19(07b4c14e7001f54f84975983185e3066)
       '@babel/core': 7.29.0
       '@babel/generator': 7.29.7
       '@babel/parser': 7.29.7
@@ -22848,16 +23232,16 @@ snapshots:
       '@rollup/plugin-alias': 6.0.0(rollup@4.60.1)
       '@rollup/plugin-commonjs': 29.0.3(rollup@4.60.1)
       '@rollup/plugin-replace': 6.0.3(rollup@4.60.1)
-      '@vitejs/plugin-vue': 6.0.8(390ef97baa13b6fcc8ddd5bc092fb254)
-      '@vitejs/plugin-vue-jsx': 5.1.6(390ef97baa13b6fcc8ddd5bc092fb254)
+      '@vitejs/plugin-vue': 6.0.8(63d70c90e1fc1d05c695ec8c9f21d83f)
+      '@vitejs/plugin-vue-jsx': 5.1.6(63d70c90e1fc1d05c695ec8c9f21d83f)
       '@vue/compiler-sfc': 3.5.32
       esbuild: 0.25.12
       minimist: 1.2.8
       react-reconciler: 0.32.0(react@19.2.8)
       sass: 1.99.0
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
-      vite-plugin-solid: 2.11.13(f20ea12ee699e8bf6c3f3e1055b0f26a)
-      vite-plugin-static-copy: 3.4.0(9a9c3d4119efcb833c24d2914edb54ae)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
+      vite-plugin-solid: 2.11.13(ed0c59d19227732f0ac9e8b3263ea791)
+      vite-plugin-static-copy: 3.4.0(51d2c4025860465bfb296cb576ec3f56)
       vue-tsc: 3.3.8(typescript@5.9.3)
       ws: 8.20.0
     transitivePeerDependencies:
@@ -24130,6 +24514,20 @@ snapshots:
       - bluebird
       - supports-color
 
+  '@replit/codemirror-lang-svelte@6.0.0(08d218bf891306cb482fd1df9066b056)':
+    dependencies:
+      '@codemirror/autocomplete': 6.18.6
+      '@codemirror/lang-css': 6.3.1
+      '@codemirror/lang-html': 6.4.11
+      '@codemirror/lang-javascript': 6.2.4
+      '@codemirror/language': 6.12.3
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.0
+      '@lezer/common': 1.5.2
+      '@lezer/highlight': 1.2.3
+      '@lezer/javascript': 1.5.4
+      '@lezer/lr': 1.4.10
+
   '@replit/codemirror-lang-svelte@6.0.0(71226cd44c52d86920bb27978376941e)':
     dependencies:
       '@codemirror/autocomplete': 6.18.6
@@ -24144,19 +24542,19 @@ snapshots:
       '@lezer/javascript': 1.5.4
       '@lezer/lr': 1.4.8
 
-  '@replit/codemirror-lang-svelte@6.0.0(71bfe8041a192a01c85b230d89de5465)':
+  '@replit/codemirror-lang-svelte@6.0.0(adacaab9b9dc816a3938ada54b1ce9a7)':
     dependencies:
-      '@codemirror/autocomplete': 6.20.1
+      '@codemirror/autocomplete': 6.20.3
       '@codemirror/lang-css': 6.3.1
-      '@codemirror/lang-html': 6.4.11
+      '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-javascript': 6.2.5
-      '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/language': 6.12.4
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/javascript': 1.5.4
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   '@rigor789/resolve-package-path@1.0.7': {}
 
@@ -24538,10 +24936,10 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tailwindcss/typography@0.5.20(tailwindcss@3.4.19(yaml@2.8.3))':
+  '@tailwindcss/typography@0.5.20(tailwindcss@3.4.19(yaml@2.9.1))':
     dependencies:
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.19(yaml@2.8.3)
+      tailwindcss: 3.4.19(yaml@2.9.1)
 
   '@testim/chrome-version@1.1.4': {}
 
@@ -25097,13 +25495,13 @@ snapshots:
       '@typescript-eslint/types': 8.61.0
       eslint-visitor-keys: 5.0.1
 
-  '@ungap/structured-clone@1.3.0': {}
+  '@ungap/structured-clone@1.4.0': {}
 
-  '@universal-ember/docs-support@0.9.2(2189c74f128087c18094239a768ded36)':
+  '@universal-ember/docs-support@0.9.2(4dbd39ff9dbd1716d04784dc83db11d4)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
       '@fontsource/lexend': 5.2.11
-      '@tailwindcss/typography': 0.5.20(tailwindcss@3.4.19(yaml@2.8.3))
+      '@tailwindcss/typography': 0.5.20(tailwindcss@3.4.19(yaml@2.9.1))
       change-case: 5.4.4
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
       ember-mobile-menu: 6.1.0(1bed6a78a9934b91441c95d4447c2130)
@@ -25111,11 +25509,11 @@ snapshots:
       ember-primitives: 0.53.1(c876d29c7108eb5a4e4e57f9e68c6dff)
       ember-resources: 7.0.8(5417512ae382abcafe5679ee7b1ac481)
       inter-ui: 4.1.1
-      kolay: 4.1.0(b186acb6a5fb3b0afbb6a8a87202195b)
+      kolay: 4.1.0(49d7c4776a7a52bd911aad11e9a90bc0)
       package-up: 5.0.0
       read-package-up: 12.0.0
       should-handle-link: 1.3.0
-      tailwindcss: 3.4.19(yaml@2.8.3)
+      tailwindcss: 3.4.19(yaml@2.9.1)
     transitivePeerDependencies:
       - '@babel/core'
       - '@codemirror/lang-css'
@@ -25203,30 +25601,30 @@ snapshots:
 
   '@valor/nativescript-websockets@2.0.3': {}
 
-  '@vitejs/plugin-basic-ssl@2.1.4(97ce4439cf0679a768d3dd2ecd4d15cf)':
+  '@vitejs/plugin-basic-ssl@2.1.4(bb1a0d058015e8df15a6e4a26ff43cdd)':
     dependencies:
-      vite: 7.3.6(aebee2f2ddce5d091dec4112b5dad2ab)
+      vite: 7.3.6(1109bfb4c1b06cd993b8fbbd5aba2144)
 
-  '@vitejs/plugin-basic-ssl@2.1.4(b856fa2f76cf075d8e0786bbd9468f9f)':
+  '@vitejs/plugin-basic-ssl@2.1.4(fd1ebe0a28669d84c191f71540db5c34)':
     dependencies:
-      vite: 7.3.6(3faf55fc6a90800fe49823f1af1ac333)
+      vite: 7.3.6(d1aae5cb0b02d4a86bf95813c8110939)
 
-  '@vitejs/plugin-vue-jsx@5.1.6(390ef97baa13b6fcc8ddd5bc092fb254)':
+  '@vitejs/plugin-vue-jsx@5.1.6(63d70c90e1fc1d05c695ec8c9f21d83f)':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-syntax-typescript': 7.29.7(@babel/core@7.29.0)
       '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.0)
       '@rolldown/pluginutils': 1.0.1
       '@vue/babel-plugin-jsx': 2.0.1(@babel/core@7.29.0)
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
       vue: 3.5.40(typescript@5.9.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@6.0.8(390ef97baa13b6fcc8ddd5bc092fb254)':
+  '@vitejs/plugin-vue@6.0.8(63d70c90e1fc1d05c695ec8c9f21d83f)':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
       vue: 3.5.40(typescript@5.9.3)
 
   '@volar/language-core@2.4.28':
@@ -25369,7 +25767,7 @@ snapshots:
   '@warp-drive-mirror/build-config@5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)
       babel-import-util: 2.1.1
       babel-plugin-debug-macros: 2.0.0(@babel/core@7.29.0)
       semver: 7.8.5
@@ -25380,7 +25778,7 @@ snapshots:
 
   '@warp-drive-mirror/core@5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
-      '@embroider/macros': 1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@warp-drive-mirror/build-config': 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
     transitivePeerDependencies:
       - '@babel/core'
@@ -25403,7 +25801,7 @@ snapshots:
 
   '@warp-drive-mirror/utilities@5.8.1(fb9deb460ff3722dc7f5a909dcfa8694)':
     dependencies:
-      '@embroider/macros': 1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@warp-drive-mirror/core': 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
     transitivePeerDependencies:
       - '@babel/core'
@@ -25642,6 +26040,10 @@ snapshots:
     optionalDependencies:
       ajv: 8.18.0
 
+  ajv-formats@3.0.1(ajv@8.20.0):
+    optionalDependencies:
+      ajv: 8.20.0
+
   ajv-keywords@3.5.2(ajv@6.14.0):
     dependencies:
       ajv: 6.14.0
@@ -25649,6 +26051,11 @@ snapshots:
   ajv-keywords@5.1.0(ajv@8.18.0):
     dependencies:
       ajv: 8.18.0
+      fast-deep-equal: 3.1.3
+
+  ajv-keywords@5.1.0(ajv@8.20.0):
+    dependencies:
+      ajv: 8.20.0
       fast-deep-equal: 3.1.3
 
   ajv@6.14.0:
@@ -25662,6 +26069,13 @@ snapshots:
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+
+  ajv@8.20.0:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -25872,7 +26286,7 @@ snapshots:
 
   astral-regex@2.0.0: {}
 
-  astroturf@1.2.0(webpack@5.106.1(postcss@8.5.16)):
+  astroturf@1.2.0(df9e119ba5a87b078041da2cc8b85a44):
     dependencies:
       '@babel/code-frame': 7.29.0
       '@babel/core': 7.29.0
@@ -25885,7 +26299,7 @@ snapshots:
       '@modular-css/processor': 28.1.5(postcss@8.5.16)
       common-tags: 1.8.2
       cosmiconfig: 7.1.0
-      css-loader: 5.2.7(webpack@5.106.1(postcss@8.5.16))
+      css-loader: 5.2.7(df9e119ba5a87b078041da2cc8b85a44)
       fast-levenshtein: 3.0.0
       find-cache-dir: 3.3.2
       globby: 11.1.0
@@ -25898,7 +26312,7 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.5.16)
       resolve: 1.22.11
       unique-slug: 4.0.0
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
       webpack-virtual-modules: 0.3.2
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -26160,13 +26574,6 @@ snapshots:
       find-up: 5.0.0
       webpack: 5.105.2(esbuild@0.28.1)
 
-  babel-loader@10.1.1(1768539686b3e0952642b747e8d2dde5):
-    dependencies:
-      '@babel/core': 7.29.7
-      find-up: 5.0.0
-    optionalDependencies:
-      webpack: 5.106.1(postcss@8.5.16)
-
   babel-loader@10.1.1(b87d79a832810890942fb12f6a946012):
     dependencies:
       '@babel/core': 7.29.7
@@ -26174,14 +26581,21 @@ snapshots:
     optionalDependencies:
       webpack: 5.106.1(postcss@8.5.22)
 
-  babel-loader@8.4.1(3ed753db272da7f8185b659e070e5465):
+  babel-loader@10.1.1(d9a4240ad390d5f9ac23235bef66bed0):
+    dependencies:
+      '@babel/core': 7.29.7
+      find-up: 5.0.0
+    optionalDependencies:
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
+
+  babel-loader@8.4.1(517d73a07b8ad9d2caa2afd317bb216b):
     dependencies:
       '@babel/core': 7.29.0
       find-cache-dir: 3.3.2
       loader-utils: 2.0.4
       make-dir: 3.1.0
       schema-utils: 2.7.1
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   babel-loader@8.4.1(c5d598ecf1da619cc7e36d285b7d7cd9):
     dependencies:
@@ -26192,12 +26606,12 @@ snapshots:
       schema-utils: 2.7.1
       webpack: 5.106.1(postcss@8.5.22)
 
-  babel-loader@9.2.1(712b80f2e96a10bf6a77e46c7c8b570b):
+  babel-loader@9.2.1(48081b43c81cee5ef7230c5dd9fdcf1f):
     dependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       find-cache-dir: 4.0.0
       schema-utils: 4.3.3
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   babel-messages@6.23.0:
     dependencies:
@@ -26876,11 +27290,12 @@ snapshots:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
-  brace-expansion@2.1.0:
+  brace-expansion@1.1.21:
     dependencies:
       balanced-match: 1.0.2
+      concat-map: 0.0.1
 
-  brace-expansion@2.1.4:
+  brace-expansion@2.1.7:
     dependencies:
       balanced-match: 1.0.2
 
@@ -27780,25 +28195,25 @@ snapshots:
       - '@codemirror/lang-css'
       - '@codemirror/language'
 
-  codemirror-lang-glimdown@2.0.3(d773073e75358aa4ad9d98d3845faf02):
+  codemirror-lang-glimdown@2.0.4(58056303b4a7029ff93dfa47e2283475):
     dependencies:
-      '@codemirror/lang-html': 6.4.11
+      '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-javascript': 6.2.5
-      '@codemirror/lang-markdown': 6.5.0
+      '@codemirror/lang-markdown': 6.5.2
       '@codemirror/lang-vue': 0.1.3
       '@codemirror/lang-yaml': 6.1.3
       '@codemirror/language-data': 6.5.2
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/html': 1.3.13
       '@lezer/javascript': 1.5.4
-      '@lezer/lr': 1.4.8
-      '@lezer/markdown': 1.6.3
-      '@replit/codemirror-lang-svelte': 6.0.0(71bfe8041a192a01c85b230d89de5465)
-      codemirror-lang-glimmer: 2.0.3(@lezer/common@1.5.2)
-      codemirror-lang-glimmer-js: 2.0.3(09ccd51397cfdb748bef17fdd94f705b)
+      '@lezer/lr': 1.4.10
+      '@lezer/markdown': 1.7.2
+      '@replit/codemirror-lang-svelte': 6.0.0(adacaab9b9dc816a3938ada54b1ce9a7)
+      codemirror-lang-glimmer: 2.0.4(@lezer/common@1.5.2)
+      codemirror-lang-glimmer-js: 2.0.4(ec953d6d15edb74ea10c6f33f6f0245e)
       codemirror-lang-mermaid: 0.5.0
     transitivePeerDependencies:
       - '@codemirror/autocomplete'
@@ -27819,17 +28234,17 @@ snapshots:
     transitivePeerDependencies:
       - '@lezer/common'
 
-  codemirror-lang-glimmer-js@2.0.3(09ccd51397cfdb748bef17fdd94f705b):
+  codemirror-lang-glimmer-js@2.0.4(ec953d6d15edb74ea10c6f33f6f0245e):
     dependencies:
       '@codemirror/lang-css': 6.3.1
-      '@codemirror/lang-html': 6.4.11
+      '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-javascript': 6.2.5
-      '@codemirror/language': 6.12.3
-      '@codemirror/view': 6.41.0
+      '@codemirror/language': 6.12.4
+      '@codemirror/view': 6.43.12
       '@lezer/highlight': 1.2.3
       '@lezer/javascript': 1.5.4
-      '@lezer/lr': 1.4.8
-      codemirror-lang-glimmer: 2.0.3(@lezer/common@1.5.2)
+      '@lezer/lr': 1.4.10
+      codemirror-lang-glimmer: 2.0.4(@lezer/common@1.5.2)
     transitivePeerDependencies:
       - '@lezer/common'
 
@@ -27849,27 +28264,27 @@ snapshots:
       '@lezer/lr': 1.4.8
       lezer-glimmer: 2.0.0
 
-  codemirror-lang-glimmer@2.0.3(@lezer/common@1.5.2):
+  codemirror-lang-glimmer@2.0.4(@lezer/common@1.5.2):
     dependencies:
       '@codemirror/autocomplete': 6.20.0
       '@codemirror/lang-css': 6.3.1
-      '@codemirror/lang-html': 6.4.11
+      '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-javascript': 6.2.5
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@glimdown/lezer-glimmer-expression': 2.0.3
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/html': 1.3.13
       '@lezer/javascript': 1.5.4
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
       lezer-glimmer: 2.0.3
 
   codemirror-lang-mermaid@0.5.0:
     dependencies:
-      '@codemirror/language': 6.12.3
+      '@codemirror/language': 6.12.4
       '@lezer/highlight': 1.2.3
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   codemirror-languageserver@1.22.0(1409ddfaf77b304133aaee6c4a09a7da):
     dependencies:
@@ -27880,14 +28295,14 @@ snapshots:
       marked: 16.4.2
       vscode-languageserver-protocol: 3.17.5
 
-  codemirror-languageserver@1.22.0(807844697f809862157cfdf09cd2fc77):
+  codemirror-languageserver@1.22.1(9b2538c7f0eddeede1a79daea0344709):
     dependencies:
-      '@codemirror/autocomplete': 6.20.1
-      '@codemirror/lint': 6.9.5
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/lint': 6.9.7
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       marked: 16.4.2
-      vscode-languageserver-protocol: 3.17.5
+      vscode-languageserver-protocol: 3.18.3
 
   codemirror@6.0.2:
     dependencies:
@@ -28172,6 +28587,8 @@ snapshots:
 
   crelt@1.0.6: {}
 
+  crelt@1.0.7: {}
+
   cross-spawn@6.0.6:
     dependencies:
       nice-try: 1.0.5
@@ -28205,7 +28622,7 @@ snapshots:
     dependencies:
       postcss: 8.5.22
 
-  css-loader@5.2.7(webpack@5.106.1(postcss@8.5.16)):
+  css-loader@5.2.7(df9e119ba5a87b078041da2cc8b85a44):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.16)
       loader-utils: 2.0.4
@@ -28217,7 +28634,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       schema-utils: 3.3.0
       semver: 7.7.4
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   css-loader@5.2.7(webpack@5.106.1(postcss@8.5.22)):
     dependencies:
@@ -28492,6 +28909,13 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
+  decorator-transforms@2.3.2(@babel/core@7.29.0):
+    dependencies:
+      '@babel/plugin-syntax-decorators': 7.29.7(@babel/core@7.29.0)
+      babel-import-util: 3.0.1
+    transitivePeerDependencies:
+      - '@babel/core'
+
   deep-extend@0.6.0: {}
 
   deep-is@0.1.4: {}
@@ -28720,7 +29144,7 @@ snapshots:
 
   email-validator@2.0.4: {}
 
-  ember-a11y-testing@7.1.3(2d5004dff093b53cf806dddcad01f215):
+  ember-a11y-testing@7.1.3(65ae8132710b95b051933f4fd6033236):
     dependencies:
       '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@ember/test-waiters': 4.1.2
@@ -28728,7 +29152,7 @@ snapshots:
       '@scalvert/ember-setup-middleware-reporter': 0.1.1
       axe-core: 4.11.2
       broccoli-persistent-filter: 3.1.3
-      ember-auto-import: 2.13.1(c39788b786afceb3d5232f0295c2972d)
+      ember-auto-import: 2.13.1(250da5a39f05a2ed5157c579fd63b614)
       ember-cli-babel: 8.3.1(@babel/core@7.29.0)
       ember-cli-htmlbars: 6.3.0
       ember-cli-typescript: 4.2.1
@@ -28749,7 +29173,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-auto-import@2.13.1(c39788b786afceb3d5232f0295c2972d):
+  ember-auto-import@2.13.1(250da5a39f05a2ed5157c579fd63b614):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.29.0)
@@ -28760,7 +29184,7 @@ snapshots:
       '@embroider/macros': 1.20.2(c8332dc3f90c0e60eb130a3a85f980b9)
       '@embroider/reverse-exports': 0.2.0
       '@embroider/shared-internals': 2.9.2
-      babel-loader: 8.4.1(3ed753db272da7f8185b659e070e5465)
+      babel-loader: 8.4.1(517d73a07b8ad9d2caa2afd317bb216b)
       babel-plugin-ember-modules-api-polyfill: 3.5.0
       babel-plugin-ember-template-compilation: 2.4.1
       babel-plugin-htmlbars-inline-precompile: 5.3.1
@@ -28770,7 +29194,7 @@ snapshots:
       broccoli-merge-trees: 4.2.0
       broccoli-plugin: 4.0.7
       broccoli-source: 3.0.1
-      css-loader: 5.2.7(webpack@5.106.1(postcss@8.5.16))
+      css-loader: 5.2.7(df9e119ba5a87b078041da2cc8b85a44)
       debug: 4.4.3(supports-color@9.4.0)
       fs-extra: 10.1.0
       fs-tree-diff: 2.0.1
@@ -28778,14 +29202,14 @@ snapshots:
       is-subdir: 1.2.0
       js-string-escape: 1.0.1
       lodash: 4.18.1
-      mini-css-extract-plugin: 2.10.2(webpack@5.106.1(postcss@8.5.16))
+      mini-css-extract-plugin: 2.10.2(df9e119ba5a87b078041da2cc8b85a44)
       minimatch: 3.1.5
       parse5: 6.0.1
       pkg-entry-points: 1.1.1
       resolve: 1.22.11
       resolve-package-path: 4.0.3
       semver: 7.7.4
-      style-loader: 2.0.0(webpack@5.106.1(postcss@8.5.16))
+      style-loader: 2.0.0(df9e119ba5a87b078041da2cc8b85a44)
       typescript-memoize: 1.1.1
       walk-sync: 3.0.0
     transitivePeerDependencies:
@@ -29454,7 +29878,7 @@ snapshots:
   ember-gesture-modifiers@6.1.0(57107800b34b2a68d3b7f54b4e7e5b23):
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      decorator-transforms: 2.3.1(@babel/core@7.29.0)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
       ember-modifier: 4.3.0(@babel/core@7.29.0)
       ember-source: 7.2.0(@glimmer/component@2.1.1)
     optionalDependencies:
@@ -29539,7 +29963,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  ember-native@file:ember-native(73174dc3a71af4d88a4e8209a556321e):
+  ember-native@file:ember-native(78c85e29f651209bc8cd353691e3db04):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.29.0)
@@ -29551,7 +29975,7 @@ snapshots:
       '@ember/string': 4.0.1
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.9.0
-      '@embroider/vite': 1.7.2(580c0dfd4116bfded085246bbe5882b5)
+      '@embroider/vite': 1.7.2(6b7c74a0c9559f002e3fcae4a3d0d9d9)
       '@eslint/js': 10.0.1(eslint@9.39.4(jiti@1.21.7))
       '@glimmer/component': 2.1.1
       '@nativescript/core': 9.0.20
@@ -29559,7 +29983,7 @@ snapshots:
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.1)
       '@rollup/plugin-replace': 6.0.3(rollup@4.60.1)
       '@types/node': 26.2.0
-      astroturf: 1.2.0(webpack@5.106.1(postcss@8.5.16))
+      astroturf: 1.2.0(df9e119ba5a87b078041da2cc8b85a44)
       ember-cli-babel: 8.3.1(@babel/core@7.29.0)
       ember-cli-htmlbars: 7.0.1(a648da1f5d45354b1cb815748a7d8d5f)
       ember-cli-moment-shim: 3.8.0(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -29572,7 +29996,7 @@ snapshots:
       loader.js: 4.7.0
       prettier-linter-helpers: 1.0.1
       qunit: 2.25.0
-      rollup-plugin-astroturf: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(ea35db7a61a41cd12f220231b592dd76)
+      rollup-plugin-astroturf: https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(a77785cd5443b20dc0f7be730125d602)
       rollup-plugin-postcss: 4.0.2(postcss@8.5.16)
       rollup-plugin-root-import: 1.0.0
       rollup-plugin-styles: 4.0.0(rollup@4.60.1)
@@ -29650,17 +30074,17 @@ snapshots:
       '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.7(7727beade5f526b31da91186c63ace33)
-      '@floating-ui/dom': 1.7.6
+      '@embroider/macros': 1.21.1(7727beade5f526b31da91186c63ace33)
+      '@floating-ui/dom': 1.8.0
       '@glimmer/component': 2.1.1
-      decorator-transforms: 2.3.1(@babel/core@7.29.0)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
       ember-element-helper: 0.8.8
       ember-modifier: 4.3.0(@babel/core@7.29.0)
       ember-resources: 7.0.8(5417512ae382abcafe5679ee7b1ac481)
       form-data-utils: 0.6.0
       reactiveweb: 1.9.3(921a16cd1162d0e4ac0e6838479483d3)
       should-handle-link: 1.3.0
-      tabster: 8.8.0
+      tabster: 8.8.1
       tracked-built-ins: 4.1.2(@babel/core@7.29.0)
       tracked-toolbox: 2.2.0(@babel/core@7.29.0)
       which-heading-do-i-need: 0.2.1
@@ -29671,22 +30095,22 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  ember-primitives@0.51.0(60e3a436498e483d4f8d41552304d504):
+  ember-primitives@0.51.0(c34a37553abc067e9e5a48f6ba0cd430):
     dependencies:
       '@babel/runtime': 7.29.7
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.7(7727beade5f526b31da91186c63ace33)
-      '@floating-ui/dom': 1.7.6
+      '@embroider/macros': 1.21.1(7727beade5f526b31da91186c63ace33)
+      '@floating-ui/dom': 1.8.0
       '@glimmer/component': 2.1.1
-      decorator-transforms: 2.3.1(@babel/core@7.29.0)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
       ember-element-helper: 0.8.8
       ember-modifier: 4.3.0(@babel/core@7.29.0)
-      ember-resources: 7.0.8(5417512ae382abcafe5679ee7b1ac481)
+      ember-resources: 7.1.0(d7bf158f13d0b2586760f8fde25ffd4c)
       form-data-utils: 0.6.0
       reactiveweb: 1.9.3(921a16cd1162d0e4ac0e6838479483d3)
       should-handle-link: 1.3.0
-      tabster: 8.8.0
+      tabster: 8.8.1
       tracked-built-ins: 4.1.2(@babel/core@7.29.0)
       tracked-toolbox: 2.2.0(@babel/core@7.29.0)
       which-heading-do-i-need: 0.2.4
@@ -29748,6 +30172,56 @@ snapshots:
       - '@babel/core'
       - supports-color
 
+  ember-primitives@0.60.1(265d11029c9ea005d37240170e3f9c6c):
+    dependencies:
+      '@babel/runtime': 7.29.7
+      '@ember/test-waiters': 4.1.2
+      '@embroider/addon-shim': 1.9.0
+      '@floating-ui/dom': 1.8.0
+      '@glimmer/component': 2.1.1
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-element-helper: 0.8.8
+      ember-modifier: 4.3.0(@babel/core@7.29.0)
+      ember-resources: 7.1.0(965c0d76ede0ebc026c55e9dbbdc8990)
+      form-data-utils: 0.6.0
+      reactiveweb: 1.9.3(5eea1aab1fda32f38946f5701674f213)
+      should-handle-link: 1.3.0
+      tabster: 8.8.1
+      tracked-built-ins: 4.1.2(@babel/core@7.29.0)
+      tracked-toolbox: 3.0.0(@babel/core@7.29.0)
+      which-heading-do-i-need: 0.4.1
+    optionalDependencies:
+      '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@glint/template': 1.7.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
+  ember-primitives@0.61.1(265d11029c9ea005d37240170e3f9c6c):
+    dependencies:
+      '@babel/runtime': 7.29.7
+      '@ember/test-waiters': 4.1.2
+      '@embroider/addon-shim': 1.9.0
+      '@floating-ui/dom': 1.8.0
+      '@glimmer/component': 2.1.1
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-element-helper: 0.8.8
+      ember-modifier: 4.3.0(@babel/core@7.29.0)
+      ember-resources: 7.1.0(965c0d76ede0ebc026c55e9dbbdc8990)
+      form-data-utils: 0.6.0
+      reactiveweb: 1.9.3(5eea1aab1fda32f38946f5701674f213)
+      should-handle-link: 1.3.0
+      tabster: 8.8.1
+      tracked-built-ins: 4.1.2(@babel/core@7.29.0)
+      tracked-toolbox: 3.0.0(@babel/core@7.29.0)
+      which-heading-do-i-need: 0.4.1
+    optionalDependencies:
+      '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@glint/template': 1.7.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
   ember-qunit@9.1.0(4eb09b39160f3b0e2d94dd27a0a85d1d):
     dependencies:
       '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
@@ -29757,7 +30231,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-repl@7.0.1(97a2ca31a8e4cf9a385bac208eb0c5f1):
+  ember-repl@7.0.1(ddb9b70054f9e7b8e6e6898e21c22d6b):
     dependencies:
       '@ember/test-helpers': 5.4.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@ember/test-waiters': 4.1.2
@@ -29769,7 +30243,7 @@ snapshots:
       ember-primitives: 0.40.0(c876d29c7108eb5a4e4e57f9e68c6dff)
       ember-resolver: 13.2.0
       ember-resources: 7.0.8(5417512ae382abcafe5679ee7b1ac481)
-      repl-sdk: 1.0.0(93d4969b5698d0d4464d33ccc0660007)
+      repl-sdk: 1.0.0(2131498b9766cc22739a0592ff41fd7e)
     optionalDependencies:
       '@glint/template': 1.7.7
     transitivePeerDependencies:
@@ -29781,7 +30255,7 @@ snapshots:
       - ember-modifier
       - supports-color
 
-  ember-repl@7.3.5(2105716d703a60c650dc8e372d959629):
+  ember-repl@7.3.5(02f99804fce3bec55bb17f42c4cc87b4):
     dependencies:
       '@ember/test-helpers': 5.4.1(7727beade5f526b31da91186c63ace33)
       '@ember/test-waiters': 4.1.2
@@ -29789,12 +30263,34 @@ snapshots:
       codemirror: 6.0.2
       content-tag: 4.2.0
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
-      ember-primitives: 0.51.0(60e3a436498e483d4f8d41552304d504)
+      ember-primitives: 0.51.0(c34a37553abc067e9e5a48f6ba0cd430)
       ember-resolver: 13.2.0
-      ember-resources: 7.0.8(d7bf158f13d0b2586760f8fde25ffd4c)
-      repl-sdk: 1.4.1(93d4969b5698d0d4464d33ccc0660007)
+      ember-resources: 7.1.0(d7bf158f13d0b2586760f8fde25ffd4c)
+      repl-sdk: 1.4.1(2131498b9766cc22739a0592ff41fd7e)
     optionalDependencies:
       '@glint/template': 1.7.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@codemirror/lang-css'
+      - '@glimmer/component'
+      - '@lezer/javascript'
+      - '@lezer/lr'
+      - ember-modifier
+      - supports-color
+
+  ember-repl@8.2.3(1285a5af2008a418dcd3de2490034a9f):
+    dependencies:
+      '@ember/test-helpers': 5.4.1(882cf82caec78f226fcbd647b89f3bbe)
+      '@ember/test-waiters': 4.1.2
+      codemirror: 6.0.2
+      content-tag: 4.2.0
+      decorator-transforms: 2.3.1(@babel/core@7.29.0)
+      ember-primitives: 0.61.1(265d11029c9ea005d37240170e3f9c6c)
+      ember-resolver: 13.2.0
+      ember-resources: 7.1.0(965c0d76ede0ebc026c55e9dbbdc8990)
+      repl-sdk: 2.0.0(2131498b9766cc22739a0592ff41fd7e)
+    optionalDependencies:
+      '@glint/template': 1.7.4
     transitivePeerDependencies:
       - '@babel/core'
       - '@codemirror/lang-css'
@@ -29815,7 +30311,34 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  ember-resources@7.0.8(965c0d76ede0ebc026c55e9dbbdc8990):
+    dependencies:
+      '@embroider/addon-shim': 1.9.0
+    optionalDependencies:
+      '@glimmer/component': 2.1.1
+      '@glint/template': 1.7.4
+    transitivePeerDependencies:
+      - supports-color
+
   ember-resources@7.0.8(d7bf158f13d0b2586760f8fde25ffd4c):
+    dependencies:
+      '@embroider/addon-shim': 1.9.0
+    optionalDependencies:
+      '@glimmer/component': 2.1.1
+      '@glint/template': 1.7.3
+    transitivePeerDependencies:
+      - supports-color
+
+  ember-resources@7.1.0(965c0d76ede0ebc026c55e9dbbdc8990):
+    dependencies:
+      '@embroider/addon-shim': 1.9.0
+    optionalDependencies:
+      '@glimmer/component': 2.1.1
+      '@glint/template': 1.7.4
+    transitivePeerDependencies:
+      - supports-color
+
+  ember-resources@7.1.0(d7bf158f13d0b2586760f8fde25ffd4c):
     dependencies:
       '@embroider/addon-shim': 1.9.0
     optionalDependencies:
@@ -29926,26 +30449,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-vite-hmr@2.2.4(31c0e2461c978543c0253976bccd7f89):
-    dependencies:
-      '@babel/core': 7.29.7
-      '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.7)
-      '@babel/traverse': 7.29.7
-      '@babel/types': 8.0.4
-      '@embroider/addon-shim': 1.9.0
-      '@embroider/compat': 4.1.17(5eb7d8ed04f6279bd025028b6f2cc926)
-      '@glimmer/syntax': 0.95.0
-      '@types/supports-color': 10.0.0
-      babel-import-util: 3.0.1
-      babel-loader: 10.1.1(1768539686b3e0952642b747e8d2dde5)
-      babel-plugin-ember-template-compilation: 4.0.0
-      babel-preset-env: 1.7.0
-      semver: 7.8.5
-    transitivePeerDependencies:
-      - '@rspack/core'
-      - supports-color
-      - webpack
-
   ember-vite-hmr@2.2.4(3ab58e7e672772c595ad85e4982cf253):
     dependencies:
       '@babel/core': 7.29.7
@@ -29958,6 +30461,26 @@ snapshots:
       '@types/supports-color': 10.0.0
       babel-import-util: 3.0.1
       babel-loader: 10.1.1(b87d79a832810890942fb12f6a946012)
+      babel-plugin-ember-template-compilation: 4.0.0
+      babel-preset-env: 1.7.0
+      semver: 7.8.5
+    transitivePeerDependencies:
+      - '@rspack/core'
+      - supports-color
+      - webpack
+
+  ember-vite-hmr@2.2.4(949f135d59b8c1cb2f9aaa332f69999f):
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.7)
+      '@babel/traverse': 7.29.7
+      '@babel/types': 8.0.4
+      '@embroider/addon-shim': 1.9.0
+      '@embroider/compat': 4.1.17(5eb7d8ed04f6279bd025028b6f2cc926)
+      '@glimmer/syntax': 0.95.0
+      '@types/supports-color': 10.0.0
+      babel-import-util: 3.0.1
+      babel-loader: 10.1.1(d9a4240ad390d5f9ac23235bef66bed0)
       babel-plugin-ember-template-compilation: 4.0.0
       babel-preset-env: 1.7.0
       semver: 7.8.5
@@ -30065,7 +30588,7 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.3
 
-  enhanced-resolve@5.24.5:
+  enhanced-resolve@5.25.1:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.3.3
@@ -30196,6 +30719,8 @@ snapshots:
   es-module-lexer@2.3.2: {}
 
   es-module-shims@2.8.0: {}
+
+  es-module-shims@2.8.4: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -31082,6 +31607,8 @@ snapshots:
 
   fast-uri@3.1.0: {}
 
+  fast-uri@3.1.8: {}
+
   fast-wrap-ansi@0.2.0:
     dependencies:
       fast-string-width: 3.0.2
@@ -31130,11 +31657,11 @@ snapshots:
     dependencies:
       flat-cache: 4.0.1
 
-  file-loader@6.2.0(webpack@5.106.1(postcss@8.5.16)):
+  file-loader@6.2.0(df9e119ba5a87b078041da2cc8b85a44):
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   file-type@16.5.4:
     dependencies:
@@ -31878,7 +32405,7 @@ snapshots:
       '@types/unist': 3.0.3
       devlop: 1.1.0
       hastscript: 9.0.1
-      property-information: 7.1.0
+      property-information: 7.2.0
       vfile: 6.0.3
       vfile-location: 5.0.3
       web-namespaces: 2.0.1
@@ -31899,7 +32426,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.5
       '@types/unist': 3.0.3
-      '@ungap/structured-clone': 1.3.0
+      '@ungap/structured-clone': 1.4.0
       hast-util-from-parse5: 8.0.3
       hast-util-to-parse5: 8.0.1
       html-void-elements: 3.0.0
@@ -31920,7 +32447,7 @@ snapshots:
       hast-util-whitespace: 3.0.0
       html-void-elements: 3.0.0
       mdast-util-to-hast: 13.2.1
-      property-information: 7.1.0
+      property-information: 7.2.0
       space-separated-tokens: 2.0.2
       stringify-entities: 4.0.4
       zwitch: 2.0.4
@@ -31930,7 +32457,7 @@ snapshots:
       '@types/hast': 3.0.5
       comma-separated-tokens: 2.0.3
       devlop: 1.1.0
-      property-information: 7.1.0
+      property-information: 7.2.0
       space-separated-tokens: 2.0.2
       web-namespaces: 2.0.1
       zwitch: 2.0.4
@@ -31948,7 +32475,7 @@ snapshots:
       '@types/hast': 3.0.5
       comma-separated-tokens: 2.0.3
       hast-util-parse-selector: 4.0.0
-      property-information: 7.1.0
+      property-information: 7.2.0
       space-separated-tokens: 2.0.2
 
   hawk@1.1.1:
@@ -32215,7 +32742,7 @@ snapshots:
 
   ignore-walk@8.0.0:
     dependencies:
-      minimatch: 10.2.4
+      minimatch: 10.2.6
 
   ignore@5.3.2: {}
 
@@ -33116,6 +33643,8 @@ snapshots:
 
   keyborg@2.14.1: {}
 
+  keyborg@3.498.0: {}
+
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
@@ -33126,7 +33655,7 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  kolay@4.1.0(b186acb6a5fb3b0afbb6a8a87202195b):
+  kolay@4.1.0(49d7c4776a7a52bd911aad11e9a90bc0):
     dependencies:
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.9.0
@@ -33136,7 +33665,7 @@ snapshots:
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
       ember-modifier: 4.3.0(@babel/core@7.29.0)
       ember-primitives: 0.48.2(60e3a436498e483d4f8d41552304d504)
-      ember-repl: 7.3.5(2105716d703a60c650dc8e372d959629)
+      ember-repl: 7.3.5(02f99804fce3bec55bb17f42c4cc87b4)
       ember-resources: 7.0.8(d7bf158f13d0b2586760f8fde25ffd4c)
       globby: 16.2.0
       json5: 2.2.3
@@ -33155,6 +33684,55 @@ snapshots:
       - '@lezer/lr'
       - supports-color
       - typescript
+
+  kolay@5.4.0(332e2570174f338673cc491cc2cafeed):
+    dependencies:
+      '@ember/test-waiters': 4.1.2
+      '@embroider/addon-shim': 1.9.0
+      '@glimmer/component': 2.1.1
+      '@glint/template': 1.7.4
+      change-case: 5.4.4
+      common-tags: 1.8.2
+      content-tag: 4.2.0
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-modifier: 4.3.0(@babel/core@7.29.0)
+      ember-primitives: 0.60.1(265d11029c9ea005d37240170e3f9c6c)
+      ember-repl: 8.2.3(1285a5af2008a418dcd3de2490034a9f)
+      ember-resources: 7.1.0(965c0d76ede0ebc026c55e9dbbdc8990)
+      globby: 16.2.0
+      json5: 2.2.3
+      package-up: 5.0.0
+      reactiveweb: 1.9.1(5eea1aab1fda32f38946f5701674f213)
+      rehype-raw: 7.0.0
+      rehype-stringify: 10.0.1
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.2
+      repl-sdk: 1.6.2(2131498b9766cc22739a0592ff41fd7e)
+      send: 1.2.1
+      tracked-built-ins: 4.1.2(@babel/core@7.29.0)
+      typedoc: 0.28.16(typescript@5.9.3)
+      typedoc-plugin-rename-defaults: 0.7.3(typedoc@0.28.16(typescript@5.9.3))
+      unist-util-visit: 5.1.0
+      unplugin: 3.4.0(4accb09827374bbbe33317558e4c4349)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@codemirror/lang-css'
+      - '@ember/test-helpers'
+      - '@farmfe/core'
+      - '@lezer/javascript'
+      - '@lezer/lr'
+      - '@rsbuild/core'
+      - '@rspack/core'
+      - bun-types-no-globals
+      - esbuild
+      - rolldown
+      - rollup
+      - supports-color
+      - typescript
+      - unloader
+      - vite
+      - webpack
 
   ky@1.14.3: {}
 
@@ -33312,7 +33890,7 @@ snapshots:
       '@lezer/highlight': 1.2.3
       '@lezer/html': 1.3.13
       '@lezer/javascript': 1.5.4
-      '@lezer/lr': 1.4.8
+      '@lezer/lr': 1.4.10
 
   license-webpack-plugin@4.0.2(webpack@5.105.2(esbuild@0.28.1)):
     dependencies:
@@ -33336,6 +33914,10 @@ snapshots:
   lines-and-columns@1.2.4: {}
 
   linkify-it@5.0.0:
+    dependencies:
+      uc.micro: 2.1.0
+
+  linkify-it@5.0.2:
     dependencies:
       uc.micro: 2.1.0
 
@@ -33642,6 +34224,15 @@ snapshots:
       punycode.js: 2.3.1
       uc.micro: 2.1.0
 
+  markdown-it@14.3.2:
+    dependencies:
+      argparse: 2.0.1
+      entities: 4.5.0
+      linkify-it: 5.0.2
+      mdurl: 2.1.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
+
   markdown-table@3.0.4: {}
 
   marked-terminal@7.3.0(marked@15.0.12):
@@ -33764,7 +34355,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.5
       '@types/mdast': 4.0.4
-      '@ungap/structured-clone': 1.3.0
+      '@ungap/structured-clone': 1.4.0
       devlop: 1.1.0
       micromark-util-sanitize-uri: 2.0.1
       trim-lines: 3.0.1
@@ -33795,6 +34386,8 @@ snapshots:
   mdn-data@2.27.1: {}
 
   mdurl@2.0.0: {}
+
+  mdurl@2.1.0: {}
 
   media-typer@0.3.0: {}
 
@@ -33910,7 +34503,7 @@ snapshots:
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.2
 
-  micromark-extension-gfm-table@2.1.1:
+  micromark-extension-gfm-table@2.1.2:
     dependencies:
       devlop: 1.1.0
       micromark-factory-space: 2.0.1
@@ -33935,7 +34528,7 @@ snapshots:
       micromark-extension-gfm-autolink-literal: 2.1.0
       micromark-extension-gfm-footnote: 2.1.0
       micromark-extension-gfm-strikethrough: 2.1.0
-      micromark-extension-gfm-table: 2.1.1
+      micromark-extension-gfm-table: 2.1.2
       micromark-extension-gfm-tagfilter: 2.0.0
       micromark-extension-gfm-task-list-item: 2.1.0
       micromark-util-combine-extensions: 2.0.1
@@ -34109,11 +34702,11 @@ snapshots:
       tapable: 2.3.3
       webpack: 5.105.2(esbuild@0.28.1)
 
-  mini-css-extract-plugin@2.10.2(webpack@5.106.1(postcss@8.5.16)):
+  mini-css-extract-plugin@2.10.2(df9e119ba5a87b078041da2cc8b85a44):
     dependencies:
       schema-utils: 4.3.3
       tapable: 2.3.2
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   mini-css-extract-plugin@2.10.2(webpack@5.106.1(postcss@8.5.22)):
     dependencies:
@@ -34141,7 +34734,7 @@ snapshots:
 
   minimatch@3.0.8:
     dependencies:
-      brace-expansion: 1.1.14
+      brace-expansion: 1.1.21
 
   minimatch@3.1.5:
     dependencies:
@@ -34149,15 +34742,15 @@ snapshots:
 
   minimatch@5.1.9:
     dependencies:
-      brace-expansion: 2.1.4
+      brace-expansion: 2.1.7
 
   minimatch@8.0.7:
     dependencies:
-      brace-expansion: 2.1.0
+      brace-expansion: 2.1.7
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.1.0
+      brace-expansion: 2.1.7
 
   minimist@0.0.10: {}
 
@@ -35258,6 +35851,8 @@ snapshots:
 
   pattern-key-compare@2.0.0: {}
 
+  pattern-key-compare@2.0.1: {}
+
   pbxproj-dom@1.2.0: {}
 
   peek-readable@4.1.0: {}
@@ -35272,8 +35867,7 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  picomatch@4.0.7:
-    optional: true
+  picomatch@4.0.7: {}
 
   pify@2.3.0: {}
 
@@ -35482,13 +36076,13 @@ snapshots:
       postcss: 8.5.16
       ts-node: 10.9.2(@types/node@26.2.0)(typescript@5.9.3)
 
-  postcss-load-config@6.0.1(jiti@1.21.7)(postcss@8.5.16)(yaml@2.8.3):
+  postcss-load-config@6.0.1(jiti@1.21.7)(postcss@8.5.16)(yaml@2.9.1):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       jiti: 1.21.7
       postcss: 8.5.16
-      yaml: 2.8.3
+      yaml: 2.9.1
 
   postcss-loader@8.2.0(6caa0f80ea971827cff6fa202c051b0f):
     dependencies:
@@ -35501,14 +36095,14 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  postcss-loader@8.2.1(ac4dddff9d74089e50292c0ac3784622):
+  postcss-loader@8.2.1(0571f0c19a8e40d0c978f294d5e95fde):
     dependencies:
       cosmiconfig: 9.0.1(typescript@5.9.3)
       jiti: 2.6.1
       postcss: 8.5.16
       semver: 7.7.4
     optionalDependencies:
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
     transitivePeerDependencies:
       - typescript
 
@@ -35983,7 +36577,7 @@ snapshots:
       retry: 0.12.0
       signal-exit: 3.0.7
 
-  property-information@7.1.0: {}
+  property-information@7.2.0: {}
 
   proto-list@1.2.4: {}
 
@@ -36154,13 +36748,38 @@ snapshots:
 
   react@19.2.8: {}
 
+  reactiveweb@1.9.1(5eea1aab1fda32f38946f5701674f213):
+    dependencies:
+      '@ember/test-waiters': 4.1.2
+      '@embroider/addon-shim': 1.9.0
+      '@embroider/macros': 1.21.1(882cf82caec78f226fcbd647b89f3bbe)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-resources: 7.1.0(965c0d76ede0ebc026c55e9dbbdc8990)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glimmer/component'
+      - '@glint/template'
+      - supports-color
+
   reactiveweb@1.9.1(921a16cd1162d0e4ac0e6838479483d3):
     dependencies:
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.2(7727beade5f526b31da91186c63ace33)
+      '@embroider/macros': 1.21.1(7727beade5f526b31da91186c63ace33)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-resources: 7.1.0(d7bf158f13d0b2586760f8fde25ffd4c)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glimmer/component'
+      - '@glint/template'
+      - supports-color
+
+  reactiveweb@1.9.3(5eea1aab1fda32f38946f5701674f213):
+    dependencies:
+      '@ember/test-waiters': 4.1.2
+      '@embroider/addon-shim': 1.9.0
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
-      ember-resources: 7.0.8(d7bf158f13d0b2586760f8fde25ffd4c)
+      ember-resources: 7.0.8(965c0d76ede0ebc026c55e9dbbdc8990)
     transitivePeerDependencies:
       - '@babel/core'
       - '@glimmer/component'
@@ -36388,7 +37007,7 @@ snapshots:
   rehype-autolink-headings@7.1.0:
     dependencies:
       '@types/hast': 3.0.5
-      '@ungap/structured-clone': 1.3.0
+      '@ungap/structured-clone': 1.4.0
       hast-util-heading-rank: 3.0.0
       hast-util-is-element: 3.0.0
       unified: 11.0.5
@@ -36519,7 +37138,7 @@ snapshots:
       '@zkochan/rimraf': 3.0.2
       fs-extra: 11.3.0
 
-  repl-sdk@1.0.0(93d4969b5698d0d4464d33ccc0660007):
+  repl-sdk@1.0.0(2131498b9766cc22739a0592ff41fd7e):
     dependencies:
       '@codemirror/autocomplete': 6.18.6
       '@codemirror/commands': 6.8.1
@@ -36538,7 +37157,7 @@ snapshots:
       '@lezer/highlight': 1.2.3
       '@lezer/html': 1.3.13
       '@lezer/markdown': 1.6.3
-      '@replit/codemirror-lang-svelte': 6.0.0(71226cd44c52d86920bb27978376941e)
+      '@replit/codemirror-lang-svelte': 6.0.0(08d218bf891306cb482fd1df9066b056)
       change-case: 5.4.4
       codemirror: 6.0.2
       codemirror-lang-glimdown: 2.0.0(4e94c95a6223614f162ffe277bb08e97)
@@ -36558,36 +37177,36 @@ snapshots:
       - '@lezer/javascript'
       - '@lezer/lr'
 
-  repl-sdk@1.4.1(93d4969b5698d0d4464d33ccc0660007):
+  repl-sdk@1.4.1(2131498b9766cc22739a0592ff41fd7e):
     dependencies:
-      '@codemirror/autocomplete': 6.20.1
-      '@codemirror/commands': 6.10.3
-      '@codemirror/lang-html': 6.4.11
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/commands': 6.11.1
+      '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-javascript': 6.2.5
-      '@codemirror/lang-markdown': 6.5.0
+      '@codemirror/lang-markdown': 6.5.2
       '@codemirror/lang-vue': 0.1.3
       '@codemirror/lang-yaml': 6.1.3
-      '@codemirror/language': 6.12.3
+      '@codemirror/language': 6.12.4
       '@codemirror/language-data': 6.5.2
-      '@codemirror/lint': 6.9.5
-      '@codemirror/search': 6.6.0
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.41.0
+      '@codemirror/lint': 6.9.7
+      '@codemirror/search': 6.7.2
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/html': 1.3.13
-      '@lezer/markdown': 1.6.3
-      '@replit/codemirror-lang-svelte': 6.0.0(71bfe8041a192a01c85b230d89de5465)
+      '@lezer/markdown': 1.7.2
+      '@replit/codemirror-lang-svelte': 6.0.0(adacaab9b9dc816a3938ada54b1ce9a7)
       '@shikijs/rehype': 3.23.0
       change-case: 5.4.4
       codemirror: 6.0.2
-      codemirror-lang-glimdown: 2.0.3(d773073e75358aa4ad9d98d3845faf02)
-      codemirror-lang-glimmer: 2.0.3(@lezer/common@1.5.2)
-      codemirror-lang-glimmer-js: 2.0.3(09ccd51397cfdb748bef17fdd94f705b)
+      codemirror-lang-glimdown: 2.0.4(58056303b4a7029ff93dfa47e2283475)
+      codemirror-lang-glimmer: 2.0.4(@lezer/common@1.5.2)
+      codemirror-lang-glimmer-js: 2.0.4(ec953d6d15edb74ea10c6f33f6f0245e)
       codemirror-lang-mermaid: 0.5.0
-      codemirror-languageserver: 1.22.0(807844697f809862157cfdf09cd2fc77)
+      codemirror-languageserver: 1.22.1(9b2538c7f0eddeede1a79daea0344709)
       comlink: 4.4.2
-      es-module-shims: 2.8.0
+      es-module-shims: 2.8.4
       mdast: 3.0.0
       mime: 4.1.0
       package-name-regex: 5.0.0
@@ -36599,7 +37218,112 @@ snapshots:
       remark-parse: 11.0.0
       remark-rehype: 11.1.2
       resolve.exports: 2.0.3
-      resolve.imports: 2.0.3
+      resolve.imports: 2.0.4
+      tarparser: 0.0.5
+      unified: 11.0.5
+      unist-util-visit: 5.1.0
+      vfile: 6.0.3
+    transitivePeerDependencies:
+      - '@codemirror/lang-css'
+      - '@lezer/javascript'
+      - '@lezer/lr'
+      - supports-color
+
+  repl-sdk@1.6.2(2131498b9766cc22739a0592ff41fd7e):
+    dependencies:
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/commands': 6.11.1
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/lang-javascript': 6.2.5
+      '@codemirror/lang-markdown': 6.5.2
+      '@codemirror/lang-vue': 0.1.3
+      '@codemirror/lang-yaml': 6.1.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/language-data': 6.5.2
+      '@codemirror/lint': 6.9.7
+      '@codemirror/search': 6.7.2
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      '@lezer/common': 1.5.2
+      '@lezer/highlight': 1.2.3
+      '@lezer/html': 1.3.13
+      '@lezer/markdown': 1.7.2
+      '@replit/codemirror-lang-svelte': 6.0.0(adacaab9b9dc816a3938ada54b1ce9a7)
+      '@shikijs/rehype': 3.23.0
+      change-case: 5.4.4
+      codemirror: 6.0.2
+      codemirror-lang-glimdown: 2.0.4(58056303b4a7029ff93dfa47e2283475)
+      codemirror-lang-glimmer: 2.0.4(@lezer/common@1.5.2)
+      codemirror-lang-glimmer-js: 2.0.4(ec953d6d15edb74ea10c6f33f6f0245e)
+      codemirror-lang-mermaid: 0.5.0
+      codemirror-languageserver: 1.22.1(9b2538c7f0eddeede1a79daea0344709)
+      comlink: 4.4.2
+      es-module-shims: 2.8.4
+      mdast: 3.0.0
+      mime: 4.1.0
+      package-name-regex: 5.0.0
+      rehype-autolink-headings: 7.1.0
+      rehype-raw: 7.0.0
+      rehype-slug: 6.0.0
+      rehype-stringify: 10.0.1
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.2
+      resolve.exports: 2.0.3
+      resolve.imports: 2.0.4
+      tarparser: 0.0.5
+      unified: 11.0.5
+      unist-util-visit: 5.1.0
+      vfile: 6.0.3
+    transitivePeerDependencies:
+      - '@codemirror/lang-css'
+      - '@lezer/javascript'
+      - '@lezer/lr'
+      - supports-color
+
+  repl-sdk@2.0.0(2131498b9766cc22739a0592ff41fd7e):
+    dependencies:
+      '@codemirror/autocomplete': 6.20.3
+      '@codemirror/commands': 6.11.1
+      '@codemirror/lang-html': 6.4.12
+      '@codemirror/lang-javascript': 6.2.5
+      '@codemirror/lang-markdown': 6.5.2
+      '@codemirror/lang-vue': 0.1.3
+      '@codemirror/lang-yaml': 6.1.3
+      '@codemirror/language': 6.12.4
+      '@codemirror/language-data': 6.5.2
+      '@codemirror/lint': 6.9.7
+      '@codemirror/search': 6.7.2
+      '@codemirror/state': 6.7.5
+      '@codemirror/view': 6.43.12
+      '@lezer/common': 1.5.2
+      '@lezer/highlight': 1.2.3
+      '@lezer/html': 1.3.13
+      '@lezer/markdown': 1.7.2
+      '@replit/codemirror-lang-svelte': 6.0.0(adacaab9b9dc816a3938ada54b1ce9a7)
+      '@shikijs/rehype': 3.23.0
+      codemirror: 6.0.2
+      codemirror-lang-glimdown: 2.0.4(58056303b4a7029ff93dfa47e2283475)
+      codemirror-lang-glimmer: 2.0.4(@lezer/common@1.5.2)
+      codemirror-lang-glimmer-js: 2.0.4(ec953d6d15edb74ea10c6f33f6f0245e)
+      codemirror-lang-mermaid: 0.5.0
+      codemirror-languageserver: 1.22.1(9b2538c7f0eddeede1a79daea0344709)
+      comlink: 4.4.2
+      es-module-shims: 2.8.4
+      github-slugger: 2.0.0
+      mdast: 3.0.0
+      mdast-util-to-string: 4.0.0
+      mime: 4.1.0
+      package-name-regex: 5.0.0
+      rehype-autolink-headings: 7.1.0
+      rehype-raw: 7.0.0
+      rehype-slug: 6.0.0
+      rehype-stringify: 10.0.1
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.2
+      resolve.exports: 2.0.3
+      resolve.imports: 2.0.4
       tarparser: 0.0.5
       unified: 11.0.5
       unist-util-visit: 5.1.0
@@ -36723,6 +37447,10 @@ snapshots:
     dependencies:
       pattern-key-compare: 2.0.0
 
+  resolve.imports@2.0.4:
+    dependencies:
+      pattern-key-compare: 2.0.1
+
   resolve@1.22.11:
     dependencies:
       is-core-module: 2.16.1
@@ -36833,11 +37561,11 @@ snapshots:
       astroturf: 1.2.0(webpack@5.106.1(postcss@8.5.22))
       rollup: 4.60.1
 
-  rollup-plugin-astroturf@https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(ea35db7a61a41cd12f220231b592dd76):
+  rollup-plugin-astroturf@https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a(a77785cd5443b20dc0f7be730125d602):
     dependencies:
       '@babel/core': 7.29.0
       '@rollup/pluginutils': 4.2.1
-      astroturf: 1.2.0(webpack@5.106.1(postcss@8.5.16))
+      astroturf: 1.2.0(df9e119ba5a87b078041da2cc8b85a44)
       rollup: 4.60.1
 
   rollup-plugin-copy-assets@2.0.3(rollup@4.60.1):
@@ -37201,6 +37929,13 @@ snapshots:
       ajv-formats: 2.1.1(ajv@8.18.0)
       ajv-keywords: 5.1.0(ajv@8.18.0)
 
+  schema-utils@4.5.0:
+    dependencies:
+      '@types/json-schema': 7.0.15
+      ajv: 8.20.0
+      ajv-formats: 3.0.1(ajv@8.20.0)
+      ajv-keywords: 5.1.0(ajv@8.20.0)
+
   select-hose@2.0.0: {}
 
   selenium-webdriver@4.43.0:
@@ -37289,7 +38024,7 @@ snapshots:
       mime-types: 3.0.2
       ms: 2.1.3
       on-finished: 2.4.1
-      range-parser: 1.2.1
+      range-parser: 1.3.0
       statuses: 2.0.2
     transitivePeerDependencies:
       - supports-color
@@ -38042,11 +38777,11 @@ snapshots:
 
   style-inject@0.3.0: {}
 
-  style-loader@2.0.0(webpack@5.106.1(postcss@8.5.16)):
+  style-loader@2.0.0(df9e119ba5a87b078041da2cc8b85a44):
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   style-loader@2.0.0(webpack@5.106.1(postcss@8.5.22)):
     dependencies:
@@ -38055,6 +38790,8 @@ snapshots:
       webpack: 5.106.1(postcss@8.5.22)
 
   style-mod@4.1.3: {}
+
+  style-mod@4.1.4: {}
 
   styled_string@0.0.1: {}
 
@@ -38180,9 +38917,14 @@ snapshots:
       keyborg: 2.14.1
       tslib: 2.8.1
 
+  tabster@8.8.1:
+    dependencies:
+      keyborg: 3.498.0
+      tslib: 2.8.1
+
   tagged-tag@1.0.0: {}
 
-  tailwindcss@3.4.19(yaml@2.8.3):
+  tailwindcss@3.4.19(yaml@2.9.1):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -38201,7 +38943,7 @@ snapshots:
       postcss: 8.5.16
       postcss-import: 15.1.0(postcss@8.5.16)
       postcss-js: 4.1.0(postcss@8.5.16)
-      postcss-load-config: 6.0.1(jiti@1.21.7)(postcss@8.5.16)(yaml@2.8.3)
+      postcss-load-config: 6.0.1(jiti@1.21.7)(postcss@8.5.16)(yaml@2.9.1)
       postcss-nested: 6.2.0(postcss@8.5.16)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.11
@@ -38217,8 +38959,8 @@ snapshots:
 
   tap-yaml@4.3.1:
     dependencies:
-      yaml: 2.8.3
-      yaml-types: 0.4.0(yaml@2.8.3)
+      yaml: 2.9.1
+      yaml-types: 0.4.0(yaml@2.9.1)
 
   tapable@2.3.2: {}
 
@@ -38264,21 +39006,22 @@ snapshots:
     optionalDependencies:
       esbuild: 0.28.1
 
-  terser-webpack-plugin@5.6.1(5af1501a45316600463534daa78e3e94):
+  terser-webpack-plugin@5.6.1(013bd126c34e3ad304cc0547ddb835b7):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       terser: 5.51.2
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
     optionalDependencies:
+      esbuild: 0.28.1
       postcss: 8.5.16
 
   terser-webpack-plugin@5.6.1(df22ffd152cf227326e60641a3103ec4):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       terser: 5.51.2
       webpack: 5.106.1(postcss@8.5.22)
     optionalDependencies:
@@ -38410,14 +39153,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  thread-loader@3.0.4(webpack@5.106.1(postcss@8.5.16)):
+  thread-loader@3.0.4(df9e119ba5a87b078041da2cc8b85a44):
     dependencies:
       json-parse-better-errors: 1.0.2
       loader-runner: 4.3.2
       loader-utils: 2.0.4
       neo-async: 2.6.2
       schema-utils: 3.3.0
-      webpack: 5.106.1(postcss@8.5.16)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   through2@3.0.2:
     dependencies:
@@ -38553,7 +39296,7 @@ snapshots:
   tracked-toolbox@2.2.0(@babel/core@7.29.0):
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      decorator-transforms: 2.3.1(@babel/core@7.29.0)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
       ember-cache-primitive-polyfill: 1.0.1(@babel/core@7.29.0)
     transitivePeerDependencies:
       - '@babel/core'
@@ -38782,14 +39525,28 @@ snapshots:
       camelcase: 8.0.0
       typedoc: 0.28.15(typescript@5.9.3)
 
+  typedoc-plugin-rename-defaults@0.7.3(typedoc@0.28.16(typescript@5.9.3)):
+    dependencies:
+      camelcase: 8.0.0
+      typedoc: 0.28.16(typescript@5.9.3)
+
   typedoc@0.28.15(typescript@5.9.3):
     dependencies:
       '@gerrit0/mini-shiki': 3.23.0
       lunr: 2.3.9
-      markdown-it: 14.1.1
+      markdown-it: 14.3.2
       minimatch: 9.0.9
       typescript: 5.9.3
-      yaml: 2.8.3
+      yaml: 2.9.1
+
+  typedoc@0.28.16(typescript@5.9.3):
+    dependencies:
+      '@gerrit0/mini-shiki': 3.23.0
+      lunr: 2.3.9
+      markdown-it: 14.3.2
+      minimatch: 9.0.9
+      typescript: 5.9.3
+      yaml: 2.9.1
 
   typedoc@0.28.18(typescript@5.9.3):
     dependencies:
@@ -38981,8 +39738,19 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       acorn: 8.16.0
-      picomatch: 4.0.4
+      picomatch: 4.0.7
       webpack-virtual-modules: 0.6.2
+
+  unplugin@3.4.0(4accb09827374bbbe33317558e4c4349):
+    dependencies:
+      '@jridgewell/remapping': 2.3.5
+      picomatch: 4.0.7
+      webpack-virtual-modules: 0.6.2
+    optionalDependencies:
+      esbuild: 0.28.1
+      rollup: 4.60.1
+      vite: 7.3.2(dd414e737393da9d5b9d5b6459537199)
+      webpack: 5.106.1(esbuild@0.28.1)(postcss@8.5.16)
 
   unrs-resolver@1.12.2:
     dependencies:
@@ -39138,7 +39906,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-plugin-solid@2.11.13(f20ea12ee699e8bf6c3f3e1055b0f26a):
+  vite-plugin-solid@2.11.13(ed0c59d19227732f0ac9e8b3263ea791):
     dependencies:
       '@babel/core': 7.29.0
       '@types/babel__core': 7.20.5
@@ -39146,20 +39914,20 @@ snapshots:
       merge-anything: 5.1.7
       solid-js: 1.9.14
       solid-refresh: 0.6.3(solid-js@1.9.14)
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
-      vitefu: 1.1.3(9a9c3d4119efcb833c24d2914edb54ae)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
+      vitefu: 1.1.3(51d2c4025860465bfb296cb576ec3f56)
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-static-copy@3.4.0(9a9c3d4119efcb833c24d2914edb54ae):
+  vite-plugin-static-copy@3.4.0(51d2c4025860465bfb296cb576ec3f56):
     dependencies:
       chokidar: 3.6.0
       p-map: 7.0.4
       picocolors: 1.1.1
       tinyglobby: 0.2.17
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
 
-  vite@7.3.2(1b605b330f31ef9b950e0ab968ff7e2f):
+  vite@7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -39176,9 +39944,9 @@ snapshots:
       sass-embedded: 1.104.0
       stylus: 0.62.0
       terser: 5.51.2
-      yaml: 2.8.3
+      yaml: 2.9.1
 
-  vite@7.3.2(2e5de8cc25dc2caf6ff93f9b17c1a0d0):
+  vite@7.3.2(dd414e737393da9d5b9d5b6459537199):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -39195,9 +39963,9 @@ snapshots:
       sass-embedded: 1.104.0
       stylus: 0.62.0
       terser: 5.51.2
-      yaml: 2.8.3
+      yaml: 2.9.1
 
-  vite@7.3.6(3faf55fc6a90800fe49823f1af1ac333):
+  vite@7.3.6(1109bfb4c1b06cd993b8fbbd5aba2144):
     dependencies:
       esbuild: 0.28.1
       fdir: 6.5.0(picomatch@4.0.4)
@@ -39214,28 +39982,9 @@ snapshots:
       sass-embedded: 1.104.0
       stylus: 0.62.0
       terser: 5.46.0
-      yaml: 2.8.3
+      yaml: 2.9.1
 
-  vite@7.3.6(aebee2f2ddce5d091dec4112b5dad2ab):
-    dependencies:
-      esbuild: 0.28.1
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
-      postcss: 8.5.16
-      rollup: 4.60.1
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      '@types/node': 26.2.0
-      fsevents: 2.3.3
-      jiti: 2.6.1
-      less: 4.4.2
-      sass: 1.97.3
-      sass-embedded: 1.104.0
-      stylus: 0.62.0
-      terser: 5.51.2
-      yaml: 2.8.3
-
-  vite@7.3.6(e55ba2124e62458e58b3d07598d09cc4):
+  vite@7.3.6(49bf7428740a5e0bab4e9de94b825bcd):
     dependencies:
       esbuild: 0.28.1
       fdir: 6.5.0(picomatch@4.0.4)
@@ -39252,11 +40001,30 @@ snapshots:
       sass-embedded: 1.104.0
       stylus: 0.62.0
       terser: 5.51.2
-      yaml: 2.8.3
+      yaml: 2.9.1
 
-  vitefu@1.1.3(9a9c3d4119efcb833c24d2914edb54ae):
+  vite@7.3.6(d1aae5cb0b02d4a86bf95813c8110939):
+    dependencies:
+      esbuild: 0.28.1
+      fdir: 6.5.0(picomatch@4.0.4)
+      picomatch: 4.0.4
+      postcss: 8.5.16
+      rollup: 4.60.1
+      tinyglobby: 0.2.17
     optionalDependencies:
-      vite: 7.3.2(1b605b330f31ef9b950e0ab968ff7e2f)
+      '@types/node': 26.2.0
+      fsevents: 2.3.3
+      jiti: 2.6.1
+      less: 4.4.2
+      sass: 1.97.3
+      sass-embedded: 1.104.0
+      stylus: 0.62.0
+      terser: 5.51.2
+      yaml: 2.9.1
+
+  vitefu@1.1.3(51d2c4025860465bfb296cb576ec3f56):
+    optionalDependencies:
+      vite: 7.3.2(2d74ef49ee8862a0f34cb5ad08c10aef)
 
   vm2@3.10.5:
     dependencies:
@@ -39277,6 +40045,8 @@ snapshots:
 
   vscode-jsonrpc@8.2.0: {}
 
+  vscode-jsonrpc@9.0.2: {}
+
   vscode-languageserver-protocol@3.17.3:
     dependencies:
       vscode-jsonrpc: 8.1.0
@@ -39287,6 +40057,11 @@ snapshots:
       vscode-jsonrpc: 8.2.0
       vscode-languageserver-types: 3.17.5
 
+  vscode-languageserver-protocol@3.18.3:
+    dependencies:
+      vscode-jsonrpc: 9.0.2
+      vscode-languageserver-types: 3.18.3
+
   vscode-languageserver-textdocument@1.0.12: {}
 
   vscode-languageserver-types@3.17.3: {}
@@ -39294,6 +40069,8 @@ snapshots:
   vscode-languageserver-types@3.17.5: {}
 
   vscode-languageserver-types@3.18.0: {}
+
+  vscode-languageserver-types@3.18.3: {}
 
   vscode-languageserver@8.1.0:
     dependencies:
@@ -39541,7 +40318,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.106.1(postcss@8.5.16):
+  webpack@5.106.1(esbuild@0.28.1)(postcss@8.5.16):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.9
@@ -39553,7 +40330,7 @@ snapshots:
       acorn-import-phases: 1.0.4(acorn@8.18.0)
       browserslist: 4.28.9
       chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.24.5
+      enhanced-resolve: 5.25.1
       es-module-lexer: 2.3.2
       eslint-scope: 5.1.1
       events: 3.3.0
@@ -39563,9 +40340,9 @@ snapshots:
       loader-runner: 4.3.2
       mime-types: 2.1.35
       neo-async: 2.6.2
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       tapable: 2.3.3
-      terser-webpack-plugin: 5.6.1(5af1501a45316600463534daa78e3e94)
+      terser-webpack-plugin: 5.6.1(013bd126c34e3ad304cc0547ddb835b7)
       watchpack: 2.5.2
       webpack-sources: 3.5.1
     transitivePeerDependencies:
@@ -39594,7 +40371,7 @@ snapshots:
       acorn-import-phases: 1.0.4(acorn@8.18.0)
       browserslist: 4.28.9
       chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.24.5
+      enhanced-resolve: 5.25.1
       es-module-lexer: 2.3.2
       eslint-scope: 5.1.1
       events: 3.3.0
@@ -39604,7 +40381,7 @@ snapshots:
       loader-runner: 4.3.2
       mime-types: 2.1.35
       neo-async: 2.6.2
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       tapable: 2.3.3
       terser-webpack-plugin: 5.6.1(df22ffd152cf227326e60641a3103ec4)
       watchpack: 2.5.2
@@ -39687,6 +40464,8 @@ snapshots:
   which-heading-do-i-need@0.2.6: {}
 
   which-heading-do-i-need@0.2.7: {}
+
+  which-heading-do-i-need@0.4.1: {}
 
   which-module@2.0.1: {}
 
@@ -39903,13 +40682,15 @@ snapshots:
       fs-extra: 4.0.3
       lodash.merge: 4.6.2
 
-  yaml-types@0.4.0(yaml@2.8.3):
+  yaml-types@0.4.0(yaml@2.9.1):
     dependencies:
-      yaml: 2.8.3
+      yaml: 2.9.1
 
   yaml@1.10.3: {}
 
   yaml@2.8.3: {}
+
+  yaml@2.9.1: {}
 
   yamlparser@0.0.2: {}
 
