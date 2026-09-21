@@ -134,7 +134,7 @@
     "prettier-plugin-ember-template-tag": "^2.1.0",
     "qunit": "^2.24.3",
     "qunit-assertions-extra": "^1.0.3",
-    "qunit-dom": "^3.4.0",
+    "qunit-dom": "^3.6.0",
     "read-package-up": "^12.0.0",
     "rollup-plugin-astroturf": "https://codeload.github.com/patricklx/rollup-plugin-astroturf/tar.gz/5354c7a",
     "svg-inline-loader": "^0.8.2",
