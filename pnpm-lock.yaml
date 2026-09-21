@@ -270,8 +270,8 @@ importers:
         specifier: ^2.24.3
         version: 2.25.0
       qunit-dom:
-        specifier: ^3.4.0
-        version: 3.5.0
+        specifier: ^3.6.0
+        version: 3.6.0
       socket.io:
         specifier: ^4.8.1
         version: 4.8.3
@@ -616,8 +616,8 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3(qunit@2.25.0)
       qunit-dom:
-        specifier: ^3.4.0
-        version: 3.5.0
+        specifier: ^3.6.0
+        version: 3.6.0
       read-package-up:
         specifier: ^12.0.0
         version: 12.0.0
@@ -902,8 +902,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.4(prettier@3.8.2)
       qunit-dom:
-        specifier: ^3.4.0
-        version: 3.5.0
+        specifier: ^3.6.0
+        version: 3.6.0
       release-it:
         specifier: ^15.10.3
         version: 15.11.0(encoding@0.1.13)
@@ -2584,6 +2584,15 @@ packages:
 
   '@embroider/macros@1.20.7':
     resolution: {integrity: sha512-B9KJuqeODyad6rWYFK4yKKKSR9H2OsClMzHREmEx94FrwA9/PS37ebTHWeuzLKspas7UclpYE8sBmxSbi/pWig==}
+    engines: {node: 12.* || 14.* || >= 16}
+    peerDependencies:
+      '@glint/template': ^1.0.0
+    peerDependenciesMeta:
+      '@glint/template':
+        optional: true
+
+  '@embroider/macros@1.21.1':
+    resolution: {integrity: sha512-57jR1QobqR3NKZX8bGi8ljONPfQdmQ01/LAzkwx/InGySyiC1HkvgPT4NdNWAFtK5Q00SYGYMQzJXZg3/zh9cQ==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -6617,6 +6626,9 @@ packages:
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
 
+  ajv@8.20.0:
+    resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
+
   alien-signals@3.2.1:
     resolution: {integrity: sha512-I8FjmltrfnDFoZedi5CG8DghVYNhzb/Ijluz7tCSJH0xpd0484Kowhbb1XDYOxfJpU1p5wnM2X54dA+IfGyD1g==}
 
@@ -9415,8 +9427,8 @@ packages:
     resolution: {integrity: sha512-SkE2t82KlkkxQRVMVLAGKxLfORGQfrkx5dkj+vlgXRVNEdPc4eZcR+J/Fvj8C+yKSFH5L0q3NFlyufOVQnCcYQ==}
     engines: {node: '>=10.13.0'}
 
-  enhanced-resolve@5.24.5:
-    resolution: {integrity: sha512-L1l8TNvomm6UVW5B253AGxQagSQr+vGwhMlrrfRS2qmhx46AMpMVJKQYLvWYbysTMY8VoicOvzHzoHMbyzB+4A==}
+  enhanced-resolve@5.25.1:
+    resolution: {integrity: sha512-nGXts5znJzmWPu+mIE9izCOzdg63oJca2mDzGWWTth7sr4aCToKcoyFVBQwN75Ij5Pf6p510EwkTqViTRzDV+w==}
     engines: {node: '>=10.13.0'}
 
   ensure-posix-path@1.1.1:
@@ -9975,6 +9987,9 @@ packages:
 
   fast-uri@3.1.0:
     resolution: {integrity: sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==}
+
+  fast-uri@3.1.8:
+    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
 
   fast-wrap-ansi@0.2.0:
     resolution: {integrity: sha512-rLV8JHxTyhVmFYhBJuMujcrHqOT2cnO5Zxj37qROj23CP39GXubJRBUFF0z8KFK77Uc0SukZUf7JZhsVEQ6n8w==}
@@ -14027,8 +14042,8 @@ packages:
     peerDependencies:
       qunit: ^2.0.0
 
-  qunit-dom@3.5.0:
-    resolution: {integrity: sha512-eemLM5bflWafzmBnwlYbjf9NrjEkV2j7NO7mTvsMzQBJbEaq2zFvUFDtHV9JaK0TT5mgRZt034LCUewYGmjjjQ==}
+  qunit-dom@3.6.0:
+    resolution: {integrity: sha512-p14dH8Hk+yUhngenPMpzS434z92RsT05CwOVpAin07kwyCMvuhxDdBouJ9j/jim2nNyDSgVPrDzijCsLZ25zRw==}
 
   qunit-theme-ember@1.0.0:
     resolution: {integrity: sha512-vdMVVo6ecdCkWttMTKeyq1ZTLGHcA6zdze2zhguNuc3ritlJMhOXY5RDseqazOwqZVfCg3rtlmL3fMUyIzUyFQ==}
@@ -14778,6 +14793,10 @@ packages:
 
   schema-utils@4.3.3:
     resolution: {integrity: sha512-eflK8wEtyOE6+hsaRVPxvUKYCpRgzLqDTb8krvAsRIwOGlHoSgYLgBXoubGgLd2fT41/OUYdb48v4k4WWHQurA==}
+    engines: {node: '>= 10.13.0'}
+
+  schema-utils@4.5.0:
+    resolution: {integrity: sha512-zJlMCZ0cAR5p/Y4oVpRoqioDMJcGxaXRrQ/4rP4WyR84vc5z/DolXdbvXeDpTwbtocDFr2rhPqHPErDCUtz2kA==}
     engines: {node: '>= 10.13.0'}
 
   select-hose@2.0.0:
@@ -21082,6 +21101,22 @@ snapshots:
       - '@babel/core'
       - supports-color
 
+  '@embroider/macros@1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)':
+    dependencies:
+      '@embroider/shared-internals': 3.2.0
+      assert-never: 1.4.0
+      babel-import-util: 3.0.1
+      ember-cli-babel: 8.3.2(@babel/core@7.29.0)
+      find-up: 5.0.0
+      lodash: 4.18.1
+      resolve: 1.22.12
+      semver: 7.8.5
+    optionalDependencies:
+      '@glint/template': 1.7.7
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
   '@embroider/reverse-exports@0.2.0':
     dependencies:
       mem: 8.1.1
@@ -24789,7 +24824,7 @@ snapshots:
 
   '@types/qunit-dom@0.7.0':
     dependencies:
-      qunit-dom: 3.5.0
+      qunit-dom: 3.6.0
 
   '@types/qunit@2.19.13': {}
 
@@ -25369,7 +25404,7 @@ snapshots:
   '@warp-drive-mirror/build-config@5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      '@embroider/macros': 1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)
       babel-import-util: 2.1.1
       babel-plugin-debug-macros: 2.0.0(@babel/core@7.29.0)
       semver: 7.8.5
@@ -25380,7 +25415,7 @@ snapshots:
 
   '@warp-drive-mirror/core@5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)':
     dependencies:
-      '@embroider/macros': 1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@warp-drive-mirror/build-config': 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
     transitivePeerDependencies:
       - '@babel/core'
@@ -25403,7 +25438,7 @@ snapshots:
 
   '@warp-drive-mirror/utilities@5.8.1(fb9deb460ff3722dc7f5a909dcfa8694)':
     dependencies:
-      '@embroider/macros': 1.20.7(c8332dc3f90c0e60eb130a3a85f980b9)
+      '@embroider/macros': 1.21.1(c8332dc3f90c0e60eb130a3a85f980b9)
       '@warp-drive-mirror/core': 5.8.1(c8332dc3f90c0e60eb130a3a85f980b9)
     transitivePeerDependencies:
       - '@babel/core'
@@ -25642,6 +25677,10 @@ snapshots:
     optionalDependencies:
       ajv: 8.18.0
 
+  ajv-formats@3.0.1(ajv@8.20.0):
+    optionalDependencies:
+      ajv: 8.20.0
+
   ajv-keywords@3.5.2(ajv@6.14.0):
     dependencies:
       ajv: 6.14.0
@@ -25649,6 +25688,11 @@ snapshots:
   ajv-keywords@5.1.0(ajv@8.18.0):
     dependencies:
       ajv: 8.18.0
+      fast-deep-equal: 3.1.3
+
+  ajv-keywords@5.1.0(ajv@8.20.0):
+    dependencies:
+      ajv: 8.20.0
       fast-deep-equal: 3.1.3
 
   ajv@6.14.0:
@@ -25662,6 +25706,13 @@ snapshots:
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+
+  ajv@8.20.0:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -30065,7 +30116,7 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.3
 
-  enhanced-resolve@5.24.5:
+  enhanced-resolve@5.25.1:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.3.3
@@ -31081,6 +31132,8 @@ snapshots:
       fast-string-truncated-width: 3.0.3
 
   fast-uri@3.1.0: {}
+
+  fast-uri@3.1.8: {}
 
   fast-wrap-ansi@0.2.0:
     dependencies:
@@ -36105,7 +36158,7 @@ snapshots:
     dependencies:
       qunit: 2.25.0
 
-  qunit-dom@3.5.0:
+  qunit-dom@3.6.0:
     dependencies:
       dom-element-descriptors: 0.5.1
 
@@ -37201,6 +37254,13 @@ snapshots:
       ajv-formats: 2.1.1(ajv@8.18.0)
       ajv-keywords: 5.1.0(ajv@8.18.0)
 
+  schema-utils@4.5.0:
+    dependencies:
+      '@types/json-schema': 7.0.15
+      ajv: 8.20.0
+      ajv-formats: 3.0.1(ajv@8.20.0)
+      ajv-keywords: 5.1.0(ajv@8.20.0)
+
   select-hose@2.0.0: {}
 
   selenium-webdriver@4.43.0:
@@ -38268,7 +38328,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       terser: 5.51.2
       webpack: 5.106.1(postcss@8.5.16)
     optionalDependencies:
@@ -38278,7 +38338,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       terser: 5.51.2
       webpack: 5.106.1(postcss@8.5.22)
     optionalDependencies:
@@ -39553,7 +39613,7 @@ snapshots:
       acorn-import-phases: 1.0.4(acorn@8.18.0)
       browserslist: 4.28.9
       chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.24.5
+      enhanced-resolve: 5.25.1
       es-module-lexer: 2.3.2
       eslint-scope: 5.1.1
       events: 3.3.0
@@ -39563,7 +39623,7 @@ snapshots:
       loader-runner: 4.3.2
       mime-types: 2.1.35
       neo-async: 2.6.2
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       tapable: 2.3.3
       terser-webpack-plugin: 5.6.1(5af1501a45316600463534daa78e3e94)
       watchpack: 2.5.2
@@ -39594,7 +39654,7 @@ snapshots:
       acorn-import-phases: 1.0.4(acorn@8.18.0)
       browserslist: 4.28.9
       chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.24.5
+      enhanced-resolve: 5.25.1
       es-module-lexer: 2.3.2
       eslint-scope: 5.1.1
       events: 3.3.0
@@ -39604,7 +39664,7 @@ snapshots:
       loader-runner: 4.3.2
       mime-types: 2.1.35
       neo-async: 2.6.2
-      schema-utils: 4.3.3
+      schema-utils: 4.5.0
       tapable: 2.3.3
       terser-webpack-plugin: 5.6.1(df22ffd152cf227326e60641a3103ec4)
       watchpack: 2.5.2
